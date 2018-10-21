@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">升级打怪打装备</string>
+
+    <string name="activity_title_monsters_place">野区</string>
+    <string name="activity_title_hero_attributes">个人属性</string>
+
+    <string name="string_rlv_empty">空空如也</string>
+    <string name="string_monsters_place">出城打怪</string>
+    <string name="string_hero_attributes">个人属性</string>
+    <string name="string_shop">购买装备</string>
+    <string name="string_medicine_shop">购买药品</string>
+
+    <string name="permission_title">权限需要</string>
+    <string name="permissions_message">为了正常使用这个功能，我们需要一些权限。</string>
+
+    <string name="toast_copy_success">复制成功</string>
+
+    <string name="monsters_msg_attack">攻击:%1$d</string>
+    <string name="monsters_msg_life">生命:%1$d</string>
+    <string name="monsters_msg_armor">护甲:%1$d</string>
+    <string name="monsters_msg_exp">经验:%1$d</string>
+    <string name="monsters_msg_money">金钱:%1$d</string>
+
+    <string name="medicines_msg_price">需要金钱:%1$d</string>
+    <string name="medicines_msg_life">增加当前生命:%1$d</string>
+
+    <string name="hero_attributes_msg_attack"><![CDATA[当前攻击：%1$d <font color="#D32F2F">成长：%2$d</font>]]></string>
+    <string name="hero_attributes_msg_armor"><![CDATA[当前护甲：%1$d <font color="#D32F2F">成长：%2$d</font>]]></string>
+    <string name="hero_attributes_msg_exp">当前经验：%1$d</string>
+    <string name="hero_attributes_msg_money">当前金钱：%1$d</string>
+    <string name="hero_attributes_msg_need_exp">距离升级：%1$d / %2$d</string>
+    <string name="hero_attributes_msg_life"><![CDATA[当前生命：%1$d / %2$d <font color="#D32F2F">成长：%3$d</font>]]></string>
+    <string name="hero_attributes_msg_level">当前等级：%1$d</string>
+    <string name="string_attack_loading_msg">攻击中...3秒后结束</string>
+    <string name="string_error">程序出错，请重试</string>
+    <string name="string_attack_fail">攻击失败</string>
+    <string name="string_attack_win">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。</string>
+    <string name="string_buy_medicines_fail">购买失败，钱不够</string>
+    <string name="string_buy_medicines_suc">购买成功，当前生命值增加：%1$d；减少金钱：%2$d。</string>
+    <string name="activity_title_medicines_shop">药店</string>
+</resources>

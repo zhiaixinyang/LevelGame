@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "name": "怪物1",
+    "tips": "我是一个怪物",
+    "attack": 10,
+    "armor": 5,
+    "money": 10,
+    "life": 30,
+    "type": "C1",
+    "monster_place_id": 1,
+    "drop_goods_id": "1",
+    "exp": 10
+  },
+  {
+    "id": 2,
+    "name": "怪物2",
+    "tips": "我是一个怪物",
+    "attack": 20,
+    "armor": 5,
+    "life": 30,
+    "money": 20,
+    "type": "C2",
+    "monster_place_id": 1,
+    "drop_goods_id": "2",
+    "exp": 20
+  },
+  {
+    "id": 3,
+    "name": "怪物3",
+    "tips": "我是一个怪物",
+    "attack": 30,
+    "life": 30,
+    "armor": 5,
+    "money": 30,
+    "type": "C3",
+    "monster_place_id": 1,
+    "drop_goods_id": "3",
+    "exp": 30
+  },
+  {
+    "id": 4,
+    "name": "怪物4",
+    "tips": "我是一个怪物",
+    "attack": 40,
+    "armor": 5,
+    "money": 40,
+    "life": 30,
+    "type": "C4",
+    "monster_place_id": 1,
+    "drop_goods_id": "4",
+    "exp": 40
+  },
+  {
+    "id": 5,
+    "name": "怪物5",
+    "tips": "我是一个怪物",
+    "attack": 50,
+    "life": 30,
+    "armor": 5,
+    "money": 50,
+    "type": "C5",
+    "monster_place_id": 1,
+    "drop_goods_id": "5",
+    "exp": 50
+  },
+
+  {
+    "id": 6,
+    "name": "怪物A1",
+    "tips": "我是一个特殊怪物",
+    "attack": 50,
+    "armor": 5,
+    "life": 30,
+    "money": 50,
+    "type": "C5",
+    "monster_place_id": 2,
+    "drop_goods_id": "5",
+    "exp": 50
+  }
+]

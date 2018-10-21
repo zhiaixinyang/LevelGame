@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HorizontalSmoothProgressBar">
+        <attr name="hspForegroundProgressColor" format="color" />
+        <attr name="hspBackgroundProgressColor" format="color" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "types": "[{\"type\":\"A1\",\"probability\":0.1},{\"type\":\"A3\",\"probability\":0.01}]"
+  },
+  {
+    "id": 2,
+    "types": "[{\"type\":\"A1\",\"probability\":0.15}]"
+  },
+  {
+    "id": 3,
+    "types": "[{\"type\":\"A1\",\"probability\":0.3}]"
+  },
+  {
+    "id": 4,
+    "types": "[{\"type\":\"A1\",\"probability\":0.3},{\"type\":\"A2\",\"probability\":0.05}]"
+  },
+  {
+    "id": 5,
+    "types": "[{\"type\":\"A1\",\"probability\":0.4},{\"type\":\"A2\",\"probability\":0.1}]"
+  }
+]

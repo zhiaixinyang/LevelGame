@@ -1,0 +1,22 @@
+package com.mdove.levelgame.main.monsters.model.handler;
+
+import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
+import com.mdove.levelgame.main.monsters.model.vm.MonstersPlaceModelVM;
+import com.mdove.levelgame.main.monsters.presenter.MonstersPlacePresenter;
+import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter;
+
+/**
+ * Created by MDove on 2018/10/21.
+ */
+
+public class MonstersItemHandler {
+    private MonstersPresenter monstersPresenter;
+
+    public MonstersItemHandler(MonstersPresenter monstersPresenter) {
+        this.monstersPresenter = monstersPresenter;
+    }
+
+    public void onItemBtnOnClick(MonstersModelVM vm) {
+        monstersPresenter.onItemBtnClick(vm.id.get());
+    }
+}

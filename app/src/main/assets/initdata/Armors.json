@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "铠甲1",
+    "tips": "我是一件铠甲",
+    "attack": 0,
+    "armor": 5,
+    "price": 10,
+    "type": "B1",
+    "strengthen": 0
+  },
+  {
+    "id": 2,
+    "name": "铠甲2",
+    "tips": "我是一件铠甲",
+    "attack": 0,
+    "armor": 8,
+    "price": 20,
+    "type": "B2",
+    "strengthen": 0
+  },
+  {
+    "id": 3,
+    "name": "铠甲3",
+    "tips": "我是一件铠甲",
+    "attack": 0,
+    "armor": 12,
+    "price": 30,
+    "type": "B3",
+    "strengthen": 0
+  },
+  {
+    "id": 4,
+    "name": "铠甲4",
+    "tips": "我是一件铠甲",
+    "attack": 0,
+    "armor": 15,
+    "price": 50,
+    "type": "B4",
+    "strengthen": 0
+  },
+  {
+    "id": 5,
+    "name": "铠甲5",
+    "tips": "我是一件铠甲",
+    "attack": 10,
+    "armor": 30,
+    "price": 200,
+    "type": "B5",
+    "strengthen": 0
+  }
+]

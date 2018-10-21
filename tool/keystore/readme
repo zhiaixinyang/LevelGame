@@ -1,0 +1,17 @@
+alias: passwordguard
+password: wjzj000
+
+您的名字与姓氏是什么?
+  [Bin Xu]:  
+您的组织单位名称是什么?
+  [Sweet]:  
+您的组织名称是什么?
+  [Sweet]:  
+您所在的城市或区域名称是什么?
+  [Beijing]:  
+您所在的省/市/自治区名称是什么?
+  [Beijing]:  
+该单位的双字母国家/地区代码是什么?
+  [CN]:  
+CN=Bin Xu, OU=Sweet, O=Sweet, L=Beijing, ST=Beijing, C=CN是否正确?
+  [否]:  是

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mdove.levelgame.main.hero.model.HeroAttributesModelVM" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppBarLayout">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@string/activity_title_hero_attributes" />
+        </android.support.design.widget.AppBarLayout>
+
+        <TextView
+            android:id="@+id/tv_attack"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_btn_normal_height"
+            android:layout_margin="@dimen/main_btn_normal_margin"
+            android:background="@drawable/bg_white_round"
+            android:gravity="center"
+            app:htmlColorText="@{vm.attack}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/main_btn_normal_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
+            tools:text="攻击" />
+
+        <TextView
+            android:id="@+id/tv_armor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_btn_normal_height"
+            android:layout_margin="@dimen/main_btn_normal_margin"
+            android:background="@drawable/bg_white_round"
+            android:gravity="center"
+            app:htmlColorText="@{vm.armor}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/main_btn_normal_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_attack"
+            tools:text="护甲" />
+
+        <TextView
+            android:id="@+id/tv_life"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_btn_normal_height"
+            android:layout_margin="@dimen/main_btn_normal_margin"
+            android:background="@drawable/bg_white_round"
+            android:gravity="center"
+            app:htmlColorText="@{vm.life}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/main_btn_normal_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_armor"
+            tools:text="生命"/>
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_btn_normal_height"
+            android:layout_margin="@dimen/main_btn_normal_margin"
+            android:background="@drawable/bg_white_round"
+            android:gravity="center"
+            android:text="@{vm.money}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/main_btn_normal_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_life"
+            tools:text="金钱"/>
+        <TextView
+            android:id="@+id/tv_level"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_btn_normal_height"
+            android:layout_margin="@dimen/main_btn_normal_margin"
+            android:background="@drawable/bg_white_round"
+            android:gravity="center"
+            android:text="@{vm.level}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/main_btn_normal_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_money"
+            tools:text="等级"/>
+        <TextView
+            android:id="@+id/tv_exp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_btn_normal_height"
+            android:layout_margin="@dimen/main_btn_normal_margin"
+            android:background="@drawable/bg_white_round"
+            android:gravity="center"
+            android:text="@{vm.needExperience}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/main_btn_normal_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_level"
+            tools:text="升级所需经验"/>
+    </android.support.constraint.ConstraintLayout>
+</layout>

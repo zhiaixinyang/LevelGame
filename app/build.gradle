@@ -1,0 +1,118 @@
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+def getVersionCodeProperty() {
+    def versionPropsFile = file('version.properties')
+    def versionProps = new Properties()
+    versionProps.load(versionPropsFile.newReader())
+    return versionProps.getProperty('VERSION_CODE').toInteger()
+}
+
+def getVersionNameProperty() {
+    def versionPropsFile = file('version.properties')
+    def versionProps = new Properties()
+    versionProps.load(versionPropsFile.newReader())
+    return versionProps.getProperty('VERSION_NAME')
+}
+
+static def getDateTime() {
+    DateFormat df = new SimpleDateFormat("YYYYMMddHHmm")
+    return df.format(new Date())
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.mdove.levelgame"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode getVersionCodeProperty()
+        versionName getVersionNameProperty()
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        packagingOptions {
+            exclude 'META-INF/rxjava.properties'
+        }
+    }
+
+    signingConfigs {
+        sweetSignConfig {
+            storeFile file("$rootProject.projectDir/tool/keystore/PasswordGuard.jks")
+            storePassword "wjzj000"
+            keyAlias "passwordguard"
+            keyPassword "wjzj000"
+        }
+        debug {
+            storeFile file("$rootProject.projectDir/tool/keystore/debug/debug.keystore")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sweetSignConfig
+        }
+
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                def fileName
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    if (variant.buildType.name == 'release') {
+                        fileName = "升级打怪打装备-$variant.buildType.name-v${defaultConfig.versionName}-${defaultConfig.versionCode}-${getDateTime()}.apk"
+                    } else {
+                        fileName = "升级打怪打装备-$variant.buildType.name-v${defaultConfig.versionName}-${defaultConfig.versionCode}.apk"
+                    }
+                    outputFileName = fileName
+                }
+            }
+        }
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+        disable 'ExtraTranslation'
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+greendao {
+    schemaVersion 1
+    daoPackage 'com.mdove.levelgame.greendao'
+    targetGenDir 'src/main/java'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    Map<String, String> dependencies = rootProject.ext.dependencies
+    implementation dependencies.appCompat
+    implementation dependencies.constranintLayout
+    implementation dependencies.cardView
+    implementation dependencies.design
+    implementation dependencies.rxAndroid
+    implementation dependencies.rxJava
+    implementation dependencies.recyclerView
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitConverterGson
+    implementation dependencies.retrofitAdapterRxJava
+
+    implementation 'org.greenrobot:greendao:3.2.0'
+    implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+}

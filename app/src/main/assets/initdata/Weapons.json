@@ -1,0 +1,6 @@
+[{"id":1,"name":"武器1","tips":"我是一把武器","attack":10,"armor":0,"price":10,"type":"A1","strengthen":0},
+  {"id":2,"name":"武器2","tips":"我是一把武器","attack":15,"armor":0,"price":20,"type":"A2","strengthen":0},
+  {"id":3,"name":"武器3","tips":"我是一把武器","attack":20,"armor":0,"price":30,"type":"A3","strengthen":0},
+  {"id":4,"name":"武器4","tips":"我是一把武器","attack":25,"armor":0,"price":50,"type":"A4","strengthen":0},
+  {"id":5,"name":"武器5","tips":"我是一把武器","attack":50,"armor":5,"price":200,"type":"A5","strengthen":0}
+]

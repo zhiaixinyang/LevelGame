@@ -6,11 +6,7 @@ import android.view.ViewGroup;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.databinding.ItemMedicinesBinding;
-import com.mdove.levelgame.databinding.ItemMonstersBinding;
-import com.mdove.levelgame.main.monsters.model.handler.MonstersItemHandler;
-import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
-import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter;
-import com.mdove.levelgame.main.shop.model.MedicinesModelVM;
+import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
 import com.mdove.levelgame.main.shop.model.handler.MedicinesItemHandler;
 import com.mdove.levelgame.main.shop.presenter.MedicinesShopPresenter;
 import com.mdove.levelgame.utils.InflateUtils;

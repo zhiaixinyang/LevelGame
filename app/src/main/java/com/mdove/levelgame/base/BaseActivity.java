@@ -1,6 +1,5 @@
 package com.mdove.levelgame.base;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,6 +25,7 @@ import android.widget.TextView;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.utils.DensityUtil;
 import com.mdove.levelgame.view.MyDialog;
+import com.mdove.levelgame.view.MyProgressDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.ListIterator;
  * @author MDove on 2018/2/14.
  */
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
-    private ProgressDialog progressDialog;
+    private MyProgressDialog progressDialog;
     private Toolbar mToolbar;
     private TextView mLayoutEmpty;
     private FrameLayout mContentContainer;
@@ -261,7 +261,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             @Override
             public void run() {
                 if (progressDialog == null) {
-                    progressDialog = new ProgressDialog(BaseActivity.this);
+                    progressDialog = new MyProgressDialog(BaseActivity.this);
                     progressDialog.setCancelable(false);
                 }
                 progressDialog.setMessage(msg);

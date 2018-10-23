@@ -8,6 +8,8 @@
     <string name="string_monsters_place">出城打怪</string>
     <string name="string_hero_attributes">个人属性</string>
     <string name="string_shop">购买装备</string>
+    <string name="string_buy_attack">武器商店</string>
+    <string name="string_buy_armor">铠甲商店</string>
     <string name="string_medicine_shop">购买药品</string>
 
     <string name="permission_title">权限需要</string>
@@ -15,14 +17,22 @@
 
     <string name="toast_copy_success">复制成功</string>
 
-    <string name="monsters_msg_attack">攻击:%1$d</string>
-    <string name="monsters_msg_life">生命:%1$d</string>
-    <string name="monsters_msg_armor">护甲:%1$d</string>
-    <string name="monsters_msg_exp">经验:%1$d</string>
-    <string name="monsters_msg_money">金钱:%1$d</string>
+    <string name="monsters_msg_attack">攻击：%1$d</string>
+    <string name="monsters_msg_life">生命：%1$d</string>
+    <string name="monsters_msg_armor">护甲：%1$d</string>
+    <string name="monsters_msg_exp">经验：%1$d</string>
+    <string name="monsters_msg_money">金钱：%1$d</string>
 
-    <string name="medicines_msg_price">需要金钱:%1$d</string>
-    <string name="medicines_msg_life">增加当前生命:%1$d</string>
+    <string name="medicines_msg_price">需要金钱：%1$d</string>
+    <string name="medicines_msg_life">增加当前生命：%1$d</string>
+
+    <string name="shop_attack_msg_price">需要金钱：%1$d</string>
+    <string name="shop_attack_msg_attack">装备后增加攻击：%1$d</string>
+    <string name="shop_attack_msg_armor">装备后增加护甲：%1$d</string>
+
+    <string name="shop_armor_msg_price">需要金钱：%1$d</string>
+    <string name="shop_armor_msg_attack">装备后增加攻击：%1$d</string>
+    <string name="shop_armor_msg_armor">装备后增加护甲：%1$d</string>
 
     <string name="hero_attributes_msg_attack"><![CDATA[当前攻击：%1$d <font color="#D32F2F">成长：%2$d</font>]]></string>
     <string name="hero_attributes_msg_armor"><![CDATA[当前护甲：%1$d <font color="#D32F2F">成长：%2$d</font>]]></string>

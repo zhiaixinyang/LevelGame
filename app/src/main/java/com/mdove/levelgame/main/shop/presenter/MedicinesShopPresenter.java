@@ -5,7 +5,7 @@ import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.model.BuyMedicinesResp;
-import com.mdove.levelgame.main.shop.model.MedicinesModelVM;
+import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
 import com.mdove.levelgame.utils.ToastHelper;
 
 import java.util.ArrayList;
@@ -14,8 +14,6 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**

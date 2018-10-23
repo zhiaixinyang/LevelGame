@@ -10,6 +10,8 @@ import com.mdove.levelgame.greendao.entity.MonstersPlace;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
+import com.mdove.levelgame.main.shop.model.ShopArmorModel;
+import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 import com.mdove.levelgame.utils.FileUtil;
 import com.mdove.levelgame.utils.JsonUtil;
 
@@ -31,11 +33,31 @@ public class InitDataFileUtils {
         return null;
     }
 
+    public static List<ShopArmorModel> getShopArmors() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_ARMORS);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<ShopArmorModel>>() {
+            }.getType());
+        }
+        return null;
+    }
+
     public static List<Weapons> getInitWeapons() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_WEAPONS);
         if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<Weapons>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<ShopAttackModel> getShopWeapons() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_WEAPONS);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<ShopAttackModel>>() {
             }.getType());
         }
         return null;

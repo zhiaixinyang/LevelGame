@@ -1,4 +1,4 @@
-package com.mdove.levelgame.main.shop.model;
+package com.mdove.levelgame.main.shop.model.mv;
 
 import android.databinding.ObservableField;
 

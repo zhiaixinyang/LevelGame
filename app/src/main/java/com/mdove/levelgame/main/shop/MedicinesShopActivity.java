@@ -10,9 +10,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
-import com.mdove.levelgame.main.monsters.MonstersActivity;
 import com.mdove.levelgame.main.shop.adapter.MedicinesShopAdapter;
-import com.mdove.levelgame.main.shop.model.MedicinesModelVM;
+import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
 import com.mdove.levelgame.main.shop.presenter.MedicinesShopContract;
 import com.mdove.levelgame.main.shop.presenter.MedicinesShopPresenter;
 

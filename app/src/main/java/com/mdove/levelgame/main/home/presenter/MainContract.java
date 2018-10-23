@@ -10,9 +10,16 @@ import com.mdove.levelgame.base.BaseView;
 public interface MainContract {
     interface IMainPresenter extends BasePresenter<IMainView> {
         void onClickMonstersPlace();
+
         void onClickHeroAttributes();
+
         void onClickBuyMedicines();
+
         void onClickGoShop();
+
+        void onClickHeroPackage();
+
+        void initAllData();
     }
 
     interface IMainView extends BaseView {

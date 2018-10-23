@@ -26,7 +26,10 @@ public class ShopAttackFragment extends BaseListFragment implements ShopAttackCo
     public void initData() {
         presenter = new ShopAttackPresenter();
         presenter.subscribe(this);
+    }
 
+    @Override
+    public void loadData() {
         presenter.initData();
     }
 

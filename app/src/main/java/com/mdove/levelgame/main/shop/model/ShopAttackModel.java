@@ -14,7 +14,7 @@ public class ShopAttackModel {
     // 护甲值
     public int armor;
     // 价格
-    public long price;
+    public int price;
     /**
      *  装备类型 标识什么样子的装备。比如：普通装备（369等），神装...
      *  首字母A：表示武器

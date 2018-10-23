@@ -17,7 +17,7 @@ import com.mdove.levelgame.view.MyProgressDialog;
 import java.util.List;
 
 
-public abstract class BaseListFragment extends Fragment implements BaseView{
+public abstract class BaseListFragment extends Fragment implements BaseView {
     private RecyclerView rlv;
     private BaseListAdapter adapter;
     private MyProgressDialog progressDialog;
@@ -32,12 +32,14 @@ public abstract class BaseListFragment extends Fragment implements BaseView{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rlv = view.findViewById(R.id.rlv);
-
         rlv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        initData();
+
         adapter = createAdapter();
         rlv.setAdapter(adapter);
 
-        initData();
+        loadData();
     }
 
     @Override
@@ -74,6 +76,8 @@ public abstract class BaseListFragment extends Fragment implements BaseView{
     }
 
     public abstract void initData();
+
+    public abstract void loadData();
 
     public abstract BaseListAdapter createAdapter();
 

@@ -4,4 +4,6 @@
     <dimen name="main_btn_normal_margin">5dp</dimen>
     <dimen name="main_btn_normal_text_size">16sp</dimen>
     <dimen name="item_monsters_place_btn_normal_margin">5dp</dimen>
+    <dimen name="item_hero_equip_text_size">16sp</dimen>
+    <dimen name="item_hero_equip_normal_margin">8dp</dimen>
 </resources>

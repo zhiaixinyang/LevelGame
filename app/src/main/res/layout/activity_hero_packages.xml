@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light">
+
+    <TextView
+        android:id="@+id/tv_equip"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="@string/string_has_equip" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_equip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_equip"
+        android:layout_marginBottom="5dp" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rlv_equip"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_packages"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/line"
+        android:gravity="center"
+        android:text="@string/string_packages" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rlv_packages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_packages" />
+</RelativeLayout>

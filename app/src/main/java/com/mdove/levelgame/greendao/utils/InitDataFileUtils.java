@@ -3,6 +3,8 @@ package com.mdove.levelgame.greendao.utils;
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.config.ConstAssetsFileName;
+import com.mdove.levelgame.greendao.AllGoods;
+import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
@@ -22,6 +24,47 @@ import java.util.List;
  */
 
 public class InitDataFileUtils {
+    private static List<ShopArmorModel> shopArmorModels;
+    private static List<ShopAttackModel> shopAttackModels;
+    private static List<MonstersModel> monstersModels;
+    private static List<Medicines> medicines;
+    private static List<MonstersPlaceModel> monstersPlaceModels;
+
+    public static void initData() {
+        AllGoodsDao allGoodsDao = App.getDaoSession().getAllGoodsDao();
+        long count = allGoodsDao.queryBuilder().count();
+        if (shopArmorModels == null) {
+            shopArmorModels = getShopArmors();
+            if (count >0) {
+                for (ShopArmorModel model : shopArmorModels) {
+                    AllGoods goods = new AllGoods();
+                    goods.type = model.type;
+                    goods.goodsId = model.id;
+                    allGoodsDao.insert(goods);
+                }
+            }
+        }
+        if (shopAttackModels == null) {
+            shopAttackModels = getShopWeapons();
+            if (count >0) {
+                for (ShopAttackModel model : shopAttackModels) {
+                    AllGoods goods = new AllGoods();
+                    goods.type = model.type;
+                    goods.goodsId = model.id;
+                    allGoodsDao.insert(goods);
+                }
+            }
+        }
+        if (monstersModels == null) {
+            monstersModels = getInitMonsters();
+        }
+        if (medicines == null) {
+            medicines = getInitMedicines();
+        }
+        if (monstersPlaceModels == null) {
+            monstersPlaceModels = getInitMonstersPlace();
+        }
+    }
 
     public static List<Armors> getInitArmors() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
@@ -36,11 +79,11 @@ public class InitDataFileUtils {
     public static List<ShopArmorModel> getShopArmors() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_ARMORS);
-        if (json != null) {
+        if (json != null && shopArmorModels == null) {
             return JsonUtil.decode(json, new TypeToken<List<ShopArmorModel>>() {
             }.getType());
         }
-        return null;
+        return shopArmorModels;
     }
 
     public static List<Weapons> getInitWeapons() {
@@ -56,41 +99,41 @@ public class InitDataFileUtils {
     public static List<ShopAttackModel> getShopWeapons() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_WEAPONS);
-        if (json != null) {
+        if (json != null && shopAttackModels == null) {
             return JsonUtil.decode(json, new TypeToken<List<ShopAttackModel>>() {
             }.getType());
         }
-        return null;
+        return shopAttackModels;
     }
 
     public static List<MonstersModel> getInitMonsters() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS);
-        if (json != null) {
+        if (json != null && monstersModels == null) {
             return JsonUtil.decode(json, new TypeToken<List<MonstersModel>>() {
             }.getType());
         }
-        return null;
+        return monstersModels;
     }
 
     public static List<MonstersPlaceModel> getInitMonstersPlace() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS_PLACE);
-        if (json != null) {
+        if (json != null && monstersPlaceModels == null) {
             return JsonUtil.decode(json, new TypeToken<List<MonstersPlaceModel>>() {
             }.getType());
         }
-        return null;
+        return monstersPlaceModels;
     }
 
     public static List<Medicines> getInitMedicines() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MEDICINES_SHOP);
-        if (json != null) {
+        if (json != null && medicines == null) {
             return JsonUtil.decode(json, new TypeToken<List<Medicines>>() {
             }.getType());
         }
-        return null;
+        return medicines;
     }
 
 //    public static List<Armors> getInitArmors() {

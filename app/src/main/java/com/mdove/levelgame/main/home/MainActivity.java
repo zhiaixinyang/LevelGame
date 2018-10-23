@@ -22,6 +22,8 @@ public class MainActivity extends BaseActivity implements MainContract.IMainView
         mainPresenter = new MainPresenter();
         mainPresenter.subscribe(this);
         binding.setHandler(new MainActionHandler(mainPresenter));
+
+        mainPresenter.initAllData();
     }
 
     @Override

@@ -1,12 +1,8 @@
-package com.mdove.levelgame.main.hero;
+package com.mdove.levelgame.main.hero.manager;
 
-import com.mdove.levelgame.App;
-import com.mdove.levelgame.greendao.HeroAttributesDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
-import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.model.AttackResp;
-import com.mdove.levelgame.main.hero.model.BuyMedicinesResp;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 
 import java.util.List;
@@ -20,32 +16,18 @@ public class HeroAttributesManager {
     public static final int ATTACK_STATUS_FAIL = 2;
     public static final int ATTACK_STATUS_ERROR = 3;
 
-    public static final int BUY_MEDICINES_STATUS_SUC = 1;
-    // 没钱购买失败
-    public static final int BUY_MEDICINES_STATUS_FAIL = 2;
-    public static final int BUY_MEDICINES_STATUS_ERROR = 3;
-
     private HeroAttributes heroAttributes;
-    private HeroAttributesDao heroAttributesDao;
 
     private static class SingletonHolder {
         static final HeroAttributesManager INSTANCE = new HeroAttributesManager();
     }
 
-    private HeroAttributesManager() {
-        heroAttributesDao = App.getDaoSession().getHeroAttributesDao();
-    }
-
-    public HeroAttributes getHeroAttributes() {
-        return heroAttributes;
-    }
-
-    public void setHeroAttributes(HeroAttributes model) {
-        heroAttributes = model;
-    }
-
     public static HeroAttributesManager getInstance() {
         return SingletonHolder.INSTANCE;
+    }
+
+    private HeroAttributesManager() {
+        heroAttributes = HeroManager.getInstance().getHeroAttributes();
     }
 
     public AttackResp attack(long monstersId) {
@@ -97,38 +79,6 @@ public class HeroAttributesManager {
         return attackResp;
     }
 
-    public BuyMedicinesResp buyMedicines(long id) {
-        BuyMedicinesResp resp = new BuyMedicinesResp();
-        resp.buyStatus = BUY_MEDICINES_STATUS_ERROR;
-        Medicines realModel = null;
-        List<Medicines> medicines = InitDataFileUtils.getInitMedicines();
-        for (Medicines model : medicines) {
-            if (model.id == id) {
-                realModel = model;
-            }
-        }
-        // 没钱
-        if (heroAttributes.money - realModel.price < 0) {
-            resp.buyStatus = BUY_MEDICINES_STATUS_FAIL;
-        } else {// 购买成功
-            resp.buyStatus = BUY_MEDICINES_STATUS_SUC;
-            // 当前生命超出上限，舍弃
-            if (heroAttributes.curLife + realModel.life > heroAttributes.maxLife) {
-                heroAttributes.curLife = heroAttributes.maxLife;
-            } else {
-                heroAttributes.curLife += realModel.life;
-            }
-            // 扣钱
-            heroAttributes.money -= realModel.price;
-
-            // 构建Resp
-            resp.life = realModel.life;
-            resp.price = realModel.price;
-        }
-
-        return resp;
-    }
-
     private long getLevelExp(HeroAttributes heroAttributes) {
         long levelExp = heroAttributes.baseExp;
         if (heroAttributes.level > 1) {
@@ -138,6 +88,6 @@ public class HeroAttributesManager {
     }
 
     public void save() {
-        heroAttributesDao.update(heroAttributes);
+        HeroManager.getInstance().save();
     }
 }

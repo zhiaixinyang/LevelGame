@@ -1,9 +1,8 @@
 package com.mdove.levelgame.main.monsters.presenter;
 
 import com.mdove.levelgame.R;
-import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
-import com.mdove.levelgame.main.hero.HeroAttributesManager;
+import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
@@ -15,8 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 

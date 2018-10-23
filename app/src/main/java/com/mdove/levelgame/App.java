@@ -8,7 +8,7 @@ import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.utils.DaoManager;
-import com.mdove.levelgame.main.hero.HeroAttributesManager;
+import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -57,12 +57,6 @@ public class App extends Application {
             dao.insert(heroAttributes);
             AppConfig.setFirstLogin();
         }
-
-        initHeroAttributes();
-    }
-
-    private void initHeroAttributes() {
-        HeroAttributesManager.getInstance().setHeroAttributes(getDaoSession().getHeroAttributesDao().queryBuilder().unique());
     }
 
     public static DaoSession getDaoSession() {

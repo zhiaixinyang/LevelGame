@@ -2,11 +2,11 @@ package com.mdove.levelgame.main.hero.presenter;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
-import com.mdove.levelgame.main.hero.HeroAttributesManager;
+import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.HeroAttributesModelVM;
 
 /**
- * Created by MBENBEN on 2018/10/21.
+ * Created by MDove on 2018/10/21.
  */
 
 public class HeroAttributesPresenter implements HeroAttributesContract.IHeroAttributesPresenter {
@@ -29,6 +29,6 @@ public class HeroAttributesPresenter implements HeroAttributesContract.IHeroAttr
 
     @Override
     public void initData() {
-        view.showData(new HeroAttributesModelVM(HeroAttributesManager.getInstance().getHeroAttributes()));
+        view.showData(new HeroAttributesModelVM(HeroManager.getInstance().getHeroAttributes()));
     }
 }

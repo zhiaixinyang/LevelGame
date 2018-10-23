@@ -1,10 +1,15 @@
 package com.mdove.levelgame.main.shop.presenter;
 
+import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
+import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
+import com.mdove.levelgame.main.hero.model.BuyArmorResp;
+import com.mdove.levelgame.main.hero.model.BuyAttackResp;
 import com.mdove.levelgame.main.shop.model.ShopArmorModel;
 import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 import com.mdove.levelgame.main.shop.model.mv.ShopArmorModelVM;
 import com.mdove.levelgame.main.shop.model.mv.ShopAttackModelVM;
+import com.mdove.levelgame.utils.ToastHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,22 @@ public class ShopArmorPresenter implements ShopArmorContract.IShopArmorPresenter
 
     @Override
     public void onItemBtnClick(Long id) {
-
+        BuyArmorResp resp = HeroBuyManager.getInstance().buyArmor(id);
+        switch (resp.buyStatus) {
+            case HeroBuyManager.BUY_ARMOR_STATUS_ERROR: {
+                ToastHelper.shortToast(view.getContext().getString(R.string.string_error));
+                break;
+            }
+            case HeroBuyManager.BUY_ARMOR_STATUS_FAIL: {
+                ToastHelper.shortToast(view.getContext().getString(R.string.string_buy_medicines_fail));
+                break;
+            }
+            case HeroBuyManager.BUY_ARMOR_STATUS_SUC: {
+                ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_armor_suc),  resp.price));
+                break;
+            }
+            default:
+                break;
+        }
     }
 }

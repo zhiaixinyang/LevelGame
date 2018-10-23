@@ -25,6 +25,10 @@ public class MainActionHandler {
         mainPresenter.onClickHeroAttributes();
     }
 
+    public void onClickHeroPackage() {
+        mainPresenter.onClickHeroPackage();
+    }
+
     public void onClickBuyMedicines() {
         mainPresenter.onClickBuyMedicines();
     }

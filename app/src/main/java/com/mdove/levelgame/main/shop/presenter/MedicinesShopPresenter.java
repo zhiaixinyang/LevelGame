@@ -3,7 +3,7 @@ package com.mdove.levelgame.main.shop.presenter;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
-import com.mdove.levelgame.main.hero.HeroAttributesManager;
+import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BuyMedicinesResp;
 import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
 import com.mdove.levelgame.utils.ToastHelper;
@@ -53,25 +53,27 @@ public class MedicinesShopPresenter implements MedicinesShopContract.IMedicinesS
         Observable.create(new ObservableOnSubscribe<BuyMedicinesResp>() {
             @Override
             public void subscribe(ObservableEmitter<BuyMedicinesResp> e) throws Exception {
-                BuyMedicinesResp resp = HeroAttributesManager.getInstance().buyMedicines(id);
+                BuyMedicinesResp resp = HeroBuyManager.getInstance().buyMedicines(id);
                 e.onNext(resp);
             }
         }).subscribe(new Consumer<BuyMedicinesResp>() {
             @Override
             public void accept(BuyMedicinesResp buyMedicinesResp) throws Exception {
                 switch (buyMedicinesResp.buyStatus) {
-                    case HeroAttributesManager.BUY_MEDICINES_STATUS_ERROR: {
+                    case HeroBuyManager.BUY_MEDICINES_STATUS_ERROR: {
                         ToastHelper.shortToast(view.getContext().getString(R.string.string_error));
                         break;
                     }
-                    case HeroAttributesManager.BUY_MEDICINES_STATUS_FAIL: {
+                    case HeroBuyManager.BUY_MEDICINES_STATUS_FAIL: {
                         ToastHelper.shortToast(view.getContext().getString(R.string.string_buy_medicines_fail));
                         break;
                     }
-                    case HeroAttributesManager.BUY_MEDICINES_STATUS_SUC: {
+                    case HeroBuyManager.BUY_MEDICINES_STATUS_SUC: {
                         ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_medicines_suc), buyMedicinesResp.life, buyMedicinesResp.price));
                         break;
                     }
+                    default:
+                        break;
                 }
             }
         });

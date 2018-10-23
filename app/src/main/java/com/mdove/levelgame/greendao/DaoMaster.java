@@ -28,6 +28,8 @@ public class DaoMaster extends AbstractDaoMaster {
         MonstersDao.createTable(db, ifNotExists);
         MonstersPlaceDao.createTable(db, ifNotExists);
         WeaponsDao.createTable(db, ifNotExists);
+        PackagesDao.createTable(db, ifNotExists);
+        AllGoodsDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -39,6 +41,8 @@ public class DaoMaster extends AbstractDaoMaster {
         MonstersDao.dropTable(db, ifExists);
         MonstersPlaceDao.dropTable(db, ifExists);
         WeaponsDao.dropTable(db, ifExists);
+        PackagesDao.dropTable(db, ifExists);
+        AllGoodsDao.dropTable(db, ifExists);
     }
 
     /**
@@ -64,6 +68,8 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(MonstersDao.class);
         registerDaoClass(MonstersPlaceDao.class);
         registerDaoClass(WeaponsDao.class);
+        registerDaoClass(PackagesDao.class);
+        registerDaoClass(AllGoodsDao.class);
     }
 
     public DaoSession newSession() {

@@ -12,6 +12,7 @@ public interface MainContract {
         void onClickMonstersPlace();
         void onClickHeroAttributes();
         void onClickBuyMedicines();
+        void onClickGoShop();
     }
 
     interface IMainView extends BaseView {

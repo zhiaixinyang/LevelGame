@@ -8,8 +8,8 @@
     <string name="string_monsters_place">出城打怪</string>
     <string name="string_hero_attributes">个人属性</string>
     <string name="string_shop">购买装备</string>
-    <string name="string_buy_attack">武器商店</string>
-    <string name="string_buy_armor">铠甲商店</string>
+    <string name="string_fragment_title_buy_attack">武器商店</string>
+    <string name="string_fragment_title_buy_armor">铠甲商店</string>
     <string name="string_medicine_shop">购买药品</string>
 
     <string name="permission_title">权限需要</string>

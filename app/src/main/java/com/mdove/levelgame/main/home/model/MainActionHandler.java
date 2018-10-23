@@ -17,6 +17,10 @@ public class MainActionHandler {
         mainPresenter.onClickMonstersPlace();
     }
 
+    public void onClickGoShop() {
+        mainPresenter.onClickGoShop();
+    }
+
     public void onClickHeroAttributes() {
         mainPresenter.onClickHeroAttributes();
     }

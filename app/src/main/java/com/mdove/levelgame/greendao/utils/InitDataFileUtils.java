@@ -5,6 +5,11 @@ import com.mdove.levelgame.App;
 import com.mdove.levelgame.config.ConstAssetsFileName;
 import com.mdove.levelgame.greendao.AllGoods;
 import com.mdove.levelgame.greendao.AllGoodsDao;
+import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.greendao.MedicinesDao;
+import com.mdove.levelgame.greendao.MonstersDao;
+import com.mdove.levelgame.greendao.MonstersPlaceDao;
+import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
@@ -29,15 +34,23 @@ public class InitDataFileUtils {
     private static List<Armors> armors;
     private static List<ShopAttackModel> shopAttackModels;
     private static List<MonstersModel> monstersModels;
+    private static List<Monsters> monsters;
     private static List<Medicines> medicines;
     private static List<MonstersPlaceModel> monstersPlaceModels;
+    private static List<MonstersPlace> monstersPlaces;
 
     public static void initData() {
         AllGoodsDao allGoodsDao = App.getDaoSession().getAllGoodsDao();
+        WeaponsDao weaponsDao = App.getDaoSession().getWeaponsDao();
+        ArmorsDao armorsDao = App.getDaoSession().getArmorsDao();
+        MonstersDao monstersDao = App.getDaoSession().getMonstersDao();
+        MonstersPlaceDao monstersPlaceDao = App.getDaoSession().getMonstersPlaceDao();
+        MedicinesDao medicinesDao = App.getDaoSession().getMedicinesDao();
+
         long count = allGoodsDao.queryBuilder().count();
         if (shopArmorModels == null) {
             shopArmorModels = getShopArmors();
-            if (count > 0) {
+            if (count == 0) {
                 for (ShopArmorModel model : shopArmorModels) {
                     AllGoods goods = new AllGoods();
                     goods.type = model.type;
@@ -48,29 +61,31 @@ public class InitDataFileUtils {
         }
         if (weapons == null) {
             weapons = getInitWeapons();
-            if (count > 0) {
+            if (count == 0) {
                 for (Weapons model : weapons) {
                     AllGoods goods = new AllGoods();
                     goods.type = model.type;
                     goods.goodsId = model.id;
                     allGoodsDao.insert(goods);
+                    weaponsDao.insert(model);
                 }
             }
         }
         if (armors == null) {
             armors = getInitArmors();
-            if (count > 0) {
+            if (count == 0) {
                 for (Armors model : armors) {
                     AllGoods goods = new AllGoods();
                     goods.type = model.type;
                     goods.goodsId = model.id;
                     allGoodsDao.insert(goods);
+                    armorsDao.insert(model);
                 }
             }
         }
         if (shopAttackModels == null) {
             shopAttackModels = getShopWeapons();
-            if (count > 0) {
+            if (count == 0) {
                 for (ShopAttackModel model : shopAttackModels) {
                     AllGoods goods = new AllGoods();
                     goods.type = model.type;
@@ -79,14 +94,27 @@ public class InitDataFileUtils {
                 }
             }
         }
-        if (monstersModels == null) {
-            monstersModels = getInitMonsters();
+        if (monsters == null) {
+            monsters = getInitMonstersBase();
+            for (Monsters monsters : monsters) {
+                monstersDao.insert(monsters);
+            }
         }
         if (medicines == null) {
             medicines = getInitMedicines();
+            for (Medicines medicine : medicines) {
+                medicinesDao.insert(medicine);
+            }
         }
         if (monstersPlaceModels == null) {
             monstersPlaceModels = getInitMonstersPlace();
+        }
+
+        if (monstersPlaces == null) {
+            monstersPlaces = getInitMonstersPlaceBase();
+            for (MonstersPlace monstersPlace : monstersPlaces) {
+                monstersPlaceDao.insert(monstersPlace);
+            }
         }
     }
 
@@ -140,6 +168,16 @@ public class InitDataFileUtils {
         return monstersModels;
     }
 
+    public static List<Monsters> getInitMonstersBase() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_MONSTERS);
+        if (json != null && monsters == null) {
+            return JsonUtil.decode(json, new TypeToken<List<Monsters>>() {
+            }.getType());
+        }
+        return monsters;
+    }
+
     public static List<MonstersPlaceModel> getInitMonstersPlace() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS_PLACE);
@@ -148,6 +186,16 @@ public class InitDataFileUtils {
             }.getType());
         }
         return monstersPlaceModels;
+    }
+
+    public static List<MonstersPlace> getInitMonstersPlaceBase() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_MONSTERS_PLACE);
+        if (json != null && monstersPlaces == null) {
+            return JsonUtil.decode(json, new TypeToken<List<MonstersPlace>>() {
+            }.getType());
+        }
+        return monstersPlaces;
     }
 
     public static List<Medicines> getInitMedicines() {

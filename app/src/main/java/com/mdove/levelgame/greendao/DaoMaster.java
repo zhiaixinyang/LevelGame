@@ -24,12 +24,12 @@ public class DaoMaster extends AbstractDaoMaster {
         ArmorsDao.createTable(db, ifNotExists);
         DropGoodsDao.createTable(db, ifNotExists);
         HeroAttributesDao.createTable(db, ifNotExists);
-        MedicinesDao.createTable(db, ifNotExists);
         MonstersDao.createTable(db, ifNotExists);
         MonstersPlaceDao.createTable(db, ifNotExists);
         WeaponsDao.createTable(db, ifNotExists);
-        PackagesDao.createTable(db, ifNotExists);
+        MedicinesDao.createTable(db, ifNotExists);
         AllGoodsDao.createTable(db, ifNotExists);
+        PackagesDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -37,12 +37,12 @@ public class DaoMaster extends AbstractDaoMaster {
         ArmorsDao.dropTable(db, ifExists);
         DropGoodsDao.dropTable(db, ifExists);
         HeroAttributesDao.dropTable(db, ifExists);
-        MedicinesDao.dropTable(db, ifExists);
         MonstersDao.dropTable(db, ifExists);
         MonstersPlaceDao.dropTable(db, ifExists);
         WeaponsDao.dropTable(db, ifExists);
-        PackagesDao.dropTable(db, ifExists);
+        MedicinesDao.dropTable(db, ifExists);
         AllGoodsDao.dropTable(db, ifExists);
+        PackagesDao.dropTable(db, ifExists);
     }
 
     /**
@@ -64,12 +64,12 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ArmorsDao.class);
         registerDaoClass(DropGoodsDao.class);
         registerDaoClass(HeroAttributesDao.class);
-        registerDaoClass(MedicinesDao.class);
         registerDaoClass(MonstersDao.class);
         registerDaoClass(MonstersPlaceDao.class);
         registerDaoClass(WeaponsDao.class);
-        registerDaoClass(PackagesDao.class);
+        registerDaoClass(MedicinesDao.class);
         registerDaoClass(AllGoodsDao.class);
+        registerDaoClass(PackagesDao.class);
     }
 
     public DaoSession newSession() {

@@ -70,7 +70,6 @@ public class MainPresenter implements MainContract.IMainPresenter {
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
-                        InitDataFileUtils.initData();
                         mView.dismissLoadingDialog();
                     }
                 });

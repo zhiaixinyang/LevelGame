@@ -26,6 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_equip"
         android:layout_marginBottom="5dp"
+        android:scrollbars="none"
+        android:overScrollMode="never"
         android:background="@color/gray_light" />
 
     <TextView
@@ -49,6 +51,8 @@
         android:id="@+id/rlv_packages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:overScrollMode="never"
         android:layout_below="@+id/tv_packages"
         android:background="@color/gray_light" />
 </RelativeLayout>

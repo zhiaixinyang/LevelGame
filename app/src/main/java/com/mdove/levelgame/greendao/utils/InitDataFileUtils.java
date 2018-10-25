@@ -41,11 +41,17 @@ public class InitDataFileUtils {
 
     public static void initData() {
         AllGoodsDao allGoodsDao = App.getDaoSession().getAllGoodsDao();
+        allGoodsDao.deleteAll();
         WeaponsDao weaponsDao = App.getDaoSession().getWeaponsDao();
+        weaponsDao.deleteAll();
         ArmorsDao armorsDao = App.getDaoSession().getArmorsDao();
+        armorsDao.deleteAll();
         MonstersDao monstersDao = App.getDaoSession().getMonstersDao();
+        monstersDao.deleteAll();
         MonstersPlaceDao monstersPlaceDao = App.getDaoSession().getMonstersPlaceDao();
+        monstersPlaceDao.deleteAll();
         MedicinesDao medicinesDao = App.getDaoSession().getMedicinesDao();
+        medicinesDao.deleteAll();
 
         long count = allGoodsDao.queryBuilder().count();
         if (shopArmorModels == null) {

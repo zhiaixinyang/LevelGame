@@ -30,4 +30,15 @@ public class AppConfig implements IAppConfig {
         editor.putBoolean(KEY_FIRST_LOGIN, true);
         editor.apply();
     }
+
+    public static long getDBVersion() {
+        SharedPreferences preferences = initSharedPreferences();
+        return preferences.getLong(KEY_UPDATE_DB, 0);
+    }
+
+    public static void setDBVersion(long version){
+        SharedPreferences.Editor editor = initSharedPreferences().edit();
+        editor.putLong(KEY_UPDATE_DB, version);
+        editor.apply();
+    }
 }

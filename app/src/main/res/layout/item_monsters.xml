@@ -39,18 +39,19 @@
 
         <TextView
             android:id="@+id/tv_tips"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-            android:gravity="center"
             android:text="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="怪物介绍" />
 
         <TextView
+            android:id="@+id/btn_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"

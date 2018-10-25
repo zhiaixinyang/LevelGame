@@ -56,6 +56,8 @@ public class App extends Application {
             heroAttributes.lifeIncrease = 20;
             dao.insert(heroAttributes);
             AppConfig.setFirstLogin();
+        }
+        if (AppConfig.getDBVersion() == 0) {
             InitDataFileUtils.initData();
         }
     }

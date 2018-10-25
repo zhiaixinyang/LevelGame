@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "铠甲1",
-    "tips": "我是一件铠甲",
+    "name": "布衣",
+    "tips": "普普通通的布衣，勉强遮羞吧~",
     "attack": 0,
     "armor": 5,
     "price": 10,
@@ -11,8 +11,8 @@
   },
   {
     "id": 2,
-    "name": "铠甲2",
-    "tips": "我是一件铠甲",
+    "name": "布甲",
+    "tips": "和布衣唯一的区别就是，一字之差~",
     "attack": 0,
     "armor": 8,
     "price": 20,
@@ -21,31 +21,31 @@
   },
   {
     "id": 3,
-    "name": "铠甲3",
-    "tips": "我是一件铠甲",
-    "attack": 0,
-    "armor": 12,
-    "price": 30,
+    "name": "轻盔甲",
+    "tips": "入门级铠甲，多多少少像点样子。",
+    "attack": 3,
+    "armor": 20,
+    "price": 100,
     "type": "B3",
     "strengthen": 0
   },
   {
     "id": 4,
-    "name": "铠甲4",
-    "tips": "我是一件铠甲",
-    "attack": 0,
-    "armor": 15,
-    "price": 50,
+    "name": "重盔甲",
+    "tips": "穿上贼拉风的铠甲，就是有点重。",
+    "attack": 15,
+    "armor": 50,
+    "price": 500,
     "type": "B4",
     "strengthen": 0
   },
   {
     "id": 5,
-    "name": "铠甲5",
-    "tips": "我是一件铠甲",
-    "attack": 10,
-    "armor": 30,
-    "price": 200,
+    "name": "战神甲",
+    "tips": "听着名字就知道这是个“狠角色”，干就完了！",
+    "attack": 30,
+    "armor": 100,
+    "price": 3000,
     "type": "B5",
     "strengthen": 0
   }

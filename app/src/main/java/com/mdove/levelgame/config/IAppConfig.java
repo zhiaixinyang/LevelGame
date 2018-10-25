@@ -7,6 +7,6 @@ package com.mdove.levelgame.config;
 public interface IAppConfig {
     String KEY_FIRST_LOGIN = "key_first_login";
 
-    String KEY_HOLD_WEAPONS_TYPE = "key_hold_weapons_id";
+    String KEY_UPDATE_DB = "key_update_db";
     String KEY_HOLD_ARMORS_TYPE = "key_hold_armors_id";
 }

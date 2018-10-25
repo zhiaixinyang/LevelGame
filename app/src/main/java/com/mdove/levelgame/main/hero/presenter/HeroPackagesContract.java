@@ -25,6 +25,7 @@ public interface HeroPackagesContract {
 
         void showPackage(List<HeroPackageModelVM> data);
 
+        // 效果差
         void deleteUIByType(String type);
     }
 }

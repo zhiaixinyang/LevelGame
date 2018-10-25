@@ -20,30 +20,6 @@ public class AppConfig implements IAppConfig {
         return sPrefs;
     }
 
-    // id：背包道具id
-    public static void setHoldWeaponsType(String type) {
-        SharedPreferences.Editor editor = initSharedPreferences().edit();
-        editor.putString(KEY_HOLD_WEAPONS_TYPE, type);
-        editor.commit();
-    }
-
-    public static String getHoldWeaponsType() {
-        SharedPreferences preferences = initSharedPreferences();
-        return preferences.getString(KEY_HOLD_WEAPONS_TYPE, "-1");
-    }
-
-    // id：背包道具id
-    public static void setHoldArmorType(String type) {
-        SharedPreferences.Editor editor = initSharedPreferences().edit();
-        editor.putString(KEY_HOLD_ARMORS_TYPE, type);
-        editor.commit();
-    }
-
-    public static String getHoldArmorType() {
-        SharedPreferences preferences = initSharedPreferences();
-        return preferences.getString(KEY_HOLD_ARMORS_TYPE, "-1");
-    }
-
     public static boolean isFirstLogin() {
         SharedPreferences preferences = initSharedPreferences();
         return preferences.getBoolean(KEY_FIRST_LOGIN, false);

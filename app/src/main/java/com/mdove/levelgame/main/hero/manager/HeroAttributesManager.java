@@ -91,7 +91,6 @@ public class HeroAttributesManager {
     public void holdOnAttack(Weapons weapons) {
         heroAttributes.attack += weapons.attack;
         heroAttributes.armor += weapons.armor;
-        AppConfig.setHoldWeaponsType(weapons.type);
         save();
     }
 
@@ -104,7 +103,6 @@ public class HeroAttributesManager {
     public void holdOnArmor(Armors armors) {
         heroAttributes.attack += armors.attack;
         heroAttributes.armor += armors.armor;
-        AppConfig.setHoldArmorType(armors.type);
         save();
     }
 

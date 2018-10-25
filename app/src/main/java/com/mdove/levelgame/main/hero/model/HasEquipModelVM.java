@@ -14,9 +14,10 @@ public class HasEquipModelVM {
     public ObservableField<String> attack = new ObservableField<>();
     public ObservableField<String> armor = new ObservableField<>();
 
-    public HasEquipModelVM(Long id, String name, int attack, int armor) {
+    public HasEquipModelVM(Long id, String name, String attack, String armor) {
         this.id.set(id);
         this.name.set(name);
+
         this.attack.set(String.format(App.getAppContext().getString(R.string.string_equip_msg_attack), attack));
         this.armor.set(String.format(App.getAppContext().getString(R.string.string_equip_msg_armor), armor));
     }

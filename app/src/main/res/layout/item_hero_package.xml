@@ -16,7 +16,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
+        android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
+        android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
+        android:background="@drawable/bg_white_round">
 
         <TextView
             android:id="@+id/tv_name"
@@ -35,6 +39,7 @@
             android:id="@+id/tv_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
             android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
             android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
             android:text="@{vm.attack}"
@@ -42,17 +47,20 @@
             android:textSize="@dimen/item_hero_equip_text_size"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="装备攻击" />
 
         <TextView
             android:id="@+id/tv_armor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
             android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
             android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="@dimen/item_hero_equip_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="装备防御" />
@@ -62,12 +70,12 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
             android:background="@drawable/bg_take_off_equip_blue"
+            android:onClick="@{()->handler.onClickEquip(vm)}"
             android:paddingBottom="4dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingTop="4dp"
             android:text="装备"
-            android:onClick="@{()->handler.onClickEquip(vm)}"
             android:textColor="@color/blue_700"
             android:textSize="@dimen/item_hero_equip_text_size"
             app:layout_constraintBottom_toBottomOf="parent"

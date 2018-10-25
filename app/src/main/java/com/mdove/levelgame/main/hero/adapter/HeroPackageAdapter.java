@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.hero.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 
 import com.mdove.levelgame.R;
@@ -41,6 +42,24 @@ public class HeroPackageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void setData(List<HeroPackageModelVM> data) {
         this.data = data;
         notifyDataSetChanged();
+    }
+
+    private void deleteByPosition(int position) {
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void deleteByType(String type) {
+        int position = -1;
+        for (HeroPackageModelVM vm : data) {
+            if (TextUtils.equals(type, vm.type.get())) {
+                position = data.indexOf(vm);
+                break;
+            }
+        }
+        if (position != -1) {
+            deleteByPosition(position);
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

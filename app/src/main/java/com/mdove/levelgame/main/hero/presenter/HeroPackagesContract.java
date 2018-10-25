@@ -24,5 +24,7 @@ public interface HeroPackagesContract {
         void showEquipData(List<HasEquipModelVM> data);
 
         void showPackage(List<HeroPackageModelVM> data);
+
+        void deleteUIByType(String type);
     }
 }

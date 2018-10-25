@@ -24,8 +24,8 @@
     <string name="monsters_msg_exp">经验：%1$d</string>
     <string name="monsters_msg_money">金钱：%1$d</string>
 
-    <string name="string_equip_msg_attack">攻击：%1$d</string>
-    <string name="string_equip_msg_armor">防御：%1$d</string>
+    <string name="string_equip_msg_attack">攻击：%1$s</string>
+    <string name="string_equip_msg_armor">防御：%1$s</string>
 
 
     <string name="medicines_msg_price">需要金钱：%1$d</string>
@@ -57,4 +57,7 @@
     <string name="activity_title_medicines_shop">药店</string>
     <string name="string_has_equip">已装备</string>
     <string name="string_packages">背包详情</string>
+    <string name="string_equip_loading">装备中...</string>
+    <string name="string_no_hold_on_attack">未装备武器</string>
+    <string name="string_no_hold_on_armor">未装备铠甲</string>
 </resources>

@@ -6,4 +6,7 @@
     <dimen name="item_monsters_place_btn_normal_margin">5dp</dimen>
     <dimen name="item_hero_equip_text_size">16sp</dimen>
     <dimen name="item_hero_equip_normal_margin">8dp</dimen>
+    <dimen name="activity_hero_packages_tips_padding_r_l">24dp</dimen>
+    <dimen name="activity_hero_packages_tips_padding_t_b">4dp</dimen>
+    <dimen name="activity_hero_packages_tips_text_size">16sp</dimen>
 </resources>

@@ -1,6 +1,9 @@
 package com.mdove.levelgame.main.hero.manager;
 
+import com.mdove.levelgame.config.AppConfig;
+import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
@@ -77,6 +80,32 @@ public class HeroAttributesManager {
         }
         attackResp.attackStatus = attackStatus;
         return attackResp;
+    }
+
+    public void takeOffAttack(Weapons weapons) {
+        heroAttributes.attack -= weapons.attack;
+        heroAttributes.armor -= weapons.armor;
+        save();
+    }
+
+    public void holdOnAttack(Weapons weapons) {
+        heroAttributes.attack += weapons.attack;
+        heroAttributes.armor += weapons.armor;
+        AppConfig.setHoldWeaponsType(weapons.type);
+        save();
+    }
+
+    public void takeOffArmor(Armors armors) {
+        heroAttributes.attack -= armors.attack;
+        heroAttributes.armor -= armors.armor;
+        save();
+    }
+
+    public void holdOnArmor(Armors armors) {
+        heroAttributes.attack += armors.attack;
+        heroAttributes.armor += armors.armor;
+        AppConfig.setHoldArmorType(armors.type);
+        save();
     }
 
     private long getLevelExp(HeroAttributes heroAttributes) {

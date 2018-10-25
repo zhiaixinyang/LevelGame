@@ -71,4 +71,9 @@ public class HeroPackagesActivity extends BaseActivity implements HeroPackagesCo
     public void showPackage(List<HeroPackageModelVM> data) {
         heroPackageAdapter.setData(data);
     }
+
+    @Override
+    public void deleteUIByType(String type) {
+        heroPackageAdapter.deleteByType(type);
+    }
 }

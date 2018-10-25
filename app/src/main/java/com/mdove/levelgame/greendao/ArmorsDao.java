@@ -27,7 +27,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         public final static Property Id = new Property(0, long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Tips = new Property(2, String.class, "tips", false, "TIPS");
-        public final static Property Attack = new Property(3, String.class, "attack", false, "ATTACK");
+        public final static Property Attack = new Property(3, int.class, "attack", false, "ATTACK");
         public final static Property Armor = new Property(4, int.class, "armor", false, "ARMOR");
         public final static Property Price = new Property(5, long.class, "price", false, "PRICE");
         public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
@@ -50,7 +50,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
                 "\"TIPS\" TEXT," + // 2: tips
-                "\"ATTACK\" TEXT," + // 3: attack
+                "\"ATTACK\" INTEGER NOT NULL ," + // 3: attack
                 "\"ARMOR\" INTEGER NOT NULL ," + // 4: armor
                 "\"PRICE\" INTEGER NOT NULL ," + // 5: price
                 "\"TYPE\" TEXT," + // 6: type
@@ -77,11 +77,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         if (tips != null) {
             stmt.bindString(3, tips);
         }
- 
-        String attack = entity.getAttack();
-        if (attack != null) {
-            stmt.bindString(4, attack);
-        }
+        stmt.bindLong(4, entity.getAttack());
         stmt.bindLong(5, entity.getArmor());
         stmt.bindLong(6, entity.getPrice());
  
@@ -106,11 +102,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         if (tips != null) {
             stmt.bindString(3, tips);
         }
- 
-        String attack = entity.getAttack();
-        if (attack != null) {
-            stmt.bindString(4, attack);
-        }
+        stmt.bindLong(4, entity.getAttack());
         stmt.bindLong(5, entity.getArmor());
         stmt.bindLong(6, entity.getPrice());
  
@@ -132,7 +124,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
             cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // tips
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // attack
+            cursor.getInt(offset + 3), // attack
             cursor.getInt(offset + 4), // armor
             cursor.getLong(offset + 5), // price
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
@@ -146,7 +138,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         entity.setId(cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setTips(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setAttack(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setAttack(cursor.getInt(offset + 3));
         entity.setArmor(cursor.getInt(offset + 4));
         entity.setPrice(cursor.getLong(offset + 5));
         entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));

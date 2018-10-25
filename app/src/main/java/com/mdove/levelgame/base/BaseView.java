@@ -8,6 +8,8 @@ import android.content.Context;
 public interface BaseView {
     Context getContext();
 
+    String getString(int stringId);
+
     void showLoadingDialog(String msg);
 
     void dismissLoadingDialog();

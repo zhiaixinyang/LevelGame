@@ -25,6 +25,8 @@ import java.util.List;
 
 public class InitDataFileUtils {
     private static List<ShopArmorModel> shopArmorModels;
+    private static List<Weapons> weapons;
+    private static List<Armors> armors;
     private static List<ShopAttackModel> shopAttackModels;
     private static List<MonstersModel> monstersModels;
     private static List<Medicines> medicines;
@@ -35,8 +37,30 @@ public class InitDataFileUtils {
         long count = allGoodsDao.queryBuilder().count();
         if (shopArmorModels == null) {
             shopArmorModels = getShopArmors();
-            if (count >0) {
+            if (count > 0) {
                 for (ShopArmorModel model : shopArmorModels) {
+                    AllGoods goods = new AllGoods();
+                    goods.type = model.type;
+                    goods.goodsId = model.id;
+                    allGoodsDao.insert(goods);
+                }
+            }
+        }
+        if (weapons == null) {
+            weapons = getInitWeapons();
+            if (count > 0) {
+                for (Weapons model : weapons) {
+                    AllGoods goods = new AllGoods();
+                    goods.type = model.type;
+                    goods.goodsId = model.id;
+                    allGoodsDao.insert(goods);
+                }
+            }
+        }
+        if (armors == null) {
+            armors = getInitArmors();
+            if (count > 0) {
+                for (Armors model : armors) {
                     AllGoods goods = new AllGoods();
                     goods.type = model.type;
                     goods.goodsId = model.id;
@@ -46,7 +70,7 @@ public class InitDataFileUtils {
         }
         if (shopAttackModels == null) {
             shopAttackModels = getShopWeapons();
-            if (count >0) {
+            if (count > 0) {
                 for (ShopAttackModel model : shopAttackModels) {
                     AllGoods goods = new AllGoods();
                     goods.type = model.type;
@@ -69,11 +93,11 @@ public class InitDataFileUtils {
     public static List<Armors> getInitArmors() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_ARMORS);
-        if (json != null) {
+        if (json != null && armors == null) {
             return JsonUtil.decode(json, new TypeToken<List<Armors>>() {
             }.getType());
         }
-        return null;
+        return armors;
     }
 
     public static List<ShopArmorModel> getShopArmors() {
@@ -89,11 +113,11 @@ public class InitDataFileUtils {
     public static List<Weapons> getInitWeapons() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_WEAPONS);
-        if (json != null) {
+        if (json != null && weapons == null) {
             return JsonUtil.decode(json, new TypeToken<List<Weapons>>() {
             }.getType());
         }
-        return null;
+        return weapons;
     }
 
     public static List<ShopAttackModel> getShopWeapons() {

@@ -24,7 +24,7 @@ public class AppConfig implements IAppConfig {
     public static void setHoldWeaponsType(String type) {
         SharedPreferences.Editor editor = initSharedPreferences().edit();
         editor.putString(KEY_HOLD_WEAPONS_TYPE, type);
-        editor.apply();
+        editor.commit();
     }
 
     public static String getHoldWeaponsType() {
@@ -36,7 +36,7 @@ public class AppConfig implements IAppConfig {
     public static void setHoldArmorType(String type) {
         SharedPreferences.Editor editor = initSharedPreferences().edit();
         editor.putString(KEY_HOLD_ARMORS_TYPE, type);
-        editor.apply();
+        editor.commit();
     }
 
     public static String getHoldArmorType() {

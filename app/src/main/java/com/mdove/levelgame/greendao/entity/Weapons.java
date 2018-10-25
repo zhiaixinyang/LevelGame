@@ -17,7 +17,7 @@ public class Weapons {
     // 提示
     public String tips;
     // 攻击值
-    public String attack;
+    public int attack;
     // 护甲值
     public int armor;
     // 价格
@@ -30,8 +30,8 @@ public class Weapons {
     public String type;
     // 强化级别
     public int strengthen;
-    @Generated(hash = 1314658568)
-    public Weapons(long id, String name, String tips, String attack, int armor,
+    @Generated(hash = 201210302)
+    public Weapons(long id, String name, String tips, int attack, int armor,
             long price, String type, int strengthen) {
         this.id = id;
         this.name = name;
@@ -63,10 +63,10 @@ public class Weapons {
     public void setTips(String tips) {
         this.tips = tips;
     }
-    public String getAttack() {
+    public int getAttack() {
         return this.attack;
     }
-    public void setAttack(String attack) {
+    public void setAttack(int attack) {
         this.attack = attack;
     }
     public int getArmor() {
@@ -93,4 +93,5 @@ public class Weapons {
     public void setStrengthen(int strengthen) {
         this.strengthen = strengthen;
     }
+
 }

@@ -5,10 +5,13 @@ import android.text.TextUtils;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.mdove.levelgame.model.DropGoodsModel;
 import com.mdove.levelgame.utils.log.LogUtils;
 
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * Created by MBENBEN on 2018/10/20.

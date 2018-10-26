@@ -1,7 +1,7 @@
 package com.mdove.levelgame.model;
 
 /**
- * Created by MBENBEN on 2018/10/21.
+ * Created by MDove on 2018/10/21.
  *
  * 掉落装备的临时数据结构
  */

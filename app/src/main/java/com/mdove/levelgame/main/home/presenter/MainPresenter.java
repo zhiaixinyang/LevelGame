@@ -59,6 +59,11 @@ public class MainPresenter implements MainContract.IMainPresenter {
     }
 
     @Override
+    public void onClickBigMonsters() {
+
+    }
+
+    @Override
     public void initAllData() {
         Observable.just(1)
                 .doOnNext(new Consumer<Integer>() {

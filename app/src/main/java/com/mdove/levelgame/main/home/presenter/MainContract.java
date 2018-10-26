@@ -18,6 +18,7 @@ public interface MainContract {
         void onClickGoShop();
 
         void onClickHeroPackage();
+        void onClickBigMonsters();
 
         void initAllData();
     }

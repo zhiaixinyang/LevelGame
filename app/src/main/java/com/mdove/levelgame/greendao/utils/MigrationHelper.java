@@ -24,56 +24,20 @@ import java.util.List;
  */
 
 public class MigrationHelper {
-    public static boolean DEBUG = false;
-    private static String TAG = "MigrationHelper";
+    public static boolean DEBUG = true;
     private static final String SQLITE_MASTER = "sqlite_master";
     private static final String SQLITE_TEMP_MASTER = "sqlite_temp_master";
 
-    private static WeakReference<ReCreateAllTableListener> weakListener;
-
-    public interface ReCreateAllTableListener{
-        void onCreateAllTables(Database db, boolean ifNotExists);
-        void onDropAllTables(Database db, boolean ifExists);
-    }
-
     public static void migrate(SQLiteDatabase db, Class<? extends AbstractDao<?, ?>>... daoClasses) {
-        printLog("【The Old Database Version】" + db.getVersion());
         Database database = new StandardDatabase(db);
         migrate(database, daoClasses);
     }
 
-    public static void migrate(SQLiteDatabase db, ReCreateAllTableListener listener, Class<? extends AbstractDao<?, ?>>... daoClasses) {
-        weakListener = new WeakReference<>(listener);
-        migrate(db, daoClasses);
-    }
-
-    public static void migrate(Database database, ReCreateAllTableListener listener, Class<? extends AbstractDao<?, ?>>... daoClasses) {
-        weakListener = new WeakReference<>(listener);
-        migrate(database, daoClasses);
-    }
-
     public static void migrate(Database database, Class<? extends AbstractDao<?, ?>>... daoClasses) {
-        printLog("【Generate temp table】start");
         generateTempTables(database, daoClasses);
-        printLog("【Generate temp table】complete");
-
-        ReCreateAllTableListener listener = null;
-        if (weakListener != null) {
-            listener = weakListener.get();
-        }
-
-        if (listener != null) {
-            listener.onDropAllTables(database, true);
-            printLog("【Drop all table by listener】");
-            listener.onCreateAllTables(database, false);
-            printLog("【Create all table by listener】");
-        } else {
-            dropAllTables(database, true, daoClasses);
-            createAllTables(database, false, daoClasses);
-        }
-        printLog("【Restore data】start");
+        dropAllTables(database, true, daoClasses);
+        createAllTables(database, false, daoClasses);
         restoreData(database, daoClasses);
-        printLog("【Restore data】complete");
     }
 
     private static void generateTempTables(Database db, Class<? extends AbstractDao<?, ?>>... daoClasses) {
@@ -83,7 +47,6 @@ public class MigrationHelper {
             DaoConfig daoConfig = new DaoConfig(db, daoClasses[i]);
             String tableName = daoConfig.tablename;
             if (!isTableExists(db, false, tableName)) {
-                printLog("【New Table】" + tableName);
                 continue;
             }
             try {
@@ -91,15 +54,12 @@ public class MigrationHelper {
                 StringBuilder dropTableStringBuilder = new StringBuilder();
                 dropTableStringBuilder.append("DROP TABLE IF EXISTS ").append(tempTableName).append(";");
                 db.execSQL(dropTableStringBuilder.toString());
-
                 StringBuilder insertTableStringBuilder = new StringBuilder();
                 insertTableStringBuilder.append("CREATE TEMPORARY TABLE ").append(tempTableName);
                 insertTableStringBuilder.append(" AS SELECT * FROM ").append(tableName).append(";");
                 db.execSQL(insertTableStringBuilder.toString());
-                printLog("【Table】" + tableName +"\n ---Columns-->"+getColumnsStr(daoConfig));
-                printLog("【Generate temp table】" + tempTableName);
             } catch (SQLException e) {
-                Log.e(TAG, "【Failed to generate temp table】" + tempTableName, e);
+
             }
         }
     }
@@ -110,7 +70,7 @@ public class MigrationHelper {
         }
         String dbName = isTemp ? SQLITE_TEMP_MASTER : SQLITE_MASTER;
         String sql = "SELECT COUNT(*) FROM " + dbName + " WHERE type = ? AND name = ?";
-        Cursor cursor=null;
+        Cursor cursor = null;
         int count = 0;
         try {
             cursor = db.rawQuery(sql, new String[]{"table", tableName});
@@ -146,12 +106,10 @@ public class MigrationHelper {
 
     private static void dropAllTables(Database db, boolean ifExists, @NonNull Class<? extends AbstractDao<?, ?>>... daoClasses) {
         reflectMethod(db, "dropTable", ifExists, daoClasses);
-        printLog("【Drop all table by reflect】");
     }
 
     private static void createAllTables(Database db, boolean ifNotExists, @NonNull Class<? extends AbstractDao<?, ?>>... daoClasses) {
         reflectMethod(db, "createTable", ifNotExists, daoClasses);
-        printLog("【Create all table by reflect】");
     }
 
     /**
@@ -185,34 +143,38 @@ public class MigrationHelper {
                 continue;
             }
 
+
             try {
                 // get all columns from tempTable, take careful to use the columns list
                 List<String> columns = getColumns(db, tempTableName);
                 ArrayList<String> properties = new ArrayList<>(columns.size());
                 for (int j = 0; j < daoConfig.properties.length; j++) {
                     String columnName = daoConfig.properties[j].columnName;
-                    if (columns.contains(columnName)) {
-                        properties.add("`" + columnName + "`");
+                    if (!columns.contains(columnName)) {
+                        StringBuilder insertTableStringBuilder = new StringBuilder();
+                        insertTableStringBuilder.append("ALTER TABLE " + tempTableName + " ADD COLUMN " + columnName +
+                                getTableType(daoConfig.properties[j].type));
+                        db.execSQL(insertTableStringBuilder.toString());
                     }
+                    properties.add(columnName);
                 }
+
                 if (properties.size() > 0) {
                     final String columnSQL = TextUtils.join(",", properties);
 
                     StringBuilder insertTableStringBuilder = new StringBuilder();
-                    insertTableStringBuilder.append("REPLACE INTO ").append(tableName).append(" (");
+                    insertTableStringBuilder.append("INSERT INTO ").append(tableName).append(" (");
                     insertTableStringBuilder.append(columnSQL);
                     insertTableStringBuilder.append(") SELECT ");
                     insertTableStringBuilder.append(columnSQL);
-                    insertTableStringBuilder.append(" FROM ").append(tempTableName).append(";");
+                    insertTableStringBuilder.append(" FROM ").append(tempTableName);
+                    insertTableStringBuilder.append(";");
                     db.execSQL(insertTableStringBuilder.toString());
-                    printLog("【Restore data】 to " + tableName);
                 }
                 StringBuilder dropTableStringBuilder = new StringBuilder();
                 dropTableStringBuilder.append("DROP TABLE ").append(tempTableName);
                 db.execSQL(dropTableStringBuilder.toString());
-                printLog("【Drop temp table】" + tempTableName);
             } catch (SQLException e) {
-                Log.e(TAG, "【Failed to restore data from temp table 】" + tempTableName, e);
             }
         }
     }
@@ -236,10 +198,20 @@ public class MigrationHelper {
         return columns;
     }
 
-    private static void printLog(String info){
-        if(DEBUG){
-            Log.d(TAG, info);
-        }
-    }
 
+    private static Object getTableType(Class<?> type) {
+        if (type.equals(int.class)) {
+            return " INTEGER DEFAULT 0";
+        }
+        if (type.equals(long.class)) {
+            return " Long DEFAULT 0";
+        }
+        if (type.equals(String.class)) {
+            return " TEXT ";
+        }
+        if (type.equals(boolean.class)) {
+            return " NUMERIC DEFAULT 0";
+        }
+        return " TEXT";
+    }
 }

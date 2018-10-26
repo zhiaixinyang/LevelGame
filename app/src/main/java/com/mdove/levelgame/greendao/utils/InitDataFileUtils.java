@@ -40,94 +40,77 @@ public class InitDataFileUtils {
     private static List<MonstersPlace> monstersPlaces;
 
     public static void initData() {
-        AllGoodsDao allGoodsDao = App.getDaoSession().getAllGoodsDao();
+        AllGoodsDao allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();
         allGoodsDao.deleteAll();
-        WeaponsDao weaponsDao = App.getDaoSession().getWeaponsDao();
+        WeaponsDao weaponsDao = DatabaseManager.getInstance().getWeaponsDao();
         weaponsDao.deleteAll();
-        ArmorsDao armorsDao = App.getDaoSession().getArmorsDao();
+        ArmorsDao armorsDao = DatabaseManager.getInstance().getArmorsDao();
         armorsDao.deleteAll();
-        MonstersDao monstersDao = App.getDaoSession().getMonstersDao();
+        MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
         monstersDao.deleteAll();
-        MonstersPlaceDao monstersPlaceDao = App.getDaoSession().getMonstersPlaceDao();
+        MonstersPlaceDao monstersPlaceDao = DatabaseManager.getInstance().getMonstersPlaceDao();
         monstersPlaceDao.deleteAll();
-        MedicinesDao medicinesDao = App.getDaoSession().getMedicinesDao();
+        MedicinesDao medicinesDao = DatabaseManager.getInstance().getMedicinesDao();
         medicinesDao.deleteAll();
 
-        long count = allGoodsDao.queryBuilder().count();
-        if (shopArmorModels == null) {
-            shopArmorModels = getShopArmors();
-            if (count == 0) {
-                for (ShopArmorModel model : shopArmorModels) {
-                    AllGoods goods = new AllGoods();
-                    goods.type = model.type;
-                    goods.goodsId = model.id;
-                    allGoodsDao.insert(goods);
-                }
-            }
+        shopArmorModels = getShopArmors();
+        for (ShopArmorModel model : shopArmorModels) {
+            AllGoods goods = new AllGoods();
+            goods.type = model.type;
+            goods.goodsId = model.id;
+            allGoodsDao.insert(goods);
         }
-        if (weapons == null) {
-            weapons = getInitWeapons();
-            if (count == 0) {
-                for (Weapons model : weapons) {
-                    AllGoods goods = new AllGoods();
-                    goods.type = model.type;
-                    goods.goodsId = model.id;
-                    allGoodsDao.insert(goods);
-                    weaponsDao.insert(model);
-                }
-            }
+
+        weapons = getInitWeapons();
+        for (Weapons model : weapons) {
+            AllGoods goods = new AllGoods();
+            goods.type = model.type;
+            goods.goodsId = model.id;
+            allGoodsDao.insert(goods);
+            weaponsDao.insert(model);
         }
-        if (armors == null) {
-            armors = getInitArmors();
-            if (count == 0) {
-                for (Armors model : armors) {
-                    AllGoods goods = new AllGoods();
-                    goods.type = model.type;
-                    goods.goodsId = model.id;
-                    allGoodsDao.insert(goods);
-                    armorsDao.insert(model);
-                }
-            }
+
+        armors = getInitArmors();
+        for (Armors model : armors) {
+            AllGoods goods = new AllGoods();
+            goods.type = model.type;
+            goods.goodsId = model.id;
+            allGoodsDao.insert(goods);
+            armorsDao.insert(model);
         }
-        if (shopAttackModels == null) {
-            shopAttackModels = getShopWeapons();
-            if (count == 0) {
-                for (ShopAttackModel model : shopAttackModels) {
-                    AllGoods goods = new AllGoods();
-                    goods.type = model.type;
-                    goods.goodsId = model.id;
-                    allGoodsDao.insert(goods);
-                }
-            }
+
+        shopAttackModels = getShopWeapons();
+        for (ShopAttackModel model : shopAttackModels) {
+            AllGoods goods = new AllGoods();
+            goods.type = model.type;
+            goods.goodsId = model.id;
+            allGoodsDao.insert(goods);
         }
-        if (monsters == null) {
-            monsters = getInitMonstersBase();
-            for (Monsters monsters : monsters) {
-                monstersDao.insert(monsters);
-            }
+
+        monsters = getInitMonstersBase();
+        for (Monsters monsters : monsters) {
+            monstersDao.insert(monsters);
         }
-        if (medicines == null) {
-            medicines = getInitMedicines();
-            for (Medicines medicine : medicines) {
-                medicinesDao.insert(medicine);
-            }
+
+        medicines = getInitMedicines();
+        for (Medicines medicine : medicines) {
+            medicinesDao.insert(medicine);
         }
+
         if (monstersPlaceModels == null) {
             monstersPlaceModels = getInitMonstersPlace();
         }
 
-        if (monstersPlaces == null) {
-            monstersPlaces = getInitMonstersPlaceBase();
-            for (MonstersPlace monstersPlace : monstersPlaces) {
-                monstersPlaceDao.insert(monstersPlace);
-            }
+        monstersPlaces = getInitMonstersPlaceBase();
+        for (MonstersPlace monstersPlace : monstersPlaces) {
+            monstersPlaceDao.insert(monstersPlace);
         }
     }
 
     public static List<Armors> getInitArmors() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_ARMORS);
-        if (json != null && armors == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<Armors>>() {
             }.getType());
         }
@@ -137,7 +120,7 @@ public class InitDataFileUtils {
     public static List<ShopArmorModel> getShopArmors() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_ARMORS);
-        if (json != null && shopArmorModels == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<ShopArmorModel>>() {
             }.getType());
         }
@@ -147,7 +130,7 @@ public class InitDataFileUtils {
     public static List<Weapons> getInitWeapons() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_WEAPONS);
-        if (json != null && weapons == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<Weapons>>() {
             }.getType());
         }
@@ -157,7 +140,7 @@ public class InitDataFileUtils {
     public static List<ShopAttackModel> getShopWeapons() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_WEAPONS);
-        if (json != null && shopAttackModels == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<ShopAttackModel>>() {
             }.getType());
         }
@@ -167,7 +150,7 @@ public class InitDataFileUtils {
     public static List<MonstersModel> getInitMonsters() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS);
-        if (json != null && monstersModels == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<MonstersModel>>() {
             }.getType());
         }
@@ -177,7 +160,7 @@ public class InitDataFileUtils {
     public static List<Monsters> getInitMonstersBase() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS);
-        if (json != null && monsters == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<Monsters>>() {
             }.getType());
         }
@@ -187,7 +170,7 @@ public class InitDataFileUtils {
     public static List<MonstersPlaceModel> getInitMonstersPlace() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS_PLACE);
-        if (json != null && monstersPlaceModels == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<MonstersPlaceModel>>() {
             }.getType());
         }
@@ -197,7 +180,7 @@ public class InitDataFileUtils {
     public static List<MonstersPlace> getInitMonstersPlaceBase() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS_PLACE);
-        if (json != null && monstersPlaces == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<MonstersPlace>>() {
             }.getType());
         }
@@ -207,7 +190,7 @@ public class InitDataFileUtils {
     public static List<Medicines> getInitMedicines() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MEDICINES_SHOP);
-        if (json != null && medicines == null) {
+        if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<Medicines>>() {
             }.getType());
         }

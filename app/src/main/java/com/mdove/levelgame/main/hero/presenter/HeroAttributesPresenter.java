@@ -2,6 +2,7 @@ package com.mdove.levelgame.main.hero.presenter;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.HeroAttributesModelVM;
 
@@ -14,7 +15,7 @@ public class HeroAttributesPresenter implements HeroAttributesContract.IHeroAttr
     private HeroAttributesContract.IHeroAttributesView view;
 
     public HeroAttributesPresenter() {
-        heroAttributesDao = App.getDaoSession().getHeroAttributesDao();
+        heroAttributesDao = DatabaseManager.getInstance().getHeroAttributesDao();
     }
 
     @Override

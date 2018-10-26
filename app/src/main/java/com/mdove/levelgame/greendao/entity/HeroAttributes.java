@@ -30,10 +30,15 @@ public class HeroAttributes {
     public long baseExp;
     // 升级经验值提升倍数
     public int expMultiple;
-    @Generated(hash = 836436504)
+    // 体力
+    public int bodyPower;
+    // 当前生存天数
+    public int days;
+    @Generated(hash = 98610741)
     public HeroAttributes(Long id, int attack, int attackIncrease, int armor,
             int armorIncrease, int curLife, int lifeIncrease, int maxLife,
-            int money, int level, long experience, long baseExp, int expMultiple) {
+            int money, int level, long experience, long baseExp, int expMultiple,
+            int bodyPower, int days) {
         this.id = id;
         this.attack = attack;
         this.attackIncrease = attackIncrease;
@@ -47,6 +52,8 @@ public class HeroAttributes {
         this.experience = experience;
         this.baseExp = baseExp;
         this.expMultiple = expMultiple;
+        this.bodyPower = bodyPower;
+        this.days = days;
     }
     @Generated(hash = 219453175)
     public HeroAttributes() {
@@ -128,6 +135,18 @@ public class HeroAttributes {
     }
     public void setExpMultiple(int expMultiple) {
         this.expMultiple = expMultiple;
+    }
+    public int getBodyPower() {
+        return this.bodyPower;
+    }
+    public void setBodyPower(int bodyPower) {
+        this.bodyPower = bodyPower;
+    }
+    public int getDays() {
+        return this.days;
+    }
+    public void setDays(int days) {
+        this.days = days;
     }
 
 }

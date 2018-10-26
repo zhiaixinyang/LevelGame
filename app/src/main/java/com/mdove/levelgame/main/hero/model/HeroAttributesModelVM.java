@@ -17,6 +17,8 @@ public class HeroAttributesModelVM {
     public ObservableField<String> money = new ObservableField<>();
     public ObservableField<String> level = new ObservableField<>();
     public ObservableField<String> needExperience = new ObservableField<>();
+    public ObservableField<String> bodyPower = new ObservableField<>();
+    public ObservableField<String> days = new ObservableField<>();
 
     public HeroAttributesModelVM(HeroAttributes heroAttributes) {
         attack.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_attack), heroAttributes.attack, heroAttributes.attackIncrease));
@@ -24,7 +26,9 @@ public class HeroAttributesModelVM {
         life.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_life), heroAttributes.curLife, heroAttributes.maxLife, heroAttributes.lifeIncrease));
         money.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_money), heroAttributes.money));
         level.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_level), heroAttributes.level));
+        days.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_days), heroAttributes.days));
         needExperience.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_need_exp), heroAttributes.experience, getLevelExp(heroAttributes)));
+        bodyPower.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_body_power), heroAttributes.bodyPower, 100));
     }
 
     private long getLevelExp(HeroAttributes heroAttributes) {

@@ -3,6 +3,7 @@ package com.mdove.levelgame.main.hero.manager;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 
 /**
  * @author zhaojing on 2018/10/23
@@ -20,7 +21,7 @@ public class HeroManager {
     }
 
     private HeroManager() {
-        heroAttributesDao = App.getDaoSession().getHeroAttributesDao();
+        heroAttributesDao = DatabaseManager.getInstance().getHeroAttributesDao();
         heroAttributes = heroAttributesDao.queryBuilder().unique();
     }
 

@@ -5,6 +5,7 @@ import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Packages;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.model.BuyArmorResp;
 import com.mdove.levelgame.main.hero.model.BuyAttackResp;
@@ -41,7 +42,7 @@ public class HeroBuyManager {
 
     private HeroBuyManager() {
         heroAttributes = HeroManager.getInstance().getHeroAttributes();
-        packagesDao = App.getDaoSession().getPackagesDao();
+        packagesDao = DatabaseManager.getInstance().getPackagesDao();
     }
 
     public static HeroBuyManager getInstance() {

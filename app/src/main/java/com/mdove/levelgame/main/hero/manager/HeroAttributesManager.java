@@ -1,9 +1,12 @@
 package com.mdove.levelgame.main.hero.manager;
 
 import com.mdove.levelgame.config.AppConfig;
+import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.Weapons;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
@@ -18,6 +21,7 @@ public class HeroAttributesManager {
     public static final int ATTACK_STATUS_WIN = 1;
     public static final int ATTACK_STATUS_FAIL = 2;
     public static final int ATTACK_STATUS_ERROR = 3;
+    public static final int ATTACK_STATUS_NO_POWER = 4;
 
     private HeroAttributes heroAttributes;
 
@@ -33,14 +37,23 @@ public class HeroAttributesManager {
         heroAttributes = HeroManager.getInstance().getHeroAttributes();
     }
 
+    public void heroRest() {
+        heroAttributes.bodyPower = 100;
+        heroAttributes.days += 1;
+        save();
+    }
+
     public AttackResp attack(long monstersId) {
         AttackResp attackResp = new AttackResp();
         int attackStatus = ATTACK_STATUS_ERROR;
-        List<MonstersModel> monsters = InitDataFileUtils.getInitMonsters();
-        MonstersModel realModel = null;
-        for (MonstersModel model : monsters) {
-            if (model.id == monstersId) {
-                realModel = model;
+        Monsters realModel = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(monstersId)).unique();
+        if (realModel != null) {
+            if (heroAttributes.bodyPower - realModel.consumePower < 0) {
+                attackStatus = ATTACK_STATUS_NO_POWER;
+                // 体力不足，直接置为null，跳过后续逻辑
+                realModel = null;
+            } else {
+                heroAttributes.bodyPower -= realModel.consumePower;
             }
         }
 

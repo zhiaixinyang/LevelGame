@@ -16,11 +16,17 @@ public interface MonstersConstract {
     interface IMonstersPresenter extends BasePresenter<IMonstersView> {
         void initData(long monstersPlaceId);
 
+        void initPower();
+
+        void heroRest();
+
         void onItemBtnClick(Long id);
     }
 
     interface IMonstersView extends BaseView {
         void attackUI(int index);
+
+        void showPowerText(String content);
 
         void showData(List<MonstersModelVM> data);
     }

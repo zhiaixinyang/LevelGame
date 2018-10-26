@@ -5,7 +5,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * Created by MBENBEN on 2018/10/20.
+ * Created by MDove on 2018/10/20.
  */
 @Entity
 public class Monsters {
@@ -31,10 +31,12 @@ public class Monsters {
     public long monsterPlaceId;
     // 经验
     public long exp;
-    @Generated(hash = 553614126)
+    // 体力消耗
+    public int consumePower;
+    @Generated(hash = 987977027)
     public Monsters(Long id, int life, String type, int attack, int armor,
             int money, String tips, String name, String dropGoodsId,
-            long monsterPlaceId, long exp) {
+            long monsterPlaceId, long exp, int consumePower) {
         this.id = id;
         this.life = life;
         this.type = type;
@@ -46,6 +48,7 @@ public class Monsters {
         this.dropGoodsId = dropGoodsId;
         this.monsterPlaceId = monsterPlaceId;
         this.exp = exp;
+        this.consumePower = consumePower;
     }
     @Generated(hash = 1349461748)
     public Monsters() {
@@ -116,5 +119,10 @@ public class Monsters {
     public void setExp(long exp) {
         this.exp = exp;
     }
-
+    public int getConsumePower() {
+        return this.consumePower;
+    }
+    public void setConsumePower(int consumePower) {
+        this.consumePower = consumePower;
+    }
 }

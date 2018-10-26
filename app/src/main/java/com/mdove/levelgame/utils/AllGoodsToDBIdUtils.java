@@ -2,6 +2,7 @@ package com.mdove.levelgame.utils;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.AllGoodsDao;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 
 /**
@@ -22,7 +23,7 @@ public class AllGoodsToDBIdUtils {
     private AllGoodsDao allGoodsDao;
 
     private AllGoodsToDBIdUtils() {
-        allGoodsDao = App.getDaoSession().getAllGoodsDao();
+        allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();
     }
 
     public int getDBType(String type) {

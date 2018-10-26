@@ -12,6 +12,7 @@ import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.model.HasEquipModelVM;
@@ -44,9 +45,9 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
     private ArmorsDao armorsDao;
 
     public HeroPackagesPresenter() {
-        weaponsDao = App.getDaoSession().getWeaponsDao();
-        packagesDao = App.getDaoSession().getPackagesDao();
-        armorsDao = App.getDaoSession().getArmorsDao();
+        weaponsDao = DatabaseManager.getInstance().getWeaponsDao();
+        packagesDao = DatabaseManager.getInstance().getPackagesDao();
+        armorsDao =DatabaseManager.getInstance().getArmorsDao();
     }
 
     @Override

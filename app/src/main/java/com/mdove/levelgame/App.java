@@ -4,10 +4,18 @@ import android.app.Application;
 import android.content.Context;
 
 import com.mdove.levelgame.config.AppConfig;
+import com.mdove.levelgame.greendao.AllGoodsDao;
+import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.DaoSession;
+import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
+import com.mdove.levelgame.greendao.MedicinesDao;
+import com.mdove.levelgame.greendao.MonstersDao;
+import com.mdove.levelgame.greendao.MonstersPlaceDao;
+import com.mdove.levelgame.greendao.PackagesDao;
+import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
-import com.mdove.levelgame.greendao.utils.DaoManager;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -17,30 +25,22 @@ import com.tencent.bugly.crashreport.CrashReport;
 
 public class App extends Application {
     public static Context mAppContext;
-    private static DaoSession mDaoSession;
-    private DaoManager mDaoManager;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mAppContext = this;
 
-        mDaoManager = DaoManager.getInstance();
+        DatabaseManager.getInstance().init(mAppContext, HeroAttributesDao.class, ArmorsDao.class,
+                DropGoodsDao.class, MedicinesDao.class, MonstersDao.class, MonstersPlaceDao.class,
+                PackagesDao.class, WeaponsDao.class, AllGoodsDao.class);
 
         CrashReport.setIsDevelopmentDevice(mAppContext, true);
         CrashReport.initCrashReport(getApplicationContext(), "544aec74cc", false);
 
-        mDaoManager.init(mAppContext);
-        if (mDaoSession == null) {
-            synchronized (App.class) {
-                if (null == mDaoSession) {
-                    mDaoSession = mDaoManager.getDaoMaster().newSession();
-                }
-            }
-        }
 
         if (!AppConfig.isFirstLogin()) {
-            HeroAttributesDao dao = getDaoSession().getHeroAttributesDao();
+            HeroAttributesDao dao = DatabaseManager.getInstance().getHeroAttributesDao();
             HeroAttributes heroAttributes = new HeroAttributes();
             heroAttributes.armor = 10;
             heroAttributes.armorIncrease = 3;
@@ -54,16 +54,12 @@ public class App extends Application {
             heroAttributes.curLife = 100;
             heroAttributes.maxLife = 100;
             heroAttributes.lifeIncrease = 20;
+            heroAttributes.bodyPower = 100;
+            heroAttributes.days = 1;
             dao.insert(heroAttributes);
             AppConfig.setFirstLogin();
         }
-        if (AppConfig.getDBVersion() == 0) {
-            InitDataFileUtils.initData();
-        }
-    }
-
-    public static DaoSession getDaoSession() {
-        return mDaoSession;
+        InitDataFileUtils.initData();
     }
 
     public static boolean isDebug() {

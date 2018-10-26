@@ -37,6 +37,8 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         public final static Property Experience = new Property(10, long.class, "experience", false, "EXPERIENCE");
         public final static Property BaseExp = new Property(11, long.class, "baseExp", false, "BASE_EXP");
         public final static Property ExpMultiple = new Property(12, int.class, "expMultiple", false, "EXP_MULTIPLE");
+        public final static Property BodyPower = new Property(13, int.class, "bodyPower", false, "BODY_POWER");
+        public final static Property Days = new Property(14, int.class, "days", false, "DAYS");
     }
 
 
@@ -64,7 +66,9 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
                 "\"LEVEL\" INTEGER NOT NULL ," + // 9: level
                 "\"EXPERIENCE\" INTEGER NOT NULL ," + // 10: experience
                 "\"BASE_EXP\" INTEGER NOT NULL ," + // 11: baseExp
-                "\"EXP_MULTIPLE\" INTEGER NOT NULL );"); // 12: expMultiple
+                "\"EXP_MULTIPLE\" INTEGER NOT NULL ," + // 12: expMultiple
+                "\"BODY_POWER\" INTEGER NOT NULL ," + // 13: bodyPower
+                "\"DAYS\" INTEGER NOT NULL );"); // 14: days
     }
 
     /** Drops the underlying database table. */
@@ -93,6 +97,8 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         stmt.bindLong(11, entity.getExperience());
         stmt.bindLong(12, entity.getBaseExp());
         stmt.bindLong(13, entity.getExpMultiple());
+        stmt.bindLong(14, entity.getBodyPower());
+        stmt.bindLong(15, entity.getDays());
     }
 
     @Override
@@ -115,6 +121,8 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         stmt.bindLong(11, entity.getExperience());
         stmt.bindLong(12, entity.getBaseExp());
         stmt.bindLong(13, entity.getExpMultiple());
+        stmt.bindLong(14, entity.getBodyPower());
+        stmt.bindLong(15, entity.getDays());
     }
 
     @Override
@@ -137,7 +145,9 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
             cursor.getInt(offset + 9), // level
             cursor.getLong(offset + 10), // experience
             cursor.getLong(offset + 11), // baseExp
-            cursor.getInt(offset + 12) // expMultiple
+            cursor.getInt(offset + 12), // expMultiple
+            cursor.getInt(offset + 13), // bodyPower
+            cursor.getInt(offset + 14) // days
         );
         return entity;
     }
@@ -157,6 +167,8 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         entity.setExperience(cursor.getLong(offset + 10));
         entity.setBaseExp(cursor.getLong(offset + 11));
         entity.setExpMultiple(cursor.getInt(offset + 12));
+        entity.setBodyPower(cursor.getInt(offset + 13));
+        entity.setDays(cursor.getInt(offset + 14));
      }
     
     @Override

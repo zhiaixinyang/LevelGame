@@ -35,6 +35,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         public final static Property DropGoodsId = new Property(8, String.class, "dropGoodsId", false, "DROP_GOODS_ID");
         public final static Property MonsterPlaceId = new Property(9, long.class, "monsterPlaceId", false, "MONSTER_PLACE_ID");
         public final static Property Exp = new Property(10, long.class, "exp", false, "EXP");
+        public final static Property ConsumePower = new Property(11, int.class, "consumePower", false, "CONSUME_POWER");
     }
 
 
@@ -60,7 +61,8 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
                 "\"NAME\" TEXT," + // 7: name
                 "\"DROP_GOODS_ID\" TEXT," + // 8: dropGoodsId
                 "\"MONSTER_PLACE_ID\" INTEGER NOT NULL ," + // 9: monsterPlaceId
-                "\"EXP\" INTEGER NOT NULL );"); // 10: exp
+                "\"EXP\" INTEGER NOT NULL ," + // 10: exp
+                "\"CONSUME_POWER\" INTEGER NOT NULL );"); // 11: consumePower
     }
 
     /** Drops the underlying database table. */
@@ -103,6 +105,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         }
         stmt.bindLong(10, entity.getMonsterPlaceId());
         stmt.bindLong(11, entity.getExp());
+        stmt.bindLong(12, entity.getConsumePower());
     }
 
     @Override
@@ -139,6 +142,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         }
         stmt.bindLong(10, entity.getMonsterPlaceId());
         stmt.bindLong(11, entity.getExp());
+        stmt.bindLong(12, entity.getConsumePower());
     }
 
     @Override
@@ -159,7 +163,8 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // name
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // dropGoodsId
             cursor.getLong(offset + 9), // monsterPlaceId
-            cursor.getLong(offset + 10) // exp
+            cursor.getLong(offset + 10), // exp
+            cursor.getInt(offset + 11) // consumePower
         );
         return entity;
     }
@@ -177,6 +182,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         entity.setDropGoodsId(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setMonsterPlaceId(cursor.getLong(offset + 9));
         entity.setExp(cursor.getLong(offset + 10));
+        entity.setConsumePower(cursor.getInt(offset + 11));
      }
     
     @Override

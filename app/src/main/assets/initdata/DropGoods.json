@@ -18,5 +18,21 @@
   {
     "id": 5,
     "types": "[{\"type\":\"A1\",\"probability\":0.4},{\"type\":\"A2\",\"probability\":0.1}]"
+  },
+  {
+    "id": 6,
+    "types": "[{\"type\":\"E1\",\"probability\":0.2},{\"type\":\"E2\",\"probability\":0.2},{\"type\":\"E3\",\"probability\":0.2}]"
+  },
+  {
+    "id": 100,
+    "types": "[{\"type\":\"A1\",\"probability\":0.4},{\"type\":\"A2\",\"probability\":0.1}]"
+  },
+  {
+    "id": 101,
+    "types": "[{\"type\":\"A1\",\"probability\":0.4},{\"type\":\"A2\",\"probability\":0.1}]"
+  },
+  {
+    "id": 102,
+    "types": "[{\"type\":\"A1\",\"probability\":0.4},{\"type\":\"A2\",\"probability\":0.1}]"
   }
 ]

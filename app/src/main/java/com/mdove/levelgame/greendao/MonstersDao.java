@@ -1,13 +1,18 @@
 package com.mdove.levelgame.greendao;
 
+import java.util.List;
+import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.Property;
+import org.greenrobot.greendao.internal.SqlUtils;
 import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
+
+import com.mdove.levelgame.greendao.entity.DropGoods;
 
 import com.mdove.levelgame.greendao.entity.Monsters;
 
@@ -32,11 +37,13 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         public final static Property Money = new Property(5, int.class, "money", false, "MONEY");
         public final static Property Tips = new Property(6, String.class, "tips", false, "TIPS");
         public final static Property Name = new Property(7, String.class, "name", false, "NAME");
-        public final static Property DropGoodsId = new Property(8, String.class, "dropGoodsId", false, "DROP_GOODS_ID");
+        public final static Property DropGoodsId = new Property(8, long.class, "dropGoodsId", false, "DROP_GOODS_ID");
         public final static Property MonsterPlaceId = new Property(9, long.class, "monsterPlaceId", false, "MONSTER_PLACE_ID");
         public final static Property Exp = new Property(10, long.class, "exp", false, "EXP");
         public final static Property ConsumePower = new Property(11, int.class, "consumePower", false, "CONSUME_POWER");
     }
+
+    private DaoSession daoSession;
 
 
     public MonstersDao(DaoConfig config) {
@@ -45,6 +52,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
     
     public MonstersDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
+        this.daoSession = daoSession;
     }
 
     /** Creates the underlying database table. */
@@ -59,7 +67,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
                 "\"MONEY\" INTEGER NOT NULL ," + // 5: money
                 "\"TIPS\" TEXT," + // 6: tips
                 "\"NAME\" TEXT," + // 7: name
-                "\"DROP_GOODS_ID\" TEXT," + // 8: dropGoodsId
+                "\"DROP_GOODS_ID\" INTEGER NOT NULL ," + // 8: dropGoodsId
                 "\"MONSTER_PLACE_ID\" INTEGER NOT NULL ," + // 9: monsterPlaceId
                 "\"EXP\" INTEGER NOT NULL ," + // 10: exp
                 "\"CONSUME_POWER\" INTEGER NOT NULL );"); // 11: consumePower
@@ -98,11 +106,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         if (name != null) {
             stmt.bindString(8, name);
         }
- 
-        String dropGoodsId = entity.getDropGoodsId();
-        if (dropGoodsId != null) {
-            stmt.bindString(9, dropGoodsId);
-        }
+        stmt.bindLong(9, entity.getDropGoodsId());
         stmt.bindLong(10, entity.getMonsterPlaceId());
         stmt.bindLong(11, entity.getExp());
         stmt.bindLong(12, entity.getConsumePower());
@@ -135,14 +139,16 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         if (name != null) {
             stmt.bindString(8, name);
         }
- 
-        String dropGoodsId = entity.getDropGoodsId();
-        if (dropGoodsId != null) {
-            stmt.bindString(9, dropGoodsId);
-        }
+        stmt.bindLong(9, entity.getDropGoodsId());
         stmt.bindLong(10, entity.getMonsterPlaceId());
         stmt.bindLong(11, entity.getExp());
         stmt.bindLong(12, entity.getConsumePower());
+    }
+
+    @Override
+    protected final void attachEntity(Monsters entity) {
+        super.attachEntity(entity);
+        entity.__setDaoSession(daoSession);
     }
 
     @Override
@@ -161,7 +167,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
             cursor.getInt(offset + 5), // money
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // tips
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // name
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // dropGoodsId
+            cursor.getLong(offset + 8), // dropGoodsId
             cursor.getLong(offset + 9), // monsterPlaceId
             cursor.getLong(offset + 10), // exp
             cursor.getInt(offset + 11) // consumePower
@@ -179,7 +185,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         entity.setMoney(cursor.getInt(offset + 5));
         entity.setTips(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setDropGoodsId(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setDropGoodsId(cursor.getLong(offset + 8));
         entity.setMonsterPlaceId(cursor.getLong(offset + 9));
         entity.setExp(cursor.getLong(offset + 10));
         entity.setConsumePower(cursor.getInt(offset + 11));
@@ -210,4 +216,97 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         return true;
     }
     
+    private String selectDeep;
+
+    protected String getSelectDeep() {
+        if (selectDeep == null) {
+            StringBuilder builder = new StringBuilder("SELECT ");
+            SqlUtils.appendColumns(builder, "T", getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T0", daoSession.getDropGoodsDao().getAllColumns());
+            builder.append(" FROM MONSTERS T");
+            builder.append(" LEFT JOIN DROP_GOODS T0 ON T.\"DROP_GOODS_ID\"=T0.\"_id\"");
+            builder.append(' ');
+            selectDeep = builder.toString();
+        }
+        return selectDeep;
+    }
+    
+    protected Monsters loadCurrentDeep(Cursor cursor, boolean lock) {
+        Monsters entity = loadCurrent(cursor, 0, lock);
+        int offset = getAllColumns().length;
+
+        DropGoods dropGoods = loadCurrentOther(daoSession.getDropGoodsDao(), cursor, offset);
+         if(dropGoods != null) {
+            entity.setDropGoods(dropGoods);
+        }
+
+        return entity;    
+    }
+
+    public Monsters loadDeep(Long key) {
+        assertSinglePk();
+        if (key == null) {
+            return null;
+        }
+
+        StringBuilder builder = new StringBuilder(getSelectDeep());
+        builder.append("WHERE ");
+        SqlUtils.appendColumnsEqValue(builder, "T", getPkColumns());
+        String sql = builder.toString();
+        
+        String[] keyArray = new String[] { key.toString() };
+        Cursor cursor = db.rawQuery(sql, keyArray);
+        
+        try {
+            boolean available = cursor.moveToFirst();
+            if (!available) {
+                return null;
+            } else if (!cursor.isLast()) {
+                throw new IllegalStateException("Expected unique result, but count was " + cursor.getCount());
+            }
+            return loadCurrentDeep(cursor, true);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+    /** Reads all available rows from the given cursor and returns a list of new ImageTO objects. */
+    public List<Monsters> loadAllDeepFromCursor(Cursor cursor) {
+        int count = cursor.getCount();
+        List<Monsters> list = new ArrayList<Monsters>(count);
+        
+        if (cursor.moveToFirst()) {
+            if (identityScope != null) {
+                identityScope.lock();
+                identityScope.reserveRoom(count);
+            }
+            try {
+                do {
+                    list.add(loadCurrentDeep(cursor, false));
+                } while (cursor.moveToNext());
+            } finally {
+                if (identityScope != null) {
+                    identityScope.unlock();
+                }
+            }
+        }
+        return list;
+    }
+    
+    protected List<Monsters> loadDeepAllAndCloseCursor(Cursor cursor) {
+        try {
+            return loadAllDeepFromCursor(cursor);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+
+    /** A raw-style query where you can pass any WHERE clause and arguments. */
+    public List<Monsters> queryDeep(String where, String... selectionArg) {
+        Cursor cursor = db.rawQuery(getSelectDeep() + where, selectionArg);
+        return loadDeepAllAndCloseCursor(cursor);
+    }
+ 
 }

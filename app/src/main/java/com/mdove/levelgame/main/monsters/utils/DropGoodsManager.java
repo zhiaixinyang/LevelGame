@@ -40,12 +40,13 @@ public class DropGoodsManager {
         DropGoodsResp resp = new DropGoodsResp();
         DropGoods dropGood = dropGoodsDao.queryBuilder().where(DropGoodsDao.Properties.Id.eq(id)).unique();
         if (dropGood != null) {
-            List<DropGoodsModel> goodsModels = JsonUtil.decode(dropGood.data, new TypeToken<List<DropGoodsModel>>() {
+            List<DropGoodsModel> goodsModels = JsonUtil.decode(dropGood.types, new TypeToken<List<DropGoodsModel>>() {
             }.getType());
             for (DropGoodsModel model : goodsModels) {
 
             }
         }
+        return null;
     }
 
     private void compute(DropGoodsResp resp, String type, float probability) {

@@ -29,8 +29,8 @@ public class MainActionHandler {
         mainPresenter.onClickHeroPackage();
     }
 
-    public void onClickBigMonsters() {
-        mainPresenter.onClickBigMonsters();
+    public void onClickBigMonsters(BigMonstersModelVM vm) {
+        mainPresenter.onClickBigMonsters(vm);
     }
 
     public void onClickBuyMedicines() {

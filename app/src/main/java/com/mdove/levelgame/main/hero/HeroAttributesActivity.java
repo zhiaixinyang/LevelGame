@@ -10,10 +10,12 @@ import android.support.annotation.Nullable;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.databinding.ActivityHeroAttributesBinding;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.model.HeroAttributesModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroAttributesContract;
 import com.mdove.levelgame.main.hero.presenter.HeroAttributesPresenter;
 import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
+import com.mdove.levelgame.utils.ToastHelper;
 
 /**
  * Created by MBENBEN on 2018/10/21.
@@ -45,6 +47,7 @@ public class HeroAttributesActivity extends BaseActivity implements HeroAttribut
         presenter.subscribe(this);
 
         presenter.initData();
+        ToastHelper.shortToast(DatabaseManager.getInstance().getBigMonstersDao().queryBuilder().list().get(0).getDropGoods().getTypes());
     }
 
     @Override

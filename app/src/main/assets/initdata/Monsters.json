@@ -9,7 +9,7 @@
     "life": 30,
     "type": "C1",
     "monster_place_id": 1,
-    "drop_goods_id": "1",
+    "drop_goods_id": 1,
     "exp": 10,
     "consume_power": 10
   },
@@ -23,7 +23,7 @@
     "money": 30,
     "type": "C2",
     "monster_place_id": 1,
-    "drop_goods_id": "2",
+    "drop_goods_id": 2,
     "consume_power": 10,
     "exp": 30
   },
@@ -37,7 +37,7 @@
     "money": 50,
     "type": "C3",
     "monster_place_id": 1,
-    "drop_goods_id": "3",
+    "drop_goods_id": 3,
     "consume_power": 25,
     "exp": 50
   },
@@ -51,7 +51,7 @@
     "life": 20,
     "type": "C4",
     "monster_place_id": 1,
-    "drop_goods_id": "4",
+    "drop_goods_id": 4,
     "consume_power": 10,
     "exp": 30
   },
@@ -65,22 +65,22 @@
     "money": 100,
     "type": "C5",
     "monster_place_id": 1,
-    "drop_goods_id": "5",
+    "drop_goods_id": 5,
     "consume_power": 30,
     "exp": 100
   },
   {
     "id": 6,
-    "name": "怪物A1",
-    "tips": "我是一个特殊怪物",
+    "name": "矿石怪物",
+    "tips": "可随机随机掉落：铁矿石、铜矿石、强化石",
     "attack": 50,
     "armor": 5,
     "life": 30,
-    "money": 50,
-    "type": "C5",
+    "money": 0,
+    "type": "C6",
     "monster_place_id": 2,
-    "drop_goods_id": "5",
-    "consume_power": 30,
-    "exp": 50
+    "drop_goods_id": 6,
+    "consume_power": 10,
+    "exp": 0
   }
 ]

@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Weapons {
     @Id(autoincrement = true)
-    public long id;
+    public Long id;
 
     // 武器名
     public String name;
@@ -28,11 +28,16 @@ public class Weapons {
      *  B：表示铠甲
      */
     public String type;
-    // 强化级别
-    public int strengthen;
-    @Generated(hash = 201210302)
-    public Weapons(long id, String name, String tips, int attack, int armor,
-            long price, String type, int strengthen) {
+    // 是否可以强化
+    public int isCanStrengthen;
+    // 是否可以升级
+    public int isCanUpdate;
+    // 是否可以合成
+    public int isCanMixture;
+    @Generated(hash = 815521936)
+    public Weapons(Long id, String name, String tips, int attack, int armor,
+            long price, String type, int isCanStrengthen, int isCanUpdate,
+            int isCanMixture) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -40,15 +45,17 @@ public class Weapons {
         this.armor = armor;
         this.price = price;
         this.type = type;
-        this.strengthen = strengthen;
+        this.isCanStrengthen = isCanStrengthen;
+        this.isCanUpdate = isCanUpdate;
+        this.isCanMixture = isCanMixture;
     }
     @Generated(hash = 1666722499)
     public Weapons() {
     }
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {
@@ -87,11 +94,22 @@ public class Weapons {
     public void setType(String type) {
         this.type = type;
     }
-    public int getStrengthen() {
-        return this.strengthen;
+    public int getIsCanStrengthen() {
+        return this.isCanStrengthen;
     }
-    public void setStrengthen(int strengthen) {
-        this.strengthen = strengthen;
+    public void setIsCanStrengthen(int isCanStrengthen) {
+        this.isCanStrengthen = isCanStrengthen;
     }
-
+    public int getIsCanUpdate() {
+        return this.isCanUpdate;
+    }
+    public void setIsCanUpdate(int isCanUpdate) {
+        this.isCanUpdate = isCanUpdate;
+    }
+    public int getIsCanMixture() {
+        return this.isCanMixture;
+    }
+    public void setIsCanMixture(int isCanMixture) {
+        this.isCanMixture = isCanMixture;
+    }
 }

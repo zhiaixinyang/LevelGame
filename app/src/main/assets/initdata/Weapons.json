@@ -1,33 +1,42 @@
 [
   {
     "id": 1,
-    "name": "锈刀",
-    "tips": "...拿在手里吓唬吓唬小孩纸吧。",
+    "name": "锈刀[可升级]",
+    "tips": "...拿在手里吓唬吓唬小孩纸吧。---可升级为：铁刀",
     "attack": 10,
     "armor": 0,
     "price": 10,
     "type": "A1",
-    "strengthen": 0
+    "is_can_strengthen": 0,
+    "is_can_update": 0,
+    "update_type": "A6",
+    "is_can_mixture":1
   },
   {
     "id": 2,
-    "name": "砍柴刀",
-    "tips": "农家常用的防身武器，唬人效果max！",
+    "name": "砍柴刀[可合成]",
+    "tips": "农家常用的防身武器，唬人效果max！---与铁刀可以合称为：短刀",
     "attack": 20,
     "armor": 0,
     "price": 50,
     "type": "A2",
-    "strengthen": 0
+    "is_can_strengthen": 0,
+    "is_can_update": 1,
+    "is_can_mixture":0,
+    "mixture_type": "A7"
   },
   {
     "id": 3,
-    "name": "长刀",
-    "tips": "正规军装备的常用武器；居家旅行、杀人越货不二之选~",
+    "name": "长刀[可合成]",
+    "tips": "正规军装备的常用武器；居家旅行、杀人越货不二之选~---可以和短刀合成为双刃",
     "attack": 30,
     "armor": 15,
     "price": 300,
     "type": "A3",
-    "strengthen": 0
+    "is_can_strengthen": 0,
+    "is_can_update": 1,
+    "mixture_type": "A8",
+    "is_can_mixture":1
   },
   {
     "id": 4,
@@ -37,7 +46,9 @@
     "armor": 5,
     "price": 500,
     "type": "A4",
-    "strengthen": 0
+    "is_can_strengthen": 0,
+    "is_can_update": 1,
+    "is_can_mixture":1
   },
   {
     "id": 5,
@@ -47,6 +58,41 @@
     "armor": 50,
     "price": 3000,
     "type": "A5",
-    "strengthen": 0
-  }
+    "is_can_strengthen": 0,
+    "is_can_update": 1,
+    "is_can_mixture":1
+  },{
+  "id": 6,
+  "name": "铁刀",
+  "tips": "升级公式：锈刀+铁矿石",
+  "attack": 30,
+  "armor": 0,
+  "price": 99999,
+  "type": "A6",
+  "is_can_strengthen": 0,
+  "is_can_update": 1,
+  "is_can_mixture":1
+},{
+  "id": 7,
+  "name": "短刀",
+  "tips": "合成公式：铁刀+砍柴刀+铜矿石",
+  "attack": 60,
+  "armor": 10,
+  "price": 99999,
+  "type": "A7",
+  "is_can_strengthen": 0,
+  "is_can_update": 1,
+  "is_can_mixture":1
+},{
+  "id": 8,
+  "name": "双刃",
+  "tips": "合成公式：短刀+长刀+铜矿石",
+  "attack": 120,
+  "armor": 20,
+  "price": 99999,
+  "type": "A8",
+  "is_can_strengthen": 0,
+  "is_can_update": 1,
+  "is_can_mixture":1
+}
 ]

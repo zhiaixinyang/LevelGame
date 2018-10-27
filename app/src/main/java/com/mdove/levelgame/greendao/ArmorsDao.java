@@ -24,7 +24,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, long.class, "id", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Tips = new Property(2, String.class, "tips", false, "TIPS");
         public final static Property Attack = new Property(3, int.class, "attack", false, "ATTACK");
@@ -47,7 +47,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"ARMORS\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
                 "\"TIPS\" TEXT," + // 2: tips
                 "\"ATTACK\" INTEGER NOT NULL ," + // 3: attack
@@ -66,7 +66,11 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Armors entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
  
         String name = entity.getName();
         if (name != null) {
@@ -91,7 +95,11 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
     @Override
     protected final void bindValues(SQLiteStatement stmt, Armors entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
  
         String name = entity.getName();
         if (name != null) {
@@ -115,13 +123,13 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public Armors readEntity(Cursor cursor, int offset) {
         Armors entity = new Armors( //
-            cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // tips
             cursor.getInt(offset + 3), // attack
@@ -135,7 +143,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
      
     @Override
     public void readEntity(Cursor cursor, Armors entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setTips(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setAttack(cursor.getInt(offset + 3));
@@ -162,7 +170,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
 
     @Override
     public boolean hasKey(Armors entity) {
-        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
+        return entity.getId() != null;
     }
 
     @Override

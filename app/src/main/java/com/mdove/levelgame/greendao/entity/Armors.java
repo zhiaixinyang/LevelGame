@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Armors {
     @Id(autoincrement = true)
-    public long id;
+    public Long id;
 
     // 武器名
     public String name;
@@ -31,8 +31,8 @@ public class Armors {
     public String type;
     // 强化级别
     public int strengthen;
-    @Generated(hash = 1790829770)
-    public Armors(long id, String name, String tips, int attack, int armor,
+    @Generated(hash = 1423506329)
+    public Armors(Long id, String name, String tips, int attack, int armor,
             long price, String type, int strengthen) {
         this.id = id;
         this.name = name;
@@ -46,10 +46,10 @@ public class Armors {
     @Generated(hash = 1024617871)
     public Armors() {
     }
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {

@@ -6,9 +6,11 @@ import android.content.Context;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
+import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
@@ -33,7 +35,7 @@ public class App extends Application {
 
         DatabaseManager.getInstance().init(mAppContext, HeroAttributesDao.class, ArmorsDao.class,
                 DropGoodsDao.class, MedicinesDao.class, MonstersDao.class, MonstersPlaceDao.class,
-                PackagesDao.class, WeaponsDao.class, AllGoodsDao.class);
+                PackagesDao.class, WeaponsDao.class, AllGoodsDao.class, BigMonstersDao.class, MaterialDao.class);
 
         CrashReport.setIsDevelopmentDevice(mAppContext, true);
         CrashReport.initCrashReport(getApplicationContext(), "544aec74cc", false);
@@ -61,6 +63,7 @@ public class App extends Application {
         }
         InitDataFileUtils.initData();
     }
+
 
     public static boolean isDebug() {
         return BuildConfig.DEBUG;

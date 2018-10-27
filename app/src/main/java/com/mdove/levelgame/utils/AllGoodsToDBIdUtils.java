@@ -11,6 +11,7 @@ import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 public class AllGoodsToDBIdUtils {
     public static final int DB_TYPE_IS_ATTACK = 1;
     public static final int DB_TYPE_IS_ARMOR = 2;
+    public static final int DB_TYPE_IS_MATERIALS = 3;
 
     private static class SingletonHolder {
         static final AllGoodsToDBIdUtils INSTANCE = new AllGoodsToDBIdUtils();
@@ -32,6 +33,8 @@ public class AllGoodsToDBIdUtils {
             dbType = DB_TYPE_IS_ATTACK;
         } else if (type.startsWith("B")) {
             dbType = DB_TYPE_IS_ARMOR;
+        }else if (type.startsWith("E")) {
+            dbType = DB_TYPE_IS_MATERIALS;
         }
 
         return dbType;

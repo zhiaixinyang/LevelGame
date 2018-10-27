@@ -24,8 +24,8 @@ public class DropGoodsDao extends AbstractDao<DropGoods, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, long.class, "id", true, "_id");
-        public final static Property Data = new Property(1, String.class, "data", false, "DATA");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
+        public final static Property Types = new Property(1, String.class, "types", false, "TYPES");
     }
 
 
@@ -41,8 +41,8 @@ public class DropGoodsDao extends AbstractDao<DropGoods, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"DROP_GOODS\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
-                "\"DATA\" TEXT);"); // 1: data
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"TYPES\" TEXT);"); // 1: types
     }
 
     /** Drops the underlying database table. */
@@ -54,43 +54,51 @@ public class DropGoodsDao extends AbstractDao<DropGoods, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, DropGoods entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
  
-        String data = entity.getData();
-        if (data != null) {
-            stmt.bindString(2, data);
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
+        String types = entity.getTypes();
+        if (types != null) {
+            stmt.bindString(2, types);
         }
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, DropGoods entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
  
-        String data = entity.getData();
-        if (data != null) {
-            stmt.bindString(2, data);
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
+ 
+        String types = entity.getTypes();
+        if (types != null) {
+            stmt.bindString(2, types);
         }
     }
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public DropGoods readEntity(Cursor cursor, int offset) {
         DropGoods entity = new DropGoods( //
-            cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // data
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // types
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, DropGoods entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
-        entity.setData(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setTypes(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
      }
     
     @Override
@@ -110,7 +118,7 @@ public class DropGoodsDao extends AbstractDao<DropGoods, Long> {
 
     @Override
     public boolean hasKey(DropGoods entity) {
-        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
+        return entity.getId() != null;
     }
 
     @Override

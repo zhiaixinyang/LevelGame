@@ -9,6 +9,11 @@
     <string name="string_hero_attributes">个人属性</string>
     <string name="string_hero_packages">背包</string>
     <string name="string_big_monsters">大魔王</string>
+    <string name="string_big_monsters_name">[拦路BOSS]-%1$s</string>
+    <string name="string_big_monsters_attack"><![CDATA[大魔王攻击： <font color="#000000">%1$d</font>]]></string>
+    <string name="string_big_monsters_armor"><![CDATA[大魔王护甲： <font color="#000000">%1$d</font>]]></string>
+    <string name="string_big_monsters_life"><![CDATA[大魔王生命： <font color="#000000">%1$d</font>]]></string>
+
     <string name="string_shop">购买装备</string>
     <string name="string_fragment_title_buy_attack">武器商店</string>
     <string name="string_fragment_title_buy_armor">铠甲商店</string>
@@ -56,6 +61,7 @@
     <string name="string_no_power">体力不足，请尝试 #休息#</string>
     <string name="string_attack_fail">攻击失败</string>
     <string name="string_attack_win">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。</string>
+    <string name="string_attack_win_has_goods">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。\n掉落：%4$s</string>
     <string name="string_buy_medicines_fail">购买失败，钱不够</string>
     <string name="string_buy_medicines_suc">购买成功，当前生命值增加：%1$d；减少金钱：%2$d。</string>
     <string name="string_buy_attack_suc">购买成功，减少金钱：%1$d。</string>
@@ -67,4 +73,9 @@
     <string name="string_no_hold_on_attack">未装备武器</string>
     <string name="string_no_hold_on_armor">未装备铠甲</string>
     <string name="string_activity_monsters_power">当前体力：%1$d / %2$d</string>
+
+    <string name="string_no_can_rest_title">无法休息</string>
+    <string name="string_no_can_rest_pos_btn">保卫家乡</string>
+    <string name="string_no_can_rest_nav_btn">再等等</string>
+    <string name="string_no_can_rest_content">入侵魔王都已经到家门口了！你竟然还想着休息？？</string>
 </resources>

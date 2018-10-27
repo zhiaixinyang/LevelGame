@@ -24,14 +24,16 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, long.class, "id", true, "_id");
+        public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Tips = new Property(2, String.class, "tips", false, "TIPS");
         public final static Property Attack = new Property(3, int.class, "attack", false, "ATTACK");
         public final static Property Armor = new Property(4, int.class, "armor", false, "ARMOR");
         public final static Property Price = new Property(5, long.class, "price", false, "PRICE");
         public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
-        public final static Property Strengthen = new Property(7, int.class, "strengthen", false, "STRENGTHEN");
+        public final static Property IsCanStrengthen = new Property(7, int.class, "isCanStrengthen", false, "IS_CAN_STRENGTHEN");
+        public final static Property IsCanUpdate = new Property(8, int.class, "isCanUpdate", false, "IS_CAN_UPDATE");
+        public final static Property IsCanMixture = new Property(9, int.class, "isCanMixture", false, "IS_CAN_MIXTURE");
     }
 
 
@@ -47,14 +49,16 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"WEAPONS\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
                 "\"TIPS\" TEXT," + // 2: tips
                 "\"ATTACK\" INTEGER NOT NULL ," + // 3: attack
                 "\"ARMOR\" INTEGER NOT NULL ," + // 4: armor
                 "\"PRICE\" INTEGER NOT NULL ," + // 5: price
                 "\"TYPE\" TEXT," + // 6: type
-                "\"STRENGTHEN\" INTEGER NOT NULL );"); // 7: strengthen
+                "\"IS_CAN_STRENGTHEN\" INTEGER NOT NULL ," + // 7: isCanStrengthen
+                "\"IS_CAN_UPDATE\" INTEGER NOT NULL ," + // 8: isCanUpdate
+                "\"IS_CAN_MIXTURE\" INTEGER NOT NULL );"); // 9: isCanMixture
     }
 
     /** Drops the underlying database table. */
@@ -66,7 +70,11 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
     @Override
     protected final void bindValues(DatabaseStatement stmt, Weapons entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
  
         String name = entity.getName();
         if (name != null) {
@@ -85,13 +93,19 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         if (type != null) {
             stmt.bindString(7, type);
         }
-        stmt.bindLong(8, entity.getStrengthen());
+        stmt.bindLong(8, entity.getIsCanStrengthen());
+        stmt.bindLong(9, entity.getIsCanUpdate());
+        stmt.bindLong(10, entity.getIsCanMixture());
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, Weapons entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getId());
+ 
+        Long id = entity.getId();
+        if (id != null) {
+            stmt.bindLong(1, id);
+        }
  
         String name = entity.getName();
         if (name != null) {
@@ -110,39 +124,45 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         if (type != null) {
             stmt.bindString(7, type);
         }
-        stmt.bindLong(8, entity.getStrengthen());
+        stmt.bindLong(8, entity.getIsCanStrengthen());
+        stmt.bindLong(9, entity.getIsCanUpdate());
+        stmt.bindLong(10, entity.getIsCanMixture());
     }
 
     @Override
     public Long readKey(Cursor cursor, int offset) {
-        return cursor.getLong(offset + 0);
+        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
     }    
 
     @Override
     public Weapons readEntity(Cursor cursor, int offset) {
         Weapons entity = new Weapons( //
-            cursor.getLong(offset + 0), // id
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // tips
             cursor.getInt(offset + 3), // attack
             cursor.getInt(offset + 4), // armor
             cursor.getLong(offset + 5), // price
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
-            cursor.getInt(offset + 7) // strengthen
+            cursor.getInt(offset + 7), // isCanStrengthen
+            cursor.getInt(offset + 8), // isCanUpdate
+            cursor.getInt(offset + 9) // isCanMixture
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, Weapons entity, int offset) {
-        entity.setId(cursor.getLong(offset + 0));
+        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setTips(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setAttack(cursor.getInt(offset + 3));
         entity.setArmor(cursor.getInt(offset + 4));
         entity.setPrice(cursor.getLong(offset + 5));
         entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setStrengthen(cursor.getInt(offset + 7));
+        entity.setIsCanStrengthen(cursor.getInt(offset + 7));
+        entity.setIsCanUpdate(cursor.getInt(offset + 8));
+        entity.setIsCanMixture(cursor.getInt(offset + 9));
      }
     
     @Override
@@ -162,7 +182,7 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
 
     @Override
     public boolean hasKey(Weapons entity) {
-        throw new UnsupportedOperationException("Unsupported for entities with a non-null key");
+        return entity.getId() != null;
     }
 
     @Override

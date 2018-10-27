@@ -5,10 +5,12 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DaoMaster;
 import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
+import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
@@ -40,6 +42,8 @@ public class DatabaseManager {
     private PackagesDao packagesDao;
     private WeaponsDao weaponsDao;
     private AllGoodsDao allGoodsDao;
+    private BigMonstersDao bigMonstersDao;
+    private MaterialDao materialDao;
 
     private static final class Holder {
         private static final DatabaseManager INSTANCE = new DatabaseManager();
@@ -76,6 +80,12 @@ public class DatabaseManager {
         packagesDao = mDaoSession.getPackagesDao();
         weaponsDao = mDaoSession.getWeaponsDao();
         allGoodsDao = mDaoSession.getAllGoodsDao();
+        bigMonstersDao = mDaoSession.getBigMonstersDao();
+        materialDao = mDaoSession.getMaterialDao();
+    }
+
+    public MaterialDao getMaterialDao() {
+        return materialDao;
     }
 
     /**
@@ -85,6 +95,10 @@ public class DatabaseManager {
      */
     public DaoMaster getDaoMaster() {
         return mDaoMaster;
+    }
+
+    public BigMonstersDao getBigMonstersDao() {
+        return bigMonstersDao;
     }
 
     public HeroAttributesDao getHeroAttributesDao() {

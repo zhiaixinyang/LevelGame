@@ -6,11 +6,17 @@ import com.mdove.levelgame.config.ConstAssetsFileName;
 import com.mdove.levelgame.greendao.AllGoods;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.greendao.BigMonstersDao;
+import com.mdove.levelgame.greendao.DropGoodsDao;
+import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
+import com.mdove.levelgame.greendao.entity.BigMonsters;
+import com.mdove.levelgame.greendao.entity.DropGoods;
+import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.MonstersPlace;
@@ -52,6 +58,17 @@ public class InitDataFileUtils {
         monstersPlaceDao.deleteAll();
         MedicinesDao medicinesDao = DatabaseManager.getInstance().getMedicinesDao();
         medicinesDao.deleteAll();
+        BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
+        bigMonstersDao.deleteAll();
+        DropGoodsDao dropGoodsDao = DatabaseManager.getInstance().getDropGoodsDao();
+        dropGoodsDao.deleteAll();
+        MaterialDao materialDao = DatabaseManager.getInstance().getMaterialDao();
+        materialDao.deleteAll();
+
+        List<DropGoods> dropGoods = getInitDropGoods();
+        for (DropGoods dropGood : dropGoods) {
+            dropGoodsDao.insert(dropGood);
+        }
 
         shopArmorModels = getShopArmors();
         for (ShopArmorModel model : shopArmorModels) {
@@ -104,6 +121,15 @@ public class InitDataFileUtils {
         monstersPlaces = getInitMonstersPlaceBase();
         for (MonstersPlace monstersPlace : monstersPlaces) {
             monstersPlaceDao.insert(monstersPlace);
+        }
+
+        for (Material material : getInitMaterials()) {
+            materialDao.insert(material);
+        }
+
+        List<BigMonsters> bigMonsters = getInitBigMonsters();
+        for (BigMonsters b : bigMonsters) {
+            bigMonstersDao.insert(b);
         }
     }
 
@@ -177,6 +203,26 @@ public class InitDataFileUtils {
         return monstersPlaceModels;
     }
 
+    public static List<BigMonsters> getInitBigMonsters() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_BIG_MONSTERS);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<BigMonsters>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<DropGoods> getInitDropGoods() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_DROP_GOODS);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<DropGoods>>() {
+            }.getType());
+        }
+        return null;
+    }
+
     public static List<MonstersPlace> getInitMonstersPlaceBase() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS_PLACE);
@@ -195,6 +241,16 @@ public class InitDataFileUtils {
             }.getType());
         }
         return medicines;
+    }
+
+    public static List<Material> getInitMaterials() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_MATERIALS);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<Material>>() {
+            }.getType());
+        }
+        return null;
     }
 
 //    public static List<Armors> getInitArmors() {

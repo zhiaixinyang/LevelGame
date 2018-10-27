@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "第十天魔王",
+    "tips": "只有击败我，才可以正常进行游戏！",
+    "attack": 100,
+    "armor": 50,
+    "money": 0,
+    "life": 500,
+    "type": "C100",
+    "monster_place_id": 0,
+    "drop_goods_id": 100,
+    "exp": 0,
+    "consume_power": 0,
+    "is_dead": 1,
+    "is_gone":0
+  },
+  {
+    "id": 2,
+    "name": "三十天魔王",
+    "tips": "只有击败我，才可以正常进行游戏！",
+    "attack": 500,
+    "armor": 200,
+    "life": 3000,
+    "money": 0,
+    "type": "C101",
+    "monster_place_id": 0,
+    "drop_goods_id": 101,
+    "consume_power": 0,
+    "exp": 0,
+    "is_dead": 1,
+    "is_gone":0
+  },
+  {
+    "id": 3,
+    "name": "五十天魔王",
+    "tips": "只有击败我，才可以正常进行游戏！",
+    "attack": 5000,
+    "armor": 2000,
+    "life": 10000,
+    "money": 0,
+    "type": "C102",
+    "monster_place_id": 0,
+    "drop_goods_id": 102,
+    "consume_power": 0,
+    "exp": 0,
+    "is_dead": 1,
+    "is_gone":0
+  }
+]

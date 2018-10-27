@@ -7,9 +7,11 @@ import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.RxTransformerHelper;
 import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
+import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
@@ -47,7 +49,7 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
     public HeroPackagesPresenter() {
         weaponsDao = DatabaseManager.getInstance().getWeaponsDao();
         packagesDao = DatabaseManager.getInstance().getPackagesDao();
-        armorsDao =DatabaseManager.getInstance().getArmorsDao();
+        armorsDao = DatabaseManager.getInstance().getArmorsDao();
     }
 
     @Override
@@ -74,26 +76,23 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
             int dbTpe = AllGoodsToDBIdUtils.getInstance().getDBType(pk.type);
             switch (dbTpe) {
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
-                    List<Weapons> attacks = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(pk.type)).list();
-                    if (attacks == null || attacks.size() <= 0) {
-                        break;
-                    }
-                    for (Weapons model : attacks) {
-                        if (pk.isEquip == 1) {
-                            packageModelVMS.add(new HeroPackageModelVM(pk.id, model.name, model.attack, model.armor, model.type));
-                        }
+                    Weapons attack = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(pk.type)).unique();
+                    if (attack != null && pk.isEquip == 1) {
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, attack.name, attack.attack, attack.armor, attack.type));
                     }
                     break;
                 }
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_ARMOR: {
-                    List<Armors> armors = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(pk.type)).list();
-                    if (armors == null || armors.size() <= 0) {
-                        break;
+                    Armors armors = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(pk.type)).unique();
+                    if (armors != null && pk.isEquip == 1) {
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, armors.name, armors.attack, armors.armor, armors.type));
                     }
-                    for (Armors model : armors) {
-                        if (pk.isEquip == 1) {
-                            packageModelVMS.add(new HeroPackageModelVM(pk.id, model.name, model.attack, model.armor, model.type));
-                        }
+                    break;
+                }
+                case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
+                    Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(pk.type)).unique();
+                    if (material != null && pk.isEquip == 1) {
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, material.name, 0, 0, material.type));
                     }
                     break;
                 }

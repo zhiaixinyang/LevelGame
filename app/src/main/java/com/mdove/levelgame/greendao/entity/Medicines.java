@@ -13,7 +13,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Medicines {
     @Id(autoincrement = true)
-    public long id;
+    public Long id;
     // 药品名
     public String name;
     // 提示
@@ -23,8 +23,8 @@ public class Medicines {
     // 价格
     public int price;
     public String type;
-    @Generated(hash = 1210379228)
-    public Medicines(long id, String name, String tips, int life, int price,
+    @Generated(hash = 1395275160)
+    public Medicines(Long id, String name, String tips, int life, int price,
             String type) {
         this.id = id;
         this.name = name;
@@ -36,10 +36,10 @@ public class Medicines {
     @Generated(hash = 1436234687)
     public Medicines() {
     }
-    public long getId() {
+    public Long getId() {
         return this.id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {
@@ -72,4 +72,5 @@ public class Medicines {
     public void setType(String type) {
         this.type = type;
     }
+   
 }

@@ -18,6 +18,7 @@ import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.model.HasEquipModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
+import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 /**
@@ -474,6 +476,19 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
                         view.dismissLoadingDialog();
                     }
                 });
+    }
+
+    @Override
+    public void onClickSell(final HeroPackageModelVM vm) {
+        HeroAttributesManager.getInstance().sellGoods(vm.pkId.get()).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                if (integer > 0) {
+                    ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), integer));
+                    initPksData();
+                }
+            }
+        });
     }
 
     // 临时封装了脱掉装备的Id和穿装备的Id

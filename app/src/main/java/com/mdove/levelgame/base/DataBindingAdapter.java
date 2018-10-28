@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.main.hero.model.HasEquipModelVM;
+import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 
 /**
  * Created by MDove on 2018/3/5.
@@ -35,6 +36,14 @@ public class DataBindingAdapter {
             textView.setTextColor(ContextCompat.getColor(main.getContext(), R.color.black));
             main.setBackgroundResource(R.drawable.bg_white_round);
             btnTakeOff.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @BindingAdapter("materialIsGone")
+    public static void materialsIsGone(TextView view, HeroPackageModelVM vm) {
+        // 材料隐藏 装备View
+        if (vm.type.get().startsWith("E")){
+            view.setVisibility(View.GONE);
         }
     }
 }

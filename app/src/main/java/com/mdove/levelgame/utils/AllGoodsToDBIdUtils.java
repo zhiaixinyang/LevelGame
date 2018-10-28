@@ -2,6 +2,9 @@ package com.mdove.levelgame.utils;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.AllGoodsDao;
+import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.greendao.MaterialDao;
+import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 
@@ -27,13 +30,32 @@ public class AllGoodsToDBIdUtils {
         allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();
     }
 
+    public Object getObjectFromType(String type) {
+        Object ob = null;
+        switch (getDBType(type)) {
+            case DB_TYPE_IS_ATTACK: {
+                ob = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.Type.eq(type)).unique();
+                break;
+            }
+            case DB_TYPE_IS_ARMOR: {
+                ob = DatabaseManager.getInstance().getArmorsDao().queryBuilder().where(ArmorsDao.Properties.Type.eq(type)).unique();
+                break;
+            }
+            case DB_TYPE_IS_MATERIALS: {
+                ob = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(type)).unique();
+                break;
+            }
+        }
+        return ob;
+    }
+
     public int getDBType(String type) {
         int dbType = 0;
         if (type.startsWith("A")) {
             dbType = DB_TYPE_IS_ATTACK;
         } else if (type.startsWith("B")) {
             dbType = DB_TYPE_IS_ARMOR;
-        }else if (type.startsWith("E")) {
+        } else if (type.startsWith("E")) {
             dbType = DB_TYPE_IS_MATERIALS;
         }
 

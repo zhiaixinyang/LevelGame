@@ -54,30 +54,35 @@ public class HeroBuyManager {
     public BuyMedicinesResp buyMedicines(long id) {
         BuyMedicinesResp resp = new BuyMedicinesResp();
         resp.buyStatus = BUY_MEDICINES_STATUS_ERROR;
-        Medicines realModel = null;
+        Medicines medicine = null;
         List<Medicines> medicines = InitDataFileUtils.getInitMedicines();
         for (Medicines model : medicines) {
             if (model.id == id) {
-                realModel = model;
+                medicine = model;
             }
         }
         // 没钱
-        if (heroAttributes.money - realModel.price < 0) {
+        if (heroAttributes.money - medicine.price < 0) {
             resp.buyStatus = BUY_MEDICINES_STATUS_FAIL;
         } else {// 购买成功
             resp.buyStatus = BUY_MEDICINES_STATUS_SUC;
+            // 先判断能否增加生命上限
+            if (medicine.lifeUp > 0) {
+                heroAttributes.maxLife += medicine.lifeUp;
+            }
             // 当前生命超出上限，舍弃
-            if (heroAttributes.curLife + realModel.life > heroAttributes.maxLife) {
+            if (heroAttributes.curLife + medicine.life > heroAttributes.maxLife) {
                 heroAttributes.curLife = heroAttributes.maxLife;
             } else {
-                heroAttributes.curLife += realModel.life;
+                heroAttributes.curLife += medicine.life;
             }
             // 扣钱
-            heroAttributes.money -= realModel.price;
+            heroAttributes.money -= medicine.price;
 
             // 构建Resp
-            resp.life = realModel.life;
-            resp.price = realModel.price;
+            resp.life = medicine.life;
+            resp.price = medicine.price;
+            resp.lifeUp = medicine.lifeUp;
         }
         return resp;
     }

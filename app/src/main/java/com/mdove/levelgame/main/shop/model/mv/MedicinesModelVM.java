@@ -15,6 +15,7 @@ public class MedicinesModelVM {
     public ObservableField<String> tips = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
+    public ObservableField<String> lifeUp = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();
 
     public MedicinesModelVM(Medicines medicines) {
@@ -23,5 +24,6 @@ public class MedicinesModelVM {
         name.set(medicines.name);
         price.set(String.format(App.getAppContext().getString(R.string.medicines_msg_price), medicines.price));
         life.set(String.format(App.getAppContext().getString(R.string.medicines_msg_life), medicines.life));
+        lifeUp.set(String.format(App.getAppContext().getString(R.string.medicines_msg_life_up), medicines.lifeUp));
     }
 }

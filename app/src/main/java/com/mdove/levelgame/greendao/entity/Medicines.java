@@ -20,16 +20,19 @@ public class Medicines {
     public String tips;
     // 加血
     public int life;
+    // 血上限
+    public int lifeUp;
     // 价格
     public int price;
     public String type;
-    @Generated(hash = 1395275160)
-    public Medicines(Long id, String name, String tips, int life, int price,
-            String type) {
+    @Generated(hash = 1852803510)
+    public Medicines(Long id, String name, String tips, int life, int lifeUp,
+            int price, String type) {
         this.id = id;
         this.name = name;
         this.tips = tips;
         this.life = life;
+        this.lifeUp = lifeUp;
         this.price = price;
         this.type = type;
     }
@@ -60,6 +63,12 @@ public class Medicines {
     public void setLife(int life) {
         this.life = life;
     }
+    public int getLifeUp() {
+        return this.lifeUp;
+    }
+    public void setLifeUp(int lifeUp) {
+        this.lifeUp = lifeUp;
+    }
     public int getPrice() {
         return this.price;
     }
@@ -72,5 +81,5 @@ public class Medicines {
     public void setType(String type) {
         this.type = type;
     }
-   
+
 }

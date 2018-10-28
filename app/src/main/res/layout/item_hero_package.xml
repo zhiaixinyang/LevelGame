@@ -17,9 +17,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
         android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
-        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:background="@drawable/bg_white_round">
 
         <TextView
@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/item_hero_equip_normal_margin"
             android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
-            app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
             android:textSize="@dimen/item_hero_equip_text_size"
+            app:htmlColorText="@{vm.name}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="装备名字" />
@@ -45,9 +45,9 @@
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="@dimen/item_hero_equip_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="装备攻击" />
 
         <TextView
@@ -69,6 +69,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
+            android:background="@drawable/bg_thread_yellow"
+            android:onClick="@{()->handler.onClickSell(vm)}"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="出售"
+            android:textColor="@color/yellow_700"
+            android:textSize="@dimen/item_hero_equip_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_equip"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/btn_equip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
             android:background="@drawable/bg_take_off_equip_blue"
             android:onClick="@{()->handler.onClickEquip(vm)}"
             android:paddingBottom="4dp"
@@ -80,7 +98,8 @@
             android:textSize="@dimen/item_hero_equip_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:materialIsGone="@{vm}" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -41,6 +41,7 @@
 
     <string name="medicines_msg_price">需要金钱：%1$d</string>
     <string name="medicines_msg_life">增加当前生命：%1$d</string>
+    <string name="medicines_msg_life_up">增加生命上限：%1$d</string>
 
     <string name="shop_attack_msg_price">需要金钱：%1$d</string>
     <string name="shop_attack_msg_attack">装备后增加攻击：%1$d</string>
@@ -65,9 +66,10 @@
     <string name="string_attack_fail">攻击失败</string>
     <string name="string_attack_win_title">攻击成功</string>
     <string name="string_attack_win">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。</string>
-    <string name="string_attack_win_has_goods">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。<br/>掉落：%4$s</string>
+    <string name="string_attack_win_has_goods">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。<br />掉落：%4$s</string>
     <string name="string_buy_medicines_fail">购买失败，钱不够</string>
     <string name="string_buy_medicines_suc">购买成功，当前生命值增加：%1$d；减少金钱：%2$d。</string>
+    <string name="string_buy_medicines_suc_and_up">购买成功，当前生命值增加：%1$d；增加生命上限：%3$d；减少金钱：%2$d。</string>
     <string name="string_buy_attack_suc">购买成功，减少金钱：%1$d。</string>
     <string name="string_buy_armor_suc">购买成功，减少金钱：%1$d。</string>
     <string name="activity_title_medicines_shop">药店</string>
@@ -84,4 +86,5 @@
     <string name="string_no_can_rest_content">入侵魔王都已经到家门口了！你竟然还想着休息？？</string>
     <string name="string_dialog_cancel">取消</string>
     <string name="string_dialog_ok">确定</string>
+    <string name="string_sells_suc">卖出成功，获得金钱：%1$d</string>
 </resources>

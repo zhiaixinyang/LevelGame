@@ -69,7 +69,12 @@ public class MedicinesShopPresenter implements MedicinesShopContract.IMedicinesS
                         break;
                     }
                     case HeroBuyManager.BUY_MEDICINES_STATUS_SUC: {
-                        ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_medicines_suc), buyMedicinesResp.life, buyMedicinesResp.price));
+                        if (buyMedicinesResp.lifeUp > 0) {
+                            ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_medicines_suc_and_up), buyMedicinesResp.life,
+                                    buyMedicinesResp.price, buyMedicinesResp.lifeUp));
+                        } else {
+                            ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_medicines_suc), buyMedicinesResp.life, buyMedicinesResp.price));
+                        }
                         break;
                     }
                     default:

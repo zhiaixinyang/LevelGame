@@ -18,6 +18,8 @@ public interface HeroPackagesContract {
         void onClickTakeOff(HasEquipModelVM vm);
 
         void onClickEquip(HeroPackageModelVM vm);
+
+        void onClickSell(HeroPackageModelVM vm);
     }
 
     interface IHeroPackagesView extends BaseView {

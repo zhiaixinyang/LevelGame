@@ -16,4 +16,8 @@ public class HeroPackageHandler {
     public void onClickEquip(HeroPackageModelVM vm){
         presenter.onClickEquip(vm);
     }
+
+    public void onClickSell(HeroPackageModelVM vm){
+        presenter.onClickSell(vm);
+    }
 }

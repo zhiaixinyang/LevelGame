@@ -16,13 +16,17 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_round"
+        android:layout_marginBottom="@dimen/item_medicines_normal_margin"
+        android:layout_marginLeft="@dimen/item_medicines_normal_margin"
+        android:layout_marginRight="@dimen/item_medicines_normal_margin"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_medicines_normal_margin"
             android:gravity="center"
             android:text="@{vm.name}"
             android:textColor="@color/black"
@@ -35,7 +39,7 @@
             android:id="@+id/tv_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_medicines_normal_margin"
             android:gravity="center"
             android:text="@{vm.tips}"
             android:textColor="@color/gray_plus"
@@ -47,7 +51,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_medicines_normal_margin"
             android:background="@drawable/bg_btn_buy"
             android:paddingBottom="4dp"
             android:paddingLeft="12dp"
@@ -64,7 +68,7 @@
             android:id="@+id/tv_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_medicines_normal_margin"
             android:text="@{vm.price}"
             android:textColor="@color/black"
             android:textSize="12sp"
@@ -74,16 +78,30 @@
             tools:text="需要金钱：10" />
 
         <TextView
-            android:id="@+id/tv_armor"
+            android:id="@+id/tv_life"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_medicines_normal_margin"
             android:text="@{vm.life}"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加生命：10" />
+
+        <TextView
+            android:id="@+id/tv_life_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_medicines_normal_margin"
+            android:text="@{vm.lifeUp}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_life"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="生命上限：10" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

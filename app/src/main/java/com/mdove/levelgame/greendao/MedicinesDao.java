@@ -28,8 +28,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Tips = new Property(2, String.class, "tips", false, "TIPS");
         public final static Property Life = new Property(3, int.class, "life", false, "LIFE");
-        public final static Property Price = new Property(4, int.class, "price", false, "PRICE");
-        public final static Property Type = new Property(5, String.class, "type", false, "TYPE");
+        public final static Property LifeUp = new Property(4, int.class, "lifeUp", false, "LIFE_UP");
+        public final static Property Price = new Property(5, int.class, "price", false, "PRICE");
+        public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
     }
 
 
@@ -49,8 +50,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
                 "\"NAME\" TEXT," + // 1: name
                 "\"TIPS\" TEXT," + // 2: tips
                 "\"LIFE\" INTEGER NOT NULL ," + // 3: life
-                "\"PRICE\" INTEGER NOT NULL ," + // 4: price
-                "\"TYPE\" TEXT);"); // 5: type
+                "\"LIFE_UP\" INTEGER NOT NULL ," + // 4: lifeUp
+                "\"PRICE\" INTEGER NOT NULL ," + // 5: price
+                "\"TYPE\" TEXT);"); // 6: type
     }
 
     /** Drops the underlying database table. */
@@ -78,11 +80,12 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
             stmt.bindString(3, tips);
         }
         stmt.bindLong(4, entity.getLife());
-        stmt.bindLong(5, entity.getPrice());
+        stmt.bindLong(5, entity.getLifeUp());
+        stmt.bindLong(6, entity.getPrice());
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(6, type);
+            stmt.bindString(7, type);
         }
     }
 
@@ -105,11 +108,12 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
             stmt.bindString(3, tips);
         }
         stmt.bindLong(4, entity.getLife());
-        stmt.bindLong(5, entity.getPrice());
+        stmt.bindLong(5, entity.getLifeUp());
+        stmt.bindLong(6, entity.getPrice());
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(6, type);
+            stmt.bindString(7, type);
         }
     }
 
@@ -125,8 +129,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // tips
             cursor.getInt(offset + 3), // life
-            cursor.getInt(offset + 4), // price
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // type
+            cursor.getInt(offset + 4), // lifeUp
+            cursor.getInt(offset + 5), // price
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // type
         );
         return entity;
     }
@@ -137,8 +142,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setTips(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setLife(cursor.getInt(offset + 3));
-        entity.setPrice(cursor.getInt(offset + 4));
-        entity.setType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setLifeUp(cursor.getInt(offset + 4));
+        entity.setPrice(cursor.getInt(offset + 5));
+        entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

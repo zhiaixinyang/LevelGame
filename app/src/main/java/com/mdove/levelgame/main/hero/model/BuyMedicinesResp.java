@@ -9,4 +9,6 @@ public class BuyMedicinesResp extends BaseBuy{
     public int price;
     // 增加生命
     public int life;
+    // 增加生命上限
+    public int lifeUp;
 }

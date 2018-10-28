@@ -9,6 +9,7 @@ import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MonstersDao;
+import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
@@ -29,6 +30,10 @@ import com.mdove.levelgame.utils.JsonUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 
 /**
  * Created by MDove on 2018/10/20.
@@ -97,6 +102,35 @@ public class HeroAttributesManager {
         }
     }
 
+    public Observable<Integer> sellGoods(Long pkId) {
+        Packages pk = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique();
+        int money = 0;
+        if (pk != null) {
+            Object attack = AllGoodsToDBIdUtils.getInstance().getObjectFromType(pk.type);
+            if (attack != null && attack instanceof Weapons) {
+                Weapons weapons = (Weapons) attack;
+                money = (int) (weapons.price / 2);
+                heroAttributes.money += money;
+            } else if (attack != null && attack instanceof Armors) {
+                Armors armors = (Armors) attack;
+                money = (int) (armors.price / 2);
+                heroAttributes.money += money;
+            } else if (attack != null && attack instanceof Material) {
+                money = 50;
+                heroAttributes.money += money;
+            }
+            DatabaseManager.getInstance().getPackagesDao().delete(pk);
+            save();
+        }
+        final int finalMoney = money;
+        return Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                e.onNext(Integer.valueOf(finalMoney));
+            }
+        });
+    }
+
     public AttackResp attackBigMonsters(long bigMonstersId) {
         AttackResp attackResp = new AttackResp();
         int attackStatus = ATTACK_STATUS_ERROR;
@@ -106,7 +140,7 @@ public class HeroAttributesManager {
             // 对敌方造成伤害 = 我方攻击 - 敌方防御
             int realAttack = heroAttributes.attack - monsters.armor;
             // 无法破防
-            if (realAttack<=0){
+            if (realAttack <= 0) {
                 attackStatus = ATTACK_STATUS_FAIL;
                 attackResp.attackStatus = attackStatus;
                 return attackResp;
@@ -118,7 +152,7 @@ public class HeroAttributesManager {
             // 如果无法破防，需要置为0，否则出现负数
             if (realHarm <= 0) {
                 realHarm = 0;
-            }else {
+            } else {
                 // 敌方需要攻击几次
                 int monstersAttackCount = heroAttributes.curLife / realHarm;
                 if (monstersAttackCount < attackCount) {
@@ -180,7 +214,7 @@ public class HeroAttributesManager {
             // 对敌方造成伤害 = 我方攻击 - 敌方防御
             int realAttack = heroAttributes.attack - monsters.armor;
             // 无法破防
-            if (realAttack<=0){
+            if (realAttack <= 0) {
                 attackStatus = ATTACK_STATUS_FAIL;
                 attackResp.attackStatus = attackStatus;
                 return attackResp;
@@ -192,7 +226,7 @@ public class HeroAttributesManager {
             // 如果无法破防，需要置为0，否则出现负数
             if (realHarm <= 0) {
                 realHarm = 0;
-            }else {
+            } else {
                 // 敌方需要攻击几次
                 int monstersAttackCount = heroAttributes.curLife / realHarm;
                 if (monstersAttackCount < attackCount) {

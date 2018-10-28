@@ -324,6 +324,7 @@ public class HeroAttributesManager {
                     if (weapons != null) {
                         Packages packages = new Packages();
                         packages.isEquip = 1;
+                        packages.isSelect = 1;
                         packages.type = weapons.type;
                         DatabaseManager.getInstance().getPackagesDao().insert(packages);
                         name = weapons.name;
@@ -335,6 +336,7 @@ public class HeroAttributesManager {
                     if (armors != null) {
                         Packages packages = new Packages();
                         packages.isEquip = 1;
+                        packages.isSelect = 1;
                         packages.type = armors.type;
                         DatabaseManager.getInstance().getPackagesDao().insert(packages);
                         name = armors.name;
@@ -346,6 +348,7 @@ public class HeroAttributesManager {
                     if (material != null) {
                         Packages packages = new Packages();
                         packages.isEquip = 1;
+                        packages.isSelect = 1;
                         packages.type = material.type;
                         DatabaseManager.getInstance().getPackagesDao().insert(packages);
                         name = material.name;

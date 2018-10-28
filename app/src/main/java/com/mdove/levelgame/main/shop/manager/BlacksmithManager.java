@@ -1,5 +1,7 @@
 package com.mdove.levelgame.main.shop.manager;
 
+import android.text.TextUtils;
+
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.PackagesDao;
@@ -26,6 +28,9 @@ import io.reactivex.ObservableOnSubscribe;
  */
 
 public class BlacksmithManager {
+    private static final String TO_COPPER_TYPE = "A10";
+    private static final String TO_STRENGTHEN_TYPE = "A11";
+
     private static class SingletonHolder {
         static final BlacksmithManager INSTANCE = new BlacksmithManager();
     }
@@ -75,6 +80,7 @@ public class BlacksmithManager {
                         blacksmithResp.title = "升级成功";
                         blacksmithResp.content = weapon.name + "升级成功。";
                     } else {
+                        resetPkSelectStatus(hasMaterials);
                         blacksmithResp.isSuc = false;
                         blacksmithResp.title = "升级失败";
                         blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
@@ -112,6 +118,8 @@ public class BlacksmithManager {
                         blacksmithResp.title = "合成成功";
                         blacksmithResp.content = weapon.name + "合成成功。";
                     } else {
+                        // 重置pk中材料的选择状态
+                        resetPkSelectStatus(hasMaterials);
                         blacksmithResp.isSuc = false;
                         blacksmithResp.title = "合成失败";
                         blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
@@ -135,11 +143,28 @@ public class BlacksmithManager {
         });
     }
 
+    private void resetPkSelectStatus(List<HasMaterial> hasMaterials) {
+        for (HasMaterial hasMaterial : hasMaterials) {
+            Packages pk = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique();
+            if (pk != null) {
+                pk.isSelect = 1;
+                DatabaseManager.getInstance().getPackagesDao().update(pk);
+            }
+        }
+    }
+
     private void newPk(Weapons weapon) {
         Packages packages = new Packages();
         packages.isEquip = 1;
+        packages.isSelect = 1;
         packages.strengthenLevel = 0;
-        packages.type = weapon.type;
+        if (TextUtils.equals(weapon.type, TO_COPPER_TYPE)) {
+            packages.type = "E2";
+        } else if (TextUtils.equals(weapon.type, TO_STRENGTHEN_TYPE)) {
+            packages.type = "E3";
+        } else {
+            packages.type = weapon.type;
+        }
         DatabaseManager.getInstance().getPackagesDao().insert(packages);
     }
 
@@ -172,7 +197,8 @@ public class BlacksmithManager {
 
     private HasMaterial hasMaterial(String type) {
         HasMaterial material = new HasMaterial();
-        List<Packages> packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Type.eq(type)).list();
+        List<Packages> packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder()
+                .where(PackagesDao.Properties.Type.eq(type), PackagesDao.Properties.IsSelect.eq(1)).list();
         Packages pk = null;
         if (packages != null && packages.size() > 0) {
             pk = packages.get(0);
@@ -180,6 +206,8 @@ public class BlacksmithManager {
         if (pk != null) {
             material.isHas = true;
             material.id = pk.id;
+            pk.isSelect = 0;
+            DatabaseManager.getInstance().getPackagesDao().update(pk);
         } else {
             material.isHas = false;
         }
@@ -219,6 +247,7 @@ public class BlacksmithManager {
                         blacksmithResp.title = "升级成功";
                         blacksmithResp.content = armor.name + "升级成功。";
                     } else {
+                        resetPkSelectStatus(hasMaterials);
                         blacksmithResp.isSuc = false;
                         blacksmithResp.title = "升级失败";
                         blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
@@ -256,6 +285,7 @@ public class BlacksmithManager {
                         blacksmithResp.title = "合成成功";
                         blacksmithResp.content = armor.name + "合成成功。";
                     } else {
+                        resetPkSelectStatus(hasMaterials);
                         blacksmithResp.isSuc = false;
                         blacksmithResp.title = "合成失败";
                         blacksmithResp.content = "缺少材料：请确认所需材料都持有。";

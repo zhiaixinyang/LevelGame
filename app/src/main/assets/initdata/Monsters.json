@@ -138,5 +138,19 @@
     "drop_goods_id": 0,
     "consume_power": 25,
     "exp": 500
+  },
+  {
+    "id": 11,
+    "name": "怪物商人",
+    "tips": "游走在怪物堆的商人，你可能需要他手中的一些道具，甚至需要他提供的服务~",
+    "attack": 99999,
+    "armor": 99999,
+    "life": 99999,
+    "money": 0,
+    "type": "C11",
+    "monster_place_id": 2,
+    "drop_goods_id": 6,
+    "consume_power": 0,
+    "exp": 0
   }
 ]

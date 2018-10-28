@@ -20,7 +20,7 @@ public interface MonstersConstract {
 
         void heroRest();
 
-        void onItemBtnClick(Long id);
+        void onItemBtnClick(String type, Long id);
     }
 
     interface IMonstersView extends BaseView {

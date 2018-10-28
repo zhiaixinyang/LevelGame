@@ -23,7 +23,12 @@ public class BlacksmithModelVM {
     public BlacksmithModelVM(Weapons model) {
         id.set(model.id);
         tips.set(model.tips);
-        name.set(model.name);
+        // 应对特殊换矿服务
+        if (model.type.startsWith("E")) {
+            name.set("[服务：换]" + model.name);
+        } else {
+            name.set(model.name);
+        }
         attack.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_attack), model.attack));
         armor.set("");
         type.set(model.type);
@@ -40,7 +45,12 @@ public class BlacksmithModelVM {
     public BlacksmithModelVM(Armors model) {
         id.set(model.id);
         tips.set(model.tips);
-        name.set(model.name);
+        // 应对特殊换矿服务
+        if (model.type.startsWith("E")) {
+            name.set("[服务：换]" + model.name);
+        } else {
+            name.set(model.name);
+        }
         attack.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_attack), model.attack));
         armor.set("");
         type.set(model.type);

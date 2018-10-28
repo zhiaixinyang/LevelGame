@@ -485,7 +485,7 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
         HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), true).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                if (integer==-1){
+                if (integer == -1) {
                     MyDialog.showMyDialog(view.getContext(), "注意", "装备特殊，是否出售？", "不卖", "卖！", false, new BaseNormalDialog.BaseDialogListener() {
                         @Override
                         public void onClick() {
@@ -501,7 +501,7 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
                         }
                     });
 
-                }else {
+                } else {
                     if (integer > 0) {
                         ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), integer));
                         initPksData();

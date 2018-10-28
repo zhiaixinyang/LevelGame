@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.monsters.presenter;
 
 import android.content.DialogInterface;
+import android.text.TextUtils;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseNormalDialog;
@@ -32,6 +33,7 @@ import io.reactivex.functions.Function;
 
 public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     private MonstersConstract.IMonstersView view;
+    private static final String CONSTANT_BUSINESSMAN = "C11";
     private List<MonstersModelVM> realData;
 
     @Override
@@ -93,7 +95,11 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     }
 
     @Override
-    public void onItemBtnClick(final Long id) {
+    public void onItemBtnClick(String type, final Long id) {
+        if (TextUtils.equals(CONSTANT_BUSINESSMAN, type)) {
+
+            return;
+        }
         MonstersModelVM modelVM = null;
         int uiIndex = -1;
         for (MonstersModelVM monstersModel : realData) {

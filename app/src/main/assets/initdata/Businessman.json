@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "<font color=\"#D32F2F\">[服务：卖]铁矿石</font>",
+    "tips": "买买买~",
+    "price":50,
+    "type": "F1"
+  },
+  {
+    "id": 2,
+    "name": "<font color=\"#D32F2F\">[服务：卖]铜矿石</font>",
+    "tips": "买买买~",
+    "price":150,
+    "type": "F2"
+  },
+  {
+    "id": 3,
+    "name": "<font color=\"#D32F2F\">[服务：卖]强化石</font>",
+    "tips": "买买买~",
+    "price":250,
+    "type": "F3"
+  }
+]

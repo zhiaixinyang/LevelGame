@@ -19,12 +19,16 @@ public class Packages {
     public int isEquip;
     // 装备强化等级
     public int strengthenLevel;
-    @Generated(hash = 1555783642)
-    public Packages(Long id, String type, int isEquip, int strengthenLevel) {
+    // 选中，表示在升级/合成 选材料的时候已经被选中了
+    public int isSelect;
+    @Generated(hash = 967187845)
+    public Packages(Long id, String type, int isEquip, int strengthenLevel,
+            int isSelect) {
         this.id = id;
         this.type = type;
         this.isEquip = isEquip;
         this.strengthenLevel = strengthenLevel;
+        this.isSelect = isSelect;
     }
     @Generated(hash = 688242455)
     public Packages() {
@@ -53,4 +57,11 @@ public class Packages {
     public void setStrengthenLevel(int strengthenLevel) {
         this.strengthenLevel = strengthenLevel;
     }
+    public int getIsSelect() {
+        return this.isSelect;
+    }
+    public void setIsSelect(int isSelect) {
+        this.isSelect = isSelect;
+    }
+
 }

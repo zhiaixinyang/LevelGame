@@ -10,7 +10,8 @@
     "is_can_strengthen": 0,
     "is_can_update": 0,
     "update_type": "A6",
-    "is_can_mixture":1
+    "is_special": 1,
+    "is_can_mixture": 1
   },
   {
     "id": 2,
@@ -22,7 +23,8 @@
     "type": "A2",
     "is_can_strengthen": 0,
     "is_can_update": 1,
-    "is_can_mixture":0,
+    "is_can_mixture": 0,
+    "is_special": 1,
     "mixture_type": "A7"
   },
   {
@@ -36,7 +38,8 @@
     "is_can_strengthen": 0,
     "is_can_update": 1,
     "mixture_type": "A8",
-    "is_can_mixture":1
+    "is_special": 1,
+    "is_can_mixture": 1
   },
   {
     "id": 4,
@@ -47,8 +50,9 @@
     "price": 500,
     "type": "A4",
     "is_can_strengthen": 0,
+    "is_special": 1,
     "is_can_update": 1,
-    "is_can_mixture":1
+    "is_can_mixture": 1
   },
   {
     "id": 5,
@@ -58,41 +62,52 @@
     "armor": 50,
     "price": 3000,
     "type": "A5",
+    "is_special": 1,
     "is_can_strengthen": 0,
     "is_can_update": 1,
-    "is_can_mixture":1
-  },{
-  "id": 6,
-  "name": "铁刀",
-  "tips": "升级公式：锈刀+铁矿石",
-  "attack": 30,
-  "armor": 0,
-  "price": 99999,
-  "type": "A6",
-  "is_can_strengthen": 0,
-  "is_can_update": 1,
-  "is_can_mixture":1
-},{
-  "id": 7,
-  "name": "短刀",
-  "tips": "合成公式：铁刀+砍柴刀+铜矿石",
-  "attack": 60,
-  "armor": 10,
-  "price": 99999,
-  "type": "A7",
-  "is_can_strengthen": 0,
-  "is_can_update": 1,
-  "is_can_mixture":1
-},{
-  "id": 8,
-  "name": "双刃",
-  "tips": "合成公式：短刀+长刀+铜矿石",
-  "attack": 120,
-  "armor": 20,
-  "price": 99999,
-  "type": "A8",
-  "is_can_strengthen": 0,
-  "is_can_update": 1,
-  "is_can_mixture":1
-}
+    "is_can_mixture": 1
+  },
+  {
+    "id": 6,
+    "name": "铁刀",
+    "tips": "升级公式：锈刀+铁矿石",
+    "attack": 30,
+    "armor": 0,
+    "price": 99999,
+    "type": "A6",
+    "is_can_strengthen": 0,
+    "is_can_update": 0,
+    "is_special": 0,
+    "update_formula": "[{\"type\":\"A1\"},{\"type\":\"E1\"}]",
+    "is_can_mixture": 1
+  },
+  {
+    "id": 7,
+    "name": "短刀",
+    "tips": "合成公式：铁刀+砍柴刀+铜矿石",
+    "attack": 60,
+    "armor": 10,
+    "price": 99999,
+    "type": "A7",
+    "is_can_strengthen": 0,
+    "is_can_update": 1,
+    "is_special": 0,
+    "mixture_formula": "[{\"type\":\"A6\"},{\"type\":\"A2\"},{\"type\":\"E2\"}]",
+    "is_can_mixture": 0
+  },
+  {
+    "id": 8,
+    "name": "双刃",
+    "tips": "合成公式：短刀+长刀+铜矿石",
+    "attack": 120,
+    "armor": 20,
+    "price": 99999,
+    "type": "A8",
+    "is_can_strengthen": 0,
+    "is_can_update": 1,
+    "is_special": 0,
+    "strengthen_formula": "[{\"type\":\"E3\"}]",
+    "mixture_formula": "[{\"type\":\"A7\"},{\"type\":\"A3\"},{\"type\":\"E2\"}]",
+    "is_can_mixture": 0
+  }
 ]

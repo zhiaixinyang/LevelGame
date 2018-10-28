@@ -6,19 +6,19 @@
 
         <variable
             name="vm"
-            type="com.mdove.levelgame.main.shop.model.mv.ShopArmorModelVM" />
+            type="com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM" />
 
         <variable
             name="handler"
-            type="com.mdove.levelgame.main.shop.model.handler.ShopArmorItemHandler" />
+            type="com.mdove.levelgame.main.shop.model.handler.BlacksmithItemHandler" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/item_shop_armor_normal_margin"
-        android:layout_marginLeft="@dimen/item_shop_armor_normal_margin"
-        android:layout_marginBottom="@dimen/item_shop_armor_normal_margin"
+        android:layout_marginBottom="@dimen/item_blacksmith_normal_margin"
+        android:layout_marginLeft="@dimen/item_blacksmith_normal_margin"
+        android:layout_marginRight="@dimen/item_blacksmith_normal_margin"
         android:background="@drawable/bg_white_round"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
@@ -33,7 +33,7 @@
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="铠甲名字" />
+            tools:text="武器名字" />
 
         <TextView
             android:id="@+id/tv_tips"
@@ -43,40 +43,28 @@
             android:text="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
-            app:layout_constraintRight_toLeftOf="@+id/btn_buy"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_buy"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            tools:text="铠甲介绍" />
+            tools:text="武器介绍" />
 
         <TextView
             android:id="@+id/btn_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginRight="12dp"
             android:background="@drawable/bg_btn_buy"
             android:paddingBottom="4dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="4dp"
-            android:text="购买"
+            android:text="@{vm.btnName}"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-            android:text="@{vm.price}"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_buy"
-            tools:text="需要金钱：10" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="购买" />
 
         <TextView
             android:id="@+id/tv_attack"
@@ -88,7 +76,6 @@
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加攻击：10" />
 
         <TextView
@@ -99,9 +86,9 @@
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加攻击：10" />
 
     </android.support.constraint.ConstraintLayout>

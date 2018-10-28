@@ -31,9 +31,11 @@ public class Armors {
     public String type;
     // 强化级别
     public int strengthen;
-    @Generated(hash = 1423506329)
+    // 对应是否是自己的装备
+    public int isMy;
+    @Generated(hash = 1160786918)
     public Armors(Long id, String name, String tips, int attack, int armor,
-            long price, String type, int strengthen) {
+            long price, String type, int strengthen, int isMy) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -42,6 +44,7 @@ public class Armors {
         this.price = price;
         this.type = type;
         this.strengthen = strengthen;
+        this.isMy = isMy;
     }
     @Generated(hash = 1024617871)
     public Armors() {
@@ -94,5 +97,10 @@ public class Armors {
     public void setStrengthen(int strengthen) {
         this.strengthen = strengthen;
     }
-
+    public int getIsMy() {
+        return this.isMy;
+    }
+    public void setIsMy(int isMy) {
+        this.isMy = isMy;
+    }
 }

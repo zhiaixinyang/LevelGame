@@ -16,6 +16,9 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/item_shop_attack_normal_margin"
+        android:layout_marginLeft="@dimen/item_shop_attack_normal_margin"
+        android:layout_marginBottom="@dimen/item_shop_attack_normal_margin"
         android:background="@drawable/bg_white_round"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
@@ -85,6 +88,7 @@
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加攻击：10" />
 
         <TextView
@@ -97,6 +101,7 @@
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加攻击：10" />
 
     </android.support.constraint.ConstraintLayout>

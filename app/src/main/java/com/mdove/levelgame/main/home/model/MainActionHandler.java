@@ -29,6 +29,10 @@ public class MainActionHandler {
         mainPresenter.onClickHeroPackage();
     }
 
+    public void onClickAttackUpdate() {
+        mainPresenter.onClickAttackUpdate();
+    }
+
     public void onClickBigMonsters(BigMonstersModelVM vm) {
         mainPresenter.onClickBigMonsters(vm);
     }

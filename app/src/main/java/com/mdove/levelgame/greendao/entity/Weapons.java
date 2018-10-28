@@ -23,9 +23,9 @@ public class Weapons {
     // 价格
     public long price;
     /**
-     *  装备类型 标识什么样子的装备。比如：普通装备（369等），神装...
-     *  首字母A：表示武器
-     *  B：表示铠甲
+     * 装备类型 标识什么样子的装备。比如：普通装备（369等），神装...
+     * 首字母A：表示武器
+     * B：表示铠甲
      */
     public String type;
     // 是否可以强化
@@ -34,10 +34,17 @@ public class Weapons {
     public int isCanUpdate;
     // 是否可以合成
     public int isCanMixture;
-    @Generated(hash = 815521936)
+    // 特殊：在铁匠铺展示
+    public int isSpecial;
+    // 合成公式 json
+    public String mixtureFormula;
+    public String updateFormula;
+    public String strengthenFormula;
+    @Generated(hash = 1436691880)
     public Weapons(Long id, String name, String tips, int attack, int armor,
             long price, String type, int isCanStrengthen, int isCanUpdate,
-            int isCanMixture) {
+            int isCanMixture, int isSpecial, String mixtureFormula,
+            String updateFormula, String strengthenFormula) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -48,6 +55,10 @@ public class Weapons {
         this.isCanStrengthen = isCanStrengthen;
         this.isCanUpdate = isCanUpdate;
         this.isCanMixture = isCanMixture;
+        this.isSpecial = isSpecial;
+        this.mixtureFormula = mixtureFormula;
+        this.updateFormula = updateFormula;
+        this.strengthenFormula = strengthenFormula;
     }
     @Generated(hash = 1666722499)
     public Weapons() {
@@ -112,4 +123,29 @@ public class Weapons {
     public void setIsCanMixture(int isCanMixture) {
         this.isCanMixture = isCanMixture;
     }
+    public int getIsSpecial() {
+        return this.isSpecial;
+    }
+    public void setIsSpecial(int isSpecial) {
+        this.isSpecial = isSpecial;
+    }
+    public String getMixtureFormula() {
+        return this.mixtureFormula;
+    }
+    public void setMixtureFormula(String mixtureFormula) {
+        this.mixtureFormula = mixtureFormula;
+    }
+    public String getUpdateFormula() {
+        return this.updateFormula;
+    }
+    public void setUpdateFormula(String updateFormula) {
+        this.updateFormula = updateFormula;
+    }
+    public String getStrengthenFormula() {
+        return this.strengthenFormula;
+    }
+    public void setStrengthenFormula(String strengthenFormula) {
+        this.strengthenFormula = strengthenFormula;
+    }
+
 }

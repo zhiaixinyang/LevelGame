@@ -2,9 +2,11 @@ package com.mdove.levelgame.main.hero.manager;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.PackagesDao;
+import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Packages;
+import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.model.BuyArmorResp;
@@ -80,7 +82,7 @@ public class HeroBuyManager {
         return resp;
     }
 
-    public BuyArmorResp buyArmor(long id){
+    public BuyArmorResp buyArmor(long id) {
         BuyArmorResp resp = new BuyArmorResp();
         resp.buyStatus = BUY_ARMOR_STATUS_ERROR;
 
@@ -118,14 +120,7 @@ public class HeroBuyManager {
         BuyAttackResp resp = new BuyAttackResp();
         resp.buyStatus = BUY_ATTACK_STATUS_ERROR;
 
-        List<ShopAttackModel> data = InitDataFileUtils.getShopWeapons();
-        ShopAttackModel realData = null;
-        for (ShopAttackModel model : data) {
-            if (model.id == id) {
-                realData = model;
-                break;
-            }
-        }
+        Weapons realData = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.Id.eq(id)).unique();
         // 购买逻辑
         if (realData != null) {
             // 钱够
@@ -139,6 +134,7 @@ public class HeroBuyManager {
 
                 Packages packages = new Packages();
                 packages.isEquip = 1;
+                packages.strengthenLevel = 0;
                 packages.type = realData.type;
                 packagesDao.insert(packages);
             } else {

@@ -13,6 +13,7 @@ import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.presenter.MainContract;
 import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
+import com.mdove.levelgame.main.shop.BlacksmithActivity;
 import com.mdove.levelgame.main.shop.MedicinesShopActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
 import com.mdove.levelgame.main.shop.adapter.MedicinesShopAdapter;
@@ -61,6 +62,11 @@ public class MainPresenter implements MainContract.IMainPresenter {
     @Override
     public void onClickGoShop() {
         ShopActivity.start(mView.getContext());
+    }
+
+    @Override
+    public void onClickAttackUpdate() {
+        BlacksmithActivity.start(mView.getContext());
     }
 
     @Override

@@ -37,6 +37,7 @@
         android:layout_below="@+id/rlv_equip"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
+        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:textSize="@dimen/activity_hero_packages_tips_text_size"
         android:background="@drawable/bg_thread_blue"
         android:gravity="center"
@@ -53,6 +54,7 @@
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:overScrollMode="never"
+        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:layout_below="@+id/tv_packages"
         android:background="@color/gray_light" />
 </RelativeLayout>

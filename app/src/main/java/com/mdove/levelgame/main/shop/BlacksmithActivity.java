@@ -10,24 +10,24 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
-import com.mdove.levelgame.main.shop.adapter.MedicinesShopAdapter;
-import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
-import com.mdove.levelgame.main.shop.presenter.MedicinesShopContract;
-import com.mdove.levelgame.main.shop.presenter.MedicinesShopPresenter;
+import com.mdove.levelgame.main.shop.adapter.BlacksmithAdapter;
+import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM;
+import com.mdove.levelgame.main.shop.presenter.BlacksmithContract;
+import com.mdove.levelgame.main.shop.presenter.BlacksmithPresenter;
 
 import java.util.List;
 
 /**
- * Created by MDove on 2018/10/21.
+ * Created by MDove on 2018/10/27.
  */
 
-public class MedicinesShopActivity extends BaseActivity implements MedicinesShopContract.IMedicinesShopView {
+public class BlacksmithActivity extends BaseActivity implements BlacksmithContract.IBlacksmithView {
     private RecyclerView rlv;
-    private MedicinesShopPresenter presenter;
-    private MedicinesShopAdapter adapter;
+    private BlacksmithAdapter adapter;
+    private BlacksmithPresenter presenter;
 
     public static void start(Context context) {
-        Intent start = new Intent(context, MedicinesShopActivity.class);
+        Intent start = new Intent(context, BlacksmithActivity.class);
         if (!(context instanceof Activity)) {
             start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         }
@@ -42,14 +42,14 @@ public class MedicinesShopActivity extends BaseActivity implements MedicinesShop
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.activity_title_medicines_shop);
-        setContentView(R.layout.activity_medicines_shop);
+        setTitle(R.string.string_blacksmith);
+        setContentView(R.layout.activity_blacksmith);
+        rlv = findViewById(R.id.rlv);
 
-        presenter = new MedicinesShopPresenter();
+        presenter = new BlacksmithPresenter();
         presenter.subscribe(this);
 
-        rlv = findViewById(R.id.rlv);
-        adapter = new MedicinesShopAdapter(this, presenter);
+        adapter = new BlacksmithAdapter(presenter);
         rlv.setLayoutManager(new LinearLayoutManager(this));
         rlv.setAdapter(adapter);
 
@@ -57,7 +57,7 @@ public class MedicinesShopActivity extends BaseActivity implements MedicinesShop
     }
 
     @Override
-    public void showData(List<MedicinesModelVM> data) {
+    public void showData(List<BlacksmithModelVM> data) {
         adapter.setData(data);
     }
 }

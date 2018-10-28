@@ -27,6 +27,7 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Type = new Property(1, String.class, "type", false, "TYPE");
         public final static Property IsEquip = new Property(2, int.class, "isEquip", false, "IS_EQUIP");
+        public final static Property StrengthenLevel = new Property(3, int.class, "strengthenLevel", false, "STRENGTHEN_LEVEL");
     }
 
 
@@ -44,7 +45,8 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"PACKAGES\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TYPE\" TEXT," + // 1: type
-                "\"IS_EQUIP\" INTEGER NOT NULL );"); // 2: isEquip
+                "\"IS_EQUIP\" INTEGER NOT NULL ," + // 2: isEquip
+                "\"STRENGTHEN_LEVEL\" INTEGER NOT NULL );"); // 3: strengthenLevel
     }
 
     /** Drops the underlying database table. */
@@ -67,6 +69,7 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
             stmt.bindString(2, type);
         }
         stmt.bindLong(3, entity.getIsEquip());
+        stmt.bindLong(4, entity.getStrengthenLevel());
     }
 
     @Override
@@ -83,6 +86,7 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
             stmt.bindString(2, type);
         }
         stmt.bindLong(3, entity.getIsEquip());
+        stmt.bindLong(4, entity.getStrengthenLevel());
     }
 
     @Override
@@ -95,7 +99,8 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         Packages entity = new Packages( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // type
-            cursor.getInt(offset + 2) // isEquip
+            cursor.getInt(offset + 2), // isEquip
+            cursor.getInt(offset + 3) // strengthenLevel
         );
         return entity;
     }
@@ -105,6 +110,7 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setType(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setIsEquip(cursor.getInt(offset + 2));
+        entity.setStrengthenLevel(cursor.getInt(offset + 3));
      }
     
     @Override

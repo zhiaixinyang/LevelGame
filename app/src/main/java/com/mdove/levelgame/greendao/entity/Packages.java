@@ -6,8 +6,9 @@ import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * @author MDove on 2018/10/23
+ *         <p>
+ *         开启强化之后：强化过的装备都会对应到MyWeapons上
  */
-
 @Entity
 public class Packages {
     @Id(autoincrement = true)
@@ -16,11 +17,14 @@ public class Packages {
     public String type;
     // 是否装备：0表示装备
     public int isEquip;
-    @Generated(hash = 257811575)
-    public Packages(Long id, String type, int isEquip) {
+    // 装备强化等级
+    public int strengthenLevel;
+    @Generated(hash = 1555783642)
+    public Packages(Long id, String type, int isEquip, int strengthenLevel) {
         this.id = id;
         this.type = type;
         this.isEquip = isEquip;
+        this.strengthenLevel = strengthenLevel;
     }
     @Generated(hash = 688242455)
     public Packages() {
@@ -42,5 +46,11 @@ public class Packages {
     }
     public void setIsEquip(int isEquip) {
         this.isEquip = isEquip;
+    }
+    public int getStrengthenLevel() {
+        return this.strengthenLevel;
+    }
+    public void setStrengthenLevel(int strengthenLevel) {
+        this.strengthenLevel = strengthenLevel;
     }
 }

@@ -6,7 +6,7 @@ package com.mdove.levelgame.main.hero.model;
 
 public class BuyAttackResp extends BaseBuy{
     // 消耗金钱
-    public int price;
+    public long price;
     // 增加攻击
     public int attack;
     // 增加防御

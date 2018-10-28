@@ -34,6 +34,10 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         public final static Property IsCanStrengthen = new Property(7, int.class, "isCanStrengthen", false, "IS_CAN_STRENGTHEN");
         public final static Property IsCanUpdate = new Property(8, int.class, "isCanUpdate", false, "IS_CAN_UPDATE");
         public final static Property IsCanMixture = new Property(9, int.class, "isCanMixture", false, "IS_CAN_MIXTURE");
+        public final static Property IsSpecial = new Property(10, int.class, "isSpecial", false, "IS_SPECIAL");
+        public final static Property MixtureFormula = new Property(11, String.class, "mixtureFormula", false, "MIXTURE_FORMULA");
+        public final static Property UpdateFormula = new Property(12, String.class, "updateFormula", false, "UPDATE_FORMULA");
+        public final static Property StrengthenFormula = new Property(13, String.class, "strengthenFormula", false, "STRENGTHEN_FORMULA");
     }
 
 
@@ -58,7 +62,11 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
                 "\"TYPE\" TEXT," + // 6: type
                 "\"IS_CAN_STRENGTHEN\" INTEGER NOT NULL ," + // 7: isCanStrengthen
                 "\"IS_CAN_UPDATE\" INTEGER NOT NULL ," + // 8: isCanUpdate
-                "\"IS_CAN_MIXTURE\" INTEGER NOT NULL );"); // 9: isCanMixture
+                "\"IS_CAN_MIXTURE\" INTEGER NOT NULL ," + // 9: isCanMixture
+                "\"IS_SPECIAL\" INTEGER NOT NULL ," + // 10: isSpecial
+                "\"MIXTURE_FORMULA\" TEXT," + // 11: mixtureFormula
+                "\"UPDATE_FORMULA\" TEXT," + // 12: updateFormula
+                "\"STRENGTHEN_FORMULA\" TEXT);"); // 13: strengthenFormula
     }
 
     /** Drops the underlying database table. */
@@ -96,6 +104,22 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         stmt.bindLong(8, entity.getIsCanStrengthen());
         stmt.bindLong(9, entity.getIsCanUpdate());
         stmt.bindLong(10, entity.getIsCanMixture());
+        stmt.bindLong(11, entity.getIsSpecial());
+ 
+        String mixtureFormula = entity.getMixtureFormula();
+        if (mixtureFormula != null) {
+            stmt.bindString(12, mixtureFormula);
+        }
+ 
+        String updateFormula = entity.getUpdateFormula();
+        if (updateFormula != null) {
+            stmt.bindString(13, updateFormula);
+        }
+ 
+        String strengthenFormula = entity.getStrengthenFormula();
+        if (strengthenFormula != null) {
+            stmt.bindString(14, strengthenFormula);
+        }
     }
 
     @Override
@@ -127,6 +151,22 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         stmt.bindLong(8, entity.getIsCanStrengthen());
         stmt.bindLong(9, entity.getIsCanUpdate());
         stmt.bindLong(10, entity.getIsCanMixture());
+        stmt.bindLong(11, entity.getIsSpecial());
+ 
+        String mixtureFormula = entity.getMixtureFormula();
+        if (mixtureFormula != null) {
+            stmt.bindString(12, mixtureFormula);
+        }
+ 
+        String updateFormula = entity.getUpdateFormula();
+        if (updateFormula != null) {
+            stmt.bindString(13, updateFormula);
+        }
+ 
+        String strengthenFormula = entity.getStrengthenFormula();
+        if (strengthenFormula != null) {
+            stmt.bindString(14, strengthenFormula);
+        }
     }
 
     @Override
@@ -146,7 +186,11 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
             cursor.getInt(offset + 7), // isCanStrengthen
             cursor.getInt(offset + 8), // isCanUpdate
-            cursor.getInt(offset + 9) // isCanMixture
+            cursor.getInt(offset + 9), // isCanMixture
+            cursor.getInt(offset + 10), // isSpecial
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // mixtureFormula
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // updateFormula
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // strengthenFormula
         );
         return entity;
     }
@@ -163,6 +207,10 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         entity.setIsCanStrengthen(cursor.getInt(offset + 7));
         entity.setIsCanUpdate(cursor.getInt(offset + 8));
         entity.setIsCanMixture(cursor.getInt(offset + 9));
+        entity.setIsSpecial(cursor.getInt(offset + 10));
+        entity.setMixtureFormula(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setUpdateFormula(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setStrengthenFormula(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
      }
     
     @Override

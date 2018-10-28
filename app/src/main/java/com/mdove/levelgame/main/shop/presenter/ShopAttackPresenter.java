@@ -1,6 +1,9 @@
 package com.mdove.levelgame.main.shop.presenter;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.greendao.WeaponsDao;
+import com.mdove.levelgame.greendao.entity.Weapons;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BuyAttackResp;
@@ -26,9 +29,9 @@ public class ShopAttackPresenter implements ShopAttackContract.IShopAttackPresen
 
     @Override
     public void initData() {
-        List<ShopAttackModel> list = InitDataFileUtils.getShopWeapons();
+        List<Weapons> weapons = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.IsSpecial.eq(1)).list();
         List<ShopAttackModelVM> data = new ArrayList<>();
-        for (ShopAttackModel model : list) {
+        for (Weapons model : weapons) {
             data.add(new ShopAttackModelVM(model));
         }
         view.showData(data);
@@ -47,7 +50,7 @@ public class ShopAttackPresenter implements ShopAttackContract.IShopAttackPresen
                 break;
             }
             case HeroBuyManager.BUY_ATTACK_STATUS_SUC: {
-                ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_attack_suc),  resp.price));
+                ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_attack_suc), resp.price));
                 break;
             }
             default:

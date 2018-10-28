@@ -32,6 +32,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         public final static Property Price = new Property(5, long.class, "price", false, "PRICE");
         public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
         public final static Property Strengthen = new Property(7, int.class, "strengthen", false, "STRENGTHEN");
+        public final static Property IsMy = new Property(8, int.class, "isMy", false, "IS_MY");
     }
 
 
@@ -54,7 +55,8 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
                 "\"ARMOR\" INTEGER NOT NULL ," + // 4: armor
                 "\"PRICE\" INTEGER NOT NULL ," + // 5: price
                 "\"TYPE\" TEXT," + // 6: type
-                "\"STRENGTHEN\" INTEGER NOT NULL );"); // 7: strengthen
+                "\"STRENGTHEN\" INTEGER NOT NULL ," + // 7: strengthen
+                "\"IS_MY\" INTEGER NOT NULL );"); // 8: isMy
     }
 
     /** Drops the underlying database table. */
@@ -90,6 +92,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
             stmt.bindString(7, type);
         }
         stmt.bindLong(8, entity.getStrengthen());
+        stmt.bindLong(9, entity.getIsMy());
     }
 
     @Override
@@ -119,6 +122,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
             stmt.bindString(7, type);
         }
         stmt.bindLong(8, entity.getStrengthen());
+        stmt.bindLong(9, entity.getIsMy());
     }
 
     @Override
@@ -136,7 +140,8 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
             cursor.getInt(offset + 4), // armor
             cursor.getLong(offset + 5), // price
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
-            cursor.getInt(offset + 7) // strengthen
+            cursor.getInt(offset + 7), // strengthen
+            cursor.getInt(offset + 8) // isMy
         );
         return entity;
     }
@@ -151,6 +156,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         entity.setPrice(cursor.getLong(offset + 5));
         entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setStrengthen(cursor.getInt(offset + 7));
+        entity.setIsMy(cursor.getInt(offset + 8));
      }
     
     @Override

@@ -17,6 +17,7 @@ public interface MainContract {
         void onClickBuyMedicines();
 
         void onClickGoShop();
+        void onClickAttackUpdate();
 
         void onClickHeroPackage();
         void onClickBigMonsters(BigMonstersModelVM vm);

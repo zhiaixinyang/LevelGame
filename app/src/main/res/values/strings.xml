@@ -8,7 +8,10 @@
     <string name="string_monsters_place">出城打怪</string>
     <string name="string_hero_attributes">个人属性</string>
     <string name="string_hero_packages">背包</string>
+    <string name="string_blacksmith">铁匠铺</string>
     <string name="string_big_monsters">大魔王</string>
+    <string name="string_is_can_update">升级</string>
+    <string name="string_is_can_mixture">合成</string>
     <string name="string_big_monsters_name">[拦路BOSS]-%1$s</string>
     <string name="string_big_monsters_attack"><![CDATA[大魔王攻击： <font color="#000000">%1$d</font>]]></string>
     <string name="string_big_monsters_armor"><![CDATA[大魔王护甲： <font color="#000000">%1$d</font>]]></string>

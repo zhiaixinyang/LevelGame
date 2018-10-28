@@ -62,13 +62,13 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
     @Override
     public void heroRest() {
-        boolean isCanRest=HeroAttributesManager.getInstance().heroRest();
-        if (isCanRest){
+        boolean isCanRest = HeroAttributesManager.getInstance().heroRest();
+        if (isCanRest) {
             view.showLoadingDialog(view.getContext().getString(R.string.string_rest_loading_msg));
-        }else{
+        } else {
             MyDialog.showCustomDialog(view.getString(R.string.string_no_can_rest_title),
                     view.getString(R.string.string_no_can_rest_content),
-                    true, view.getContext(),view.getString(R.string.string_no_can_rest_pos_btn),
+                    true, view.getContext(), view.getString(R.string.string_no_can_rest_pos_btn),
                     view.getString(R.string.string_no_can_rest_nav_btn), new DialogInterface.OnClickListener() {
 
                         @Override
@@ -109,13 +109,6 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
         if (modelVM != null && uiIndex != -1) {
             Observable.just(1)
-                    .doOnNext(new Consumer<Integer>() {
-                        @Override
-                        public void accept(Integer integer) throws Exception {
-                            view.showLoadingDialog(view.getContext().getString(R.string.string_attack_loading_msg));
-                        }
-                    })
-                    .delay(2, TimeUnit.SECONDS)
                     .flatMap(new Function<Integer, ObservableSource<AttackResp>>() {
                         @Override
                         public ObservableSource<AttackResp> apply(Integer integer) throws Exception {
@@ -127,7 +120,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                         public void accept(AttackResp resp) throws Exception {
                             switch (resp.attackStatus) {
                                 case HeroAttributesManager.ATTACK_STATUS_ERROR: {
-                                    ToastHelper.shortToast(view.getContext().getString(R.string.string_error));
+                                    view.showLoadingDialog(view.getContext().getString(R.string.string_error));
                                     break;
                                 }
                                 case HeroAttributesManager.ATTACK_STATUS_NO_POWER: {
@@ -148,7 +141,8 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                                         dropGood = name + "、";
                                     }
                                     dropGood = dropGood.substring(0, dropGood.length() - 1);
-                                    ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_attack_win_has_goods), resp.money, resp.exp, resp.life,dropGood));
+                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
+                                            , String.format(view.getContext().getString(R.string.string_attack_win_has_goods), resp.money, resp.exp, resp.life, dropGood), true);
                                     break;
                                 }
                                 default:

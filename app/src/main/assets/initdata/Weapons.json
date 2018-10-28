@@ -69,7 +69,7 @@
   },
   {
     "id": 6,
-    "name": "铁刀",
+    "name": "<font color=\"#7B1FA2\">铁刀</font>",
     "tips": "升级公式：锈刀+铁矿石",
     "attack": 30,
     "armor": 0,
@@ -83,7 +83,7 @@
   },
   {
     "id": 7,
-    "name": "短刀",
+    "name": "<font color=\"#FBC02D\">短刀</font>",
     "tips": "合成公式：铁刀+砍柴刀+铜矿石",
     "attack": 60,
     "armor": 10,
@@ -97,7 +97,7 @@
   },
   {
     "id": 8,
-    "name": "双刃",
+    "name": "<font color=\"#FBC02D\">双刃</font>",
     "tips": "合成公式：短刀+长刀+铜矿石",
     "attack": 120,
     "armor": 20,

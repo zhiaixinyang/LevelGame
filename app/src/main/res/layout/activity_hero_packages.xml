@@ -13,6 +13,7 @@
         android:textSize="@dimen/activity_hero_packages_tips_text_size"
         android:layout_centerHorizontal="true"
         android:textColor="@color/red_700"
+        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
         android:paddingBottom="@dimen/activity_hero_packages_tips_padding_t_b"
         android:paddingLeft="@dimen/activity_hero_packages_tips_padding_r_l"

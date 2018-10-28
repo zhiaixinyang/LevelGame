@@ -44,6 +44,7 @@ public class HeroPackagesActivity extends BaseActivity implements HeroPackagesCo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(getString(R.string.string_packages));
         setContentView(R.layout.activity_hero_packages);
         rlvEquip = findViewById(R.id.rlv_equip);
         rlvPackages = findViewById(R.id.rlv_packages);

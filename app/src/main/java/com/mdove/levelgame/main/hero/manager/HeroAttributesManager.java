@@ -105,16 +105,27 @@ public class HeroAttributesManager {
         if (monsters != null) {
             // 对敌方造成伤害 = 我方攻击 - 敌方防御
             int realAttack = heroAttributes.attack - monsters.armor;
-            // 我方需要攻击几次
-            int attackCount = monsters.life / realAttack;
-            // 我方消耗生命 = （敌方攻击 - 我方防御）*attackCount
-            int realHarm = (monsters.attack - heroAttributes.armor) * attackCount;
-            // 敌方需要攻击几次
-            int monstersAttackCount = heroAttributes.curLife / realHarm;
-            if (monstersAttackCount < attackCount) {
+            // 无法破防
+            if (realAttack<=0){
                 attackStatus = ATTACK_STATUS_FAIL;
                 attackResp.attackStatus = attackStatus;
                 return attackResp;
+            }
+            // 我方需要攻击几次
+            int attackCount = monsters.life / realAttack;// 一刀秒的情况下，此时为0
+            // 我方消耗生命 = （敌方攻击 - 我方防御）*attackCount
+            int realHarm = (monsters.attack - heroAttributes.armor) * attackCount;
+            // 如果无法破防，需要置为0，否则出现负数
+            if (realHarm <= 0) {
+                realHarm = 0;
+            }else {
+                // 敌方需要攻击几次
+                int monstersAttackCount = heroAttributes.curLife / realHarm;
+                if (monstersAttackCount < attackCount) {
+                    attackStatus = ATTACK_STATUS_FAIL;
+                    attackResp.attackStatus = attackStatus;
+                    return attackResp;
+                }
             }
 
             // 战斗胜利
@@ -154,28 +165,47 @@ public class HeroAttributesManager {
     public AttackResp attack(long monstersId) {
         AttackResp attackResp = new AttackResp();
         int attackStatus = ATTACK_STATUS_ERROR;
-        Monsters realModel = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(monstersId)).unique();
-        if (realModel != null) {
-            if (heroAttributes.bodyPower - realModel.consumePower < 0) {
+        Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(monstersId)).unique();
+        if (monsters != null) {
+            if (heroAttributes.bodyPower - monsters.consumePower < 0) {
                 attackStatus = ATTACK_STATUS_NO_POWER;
                 // 体力不足，直接置为null，跳过后续逻辑
-                realModel = null;
+                monsters = null;
             } else {
-                heroAttributes.bodyPower -= realModel.consumePower;
+                heroAttributes.bodyPower -= monsters.consumePower;
             }
         }
 
-        if (realModel != null) {
+        if (monsters != null) {
             // 对敌方造成伤害 = 我方攻击 - 敌方防御
-            int realAttack = heroAttributes.attack - realModel.armor;
+            int realAttack = heroAttributes.attack - monsters.armor;
+            // 无法破防
+            if (realAttack<=0){
+                attackStatus = ATTACK_STATUS_FAIL;
+                attackResp.attackStatus = attackStatus;
+                return attackResp;
+            }
             // 需要攻击几次
-            int attackCount = realModel.life / realAttack;
-            // 我方消耗生命 = （敌方攻击 - 我方防御）*attackCount
-            int realHarm = (realModel.attack - heroAttributes.armor) * attackCount;
+            int attackCount = monsters.life / realAttack;
+            // 我方消耗生命 = （敌方攻击 - 我方防御）* attackCount
+            int realHarm = (monsters.attack - heroAttributes.armor) * attackCount;
+            // 如果无法破防，需要置为0，否则出现负数
+            if (realHarm <= 0) {
+                realHarm = 0;
+            }else {
+                // 敌方需要攻击几次
+                int monstersAttackCount = heroAttributes.curLife / realHarm;
+                if (monstersAttackCount < attackCount) {
+                    attackStatus = ATTACK_STATUS_FAIL;
+                    attackResp.attackStatus = attackStatus;
+                    return attackResp;
+                }
+            }
+
             // 战斗胜利
             if (heroAttributes.curLife - realHarm > 0) {
                 attackStatus = ATTACK_STATUS_WIN;
-                attackResp.dropGoods = dropGoods(realModel.dropGoodsId);
+                attackResp.dropGoods = dropGoods(monsters.dropGoodsId);
                 if (attackResp.dropGoods.size() > 0) {
                     attackStatus = ATTACK_STATUS_HAS_DROP_GOODS;
                 }
@@ -183,22 +213,22 @@ public class HeroAttributesManager {
                 heroAttributes.curLife -= realHarm;
                 // 判断是否需要升级
                 long levelExp = getLevelExp(heroAttributes);
-                if (heroAttributes.experience + realModel.exp >= levelExp) {
+                if (heroAttributes.experience + monsters.exp >= levelExp) {
                     heroAttributes.level += 1;
-                    heroAttributes.experience = (heroAttributes.experience + realModel.exp) - levelExp;
+                    heroAttributes.experience = (heroAttributes.experience + monsters.exp) - levelExp;
 
                     heroAttributes.attack += heroAttributes.attackIncrease;
                     heroAttributes.armor += heroAttributes.armorIncrease;
                     heroAttributes.curLife += heroAttributes.lifeIncrease;
                     heroAttributes.maxLife += heroAttributes.lifeIncrease;
                 } else {
-                    heroAttributes.experience += realModel.exp;
+                    heroAttributes.experience += monsters.exp;
                 }
-                heroAttributes.money += realModel.money;
+                heroAttributes.money += monsters.money;
                 save();
-                attackResp.exp = (int) realModel.exp;
+                attackResp.exp = (int) monsters.exp;
                 attackResp.life = realHarm;
-                attackResp.money = realModel.money;
+                attackResp.money = monsters.money;
             } else {
                 attackStatus = ATTACK_STATUS_FAIL;
             }

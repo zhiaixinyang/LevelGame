@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/item_hero_equip_normal_margin"
             android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
-            android:text="@{vm.name}"
+            app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
             android:textSize="@dimen/item_hero_equip_text_size"
             app:layout_constraintLeft_toLeftOf="parent"

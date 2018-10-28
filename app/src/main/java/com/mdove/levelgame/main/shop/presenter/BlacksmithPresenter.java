@@ -49,7 +49,7 @@ public class BlacksmithPresenter implements BlacksmithContract.IBlacksmithPresen
         BlacksmithManager.getInstance().attackUpdate(id).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
             @Override
             public void accept(BlacksmithManager.BlacksmithResp blacksmithResp) throws Exception {
-                MyDialog.showAlert(blacksmithResp.title, blacksmithResp.content, true, view.getContext());
+                MyDialog.showMyDialog(view.getContext(),blacksmithResp.title, blacksmithResp.content, true);
             }
         });
     }

@@ -9,6 +9,8 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.mdove.levelgame.base.BaseNormalDialog;
+
 /**
  * Created by MDove on 2018/10/21.
  */
@@ -31,6 +33,17 @@ public class MyDialog {
             }
         });
         builder.show();
+    }
+
+    public static void showMyDialog(Context context, String title, String msg, boolean isOnlyOk) {
+        if (((Activity) context).isFinishing()) {
+            return;
+        }
+        BaseNormalDialog dialog = new BaseNormalDialog(context);
+        dialog.setContent(msg);
+        dialog.setTitle(title);
+        dialog.setOnlyOk(isOnlyOk);
+        dialog.show();
     }
 
     public static void showAlert(String title, String msg, boolean cancelable, Context context) {

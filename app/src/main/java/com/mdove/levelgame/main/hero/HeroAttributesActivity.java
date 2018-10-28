@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
@@ -24,6 +25,7 @@ import com.mdove.levelgame.utils.ToastHelper;
 public class HeroAttributesActivity extends BaseActivity implements HeroAttributesContract.IHeroAttributesView {
     private ActivityHeroAttributesBinding binding;
     private HeroAttributesPresenter presenter;
+    private Toolbar mToolbar;
 
     public static void start(Context context) {
         Intent start = new Intent(context, HeroAttributesActivity.class);
@@ -42,12 +44,23 @@ public class HeroAttributesActivity extends BaseActivity implements HeroAttribut
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hero_attributes);
+        initToolbar();
 
         presenter = new HeroAttributesPresenter();
         presenter.subscribe(this);
 
         presenter.initData();
-        ToastHelper.shortToast(DatabaseManager.getInstance().getBigMonstersDao().queryBuilder().list().get(0).getDropGoods().getTypes());
+    }
+
+    private void initToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override

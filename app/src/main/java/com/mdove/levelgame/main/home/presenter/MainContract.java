@@ -24,9 +24,11 @@ public interface MainContract {
 
         void initAllData();
         void initBigMonster();
+        void initBigMonsterInvade();
     }
 
     interface IMainView extends BaseView {
         void showBigMonsters(BigMonstersModelVM vm);
+        void showBigMonsterInvade(String days);
     }
 }

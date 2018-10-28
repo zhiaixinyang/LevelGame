@@ -3,6 +3,7 @@ package com.mdove.levelgame.main.monsters.presenter;
 import android.content.DialogInterface;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.base.BaseNormalDialog;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
@@ -66,19 +67,14 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
         if (isCanRest) {
             view.showLoadingDialog(view.getContext().getString(R.string.string_rest_loading_msg));
         } else {
-            MyDialog.showCustomDialog(view.getString(R.string.string_no_can_rest_title),
+            MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_no_can_rest_title),
                     view.getString(R.string.string_no_can_rest_content),
-                    true, view.getContext(), view.getString(R.string.string_no_can_rest_pos_btn),
-                    view.getString(R.string.string_no_can_rest_nav_btn), new DialogInterface.OnClickListener() {
-
+                    view.getString(R.string.string_no_can_rest_nav_btn),
+                    view.getString(R.string.string_no_can_rest_pos_btn), true,
+                    new BaseNormalDialog.BaseDialogListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick() {
                             MainActivity.start(view.getContext());
-                        }
-                    }, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
                         }
                     });
         }

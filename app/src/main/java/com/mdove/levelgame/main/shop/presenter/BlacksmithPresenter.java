@@ -1,6 +1,8 @@
 package com.mdove.levelgame.main.shop.presenter;
 
+import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
+import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
@@ -41,15 +43,21 @@ public class BlacksmithPresenter implements BlacksmithContract.IBlacksmithPresen
                 data.add(new BlacksmithModelVM(weapon));
             }
         }
+        List<Armors> armors = DatabaseManager.getInstance().getArmorsDao().queryBuilder().where(ArmorsDao.Properties.IsSpecial.eq(0)).list();
+        if (armors != null && armors.size() > 0) {
+            for (Armors armor : armors) {
+                data.add(new BlacksmithModelVM(armor));
+            }
+        }
         view.showData(data);
     }
 
     @Override
-    public void onItemBtnClick(Long id) {
-        BlacksmithManager.getInstance().attackUpdate(id).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
+    public void onItemBtnClick(String type, Long id) {
+        BlacksmithManager.getInstance().goodsUpdate(type, id).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
             @Override
             public void accept(BlacksmithManager.BlacksmithResp blacksmithResp) throws Exception {
-                MyDialog.showMyDialog(view.getContext(),blacksmithResp.title, blacksmithResp.content, true);
+                MyDialog.showMyDialog(view.getContext(), blacksmithResp.title, blacksmithResp.content, true);
             }
         });
     }

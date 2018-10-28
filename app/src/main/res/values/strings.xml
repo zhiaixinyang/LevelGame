@@ -5,17 +5,18 @@
     <string name="activity_title_hero_attributes">个人属性</string>
 
     <string name="string_rlv_empty">空空如也</string>
-    <string name="string_monsters_place">出城打怪</string>
+    <string name="string_monsters_place">出村打怪</string>
     <string name="string_hero_attributes">个人属性</string>
     <string name="string_hero_packages">背包</string>
     <string name="string_blacksmith">铁匠铺</string>
     <string name="string_big_monsters">大魔王</string>
     <string name="string_is_can_update">升级</string>
     <string name="string_is_can_mixture">合成</string>
-    <string name="string_big_monsters_name">[拦路BOSS]-%1$s</string>
+    <string name="string_big_monsters_name">[入侵BOSS]-%1$s</string>
     <string name="string_big_monsters_attack"><![CDATA[大魔王攻击： <font color="#000000">%1$d</font>]]></string>
     <string name="string_big_monsters_armor"><![CDATA[大魔王护甲： <font color="#000000">%1$d</font>]]></string>
     <string name="string_big_monsters_life"><![CDATA[大魔王生命： <font color="#000000">%1$d</font>]]></string>
+    <string name="string_big_monsters_distance_invade"><![CDATA[距离<font color="#D32F2F">魔王</font>入侵，还有：<font color="#D32F2F" ><big><b>%1$d</b></big></font>天！]]></string>
 
     <string name="string_shop">购买装备</string>
     <string name="string_fragment_title_buy_attack">武器商店</string>

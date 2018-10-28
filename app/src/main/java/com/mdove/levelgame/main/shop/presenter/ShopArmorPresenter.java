@@ -1,6 +1,9 @@
 package com.mdove.levelgame.main.shop.presenter;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.greendao.entity.Armors;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BuyArmorResp;
@@ -29,9 +32,9 @@ public class ShopArmorPresenter implements ShopArmorContract.IShopArmorPresenter
 
     @Override
     public void initData() {
-        List<ShopArmorModel> list = InitDataFileUtils.getShopArmors();
+        List<Armors> list = DatabaseManager.getInstance().getArmorsDao().queryBuilder().where(ArmorsDao.Properties.IsSpecial.eq(1)).list();
         List<ShopArmorModelVM> data = new ArrayList<>();
-        for (ShopArmorModel model : list) {
+        for (Armors model : list) {
             data.add(new ShopArmorModelVM(model));
         }
         view.showData(data);

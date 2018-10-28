@@ -17,6 +17,6 @@ public class BlacksmithItemHandler {
     }
 
     public void onItemBtnOnClick(BlacksmithModelVM vm) {
-        blacksmithPresenter.onItemBtnClick(vm.id.get());
+        blacksmithPresenter.onItemBtnClick(vm.type.get(), vm.id.get());
     }
 }

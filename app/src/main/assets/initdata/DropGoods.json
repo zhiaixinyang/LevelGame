@@ -1,5 +1,9 @@
 [
   {
+    "id": 0,
+    "types": "[{\"type\":\"A1\",\"probability\":0.0}]"
+  },
+  {
     "id": 1,
     "types": "[{\"type\":\"A1\",\"probability\":0.1},{\"type\":\"A3\",\"probability\":0.01}]"
   },
@@ -17,11 +21,15 @@
   },
   {
     "id": 5,
-    "types": "[{\"type\":\"A1\",\"probability\":0.4},{\"type\":\"A2\",\"probability\":0.1}]"
+    "types": "[{\"type\":\"A5\",\"probability\":0.1},{\"type\":\"B5\",\"probability\":0.1}]"
   },
   {
     "id": 6,
     "types": "[{\"type\":\"E1\",\"probability\":0.2},{\"type\":\"E2\",\"probability\":0.2},{\"type\":\"E3\",\"probability\":0.2}]"
+  },
+  {
+    "id": 7,
+    "types": "[{\"type\":\"E4\",\"probability\":1}]"
   },
   {
     "id": 100,

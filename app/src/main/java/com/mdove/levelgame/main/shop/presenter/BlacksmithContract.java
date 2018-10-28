@@ -15,7 +15,7 @@ public interface BlacksmithContract {
     interface IBlacksmithPresenter extends BasePresenter<IBlacksmithView> {
         void initData();
 
-        void onItemBtnClick(Long id);
+        void onItemBtnClick(String type, Long id);
     }
 
     interface IBlacksmithView extends BaseView {

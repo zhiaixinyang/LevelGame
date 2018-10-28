@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 
 import com.mdove.levelgame.R;
@@ -43,6 +44,7 @@ public class MainActivity extends BaseActivity implements MainContract.IMainView
     protected void onResume() {
         super.onResume();
         mainPresenter.initBigMonster();
+        mainPresenter.initBigMonsterInvade();
     }
 
     @Override
@@ -52,12 +54,17 @@ public class MainActivity extends BaseActivity implements MainContract.IMainView
 
     @Override
     public void showBigMonsters(BigMonstersModelVM vm) {
-        if (vm!=null) {
+        if (vm != null) {
             binding.layoutBigMonsters.setVisibility(View.VISIBLE);
             binding.setVm(vm);
-        }else{
+        } else {
             binding.layoutBigMonsters.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void showBigMonsterInvade(String days) {
+        binding.tvInvade.setText(Html.fromHtml(days));
     }
 
 }

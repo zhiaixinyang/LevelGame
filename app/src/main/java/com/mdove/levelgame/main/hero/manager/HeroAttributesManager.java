@@ -71,15 +71,9 @@ public class HeroAttributesManager {
 
     public boolean heroRest() {
         boolean isCanRest;
-        // 第十天大魔王
-        if (heroAttributes.days == 10) {
-            isCanRest = computeBigMonster(1);
-        } else if (heroAttributes.days == 30) {
-            // 三十天大魔王
-            isCanRest = computeBigMonster(2);
-        } else if (heroAttributes.days == 50) {
-            // 五十天大魔王
-            isCanRest = computeBigMonster(3);
+        // 如果魔王此时不是gone状态，则不能rest
+        if (!goneBigMonster()) {
+            isCanRest = false;
         } else {
             isCanRest = true;
             heroAttributes.bodyPower = 100;
@@ -89,17 +83,29 @@ public class HeroAttributesManager {
         return isCanRest;
     }
 
+    public boolean goneBigMonster() {
+        boolean isGone = true;
+        if (heroAttributes.days == 10) {
+            isGone = computeBigMonster(1);
+        } else if (heroAttributes.days == 30) {
+            // 三十天大魔王
+            isGone = computeBigMonster(2);
+        } else if (heroAttributes.days == 50) {
+            // 五十天大魔王
+            isGone = computeBigMonster(3);
+        }
+        return isGone;
+    }
+
     private boolean computeBigMonster(long id) {
         BigMonsters bigMonsters = bigMonstersDao.queryBuilder().where(BigMonstersDao.Properties.Id.eq(id)).unique();
-        // 如果魔王没死，说明魔王还没出现（否则正常rest）
+        // 如果魔王没死，说明魔王还没出现
         if (bigMonsters.isDead == 1) {
             //让大魔王出现
             bigMonsters.isGone = 1;
             bigMonstersDao.update(bigMonsters);
             return false;
         } else {
-            heroAttributes.bodyPower = 100;
-            heroAttributes.days += 1;
             return true;
         }
     }
@@ -163,14 +169,13 @@ public class HeroAttributesManager {
             }
             // 我方需要攻击几次
             int attackCount = monsters.life / realAttack;// 一刀秒的情况下，此时为0
-            // 我方消耗生命 = （敌方攻击 - 我方防御）*attackCount
-            int realHarm = (monsters.attack - heroAttributes.armor) * attackCount;
-            // 如果无法破防，需要置为0，否则出现负数
-            if (realHarm <= 0) {
-                realHarm = 0;
-            } else {
+            // 地方对我们造成的伤害 = 敌方攻击 - 我方防御
+            int realAttackMonster = (monsters.attack - heroAttributes.armor) * attackCount;
+            int realHarm = 0;
+            // realAttackMonster<0，说明敌方无法破防，realHarm = 0
+            if (realAttackMonster > 0) {
                 // 敌方需要攻击几次
-                int monstersAttackCount = heroAttributes.curLife / realHarm;
+                int monstersAttackCount = heroAttributes.curLife / realAttackMonster;
                 if (monstersAttackCount < attackCount) {
                     attackStatus = ATTACK_STATUS_FAIL;
                     attackResp.attackStatus = attackStatus;
@@ -237,14 +242,15 @@ public class HeroAttributesManager {
             }
             // 需要攻击几次
             int attackCount = monsters.life / realAttack;
-            // 我方消耗生命 = （敌方攻击 - 我方防御）* attackCount
-            int realHarm = (monsters.attack - heroAttributes.armor) * attackCount;
-            // 如果无法破防，需要置为0，否则出现负数
-            if (realHarm <= 0) {
-                realHarm = 0;
-            } else {
+            // 敌方对我方造成伤害 = 敌方攻击 - 我方防御
+            int realAttackMonster = monsters.attack - heroAttributes.armor;
+            int realHarm = 0;
+            // realAttackMonster<0，说明敌方无法破防，realHarm = 0
+            if (realAttackMonster > 0) {
                 // 敌方需要攻击几次
-                int monstersAttackCount = heroAttributes.curLife / realHarm;
+                int monstersAttackCount = heroAttributes.curLife / realAttackMonster;
+                // 总共对我方造成伤害
+                realHarm = realAttackMonster * monstersAttackCount;
                 if (monstersAttackCount < attackCount) {
                     attackStatus = ATTACK_STATUS_FAIL;
                     attackResp.attackStatus = attackStatus;

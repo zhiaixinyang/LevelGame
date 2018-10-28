@@ -31,11 +31,23 @@ public class Armors {
     public String type;
     // 强化级别
     public int strengthen;
-    // 对应是否是自己的装备
-    public int isMy;
-    @Generated(hash = 1160786918)
+    // 是否可以强化
+    public int isCanStrengthen;
+    // 是否可以升级
+    public int isCanUpdate;
+    // 是否可以合成
+    public int isCanMixture;
+    // 特殊：在铁匠铺展示
+    public int isSpecial;
+    // 合成公式 json
+    public String mixtureFormula;
+    public String updateFormula;
+    public String strengthenFormula;
+    @Generated(hash = 1831713936)
     public Armors(Long id, String name, String tips, int attack, int armor,
-            long price, String type, int strengthen, int isMy) {
+            long price, String type, int strengthen, int isCanStrengthen,
+            int isCanUpdate, int isCanMixture, int isSpecial, String mixtureFormula,
+            String updateFormula, String strengthenFormula) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -44,7 +56,13 @@ public class Armors {
         this.price = price;
         this.type = type;
         this.strengthen = strengthen;
-        this.isMy = isMy;
+        this.isCanStrengthen = isCanStrengthen;
+        this.isCanUpdate = isCanUpdate;
+        this.isCanMixture = isCanMixture;
+        this.isSpecial = isSpecial;
+        this.mixtureFormula = mixtureFormula;
+        this.updateFormula = updateFormula;
+        this.strengthenFormula = strengthenFormula;
     }
     @Generated(hash = 1024617871)
     public Armors() {
@@ -97,10 +115,46 @@ public class Armors {
     public void setStrengthen(int strengthen) {
         this.strengthen = strengthen;
     }
-    public int getIsMy() {
-        return this.isMy;
+    public int getIsCanStrengthen() {
+        return this.isCanStrengthen;
     }
-    public void setIsMy(int isMy) {
-        this.isMy = isMy;
+    public void setIsCanStrengthen(int isCanStrengthen) {
+        this.isCanStrengthen = isCanStrengthen;
+    }
+    public int getIsCanUpdate() {
+        return this.isCanUpdate;
+    }
+    public void setIsCanUpdate(int isCanUpdate) {
+        this.isCanUpdate = isCanUpdate;
+    }
+    public int getIsCanMixture() {
+        return this.isCanMixture;
+    }
+    public void setIsCanMixture(int isCanMixture) {
+        this.isCanMixture = isCanMixture;
+    }
+    public int getIsSpecial() {
+        return this.isSpecial;
+    }
+    public void setIsSpecial(int isSpecial) {
+        this.isSpecial = isSpecial;
+    }
+    public String getMixtureFormula() {
+        return this.mixtureFormula;
+    }
+    public void setMixtureFormula(String mixtureFormula) {
+        this.mixtureFormula = mixtureFormula;
+    }
+    public String getUpdateFormula() {
+        return this.updateFormula;
+    }
+    public void setUpdateFormula(String updateFormula) {
+        this.updateFormula = updateFormula;
+    }
+    public String getStrengthenFormula() {
+        return this.strengthenFormula;
+    }
+    public void setStrengthenFormula(String strengthenFormula) {
+        this.strengthenFormula = strengthenFormula;
     }
 }

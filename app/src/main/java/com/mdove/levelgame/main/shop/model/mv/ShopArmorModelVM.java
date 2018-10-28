@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.main.shop.model.ShopArmorModel;
 import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 
@@ -18,7 +19,7 @@ public class ShopArmorModelVM {
     public ObservableField<String> armor = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();
 
-    public ShopArmorModelVM(ShopArmorModel model) {
+    public ShopArmorModelVM(Armors model) {
         id.set(model.id);
         tips.set(model.tips);
         name.set(model.name);

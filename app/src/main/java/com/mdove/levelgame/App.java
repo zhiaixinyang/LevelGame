@@ -19,6 +19,7 @@ import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
+import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -41,6 +42,8 @@ public class App extends Application {
         CrashReport.initCrashReport(getApplicationContext(), "544aec74cc", false);
 
 
+//        HeroManager.getInstance().getHeroAttributes().days = 9;
+//        HeroManager.getInstance().save();
         if (!AppConfig.isFirstLogin()) {
             HeroAttributesDao dao = DatabaseManager.getInstance().getHeroAttributesDao();
             HeroAttributes heroAttributes = new HeroAttributes();

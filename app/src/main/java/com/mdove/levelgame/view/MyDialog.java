@@ -46,6 +46,21 @@ public class MyDialog {
         dialog.show();
     }
 
+    public static void showMyDialog(Context context, String title, String msg, String cancelText,
+                                    String okText, boolean isOnlyOk, BaseNormalDialog.BaseDialogListener listener) {
+        if (((Activity) context).isFinishing()) {
+            return;
+        }
+        BaseNormalDialog dialog = new BaseNormalDialog(context);
+        dialog.setContent(msg);
+        dialog.setTitle(title);
+        dialog.setOnlyOk(isOnlyOk);
+        dialog.setCancelText(cancelText);
+        dialog.setOkText(okText);
+        dialog.setOkListener(listener);
+        dialog.show();
+    }
+
     public static void showAlert(String title, String msg, boolean cancelable, Context context) {
         if (((Activity) context).isFinishing()) {
             return;

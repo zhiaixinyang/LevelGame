@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.base.BaseNormalDialog;
 import com.mdove.levelgame.base.RxTransformerHelper;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.MaterialDao;
@@ -27,6 +28,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -480,12 +482,30 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
 
     @Override
     public void onClickSell(final HeroPackageModelVM vm) {
-        HeroAttributesManager.getInstance().sellGoods(vm.pkId.get()).subscribe(new Consumer<Integer>() {
+        HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), true).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                if (integer > 0) {
-                    ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), integer));
-                    initPksData();
+                if (integer==-1){
+                    MyDialog.showMyDialog(view.getContext(), "注意", "装备特殊，是否出售？", "不卖", "卖！", false, new BaseNormalDialog.BaseDialogListener() {
+                        @Override
+                        public void onClick() {
+                            HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), false).subscribe(new Consumer<Integer>() {
+                                @Override
+                                public void accept(Integer integer) throws Exception {
+                                    if (integer > 0) {
+                                        ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), integer));
+                                        initPksData();
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                }else {
+                    if (integer > 0) {
+                        ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), integer));
+                        initPksData();
+                    }
                 }
             }
         });

@@ -3,6 +3,8 @@ package com.mdove.levelgame.main.hero.manager;
 import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
+import com.mdove.levelgame.App;
+import com.mdove.levelgame.R;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
@@ -102,7 +104,12 @@ public class HeroAttributesManager {
         }
     }
 
-    public Observable<Integer> sellGoods(Long pkId) {
+    /**
+     * @param pkId
+     * @param isCheck true表示需要：特殊装备弹dialog确认
+     * @return
+     */
+    public Observable<Integer> sellGoods(Long pkId, boolean isCheck) {
         Packages pk = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique();
         int money = 0;
         if (pk != null) {
@@ -111,6 +118,15 @@ public class HeroAttributesManager {
                 Weapons weapons = (Weapons) attack;
                 money = (int) (weapons.price / 2);
                 heroAttributes.money += money;
+                // 此时表示装备特殊，弹dialog
+                if (weapons.isSpecial == 0 && isCheck) {
+                    return Observable.create(new ObservableOnSubscribe<Integer>() {
+                        @Override
+                        public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                            e.onNext(Integer.valueOf(-1));
+                        }
+                    });
+                }
             } else if (attack != null && attack instanceof Armors) {
                 Armors armors = (Armors) attack;
                 money = (int) (armors.price / 2);
@@ -357,6 +373,19 @@ public class HeroAttributesManager {
         heroAttributes.attack += armors.attack;
         heroAttributes.armor += armors.armor;
         save();
+    }
+
+    public String formatAttributesString() {
+        String content = "";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_attack), heroAttributes.attack, heroAttributes.attackIncrease) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_armor), heroAttributes.armor, heroAttributes.armorIncrease) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_life), heroAttributes.curLife, heroAttributes.maxLife, heroAttributes.lifeIncrease) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_money), heroAttributes.money) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_level), heroAttributes.level) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_days), heroAttributes.days) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_need_exp), heroAttributes.experience, getLevelExp(heroAttributes)) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_body_power), heroAttributes.bodyPower, 100);
+        return content;
     }
 
     private long getLevelExp(HeroAttributes heroAttributes) {

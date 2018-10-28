@@ -44,6 +44,18 @@ public class BaseNormalDialog extends AppCompatDialog {
         }
     }
 
+    public void setCancelText(String text) {
+        if (binding != null) {
+            binding.btnCancel.setText(Html.fromHtml(text));
+        }
+    }
+
+    public void setOkText(String text) {
+        if (binding != null) {
+            binding.btnSubmit.setText(Html.fromHtml(text));
+        }
+    }
+
     public void setOnlyOk(boolean isOnlyOk) {
         this.isOnlyOk = isOnlyOk;
     }
@@ -70,7 +82,7 @@ public class BaseNormalDialog extends AppCompatDialog {
             binding.btnSubmit.setVisibility(View.GONE);
         }
 
-        if (isOnlyOk){
+        if (isOnlyOk) {
             binding.btnSubmit.setVisibility(View.VISIBLE);
             binding.btnCancel.setVisibility(View.GONE);
         }

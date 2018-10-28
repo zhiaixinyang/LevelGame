@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.utils.DensityUtil;
 import com.mdove.levelgame.view.MyDialog;
 import com.mdove.levelgame.view.MyProgressDialog;
@@ -39,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     private Toolbar mToolbar;
     private TextView mLayoutEmpty;
     private FrameLayout mContentContainer;
+    private TextView btnAttr;
     private List<IBackHandler> mBackHandlers = new ArrayList<>();
 
     @Override
@@ -49,6 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             super.setContentView(R.layout.activity_base);
 
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            btnAttr = findViewById(R.id.btn_attributes);
             mContentContainer = (FrameLayout) findViewById(R.id.content_frame);
             mLayoutEmpty = findViewById(R.id.layout_empty);
             mLayoutEmpty.setVisibility(View.GONE);
@@ -59,6 +62,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 getSupportActionBar().setHomeButtonEnabled(true);
                 getSupportActionBar().setDisplayShowTitleEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                btnAttr.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyDialog.showMyDialog(BaseActivity.this, "个人属性", HeroAttributesManager.getInstance().formatAttributesString(), true);
+                    }
+                });
             }
         }
     }

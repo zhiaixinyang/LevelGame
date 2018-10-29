@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_light"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -49,8 +50,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rlv"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/item_base_list_normal_margin"
             android:layout_height="match_parent"
-            android:background="@color/gray_light" />
+            android:layout_marginTop="@dimen/item_base_list_normal_margin" />
     </LinearLayout>
 </FrameLayout>

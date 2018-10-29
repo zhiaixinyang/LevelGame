@@ -20,9 +20,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-        android:onClick="@{()->handler.onItemBtnOnClick(vm)}"
         android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
-        android:background="@drawable/bg_white_round">
+        android:background="@drawable/bg_white_round"
+        android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
         <TextView
             android:id="@+id/tv_name"
@@ -60,7 +60,7 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="4dp"
-            android:text="攻击"
+            android:text="@{vm.btnText}"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -115,6 +115,7 @@
             app:layout_constraintLeft_toRightOf="@+id/tv_exp"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="金钱：10" />
+
         <TextView
             android:id="@+id/tv_life"
             android:layout_width="wrap_content"

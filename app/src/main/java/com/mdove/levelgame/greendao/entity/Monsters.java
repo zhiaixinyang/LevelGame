@@ -5,9 +5,12 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.DaoException;
+
 import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.DropGoodsDao;
+
 import org.greenrobot.greendao.annotation.NotNull;
+
 import com.mdove.levelgame.greendao.MonstersDao;
 
 /**
@@ -33,24 +36,21 @@ public class Monsters {
     public String name;
     // 特殊掉落的物品的id（json串可以掉落多个）
     public long dropGoodsId;
-    @ToOne(joinProperty = "dropGoodsId")
-    public DropGoods dropGoods;
     // 对应野区的Id
     public long monsterPlaceId;
     // 经验
     public long exp;
     // 体力消耗
     public int consumePower;
-    /** Used to resolve relations */
-    @Generated(hash = 2040040024)
-    private transient DaoSession daoSession;
-    /** Used for active entity operations. */
-    @Generated(hash = 367133519)
-    private transient MonstersDao myDao;
-    @Generated(hash = 1476846195)
+    // 是否是商人
+    public int isBusinessman;
+    // 卖出商品的json
+    public String sellGoodsJson;
+    @Generated(hash = 1081917758)
     public Monsters(Long id, int life, String type, int attack, int armor,
             int money, String tips, String name, long dropGoodsId,
-            long monsterPlaceId, long exp, int consumePower) {
+            long monsterPlaceId, long exp, int consumePower, int isBusinessman,
+            String sellGoodsJson) {
         this.id = id;
         this.life = life;
         this.type = type;
@@ -63,6 +63,8 @@ public class Monsters {
         this.monsterPlaceId = monsterPlaceId;
         this.exp = exp;
         this.consumePower = consumePower;
+        this.isBusinessman = isBusinessman;
+        this.sellGoodsJson = sellGoodsJson;
     }
     @Generated(hash = 1349461748)
     public Monsters() {
@@ -139,78 +141,17 @@ public class Monsters {
     public void setConsumePower(int consumePower) {
         this.consumePower = consumePower;
     }
-    @Generated(hash = 37712599)
-    private transient Long dropGoods__resolvedKey;
-    /** To-one relationship, resolved on first access. */
-    @Generated(hash = 1204493026)
-    public DropGoods getDropGoods() {
-        long __key = this.dropGoodsId;
-        if (dropGoods__resolvedKey == null
-                || !dropGoods__resolvedKey.equals(__key)) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            DropGoodsDao targetDao = daoSession.getDropGoodsDao();
-            DropGoods dropGoodsNew = targetDao.load(__key);
-            synchronized (this) {
-                dropGoods = dropGoodsNew;
-                dropGoods__resolvedKey = __key;
-            }
-        }
-        return dropGoods;
+    public int getIsBusinessman() {
+        return this.isBusinessman;
     }
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 889873400)
-    public void setDropGoods(@NotNull DropGoods dropGoods) {
-        if (dropGoods == null) {
-            throw new DaoException(
-                    "To-one property 'dropGoodsId' has not-null constraint; cannot set to-one to null");
-        }
-        synchronized (this) {
-            this.dropGoods = dropGoods;
-            dropGoodsId = dropGoods.getId();
-            dropGoods__resolvedKey = dropGoodsId;
-        }
+    public void setIsBusinessman(int isBusinessman) {
+        this.isBusinessman = isBusinessman;
     }
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 128553479)
-    public void delete() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.delete(this);
+    public String getSellGoodsJson() {
+        return this.sellGoodsJson;
     }
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 1942392019)
-    public void refresh() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.refresh(this);
-    }
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 713229351)
-    public void update() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.update(this);
-    }
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 108176358)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getMonstersDao() : null;
+    public void setSellGoodsJson(String sellGoodsJson) {
+        this.sellGoodsJson = sellGoodsJson;
     }
 
 }

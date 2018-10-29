@@ -138,7 +138,8 @@ public class HeroAttributesManager {
                 money = (int) (armors.price / 2);
                 heroAttributes.money += money;
             } else if (attack != null && attack instanceof Material) {
-                money = 50;
+                Material material= (Material) attack;
+                money = (int) (material.price / 2);
                 heroAttributes.money += money;
             }
             DatabaseManager.getInstance().getPackagesDao().delete(pk);

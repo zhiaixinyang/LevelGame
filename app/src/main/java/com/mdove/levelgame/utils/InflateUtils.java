@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * @author MDOve on 2018/2/10.
+ * @author MDove on 2018/2/10.
  */
 public class InflateUtils {
 

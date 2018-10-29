@@ -28,6 +28,7 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         public final static Property Type = new Property(1, String.class, "type", false, "TYPE");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property Tips = new Property(3, String.class, "tips", false, "TIPS");
+        public final static Property Price = new Property(4, long.class, "price", false, "PRICE");
     }
 
 
@@ -46,7 +47,8 @@ public class MaterialDao extends AbstractDao<Material, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TYPE\" TEXT," + // 1: type
                 "\"NAME\" TEXT," + // 2: name
-                "\"TIPS\" TEXT);"); // 3: tips
+                "\"TIPS\" TEXT," + // 3: tips
+                "\"PRICE\" INTEGER NOT NULL );"); // 4: price
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +80,7 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         if (tips != null) {
             stmt.bindString(4, tips);
         }
+        stmt.bindLong(5, entity.getPrice());
     }
 
     @Override
@@ -103,6 +106,7 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         if (tips != null) {
             stmt.bindString(4, tips);
         }
+        stmt.bindLong(5, entity.getPrice());
     }
 
     @Override
@@ -116,7 +120,8 @@ public class MaterialDao extends AbstractDao<Material, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // type
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // tips
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // tips
+            cursor.getLong(offset + 4) // price
         );
         return entity;
     }
@@ -127,6 +132,7 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         entity.setType(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setTips(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setPrice(cursor.getLong(offset + 4));
      }
     
     @Override

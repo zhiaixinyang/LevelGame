@@ -18,12 +18,14 @@ public class Material {
     public String type;
     public String name;
     public String tips;
-    @Generated(hash = 1565768794)
-    public Material(Long id, String type, String name, String tips) {
+    public long price;
+    @Generated(hash = 1136677447)
+    public Material(Long id, String type, String name, String tips, long price) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.tips = tips;
+        this.price = price;
     }
     @Generated(hash = 1176792654)
     public Material() {
@@ -52,6 +54,11 @@ public class Material {
     public void setTips(String tips) {
         this.tips = tips;
     }
-
+    public long getPrice() {
+        return this.price;
+    }
+    public void setPrice(long price) {
+        this.price = price;
+    }
 
 }

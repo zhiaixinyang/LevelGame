@@ -88,7 +88,7 @@
   {
     "id": 7,
     "name": "<font color=\"#FBC02D\">刃甲</font>",
-    "tips": "合成公式：重盔甲+双刃+双刃+铜矿石",
+    "tips": "合成公式：重盔甲+双刃+铜矿石",
     "attack": 300,
     "armor": 80,
     "price": 2,
@@ -98,7 +98,7 @@
     "is_can_update": 1,
     "is_special": 0,
     "strengthen_formula": "[{\"type\":\"E3\"}]",
-    "mixture_formula": "[{\"type\":\"B4\"},{\"type\":\"E2\"},{\"type\":\"A8\"},{\"type\":\"A8\"}]",
+    "mixture_formula": "[{\"type\":\"B4\"},{\"type\":\"E2\"},{\"type\":\"A8\"}]",
     "is_can_mixture": 0
   }
 ]

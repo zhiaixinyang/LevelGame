@@ -1,21 +1,31 @@
 package com.mdove.levelgame.main.hero.manager;
 
+import android.text.TextUtils;
+
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
+import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
+import com.mdove.levelgame.main.hero.model.BaseBuy;
 import com.mdove.levelgame.main.hero.model.BuyArmorResp;
 import com.mdove.levelgame.main.hero.model.BuyAttackResp;
 import com.mdove.levelgame.main.hero.model.BuyMedicinesResp;
 import com.mdove.levelgame.main.shop.model.ShopArmorModel;
 import com.mdove.levelgame.main.shop.model.ShopAttackModel;
+import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 
 /**
  * Created by MDove on 2018/10/20.
@@ -34,6 +44,10 @@ public class HeroBuyManager {
     public static final int BUY_ARMOR_STATUS_SUC = 7;
     public static final int BUY_ARMOR_STATUS_FAIL = 8;
     public static final int BUY_ARMOR_STATUS_ERROR = 9;
+
+    public static final int BUY_BASE_STATUS_SUC = 10;
+    public static final int BUY_BASE_STATUS_FAIL = 11;
+    public static final int BUY_BASE_STATUS_ERROR = 12;
 
     private HeroAttributes heroAttributes;
     private PackagesDao packagesDao;
@@ -120,6 +134,71 @@ public class HeroBuyManager {
             }
         }
         return resp;
+    }
+
+    public Observable<BaseBuy> buy(String type, long price) {
+        final BaseBuy baseBuy = new BaseBuy();
+
+        Object oj = AllGoodsToDBIdUtils.getInstance().getObjectFromType(type);
+        if (oj != null) {
+            // 构建BaseBuy
+            if (oj instanceof Weapons) {
+                Weapons model = (Weapons) oj;
+                baseBuy.name = model.name;
+                baseBuy.tips = model.tips;
+                baseBuy.type = model.type;
+                if (price > 0) {
+                    baseBuy.price = price;
+                } else {
+                    baseBuy.price = model.price;
+                }
+            } else if (oj instanceof Armors) {
+                Armors model = (Armors) oj;
+                baseBuy.name = model.name;
+                baseBuy.tips = model.tips;
+                baseBuy.type = model.type;
+                if (price > 0) {
+                    baseBuy.price = price;
+                } else {
+                    baseBuy.price = model.price;
+                }
+            } else if (oj instanceof Material) {
+                Material model = (Material) oj;
+                baseBuy.name = model.name;
+                baseBuy.tips = model.tips;
+                baseBuy.type = model.type;
+                if (price > 0) {
+                    baseBuy.price = price;
+                } else {
+                    baseBuy.price = model.price;
+                }
+            }
+            // 开始购买
+            if (baseBuy.price > 0) {
+                if (heroAttributes.money >= baseBuy.price) {
+                    baseBuy.buyStatus = BUY_BASE_STATUS_SUC;
+
+                    heroAttributes.money -= baseBuy.price;
+
+                    Packages packages = new Packages();
+                    packages.isEquip = 1;
+                    packages.isSelect = 1;
+                    packages.strengthenLevel = 0;
+                    packages.type = baseBuy.type;
+                    packagesDao.insert(packages);
+                } else {
+                    baseBuy.buyStatus = BUY_BASE_STATUS_FAIL;
+                }
+            }
+        } else {
+            baseBuy.buyStatus = BUY_BASE_STATUS_ERROR;
+        }
+        return Observable.create(new ObservableOnSubscribe<BaseBuy>() {
+            @Override
+            public void subscribe(ObservableEmitter<BaseBuy> e) throws Exception {
+                e.onNext(baseBuy);
+            }
+        });
     }
 
     public BuyAttackResp buyAttack(long id) {

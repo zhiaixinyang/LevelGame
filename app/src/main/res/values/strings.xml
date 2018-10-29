@@ -73,6 +73,8 @@
     <string name="string_buy_medicines_suc_and_up">购买成功，当前生命值增加：%1$d；增加生命上限：%3$d；减少金钱：%2$d。</string>
     <string name="string_buy_attack_suc">购买成功，减少金钱：%1$d。</string>
     <string name="string_buy_armor_suc">购买成功，减少金钱：%1$d。</string>
+    <string name="string_buy_base_suc">购买成功，减少金钱：%1$d。</string>
+    <string name="string_buy_base_fail">购买失败，钱不够</string>
     <string name="activity_title_medicines_shop">药店</string>
     <string name="string_has_equip">已装备</string>
     <string name="string_packages">背包详情</string>

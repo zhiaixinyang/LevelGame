@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseNormalDialog;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
@@ -14,6 +15,7 @@ import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.home.MainActivity;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
+import com.mdove.levelgame.main.shop.BusinessmanActivity;
 import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.MyDialog;
 
@@ -47,12 +49,12 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
     @Override
     public void initData(long monstersPlaceId) {
-        List<MonstersModel> monsters = InitDataFileUtils.getInitMonsters();
+        List<Monsters> monsters = DatabaseManager.getInstance().getMonstersDao().loadAll();
         realData = new ArrayList<>();
 
-        for (MonstersModel monstersModel : monsters) {
-            if (monstersModel.monsterPlaceId == monstersPlaceId) {
-                realData.add(new MonstersModelVM(monstersModel));
+        for (Monsters monster : monsters) {
+            if (monster.monsterPlaceId == monstersPlaceId) {
+                realData.add(new MonstersModelVM(monster));
             }
         }
         view.showData(realData);
@@ -97,7 +99,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     @Override
     public void onItemBtnClick(String type, final Long id) {
         if (TextUtils.equals(CONSTANT_BUSINESSMAN, type)) {
-
+            BusinessmanActivity.start(view.getContext(), id);
             return;
         }
         MonstersModelVM modelVM = null;

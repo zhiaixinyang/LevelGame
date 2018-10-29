@@ -2,6 +2,7 @@ package com.mdove.levelgame.greendao.utils;
 
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.App;
+import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.config.ConstAssetsFileName;
 import com.mdove.levelgame.greendao.AllGoods;
 import com.mdove.levelgame.greendao.AllGoodsDao;
@@ -58,8 +59,10 @@ public class InitDataFileUtils {
         monstersPlaceDao.deleteAll();
         MedicinesDao medicinesDao = DatabaseManager.getInstance().getMedicinesDao();
         medicinesDao.deleteAll();
-//        BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
-//        bigMonstersDao.deleteAll();
+        BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
+        if (!AppConfig.isFirstLogin()) {
+            bigMonstersDao.deleteAll();
+        }
         DropGoodsDao dropGoodsDao = DatabaseManager.getInstance().getDropGoodsDao();
         dropGoodsDao.deleteAll();
         MaterialDao materialDao = DatabaseManager.getInstance().getMaterialDao();
@@ -126,11 +129,12 @@ public class InitDataFileUtils {
         for (Material material : getInitMaterials()) {
             materialDao.insert(material);
         }
-
-//        List<BigMonsters> bigMonsters = getInitBigMonsters();
-//        for (BigMonsters b : bigMonsters) {
-//            bigMonstersDao.insert(b);
-//        }
+        if (!AppConfig.isFirstLogin()) {
+            List<BigMonsters> bigMonsters = getInitBigMonsters();
+            for (BigMonsters b : bigMonsters) {
+                bigMonstersDao.insert(b);
+            }
+        }
     }
 
     public static List<Armors> getInitArmors() {

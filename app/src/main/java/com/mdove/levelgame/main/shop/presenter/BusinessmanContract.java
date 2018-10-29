@@ -19,5 +19,7 @@ public interface BusinessmanContract {
 
     interface IBusinessmanView extends BaseView {
         void showData(List<SellGoodsModelVM> data);
+
+        void showTitle(String title);
     }
 }

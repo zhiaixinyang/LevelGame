@@ -37,6 +37,7 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
         Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder()
                 .where(MonstersDao.Properties.Id.eq(monstersId), MonstersDao.Properties.IsBusinessman.eq(0)).unique();
         if (monsters != null && !TextUtils.isEmpty(monsters.sellGoodsJson)) {
+            view.showTitle(monsters.name);
             List<SellGoodsTemp> sellGoodsTemps = JsonUtil.decode(monsters.sellGoodsJson, new TypeToken<List<SellGoodsTemp>>() {
             }.getType());
             for (SellGoodsTemp temp : sellGoodsTemps) {

@@ -51,4 +51,9 @@ public class BusinessmanActivity extends BaseListActivity<SellGoodsModelVM> impl
     public void showData(List<SellGoodsModelVM> data) {
         getAdapter().setData(data);
     }
+
+    @Override
+    public void showTitle(String title) {
+        setTitle(title);
+    }
 }

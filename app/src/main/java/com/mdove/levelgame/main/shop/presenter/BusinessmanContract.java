@@ -14,7 +14,7 @@ public interface BusinessmanContract {
     interface IBusinessmanPresenter extends BasePresenter<IBusinessmanView> {
         void initData(Long monstersId);
 
-        void onItemBtnClick(String type, long price);
+        void onItemBtnClick(int status,String type, long price);
     }
 
     interface IBusinessmanView extends BaseView {

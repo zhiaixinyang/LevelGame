@@ -4,14 +4,9 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BuyArmorResp;
-import com.mdove.levelgame.main.hero.model.BuyAttackResp;
-import com.mdove.levelgame.main.shop.model.ShopArmorModel;
-import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 import com.mdove.levelgame.main.shop.model.mv.ShopArmorModelVM;
-import com.mdove.levelgame.main.shop.model.mv.ShopAttackModelVM;
 import com.mdove.levelgame.utils.ToastHelper;
 
 import java.util.ArrayList;
@@ -32,7 +27,9 @@ public class ShopArmorPresenter implements ShopArmorContract.IShopArmorPresenter
 
     @Override
     public void initData() {
-        List<Armors> list = DatabaseManager.getInstance().getArmorsDao().queryBuilder().where(ArmorsDao.Properties.IsSpecial.eq(1)).list();
+        // 因为防具是死的，所以BelongMonsterId直接匹配字符串
+        List<Armors> list = DatabaseManager.getInstance().getArmorsDao().queryBuilder()
+                .where(ArmorsDao.Properties.BelongMonsterId.eq("1001,")).list();
         List<ShopArmorModelVM> data = new ArrayList<>();
         for (Armors model : list) {
             data.add(new ShopArmorModelVM(model));

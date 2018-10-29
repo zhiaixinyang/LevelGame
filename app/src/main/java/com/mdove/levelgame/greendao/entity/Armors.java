@@ -43,11 +43,14 @@ public class Armors {
     public String mixtureFormula;
     public String updateFormula;
     public String strengthenFormula;
-    @Generated(hash = 1831713936)
+    // 并没有太大的用！！此装备属于哪个monster（1000表示武器商店，1001表示防具商店，1002表示铁匠铺）通过split(",")去截
+    public String belongMonsterId;
+    @Generated(hash = 2070177843)
     public Armors(Long id, String name, String tips, int attack, int armor,
             long price, String type, int strengthen, int isCanStrengthen,
             int isCanUpdate, int isCanMixture, int isSpecial, String mixtureFormula,
-            String updateFormula, String strengthenFormula) {
+            String updateFormula, String strengthenFormula,
+            String belongMonsterId) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -63,6 +66,7 @@ public class Armors {
         this.mixtureFormula = mixtureFormula;
         this.updateFormula = updateFormula;
         this.strengthenFormula = strengthenFormula;
+        this.belongMonsterId = belongMonsterId;
     }
     @Generated(hash = 1024617871)
     public Armors() {
@@ -157,4 +161,11 @@ public class Armors {
     public void setStrengthenFormula(String strengthenFormula) {
         this.strengthenFormula = strengthenFormula;
     }
+    public String getBelongMonsterId() {
+        return this.belongMonsterId;
+    }
+    public void setBelongMonsterId(String belongMonsterId) {
+        this.belongMonsterId = belongMonsterId;
+    }
+
 }

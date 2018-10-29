@@ -39,6 +39,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         public final static Property MixtureFormula = new Property(12, String.class, "mixtureFormula", false, "MIXTURE_FORMULA");
         public final static Property UpdateFormula = new Property(13, String.class, "updateFormula", false, "UPDATE_FORMULA");
         public final static Property StrengthenFormula = new Property(14, String.class, "strengthenFormula", false, "STRENGTHEN_FORMULA");
+        public final static Property BelongMonsterId = new Property(15, String.class, "belongMonsterId", false, "BELONG_MONSTER_ID");
     }
 
 
@@ -68,7 +69,8 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
                 "\"IS_SPECIAL\" INTEGER NOT NULL ," + // 11: isSpecial
                 "\"MIXTURE_FORMULA\" TEXT," + // 12: mixtureFormula
                 "\"UPDATE_FORMULA\" TEXT," + // 13: updateFormula
-                "\"STRENGTHEN_FORMULA\" TEXT);"); // 14: strengthenFormula
+                "\"STRENGTHEN_FORMULA\" TEXT," + // 14: strengthenFormula
+                "\"BELONG_MONSTER_ID\" TEXT);"); // 15: belongMonsterId
     }
 
     /** Drops the underlying database table. */
@@ -123,6 +125,11 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         if (strengthenFormula != null) {
             stmt.bindString(15, strengthenFormula);
         }
+ 
+        String belongMonsterId = entity.getBelongMonsterId();
+        if (belongMonsterId != null) {
+            stmt.bindString(16, belongMonsterId);
+        }
     }
 
     @Override
@@ -171,6 +178,11 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         if (strengthenFormula != null) {
             stmt.bindString(15, strengthenFormula);
         }
+ 
+        String belongMonsterId = entity.getBelongMonsterId();
+        if (belongMonsterId != null) {
+            stmt.bindString(16, belongMonsterId);
+        }
     }
 
     @Override
@@ -195,7 +207,8 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
             cursor.getInt(offset + 11), // isSpecial
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // mixtureFormula
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // updateFormula
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // strengthenFormula
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // strengthenFormula
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15) // belongMonsterId
         );
         return entity;
     }
@@ -217,6 +230,7 @@ public class ArmorsDao extends AbstractDao<Armors, Long> {
         entity.setMixtureFormula(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setUpdateFormula(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setStrengthenFormula(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setBelongMonsterId(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
      }
     
     @Override

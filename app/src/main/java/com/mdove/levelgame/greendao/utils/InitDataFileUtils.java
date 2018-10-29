@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.config.ConstAssetsFileName;
+import com.mdove.levelgame.greendao.AdventureDao;
 import com.mdove.levelgame.greendao.AllGoods;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
@@ -14,6 +15,7 @@ import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
+import com.mdove.levelgame.greendao.entity.Adventure;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.DropGoods;
@@ -45,6 +47,7 @@ public class InitDataFileUtils {
     private static List<Medicines> medicines;
     private static List<MonstersPlaceModel> monstersPlaceModels;
     private static List<MonstersPlace> monstersPlaces;
+    private static List<Adventure> adventures;
 
     public static void initData() {
         AllGoodsDao allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();
@@ -67,6 +70,13 @@ public class InitDataFileUtils {
         dropGoodsDao.deleteAll();
         MaterialDao materialDao = DatabaseManager.getInstance().getMaterialDao();
         materialDao.deleteAll();
+        AdventureDao adventureDao = DatabaseManager.getInstance().getAdventureDao();
+        adventureDao.deleteAll();
+
+        List<Adventure> adventures = getInitAdventure();
+        for (Adventure adventure : adventures) {
+            adventureDao.insert(adventure);
+        }
 
         List<DropGoods> dropGoods = getInitDropGoods();
         for (DropGoods dropGood : dropGoods) {
@@ -222,6 +232,16 @@ public class InitDataFileUtils {
                 ConstAssetsFileName.ASSETS_DROP_GOODS);
         if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<DropGoods>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<Adventure> getInitAdventure() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_ADVENTURE);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<Adventure>>() {
             }.getType());
         }
         return null;

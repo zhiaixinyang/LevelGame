@@ -38,6 +38,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         public final static Property ConsumePower = new Property(11, int.class, "consumePower", false, "CONSUME_POWER");
         public final static Property IsBusinessman = new Property(12, int.class, "isBusinessman", false, "IS_BUSINESSMAN");
         public final static Property SellGoodsJson = new Property(13, String.class, "sellGoodsJson", false, "SELL_GOODS_JSON");
+        public final static Property IsShow = new Property(14, int.class, "isShow", false, "IS_SHOW");
     }
 
 
@@ -66,7 +67,8 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
                 "\"EXP\" INTEGER NOT NULL ," + // 10: exp
                 "\"CONSUME_POWER\" INTEGER NOT NULL ," + // 11: consumePower
                 "\"IS_BUSINESSMAN\" INTEGER NOT NULL ," + // 12: isBusinessman
-                "\"SELL_GOODS_JSON\" TEXT);"); // 13: sellGoodsJson
+                "\"SELL_GOODS_JSON\" TEXT," + // 13: sellGoodsJson
+                "\"IS_SHOW\" INTEGER NOT NULL );"); // 14: isShow
     }
 
     /** Drops the underlying database table. */
@@ -112,6 +114,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         if (sellGoodsJson != null) {
             stmt.bindString(14, sellGoodsJson);
         }
+        stmt.bindLong(15, entity.getIsShow());
     }
 
     @Override
@@ -151,6 +154,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         if (sellGoodsJson != null) {
             stmt.bindString(14, sellGoodsJson);
         }
+        stmt.bindLong(15, entity.getIsShow());
     }
 
     @Override
@@ -174,7 +178,8 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
             cursor.getLong(offset + 10), // exp
             cursor.getInt(offset + 11), // consumePower
             cursor.getInt(offset + 12), // isBusinessman
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // sellGoodsJson
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // sellGoodsJson
+            cursor.getInt(offset + 14) // isShow
         );
         return entity;
     }
@@ -195,6 +200,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         entity.setConsumePower(cursor.getInt(offset + 11));
         entity.setIsBusinessman(cursor.getInt(offset + 12));
         entity.setSellGoodsJson(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setIsShow(cursor.getInt(offset + 14));
      }
     
     @Override

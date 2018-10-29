@@ -1,6 +1,5 @@
 package com.mdove.levelgame.main.hero.model;
 
-import android.annotation.SuppressLint;
 import android.databinding.ObservableField;
 
 import com.mdove.levelgame.App;

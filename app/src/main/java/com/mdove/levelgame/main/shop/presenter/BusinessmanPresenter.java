@@ -10,12 +10,15 @@ import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
+import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BaseBuy;
+import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
 import com.mdove.levelgame.main.shop.model.mv.SellGoodsModelVM;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
 import com.mdove.levelgame.utils.ToastHelper;
+import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,43 +48,70 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
                 if (oj != null) {
                     if (oj instanceof Weapons) {
                         Weapons weapons = (Weapons) oj;
-                        data.add(new SellGoodsModelVM(temp.price, weapons.name, weapons.tips, weapons.type));
+                        int status = 0;
+                        if (weapons.isCanMixture == 0) {
+                            status = 1;
+                        } else if (weapons.isCanUpdate == 0) {
+                            status = 2;
+                        }
+                        data.add(new SellGoodsModelVM(temp.price, weapons.name, weapons.tips, weapons.type, status));
                     } else if (oj instanceof Armors) {
                         Armors armors = (Armors) oj;
-                        data.add(new SellGoodsModelVM(temp.price, armors.name, armors.tips, armors.type));
+                        int status = 0;
+                        if (armors.isCanMixture == 0) {
+                            status = 1;
+                        } else if (armors.isCanUpdate == 0) {
+                            status = 2;
+                        }
+                        data.add(new SellGoodsModelVM(temp.price, armors.name, armors.tips, armors.type, status));
                     } else if (oj instanceof Material) {
                         Material material = (Material) oj;
-                        data.add(new SellGoodsModelVM(temp.price, material.name, material.tips, material.type));
+                        data.add(new SellGoodsModelVM(temp.price, material.name, material.tips, material.type, 0));
                     }
                 }
             }
+            view.showData(data);
         }
-        view.showData(data);
     }
 
     @Override
-    public void onItemBtnClick(String type, long price) {
-        HeroBuyManager.getInstance().buy(type, price).subscribe(new Consumer<BaseBuy>() {
-            @Override
-            public void accept(BaseBuy baseBuy) throws Exception {
-                switch (baseBuy.buyStatus) {
-                    case HeroBuyManager.BUY_BASE_STATUS_SUC: {
-                        ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_base_suc), baseBuy.price));
-                        break;
+    public void onItemBtnClick(int status,String type, long price) {
+        switch (status){
+            case 0:{
+                HeroBuyManager.getInstance().buy(type, price).subscribe(new Consumer<BaseBuy>() {
+                    @Override
+                    public void accept(BaseBuy baseBuy) throws Exception {
+                        switch (baseBuy.buyStatus) {
+                            case HeroBuyManager.BUY_BASE_STATUS_SUC: {
+                                ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_base_suc), baseBuy.price));
+                                break;
+                            }
+                            case HeroBuyManager.BUY_BASE_STATUS_FAIL: {
+                                ToastHelper.shortToast(view.getContext().getString(R.string.string_buy_base_fail));
+                                break;
+                            }
+                            case HeroBuyManager.BUY_BASE_STATUS_ERROR: {
+                                ToastHelper.shortToast(view.getContext().getString(R.string.string_error));
+                                break;
+                            }
+                            default:
+                                break;
+                        }
                     }
-                    case HeroBuyManager.BUY_BASE_STATUS_FAIL: {
-                        ToastHelper.shortToast(view.getContext().getString(R.string.string_buy_base_fail));
-                        break;
-                    }
-                    case HeroBuyManager.BUY_BASE_STATUS_ERROR: {
-                        ToastHelper.shortToast(view.getContext().getString(R.string.string_error));
-                        break;
-                    }
-                    default:
-                        break;
-                }
+                });
+                break;
             }
-        });
+            case 1:
+            case 2:{
+                BlacksmithManager.getInstance().goodsUpdate(type).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
+                    @Override
+                    public void accept(BlacksmithManager.BlacksmithResp blacksmithResp) throws Exception {
+                        MyDialog.showMyDialog(view.getContext(), blacksmithResp.title, blacksmithResp.content, true);
+                    }
+                });
+            }
+        }
+
     }
 
     @Override

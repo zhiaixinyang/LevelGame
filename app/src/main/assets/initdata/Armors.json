@@ -11,6 +11,8 @@
     "is_can_strengthen": 0,
     "is_can_update": 1,
     "is_special": 1,
+    "belong_monster_id":"1001,",
+
     "is_can_mixture": 1
   },
   {
@@ -19,6 +21,9 @@
     "tips": "和布衣唯一的区别就是，一字之差~",
     "attack": 0,
     "armor": 8,
+    "belong_monster_id":"1001,",
+
+
     "price": 20,
     "type": "B2",
     "strengthen": 0,
@@ -35,6 +40,9 @@
     "armor": 20,
     "price": 100,
     "type": "B3",
+    "belong_monster_id":"1001,",
+
+
     "strengthen": 0,
     "is_can_strengthen": 0,
     "is_can_update": 1,
@@ -49,6 +57,9 @@
     "armor": 50,
     "price": 500,
     "type": "B4",
+    "belong_monster_id":"1001,",
+
+
     "strengthen": 0,
     "is_can_strengthen": 0,
     "is_can_update": 1,
@@ -63,6 +74,9 @@
     "armor": 100,
     "price": 3000,
     "type": "B5",
+    "belong_monster_id":"1001,",
+
+
     "strengthen": 0,
     "is_can_strengthen": 0,
     "is_can_update": 1,
@@ -79,6 +93,9 @@
     "type": "B6",
     "strengthen": 0,
     "is_can_strengthen": 0,
+    "belong_monster_id":"1002,",
+
+
     "is_can_update": 1,
     "is_special": 0,
     "strengthen_formula": "[{\"type\":\"E3\"}]",
@@ -93,6 +110,8 @@
     "armor": 80,
     "price": 2,
     "type": "B7",
+    "belong_monster_id":"1002,",
+
     "strengthen": 0,
     "is_can_strengthen": 0,
     "is_can_update": 1,

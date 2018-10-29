@@ -15,6 +15,6 @@ public class SellGoodsItemHandler {
     }
 
     public void onItemBtnOnClick(SellGoodsModelVM vm) {
-        presenter.onItemBtnClick(vm.type.get(),vm.realPrice.get());
+        presenter.onItemBtnClick(vm.status,vm.type.get(), vm.realPrice.get());
     }
 }

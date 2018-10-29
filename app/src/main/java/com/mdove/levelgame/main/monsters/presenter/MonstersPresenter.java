@@ -49,9 +49,12 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
     @Override
     public void initData(long monstersPlaceId) {
-        List<Monsters> monsters = DatabaseManager.getInstance().getMonstersDao().loadAll();
+        List<Monsters> monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder()
+                .where(MonstersDao.Properties.MonsterPlaceId.eq(monstersPlaceId), MonstersDao.Properties.IsShow.eq(0)).list();
         realData = new ArrayList<>();
-
+        if (monsters == null || monsters.size() == 0) {
+            return;
+        }
         for (Monsters monster : monsters) {
             if (monster.monsterPlaceId == monstersPlaceId) {
                 realData.add(new MonstersModelVM(monster));

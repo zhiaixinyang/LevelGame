@@ -6,6 +6,7 @@
     "attack": 10,
     "armor": 0,
     "price": 10,
+    "belong_monster_id":"1000,",
     "type": "A1",
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
@@ -25,6 +26,7 @@
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
+    "belong_monster_id":"1000,",
     "is_can_mixture": 0,
     "is_special": 1,
     "mixture_type": "A7"
@@ -37,6 +39,7 @@
     "armor": 15,
     "price": 500,
     "type": "A3",
+    "belong_monster_id":"1000,",
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
@@ -54,6 +57,7 @@
     "type": "A4",
     "is_can_strengthen": 0,
     "is_special": 1,
+    "belong_monster_id":"1000,",
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_can_mixture": 1
@@ -67,6 +71,7 @@
     "price": 3000,
     "type": "A5",
     "is_special": 1,
+    "belong_monster_id":"1000,",
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_strengthen": 0,
     "is_can_update": 1,
@@ -79,6 +84,7 @@
     "type": "A10",
     "is_can_update": 1,
     "is_can_mixture": 0,
+    "belong_monster_id":"1002,",
     "price": 0,
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"E1\"},{\"type\":\"E1\"},{\"type\":\"E1\"}]"
@@ -90,6 +96,7 @@
     "type": "A11",
     "is_can_update": 1,
     "is_can_mixture": 0,
+    "belong_monster_id":"1002,",
     "price": 0,
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"E1\"},{\"type\":\"E1\"},{\"type\":\"E1\"},{\"type\":\"E1\"},{\"type\":\"E1\"}]"
@@ -104,6 +111,7 @@
     "type": "A6",
     "is_can_strengthen": 0,
     "is_can_update": 0,
+    "belong_monster_id":"1002,",
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_special": 0,
     "update_formula": "[{\"type\":\"A1\"},{\"type\":\"E1\"}]",
@@ -118,9 +126,10 @@
     "price": 2,
     "type": "A7",
     "is_can_strengthen": 0,
-    "is_can_update": 1,
+    "is_can_update": 3,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_special": 0,
+    "belong_monster_id":"1002,",
     "mixture_formula": "[{\"type\":\"A6\"},{\"type\":\"A2\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
   },
@@ -133,9 +142,10 @@
     "price": 2,
     "type": "A8",
     "is_can_strengthen": 0,
-    "is_can_update": 1,
+    "is_can_update": 3,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_special": 0,
+    "belong_monster_id":"1002,",
     "mixture_formula": "[{\"type\":\"A7\"},{\"type\":\"A3\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
   },
@@ -150,6 +160,7 @@
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
+    "belong_monster_id":"1002,",
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"A5\"},{\"type\":\"E4\"}]",
     "is_can_mixture": 0
@@ -165,6 +176,7 @@
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
+    "belong_monster_id":"1002,",
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"A3\"},{\"type\":\"E5\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
@@ -178,6 +190,7 @@
     "price": 2,
     "type": "A13",
     "is_can_strengthen": 0,
+    "belong_monster_id":"1002,",
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 0,
@@ -195,8 +208,25 @@
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
+    "belong_monster_id":"1002,",
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"A12\"},{\"type\":\"A13\"},{\"type\":\"E5\"},{\"type\":\"E2\"}]",
+    "is_can_mixture": 0
+  },
+  {
+    "id": 15,
+    "name": "<font color=\"#D32F2F\">龙渊剑</font>",
+    "tips": "相传欧冶子和干将为铸此剑，凿开茨山，放出山中溪水，引至铸剑炉旁成北斗七星环列的七个池中，是名七星。剑成之后，俯视剑身，如同登高山而下望深渊，飘渺而深邃仿佛有巨龙盘卧。是名龙渊。\n合成公式：干将·莫邪",
+    "attack": 500,
+    "armor": 100,
+    "price": 2,
+    "type": "A15",
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "is_can_update": 1,
+    "belong_monster_id":"13,",
+    "is_special": 0,
+    "mixture_formula": "[{\"type\":\"A14\"}]",
     "is_can_mixture": 0
   }
 ]

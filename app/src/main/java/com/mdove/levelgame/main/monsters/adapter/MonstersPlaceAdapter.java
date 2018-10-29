@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.databinding.ItemMonstersPlaceBinding;
+import com.mdove.levelgame.greendao.entity.MonstersPlace;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
 import com.mdove.levelgame.main.monsters.model.handler.MonstersPlaceItemHandler;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersPlaceModelVM;
@@ -22,7 +23,7 @@ import java.util.List;
 public class MonstersPlaceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private MonstersPlacePresenter placePresenter;
-    private List<MonstersPlaceModel> data;
+    private List<MonstersPlace> data;
 
     public MonstersPlaceAdapter(Context context, MonstersPlacePresenter placePresenter) {
         this.context = context;
@@ -44,7 +45,7 @@ public class MonstersPlaceAdapter extends RecyclerView.Adapter<RecyclerView.View
         return data == null ? 0 : data.size();
     }
 
-    public void setData(List<MonstersPlaceModel> data) {
+    public void setData(List<MonstersPlace> data) {
         this.data = data;
         notifyDataSetChanged();
     }
@@ -57,7 +58,7 @@ public class MonstersPlaceAdapter extends RecyclerView.Adapter<RecyclerView.View
             this.binding = binding;
         }
 
-        public void bind(MonstersPlaceModel model) {
+        public void bind(MonstersPlace model) {
             binding.setVm(new MonstersPlaceModelVM(model));
             binding.setHandler(new MonstersPlaceItemHandler(placePresenter));
         }

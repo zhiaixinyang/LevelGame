@@ -5,7 +5,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * Created by MBENBEN on 2018/10/20.
+ * Created by MDove on 2018/10/20.
  */
 @Entity
 public class MonstersPlace {
@@ -16,11 +16,13 @@ public class MonstersPlace {
     public String name;
     // 野区描述
     public String tips;
-    @Generated(hash = 1419623646)
-    public MonstersPlace(Long id, String name, String tips) {
+    public int isShow;
+    @Generated(hash = 2042602423)
+    public MonstersPlace(Long id, String name, String tips, int isShow) {
         this.id = id;
         this.name = name;
         this.tips = tips;
+        this.isShow = isShow;
     }
     @Generated(hash = 1850515903)
     public MonstersPlace() {
@@ -43,4 +45,11 @@ public class MonstersPlace {
     public void setTips(String tips) {
         this.tips = tips;
     }
+    public int getIsShow() {
+        return this.isShow;
+    }
+    public void setIsShow(int isShow) {
+        this.isShow = isShow;
+    }
+
 }

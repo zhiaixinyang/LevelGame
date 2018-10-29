@@ -29,7 +29,9 @@ public class ShopAttackPresenter implements ShopAttackContract.IShopAttackPresen
 
     @Override
     public void initData() {
-        List<Weapons> weapons = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.IsSpecial.eq(1)).list();
+        // 因为武器是死的，所以BelongMonsterId直接匹配字符串
+        List<Weapons> weapons = DatabaseManager.getInstance().getWeaponsDao().queryBuilder()
+                .where(WeaponsDao.Properties.BelongMonsterId.eq("1000,")).list();
         List<ShopAttackModelVM> data = new ArrayList<>();
         for (Weapons model : weapons) {
             data.add(new ShopAttackModelVM(model));

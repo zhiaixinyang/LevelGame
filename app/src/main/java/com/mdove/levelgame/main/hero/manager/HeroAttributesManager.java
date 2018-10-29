@@ -22,6 +22,7 @@ import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
+import com.mdove.levelgame.main.monsters.manager.AdventureManager;
 import com.mdove.levelgame.model.DropGoodsModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
@@ -75,6 +76,7 @@ public class HeroAttributesManager {
             isCanRest = true;
             heroAttributes.bodyPower = 100;
             heroAttributes.days += 1;
+            AdventureManager.getInstance().setAdventure();
         }
         save();
         return isCanRest;

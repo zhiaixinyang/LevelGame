@@ -50,18 +50,17 @@ public class BlacksmithManager {
         return SingletonHolder.INSTANCE;
     }
 
-    public Observable<BlacksmithResp> goodsUpdate(String type, Long id) {
+    public Observable<BlacksmithResp> goodsUpdate(String type) {
         Object oj = AllGoodsToDBIdUtils.getInstance().getObjectFromType(type);
         if (oj != null && oj instanceof Weapons) {
-            return attackUpdate(id);
+            return attackUpdate((Weapons) oj);
         } else {
-            return armorUpdate(id);
+            return armorUpdate((Armors) oj);
         }
     }
 
-    public Observable<BlacksmithResp> attackUpdate(Long id) {
+    private Observable<BlacksmithResp> attackUpdate(Weapons weapon) {
         final BlacksmithResp blacksmithResp = new BlacksmithResp();
-        Weapons weapon = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.Id.eq(id)).unique();
         if (weapon != null) {
             // 可升级
             if (weapon.isCanUpdate == 0) {
@@ -153,6 +152,100 @@ public class BlacksmithManager {
             }
         });
     }
+
+    private Observable<BlacksmithResp> armorUpdate(Armors armor) {
+        final BlacksmithResp blacksmithResp = new BlacksmithResp();
+        if (armor != null) {
+            // 可升级
+            if (armor.isCanUpdate == 0) {
+                // 判断材料是否完全
+                String formula = armor.updateFormula;
+                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
+                }.getType());
+                if (need != null && need.size() > 0) {
+                    List<HasMaterial> hasMaterials = new ArrayList<>();
+                    for (NeedMaterial type : need) {
+                        hasMaterials.add(hasMaterial(type.type));
+                    }
+                    boolean isSuc = true;
+                    for (HasMaterial material : hasMaterials) {
+                        if (!material.isHas) {
+                            isSuc = false;
+                            break;
+                        }
+                    }
+                    // 升级成功
+                    if (isSuc) {
+                        // 删除低级材料（装备+石头，直接从Pk中）
+                        deleteMaterial(hasMaterials);
+                        // 生成新装备
+                        newPk(armor);
+                        blacksmithResp.isSuc = true;
+                        blacksmithResp.title = "升级成功";
+                        blacksmithResp.content = armor.name + "升级成功。";
+                    } else {
+                        resetPkSelectStatus(hasMaterials);
+                        blacksmithResp.isSuc = false;
+                        blacksmithResp.title = "升级失败";
+                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
+                    }
+                } else {
+                    blacksmithResp.isSuc = false;
+                    blacksmithResp.title = "未知错误";
+                    blacksmithResp.content = "获取升级材料异常：null。";
+                }
+            } else if (armor.isCanMixture == 0) {
+                // 可合成
+                // 判断材料是否完全
+                String formula = armor.mixtureFormula;
+                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
+                }.getType());
+                if (need != null && need.size() > 0) {
+                    List<HasMaterial> hasMaterials = new ArrayList<>();
+                    for (NeedMaterial type : need) {
+                        hasMaterials.add(hasMaterial(type.type));
+                    }
+                    boolean isSuc = true;
+                    for (HasMaterial attack : hasMaterials) {
+                        if (!attack.isHas) {
+                            isSuc = false;
+                            break;
+                        }
+                    }
+                    // 合成成功
+                    if (isSuc) {
+                        // 删除低级材料（装备+石头，直接从Pk中）
+                        deleteMaterial(hasMaterials);
+                        // 生成新装备
+                        newPk(armor);
+                        blacksmithResp.isSuc = true;
+                        blacksmithResp.title = "合成成功";
+                        blacksmithResp.content = armor.name + "合成成功。";
+                    } else {
+                        resetPkSelectStatus(hasMaterials);
+                        blacksmithResp.isSuc = false;
+                        blacksmithResp.title = "合成失败";
+                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
+                    }
+                } else {
+                    blacksmithResp.isSuc = false;
+                    blacksmithResp.title = "未知错误";
+                    blacksmithResp.content = "获取升级材料异常：null。";
+                }
+            }
+        } else {
+            blacksmithResp.isSuc = false;
+            blacksmithResp.title = "未知错误";
+            blacksmithResp.content = "未找到对应升级的装备...";
+        }
+        return Observable.create(new ObservableOnSubscribe<BlacksmithResp>() {
+            @Override
+            public void subscribe(ObservableEmitter<BlacksmithResp> e) throws Exception {
+                e.onNext(blacksmithResp);
+            }
+        });
+    }
+
 
     private void resetPkSelectStatus(List<HasMaterial> hasMaterials) {
         if (hasMaterials == null || hasMaterials.size() == 0) {
@@ -314,101 +407,6 @@ public class BlacksmithManager {
             material.isHas = false;
         }
         return material;
-    }
-
-
-    public Observable<BlacksmithResp> armorUpdate(Long id) {
-        final BlacksmithResp blacksmithResp = new BlacksmithResp();
-        Armors armor = DatabaseManager.getInstance().getArmorsDao().queryBuilder().where(ArmorsDao.Properties.Id.eq(id)).unique();
-        if (armor != null) {
-            // 可升级
-            if (armor.isCanUpdate == 0) {
-                // 判断材料是否完全
-                String formula = armor.updateFormula;
-                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
-                }.getType());
-                if (need != null && need.size() > 0) {
-                    List<HasMaterial> hasMaterials = new ArrayList<>();
-                    for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
-                    }
-                    boolean isSuc = true;
-                    for (HasMaterial material : hasMaterials) {
-                        if (!material.isHas) {
-                            isSuc = false;
-                            break;
-                        }
-                    }
-                    // 升级成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials);
-                        // 生成新装备
-                        newPk(armor);
-                        blacksmithResp.isSuc = true;
-                        blacksmithResp.title = "升级成功";
-                        blacksmithResp.content = armor.name + "升级成功。";
-                    } else {
-                        resetPkSelectStatus(hasMaterials);
-                        blacksmithResp.isSuc = false;
-                        blacksmithResp.title = "升级失败";
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
-                    }
-                } else {
-                    blacksmithResp.isSuc = false;
-                    blacksmithResp.title = "未知错误";
-                    blacksmithResp.content = "获取升级材料异常：null。";
-                }
-            } else if (armor.isCanMixture == 0) {
-                // 可合成
-                // 判断材料是否完全
-                String formula = armor.mixtureFormula;
-                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
-                }.getType());
-                if (need != null && need.size() > 0) {
-                    List<HasMaterial> hasMaterials = new ArrayList<>();
-                    for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
-                    }
-                    boolean isSuc = true;
-                    for (HasMaterial attack : hasMaterials) {
-                        if (!attack.isHas) {
-                            isSuc = false;
-                            break;
-                        }
-                    }
-                    // 合成成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials);
-                        // 生成新装备
-                        newPk(armor);
-                        blacksmithResp.isSuc = true;
-                        blacksmithResp.title = "合成成功";
-                        blacksmithResp.content = armor.name + "合成成功。";
-                    } else {
-                        resetPkSelectStatus(hasMaterials);
-                        blacksmithResp.isSuc = false;
-                        blacksmithResp.title = "合成失败";
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
-                    }
-                } else {
-                    blacksmithResp.isSuc = false;
-                    blacksmithResp.title = "未知错误";
-                    blacksmithResp.content = "获取升级材料异常：null。";
-                }
-            }
-        } else {
-            blacksmithResp.isSuc = false;
-            blacksmithResp.title = "未知错误";
-            blacksmithResp.content = "未找到对应升级的装备...";
-        }
-        return Observable.create(new ObservableOnSubscribe<BlacksmithResp>() {
-            @Override
-            public void subscribe(ObservableEmitter<BlacksmithResp> e) throws Exception {
-                e.onNext(blacksmithResp);
-            }
-        });
     }
 
     private class NeedMaterial {

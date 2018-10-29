@@ -15,4 +15,5 @@ public class ConstAssetsFileName {
     public static final String ASSETS_DROP_GOODS = CONFIG + "DropGoods.json";
     public static final String ASSETS_MEDICINES_SHOP = CONFIG + "MedicineShop.json";
     public static final String ASSETS_MATERIALS = CONFIG + "Materials.json";
+    public static final String ASSETS_ADVENTURE = CONFIG + "Adventure.json";
 }

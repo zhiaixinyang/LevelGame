@@ -46,11 +46,12 @@ public class Monsters {
     public int isBusinessman;
     // 卖出商品的json
     public String sellGoodsJson;
-    @Generated(hash = 1081917758)
+    public int isShow;
+    @Generated(hash = 1177281061)
     public Monsters(Long id, int life, String type, int attack, int armor,
             int money, String tips, String name, long dropGoodsId,
             long monsterPlaceId, long exp, int consumePower, int isBusinessman,
-            String sellGoodsJson) {
+            String sellGoodsJson, int isShow) {
         this.id = id;
         this.life = life;
         this.type = type;
@@ -65,6 +66,7 @@ public class Monsters {
         this.consumePower = consumePower;
         this.isBusinessman = isBusinessman;
         this.sellGoodsJson = sellGoodsJson;
+        this.isShow = isShow;
     }
     @Generated(hash = 1349461748)
     public Monsters() {
@@ -153,5 +155,10 @@ public class Monsters {
     public void setSellGoodsJson(String sellGoodsJson) {
         this.sellGoodsJson = sellGoodsJson;
     }
-
+    public int getIsShow() {
+        return this.isShow;
+    }
+    public void setIsShow(int isShow) {
+        this.isShow = isShow;
+    }
 }

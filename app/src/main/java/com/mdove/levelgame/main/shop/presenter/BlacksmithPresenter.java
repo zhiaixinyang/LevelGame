@@ -37,13 +37,16 @@ public class BlacksmithPresenter implements BlacksmithContract.IBlacksmithPresen
     @Override
     public void initData() {
         List<BlacksmithModelVM> data = new ArrayList<>();
-        List<Weapons> weapons = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.IsSpecial.eq(0)).list();
+        // 因为铁匠铺是死的，所以BelongMonsterId直接匹配字符串
+        List<Weapons> weapons = DatabaseManager.getInstance().getWeaponsDao().queryBuilder()
+                .where(WeaponsDao.Properties.BelongMonsterId.eq("1002,")).list();
         if (weapons != null && weapons.size() > 0) {
             for (Weapons weapon : weapons) {
                 data.add(new BlacksmithModelVM(weapon));
             }
         }
-        List<Armors> armors = DatabaseManager.getInstance().getArmorsDao().queryBuilder().where(ArmorsDao.Properties.IsSpecial.eq(0)).list();
+        List<Armors> armors = DatabaseManager.getInstance().getArmorsDao().queryBuilder()
+                .where(ArmorsDao.Properties.BelongMonsterId.eq("1002,")).list();
         if (armors != null && armors.size() > 0) {
             for (Armors armor : armors) {
                 data.add(new BlacksmithModelVM(armor));
@@ -54,7 +57,7 @@ public class BlacksmithPresenter implements BlacksmithContract.IBlacksmithPresen
 
     @Override
     public void onItemBtnClick(String type, Long id) {
-        BlacksmithManager.getInstance().goodsUpdate(type, id).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
+        BlacksmithManager.getInstance().goodsUpdate(type).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
             @Override
             public void accept(BlacksmithManager.BlacksmithResp blacksmithResp) throws Exception {
                 MyDialog.showMyDialog(view.getContext(), blacksmithResp.title, blacksmithResp.content, true);

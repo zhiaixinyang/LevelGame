@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
+import com.mdove.levelgame.greendao.entity.MonstersPlace;
 import com.mdove.levelgame.main.monsters.adapter.MonstersPlaceAdapter;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
 import com.mdove.levelgame.main.monsters.presenter.MonstersPlaceContract;
@@ -57,7 +58,7 @@ public class MonstersPlaceActivity extends BaseActivity implements MonstersPlace
     }
 
     @Override
-    public void showData(List<MonstersPlaceModel> data) {
+    public void showData(List<MonstersPlace> data) {
         adapter.setData(data);
     }
 

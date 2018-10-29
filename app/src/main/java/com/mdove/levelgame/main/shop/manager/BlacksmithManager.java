@@ -144,11 +144,17 @@ public class BlacksmithManager {
     }
 
     private void resetPkSelectStatus(List<HasMaterial> hasMaterials) {
+        if (hasMaterials==null||hasMaterials.size()==0){
+            return;
+        }
         for (HasMaterial hasMaterial : hasMaterials) {
-            Packages pk = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique();
-            if (pk != null) {
-                pk.isSelect = 1;
-                DatabaseManager.getInstance().getPackagesDao().update(pk);
+            // isHas为true，说明此id的pk被select了
+            if (hasMaterial.isHas) {
+                Packages pk = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique();
+                if (pk != null) {
+                    pk.isSelect = 1;
+                    DatabaseManager.getInstance().getPackagesDao().update(pk);
+                }
             }
         }
     }

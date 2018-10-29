@@ -242,6 +242,7 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
                                     pk.isEquip = 1;
                                     packagesDao.update(pk);
                                     model.takeOffType = pk.type;
+                                    model.takeOffStrengthen = pk.strengthenLevel;
                                     model.takeOffAttack = takeOffAttack;
                                 }
                                 return model;
@@ -259,6 +260,7 @@ public class HeroPackagesPresenter implements HeroPackagesContract.IHeroPackages
                                     pk.isEquip = 1;
                                     packagesDao.update(pk);
                                     model.takeOffType = pk.type;
+                                    model.takeOffStrengthen = pk.strengthenLevel;
                                     model.takeOffArmor = takeOffArmor;
                                 }
                                 return model;

@@ -176,6 +176,10 @@ public class HeroAttributesManager {
             if (realAttackMonster > 0) {
                 // 敌方需要攻击几次
                 int monstersAttackCount = heroAttributes.curLife / realAttackMonster;
+                // 如果我方攻击次数少于敌方（并且attackCount>0），则生命降低为：realAttackMonster * attackCount
+                if (attackCount < monstersAttackCount && attackCount > 0) {
+                    realHarm = realAttackMonster * attackCount;
+                }
                 if (monstersAttackCount < attackCount) {
                     attackStatus = ATTACK_STATUS_FAIL;
                     attackResp.attackStatus = attackStatus;
@@ -240,8 +244,9 @@ public class HeroAttributesManager {
                 attackResp.attackStatus = attackStatus;
                 return attackResp;
             }
-            // 需要攻击几次
+            // 需要攻击几次(attackCount==0,说明秒杀对手)
             int attackCount = monsters.life / realAttack;
+
             // 敌方对我方造成伤害 = 敌方攻击 - 我方防御
             int realAttackMonster = monsters.attack - heroAttributes.armor;
             int realHarm = 0;
@@ -250,7 +255,10 @@ public class HeroAttributesManager {
                 // 敌方需要攻击几次
                 int monstersAttackCount = heroAttributes.curLife / realAttackMonster;
                 // 总共对我方造成伤害
-                realHarm = realAttackMonster * monstersAttackCount;
+                // 如果我方攻击次数少于敌方（并且attackCount>0），则生命降低为：realAttackMonster * attackCount
+                if (attackCount < monstersAttackCount && attackCount > 0) {
+                    realHarm = realAttackMonster * attackCount;
+                }
                 if (monstersAttackCount < attackCount) {
                     attackStatus = ATTACK_STATUS_FAIL;
                     attackResp.attackStatus = attackStatus;

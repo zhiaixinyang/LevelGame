@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseNormalDialog;
+import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
@@ -35,7 +36,6 @@ import io.reactivex.functions.Function;
 
 public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     private MonstersConstract.IMonstersView view;
-    private static final String CONSTANT_BUSINESSMAN = "C11";
     private List<MonstersModelVM> realData;
 
     @Override
@@ -98,7 +98,8 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
     @Override
     public void onItemBtnClick(String type, final Long id) {
-        if (TextUtils.equals(CONSTANT_BUSINESSMAN, type)) {
+        Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Type.eq(type)).unique();
+        if (monsters != null && monsters.isBusinessman == 0) {
             BusinessmanActivity.start(view.getContext(), id);
             return;
         }

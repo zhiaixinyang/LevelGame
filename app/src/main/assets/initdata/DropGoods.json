@@ -32,6 +32,10 @@
     "types": "[{\"type\":\"E4\",\"probability\":1}]"
   },
   {
+    "id": 8,
+    "types": "[{\"type\":\"E5\",\"probability\":0.4}]"
+  },
+  {
     "id": 100,
     "types": "[{\"type\":\"A1\",\"probability\":0.4},{\"type\":\"A2\",\"probability\":0.1}]"
   },

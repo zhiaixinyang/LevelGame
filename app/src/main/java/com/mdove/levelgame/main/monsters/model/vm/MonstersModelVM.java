@@ -42,6 +42,10 @@ public class MonstersModelVM {
         life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_life), model.life));
         type.set(model.type);
 
-        btnText.set("攻击");
+        if (model.isBusinessman==0){
+            btnText.set("购买");
+        }else {
+            btnText.set("攻击");
+        }
     }
 }

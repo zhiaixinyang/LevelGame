@@ -89,7 +89,7 @@
     "id": 7,
     "name": "<font color=\"#FBC02D\">刃甲</font>",
     "tips": "合成公式：重盔甲+双刃+铜矿石",
-    "attack": 300,
+    "attack": 200,
     "armor": 80,
     "price": 2,
     "type": "B7",

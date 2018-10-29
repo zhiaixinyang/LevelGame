@@ -74,6 +74,11 @@ public class HeroPackagesActivity extends BaseActivity implements HeroPackagesCo
     }
 
     @Override
+    public void notifyByPosition(int position) {
+        heroPackageAdapter.notifyItemChanged(position);
+    }
+
+    @Override
     public void deleteUIByType(String type) {
         heroPackageAdapter.deleteByType(type);
     }

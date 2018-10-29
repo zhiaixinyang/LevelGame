@@ -36,8 +36,12 @@
     <string name="monsters_msg_exp">经验：%1$d</string>
     <string name="monsters_msg_money">金钱：%1$d</string>
 
-    <string name="string_equip_msg_attack">攻击：%1$s</string>
-    <string name="string_equip_msg_armor">防御：%1$s</string>
+    <string name="string_equip_msg_attack">攻击：%1$d</string>
+    <string name="string_pk_msg_attack">攻击：%1$d</string>
+    <string name="string_pk_msg_name_strengthen">%1$s +%2$d</string>
+    <string name="string_equip_msg_name_strengthen">%1$s +%2$d</string>
+    <string name="string_equip_msg_armor">防御：%1$d</string>
+    <string name="string_pk_msg_armor">防御：%1$d</string>
 
 
     <string name="medicines_msg_price">需要金钱：%1$d</string>
@@ -90,4 +94,9 @@
     <string name="string_dialog_cancel">取消</string>
     <string name="string_dialog_ok">确定</string>
     <string name="string_sells_suc">卖出成功，获得金钱：%1$d</string>
+    <string name="string_strengthen_suc">恭喜，强化成功！</string>
+    <string name="string_strengthen_fail">很遗憾，强化失败。</string>
+    <string name="string_strengthen_no_material">缺少材料，请注意。</string>
+    <string name="string_strengthen_error">程序异常，请重试。</string>
+    <string name="string_strengthen_title">强化结果：</string>
 </resources>

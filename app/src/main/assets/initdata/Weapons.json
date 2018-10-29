@@ -1,13 +1,14 @@
 [
   {
     "id": 1,
-    "name": "锈刀[可升级]",
+    "name": "锈刀",
     "tips": "...拿在手里吓唬吓唬小孩纸吧。---可升级为：铁刀",
     "attack": 10,
     "armor": 0,
     "price": 10,
     "type": "A1",
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 0,
     "update_type": "A6",
     "is_special": 1,
@@ -15,13 +16,14 @@
   },
   {
     "id": 2,
-    "name": "砍柴刀[可合成]",
+    "name": "砍柴刀",
     "tips": "农家常用的防身武器，唬人效果max！---与铁刀可以合称为：短刀",
     "attack": 20,
     "armor": 0,
     "price": 50,
     "type": "A2",
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_can_mixture": 0,
     "is_special": 1,
@@ -29,13 +31,14 @@
   },
   {
     "id": 3,
-    "name": "长刀[可合成]",
+    "name": "长刀",
     "tips": "正规军装备的常用武器；居家旅行、杀人越货不二之选~---\n可以和短刀合成为双刃",
     "attack": 30,
     "armor": 15,
     "price": 500,
     "type": "A3",
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "mixture_type": "A8",
     "is_special": 1,
@@ -51,6 +54,7 @@
     "type": "A4",
     "is_can_strengthen": 0,
     "is_special": 1,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_can_mixture": 1
   },
@@ -63,6 +67,7 @@
     "price": 3000,
     "type": "A5",
     "is_special": 1,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_strengthen": 0,
     "is_can_update": 1,
     "is_can_mixture": 1
@@ -99,6 +104,7 @@
     "type": "A6",
     "is_can_strengthen": 0,
     "is_can_update": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_special": 0,
     "update_formula": "[{\"type\":\"A1\"},{\"type\":\"E1\"}]",
     "is_can_mixture": 1
@@ -113,6 +119,7 @@
     "type": "A7",
     "is_can_strengthen": 0,
     "is_can_update": 1,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"A6\"},{\"type\":\"A2\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
@@ -127,8 +134,8 @@
     "type": "A8",
     "is_can_strengthen": 0,
     "is_can_update": 1,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_special": 0,
-    "strengthen_formula": "[{\"type\":\"E3\"}]",
     "mixture_formula": "[{\"type\":\"A7\"},{\"type\":\"A3\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
   },
@@ -141,9 +148,9 @@
     "price": 2,
     "type": "A9",
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 0,
-    "strengthen_formula": "[{\"type\":\"E3\"}]",
     "mixture_formula": "[{\"type\":\"A5\"},{\"type\":\"E4\"}]",
     "is_can_mixture": 0
   },
@@ -156,9 +163,9 @@
     "price": 2,
     "type": "A12",
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 0,
-    "strengthen_formula": "[{\"type\":\"E3\"}]",
     "mixture_formula": "[{\"type\":\"A3\"},{\"type\":\"E5\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
   },
@@ -171,9 +178,9 @@
     "price": 2,
     "type": "A13",
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 0,
-    "strengthen_formula": "[{\"type\":\"E3\"}]",
     "mixture_formula": "[{\"type\":\"A3\"},{\"type\":\"E5\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
   },
@@ -186,9 +193,9 @@
     "price": 2,
     "type": "A14",
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 0,
-    "strengthen_formula": "[{\"type\":\"E3\"}]",
     "mixture_formula": "[{\"type\":\"A12\"},{\"type\":\"A13\"},{\"type\":\"E5\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
   }

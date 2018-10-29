@@ -7,17 +7,19 @@ import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
-import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
+import com.mdove.levelgame.main.shop.model.StrengthenNeedModel;
+import com.mdove.levelgame.main.shop.model.StrengthenResp;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Random;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -30,6 +32,15 @@ import io.reactivex.ObservableOnSubscribe;
 public class BlacksmithManager {
     private static final String TO_COPPER_TYPE = "A10";
     private static final String TO_STRENGTHEN_TYPE = "A11";
+
+    // 强化已满级
+    public static final int STRENGTHEN_STATUS_MAX = 1;
+    // 强化成功
+    public static final int STRENGTHEN_STATUS_SUC = 2;
+    public static final int STRENGTHEN_STATUS_FAIL = 3;
+    // 材料不足
+    public static final int STRENGTHEN_STATUS_NO_MATERIAL = 5;
+    public static final int STRENGTHEN_STATUS_ERROR = 4;
 
     private static class SingletonHolder {
         static final BlacksmithManager INSTANCE = new BlacksmithManager();
@@ -144,7 +155,7 @@ public class BlacksmithManager {
     }
 
     private void resetPkSelectStatus(List<HasMaterial> hasMaterials) {
-        if (hasMaterials==null||hasMaterials.size()==0){
+        if (hasMaterials == null || hasMaterials.size() == 0) {
             return;
         }
         for (HasMaterial hasMaterial : hasMaterials) {
@@ -191,14 +202,99 @@ public class BlacksmithManager {
                 if (packages.isEquip == 0) {
                     Object oj = AllGoodsToDBIdUtils.getInstance().getObjectFromType(packages.type);
                     if (oj != null && oj instanceof Weapons) {
-                        HeroAttributesManager.getInstance().takeOffAttack((Weapons) oj);
+                        HeroAttributesManager.getInstance().takeOffAttack(packages.strengthenLevel, (Weapons) oj);
                     } else if (oj != null && oj instanceof Armors) {
-                        HeroAttributesManager.getInstance().takeOffArmor((Armors) oj);
+                        HeroAttributesManager.getInstance().takeOffArmor(packages.strengthenLevel, (Armors) oj);
                     }
                 }
                 packagesDao.delete(packages);
             }
         }
+    }
+
+    public StrengthenResp strengthenGoods(long pkId, String type) {
+        StrengthenResp resp = new StrengthenResp();
+        resp.status = STRENGTHEN_STATUS_ERROR;
+        Object ob = AllGoodsToDBIdUtils.getInstance().getObjectFromType(type);
+        PackagesDao packagesDao = DatabaseManager.getInstance().getPackagesDao();
+        Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique();
+        if (ob != null && pk != null) {
+            // 强化装备为：武器
+            if (ob instanceof Weapons) {
+                Weapons model = (Weapons) ob;
+                if (model.isCanStrengthen == 0) {
+                    List<StrengthenNeedModel> needModels = JsonUtil.decode(model.strengthenFormula, new TypeToken<List<StrengthenNeedModel>>() {
+                    }.getType());
+                    int nextLevel = pk.strengthenLevel + 1;
+                    // 可强化
+                    if (nextLevel <= needModels.size()) {
+                        // 数组越界问题
+                        StrengthenNeedModel needModel = needModels.get(nextLevel - 1);
+                        HasMaterial hasMaterial = hasMaterial(needModel.type);
+                        if (!hasMaterial.isHas) {
+                            resp.status = STRENGTHEN_STATUS_NO_MATERIAL;
+                            return resp;
+                        } else {
+                            // 材料足够，先删强化石
+                            packagesDao.delete(packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique());
+                            float probability = needModel.probability * 100;
+                            int random = new Random(System.currentTimeMillis()).nextInt(100);
+                            // 强化成功
+                            if (random <= probability) {
+                                resp.status = STRENGTHEN_STATUS_SUC;
+                                pk.strengthenLevel = nextLevel;
+                                resp.level = pk.strengthenLevel;
+                                packagesDao.update(pk);
+                                return resp;
+                            } else {
+                                resp.status = STRENGTHEN_STATUS_FAIL;
+                                return resp;
+                            }
+                        }
+                    } else {
+                        resp.status = STRENGTHEN_STATUS_MAX;
+                        return resp;
+                    }
+                }
+            } else if (ob instanceof Armors) {// 强化装备为：防具
+                Armors model = (Armors) ob;
+                if (model.isCanStrengthen == 0) {
+                    List<StrengthenNeedModel> needModels = JsonUtil.decode(model.strengthenFormula, new TypeToken<List<StrengthenNeedModel>>() {
+                    }.getType());
+                    int nextLevel = pk.strengthenLevel + 1;
+                    // 可强化
+                    if (nextLevel <= needModels.size()) {
+                        // 数组越界问题
+                        StrengthenNeedModel needModel = needModels.get(nextLevel - 1);
+                        HasMaterial hasMaterial = hasMaterial(needModel.type);
+                        if (!hasMaterial.isHas) {
+                            resp.status = STRENGTHEN_STATUS_NO_MATERIAL;
+                            return resp;
+                        } else {
+                            // 材料足够，先删强化石
+                            packagesDao.delete(packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique());
+                            float probability = needModel.probability * 100;
+                            int random = new Random(System.currentTimeMillis()).nextInt(100);
+                            // 强化成功
+                            if (random <= probability) {
+                                resp.status = STRENGTHEN_STATUS_SUC;
+                                pk.strengthenLevel = nextLevel;
+                                resp.level = pk.strengthenLevel;
+                                packagesDao.update(pk);
+                                return resp;
+                            } else {
+                                resp.status = STRENGTHEN_STATUS_FAIL;
+                                return resp;
+                            }
+                        }
+                    } else {
+                        resp.status = STRENGTHEN_STATUS_MAX;
+                        return resp;
+                    }
+                }
+            }
+        }
+        return resp;
     }
 
     private HasMaterial hasMaterial(String type) {

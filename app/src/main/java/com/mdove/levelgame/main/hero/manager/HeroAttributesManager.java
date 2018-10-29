@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
-import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DropGoodsDao;
@@ -22,9 +21,7 @@ import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.model.AttackResp;
-import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.model.DropGoodsModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
@@ -138,7 +135,7 @@ public class HeroAttributesManager {
                 money = (int) (armors.price / 2);
                 heroAttributes.money += money;
             } else if (attack != null && attack instanceof Material) {
-                Material material= (Material) attack;
+                Material material = (Material) attack;
                 money = (int) (material.price / 2);
                 heroAttributes.money += money;
             }
@@ -364,32 +361,34 @@ public class HeroAttributesManager {
                     }
                     break;
                 }
+                default:
+                    break;
             }
         }
         return name;
     }
 
-    public void takeOffAttack(Weapons weapons) {
-        heroAttributes.attack -= weapons.attack;
-        heroAttributes.armor -= weapons.armor;
+    public void takeOffAttack(long strengthen, Weapons weapons) {
+        heroAttributes.attack -= (1 + strengthen * 0.2) * (weapons.attack);
+        heroAttributes.armor -= (1 + strengthen * 0.2) * weapons.armor;
         save();
     }
 
-    public void holdOnAttack(Weapons weapons) {
-        heroAttributes.attack += weapons.attack;
-        heroAttributes.armor += weapons.armor;
+    public void holdOnAttack(long strengthen, Weapons weapons) {
+        heroAttributes.attack += (1 + strengthen * 0.2) * (weapons.attack);
+        heroAttributes.armor += (1 + strengthen * 0.2) * (weapons.armor);
         save();
     }
 
-    public void takeOffArmor(Armors armors) {
-        heroAttributes.attack -= armors.attack;
-        heroAttributes.armor -= armors.armor;
+    public void takeOffArmor(long strengthen, Armors armors) {
+        heroAttributes.attack -= (1 + strengthen * 0.2) * (armors.attack);
+        heroAttributes.armor -= (1 + strengthen * 0.2) * (armors.armor);
         save();
     }
 
-    public void holdOnArmor(Armors armors) {
-        heroAttributes.attack += armors.attack;
-        heroAttributes.armor += armors.armor;
+    public void holdOnArmor(long strengthen, Armors armors) {
+        heroAttributes.attack += (1 + strengthen * 0.2) * (armors.attack);
+        heroAttributes.armor += (1 + strengthen * 0.2) * (armors.armor);
         save();
     }
 

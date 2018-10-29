@@ -19,6 +19,8 @@ public interface HeroPackagesContract {
 
         void onClickEquip(HeroPackageModelVM vm);
 
+        void onClickStrengthen(HeroPackageModelVM vm);
+
         void onClickSell(HeroPackageModelVM vm);
     }
 
@@ -26,6 +28,8 @@ public interface HeroPackagesContract {
         void showEquipData(List<HasEquipModelVM> data);
 
         void showPackage(List<HeroPackageModelVM> data);
+
+        void notifyByPosition(int position);
 
         // 效果差
         void deleteUIByType(String type);

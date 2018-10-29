@@ -17,6 +17,10 @@ public class HeroPackageHandler {
         presenter.onClickEquip(vm);
     }
 
+    public void onClickStrengthen(HeroPackageModelVM vm){
+        presenter.onClickStrengthen(vm);
+    }
+
     public void onClickSell(HeroPackageModelVM vm){
         presenter.onClickSell(vm);
     }

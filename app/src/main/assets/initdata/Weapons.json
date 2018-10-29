@@ -136,8 +136,8 @@
     "id": 9,
     "name": "<font color=\"#D32F2F\">真·战神枪</font>",
     "tips": "合成公式：战神枪+战神令（材料）",
-    "attack": 300,
-    "armor": 100,
+    "attack": 500,
+    "armor": 200,
     "price": 2,
     "type": "A9",
     "is_can_strengthen": 0,
@@ -189,7 +189,7 @@
     "is_can_update": 1,
     "is_special": 0,
     "strengthen_formula": "[{\"type\":\"E3\"}]",
-    "mixture_formula": "[{\"type\":\"A10\"},{\"type\":\"A11\"},{\"type\":\"E5\"},{\"type\":\"E2\"}]",
+    "mixture_formula": "[{\"type\":\"A12\"},{\"type\":\"A13\"},{\"type\":\"E5\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
   }
 ]

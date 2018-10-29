@@ -58,8 +58,8 @@ public class InitDataFileUtils {
         monstersPlaceDao.deleteAll();
         MedicinesDao medicinesDao = DatabaseManager.getInstance().getMedicinesDao();
         medicinesDao.deleteAll();
-        BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
-        bigMonstersDao.deleteAll();
+//        BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
+//        bigMonstersDao.deleteAll();
         DropGoodsDao dropGoodsDao = DatabaseManager.getInstance().getDropGoodsDao();
         dropGoodsDao.deleteAll();
         MaterialDao materialDao = DatabaseManager.getInstance().getMaterialDao();
@@ -127,10 +127,10 @@ public class InitDataFileUtils {
             materialDao.insert(material);
         }
 
-        List<BigMonsters> bigMonsters = getInitBigMonsters();
-        for (BigMonsters b : bigMonsters) {
-            bigMonstersDao.insert(b);
-        }
+//        List<BigMonsters> bigMonsters = getInitBigMonsters();
+//        for (BigMonsters b : bigMonsters) {
+//            bigMonstersDao.insert(b);
+//        }
     }
 
     public static List<Armors> getInitArmors() {

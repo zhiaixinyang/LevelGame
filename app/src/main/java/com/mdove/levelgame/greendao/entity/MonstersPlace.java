@@ -17,12 +17,16 @@ public class MonstersPlace {
     // 野区描述
     public String tips;
     public int isShow;
-    @Generated(hash = 2042602423)
-    public MonstersPlace(Long id, String name, String tips, int isShow) {
+    // 是否是奇遇
+    public int isAdventure;
+    @Generated(hash = 1114514202)
+    public MonstersPlace(Long id, String name, String tips, int isShow,
+            int isAdventure) {
         this.id = id;
         this.name = name;
         this.tips = tips;
         this.isShow = isShow;
+        this.isAdventure = isAdventure;
     }
     @Generated(hash = 1850515903)
     public MonstersPlace() {
@@ -50,6 +54,12 @@ public class MonstersPlace {
     }
     public void setIsShow(int isShow) {
         this.isShow = isShow;
+    }
+    public int getIsAdventure() {
+        return this.isAdventure;
+    }
+    public void setIsAdventure(int isAdventure) {
+        this.isAdventure = isAdventure;
     }
 
 }

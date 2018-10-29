@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.databinding.ItemMonstersPlaceAdventureBinding;
 import com.mdove.levelgame.databinding.ItemMonstersPlaceBinding;
 import com.mdove.levelgame.greendao.entity.MonstersPlace;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
@@ -31,8 +32,22 @@ public class MonstersPlaceAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (data.get(position).isAdventure == 0) {
+            // 奇遇layout
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder((ItemMonstersPlaceBinding) InflateUtils.bindingInflate(parent, R.layout.item_monsters_place));
+        if (viewType == 0) {
+            return new AdventureViewHolder((ItemMonstersPlaceAdventureBinding) InflateUtils.bindingInflate(parent, R.layout.item_monsters_place_adventure));
+        } else {
+            return new ViewHolder((ItemMonstersPlaceBinding) InflateUtils.bindingInflate(parent, R.layout.item_monsters_place));
+        }
     }
 
     @Override
@@ -54,6 +69,20 @@ public class MonstersPlaceAdapter extends RecyclerView.Adapter<RecyclerView.View
         private ItemMonstersPlaceBinding binding;
 
         public ViewHolder(ItemMonstersPlaceBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(MonstersPlace model) {
+            binding.setVm(new MonstersPlaceModelVM(model));
+            binding.setHandler(new MonstersPlaceItemHandler(placePresenter));
+        }
+    }
+
+    public class AdventureViewHolder extends RecyclerView.ViewHolder {
+        private ItemMonstersPlaceAdventureBinding binding;
+
+        public AdventureViewHolder(ItemMonstersPlaceAdventureBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

@@ -201,7 +201,7 @@
     "life": 99999,
     "money": 0,
     "type": "C13",
-    "is_show": 0,
+    "is_show": 1,
     "monster_place_id": 5,
     "drop_goods_id": 0,
     "is_businessman": 0,

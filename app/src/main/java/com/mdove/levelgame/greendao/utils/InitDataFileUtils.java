@@ -63,20 +63,15 @@ public class InitDataFileUtils {
         MedicinesDao medicinesDao = DatabaseManager.getInstance().getMedicinesDao();
         medicinesDao.deleteAll();
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
+        AdventureDao adventureDao = DatabaseManager.getInstance().getAdventureDao();
         if (!AppConfig.isFirstLogin()) {
             bigMonstersDao.deleteAll();
+            adventureDao.deleteAll();
         }
         DropGoodsDao dropGoodsDao = DatabaseManager.getInstance().getDropGoodsDao();
         dropGoodsDao.deleteAll();
         MaterialDao materialDao = DatabaseManager.getInstance().getMaterialDao();
         materialDao.deleteAll();
-        AdventureDao adventureDao = DatabaseManager.getInstance().getAdventureDao();
-        adventureDao.deleteAll();
-
-        List<Adventure> adventures = getInitAdventure();
-        for (Adventure adventure : adventures) {
-            adventureDao.insert(adventure);
-        }
 
         List<DropGoods> dropGoods = getInitDropGoods();
         for (DropGoods dropGood : dropGoods) {
@@ -143,6 +138,10 @@ public class InitDataFileUtils {
             List<BigMonsters> bigMonsters = getInitBigMonsters();
             for (BigMonsters b : bigMonsters) {
                 bigMonstersDao.insert(b);
+            }
+            List<Adventure> adventures = getInitAdventure();
+            for (Adventure adventure : adventures) {
+                adventureDao.insert(adventure);
             }
         }
     }

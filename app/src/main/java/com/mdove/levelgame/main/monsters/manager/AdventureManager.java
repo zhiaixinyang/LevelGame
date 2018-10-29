@@ -38,12 +38,20 @@ public class AdventureManager {
                         .where(MonstersPlaceDao.Properties.Id.eq(adventure.monsterPlaceId)).unique();
                 Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder()
                         .where(MonstersDao.Properties.Type.eq(adventure.type)).unique();
+                // 奇遇出现
                 if (monstersPlace != null && monsters != null && days == adventure.days) {
                     monsters.isShow = 0;
                     monstersPlace.isShow = 0;
                     DatabaseManager.getInstance().getMonstersDao().update(monsters);
                     DatabaseManager.getInstance().getMonstersPlaceDao().update(monstersPlace);
                 }
+                if (days > adventure.days && monstersPlace.isShow == 0 && monsters.isShow == 0) {
+                    monsters.isShow = 1;
+                    monstersPlace.isShow = 1;
+                    DatabaseManager.getInstance().getMonstersDao().update(monsters);
+                    DatabaseManager.getInstance().getMonstersPlaceDao().update(monstersPlace);
+                }
+
             }
         }
     }

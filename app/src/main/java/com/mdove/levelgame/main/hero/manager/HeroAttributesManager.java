@@ -177,7 +177,7 @@ public class HeroAttributesManager {
                 // 敌方需要攻击几次
                 int monstersAttackCount = heroAttributes.curLife / realAttackMonster;
                 // 如果我方攻击次数少于敌方（并且attackCount>0），则生命降低为：realAttackMonster * attackCount
-                if (attackCount < monstersAttackCount && attackCount > 0) {
+                if (attackCount <= monstersAttackCount && attackCount > 0) {
                     realHarm = realAttackMonster * attackCount;
                 }
                 if (monstersAttackCount < attackCount) {
@@ -256,7 +256,7 @@ public class HeroAttributesManager {
                 int monstersAttackCount = heroAttributes.curLife / realAttackMonster;
                 // 总共对我方造成伤害
                 // 如果我方攻击次数少于敌方（并且attackCount>0），则生命降低为：realAttackMonster * attackCount
-                if (attackCount < monstersAttackCount && attackCount > 0) {
+                if (attackCount <= monstersAttackCount && attackCount > 0) {
                     realHarm = realAttackMonster * attackCount;
                 }
                 if (monstersAttackCount < attackCount) {

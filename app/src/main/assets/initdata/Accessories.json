@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "东皇钟",
+    "tips": "<font color=\"#D32F2F\">神器</font>之一。<br/>传说中上古之神用于封印魔王所铸神器。魔王封印之中，神器便失去踪迹...",
+    "attack": 0,
+    "armor": 350,
+    "life": 200,
+    "price": 2,
+    "type": "G1",
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "is_can_update": 1,
+    "is_special": 0,
+    "is_can_mixture": 0,
+    "mixture_formula": "[{\"type\":\"B1\"},{\"type\":\"B2\"},{\"type\":\"B3\"},{\"type\":\"B4\"}]"
+  }
+]

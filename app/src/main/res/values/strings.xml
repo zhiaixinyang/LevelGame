@@ -34,6 +34,7 @@
 
     <string name="monsters_msg_attack">攻击：%1$d</string>
     <string name="monsters_msg_life">生命：%1$d</string>
+    <string name="monsters_msg_has_count">还剩次数：%1$d / %2$d</string>
     <string name="monsters_msg_armor">护甲：%1$d</string>
     <string name="monsters_msg_exp">经验：%1$d</string>
     <string name="monsters_msg_money">金钱：%1$d</string>
@@ -72,6 +73,7 @@
     <string name="string_no_power">体力不足，请尝试 #休息#</string>
     <string name="string_attack_fail">攻击失败</string>
     <string name="string_attack_win_title">攻击成功</string>
+    <string name="string_attack_win_no_count">此怪物可攻击次数不足。/\n可尝试#休息#</string>
     <string name="string_attack_win">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。</string>
     <string name="string_attack_win_has_goods">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。<br />掉落：%4$s</string>
     <string name="string_buy_medicines_fail">购买失败，钱不够</string>

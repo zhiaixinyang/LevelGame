@@ -33,5 +33,12 @@
     "is_show": 1,
     "is_adventure":0,
     "tips": "此处必然有高人！！"
+  },
+  {
+    "id": 6,
+    "name": "天外天",
+    "is_show": 0,
+    "is_adventure":1,
+    "tips": "传说中<font color=\"#7B1FA2\">神兽</font>生活的地方。"
   }
 ]

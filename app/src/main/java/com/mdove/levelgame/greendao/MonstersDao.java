@@ -39,6 +39,9 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         public final static Property IsBusinessman = new Property(12, int.class, "isBusinessman", false, "IS_BUSINESSMAN");
         public final static Property SellGoodsJson = new Property(13, String.class, "sellGoodsJson", false, "SELL_GOODS_JSON");
         public final static Property IsShow = new Property(14, int.class, "isShow", false, "IS_SHOW");
+        public final static Property IsLimitCount = new Property(15, int.class, "isLimitCount", false, "IS_LIMIT_COUNT");
+        public final static Property LimitCount = new Property(16, int.class, "limitCount", false, "LIMIT_COUNT");
+        public final static Property CurCount = new Property(17, int.class, "curCount", false, "CUR_COUNT");
     }
 
 
@@ -68,7 +71,10 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
                 "\"CONSUME_POWER\" INTEGER NOT NULL ," + // 11: consumePower
                 "\"IS_BUSINESSMAN\" INTEGER NOT NULL ," + // 12: isBusinessman
                 "\"SELL_GOODS_JSON\" TEXT," + // 13: sellGoodsJson
-                "\"IS_SHOW\" INTEGER NOT NULL );"); // 14: isShow
+                "\"IS_SHOW\" INTEGER NOT NULL ," + // 14: isShow
+                "\"IS_LIMIT_COUNT\" INTEGER NOT NULL ," + // 15: isLimitCount
+                "\"LIMIT_COUNT\" INTEGER NOT NULL ," + // 16: limitCount
+                "\"CUR_COUNT\" INTEGER NOT NULL );"); // 17: curCount
     }
 
     /** Drops the underlying database table. */
@@ -115,6 +121,9 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
             stmt.bindString(14, sellGoodsJson);
         }
         stmt.bindLong(15, entity.getIsShow());
+        stmt.bindLong(16, entity.getIsLimitCount());
+        stmt.bindLong(17, entity.getLimitCount());
+        stmt.bindLong(18, entity.getCurCount());
     }
 
     @Override
@@ -155,6 +164,9 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
             stmt.bindString(14, sellGoodsJson);
         }
         stmt.bindLong(15, entity.getIsShow());
+        stmt.bindLong(16, entity.getIsLimitCount());
+        stmt.bindLong(17, entity.getLimitCount());
+        stmt.bindLong(18, entity.getCurCount());
     }
 
     @Override
@@ -179,7 +191,10 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
             cursor.getInt(offset + 11), // consumePower
             cursor.getInt(offset + 12), // isBusinessman
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // sellGoodsJson
-            cursor.getInt(offset + 14) // isShow
+            cursor.getInt(offset + 14), // isShow
+            cursor.getInt(offset + 15), // isLimitCount
+            cursor.getInt(offset + 16), // limitCount
+            cursor.getInt(offset + 17) // curCount
         );
         return entity;
     }
@@ -201,6 +216,9 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         entity.setIsBusinessman(cursor.getInt(offset + 12));
         entity.setSellGoodsJson(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setIsShow(cursor.getInt(offset + 14));
+        entity.setIsLimitCount(cursor.getInt(offset + 15));
+        entity.setLimitCount(cursor.getInt(offset + 16));
+        entity.setCurCount(cursor.getInt(offset + 17));
      }
     
     @Override

@@ -91,6 +91,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         adapter.notifyAttackUI(index);
     }
 
+
     @Override
     public void showPowerText(String content) {
         tvPower.setText(content);

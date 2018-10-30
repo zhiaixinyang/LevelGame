@@ -1,5 +1,6 @@
 package com.mdove.levelgame.main.monsters.presenter;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.text.TextUtils;
 
@@ -99,6 +100,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onItemBtnClick(String type, final Long id) {
         Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Type.eq(type)).unique();
@@ -140,7 +142,8 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                                     break;
                                 }
                                 case HeroAttributesManager.ATTACK_STATUS_WIN: {
-                                    ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_attack_win), resp.money, resp.exp, resp.life));
+                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
+                                            , String.format(view.getContext().getString(R.string.string_attack_win), resp.money, resp.exp, resp.life), true);
                                     break;
                                 }
                                 case HeroAttributesManager.ATTACK_STATUS_HAS_DROP_GOODS: {
@@ -151,6 +154,11 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                                     dropGood = dropGood.substring(0, dropGood.length() - 1);
                                     MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
                                             , String.format(view.getContext().getString(R.string.string_attack_win_has_goods), resp.money, resp.exp, resp.life, dropGood), true);
+                                    break;
+                                }
+                                case HeroAttributesManager.ATTACK_STATUS_NO_COUNT: {
+                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
+                                            , R.string.string_attack_win_no_count, true);
                                     break;
                                 }
                                 default:

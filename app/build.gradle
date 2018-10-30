@@ -90,7 +90,7 @@ android {
 }
 
 greendao {
-    schemaVersion 9
+    schemaVersion 10
     daoPackage 'com.mdove.levelgame.greendao'
     targetGenDir 'src/main/java'
 }

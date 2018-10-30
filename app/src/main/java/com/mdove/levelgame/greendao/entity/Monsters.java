@@ -47,11 +47,18 @@ public class Monsters {
     // 卖出商品的json
     public String sellGoodsJson;
     public int isShow;
-    @Generated(hash = 1177281061)
+    // 是否限制次数
+    public int isLimitCount;
+    // 限制几次
+    public int limitCount;
+    // 当前还剩了
+    public int curCount;
+    @Generated(hash = 1997362167)
     public Monsters(Long id, int life, String type, int attack, int armor,
             int money, String tips, String name, long dropGoodsId,
             long monsterPlaceId, long exp, int consumePower, int isBusinessman,
-            String sellGoodsJson, int isShow) {
+            String sellGoodsJson, int isShow, int isLimitCount, int limitCount,
+            int curCount) {
         this.id = id;
         this.life = life;
         this.type = type;
@@ -67,6 +74,9 @@ public class Monsters {
         this.isBusinessman = isBusinessman;
         this.sellGoodsJson = sellGoodsJson;
         this.isShow = isShow;
+        this.isLimitCount = isLimitCount;
+        this.limitCount = limitCount;
+        this.curCount = curCount;
     }
     @Generated(hash = 1349461748)
     public Monsters() {
@@ -160,5 +170,23 @@ public class Monsters {
     }
     public void setIsShow(int isShow) {
         this.isShow = isShow;
+    }
+    public int getIsLimitCount() {
+        return this.isLimitCount;
+    }
+    public void setIsLimitCount(int isLimitCount) {
+        this.isLimitCount = isLimitCount;
+    }
+    public int getLimitCount() {
+        return this.limitCount;
+    }
+    public void setLimitCount(int limitCount) {
+        this.limitCount = limitCount;
+    }
+    public int getCurCount() {
+        return this.curCount;
+    }
+    public void setCurCount(int curCount) {
+        this.curCount = curCount;
     }
 }

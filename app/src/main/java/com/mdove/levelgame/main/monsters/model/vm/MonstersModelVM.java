@@ -24,6 +24,7 @@ public class MonstersModelVM {
     public ObservableField<String> money = new ObservableField<>();
     public ObservableField<String> type = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
+    public ObservableField<String> limitCount = new ObservableField<>();
 
     public ObservableField<String> btnText = new ObservableField<>();
 
@@ -35,7 +36,11 @@ public class MonstersModelVM {
         name.set(model.name);
         tips.set(model.tips);
         dropGoodsId.set(model.dropGoodsId);
-
+        if (model.isLimitCount==0) {
+            limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), model.curCount, model.limitCount));
+        }else{
+            limitCount.set("");
+        }
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));
         money.set(String.format(App.getAppContext().getString(R.string.monsters_msg_money), model.money));

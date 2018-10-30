@@ -17,9 +17,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
-        android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
         android:background="@drawable/bg_white_round"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
@@ -42,9 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
             android:gravity="left"
-            android:text="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
+            app:htmlColorText="@{vm.tips}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/btn_go"

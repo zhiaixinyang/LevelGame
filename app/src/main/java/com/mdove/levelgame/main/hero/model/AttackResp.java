@@ -7,6 +7,7 @@ import java.util.List;
  */
 
 public class AttackResp {
+    public long monsterId;
     public int attackStatus;
     // 获得经验
     public int exp;

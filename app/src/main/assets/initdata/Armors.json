@@ -85,7 +85,7 @@
   },
   {
     "id": 6,
-    "name": "<font color=\"#D32F2F\">真·战神甲</font>",
+    "name": "<font color=\"#7B1FA2\">真·战神甲</font>",
     "tips": "合成公式：战神甲+战神令（材料）",
     "attack": 150,
     "armor": 300,
@@ -111,7 +111,6 @@
     "price": 2,
     "type": "B7",
     "belong_monster_id":"1002,",
-
     "strengthen": 0,
     "is_can_strengthen": 0,
     "is_can_update": 1,

@@ -51,6 +51,8 @@ public class HeroAttributesManager {
     public static final int ATTACK_STATUS_ERROR = 3;
     // 体力不足
     public static final int ATTACK_STATUS_NO_POWER = 4;
+    // 次数不够
+    public static final int ATTACK_STATUS_NO_COUNT = 6;
 
     private HeroAttributes heroAttributes;
 
@@ -79,6 +81,18 @@ public class HeroAttributesManager {
             AdventureManager.getInstance().setAdventure();
         }
         save();
+        MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
+        List<Monsters> data = monstersDao.loadAll();
+        if (data != null && data.size() > 0) {
+            for (Monsters monster : data) {
+                if (monster.isLimitCount == 1) {
+                    continue;
+                } else {
+                    monster.curCount = monster.limitCount;
+                    monstersDao.update(monster);
+                }
+            }
+        }
         return isCanRest;
     }
 
@@ -225,6 +239,8 @@ public class HeroAttributesManager {
         AttackResp attackResp = new AttackResp();
         int attackStatus = ATTACK_STATUS_ERROR;
         Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(monstersId)).unique();
+
+        // 体力判断
         if (monsters != null) {
             if (heroAttributes.bodyPower - monsters.consumePower < 0) {
                 attackStatus = ATTACK_STATUS_NO_POWER;
@@ -235,13 +251,23 @@ public class HeroAttributesManager {
             }
         }
 
+        // 次数判断
+        if (monsters != null) {
+            if (monsters.isLimitCount == 0) {
+                if (monsters.curCount == 0) {
+                    attackStatus = ATTACK_STATUS_NO_COUNT;
+                    // 体力不足，直接置为null，跳过后续逻辑
+                    monsters = null;
+                }
+            }
+        }
+
         if (monsters != null) {
             // 对敌方造成伤害 = 我方攻击 - 敌方防御
             int realAttack = heroAttributes.attack - monsters.armor;
             // 无法破防
             if (realAttack <= 0) {
-                attackStatus = ATTACK_STATUS_FAIL;
-                attackResp.attackStatus = attackStatus;
+                attackResp.attackStatus = ATTACK_STATUS_FAIL;
                 return attackResp;
             }
             // 需要攻击几次(attackCount==0,说明秒杀对手)
@@ -269,6 +295,12 @@ public class HeroAttributesManager {
             // 战斗胜利
             if (heroAttributes.curLife - realHarm > 0) {
                 attackStatus = ATTACK_STATUS_WIN;
+
+                // 减少次数
+                monsters.curCount -= 1;
+                DatabaseManager.getInstance().getMonstersDao().update(monsters);
+                attackResp.monsterId = monstersId;
+
                 attackResp.dropGoods = dropGoods(monsters.dropGoodsId);
                 if (attackResp.dropGoods.size() > 0) {
                     attackStatus = ATTACK_STATUS_HAS_DROP_GOODS;

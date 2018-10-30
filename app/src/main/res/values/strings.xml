@@ -21,6 +21,8 @@
     <string name="string_shop">购买装备</string>
     <string name="string_fragment_title_buy_attack">武器商店</string>
     <string name="string_fragment_title_buy_armor">铠甲商店</string>
+    <string name="string_fragment_title_equip">已装备</string>
+    <string name="string_fragment_title_package">我的道具</string>
     <string name="string_medicine_shop">购买药品</string>
     <string name="string_rest">休息</string>
     <string name="string_rest_loading_msg">休息中...5秒后结束</string>

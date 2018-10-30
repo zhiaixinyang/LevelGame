@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_packages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
+            android:background="@drawable/bg_thread_blue"
+            android:gravity="center"
+            android:paddingBottom="@dimen/activity_hero_packages_tips_padding_t_b"
+            android:paddingLeft="@dimen/activity_hero_packages_tips_padding_r_l"
+            android:paddingRight="@dimen/activity_hero_packages_tips_padding_r_l"
+            android:paddingTop="@dimen/activity_hero_packages_tips_padding_t_b"
+            android:text="@string/string_packages"
+            android:textColor="@color/blue_700"
+            android:textSize="@dimen/activity_hero_packages_tips_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

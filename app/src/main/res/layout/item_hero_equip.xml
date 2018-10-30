@@ -5,7 +5,7 @@
 
         <variable
             name="vm"
-            type="com.mdove.levelgame.main.hero.model.HasEquipModelVM" />
+            type="com.mdove.levelgame.main.hero.model.HeroEquipModelVM" />
 
         <variable
             name="handler"

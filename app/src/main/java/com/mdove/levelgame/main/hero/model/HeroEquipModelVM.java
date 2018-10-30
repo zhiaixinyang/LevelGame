@@ -8,7 +8,7 @@ import com.mdove.levelgame.R;
 /**
  * @author MDove on 2018/10/23
  */
-public class HasEquipModelVM {
+public class HeroEquipModelVM {
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<Long> strengthen = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
@@ -16,7 +16,7 @@ public class HasEquipModelVM {
     public ObservableField<String> armor = new ObservableField<>();
     public ObservableField<String> type = new ObservableField<>();
 
-    public HasEquipModelVM(Long id, long strengthen, String name, int attack, int armor, String type, boolean isEquip,boolean isWeapons) {
+    public HeroEquipModelVM(Long id, long strengthen, String name, int attack, int armor, String type, boolean isEquip, boolean isWeapons) {
         this.id.set(id);
         this.strengthen.set(strengthen);
         this.name.set(name);

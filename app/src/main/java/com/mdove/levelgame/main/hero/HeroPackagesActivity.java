@@ -5,28 +5,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
-import com.mdove.levelgame.main.hero.adapter.HasEquipAdapter;
-import com.mdove.levelgame.main.hero.adapter.HeroPackageAdapter;
-import com.mdove.levelgame.main.hero.model.HasEquipModelVM;
-import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
-import com.mdove.levelgame.main.hero.presenter.HeroPackagesContract;
-import com.mdove.levelgame.main.hero.presenter.HeroPackagesPresenter;
+import com.mdove.levelgame.main.hero.fragment.HeroEquipFragment;
+import com.mdove.levelgame.main.hero.fragment.HeroPackageFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author MDove on 2018/10/23
  */
-public class HeroPackagesActivity extends BaseActivity implements HeroPackagesContract.IHeroPackagesView {
-    private RecyclerView rlvEquip, rlvPackages;
-    private HasEquipAdapter equipAdapter;
-    private HeroPackageAdapter heroPackageAdapter;
-    private HeroPackagesPresenter presenter;
+public class HeroPackagesActivity extends BaseActivity {
+    private TabLayout tab;
+    private ViewPager vp;
+    private String[] titles;
+    private List<Fragment> fragments;
 
     public static void start(Context context) {
         Intent start = new Intent(context, HeroPackagesActivity.class);
@@ -44,42 +43,33 @@ public class HeroPackagesActivity extends BaseActivity implements HeroPackagesCo
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getString(R.string.string_packages));
+        setTitle(R.string.string_packages);
         setContentView(R.layout.activity_hero_packages);
-        rlvEquip = findViewById(R.id.rlv_equip);
-        rlvPackages = findViewById(R.id.rlv_packages);
 
-        presenter = new HeroPackagesPresenter();
-        presenter.subscribe(this);
+        tab = findViewById(R.id.tab);
+        vp = findViewById(R.id.vp);
 
-        equipAdapter = new HasEquipAdapter(presenter);
-        heroPackageAdapter = new HeroPackageAdapter(presenter);
+        titles = new String[]{getString(R.string.string_fragment_title_equip), getString(R.string.string_fragment_title_package)};
+        fragments = new ArrayList<>();
+        fragments.add(HeroEquipFragment.newInstance());
+        fragments.add(HeroPackageFragment.newInstance());
 
-        rlvEquip.setLayoutManager(new LinearLayoutManager(this));
-        rlvEquip.setAdapter(equipAdapter);
-        rlvPackages.setLayoutManager(new LinearLayoutManager(this));
-        rlvPackages.setAdapter(heroPackageAdapter);
+        vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragments.get(position);
+            }
 
-        presenter.initData();
-    }
+            @Override
+            public int getCount() {
+                return fragments.size();
+            }
 
-    @Override
-    public void showEquipData(List<HasEquipModelVM> data) {
-        equipAdapter.setData(data);
-    }
-
-    @Override
-    public void showPackage(List<HeroPackageModelVM> data) {
-        heroPackageAdapter.setData(data);
-    }
-
-    @Override
-    public void notifyByPosition(int position) {
-        heroPackageAdapter.notifyItemChanged(position);
-    }
-
-    @Override
-    public void deleteUIByType(String type) {
-        heroPackageAdapter.deleteByType(type);
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titles[position];
+            }
+        });
+        tab.setupWithViewPager(vp);
     }
 }

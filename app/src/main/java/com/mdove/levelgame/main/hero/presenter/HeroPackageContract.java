@@ -2,20 +2,17 @@ package com.mdove.levelgame.main.hero.presenter;
 
 import com.mdove.levelgame.base.BasePresenter;
 import com.mdove.levelgame.base.BaseView;
-import com.mdove.levelgame.main.hero.model.HeroEquipModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 
 import java.util.List;
 
 /**
- * Created by MDove on 2018/10/23.
+ * Created by MDove on 2018/10/30.
  */
 
-public interface HeroPackagesContract {
-    interface IHeroPackagesPresenter extends BasePresenter<IHeroPackagesView> {
+public interface HeroPackageContract {
+    interface IHeroPackagePresenter extends BasePresenter<IHeroPackageView> {
         void initData();
-
-        void onClickTakeOff(HeroEquipModelVM vm);
 
         void onClickEquip(HeroPackageModelVM vm);
 
@@ -24,14 +21,9 @@ public interface HeroPackagesContract {
         void onClickSell(HeroPackageModelVM vm);
     }
 
-    interface IHeroPackagesView extends BaseView {
-        void showEquipData(List<HeroEquipModelVM> data);
-
+    interface IHeroPackageView extends BaseView {
         void showPackage(List<HeroPackageModelVM> data);
 
         void notifyByPosition(int position);
-
-        // 效果差
-        void deleteUIByType(String type);
     }
 }

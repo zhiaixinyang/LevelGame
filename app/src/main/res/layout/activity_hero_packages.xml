@@ -1,61 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray_light">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_equip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_thread_red"
-        android:gravity="center"
-        android:textSize="@dimen/activity_hero_packages_tips_text_size"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/red_700"
-        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
-        android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
-        android:paddingBottom="@dimen/activity_hero_packages_tips_padding_t_b"
-        android:paddingLeft="@dimen/activity_hero_packages_tips_padding_r_l"
-        android:paddingRight="@dimen/activity_hero_packages_tips_padding_r_l"
-        android:paddingTop="@dimen/activity_hero_packages_tips_padding_t_b"
-        android:text="@string/string_has_equip" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rlv_equip"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_equip"
-        android:layout_marginBottom="5dp"
-        android:scrollbars="none"
-        android:overScrollMode="never"
-        android:background="@color/gray_light" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="@color/black"
+        app:tabIndicatorHeight="2dp" />
 
-    <TextView
-        android:id="@+id/tv_packages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rlv_equip"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
-        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
-        android:textSize="@dimen/activity_hero_packages_tips_text_size"
-        android:background="@drawable/bg_thread_blue"
-        android:gravity="center"
-        android:paddingBottom="@dimen/activity_hero_packages_tips_padding_t_b"
-        android:paddingLeft="@dimen/activity_hero_packages_tips_padding_r_l"
-        android:paddingRight="@dimen/activity_hero_packages_tips_padding_r_l"
-        android:paddingTop="@dimen/activity_hero_packages_tips_padding_t_b"
-        android:text="@string/string_packages"
-        android:textColor="@color/blue_700" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rlv_packages"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:overScrollMode="never"
-        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
-        android:layout_below="@+id/tv_packages"
-        android:background="@color/gray_light" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab" />
 </RelativeLayout>

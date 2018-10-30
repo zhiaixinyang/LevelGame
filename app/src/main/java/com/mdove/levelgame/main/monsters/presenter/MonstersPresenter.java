@@ -60,7 +60,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
             return;
         }
         for (Monsters monster : monsters) {
-            if (monster.monsterPlaceId == monstersPlaceId) {
+            if (monster.monsterPlaceId == monstersPlaceId && monster.isShow == 0) {
                 realData.add(new MonstersModelVM(monster));
             }
         }

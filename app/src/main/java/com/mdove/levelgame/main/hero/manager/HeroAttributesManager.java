@@ -78,20 +78,45 @@ public class HeroAttributesManager {
             isCanRest = true;
             heroAttributes.bodyPower = 100;
             heroAttributes.days += 1;
+
+            // 奇遇设置
             AdventureManager.getInstance().setAdventure();
-        }
-        save();
-        MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
-        List<Monsters> data = monstersDao.loadAll();
-        if (data != null && data.size() > 0) {
-            for (Monsters monster : data) {
-                if (monster.isLimitCount == 1) {
-                    continue;
-                } else {
-                    monster.curCount = monster.limitCount;
-                    monstersDao.update(monster);
+
+            MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
+            // 战神出现
+            Monsters zhanShen = monstersDao.queryBuilder().where(MonstersDao.Properties.Id.eq(15)).unique();
+            if (zhanShen != null) {
+                if ( heroAttributes.days % 2 == 0) {
+                    zhanShen.isShow = 0;
+                }else{
+                    zhanShen.isShow = 1;
+                }
+                monstersDao.update(zhanShen);
+            }
+            // 战神后人出现
+            Monsters zhanShenHouRen = monstersDao.queryBuilder().where(MonstersDao.Properties.Id.eq(16)).unique();
+            if (zhanShenHouRen != null) {
+                if ( heroAttributes.days % 5 == 0) {
+                    zhanShenHouRen.isShow = 0;
+                }else{
+                    zhanShenHouRen.isShow = 1;
+                }
+                monstersDao.update(zhanShenHouRen);
+            }
+
+            // 重置所有怪物次数
+            List<Monsters> data = monstersDao.loadAll();
+            if (data != null && data.size() > 0) {
+                for (Monsters monster : data) {
+                    if (monster.isLimitCount == 1) {
+                        continue;
+                    } else {
+                        monster.curCount = monster.limitCount;
+                        monstersDao.update(monster);
+                    }
                 }
             }
+            save();
         }
         return isCanRest;
     }

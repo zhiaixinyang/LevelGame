@@ -40,7 +40,7 @@ public class Weapons {
     public String mixtureFormula;
     public String updateFormula;
     public String strengthenFormula;
-    // 并没有太大的用！！此装备属于哪个monster（1000表示武器商店，1001表示防具商店，1002表示铁匠铺）通过split(",")去截
+    // 此装备属于哪个monster（1000表示武器商店，1001表示防具商店，1002表示铁匠铺）通过split(",")去截
     public String belongMonsterId;
     @Generated(hash = 1405960489)
     public Weapons(Long id, String name, String tips, int attack, int armor,

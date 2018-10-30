@@ -6,7 +6,7 @@ import com.mdove.levelgame.greendao.entity.MonstersPlace;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
 
 /**
- * Created by MBENBEN on 2018/10/21.
+ * Created by MDove on 2018/10/21.
  */
 
 public class MonstersPlaceModelVM {

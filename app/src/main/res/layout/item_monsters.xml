@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,14 +15,13 @@
 
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-        android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
         android:background="@drawable/bg_white_round"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
@@ -28,7 +29,8 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -41,7 +43,9 @@
             android:id="@+id/tv_tips"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:htmlColorText="@{vm.tips}"
@@ -54,7 +58,7 @@
             android:id="@+id/btn_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
             android:background="@drawable/bg_btn_attack_monsters"
             android:paddingBottom="4dp"
             android:paddingLeft="12dp"
@@ -65,16 +69,19 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
         <TextView
             android:id="@+id/tv_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="攻击：10" />
@@ -83,10 +90,13 @@
             android:id="@+id/tv_armor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="护甲：10" />
@@ -95,10 +105,13 @@
             android:id="@+id/tv_exp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.exp}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_armor"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="经验：10" />
@@ -107,10 +120,13 @@
             android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.money}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_exp"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="金钱：10" />
@@ -119,10 +135,13 @@
             android:id="@+id/tv_life"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.life}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_money"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="生命：10" />
@@ -131,14 +150,12 @@
             android:id="@+id/tv_limit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
             android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.limitCount}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_attack"
             tools:text="限制次数" />
     </android.support.constraint.ConstraintLayout>
 

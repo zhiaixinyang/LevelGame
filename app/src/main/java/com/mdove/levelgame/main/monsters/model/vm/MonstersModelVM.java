@@ -28,6 +28,7 @@ public class MonstersModelVM {
 
     public ObservableField<String> btnText = new ObservableField<>();
     private int limitCountInt;
+    private int isLimitCount;
 
     public MonstersModelVM(Monsters model) {
         id.set(model.id);
@@ -37,6 +38,7 @@ public class MonstersModelVM {
         name.set(model.name);
         tips.set(model.tips);
         dropGoodsId.set(model.dropGoodsId);
+        isLimitCount = model.isLimitCount;
         if (model.isLimitCount == 0) {
             limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), model.curCount, model.limitCount));
         } else {
@@ -56,6 +58,8 @@ public class MonstersModelVM {
     }
 
     public void resetLimitCount(int curCount) {
-        limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), curCount, limitCountInt));
+        if (isLimitCount == 0) {
+            limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), curCount, limitCountInt));
+        }
     }
 }

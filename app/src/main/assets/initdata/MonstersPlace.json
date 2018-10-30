@@ -39,6 +39,13 @@
     "name": "天外天",
     "is_show": 0,
     "is_adventure":1,
-    "tips": "传说中<font color=\"#7B1FA2\">神兽</font>生活的地方。"
+    "tips": "传说中<font color=\"#D32F2F\">神兽</font>生活的地方。"
+  },
+  {
+    "id": 7,
+    "name": "宁神塔",
+    "is_show": 0,
+    "is_adventure":1,
+    "tips": "上古之神死后永远安息于此..."
   }
 ]

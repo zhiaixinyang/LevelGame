@@ -101,6 +101,7 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
                 });
                 break;
             }
+            // 装备对应升级/合成
             case 1:
             case 2:{
                 BlacksmithManager.getInstance().goodsUpdate(type).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {

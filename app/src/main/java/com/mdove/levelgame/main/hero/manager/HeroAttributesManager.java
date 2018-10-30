@@ -300,6 +300,7 @@ public class HeroAttributesManager {
                 monsters.curCount -= 1;
                 DatabaseManager.getInstance().getMonstersDao().update(monsters);
                 attackResp.monsterId = monstersId;
+                attackResp.curCount = monsters.curCount;
 
                 attackResp.dropGoods = dropGoods(monsters.dropGoodsId);
                 if (attackResp.dropGoods.size() > 0) {

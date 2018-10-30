@@ -15,6 +15,7 @@ public class AttackResp {
     public int money;
     // 损失生命
     public int life;
+    public int curCount;
     // 获取道具名字
     public List<String> dropGoods;
 }

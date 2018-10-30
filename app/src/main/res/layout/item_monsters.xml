@@ -48,7 +48,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/btn_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            tools:text="怪物介绍" />
+            tools:text="怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍" />
 
         <TextView
             android:id="@+id/btn_attack"
@@ -138,7 +138,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_life"
+            app:layout_constraintTop_toBottomOf="@+id/tv_attack"
             tools:text="限制次数" />
     </android.support.constraint.ConstraintLayout>
 

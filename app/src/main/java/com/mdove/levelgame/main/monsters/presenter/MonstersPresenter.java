@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.text.TextUtils;
 
+import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseNormalDialog;
 import com.mdove.levelgame.greendao.MonstersDao;
@@ -38,6 +39,7 @@ import io.reactivex.functions.Function;
 public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     private MonstersConstract.IMonstersView view;
     private List<MonstersModelVM> realData;
+    private long monstersPlaceId;
 
     @Override
     public void subscribe(MonstersConstract.IMonstersView view) {
@@ -50,6 +52,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
     @Override
     public void initData(long monstersPlaceId) {
+        this.monstersPlaceId = monstersPlaceId;
         List<Monsters> monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder()
                 .where(MonstersDao.Properties.MonsterPlaceId.eq(monstersPlaceId), MonstersDao.Properties.IsShow.eq(0)).list();
         realData = new ArrayList<>();
@@ -94,6 +97,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                     @Override
                     public void accept(Integer integer) throws Exception {
                         initPower();
+                        initData(monstersPlaceId);
                         view.dismissLoadingDialog();
                     }
                 });
@@ -118,6 +122,8 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
         }
 
         if (modelVM != null && uiIndex != -1) {
+            final MonstersModelVM finalModelVM = modelVM;
+            final int finalUiIndex = uiIndex;
             Observable.just(1)
                     .flatMap(new Function<Integer, ObservableSource<AttackResp>>() {
                         @Override
@@ -142,11 +148,15 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                                     break;
                                 }
                                 case HeroAttributesManager.ATTACK_STATUS_WIN: {
+                                    finalModelVM.resetLimitCount(resp.curCount);
+                                    view.attackUI(finalUiIndex);
                                     MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
                                             , String.format(view.getContext().getString(R.string.string_attack_win), resp.money, resp.exp, resp.life), true);
                                     break;
                                 }
                                 case HeroAttributesManager.ATTACK_STATUS_HAS_DROP_GOODS: {
+                                    finalModelVM.resetLimitCount(resp.curCount);
+                                    view.attackUI(finalUiIndex);
                                     String dropGood = "";
                                     for (String name : resp.dropGoods) {
                                         dropGood = name + "、";
@@ -158,7 +168,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                                 }
                                 case HeroAttributesManager.ATTACK_STATUS_NO_COUNT: {
                                     MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
-                                            , R.string.string_attack_win_no_count, true);
+                                            , view.getString(R.string.string_attack_win_no_count), true);
                                     break;
                                 }
                                 default:

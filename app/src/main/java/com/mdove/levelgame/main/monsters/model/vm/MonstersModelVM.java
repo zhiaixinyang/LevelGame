@@ -27,18 +27,19 @@ public class MonstersModelVM {
     public ObservableField<String> limitCount = new ObservableField<>();
 
     public ObservableField<String> btnText = new ObservableField<>();
+    private int limitCountInt;
 
     public MonstersModelVM(Monsters model) {
         id.set(model.id);
         exp.set(String.format(App.getAppContext().getString(R.string.monsters_msg_exp), model.exp));
         monsterPlaceId.set(model.monsterPlaceId);
-
+        limitCountInt = model.limitCount;
         name.set(model.name);
         tips.set(model.tips);
         dropGoodsId.set(model.dropGoodsId);
-        if (model.isLimitCount==0) {
+        if (model.isLimitCount == 0) {
             limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), model.curCount, model.limitCount));
-        }else{
+        } else {
             limitCount.set("");
         }
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
@@ -47,10 +48,14 @@ public class MonstersModelVM {
         life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_life), model.life));
         type.set(model.type);
 
-        if (model.isBusinessman==0){
+        if (model.isBusinessman == 0) {
             btnText.set("购买");
-        }else {
+        } else {
             btnText.set("攻击");
         }
+    }
+
+    public void resetLimitCount(int curCount) {
+        limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), curCount, limitCountInt));
     }
 }

@@ -51,7 +51,7 @@ public class MonstersModelVM {
         type.set(model.type);
 
         if (model.isBusinessman == 0) {
-            btnText.set("购买");
+            btnText.set("进入");
             isBusinessman.set(true);
         } else {
             btnText.set("攻击");

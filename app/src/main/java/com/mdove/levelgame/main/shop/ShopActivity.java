@@ -14,6 +14,7 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.main.shop.fragment.ShopArmorFragment;
 import com.mdove.levelgame.main.shop.fragment.ShopAttackFragment;
+import com.mdove.levelgame.main.shop.fragment.ShopMedicinesFragment;
 import com.mdove.levelgame.main.shop.presenter.ShopContract;
 
 import java.util.ArrayList;
@@ -46,10 +47,12 @@ public class ShopActivity extends BaseActivity implements ShopContract.IMedicine
         tab = findViewById(R.id.tab);
         vp = findViewById(R.id.vp);
 
-        titles = new String[]{getString(R.string.string_fragment_title_buy_attack), getString(R.string.string_fragment_title_buy_armor)};
+        titles = new String[]{getString(R.string.string_fragment_title_buy_attack), getString(R.string.string_fragment_title_buy_armor),
+                getString(R.string.string_fragment_title_buy_medicine)};
         fragments = new ArrayList<>();
         fragments.add(ShopAttackFragment.newInstance());
         fragments.add(ShopArmorFragment.newInstance());
+        fragments.add(ShopMedicinesFragment.newInstance());
 
         vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override

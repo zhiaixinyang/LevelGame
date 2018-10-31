@@ -1,11 +1,16 @@
 package com.mdove.levelgame.main.shop.presenter;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Medicines;
+import com.mdove.levelgame.greendao.entity.Weapons;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
+import com.mdove.levelgame.main.hero.model.BuyAttackResp;
 import com.mdove.levelgame.main.hero.model.BuyMedicinesResp;
 import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
+import com.mdove.levelgame.main.shop.model.mv.ShopAttackModelVM;
 import com.mdove.levelgame.utils.ToastHelper;
 
 import java.util.ArrayList;
@@ -17,18 +22,14 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.functions.Consumer;
 
 /**
- * Created by MDove on 2018/10/21.
+ * Created by MDove on 2018/10/30.
  */
-
-public class MedicinesShopPresenter implements MedicinesShopContract.IMedicinesShopPresenter {
-    private MedicinesShopContract.IMedicinesShopView view;
+public class ShopMedicinesPresenter implements ShopMedicinesContract.IShopMedicinesPresenter {
+    private ShopMedicinesContract.IShopMedicinesView view;
     private List<MedicinesModelVM> data;
 
-    public MedicinesShopPresenter() {
-    }
-
     @Override
-    public void subscribe(MedicinesShopContract.IMedicinesShopView view) {
+    public void subscribe(ShopMedicinesContract.IShopMedicinesView view) {
         this.view = view;
     }
 

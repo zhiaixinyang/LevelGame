@@ -16,6 +16,9 @@ import com.mdove.levelgame.main.shop.presenter.ShopAttackPresenter;
 
 import java.util.List;
 
+/**
+ * Created by MDove on 2018/10/30.
+ */
 public class ShopArmorFragment extends BaseListFragment implements ShopArmorContract.IShopArmorView {
     private ShopArmorPresenter presenter;
 

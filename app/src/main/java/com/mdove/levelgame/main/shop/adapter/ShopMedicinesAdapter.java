@@ -1,30 +1,24 @@
 package com.mdove.levelgame.main.shop.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.databinding.ItemMedicinesBinding;
-import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
 import com.mdove.levelgame.main.shop.model.handler.MedicinesItemHandler;
-import com.mdove.levelgame.main.shop.presenter.MedicinesShopPresenter;
+import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
+import com.mdove.levelgame.main.shop.presenter.ShopMedicinesPresenter;
 import com.mdove.levelgame.utils.InflateUtils;
 
-import java.util.List;
-
 /**
- * Created by MBENBEN on 2018/10/21.
+ * @author MDove on 2018/10/30
  */
+public class ShopMedicinesAdapter extends BaseListAdapter<MedicinesModelVM> {
+    private ShopMedicinesPresenter presenter;
 
-public class MedicinesShopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context context;
-    private MedicinesShopPresenter medicinesShopPresenter;
-    private List<MedicinesModelVM> data;
-
-    public MedicinesShopAdapter(Context context, MedicinesShopPresenter medicinesShopPresenter) {
-        this.context = context;
-        this.medicinesShopPresenter = medicinesShopPresenter;
+    public ShopMedicinesAdapter(ShopMedicinesPresenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
@@ -34,17 +28,7 @@ public class MedicinesShopAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).bind(data.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return data == null ? 0 : data.size();
-    }
-
-    public void setData(List<MedicinesModelVM> data) {
-        this.data = data;
-        notifyDataSetChanged();
+        ((ShopMedicinesAdapter.ViewHolder) holder).bind(getData().get(position));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,7 +41,7 @@ public class MedicinesShopAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         public void bind(MedicinesModelVM vm) {
             binding.setVm(vm);
-            binding.setHandler(new MedicinesItemHandler(medicinesShopPresenter));
+            binding.setHandler(new MedicinesItemHandler(presenter));
         }
     }
 }

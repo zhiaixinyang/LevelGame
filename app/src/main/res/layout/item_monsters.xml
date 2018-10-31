@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM" />
@@ -16,14 +18,13 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-        android:background="@drawable/bg_white_round"
-        android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
+        android:onClick="@{()->handler.onItemBtnOnClick(vm)}"
+        app:convertBgBySpecial="@{vm}">
 
         <TextView
             android:id="@+id/tv_name"
@@ -43,9 +44,7 @@
             android:id="@+id/tv_tips"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:htmlColorText="@{vm.tips}"
@@ -69,7 +68,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_limit" />
 
         <TextView
             android:id="@+id/tv_attack"
@@ -81,6 +80,8 @@
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            android:visibility="@{vm.isBusinessman? View.GONE : View.VISIBLE}"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
@@ -96,6 +97,8 @@
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            android:visibility="@{vm.isBusinessman? View.GONE : View.VISIBLE}"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
@@ -111,6 +114,8 @@
             android:text="@{vm.exp}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            android:visibility="@{vm.isBusinessman? View.GONE : View.VISIBLE}"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_armor"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
@@ -126,6 +131,8 @@
             android:text="@{vm.money}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            android:visibility="@{vm.isBusinessman? View.GONE : View.VISIBLE}"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_exp"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
@@ -141,6 +148,7 @@
             android:text="@{vm.life}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            android:visibility="@{vm.isBusinessman? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_money"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
@@ -154,6 +162,7 @@
             android:text="@{vm.limitCount}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            android:visibility="@{vm.isLimitCount? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_name"
             app:layout_constraintRight_toRightOf="parent"
             tools:text="限制次数" />

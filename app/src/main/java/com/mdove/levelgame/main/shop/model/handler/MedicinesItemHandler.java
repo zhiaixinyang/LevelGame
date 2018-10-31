@@ -1,16 +1,16 @@
 package com.mdove.levelgame.main.shop.model.handler;
 
 import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
-import com.mdove.levelgame.main.shop.presenter.MedicinesShopPresenter;
+import com.mdove.levelgame.main.shop.presenter.ShopMedicinesPresenter;
 
 /**
  * Created by MDove on 2018/10/21.
  */
 
 public class MedicinesItemHandler {
-    private MedicinesShopPresenter medicinesShopPresenter;
+    private ShopMedicinesPresenter medicinesShopPresenter;
 
-    public MedicinesItemHandler(MedicinesShopPresenter medicinesShopPresenter) {
+    public MedicinesItemHandler(ShopMedicinesPresenter medicinesShopPresenter) {
         this.medicinesShopPresenter = medicinesShopPresenter;
     }
 

@@ -11,6 +11,7 @@ import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
+import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
@@ -18,6 +19,7 @@ import com.mdove.levelgame.greendao.MonstersPlaceDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
@@ -38,7 +40,7 @@ public class App extends Application {
         DatabaseManager.getInstance().init(mAppContext, HeroAttributesDao.class, ArmorsDao.class,
                 DropGoodsDao.class, MedicinesDao.class, MonstersDao.class, MonstersPlaceDao.class,
                 PackagesDao.class, WeaponsDao.class, AllGoodsDao.class, BigMonstersDao.class, MaterialDao.class,
-                AdventureDao.class);
+                AdventureDao.class, MainMenuDao.class);
 
         CrashReport.setIsDevelopmentDevice(mAppContext, true);
         CrashReport.initCrashReport(getApplicationContext(), "544aec74cc", false);

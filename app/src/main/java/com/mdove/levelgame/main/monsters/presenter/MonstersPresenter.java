@@ -15,6 +15,7 @@ import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
+import com.mdove.levelgame.main.home.HomeActivity;
 import com.mdove.levelgame.main.home.MainActivity;
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
@@ -89,7 +90,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                     new BaseNormalDialog.BaseDialogListener() {
                         @Override
                         public void onClick() {
-                            MainActivity.start(view.getContext());
+                            HomeActivity.start(view.getContext());
                         }
                     });
         }

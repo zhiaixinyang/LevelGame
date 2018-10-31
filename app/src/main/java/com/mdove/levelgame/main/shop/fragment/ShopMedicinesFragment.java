@@ -5,29 +5,33 @@ import android.os.Bundle;
 import com.mdove.levelgame.base.BaseListFragment;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.main.shop.adapter.ShopAttackAdapter;
+import com.mdove.levelgame.main.shop.adapter.ShopMedicinesAdapter;
+import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
 import com.mdove.levelgame.main.shop.model.mv.ShopAttackModelVM;
 import com.mdove.levelgame.main.shop.presenter.ShopAttackContract;
 import com.mdove.levelgame.main.shop.presenter.ShopAttackPresenter;
+import com.mdove.levelgame.main.shop.presenter.ShopMedicinesContract;
+import com.mdove.levelgame.main.shop.presenter.ShopMedicinesPresenter;
 
 import java.util.List;
 
 /**
  * Created by MDove on 2018/10/30.
  */
-public class ShopAttackFragment extends BaseListFragment implements ShopAttackContract.IShopAttackView {
-    private ShopAttackPresenter presenter;
+public class ShopMedicinesFragment extends BaseListFragment implements ShopMedicinesContract.IShopMedicinesView {
+    private ShopMedicinesPresenter presenter;
 
-    public static ShopAttackFragment newInstance() {
+    public static ShopMedicinesFragment newInstance() {
         Bundle args = new Bundle();
-        
-        ShopAttackFragment fragment = new ShopAttackFragment();
+
+        ShopMedicinesFragment fragment = new ShopMedicinesFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void initData() {
-        presenter = new ShopAttackPresenter();
+        presenter = new ShopMedicinesPresenter();
         presenter.subscribe(this);
     }
 
@@ -38,12 +42,12 @@ public class ShopAttackFragment extends BaseListFragment implements ShopAttackCo
 
     @Override
     public BaseListAdapter createAdapter() {
-        return new ShopAttackAdapter(presenter);
+        return new ShopMedicinesAdapter(presenter);
     }
 
 
     @Override
-    public void showData(List<ShopAttackModelVM> data) {
+    public void showData(List<MedicinesModelVM> data) {
         getAdapter().setData(data);
     }
 }

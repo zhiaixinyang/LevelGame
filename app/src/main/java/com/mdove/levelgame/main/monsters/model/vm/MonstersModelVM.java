@@ -27,8 +27,10 @@ public class MonstersModelVM {
     public ObservableField<String> limitCount = new ObservableField<>();
 
     public ObservableField<String> btnText = new ObservableField<>();
+    public ObservableField<Boolean> isSpecial = new ObservableField<>();
+    public ObservableField<Boolean> isBusinessman = new ObservableField<>();
+    public ObservableField<Boolean> isLimitCount = new ObservableField<>();
     private int limitCountInt;
-    private int isLimitCount;
 
     public MonstersModelVM(Monsters model) {
         id.set(model.id);
@@ -38,11 +40,9 @@ public class MonstersModelVM {
         name.set(model.name);
         tips.set(model.tips);
         dropGoodsId.set(model.dropGoodsId);
-        isLimitCount = model.isLimitCount;
         if (model.isLimitCount == 0) {
+            isLimitCount.set(true);
             limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), model.curCount, model.limitCount));
-        } else {
-            limitCount.set("");
         }
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));
@@ -52,13 +52,15 @@ public class MonstersModelVM {
 
         if (model.isBusinessman == 0) {
             btnText.set("购买");
+            isBusinessman.set(true);
         } else {
             btnText.set("攻击");
+            isBusinessman.set(false);
         }
     }
 
     public void resetLimitCount(int curCount) {
-        if (isLimitCount == 0) {
+        if (isLimitCount.get()) {
             limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), curCount, limitCountInt));
         }
     }

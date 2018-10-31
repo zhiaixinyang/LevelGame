@@ -21,6 +21,7 @@
     <string name="string_shop">购买装备</string>
     <string name="string_fragment_title_buy_attack">武器商店</string>
     <string name="string_fragment_title_buy_armor">铠甲商店</string>
+    <string name="string_fragment_title_buy_medicine">药品商店</string>
     <string name="string_fragment_title_equip">已装备</string>
     <string name="string_fragment_title_update_attack">打造武器</string>
     <string name="string_fragment_title_update_armor">打造铠甲</string>
@@ -105,4 +106,5 @@
     <string name="string_strengthen_no_material">缺少材料，请注意。</string>
     <string name="string_strengthen_error">程序异常，请重试。</string>
     <string name="string_strengthen_title">强化结果：</string>
+    <string name="string_attack_big_monster_suc">抵御魔王成功</string>
 </resources>

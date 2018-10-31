@@ -10,6 +10,7 @@ import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DropGoodsDao;
+import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
@@ -19,6 +20,7 @@ import com.mdove.levelgame.greendao.entity.Adventure;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.DropGoods;
+import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
@@ -64,6 +66,10 @@ public class InitDataFileUtils {
         medicinesDao.deleteAll();
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
         AdventureDao adventureDao = DatabaseManager.getInstance().getAdventureDao();
+
+        MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
+        mainMenuDao.deleteAll();
+
         if (!AppConfig.isFirstLogin()) {
             bigMonstersDao.deleteAll();
             adventureDao.deleteAll();
@@ -76,6 +82,11 @@ public class InitDataFileUtils {
         List<DropGoods> dropGoods = getInitDropGoods();
         for (DropGoods dropGood : dropGoods) {
             dropGoodsDao.insert(dropGood);
+        }
+
+        List<MainMenu> mainMenus = getInitmainMenu();
+        for (MainMenu mainMenu : mainMenus) {
+            mainMenuDao.insert(mainMenu);
         }
 
         shopArmorModels = getShopArmors();
@@ -231,6 +242,16 @@ public class InitDataFileUtils {
                 ConstAssetsFileName.ASSETS_DROP_GOODS);
         if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<DropGoods>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<MainMenu> getInitmainMenu() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_MAIN_MENU);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<MainMenu>>() {
             }.getType());
         }
         return null;

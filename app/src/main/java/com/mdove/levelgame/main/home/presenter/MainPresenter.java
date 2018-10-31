@@ -4,21 +4,16 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.RxTransformerHelper;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
-import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.HeroAttributesActivity;
 import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
-import com.mdove.levelgame.main.home.presenter.MainContract;
 import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
 import com.mdove.levelgame.main.shop.BlacksmithActivity;
-import com.mdove.levelgame.main.shop.MedicinesShopActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
-import com.mdove.levelgame.main.shop.adapter.MedicinesShopAdapter;
 import com.mdove.levelgame.utils.ToastHelper;
 
 import java.util.List;
@@ -58,7 +53,7 @@ public class MainPresenter implements MainContract.IMainPresenter {
 
     @Override
     public void onClickBuyMedicines() {
-        MedicinesShopActivity.start(mView.getContext());
+//        MedicinesShopActivity.start(mView.getContext());
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.mdove.levelgame.greendao.DaoMaster;
 import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
+import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
@@ -46,6 +47,7 @@ public class DatabaseManager {
     private BigMonstersDao bigMonstersDao;
     private MaterialDao materialDao;
     private AdventureDao adventureDao;
+    private MainMenuDao mainMenuDao;
 
     private static final class Holder {
         private static final DatabaseManager INSTANCE = new DatabaseManager();
@@ -85,6 +87,7 @@ public class DatabaseManager {
         bigMonstersDao = mDaoSession.getBigMonstersDao();
         materialDao = mDaoSession.getMaterialDao();
         adventureDao = mDaoSession.getAdventureDao();
+        mainMenuDao = mDaoSession.getMainMenuDao();
     }
 
     public MaterialDao getMaterialDao() {
@@ -122,6 +125,10 @@ public class DatabaseManager {
 
     public MonstersDao getMonstersDao() {
         return monstersDao;
+    }
+
+    public MainMenuDao getMainMenuDao() {
+        return mainMenuDao;
     }
 
     public MonstersPlaceDao getMonstersPlaceDao() {

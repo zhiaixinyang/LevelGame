@@ -23,6 +23,7 @@ import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.monsters.manager.AdventureManager;
+import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager;
 import com.mdove.levelgame.model.DropGoodsModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
@@ -81,28 +82,10 @@ public class HeroAttributesManager {
 
             // 奇遇设置
             AdventureManager.getInstance().setAdventure();
+            // 特殊怪物出现设置
+            SpecialMonsterManager.getInstance().setShowSpecialMonster();
 
             MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
-            // 战神出现
-            Monsters zhanShen = monstersDao.queryBuilder().where(MonstersDao.Properties.Id.eq(15)).unique();
-            if (zhanShen != null) {
-                if ( heroAttributes.days % 2 == 0) {
-                    zhanShen.isShow = 0;
-                }else{
-                    zhanShen.isShow = 1;
-                }
-                monstersDao.update(zhanShen);
-            }
-            // 战神后人出现
-            Monsters zhanShenHouRen = monstersDao.queryBuilder().where(MonstersDao.Properties.Id.eq(16)).unique();
-            if (zhanShenHouRen != null) {
-                if ( heroAttributes.days % 5 == 0) {
-                    zhanShenHouRen.isShow = 0;
-                }else{
-                    zhanShenHouRen.isShow = 1;
-                }
-                monstersDao.update(zhanShenHouRen);
-            }
 
             // 重置所有怪物次数
             List<Monsters> data = monstersDao.loadAll();

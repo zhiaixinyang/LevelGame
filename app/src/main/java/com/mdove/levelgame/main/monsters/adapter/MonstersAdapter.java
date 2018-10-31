@@ -15,7 +15,7 @@ import com.mdove.levelgame.utils.InflateUtils;
 import java.util.List;
 
 /**
- * Created by MBENBEN on 2018/10/21.
+ * Created by MDove on 2018/10/21.
  */
 
 public class MonstersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

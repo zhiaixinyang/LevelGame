@@ -16,6 +16,7 @@ import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.home.MainActivity;
+import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.shop.BusinessmanActivity;
@@ -52,6 +53,9 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
     @Override
     public void initData(long monstersPlaceId) {
+        // 特殊怪物出现设置
+        SpecialMonsterManager.getInstance().setShowSpecialMonster();
+
         this.monstersPlaceId = monstersPlaceId;
         List<Monsters> monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder()
                 .where(MonstersDao.Properties.MonsterPlaceId.eq(monstersPlaceId), MonstersDao.Properties.IsShow.eq(0)).list();

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.mdove.levelgame.config.AppConfig;
+import com.mdove.levelgame.greendao.AccessoriesDao;
 import com.mdove.levelgame.greendao.AdventureDao;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
@@ -40,7 +41,7 @@ public class App extends Application {
         DatabaseManager.getInstance().init(mAppContext, HeroAttributesDao.class, ArmorsDao.class,
                 DropGoodsDao.class, MedicinesDao.class, MonstersDao.class, MonstersPlaceDao.class,
                 PackagesDao.class, WeaponsDao.class, AllGoodsDao.class, BigMonstersDao.class, MaterialDao.class,
-                AdventureDao.class, MainMenuDao.class);
+                AdventureDao.class, MainMenuDao.class, AccessoriesDao.class);
 
         CrashReport.setIsDevelopmentDevice(mAppContext, true);
         CrashReport.initCrashReport(getApplicationContext(), "544aec74cc", false);

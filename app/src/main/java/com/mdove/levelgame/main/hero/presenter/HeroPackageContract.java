@@ -19,11 +19,23 @@ public interface HeroPackageContract {
         void onClickStrengthen(HeroPackageModelVM vm);
 
         void onClickSell(HeroPackageModelVM vm);
+
+        void notifyPackageAddUI(long pkId);
     }
 
     interface IHeroPackageView extends BaseView {
         void showPackage(List<HeroPackageModelVM> data);
 
         void notifyByPosition(int position);
+
+        void deleteByPosition(int position);
+
+        void addByPosition(int position);
+
+        //通知Equip页面重新对进行刷新（重新加载对应的值）
+        void notifyEquipUpdateUI(int position);
+
+        void notifyPackageAddUI(long pkId);
+
     }
 }

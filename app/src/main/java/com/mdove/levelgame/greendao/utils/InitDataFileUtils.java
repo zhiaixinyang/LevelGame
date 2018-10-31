@@ -1,9 +1,12 @@
 package com.mdove.levelgame.greendao.utils;
 
+import android.databinding.DataBindingUtil;
+
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.config.ConstAssetsFileName;
+import com.mdove.levelgame.greendao.AccessoriesDao;
 import com.mdove.levelgame.greendao.AdventureDao;
 import com.mdove.levelgame.greendao.AllGoods;
 import com.mdove.levelgame.greendao.AllGoodsDao;
@@ -16,6 +19,7 @@ import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
+import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Adventure;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
@@ -69,6 +73,14 @@ public class InitDataFileUtils {
 
         MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
         mainMenuDao.deleteAll();
+
+        AccessoriesDao accessoriesDao = DatabaseManager.getInstance().getAccessoriesDao();
+        accessoriesDao.deleteAll();
+
+        List<Accessories> accessories = getInitAccessories();
+        for (Accessories accessorie : accessories) {
+            accessoriesDao.insert(accessorie);
+        }
 
         if (!AppConfig.isFirstLogin()) {
             bigMonstersDao.deleteAll();
@@ -242,6 +254,16 @@ public class InitDataFileUtils {
                 ConstAssetsFileName.ASSETS_DROP_GOODS);
         if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<DropGoods>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<Accessories> getInitAccessories() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_ACCESSORIES);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<Accessories>>() {
             }.getType());
         }
         return null;

@@ -12,6 +12,7 @@ import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
+import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.DropGoods;
@@ -131,12 +132,20 @@ public class HeroAttributesManager {
         }
     }
 
+    public class SellResp {
+        public long pkId;
+        // -1 标识需要弹dailog
+        public int sellMoney;
+    }
+
     /**
      * @param pkId
      * @param isCheck true表示需要：特殊装备弹dialog确认
      * @return
      */
-    public Observable<Integer> sellGoods(Long pkId, boolean isCheck) {
+    public Observable<SellResp> sellGoods(Long pkId, boolean isCheck) {
+        final SellResp sellResp = new SellResp();
+        sellResp.pkId = pkId;
         Packages pk = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique();
         int money = 0;
         if (pk != null) {
@@ -147,10 +156,11 @@ public class HeroAttributesManager {
                 heroAttributes.money += money;
                 // 此时表示装备特殊，弹dialog
                 if (weapons.isSpecial == 0 && isCheck) {
-                    return Observable.create(new ObservableOnSubscribe<Integer>() {
+                    sellResp.sellMoney = -1;
+                    return Observable.create(new ObservableOnSubscribe<SellResp>() {
                         @Override
-                        public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-                            e.onNext(Integer.valueOf(-1));
+                        public void subscribe(ObservableEmitter<SellResp> e) throws Exception {
+                            e.onNext(sellResp);
                         }
                     });
                 }
@@ -166,11 +176,11 @@ public class HeroAttributesManager {
             DatabaseManager.getInstance().getPackagesDao().delete(pk);
             save();
         }
-        final int finalMoney = money;
-        return Observable.create(new ObservableOnSubscribe<Integer>() {
+        sellResp.sellMoney = money;
+        return Observable.create(new ObservableOnSubscribe<SellResp>() {
             @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-                e.onNext(Integer.valueOf(finalMoney));
+            public void subscribe(ObservableEmitter<SellResp> e) throws Exception {
+                e.onNext(sellResp);
             }
         });
     }
@@ -432,6 +442,22 @@ public class HeroAttributesManager {
     public void holdOnArmor(long strengthen, Armors armors) {
         heroAttributes.attack += (1 + strengthen * 0.2) * (armors.attack);
         heroAttributes.armor += (1 + strengthen * 0.2) * (armors.armor);
+        save();
+    }
+
+    public void takeOffAccessories(long strengthen, Accessories accessories) {
+        heroAttributes.attack -= (1 + strengthen * 0.2) * (accessories.attack);
+        heroAttributes.armor -= (1 + strengthen * 0.2) * (accessories.armor);
+        heroAttributes.maxLife -= (1 + strengthen * 0.2) * (accessories.life);
+        heroAttributes.curLife -= (1 + strengthen * 0.2) * (accessories.life);
+        save();
+    }
+
+    public void holdOnAccessories(long strengthen, Accessories accessories) {
+        heroAttributes.attack += (1 + strengthen * 0.2) * (accessories.attack);
+        heroAttributes.armor += (1 + strengthen * 0.2) * (accessories.armor);
+        heroAttributes.maxLife += (1 + strengthen * 0.2) * (accessories.life);
+        heroAttributes.curLife += (1 + strengthen * 0.2) * (accessories.life);
         save();
     }
 

@@ -3,6 +3,7 @@ package com.mdove.levelgame.greendao.utils;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mdove.levelgame.greendao.AccessoriesDao;
 import com.mdove.levelgame.greendao.AdventureDao;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
@@ -48,6 +49,7 @@ public class DatabaseManager {
     private MaterialDao materialDao;
     private AdventureDao adventureDao;
     private MainMenuDao mainMenuDao;
+    private AccessoriesDao accessoriesDao;
 
     private static final class Holder {
         private static final DatabaseManager INSTANCE = new DatabaseManager();
@@ -88,6 +90,7 @@ public class DatabaseManager {
         materialDao = mDaoSession.getMaterialDao();
         adventureDao = mDaoSession.getAdventureDao();
         mainMenuDao = mDaoSession.getMainMenuDao();
+        accessoriesDao = mDaoSession.getAccessoriesDao();
     }
 
     public MaterialDao getMaterialDao() {
@@ -149,6 +152,10 @@ public class DatabaseManager {
 
     public AdventureDao getAdventureDao() {
         return adventureDao;
+    }
+
+    public AccessoriesDao getAccessoriesDao() {
+        return accessoriesDao;
     }
 
     /**

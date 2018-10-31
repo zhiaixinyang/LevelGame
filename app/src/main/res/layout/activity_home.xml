@@ -43,20 +43,22 @@
             android:gravity="right|center_vertical"
             android:text="@string/string_monsters_place"
             android:textColor="@color/black"
-            tools:text="距离魔王进攻"
             android:textSize="@dimen/main_btn_normal_text_size"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
+            tools:text="距离魔王进攻" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rlv"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/main_btn_normal_margin"
+            android:overScrollMode="never"
+            android:scrollbars="none"
             app:layout_constraintBottom_toTopOf="@+id/layout_big_monsters"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="@dimen/main_btn_normal_margin"
             app:layout_constraintTop_toBottomOf="@+id/tv_invade" />
 
         <android.support.constraint.ConstraintLayout

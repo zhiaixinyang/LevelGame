@@ -19,6 +19,15 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         return data;
     }
 
+    public void deleteFromPosition(int position) {
+        data.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void addFromPosition(int position) {
+        notifyItemChanged(position);
+    }
+
     @Override
     public int getItemCount() {
         return data == null ? 0 : data.size();

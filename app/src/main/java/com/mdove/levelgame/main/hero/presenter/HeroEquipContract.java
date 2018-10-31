@@ -14,12 +14,20 @@ public interface HeroEquipContract {
     interface IHeroEquipPresenter extends BasePresenter<IHeroEquipView> {
         void initData();
 
+        void notifyEquipUpdateUI(int position);
+
         void onClickTakeOff(HeroEquipModelVM vm);
     }
 
     interface IHeroEquipView extends BaseView {
         void showEquipData(List<HeroEquipModelVM> data);
 
+        //通知Equip页面重新对进行刷新（重新加载对应的值）
+        void notifyEquipUpdateUI(int position);
+
         void notifyByPosition(int position);
+        void deleteByPosition(int position);
+        void notifyPackageAddUI(long pkId);
+
     }
 }

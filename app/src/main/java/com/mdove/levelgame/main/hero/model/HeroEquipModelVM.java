@@ -14,28 +14,38 @@ public class HeroEquipModelVM {
     public ObservableField<String> name = new ObservableField<>();
     public ObservableField<String> attack = new ObservableField<>();
     public ObservableField<String> armor = new ObservableField<>();
+    public ObservableField<String> life = new ObservableField<>();
     public ObservableField<String> type = new ObservableField<>();
 
-    public HeroEquipModelVM(Long id, long strengthen, String name, int attack, int armor, String type, boolean isEquip, boolean isWeapons) {
+    // goodType:1武器2防具3饰品
+    public HeroEquipModelVM(Long id, long strengthen, String name, int attack, int armor, int life, String type, boolean isEquip, int goodType) {
         this.id.set(id);
         this.strengthen.set(strengthen);
         this.name.set(name);
         if (strengthen > 0) {
             this.name.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_name_strengthen), name, strengthen));
-            this.attack.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_attack),  (int)((1 + strengthen * 0.2) * attack)));
-            this.armor.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_armor),  (int)((1 + strengthen * 0.2) * armor)));
+            this.attack.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_attack), (int) ((1 + strengthen * 0.2) * attack)));
+            this.armor.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_armor), (int) ((1 + strengthen * 0.2) * armor)));
+            this.life.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_life), (int) ((1 + strengthen * 0.2) * life)));
         } else {
             this.name.set(name);
             this.attack.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_attack), attack));
             this.armor.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_armor), armor));
+            this.life.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_life), life));
         }
         if (!isEquip) {
-            if (isWeapons) {
+            if (goodType == 1) {
                 this.attack.set(App.getAppContext().getString(R.string.string_no_hold_on_attack));
                 this.armor.set(App.getAppContext().getString(R.string.string_no_hold_on_attack));
-            }else{
+                this.life.set(App.getAppContext().getString(R.string.string_no_hold_on_attack));
+            } else if (goodType == 2) {
                 this.attack.set(App.getAppContext().getString(R.string.string_no_hold_on_armor));
                 this.armor.set(App.getAppContext().getString(R.string.string_no_hold_on_armor));
+                this.life.set(App.getAppContext().getString(R.string.string_no_hold_on_armor));
+            } else if (goodType == 3) {
+                this.attack.set(App.getAppContext().getString(R.string.string_no_hold_on_accessories));
+                this.armor.set(App.getAppContext().getString(R.string.string_no_hold_on_accessories));
+                this.life.set(App.getAppContext().getString(R.string.string_no_hold_on_accessories));
             }
         }
         this.type.set(type);

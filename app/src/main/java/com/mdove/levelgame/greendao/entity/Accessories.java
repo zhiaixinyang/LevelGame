@@ -5,28 +5,21 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * Created by MDove on 2018/10/20.
+ * @author MDove on 2018/10/31
  */
 @Entity
-public class Weapons {
+public class Accessories {
     @Id(autoincrement = true)
     public Long id;
-
-    // 武器名
     public String name;
-    // 提示
     public String tips;
     // 攻击值
     public int attack;
     // 护甲值
     public int armor;
+    public int life;
     // 价格
     public long price;
-    /**
-     * 装备类型 标识什么样子的装备。比如：普通装备（369等），神装...
-     * 首字母A：表示武器
-     * B：表示铠甲
-     */
     public String type;
     // 是否可以强化
     public int isCanStrengthen;
@@ -34,38 +27,37 @@ public class Weapons {
     public int isCanUpdate;
     // 是否可以合成
     public int isCanMixture;
-    // 出售是否弹dialog
-    public int isSpecial;
     // 合成公式 json
     public String mixtureFormula;
     public String updateFormula;
     public String strengthenFormula;
-    // 此装备属于哪个monster（1000表示武器商店，1001表示防具商店，1002表示铁匠铺）通过split(",")去截
+    // 出售是否弹dialog
+    public int isSpecial;
     public String belongMonsterId;
-    @Generated(hash = 1405960489)
-    public Weapons(Long id, String name, String tips, int attack, int armor,
-            long price, String type, int isCanStrengthen, int isCanUpdate,
-            int isCanMixture, int isSpecial, String mixtureFormula,
-            String updateFormula, String strengthenFormula,
-            String belongMonsterId) {
+    @Generated(hash = 569723552)
+    public Accessories(Long id, String name, String tips, int attack, int armor,
+            int life, long price, String type, int isCanStrengthen, int isCanUpdate,
+            int isCanMixture, String mixtureFormula, String updateFormula,
+            String strengthenFormula, int isSpecial, String belongMonsterId) {
         this.id = id;
         this.name = name;
         this.tips = tips;
         this.attack = attack;
         this.armor = armor;
+        this.life = life;
         this.price = price;
         this.type = type;
         this.isCanStrengthen = isCanStrengthen;
         this.isCanUpdate = isCanUpdate;
         this.isCanMixture = isCanMixture;
-        this.isSpecial = isSpecial;
         this.mixtureFormula = mixtureFormula;
         this.updateFormula = updateFormula;
         this.strengthenFormula = strengthenFormula;
+        this.isSpecial = isSpecial;
         this.belongMonsterId = belongMonsterId;
     }
-    @Generated(hash = 1666722499)
-    public Weapons() {
+    @Generated(hash = 1483837939)
+    public Accessories() {
     }
     public Long getId() {
         return this.id;
@@ -97,6 +89,12 @@ public class Weapons {
     public void setArmor(int armor) {
         this.armor = armor;
     }
+    public int getLife() {
+        return this.life;
+    }
+    public void setLife(int life) {
+        this.life = life;
+    }
     public long getPrice() {
         return this.price;
     }
@@ -127,12 +125,6 @@ public class Weapons {
     public void setIsCanMixture(int isCanMixture) {
         this.isCanMixture = isCanMixture;
     }
-    public int getIsSpecial() {
-        return this.isSpecial;
-    }
-    public void setIsSpecial(int isSpecial) {
-        this.isSpecial = isSpecial;
-    }
     public String getMixtureFormula() {
         return this.mixtureFormula;
     }
@@ -151,11 +143,16 @@ public class Weapons {
     public void setStrengthenFormula(String strengthenFormula) {
         this.strengthenFormula = strengthenFormula;
     }
+    public int getIsSpecial() {
+        return this.isSpecial;
+    }
+    public void setIsSpecial(int isSpecial) {
+        this.isSpecial = isSpecial;
+    }
     public String getBelongMonsterId() {
         return this.belongMonsterId;
     }
     public void setBelongMonsterId(String belongMonsterId) {
         this.belongMonsterId = belongMonsterId;
     }
-
 }

@@ -25,6 +25,7 @@ public class MonstersModelVM {
     public ObservableField<String> type = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
     public ObservableField<String> limitCount = new ObservableField<>();
+    public ObservableField<String> power = new ObservableField<>();
 
     public ObservableField<String> btnText = new ObservableField<>();
     public ObservableField<Boolean> isSpecial = new ObservableField<>();
@@ -39,10 +40,13 @@ public class MonstersModelVM {
         limitCountInt = model.limitCount;
         name.set(model.name);
         tips.set(model.tips);
+        power.set(String.format(App.getAppContext().getString(R.string.monsters_msg_use_power),model.consumePower));
         dropGoodsId.set(model.dropGoodsId);
         if (model.isLimitCount == 0) {
             isLimitCount.set(true);
             limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), model.curCount, model.limitCount));
+        }else{
+            isLimitCount.set(false);
         }
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));

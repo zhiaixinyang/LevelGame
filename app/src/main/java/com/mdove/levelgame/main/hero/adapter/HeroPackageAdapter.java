@@ -11,7 +11,6 @@ import com.mdove.levelgame.databinding.ItemHeroPackageTitleBinding;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.main.hero.model.handler.HeroPackageHandler;
 import com.mdove.levelgame.main.hero.presenter.HeroPackagePresenter;
-import com.mdove.levelgame.main.hero.presenter.HeroPackagesPresenter;
 import com.mdove.levelgame.utils.InflateUtils;
 
 import java.util.List;

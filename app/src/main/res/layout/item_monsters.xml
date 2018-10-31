@@ -46,12 +46,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
             android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:textColor="@{vm.isBusinessman?@color/black:@color/gray_plus}"
             android:textSize="12sp"
             app:htmlColorText="@{vm.tips}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/btn_attack"
+            app:layout_constraintBottom_toTopOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍怪物介绍" />
 
@@ -76,14 +76,12 @@
             android:id="@+id/tv_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
             android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:visibility="@{vm.isBusinessman? View.INVISIBLE : View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_exp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="攻击：10" />
@@ -92,18 +90,29 @@
             android:id="@+id/tv_armor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
             android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:visibility="@{vm.isBusinessman? View.INVISIBLE : View.VISIBLE}"
-
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_exp"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="护甲：10" />
+
+        <TextView
+            android:id="@+id/tv_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+            android:text="@{vm.life}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:visibility="@{vm.isBusinessman? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/tv_exp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_armor"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            tools:text="生命：10" />
 
         <TextView
             android:id="@+id/tv_exp"
@@ -111,14 +120,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
             android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.exp}"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:visibility="@{vm.isBusinessman? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tv_armor"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            app:layout_constraintLeft_toLeftOf="parent"
             tools:text="经验：10" />
 
         <TextView
@@ -127,32 +134,27 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
             android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             android:text="@{vm.money}"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:visibility="@{vm.isBusinessman? View.INVISIBLE : View.VISIBLE}"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_exp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="金钱：10" />
 
         <TextView
-            android:id="@+id/tv_life"
+            android:id="@+id/tv_power"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
             android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
-            android:text="@{vm.life}"
+            android:text="@{vm.power}"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:visibility="@{vm.isBusinessman? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_money"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
-            tools:text="生命：10" />
+            tools:text="体力：10" />
 
         <TextView
             android:id="@+id/tv_limit"

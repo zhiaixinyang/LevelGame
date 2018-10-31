@@ -1,15 +1,16 @@
 package com.mdove.levelgame.main.hero.presenter;
 
 import android.annotation.SuppressLint;
-import android.text.TextUtils;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseNormalDialog;
 import com.mdove.levelgame.base.RxTransformerHelper;
+import com.mdove.levelgame.greendao.AccessoriesDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
+import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Packages;
@@ -41,6 +42,7 @@ import io.reactivex.functions.Function;
 public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePresenter {
     private static final int EQUIP_STATUS_TYPE_ATTACK = 1;
     private static final int EQUIP_STATUS_TYPE_ARMOR = 2;
+    private static final int EQUIP_STATUS_TYPE_ACCESSORIES = 3;
     private HeroPackageContract.IHeroPackageView view;
 
     private List<HeroPackageModelVM> packageModelVMS;
@@ -48,11 +50,13 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
     private PackagesDao packagesDao;
     private WeaponsDao weaponsDao;
     private ArmorsDao armorsDao;
+    private AccessoriesDao accessoriesDao;
 
     public HeroPackagePresenter() {
         weaponsDao = DatabaseManager.getInstance().getWeaponsDao();
         packagesDao = DatabaseManager.getInstance().getPackagesDao();
         armorsDao = DatabaseManager.getInstance().getArmorsDao();
+        accessoriesDao = DatabaseManager.getInstance().getAccessoriesDao();
     }
 
     @Override
@@ -69,32 +73,131 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
         initPksData();
     }
 
+    private void deleteById(long pkId) {
+        int position = -1;
+        if (packageModelVMS != null && packageModelVMS.size() > 0) {
+            for (HeroPackageModelVM vm : packageModelVMS) {
+                if (vm.pkId.get() == pkId) {
+                    position = packageModelVMS.indexOf(vm);
+                }
+            }
+        }
+        if (position != -1) {
+            view.deleteByPosition(position);
+        }
+    }
+
+    private void updateFromEquip(long holdOnId, long takeOffId) {
+        int removePosition = -1;
+        int equipPosition = -1;
+        if (packageModelVMS != null && packageModelVMS.size() > 0) {
+            for (HeroPackageModelVM vm : packageModelVMS) {
+                if (vm.pkId.get() == holdOnId) {
+                    // Equip页面通过position。重新对页面进行刷新（重新加载对应的值）
+                    removePosition = packageModelVMS.indexOf(vm);
+                    int type = AllGoodsToDBIdUtils.getInstance().getDBType(vm.type.get());
+                    switch (type) {
+                        case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
+                            equipPosition = 1;
+                            break;
+                        }
+                        case AllGoodsToDBIdUtils.DB_TYPE_IS_ARMOR: {
+                            equipPosition = 2;
+                            break;
+                        }
+                        case AllGoodsToDBIdUtils.DB_TYPE_IS_ACCESSORIES: {
+                            equipPosition = 3;
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        if (removePosition != -1 && equipPosition != -1) {
+            view.deleteByPosition(removePosition);
+            view.notifyEquipUpdateUI(equipPosition);
+        }
+        if (takeOffId != -1) {
+            Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(takeOffId)).unique();
+            if (pk != null) {
+                addPkNotifyAdapter(pk);
+            }
+        }
+    }
+
+    // 通知装备Adapter，添加VM
+    private void addPkNotifyAdapter(Packages pk) {
+        int dbTpe = AllGoodsToDBIdUtils.getInstance().getDBType(pk.type);
+        switch (dbTpe) {
+            case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
+                Weapons attack = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(pk.type)).unique();
+                if (attack != null && pk.isEquip == 1) {
+                    packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, attack.name, attack.attack, attack.armor, 0, attack.type));
+                }
+                break;
+            }
+            case AllGoodsToDBIdUtils.DB_TYPE_IS_ARMOR: {
+                Armors armors = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(pk.type)).unique();
+                if (armors != null && pk.isEquip == 1) {
+                    packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, armors.name, armors.attack, armors.armor, 0, armors.type));
+                }
+                break;
+            }
+            case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
+                Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(pk.type)).unique();
+                if (material != null && pk.isEquip == 1) {
+                    packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
+                }
+                break;
+            }
+            case AllGoodsToDBIdUtils.DB_TYPE_IS_ACCESSORIES: {
+                Accessories accessories = DatabaseManager.getInstance().getAccessoriesDao().queryBuilder().where(AccessoriesDao.Properties.Type.eq(pk.type)).unique();
+                if (accessories != null && pk.isEquip == 1) {
+                    packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type));
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        view.addByPosition(packageModelVMS.size() - 1);
+    }
+
     private void initPksData() {
         List<Packages> packages = packagesDao.loadAll();
         packageModelVMS = new ArrayList<>();
         // Title的布局
-        packageModelVMS.add(new HeroPackageModelVM((long) -3, 0, "", 0, 0, null));
+        packageModelVMS.add(new HeroPackageModelVM((long) -3, 0, "", 0, 0, 0, null));
         for (Packages pk : packages) {
             int dbTpe = AllGoodsToDBIdUtils.getInstance().getDBType(pk.type);
             switch (dbTpe) {
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
                     Weapons attack = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(pk.type)).unique();
                     if (attack != null && pk.isEquip == 1) {
-                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, attack.name, attack.attack, attack.armor, attack.type));
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, attack.name, attack.attack, attack.armor, 0, attack.type));
                     }
                     break;
                 }
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_ARMOR: {
                     Armors armors = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(pk.type)).unique();
                     if (armors != null && pk.isEquip == 1) {
-                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, armors.name, armors.attack, armors.armor, armors.type));
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, armors.name, armors.attack, armors.armor, 0, armors.type));
                     }
                     break;
                 }
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
                     Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(pk.type)).unique();
                     if (material != null && pk.isEquip == 1) {
-                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, material.name, 0, 0, material.type));
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
+                    }
+                    break;
+                }
+                case AllGoodsToDBIdUtils.DB_TYPE_IS_ACCESSORIES: {
+                    Accessories accessories = DatabaseManager.getInstance().getAccessoriesDao().queryBuilder().where(AccessoriesDao.Properties.Type.eq(pk.type)).unique();
+                    if (accessories != null && pk.isEquip == 1) {
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type));
                     }
                     break;
                 }
@@ -105,26 +208,27 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
         view.showPackage(packageModelVMS);
     }
 
-    public class InitEquipResp {
+    // 已穿装备的封装
+    public class HasEquipResp {
         public long pkId;
         public String equipType;
         public long strengthen;
     }
 
     // 从pk里找到装备对应的type
-    private InitEquipResp getGoodsTypeFromPk(int status) {
-        InitEquipResp initEquipResp = new InitEquipResp();
+    private HasEquipResp getGoodsTypeFromPk(int status) {
+        HasEquipResp hasEquipResp = new HasEquipResp();
         List<Packages> packages = packagesDao.queryBuilder().where(PackagesDao.Properties.IsEquip.eq(0)).list();
         if (packages == null || packages.size() <= 0) {
-            return initEquipResp;
+            return hasEquipResp;
         }
         switch (status) {
             case EQUIP_STATUS_TYPE_ATTACK: {
                 for (Packages pk : packages) {
                     if (pk.isEquip == 0 && pk.type.startsWith("A")) {
-                        initEquipResp.equipType = pk.type;
-                        initEquipResp.pkId = pk.id;
-                        initEquipResp.strengthen = pk.strengthenLevel;
+                        hasEquipResp.equipType = pk.type;
+                        hasEquipResp.pkId = pk.id;
+                        hasEquipResp.strengthen = pk.strengthenLevel;
                         break;
                     }
                 }
@@ -133,9 +237,20 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
             case EQUIP_STATUS_TYPE_ARMOR: {
                 for (Packages pk : packages) {
                     if (pk.isEquip == 0 && pk.type.startsWith("B")) {
-                        initEquipResp.equipType = pk.type;
-                        initEquipResp.pkId = pk.id;
-                        initEquipResp.strengthen = pk.strengthenLevel;
+                        hasEquipResp.equipType = pk.type;
+                        hasEquipResp.pkId = pk.id;
+                        hasEquipResp.strengthen = pk.strengthenLevel;
+                        break;
+                    }
+                }
+                break;
+            }
+            case EQUIP_STATUS_TYPE_ACCESSORIES: {
+                for (Packages pk : packages) {
+                    if (pk.isEquip == 0 && pk.type.startsWith("G")) {
+                        hasEquipResp.equipType = pk.type;
+                        hasEquipResp.pkId = pk.id;
+                        hasEquipResp.strengthen = pk.strengthenLevel;
                         break;
                     }
                 }
@@ -144,7 +259,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
             default:
                 break;
         }
-        return initEquipResp;
+        return hasEquipResp;
     }
 
     // 从pk里找到装备对应的id
@@ -167,6 +282,15 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
             case EQUIP_STATUS_TYPE_ARMOR: {
                 for (Packages pk : packages) {
                     if (pk.isEquip == 0 && pk.type.startsWith("B")) {
+                        id = pk.id;
+                        break;
+                    }
+                }
+                break;
+            }
+            case EQUIP_STATUS_TYPE_ACCESSORIES: {
+                for (Packages pk : packages) {
+                    if (pk.isEquip == 0 && pk.type.startsWith("G")) {
                         id = pk.id;
                         break;
                     }
@@ -203,9 +327,10 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
                                 // 拿到已穿的装备（可能为null）
                                 long hasHoldOnId = getGoodsIdFromPk(EQUIP_STATUS_TYPE_ATTACK);
-                                InitEquipResp hasHoldOnType = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ATTACK);
+                                HasEquipResp hasHoldOnResp = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ATTACK);
                                 Packages takeOffPk = null;
                                 if (hasHoldOnId != -1) {
+                                    model.takeOffPkId = hasHoldOnId;
                                     takeOffPk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasHoldOnId)
                                             , PackagesDao.Properties.IsEquip.eq(0)).unique();
                                 }
@@ -217,6 +342,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                         , PackagesDao.Properties.IsEquip.eq(1)).unique();
                                 if (holdOnPk != null) {
                                     holdOnPk.isEquip = 0;
+                                    model.holdOnPkId = holdOnPk.id;
                                     packagesDao.update(holdOnPk);
                                     model.holdOnType = holdOnPk.type;
                                     model.holdOnStrengthen = holdOnPk.strengthenLevel;
@@ -229,7 +355,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 // 更新Pk脱掉装备库(唯一)
                                 if (takeOffPk != null) {
                                     // 找准备脱掉的武器（唯一）
-                                    Weapons hasHoldOnWeapon = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(hasHoldOnType.equipType)).unique();
+                                    Weapons hasHoldOnWeapon = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(hasHoldOnResp.equipType)).unique();
 
                                     if (hasHoldOnWeapon != null) {
                                         takeOffPk.isEquip = 1;
@@ -249,10 +375,11 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 GoodsEquipResp model = new GoodsEquipResp();
 
                                 // 拿到已穿的装备（可能为null）
-                                InitEquipResp hasHoldOnType = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ARMOR);
+                                HasEquipResp hasHoldOnResp = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ARMOR);
                                 long hasHoldOnId = getGoodsIdFromPk(EQUIP_STATUS_TYPE_ARMOR);
                                 Packages takeOffPk = null;
                                 if (hasHoldOnId != -1) {
+                                    model.takeOffPkId = hasHoldOnId;
                                     takeOffPk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasHoldOnId)
                                             , PackagesDao.Properties.IsEquip.eq(0)).unique();
                                 }
@@ -266,6 +393,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                     // 所穿装备
                                     holdOnPk.isEquip = 0;
                                     packagesDao.update(holdOnPk);
+                                    model.holdOnPkId = holdOnPk.id;
                                     model.holdOnType = holdOnPk.type;
                                     model.holdOnStrengthen = holdOnPk.strengthenLevel;
                                     model.holdOnArmor = holdOnArmor;
@@ -277,7 +405,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 // 更新Pk脱掉装备库(唯一)
                                 if (takeOffPk != null) {
                                     // 找准备脱掉的铠甲（唯一）
-                                    Armors hasHoldOnArmor = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(hasHoldOnType.equipType)).unique();
+                                    Armors hasHoldOnArmor = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(hasHoldOnResp.equipType)).unique();
 
                                     if (takeOffPk != null) {
                                         // 需要脱的装备
@@ -293,18 +421,70 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 }
                                 return model;
                             }
+                            // 饰品逻辑
+                            case AllGoodsToDBIdUtils.DB_TYPE_IS_ACCESSORIES: {
+                                GoodsEquipResp model = new GoodsEquipResp();
+
+                                // 拿到已穿的装备（可能为null）
+                                HasEquipResp hasHoldOnType = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
+                                long hasHoldOnId = getGoodsIdFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
+                                Packages takeOffPk = null;
+                                if (hasHoldOnId != -1) {
+                                    model.takeOffPkId = hasHoldOnId;
+                                    takeOffPk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasHoldOnId)
+                                            , PackagesDao.Properties.IsEquip.eq(0)).unique();
+                                }
+
+                                // 拿到需要穿的装备（通过type从防具库中取）
+                                Accessories holdOnAccessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(type)).unique();
+                                // 更新Pk穿上装备库(通过id)
+                                Packages holdOnPk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(id)
+                                        , PackagesDao.Properties.IsEquip.eq(1)).unique();
+                                if (holdOnPk != null) {
+                                    // 所穿装备
+                                    holdOnPk.isEquip = 0;
+                                    model.holdOnPkId = holdOnPk.id;
+                                    packagesDao.update(holdOnPk);
+                                    model.holdOnType = holdOnPk.type;
+                                    model.holdOnStrengthen = holdOnPk.strengthenLevel;
+                                    model.holdOnAccessories = holdOnAccessories;
+                                } else {
+                                    model.holdOnType = null;
+                                    model.holdOnAccessories = null;
+                                }
+
+                                // 更新Pk脱掉装备库(唯一)
+                                if (takeOffPk != null) {
+                                    // 找准备脱掉的饰品（唯一）
+                                    Accessories hasHoldOnAccessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(hasHoldOnType.equipType)).unique();
+
+                                    if (takeOffPk != null) {
+                                        // 需要脱的装备
+                                        takeOffPk.isEquip = 1;
+                                        packagesDao.update(takeOffPk);
+                                        model.takeOffType = takeOffPk.type;
+                                        model.takeOffStrengthen = holdOnPk.strengthenLevel;
+                                        model.takeOffAccessories = hasHoldOnAccessories;
+                                    } else {
+                                        model.takeOffType = null;
+                                        model.takeOffAccessories = null;
+                                    }
+                                }
+                                return model;
+                            }
 
                             default:
                                 break;
                         }
                         return null;
                     }
-                }).map(new Function<GoodsEquipResp, String>() {
+                }).map(new Function<GoodsEquipResp, NotifyResp>() {
             @Override
-            public String apply(GoodsEquipResp goodsEquipResp) throws Exception {
+            public NotifyResp apply(GoodsEquipResp goodsEquipResp) throws Exception {
                 // 更新英雄属性
                 boolean attackSuc = false;
                 boolean armorSuc = false;
+                boolean accessoriesSuc = false;
                 // 穿的装备是武器
                 if (goodsEquipResp.holdOnAttack != null) {
                     // 先减少脱掉装备的属性
@@ -325,24 +505,35 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                     HeroAttributesManager.getInstance().holdOnArmor(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnArmor);
                     armorSuc = true;
                 }
-                // 返回值是pk页面更新的type
-                String type = null;
-                if (armorSuc || attackSuc) {
-                    type = goodsEquipResp.holdOnType;
+                // 穿的装备是饰品
+                if (goodsEquipResp.holdOnAccessories != null) {
+                    // 先减少脱掉装备的属性
+                    if (goodsEquipResp.takeOffAccessories != null) {
+                        HeroAttributesManager.getInstance().takeOffAccessories(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAccessories);
+                    }
+                    // 增加穿装备属性
+                    HeroAttributesManager.getInstance().holdOnAccessories(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAccessories);
+                    accessoriesSuc = true;
                 }
-                return type;
+
+                NotifyResp resp = null;
+                if (armorSuc || attackSuc || accessoriesSuc) {
+                    resp = new NotifyResp();
+                    resp.holdOnId = goodsEquipResp.holdOnPkId;
+                    resp.takeOffOnId = goodsEquipResp.takeOffPkId;
+                }
+                return resp;
             }
-        }).subscribe(new Observer<String>() {
+        }).subscribe(new Observer<NotifyResp>() {
             @Override
             public void onSubscribe(Disposable d) {
             }
 
             @Override
-            public void onNext(String type) {
+            public void onNext(NotifyResp resp) {
                 view.dismissLoadingDialog();
-                if (!TextUtils.isEmpty(type)) {
-//                    view.deleteUIByType(type);
-                    initData();
+                if (resp != null) {
+                    updateFromEquip(resp.holdOnId, resp.takeOffOnId);
                 } else {
                     MyDialog.showAlert("装备失败", "未知错误", true, view.getContext());
                 }
@@ -402,19 +593,19 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
     @Override
     public void onClickSell(final HeroPackageModelVM vm) {
-        HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), true).subscribe(new Consumer<Integer>() {
+        HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), true).subscribe(new Consumer<HeroAttributesManager.SellResp>() {
             @Override
-            public void accept(Integer integer) throws Exception {
-                if (integer == -1) {
+            public void accept(final HeroAttributesManager.SellResp sellResp) throws Exception {
+                if (sellResp.sellMoney == -1) {
                     MyDialog.showMyDialog(view.getContext(), "注意", "装备特殊，是否出售？", "不卖", "卖！", false, new BaseNormalDialog.BaseDialogListener() {
                         @Override
                         public void onClick() {
-                            HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), false).subscribe(new Consumer<Integer>() {
+                            HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), false).subscribe(new Consumer<HeroAttributesManager.SellResp>() {
                                 @Override
-                                public void accept(Integer integer) throws Exception {
-                                    if (integer > 0) {
-                                        ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), integer));
-                                        initPksData();
+                                public void accept(HeroAttributesManager.SellResp sellResp1) throws Exception {
+                                    if (sellResp1.sellMoney > 0) {
+                                        ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), sellResp1.sellMoney));
+                                        deleteById(sellResp.pkId);
                                     }
                                 }
                             });
@@ -422,17 +613,29 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                     });
 
                 } else {
-                    if (integer > 0) {
-                        ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), integer));
-                        initPksData();
+                    if (sellResp.sellMoney > 0) {
+                        ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), sellResp.sellMoney));
+                        deleteById(sellResp.pkId);
                     }
                 }
             }
         });
     }
 
+    @Override
+    public void notifyPackageAddUI(long pkId) {
+        if (pkId != -1) {
+            Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique();
+            if (pk != null) {
+                addPkNotifyAdapter(pk);
+            }
+        }
+    }
+
     // 临时封装了脱掉装备的Id和穿装备的Id
     private class GoodsEquipResp {
+        public long holdOnPkId;
+        public long takeOffPkId;
         public String holdOnType;
         public String takeOffType;
         // 用于查强化等级
@@ -443,5 +646,12 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
         public Weapons takeOffAttack;
         public Armors holdOnArmor;
         public Armors takeOffArmor;
+        public Accessories holdOnAccessories;
+        public Accessories takeOffAccessories;
+    }
+
+    private class NotifyResp {
+        public long holdOnId = -1;
+        public long takeOffOnId = -1;
     }
 }

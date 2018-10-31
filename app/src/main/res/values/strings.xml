@@ -38,6 +38,7 @@
     <string name="monsters_msg_attack">攻击：%1$d</string>
     <string name="monsters_msg_life">生命：%1$d</string>
     <string name="monsters_msg_has_count">还剩次数：%1$d / %2$d</string>
+    <string name="monsters_msg_use_power">消耗体力：%1$d</string>
     <string name="monsters_msg_armor">护甲：%1$d</string>
     <string name="monsters_msg_exp">经验：%1$d</string>
     <string name="monsters_msg_money">金钱：%1$d</string>
@@ -48,6 +49,7 @@
     <string name="string_equip_msg_name_strengthen">%1$s +%2$d</string>
     <string name="string_equip_msg_armor">防御：%1$d</string>
     <string name="string_pk_msg_armor">防御：%1$d</string>
+    <string name="string_pk_msg_life">生命上限：%1$d</string>
 
 
     <string name="medicines_msg_price">需要金钱：%1$d</string>
@@ -92,6 +94,7 @@
     <string name="string_equip_loading">装备中...</string>
     <string name="string_no_hold_on_attack">未装备武器</string>
     <string name="string_no_hold_on_armor">未装备铠甲</string>
+    <string name="string_no_hold_on_accessories">未装备饰品</string>
     <string name="string_activity_monsters_power">当前体力：%1$d / %2$d</string>
 
     <string name="string_no_can_rest_title">无法休息</string>

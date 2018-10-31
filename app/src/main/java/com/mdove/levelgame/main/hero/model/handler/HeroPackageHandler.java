@@ -2,7 +2,6 @@ package com.mdove.levelgame.main.hero.model.handler;
 
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroPackagePresenter;
-import com.mdove.levelgame.main.hero.presenter.HeroPackagesPresenter;
 
 /**
  * @author MDove on 2018/10/23

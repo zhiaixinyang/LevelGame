@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout_my"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_blacksmith_normal_margin"
+            android:layout_marginLeft="@dimen/item_blacksmith_normal_margin"
+            android:layout_marginRight="@dimen/item_blacksmith_normal_margin"
+            android:background="@drawable/bg_white_round">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:htmlColorText="@{vm.name}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="我方名字" />
+
+            <TextView
+                android:id="@+id/tv_attack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+                android:text="@{vm.attack}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/pb"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                tools:text="我方攻击：10" />
+
+            <TextView
+                android:id="@+id/tv_armor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+                android:text="@{vm.armor}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/pb"
+                app:layout_constraintLeft_toRightOf="@+id/tv_attack"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                tools:text="我方防御：10" />
+
+            <TextView
+                android:id="@+id/tv_life"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+                android:text="@{vm.armor}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/pb"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                tools:text="我方生命：99/99" />
+
+            <com.mdove.levelgame.view.HorizontalSmoothProgressBar
+                android:id="@+id/pb"
+                android:layout_width="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_life"
+                app:layout_constraintRight_toRightOf="parent"
+                app:hspBackgroundProgressColor="@color/red_700"
+                app:hspForegroundProgressColor="@color/red_300"
+                android:progress="100"
+                android:layout_height="wrap_content" />
+        </android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout_enemy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_blacksmith_normal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/layout_my"
+            android:background="@drawable/bg_white_round">
+
+            <TextView
+                android:id="@+id/tv_enemy_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:htmlColorText="@{vm.name}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="我方名字" />
+
+            <TextView
+                android:id="@+id/tv_enemy_attack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+                android:text="@{vm.attack}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_enemy_name"
+                tools:text="我方攻击：10" />
+
+            <TextView
+                android:id="@+id/tv_enemy_armor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+                android:text="@{vm.armor}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
+                app:layout_constraintLeft_toRightOf="@+id/tv_enemy_attack"
+                app:layout_constraintTop_toBottomOf="@+id/tv_enemy_name"
+                tools:text="我方防御：10" />
+
+            <TextView
+                android:id="@+id/tv_enemy_life"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+                android:text="@{vm.armor}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
+                app:layout_constraintTop_toBottomOf="@+id/tv_enemy_name"
+                tools:text="我方生命：99/99" />
+
+            <com.mdove.levelgame.view.HorizontalSmoothProgressBar
+                android:id="@+id/pb_enemy"
+                android:layout_width="0dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_enemy_life"
+                android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+                app:layout_constraintRight_toRightOf="parent"
+                app:hspBackgroundProgressColor="@color/red_700"
+                app:hspForegroundProgressColor="@color/red_300"
+                android:progress="100"
+                android:layout_height="wrap_content" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

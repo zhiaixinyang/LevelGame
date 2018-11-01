@@ -9,10 +9,10 @@
     "type": "B1",
     "strengthen": 0,
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 1,
-    "belong_monster_id":"1001,",
-
+    "belong_monster_id": "1001,",
     "is_can_mixture": 1
   },
   {
@@ -21,13 +21,13 @@
     "tips": "和布衣唯一的区别就是，一字之差~",
     "attack": 0,
     "armor": 8,
-    "belong_monster_id":"1001,",
-
-
+    "belong_monster_id": "1001,",
     "price": 20,
     "type": "B2",
     "strengthen": 0,
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+
     "is_can_update": 1,
     "is_special": 1,
     "is_can_mixture": 1
@@ -38,13 +38,12 @@
     "tips": "入门级铠甲，多多少少像点样子。",
     "attack": 3,
     "armor": 20,
-    "price": 100,
+    "price": 3000,
     "type": "B3",
-    "belong_monster_id":"1001,",
-
-
+    "belong_monster_id": "1001,",
     "strengthen": 0,
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 1,
     "is_can_mixture": 1
@@ -57,11 +56,11 @@
     "armor": 50,
     "price": 500,
     "type": "B4",
-    "belong_monster_id":"1001,",
-
-
+    "belong_monster_id": "1001,",
     "strengthen": 0,
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+
     "is_can_update": 1,
     "is_special": 1,
     "is_can_mixture": 1
@@ -74,11 +73,11 @@
     "armor": 100,
     "price": 3000,
     "type": "B5",
-    "belong_monster_id":"1001,",
-
-
+    "belong_monster_id": "1001,",
     "strengthen": 0,
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+
     "is_can_update": 1,
     "is_special": 1,
     "is_can_mixture": 1
@@ -92,13 +91,12 @@
     "price": 2,
     "type": "B6",
     "strengthen": 0,
-    "is_can_strengthen": 0,
-    "belong_monster_id":"1002,",
-
-
+    "belong_monster_id": "1002,",
     "is_can_update": 1,
     "is_special": 0,
-    "strengthen_formula": "[{\"type\":\"E3\"}]",
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+
     "mixture_formula": "[{\"type\":\"B5\"},{\"type\":\"E4\"}]",
     "is_can_mixture": 0
   },
@@ -110,13 +108,30 @@
     "armor": 80,
     "price": 2,
     "type": "B7",
-    "belong_monster_id":"1002,",
+    "belong_monster_id": "1002,",
     "strengthen": 0,
     "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 0,
-    "strengthen_formula": "[{\"type\":\"E3\"}]",
     "mixture_formula": "[{\"type\":\"B4\"},{\"type\":\"E2\"},{\"type\":\"A8\"}]",
+    "is_can_mixture": 0
+  },
+  {
+    "id": 8,
+    "name": "<font color=\"#FBC02D\">鬼神甲</font>",
+    "tips": "合成公式：布衣 + 布甲 + 轻盔甲 + 刃甲 + 长刀 + 铜矿石",
+    "attack": 300,
+    "armor": 150,
+    "price": 2,
+    "type": "B8",
+    "belong_monster_id": "1002,",
+    "strengthen": 0,
+    "is_can_update": 1,
+    "is_special": 0,
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "mixture_formula": "[{\"type\":\"B1\"},{\"type\":\"B7\"},{\"type\":\"B2\"},{\"type\":\"B3\"},{\"type\":\"E2\"},{\"type\":\"A3\"}]",
     "is_can_mixture": 0
   }
 ]

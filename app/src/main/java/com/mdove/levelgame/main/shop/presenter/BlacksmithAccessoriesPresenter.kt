@@ -2,7 +2,10 @@ package com.mdove.levelgame.main.shop.presenter
 
 import com.mdove.levelgame.greendao.entity.Accessories
 import com.mdove.levelgame.greendao.utils.DatabaseManager
+import com.mdove.levelgame.main.shop.manager.BlacksmithManager
 import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM
+import com.mdove.levelgame.view.MyDialog
+import io.reactivex.functions.Consumer
 
 /**
  * @author MDove on 2018/11/1
@@ -10,7 +13,9 @@ import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM
  */
 class BlacksmithAccessoriesPresenter : BlacksmithAccessoriesContract.IBlacksmithAccessoriesPresenter {
     override fun onItemBtnClick(type: String, id: Long?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        BlacksmithManager.getInstance().goodsUpdate(type).subscribe(Consumer {
+            MyDialog.showMyDialog(view.context, it.title, it.content, true)
+        })
     }
 
     lateinit var view: BlacksmithAccessoriesContract.IBlacksmithAccessoriesView

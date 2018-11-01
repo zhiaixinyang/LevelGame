@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.MonstersDao;
+import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Monsters;
@@ -67,6 +68,15 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
                     } else if (oj instanceof Material) {
                         Material material = (Material) oj;
                         data.add(new SellGoodsModelVM(temp.price, material.name, material.tips, material.type, 0));
+                    }else if (oj instanceof Accessories) {
+                        Accessories accessories = (Accessories) oj;
+                        int status = 0;
+                        if (accessories.isCanMixture == 0) {
+                            status = 1;
+                        } else if (accessories.isCanUpdate == 0) {
+                            status = 2;
+                        }
+                        data.add(new SellGoodsModelVM(temp.price, accessories.name, accessories.tips, accessories.type, status));
                     }
                 }
             }

@@ -2,10 +2,10 @@
   {
     "id": 1,
     "name": "东皇钟",
-    "tips": "<font color=\"#D32F2F\">神器</font>之一。<br/>传说中上古之神用于封印魔王所铸神器。魔王封印之后，神器便失去踪迹...",
-    "attack": 0,
-    "armor": 350,
-    "life": 200,
+    "tips": "<font color=\"#D32F2F\">神器</font>之一。<br/>传说中上古之神用于封印魔王所铸神器。魔王封印之后，神器便失去踪迹...<br/>合成公式：鬼神甲 + 玄武甲",
+    "attack": 400,
+    "armor": 550,
+    "life": 300,
     "price": 2,
     "type": "G1",
     "is_can_strengthen": 0,
@@ -13,12 +13,12 @@
     "is_can_update": 1,
     "is_special": 0,
     "is_can_mixture": 0,
-    "mixture_formula": "[{\"type\":\"B1\"},{\"type\":\"B2\"},{\"type\":\"B3\"},{\"type\":\"B4\"},{\"type\":\"E7\"}]"
+    "mixture_formula": "[{\"type\":\"B8\"},{\"type\":\"E7\"}]"
   },
   {
     "id": 2,
     "name": "战神印",
-    "tips": "战神用于发号施令的符印，符印一出，号令三军。<br/>可与战神遗骸合成<font color=\"#7B1FA2\">真·战神印</font>",
+    "tips": "战神用于发号施令的符印，符印一出，号令三军。<br/>换取要求：战神信物<br/>可与战神遗骸合成<font color=\"#7B1FA2\">真·战神印</font>",
     "attack": 200,
     "armor": 200,
     "price": 2,

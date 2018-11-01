@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
             android:gravity="center"
-            app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
             android:textSize="16sp"
+            app:htmlColorText="@{vm.name}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="武器名字" />
@@ -40,9 +40,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-            app:htmlColorText="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
+            app:htmlColorText="@{vm.tips}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/btn_buy"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
@@ -90,6 +90,19 @@
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="增加攻击：10" />
+
+        <TextView
+            android:id="@+id/tv_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:text="@{vm.life}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_armor"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            tools:text="增加生命：10" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

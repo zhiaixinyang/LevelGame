@@ -7,7 +7,7 @@
 
         <variable
             name="handler"
-            type="com.mdove.levelgame.main.home.model.MainActionHandler" />
+            type="com.mdove.levelgame.main.home.model.HomeActionHandler" />
 
         <variable
             name="vm"

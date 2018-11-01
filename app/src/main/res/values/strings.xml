@@ -118,4 +118,6 @@
     <string name="string_strengthen_error">程序异常，请重试。</string>
     <string name="string_strengthen_title">强化结果：</string>
     <string name="string_attack_big_monster_suc">抵御魔王成功</string>
+    <string name="string_big_monsters_show_title">魔王现世</string>
+    <string name="string_big_monsters_show_content">兄dei，抄家伙干魔王，保家卫国了！</string>
 </resources>

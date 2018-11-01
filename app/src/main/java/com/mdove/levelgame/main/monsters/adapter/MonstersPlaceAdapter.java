@@ -52,7 +52,11 @@ public class MonstersPlaceAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).bind(data.get(position));
+        if (holder instanceof ViewHolder) {
+            ((ViewHolder) holder).bind(data.get(position));
+        }else if (holder instanceof AdventureViewHolder){
+            ((AdventureViewHolder) holder).bind(data.get(position));
+        }
     }
 
     @Override

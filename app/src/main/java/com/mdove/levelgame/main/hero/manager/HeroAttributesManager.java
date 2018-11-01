@@ -28,6 +28,7 @@ import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager;
 import com.mdove.levelgame.model.DropGoodsModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
+import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,15 +72,20 @@ public class HeroAttributesManager {
         bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
     }
 
-    public boolean heroRest() {
-        boolean isCanRest;
+    public int heroRest() {
+        // 0普通休息成功；1魔王已经来了，休息失败；2休息成功但，魔王已到
+        int resetStatus;
         // 如果魔王此时不是gone状态，则不能rest
         if (!goneBigMonster()) {
-            isCanRest = false;
+            resetStatus = 1;
         } else {
-            isCanRest = true;
+            resetStatus = 0;
             heroAttributes.bodyPower = 100;
             heroAttributes.days += 1;
+
+            if (heroAttributes.days == 10 || heroAttributes.days == 30 || heroAttributes.days == 50) {
+                resetStatus = 2;
+            }
 
             // 奇遇设置
             AdventureManager.getInstance().setAdventure();
@@ -102,7 +108,7 @@ public class HeroAttributesManager {
             }
             save();
         }
-        return isCanRest;
+        return resetStatus;
     }
 
     public boolean goneBigMonster() {

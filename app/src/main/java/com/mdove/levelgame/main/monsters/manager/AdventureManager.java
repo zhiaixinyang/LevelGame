@@ -51,7 +51,6 @@ public class AdventureManager {
                     DatabaseManager.getInstance().getMonstersDao().update(monsters);
                     DatabaseManager.getInstance().getMonstersPlaceDao().update(monstersPlace);
                 }
-
             }
         }
     }

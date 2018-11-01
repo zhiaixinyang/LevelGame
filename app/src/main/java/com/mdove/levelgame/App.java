@@ -49,7 +49,6 @@ public class App extends Application {
         CrashReport.setIsDevelopmentDevice(mAppContext, true);
         CrashReport.initCrashReport(getApplicationContext(), "544aec74cc", false);
 
-        InitDataFileUtils.initData();
 //        HeroManager.getInstance().getHeroAttributes().days = 9;
 //        HeroManager.getInstance().save();
         if (!AppConfig.isFirstLogin()) {
@@ -70,6 +69,8 @@ public class App extends Application {
             heroAttributes.bodyPower = 100;
             heroAttributes.days = 1;
             dao.insert(heroAttributes);
+            // 初始化数据库
+            InitDataFileUtils.initData();
             AppConfig.setFirstLogin();
         }
         resetPkSelectStatus();

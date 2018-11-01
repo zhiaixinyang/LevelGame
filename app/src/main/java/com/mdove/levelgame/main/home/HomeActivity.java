@@ -15,6 +15,8 @@ import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.databinding.ActivityHomeBinding;
 import com.mdove.levelgame.main.home.adapter.HomeAdapter;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
+import com.mdove.levelgame.main.home.model.HomeActionHandler;
+import com.mdove.levelgame.main.home.model.MainActionHandler;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.home.presenter.HomeContract;
 import com.mdove.levelgame.main.home.presenter.HomePresenter;
@@ -56,6 +58,15 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         presenter.initMenu();
         presenter.initBigMonster();
         presenter.initBigMonsterInvade();
+
+        binding.setHandler(new HomeActionHandler(presenter));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.initBigMonsterInvade();
+        presenter.initBigMonster();
     }
 
     @Override

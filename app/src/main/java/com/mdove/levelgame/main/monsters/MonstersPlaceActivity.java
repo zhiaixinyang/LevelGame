@@ -27,7 +27,7 @@ public class MonstersPlaceActivity extends BaseActivity implements MonstersPlace
     private MonstersPlaceAdapter adapter;
     private MonstersPlacePresenter presenter;
 
-    public static void start(Context context){
+    public static void start(Context context) {
         Intent start = new Intent(context, MonstersPlaceActivity.class);
         if (!(context instanceof Activity)) {
             start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -54,6 +54,12 @@ public class MonstersPlaceActivity extends BaseActivity implements MonstersPlace
         rlv.setLayoutManager(new LinearLayoutManager(this));
         rlv.setAdapter(adapter);
 
+        presenter.initData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         presenter.initData();
     }
 

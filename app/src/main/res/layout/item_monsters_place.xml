@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
             android:gravity="center"
-            android:text="@{vm.name}"
+            app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"

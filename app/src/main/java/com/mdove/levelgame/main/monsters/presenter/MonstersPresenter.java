@@ -79,10 +79,10 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 
     @Override
     public void heroRest() {
-        boolean isCanRest = HeroAttributesManager.getInstance().heroRest();
-        if (isCanRest) {
+        final int restStatus = HeroAttributesManager.getInstance().heroRest();
+        if (restStatus == 0 || restStatus == 2) {
             view.showLoadingDialog(view.getContext().getString(R.string.string_rest_loading_msg));
-        } else {
+        } else if (restStatus == 1) {
             MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_no_can_rest_title),
                     view.getString(R.string.string_no_can_rest_content),
                     view.getString(R.string.string_no_can_rest_nav_btn),
@@ -101,6 +101,10 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
+                        if (restStatus == 2) {
+                            MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_big_monsters_show_title),
+                                    view.getString(R.string.string_big_monsters_show_content), true);
+                        }
                         initPower();
                         initData(monstersPlaceId);
                         view.dismissLoadingDialog();

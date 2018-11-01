@@ -12,19 +12,21 @@ public class HeroPackageModelVM {
     public ObservableField<Long> pkId = new ObservableField<>();
     public ObservableField<Long> strengthen = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
+    public String nameInit;
     public ObservableField<String> attack = new ObservableField<>();
-    private int attackInt;
+    private int attackInit;
     public ObservableField<String> armor = new ObservableField<>();
-    private int armorInt;
+    private int armorInit;
     public ObservableField<String> life = new ObservableField<>();
-    private int lifeInt;
+    private int lifeInit;
     public ObservableField<String> type = new ObservableField<>();
 
     public HeroPackageModelVM(Long id, long strengthen, String name, int attack, int armor, int life, String type) {
         pkId.set(id);
-        attackInt = attack;
-        armorInt = armor;
-        lifeInt = life;
+        attackInit = attack;
+        armorInit = armor;
+        lifeInit = life;
+        nameInit = name;
         this.strengthen.set(strengthen);
         if (strengthen > 0) {
             this.name.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_name_strengthen), name, strengthen));
@@ -43,10 +45,10 @@ public class HeroPackageModelVM {
     public void reName(long strengthen) {
         if (strengthen > 0) {
             this.strengthen.set(strengthen);
-            this.name.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_name_strengthen), name.get(), strengthen));
-            this.attack.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_attack), (int) ((1 + strengthen * 0.2) * attackInt)));
-            this.armor.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_armor), (int) ((1 + strengthen * 0.2) * armorInt)));
-            this.life.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_life), (int) ((1 + strengthen * 0.2) * lifeInt)));
+            this.name.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_name_strengthen), nameInit, strengthen));
+            this.attack.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_attack), (int) ((1 + strengthen * 0.2) * attackInit)));
+            this.armor.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_armor), (int) ((1 + strengthen * 0.2) * armorInit)));
+            this.life.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_life), (int) ((1 + strengthen * 0.2) * lifeInit)));
         }
     }
 }

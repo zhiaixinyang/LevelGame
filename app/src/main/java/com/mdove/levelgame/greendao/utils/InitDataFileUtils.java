@@ -65,11 +65,11 @@ public class InitDataFileUtils {
         MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
         monstersDao.deleteAll();
         MonstersPlaceDao monstersPlaceDao = DatabaseManager.getInstance().getMonstersPlaceDao();
-        monstersPlaceDao.deleteAll();
         MedicinesDao medicinesDao = DatabaseManager.getInstance().getMedicinesDao();
         medicinesDao.deleteAll();
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
         AdventureDao adventureDao = DatabaseManager.getInstance().getAdventureDao();
+        adventureDao.deleteAll();
 
         MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
         mainMenuDao.deleteAll();
@@ -84,7 +84,7 @@ public class InitDataFileUtils {
 
         if (!AppConfig.isFirstLogin()) {
             bigMonstersDao.deleteAll();
-            adventureDao.deleteAll();
+            monstersPlaceDao.deleteAll();
         }
         DropGoodsDao dropGoodsDao = DatabaseManager.getInstance().getDropGoodsDao();
         dropGoodsDao.deleteAll();
@@ -149,22 +149,23 @@ public class InitDataFileUtils {
             monstersPlaceModels = getInitMonstersPlace();
         }
 
-        monstersPlaces = getInitMonstersPlaceBase();
-        for (MonstersPlace monstersPlace : monstersPlaces) {
-            monstersPlaceDao.insert(monstersPlace);
-        }
+
 
         for (Material material : getInitMaterials()) {
             materialDao.insert(material);
+        }
+        List<Adventure> adventures = getInitAdventure();
+        for (Adventure adventure : adventures) {
+            adventureDao.insert(adventure);
         }
         if (!AppConfig.isFirstLogin()) {
             List<BigMonsters> bigMonsters = getInitBigMonsters();
             for (BigMonsters b : bigMonsters) {
                 bigMonstersDao.insert(b);
             }
-            List<Adventure> adventures = getInitAdventure();
-            for (Adventure adventure : adventures) {
-                adventureDao.insert(adventure);
+            monstersPlaces = getInitMonstersPlaceBase();
+            for (MonstersPlace monstersPlace : monstersPlaces) {
+                monstersPlaceDao.insert(monstersPlace);
             }
         }
     }

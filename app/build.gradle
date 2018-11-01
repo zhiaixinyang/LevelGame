@@ -2,6 +2,8 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'org.greenrobot.greendao'
 
 def getVersionCodeProperty() {
@@ -89,6 +91,10 @@ android {
     }
 }
 
+kapt {
+    generateStubs = true
+}
+
 greendao {
     schemaVersion 12
     daoPackage 'com.mdove.levelgame.greendao'
@@ -116,5 +122,11 @@ dependencies {
 
     implementation 'org.greenrobot:greendao:3.2.0'
     implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
-    implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    kapt 'com.android.databinding:compiler:3.0.1'
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+}
+repositories {
+    mavenCentral()
 }

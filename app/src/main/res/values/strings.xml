@@ -25,6 +25,7 @@
     <string name="string_fragment_title_equip">已装备</string>
     <string name="string_fragment_title_update_attack">打造武器</string>
     <string name="string_fragment_title_update_armor">打造铠甲</string>
+    <string name="string_fragment_title_update_accessories">打造饰品</string>
     <string name="string_fragment_title_package">我的道具</string>
     <string name="string_medicine_shop">购买药品</string>
     <string name="string_rest">休息</string>
@@ -59,10 +60,17 @@
     <string name="shop_attack_msg_price">需要金钱：%1$d</string>
     <string name="shop_attack_msg_attack">装备后增加攻击：%1$d</string>
     <string name="shop_attack_msg_armor">装备后增加护甲：%1$d</string>
+    <string name="shop_attack_msg_life">装备后增加生命：%1$d</string>
 
     <string name="shop_armor_msg_price">需要金钱：%1$d</string>
     <string name="shop_armor_msg_attack">装备后增加攻击：%1$d</string>
     <string name="shop_armor_msg_armor">装备后增加护甲：%1$d</string>
+    <string name="shop_armor_msg_life">装备后增加生命：%1$d</string>
+
+    <string name="shop_accessories_msg_price">需要金钱：%1$d</string>
+    <string name="shop_accessories_msg_attack">装备后增加攻击：%1$d</string>
+    <string name="shop_accessories_msg_armor">装备后增加护甲：%1$d</string>
+    <string name="shop_accessories_msg_life">装备后增加生命：%1$d</string>
 
     <string name="hero_attributes_msg_attack"><![CDATA[当前攻击：%1$d <font color="#D32F2F">成长：%2$d</font>]]></string>
     <string name="hero_attributes_msg_armor"><![CDATA[当前护甲：%1$d <font color="#D32F2F">成长：%2$d</font>]]></string>

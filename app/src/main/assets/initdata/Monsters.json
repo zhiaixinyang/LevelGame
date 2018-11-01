@@ -290,7 +290,7 @@
     "drop_goods_id": 10,
     "is_businessman": 0,
     "consume_power": 0,
-    "sell_goods_json": "[{\"type\":\"A16\",\"price\":0}]",
+    "sell_goods_json": "[{\"type\":\"G2\",\"price\":0}]",
     "exp": 0
   },
   {

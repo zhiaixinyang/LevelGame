@@ -17,6 +17,7 @@ import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.main.hero.fragment.HeroEquipFragment;
 import com.mdove.levelgame.main.hero.fragment.HeroPackageFragment;
 import com.mdove.levelgame.main.shop.adapter.BlacksmithAdapter;
+import com.mdove.levelgame.main.shop.fragment.BlacksmithAccessoriesFragment;
 import com.mdove.levelgame.main.shop.fragment.BlacksmithArmorFragment;
 import com.mdove.levelgame.main.shop.fragment.BlacksmithAttackFragment;
 import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM;
@@ -30,7 +31,7 @@ import java.util.List;
  * Created by MDove on 2018/10/27.
  */
 
-public class BlacksmithActivity extends BaseActivity{
+public class BlacksmithActivity extends BaseActivity {
     private TabLayout tab;
     private ViewPager vp;
     private String[] titles;
@@ -58,10 +59,12 @@ public class BlacksmithActivity extends BaseActivity{
         tab = findViewById(R.id.tab);
         vp = findViewById(R.id.vp);
 
-        titles = new String[]{getString(R.string.string_fragment_title_update_attack), getString(R.string.string_fragment_title_update_armor)};
+        titles = new String[]{getString(R.string.string_fragment_title_update_attack), getString(R.string.string_fragment_title_update_armor)
+                , getString(R.string.string_fragment_title_update_accessories)};
         fragments = new ArrayList<>();
         fragments.add(BlacksmithAttackFragment.newInstance());
         fragments.add(BlacksmithArmorFragment.newInstance());
+        fragments.add(BlacksmithAccessoriesFragment.Companion.newInstance());
 
         vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override

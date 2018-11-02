@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="myVm"
+            type="com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM" />
+
+        <variable
+            name="enemyVm"
+            type="com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM" />
+    </data>
+
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_my"
@@ -24,7 +35,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:htmlColorText="@{vm.name}"
+                app:htmlColorText="@{myVm.name}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="我方名字" />
@@ -34,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-                android:text="@{vm.attack}"
+                android:text="@{myVm.attack}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/pb"
@@ -47,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-                android:text="@{vm.armor}"
+                android:text="@{myVm.armor}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/pb"
@@ -60,35 +71,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-                android:text="@{vm.armor}"
+                android:text="@{myVm.life}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/pb"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name"
                 tools:text="我方生命：99/99" />
 
             <com.mdove.levelgame.view.HorizontalSmoothProgressBar
                 android:id="@+id/pb"
-                android:layout_width="0dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
                 android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                app:myCtrlProgress="@{myVm}"
+                app:hspBackgroundProgressColor="@color/red_300"
+                app:hspForegroundProgressColor="@color/red_700"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_life"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:hspBackgroundProgressColor="@color/red_700"
-                app:hspForegroundProgressColor="@color/red_300"
-                android:progress="100"
-                android:layout_height="wrap_content" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_life" />
         </android.support.constraint.ConstraintLayout>
+
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_enemy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_blacksmith_normal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/layout_my"
-            android:background="@drawable/bg_white_round">
+            android:background="@drawable/bg_white_round"
+            app:layout_constraintTop_toBottomOf="@+id/layout_my">
 
             <TextView
                 android:id="@+id/tv_enemy_name"
@@ -98,63 +110,63 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:htmlColorText="@{vm.name}"
+                app:htmlColorText="@{enemyVm.name}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="我方名字" />
+                tools:text="敌方名字" />
 
             <TextView
                 android:id="@+id/tv_enemy_attack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-                android:text="@{vm.attack}"
+                android:text="@{enemyVm.attack}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_enemy_name"
-                tools:text="我方攻击：10" />
+                tools:text="敌方攻击：10" />
 
             <TextView
                 android:id="@+id/tv_enemy_armor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-                android:text="@{vm.armor}"
+                android:text="@{enemyVm.armor}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
                 app:layout_constraintLeft_toRightOf="@+id/tv_enemy_attack"
                 app:layout_constraintTop_toBottomOf="@+id/tv_enemy_name"
-                tools:text="我方防御：10" />
+                tools:text="敌方防御：10" />
 
             <TextView
                 android:id="@+id/tv_enemy_life"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-                android:text="@{vm.armor}"
+                android:text="@{enemyVm.life}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_enemy_name"
-                tools:text="我方生命：99/99" />
+                tools:text="敌方生命：99/99" />
 
             <com.mdove.levelgame.view.HorizontalSmoothProgressBar
                 android:id="@+id/pb_enemy"
                 android:layout_width="0dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_enemy_life"
-                android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_height="10dp"
                 android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                android:progress="@{enemyVm.lifeProgress}"
+                app:hspBackgroundProgressColor="@color/red_300"
+                app:hspForegroundProgressColor="@color/red_700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:hspBackgroundProgressColor="@color/red_700"
-                app:hspForegroundProgressColor="@color/red_300"
-                android:progress="100"
-                android:layout_height="wrap_content" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_enemy_life" />
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

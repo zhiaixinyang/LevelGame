@@ -11,7 +11,9 @@ import android.widget.TextView;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.main.hero.model.HeroEquipModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
+import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
+import com.mdove.levelgame.view.HorizontalSmoothProgressBar;
 
 /**
  * Created by MDove on 2018/3/5.
@@ -58,5 +60,10 @@ public class DataBindingAdapter {
         }else{
             view.setBackgroundResource(R.drawable.bg_white_round);
         }
+    }
+
+    @BindingAdapter("myCtrlProgress")
+    public static void myCtrlProgress(HorizontalSmoothProgressBar view, HeroAttrModelVM vm) {
+        view.setProgress(vm.lifeProgress.get());
     }
 }

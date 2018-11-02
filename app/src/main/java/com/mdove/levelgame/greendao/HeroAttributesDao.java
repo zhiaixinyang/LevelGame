@@ -39,6 +39,7 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         public final static Property ExpMultiple = new Property(12, int.class, "expMultiple", false, "EXP_MULTIPLE");
         public final static Property BodyPower = new Property(13, int.class, "bodyPower", false, "BODY_POWER");
         public final static Property Days = new Property(14, int.class, "days", false, "DAYS");
+        public final static Property AttackSpeed = new Property(15, long.class, "attackSpeed", false, "ATTACK_SPEED");
     }
 
 
@@ -68,7 +69,8 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
                 "\"BASE_EXP\" INTEGER NOT NULL ," + // 11: baseExp
                 "\"EXP_MULTIPLE\" INTEGER NOT NULL ," + // 12: expMultiple
                 "\"BODY_POWER\" INTEGER NOT NULL ," + // 13: bodyPower
-                "\"DAYS\" INTEGER NOT NULL );"); // 14: days
+                "\"DAYS\" INTEGER NOT NULL ," + // 14: days
+                "\"ATTACK_SPEED\" INTEGER NOT NULL );"); // 15: attackSpeed
     }
 
     /** Drops the underlying database table. */
@@ -99,6 +101,7 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         stmt.bindLong(13, entity.getExpMultiple());
         stmt.bindLong(14, entity.getBodyPower());
         stmt.bindLong(15, entity.getDays());
+        stmt.bindLong(16, entity.getAttackSpeed());
     }
 
     @Override
@@ -123,6 +126,7 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         stmt.bindLong(13, entity.getExpMultiple());
         stmt.bindLong(14, entity.getBodyPower());
         stmt.bindLong(15, entity.getDays());
+        stmt.bindLong(16, entity.getAttackSpeed());
     }
 
     @Override
@@ -147,7 +151,8 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
             cursor.getLong(offset + 11), // baseExp
             cursor.getInt(offset + 12), // expMultiple
             cursor.getInt(offset + 13), // bodyPower
-            cursor.getInt(offset + 14) // days
+            cursor.getInt(offset + 14), // days
+            cursor.getLong(offset + 15) // attackSpeed
         );
         return entity;
     }
@@ -169,6 +174,7 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         entity.setExpMultiple(cursor.getInt(offset + 12));
         entity.setBodyPower(cursor.getInt(offset + 13));
         entity.setDays(cursor.getInt(offset + 14));
+        entity.setAttackSpeed(cursor.getLong(offset + 15));
      }
     
     @Override

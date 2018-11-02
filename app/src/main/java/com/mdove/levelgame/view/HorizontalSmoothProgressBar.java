@@ -56,12 +56,12 @@ public class HorizontalSmoothProgressBar extends SmoothProgressBar {
         float currentWidth = width * currentProgress / 100;
         float y = getMeasuredHeight() / 2;
 
-        canvas.drawLine(0, y, currentWidth, y, foregroundPaint);
+        canvas.drawLine(0 + y, y, currentWidth - y , y, foregroundPaint);
     }
 
     @Override
     protected void drawBackground(Canvas canvas) {
         float y = getMeasuredHeight() / 2;
-        canvas.drawLine(0, y, getMeasuredWidth(), y, backgroundPaint);
+        canvas.drawLine(0 + y, y, getMeasuredWidth() - y, y, backgroundPaint);
     }
 }

@@ -117,8 +117,12 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     @SuppressLint("CheckResult")
     @Override
     public void onItemBtnClick(String type, final Long id) {
-        new FightingDialog(view.getContext()).show();
-        return;
+        Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(id)).unique();
+        if (monsters != null && monsters.isBusinessman == 0) {
+            BusinessmanActivity.start(view.getContext(), id);
+            return;
+        }
+        new FightingDialog(view.getContext(),monsters).show();
 //        Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Type.eq(type)).unique();
 //        if (monsters != null && monsters.isBusinessman == 0) {
 //            BusinessmanActivity.start(view.getContext(), id);

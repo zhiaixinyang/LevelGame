@@ -33,10 +33,11 @@ public class MonstersModelVM {
     public ObservableField<String> type = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
     public int lifeInit;
+    public int curLife;
     public ObservableField<String> limitCount = new ObservableField<>();
     public ObservableField<String> power = new ObservableField<>();
     public ObservableField<Integer> lifeProgress = new ObservableField<>();
-
+    public ObservableField<String> harm = new ObservableField<>();
     public ObservableField<String> btnText = new ObservableField<>();
     public ObservableField<Boolean> isSpecial = new ObservableField<>();
     public ObservableField<Boolean> isBusinessman = new ObservableField<>();
@@ -53,6 +54,7 @@ public class MonstersModelVM {
         power.set(String.format(App.getAppContext().getString(R.string.monsters_msg_use_power), model.consumePower));
         dropGoodsId.set(model.dropGoodsId);
         lifeInit = model.life;
+        curLife = model.life;
         if (model.isLimitCount == 0) {
             isLimitCount.set(true);
             limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), model.curCount, model.limitCount));
@@ -62,30 +64,9 @@ public class MonstersModelVM {
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));
         money.set(String.format(App.getAppContext().getString(R.string.monsters_msg_money), model.money));
-        life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_life), model.life));
+        life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_life), curLife, lifeInit));
         type.set(model.type);
         lifeProgress.set(100);
-        Observable.interval(1, TimeUnit.SECONDS).subscribe(new Observer<Long>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Long aLong) {
-                lifeProgress.set((int) (100-aLong));
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
 
         if (model.isBusinessman == 0) {
             btnText.set("进入");
@@ -94,18 +75,19 @@ public class MonstersModelVM {
             btnText.set("攻击");
             isBusinessman.set(false);
         }
+        harm.set(0+"");
     }
 
-    public void resetLifeProgress(int curLife) {
+    private void resetLifeProgress(int curLife) {
         float progress = (float) curLife / lifeInit;
         BigDecimal bg = new BigDecimal(progress);
         float real = bg.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
         lifeProgress.set((int) (real * 100));
     }
 
-    public void resetLimitCount(int curCount) {
-        if (isLimitCount.get()) {
-            limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), curCount, limitCountInt));
-        }
+    public void resetLife(int consume) {
+        curLife -= consume;
+        resetLifeProgress(curLife);
+        life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_life), curLife, lifeInit));
     }
 }

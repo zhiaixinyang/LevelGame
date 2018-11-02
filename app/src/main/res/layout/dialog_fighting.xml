@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="myVm"
             type="com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM" />
@@ -16,16 +18,30 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/gray_light">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@string/string_start_fighting"
+            android:textColor="@color/red_700"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_my"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/item_blacksmith_normal_margin"
-            android:layout_marginLeft="@dimen/item_blacksmith_normal_margin"
-            android:layout_marginRight="@dimen/item_blacksmith_normal_margin"
-            android:background="@drawable/bg_white_round">
+            android:layout_margin="@dimen/item_blacksmith_normal_margin"
+            android:background="@drawable/bg_white_round"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
             <TextView
                 android:id="@+id/tv_name"
@@ -79,13 +95,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_name"
                 tools:text="我方生命：99/99" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{myVm.harm}"
+                android:textColor="@color/red_700"
+                android:textSize="24sp"
+                android:rotation="20"
+                app:layout_constraintBottom_toTopOf="@+id/pb"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="-99" />
+
             <com.mdove.levelgame.view.HorizontalSmoothProgressBar
                 android:id="@+id/pb"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="10dp"
                 android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
                 android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-                app:myCtrlProgress="@{myVm}"
+                android:progress="@{myVm.lifeProgress}"
                 app:hspBackgroundProgressColor="@color/red_300"
                 app:hspForegroundProgressColor="@color/red_700"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -100,7 +129,21 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_blacksmith_normal_margin"
             android:background="@drawable/bg_white_round"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_my">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{enemyVm.harm}"
+                android:textColor="@color/red_700"
+                android:textSize="24sp"
+                android:rotation="20"
+                app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="-99" />
 
             <TextView
                 android:id="@+id/tv_enemy_name"

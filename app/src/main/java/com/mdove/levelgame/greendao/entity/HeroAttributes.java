@@ -34,11 +34,13 @@ public class HeroAttributes {
     public int bodyPower;
     // 当前生存天数
     public int days;
-    @Generated(hash = 98610741)
+    // 攻击速度，毫秒级（对应Rx的弹射间隔，此值越来越低）
+    public long attackSpeed;
+    @Generated(hash = 865538211)
     public HeroAttributes(Long id, int attack, int attackIncrease, int armor,
             int armorIncrease, int curLife, int lifeIncrease, int maxLife,
             int money, int level, long experience, long baseExp, int expMultiple,
-            int bodyPower, int days) {
+            int bodyPower, int days, long attackSpeed) {
         this.id = id;
         this.attack = attack;
         this.attackIncrease = attackIncrease;
@@ -54,6 +56,7 @@ public class HeroAttributes {
         this.expMultiple = expMultiple;
         this.bodyPower = bodyPower;
         this.days = days;
+        this.attackSpeed = attackSpeed;
     }
     @Generated(hash = 219453175)
     public HeroAttributes() {
@@ -148,5 +151,10 @@ public class HeroAttributes {
     public void setDays(int days) {
         this.days = days;
     }
-
+    public long getAttackSpeed() {
+        return this.attackSpeed;
+    }
+    public void setAttackSpeed(long attackSpeed) {
+        this.attackSpeed = attackSpeed;
+    }
 }

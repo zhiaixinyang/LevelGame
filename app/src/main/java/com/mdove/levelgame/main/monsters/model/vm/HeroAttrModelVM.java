@@ -23,7 +23,6 @@ public class HeroAttrModelVM {
     public ObservableField<Long> monsterPlaceId = new ObservableField<>();
 
     public ObservableField<String> name = new ObservableField<>();
-    public ObservableField<Long> dropGoodsId = new ObservableField<>();
     public ObservableField<String> tips = new ObservableField<>();
 
     public ObservableField<String> attack = new ObservableField<>();
@@ -32,15 +31,9 @@ public class HeroAttrModelVM {
     public ObservableField<String> type = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
     public int lifeInit;
-    public ObservableField<String> limitCount = new ObservableField<>();
-    public ObservableField<String> power = new ObservableField<>();
     public ObservableField<Integer> lifeProgress = new ObservableField<>();
-
+    public ObservableField<String> harm = new ObservableField<>();
     public ObservableField<String> btnText = new ObservableField<>();
-    public ObservableField<Boolean> isSpecial = new ObservableField<>();
-    public ObservableField<Boolean> isBusinessman = new ObservableField<>();
-    public ObservableField<Boolean> isLimitCount = new ObservableField<>();
-    private int limitCountInt;
 
     public HeroAttrModelVM(HeroAttributes model) {
         id.set(model.id);
@@ -53,9 +46,10 @@ public class HeroAttrModelVM {
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        lifeProgress.set((int) (100-aLong));
+                        lifeProgress.set((int) (100 - aLong));
                     }
                 });
+        harm.set(0+"");
     }
 
     public void resetLifeProgress(int curLife) {

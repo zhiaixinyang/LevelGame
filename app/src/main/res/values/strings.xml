@@ -38,6 +38,7 @@
 
     <string name="monsters_msg_attack">攻击：%1$d</string>
     <string name="monsters_msg_life">生命：%1$d</string>
+    <string name="monsters_msg_has_life">生命：%1$d/%2$d</string>
     <string name="monsters_msg_has_count">还剩次数：%1$d / %2$d</string>
     <string name="monsters_msg_use_power">消耗体力：%1$d</string>
     <string name="monsters_msg_armor">护甲：%1$d</string>
@@ -120,4 +121,5 @@
     <string name="string_attack_big_monster_suc">抵御魔王成功</string>
     <string name="string_big_monsters_show_title">魔王现世</string>
     <string name="string_big_monsters_show_content">兄dei，抄家伙干魔王，保家卫国了！</string>
+    <string name="string_start_fighting">开始战斗</string>
 </resources>

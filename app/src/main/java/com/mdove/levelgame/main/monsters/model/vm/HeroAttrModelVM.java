@@ -4,21 +4,20 @@ import android.databinding.ObservableField;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Monsters;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
- * Created by MDove on 2018/10/21.
+ * Created by MDove on 2018/11/2.
  */
 
-public class MonstersModelVM {
+public class HeroAttrModelVM {
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<String> exp = new ObservableField<>();
     public ObservableField<Long> monsterPlaceId = new ObservableField<>();
@@ -43,57 +42,20 @@ public class MonstersModelVM {
     public ObservableField<Boolean> isLimitCount = new ObservableField<>();
     private int limitCountInt;
 
-    public MonstersModelVM(Monsters model) {
+    public HeroAttrModelVM(HeroAttributes model) {
         id.set(model.id);
-        exp.set(String.format(App.getAppContext().getString(R.string.monsters_msg_exp), model.exp));
-        monsterPlaceId.set(model.monsterPlaceId);
-        limitCountInt = model.limitCount;
-        name.set(model.name);
-        tips.set(model.tips);
-        power.set(String.format(App.getAppContext().getString(R.string.monsters_msg_use_power), model.consumePower));
-        dropGoodsId.set(model.dropGoodsId);
-        lifeInit = model.life;
-        if (model.isLimitCount == 0) {
-            isLimitCount.set(true);
-            limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), model.curCount, model.limitCount));
-        } else {
-            isLimitCount.set(false);
-        }
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));
         money.set(String.format(App.getAppContext().getString(R.string.monsters_msg_money), model.money));
-        life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_life), model.life));
-        type.set(model.type);
+        life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_life), model.maxLife));
         lifeProgress.set(100);
-        Observable.interval(1, TimeUnit.SECONDS).subscribe(new Observer<Long>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Long aLong) {
-                lifeProgress.set((int) (100-aLong));
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-
-        if (model.isBusinessman == 0) {
-            btnText.set("进入");
-            isBusinessman.set(true);
-        } else {
-            btnText.set("攻击");
-            isBusinessman.set(false);
-        }
+        Observable.interval(1, TimeUnit.SECONDS)
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        lifeProgress.set((int) (100-aLong));
+                    }
+                });
     }
 
     public void resetLifeProgress(int curLife) {
@@ -101,11 +63,5 @@ public class MonstersModelVM {
         BigDecimal bg = new BigDecimal(progress);
         float real = bg.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
         lifeProgress.set((int) (real * 100));
-    }
-
-    public void resetLimitCount(int curCount) {
-        if (isLimitCount.get()) {
-            limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), curCount, limitCountInt));
-        }
     }
 }

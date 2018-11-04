@@ -24,6 +24,25 @@
         android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
         android:background="@drawable/bg_white_round">
 
+        <FrameLayout
+            android:id="@+id/iv_src"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray_round"
+            android:layout_marginStart="@dimen/item_hero_equip_normal_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:padding="3dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                tools:src="@mipmap/a1"
+                android:src="@{vm.src}" />
+        </FrameLayout>
+
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
@@ -47,7 +66,7 @@
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:htmlColorText="@{vm.tips}"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintRight_toLeftOf="@+id/btn_sell"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="装备简介" />
@@ -63,7 +82,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/item_hero_equip_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="装备攻击" />
 

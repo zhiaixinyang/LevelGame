@@ -26,7 +26,7 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_shop_attack_normal_margin"
             android:gravity="center"
             app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
@@ -35,37 +35,44 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="武器名字" />
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/iv_src"
-            android:layout_width="40dp"
-            android:src="@{vm.src}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray_round"
+            android:layout_marginStart="@dimen/item_shop_attack_normal_margin"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            android:padding="3dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginStart="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_height="40dp" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_name">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                tools:src="@mipmap/a1"
+                android:src="@{vm.src}" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/tv_tips"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginEnd="@dimen/item_monsters_place_btn_normal_margin"
-            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginStart="@dimen/item_shop_attack_normal_margin"
+            android:layout_marginEnd="@dimen/item_shop_attack_normal_margin"
+            android:layout_marginTop="@dimen/item_shop_attack_normal_margin"
             app:htmlColorText="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@+id/btn_buy"
             app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            app:layout_constraintBottom_toTopOf="@+id/tv_attack"
             tools:text="武器介绍" />
 
         <TextView
             android:id="@+id/btn_buy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_shop_attack_normal_margin"
             android:background="@drawable/bg_btn_buy"
             android:paddingBottom="4dp"
             android:paddingLeft="12dp"
@@ -82,7 +89,7 @@
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_shop_attack_normal_margin"
             android:text="@{vm.price}"
             android:textColor="@color/black"
             android:textSize="12sp"
@@ -95,7 +102,7 @@
             android:id="@+id/tv_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_shop_attack_normal_margin"
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="12sp"
@@ -108,7 +115,7 @@
             android:id="@+id/tv_armor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_margin="@dimen/item_shop_attack_normal_margin"
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="12sp"

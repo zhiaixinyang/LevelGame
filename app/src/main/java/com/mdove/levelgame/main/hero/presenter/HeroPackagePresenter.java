@@ -576,7 +576,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
                 if (position != -1 && strengthIdPosition != 1) {
                     view.notifyByPosition(position);
-                    view.deleteByPosition(position);
+                    view.deleteByPosition(strengthIdPosition);
                 }
                 break;
             }

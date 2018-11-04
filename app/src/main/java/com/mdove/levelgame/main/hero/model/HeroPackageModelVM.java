@@ -5,6 +5,8 @@ import android.view.View;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
+import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
 
 /**
  * @author MDove on 2018/10/23
@@ -22,6 +24,7 @@ public class HeroPackageModelVM {
     public ObservableField<String> life = new ObservableField<>();
     private int lifeInit;
     public ObservableField<String> type = new ObservableField<>();
+    public ObservableField<Integer> src = new ObservableField<>();
     public ObservableField<Boolean> isMaterials = new ObservableField<>();
 
     public HeroPackageModelVM(Long id, String tips, long strengthen, String name, int attack, int armor, int life, String type) {
@@ -32,6 +35,7 @@ public class HeroPackageModelVM {
         nameInit = name;
         this.strengthen.set(strengthen);
         this.tips.set(tips);
+        src.set(WeaponsIconMap.getInstance().getSrc(type));
 
         if (strengthen > 0) {
             this.name.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_name_strengthen), name, strengthen));

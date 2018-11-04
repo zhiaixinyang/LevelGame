@@ -31,7 +31,7 @@ import io.reactivex.ObservableOnSubscribe;
  */
 
 public class BlacksmithManager {
-    private static final String TO_COPPER_TYPE = "A10";
+    private static final String TO_COPPER_TYPE = "A9";
     private static final String TO_STRENGTHEN_TYPE = "A11";
 
     // 强化已满级

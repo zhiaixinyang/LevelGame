@@ -5,7 +5,7 @@ import android.databinding.ObservableField;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.entity.Weapons;
-import com.mdove.levelgame.main.shop.model.ShopAttackModel;
+import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
 
 /**
  * @author zhaojing on 2018/10/22
@@ -17,6 +17,7 @@ public class ShopAttackModelVM {
     public ObservableField<String> attack = new ObservableField<>();
     public ObservableField<String> armor = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();
+    public ObservableField<Integer> src = new ObservableField<>();
 
     public ShopAttackModelVM(Weapons model) {
         id.set(model.id);
@@ -24,9 +25,10 @@ public class ShopAttackModelVM {
         name.set(model.name);
         attack.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_attack), model.attack));
         armor.set("");
-        if (model.armor>0){
+        if (model.armor > 0) {
             armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), model.armor));
         }
         price.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_price), model.price));
+        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
     }
 }

@@ -436,6 +436,7 @@ public class BlacksmithManager {
                                 resp.status = STRENGTHEN_STATUS_SUC;
                                 pk.strengthenLevel = nextLevel;
                                 resp.level = pk.strengthenLevel;
+                                resp.strengthId=hasMaterial.id;
                                 packagesDao.update(pk);
                                 return resp;
                             } else {

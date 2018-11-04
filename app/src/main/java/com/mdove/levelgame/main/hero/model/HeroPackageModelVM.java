@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.hero.model;
 
 import android.databinding.ObservableField;
+import android.view.View;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
@@ -12,6 +13,7 @@ public class HeroPackageModelVM {
     public ObservableField<Long> pkId = new ObservableField<>();
     public ObservableField<Long> strengthen = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
+    public ObservableField<String> tips = new ObservableField<>();
     public String nameInit;
     public ObservableField<String> attack = new ObservableField<>();
     private int attackInit;
@@ -20,14 +22,17 @@ public class HeroPackageModelVM {
     public ObservableField<String> life = new ObservableField<>();
     private int lifeInit;
     public ObservableField<String> type = new ObservableField<>();
+    public ObservableField<Boolean> isMaterials = new ObservableField<>();
 
-    public HeroPackageModelVM(Long id, long strengthen, String name, int attack, int armor, int life, String type) {
+    public HeroPackageModelVM(Long id, String tips, long strengthen, String name, int attack, int armor, int life, String type) {
         pkId.set(id);
         attackInit = attack;
         armorInit = armor;
         lifeInit = life;
         nameInit = name;
         this.strengthen.set(strengthen);
+        this.tips.set(tips);
+
         if (strengthen > 0) {
             this.name.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_name_strengthen), name, strengthen));
             this.attack.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_attack), (int) ((1 + strengthen * 0.2) * attack)));
@@ -40,6 +45,12 @@ public class HeroPackageModelVM {
             this.life.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_life), life));
         }
         this.type.set(type);
+
+        if (this.type.get().startsWith("E")) {
+            isMaterials.set(true);
+        } else {
+            isMaterials.set(false);
+        }
     }
 
     public void reName(long strengthen) {

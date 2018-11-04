@@ -16,10 +16,10 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_round"
         android:layout_marginBottom="@dimen/item_medicines_normal_margin"
         android:layout_marginLeft="@dimen/item_medicines_normal_margin"
         android:layout_marginRight="@dimen/item_medicines_normal_margin"
+        android:background="@drawable/bg_white_round"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
         <TextView
@@ -35,6 +35,19 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="药品名字" />
 
+        <ImageView
+            android:id="@+id/iv_src"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@{vm.src}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
         <TextView
             android:id="@+id/tv_tips"
             android:layout_width="wrap_content"
@@ -44,7 +57,7 @@
             android:text="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="药品介绍" />
 
@@ -73,7 +86,7 @@
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="需要金钱：10" />
 
@@ -85,9 +98,9 @@
             android:text="@{vm.life}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加生命：10" />
 
         <TextView
@@ -98,9 +111,9 @@
             android:text="@{vm.lifeUp}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_life"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="生命上限：10" />
 
     </android.support.constraint.ConstraintLayout>

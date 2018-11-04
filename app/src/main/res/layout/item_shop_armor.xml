@@ -35,6 +35,17 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="铠甲名字" />
 
+        <ImageView
+            android:id="@+id/iv_src"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:src="@{vm.src}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
         <TextView
             android:id="@+id/tv_tips"
             android:layout_width="0dp"
@@ -44,8 +55,9 @@
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@+id/btn_buy"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintBottom_toTopOf="@+id/tv_attack"
             tools:text="铠甲介绍" />
 
         <TextView
@@ -86,9 +98,9 @@
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="增加攻击：10" />
 
         <TextView
@@ -99,9 +111,9 @@
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加攻击：10" />
 
     </android.support.constraint.ConstraintLayout>

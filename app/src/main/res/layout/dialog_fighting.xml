@@ -3,6 +3,7 @@
 
     <data>
 
+
         <variable
             name="myVm"
             type="com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM" />
@@ -85,13 +86,13 @@
                 android:layout_height="10dp"
                 android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
                 android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-                app:myCtrlProgress="@{myVm}"
                 app:hspBackgroundProgressColor="@color/red_300"
                 app:hspForegroundProgressColor="@color/red_700"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_life" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_life"
+                app:myCtrlProgress="@{myVm}" />
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout

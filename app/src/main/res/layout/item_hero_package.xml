@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
             type="com.mdove.levelgame.main.hero.model.HeroPackageModelVM" />
@@ -36,6 +38,21 @@
             tools:text="装备名字" />
 
         <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/item_hero_equip_normal_margin"
+            android:layout_marginStart="@dimen/item_hero_equip_normal_margin"
+            android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
+            android:textColor="@color/gray_plus"
+            android:textSize="12sp"
+            app:htmlColorText="@{vm.tips}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_sell"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="装备简介" />
+
+        <TextView
             android:id="@+id/tv_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +64,7 @@
             android:textSize="@dimen/item_hero_equip_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="装备攻击" />
 
         <TextView
@@ -62,10 +79,11 @@
             android:textSize="@dimen/item_hero_equip_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="装备防御" />
 
         <TextView
+            android:id="@+id/btn_sell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
@@ -97,10 +115,10 @@
             android:text="装备"
             android:textColor="@color/blue_700"
             android:textSize="@dimen/item_hero_equip_text_size"
+            android:visibility="@{vm.isMaterials?View.GONE:View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@+id/btn_strengthen"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:materialIsGone="@{vm}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/btn_strengthen"
@@ -118,10 +136,10 @@
             android:text="强化"
             android:textColor="@color/blue_700"
             android:textSize="@dimen/item_hero_equip_text_size"
+            android:visibility="@{vm.isMaterials?View.GONE:View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_equip"
-            app:materialIsGone="@{vm}" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_equip" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

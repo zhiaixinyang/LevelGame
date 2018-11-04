@@ -43,7 +43,7 @@
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_can_update": 1,
     "is_special": 0,
-    "mixture_formula": "[{\"type\":\"A16\"},{\"type\":\"E2\"},{\"type\":\"E8\"}]",
+    "mixture_formula": "[{\"type\":\"G2\"},{\"type\":\"E2\"},{\"type\":\"E8\"}]",
     "is_can_mixture": 0
   }
 ]

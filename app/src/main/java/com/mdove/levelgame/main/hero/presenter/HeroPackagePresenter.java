@@ -134,28 +134,28 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
             case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
                 Weapons attack = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(pk.type)).unique();
                 if (attack != null && pk.isEquip == 1) {
-                    packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, attack.name, attack.attack, attack.armor, 0, attack.type));
+                    packageModelVMS.add(new HeroPackageModelVM(pk.id, attack.tips, pk.strengthenLevel, attack.name, attack.attack, attack.armor, 0, attack.type));
                 }
                 break;
             }
             case AllGoodsToDBIdUtils.DB_TYPE_IS_ARMOR: {
                 Armors armors = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(pk.type)).unique();
                 if (armors != null && pk.isEquip == 1) {
-                    packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, armors.name, armors.attack, armors.armor, 0, armors.type));
+                    packageModelVMS.add(new HeroPackageModelVM(pk.id, armors.tips, pk.strengthenLevel, armors.name, armors.attack, armors.armor, 0, armors.type));
                 }
                 break;
             }
             case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
                 Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(pk.type)).unique();
                 if (material != null && pk.isEquip == 1) {
-                    packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
+                    packageModelVMS.add(new HeroPackageModelVM(pk.id, material.tips, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
                 }
                 break;
             }
             case AllGoodsToDBIdUtils.DB_TYPE_IS_ACCESSORIES: {
                 Accessories accessories = DatabaseManager.getInstance().getAccessoriesDao().queryBuilder().where(AccessoriesDao.Properties.Type.eq(pk.type)).unique();
                 if (accessories != null && pk.isEquip == 1) {
-                    packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type));
+                    packageModelVMS.add(new HeroPackageModelVM(pk.id, accessories.tips, pk.strengthenLevel, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type));
                 }
                 break;
             }
@@ -169,35 +169,35 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
         List<Packages> packages = packagesDao.loadAll();
         packageModelVMS = new ArrayList<>();
         // Title的布局
-        packageModelVMS.add(new HeroPackageModelVM((long) -3, 0, "", 0, 0, 0, null));
+        packageModelVMS.add(new HeroPackageModelVM((long) -3,"", 0, "", 0, 0, 0, ""));
         for (Packages pk : packages) {
             int dbTpe = AllGoodsToDBIdUtils.getInstance().getDBType(pk.type);
             switch (dbTpe) {
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
                     Weapons attack = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(pk.type)).unique();
                     if (attack != null && pk.isEquip == 1) {
-                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, attack.name, attack.attack, attack.armor, 0, attack.type));
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, attack.tips,pk.strengthenLevel, attack.name, attack.attack, attack.armor, 0, attack.type));
                     }
                     break;
                 }
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_ARMOR: {
                     Armors armors = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(pk.type)).unique();
                     if (armors != null && pk.isEquip == 1) {
-                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, armors.name, armors.attack, armors.armor, 0, armors.type));
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, armors.tips, pk.strengthenLevel, armors.name, armors.attack, armors.armor, 0, armors.type));
                     }
                     break;
                 }
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
                     Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(pk.type)).unique();
                     if (material != null && pk.isEquip == 1) {
-                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, material.tips, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
                     }
                     break;
                 }
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_ACCESSORIES: {
                     Accessories accessories = DatabaseManager.getInstance().getAccessoriesDao().queryBuilder().where(AccessoriesDao.Properties.Type.eq(pk.type)).unique();
                     if (accessories != null && pk.isEquip == 1) {
-                        packageModelVMS.add(new HeroPackageModelVM(pk.id, pk.strengthenLevel, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type));
+                        packageModelVMS.add(new HeroPackageModelVM(pk.id, accessories.tips, pk.strengthenLevel, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type));
                     }
                     break;
                 }
@@ -559,6 +559,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                 MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_strengthen_title)
                         , view.getString(R.string.string_strengthen_suc), true);
                 int position = -1;
+                int strengthIdPosition = -1;
                 for (HeroPackageModelVM vm1 : packageModelVMS) {
                     if (vm1.pkId.get() == vm.pkId.get()) {
                         position = packageModelVMS.indexOf(vm1);
@@ -566,8 +567,16 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                         break;
                     }
                 }
-                if (position != -1) {
+                for (HeroPackageModelVM vm1 : packageModelVMS) {
+                    if (vm1.pkId.get() == resp.strengthId) {
+                        strengthIdPosition = packageModelVMS.indexOf(vm1);
+                        break;
+                    }
+                }
+
+                if (position != -1 && strengthIdPosition != 1) {
                     view.notifyByPosition(position);
+                    view.deleteByPosition(position);
                 }
                 break;
             }

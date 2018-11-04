@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
 
 /**
  * @author MDove on 2018/10/23
@@ -16,12 +17,16 @@ public class HeroEquipModelVM {
     public ObservableField<String> armor = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
     public ObservableField<String> type = new ObservableField<>();
+    public ObservableField<String> tips = new ObservableField<>();
+    public ObservableField<Integer> src = new ObservableField<>();
 
     // goodType:1武器2防具3饰品
-    public HeroEquipModelVM(Long id, long strengthen, String name, int attack, int armor, int life, String type, boolean isEquip, int goodType) {
+    public HeroEquipModelVM(Long id, String tips, long strengthen, String name, int attack, int armor, int life, String type, boolean isEquip, int goodType) {
         this.id.set(id);
         this.strengthen.set(strengthen);
         this.name.set(name);
+        this.tips.set(tips);
+        src.set(WeaponsIconMap.getInstance().getSrc(type));
         if (strengthen > 0) {
             this.name.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_name_strengthen), name, strengthen));
             this.attack.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_attack), (int) ((1 + strengthen * 0.2) * attack)));

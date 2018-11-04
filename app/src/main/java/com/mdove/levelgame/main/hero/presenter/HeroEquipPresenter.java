@@ -76,7 +76,7 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                 if (!TextUtils.isEmpty(attackType.equipType)) {
                     Weapons weapons = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(attackType.equipType)).unique();
                     if (weapons != null) {
-                        equipData.set(1, new HeroEquipModelVM(weapons.id, attackType.strengthen, weapons.name, weapons.attack, weapons.armor, 0, weapons.type, true, 1));
+                        equipData.set(1, new HeroEquipModelVM(weapons.id, weapons.tips, attackType.strengthen, weapons.name, weapons.attack, weapons.armor, 0, weapons.type, true, 1));
                     }
                 }
                 break;
@@ -87,7 +87,7 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                 if (!TextUtils.isEmpty(armorType.equipType)) {
                     Armors armor = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(armorType.equipType)).unique();
                     if (armor != null) {
-                        equipData.set(2, new HeroEquipModelVM(armor.id, armorType.strengthen, armor.name, armor.attack, armor.armor, 0, armor.type, true, 2));
+                        equipData.set(2, new HeroEquipModelVM(armor.id, armor.tips, armorType.strengthen, armor.name, armor.attack, armor.armor, 0, armor.type, true, 2));
                     }
                 }
                 break;
@@ -98,7 +98,7 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                 if (!TextUtils.isEmpty(accessoriesType1.equipType)) {
                     Accessories accessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(accessoriesType1.equipType)).unique();
                     if (accessories != null) {
-                        equipData.set(3, new HeroEquipModelVM(accessories.id, accessoriesType1.strengthen, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type, true, 3));
+                        equipData.set(3, new HeroEquipModelVM(accessories.id, accessories.tips, accessoriesType1.strengthen, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type, true, 3));
                     }
                 }
                 break;
@@ -112,44 +112,44 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
     private void initEquipData() {
         equipData = new ArrayList<>();
         // Title的布局
-        equipData.add(new HeroEquipModelVM((long) -2, 0, "", 0, 0, 0, null, false, 1));
+        equipData.add(new HeroEquipModelVM((long) -2, "", 0, "", 0, 0, 0, null, false, 1));
 
         // 查询装备的武器
         InitEquipResp attackType = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ATTACK);
         if (!TextUtils.isEmpty(attackType.equipType)) {
             Weapons weapons = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(attackType.equipType)).unique();
             if (weapons != null) {
-                equipData.add(new HeroEquipModelVM(attackType.pkId, attackType.strengthen, weapons.name, weapons.attack, weapons.armor, 0, weapons.type, true, 1));
+                equipData.add(new HeroEquipModelVM(attackType.pkId, weapons.tips, attackType.strengthen, weapons.name, weapons.attack, weapons.armor, 0, weapons.type, true, 1));
             }
         }
 
         // 添加武器占位
         if (equipData.size() == 1) {
-            equipData.add(new HeroEquipModelVM((long) -1, 0, view.getString(R.string.string_no_hold_on_attack), 0, 0, 0, "-1", false, 1));
+            equipData.add(new HeroEquipModelVM((long) -1, view.getString(R.string.string_no_hold_on_attack), 0, view.getString(R.string.string_no_hold_on_attack), 0, 0, 0, "-1", false, 1));
         }
         // 查询装备的防具
         InitEquipResp armorType = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ARMOR);
         if (!TextUtils.isEmpty(armorType.equipType)) {
             Armors armor = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(armorType.equipType)).unique();
             if (armor != null) {
-                equipData.add(new HeroEquipModelVM(armorType.pkId, armorType.strengthen, armor.name, armor.attack, armor.armor, 0, armor.type, true, 2));
+                equipData.add(new HeroEquipModelVM(armorType.pkId, armor.tips, armorType.strengthen, armor.name, armor.attack, armor.armor, 0, armor.type, true, 2));
             }
         }
         // 添加防具占位
         if (equipData.size() == 2) {
-            equipData.add(new HeroEquipModelVM((long) -1, 0, view.getString(R.string.string_no_hold_on_armor), 0, 0, 0, "-1", false, 2));
+            equipData.add(new HeroEquipModelVM((long) -1, view.getString(R.string.string_no_hold_on_armor), 0, view.getString(R.string.string_no_hold_on_armor), 0, 0, 0, "-1", false, 2));
         }
         // 查询装备的饰品
         InitEquipResp accessoriesType1 = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
         if (!TextUtils.isEmpty(accessoriesType1.equipType)) {
             Accessories accessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(accessoriesType1.equipType)).unique();
             if (accessories != null) {
-                equipData.add(new HeroEquipModelVM(accessoriesType1.pkId, accessoriesType1.strengthen, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type, true, 3));
+                equipData.add(new HeroEquipModelVM(accessoriesType1.pkId, accessories.tips, accessoriesType1.strengthen, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type, true, 3));
             }
         }
         // 添加饰品占位
         if (equipData.size() == 3) {
-            equipData.add(new HeroEquipModelVM((long) -1, 0, view.getString(R.string.string_no_hold_on_accessories), 0, 0, 0, "-1", false, 3));
+            equipData.add(new HeroEquipModelVM((long) -1, view.getString(R.string.string_no_hold_on_accessories), 0, view.getString(R.string.string_no_hold_on_accessories), 0, 0, 0, "-1", false, 3));
         }
         view.showEquipData(equipData);
     }
@@ -352,15 +352,15 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
     private void takeOffById(int position) {
         switch (position) {
             case 1: {
-                equipData.set(1, new HeroEquipModelVM((long) -1, 0, view.getString(R.string.string_no_hold_on_attack), 0, 0, 0, "-1", false, 1));
+                equipData.set(1, new HeroEquipModelVM((long) -1,view.getString(R.string.string_no_hold_on_attack), 0, view.getString(R.string.string_no_hold_on_attack), 0, 0, 0, "-1", false, 1));
                 break;
             }
             case 2: {
-                equipData.set(2, new HeroEquipModelVM((long) -1, 0, view.getString(R.string.string_no_hold_on_armor), 0, 0, 0, "-1", false, 2));
+                equipData.set(2, new HeroEquipModelVM((long) -1,view.getString(R.string.string_no_hold_on_armor), 0, view.getString(R.string.string_no_hold_on_armor), 0, 0, 0, "-1", false, 2));
                 break;
             }
             case 3: {
-                equipData.set(3, new HeroEquipModelVM((long) -1, 0, view.getString(R.string.string_no_hold_on_accessories), 0, 0, 0, "-1", false, 3));
+                equipData.set(3, new HeroEquipModelVM((long) -1,view.getString(R.string.string_no_hold_on_accessories), 0, view.getString(R.string.string_no_hold_on_accessories), 0, 0, 0, "-1", false, 3));
                 break;
             }
             default:

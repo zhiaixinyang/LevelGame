@@ -51,10 +51,18 @@ public class HeroAttributesWrapper {
     }
 
     // 计算伤害并更新数据库
-    public int computeHarmLief(int enemyAttack) {
+    public int computeHarmLife(int enemyAttack) {
         HeroAttributes heroAttributes = resetAttributes();
         int harm = enemyAttack - armor;
         heroAttributes.curLife -= harm;
+        if (heroAttributes.curLife < 0) {
+            // 如果没有买药的钱，默认给10血
+            if (heroAttributes.money <= 20) {
+                heroAttributes.curLife = 10;
+            } else {
+                heroAttributes.curLife = 0;
+            }
+        }
         HeroManager.getInstance().save();
         curLife = heroAttributes.curLife;
         return harm;
@@ -64,5 +72,9 @@ public class HeroAttributesWrapper {
     public int realArmor() {
         resetAttributes();
         return armor;
+    }
+
+    public int realCurLife() {
+        return curLife;
     }
 }

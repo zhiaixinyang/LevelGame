@@ -9,19 +9,14 @@ import android.view.WindowManager;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.databinding.DialogFightingBinding;
-import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.entity.Monsters;
-import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
-import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
-import com.mdove.levelgame.main.shop.BusinessmanActivity;
 import com.mdove.levelgame.utils.SystemUtils;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -36,7 +31,8 @@ public class FightingDialog extends AppCompatDialog {
     private MonstersModelVM enVm;
     private Monsters monster;
     private Context context;
-    private CompositeDisposable heroDisposable;
+    private Disposable heroDisposable;
+    private Disposable monstersDisposable;
 
     public FightingDialog(Context context, Monsters monster) {
         super(context);
@@ -77,12 +73,13 @@ public class FightingDialog extends AppCompatDialog {
         MonsterAttackManager.getInstance().attackEnemy(monster).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
-                heroDisposable.add(d);
+                heroDisposable = d;
             }
 
             @Override
             public void onNext(Integer integer) {
                 enVm.resetLife(integer);
+                enVm.harm.set(-integer + "");
             }
 
             @Override
@@ -90,13 +87,62 @@ public class FightingDialog extends AppCompatDialog {
                 if (e instanceof AttackMonsterException) {
                     AttackMonsterException exception = (AttackMonsterException) e;
                     dismiss();
-                    MyDialog.showMyDialog(context, exception.errorTitle, exception.errorMsg, true);
+                    switch (exception.errorCode) {
+                        case AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE:
+                        case AttackMonsterException.ERROR_CODE_HERO_NO_POWER:
+                        case AttackMonsterException.ERROR_CODE_HERO_NO_COUNT:
+                        case AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD: {
+                            if (heroDisposable.isDisposed()) {
+                                return;
+                            }
+                            if (!monstersDisposable.isDisposed()) {
+                                monstersDisposable.dispose();
+                            }
+                            MyDialog.showMyDialog(context, exception.errorTitle, exception.errorMsg, true);
+                            break;
+                        }
+                        default:
+                            break;
+                    }
                 }
             }
 
             @Override
             public void onComplete() {
 
+            }
+        });
+        MonsterAttackManager.getInstance().attackHero(monster).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                monstersDisposable = d;
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                myVm.resetLife(integer);
+                myVm.harm.set(-integer + "");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (e instanceof AttackMonsterException) {
+                    AttackMonsterException exception = (AttackMonsterException) e;
+                    dismiss();
+                    if (exception.errorCode == AttackMonsterException.ERROR_CODE_HERO_IS_DEAD) {
+                        if (monstersDisposable.isDisposed()) {
+                            return;
+                        }
+                        if (!heroDisposable.isDisposed()) {
+                            heroDisposable.dispose();
+                        }
+                        MyDialog.showMyDialog(context, exception.errorTitle, exception.errorMsg, true);
+                    }
+                }
+            }
+
+            @Override
+            public void onComplete() {
             }
         });
     }

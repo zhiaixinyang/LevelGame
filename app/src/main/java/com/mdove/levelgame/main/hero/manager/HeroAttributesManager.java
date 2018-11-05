@@ -259,6 +259,40 @@ public class HeroAttributesManager {
         return attackResp;
     }
 
+    // 判断体力是否够用，够用直接减少
+    public boolean computePowerIsHas(long usePower) {
+        if (heroAttributes.bodyPower - usePower < 0) {
+            return false;
+        } else {
+            heroAttributes.bodyPower -= usePower;
+            return true;
+        }
+    }
+
+    // 攻击次数判断
+    public boolean computeLimitConut(Monsters monsters) {
+        boolean isCan = true;
+        if (monsters != null) {
+            if (monsters.isLimitCount == 0) {
+                if (monsters.curCount == 0) {
+                    isCan = false;
+                }
+            }
+        } else {
+            isCan = false;
+        }
+        return isCan;
+    }
+
+    // 当前血量判断
+    public boolean computeCurLife() {
+        boolean isCan = true;
+        if (heroAttributes.curLife <= 0) {
+            isCan = false;
+        }
+        return isCan;
+    }
+
     public AttackResp attack(long monstersId) {
         AttackResp attackResp = new AttackResp();
         int attackStatus = ATTACK_STATUS_ERROR;

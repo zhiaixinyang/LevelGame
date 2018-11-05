@@ -37,19 +37,13 @@ public class HeroAttrModelVM {
     public ObservableField<String> btnText = new ObservableField<>();
 
     public HeroAttrModelVM(HeroAttributes model) {
+        lifeInit = model.maxLife;
         id.set(model.id);
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));
         money.set(String.format(App.getAppContext().getString(R.string.monsters_msg_money), model.money));
         life.set(String.format(App.getAppContext().getString(R.string.hero_msg_has_life), model.curLife, model.maxLife));
-        lifeProgress.set(model.curLife / model.maxLife);
-        Observable.interval(1, TimeUnit.SECONDS)
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        lifeProgress.set((int) (100 - aLong));
-                    }
-                });
+        resetLifeProgress(model.curLife);
         harm.set(0 + "");
     }
 

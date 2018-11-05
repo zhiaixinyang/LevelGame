@@ -28,22 +28,42 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
             android:gravity="center"
-            app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
             android:textSize="16sp"
+            app:htmlColorText="@{vm.name}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="武器名字" />
+
+        <FrameLayout
+            android:id="@+id/iv_src"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginStart="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
+            android:background="@drawable/bg_gray_round"
+            android:padding="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@{vm.src}"
+                tools:src="@mipmap/a1" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/tv_tips"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
-            app:htmlColorText="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:htmlColorText="@{vm.tips}"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintRight_toLeftOf="@+id/btn_buy"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="武器介绍" />
@@ -74,7 +94,7 @@
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="增加攻击：10" />
 
@@ -86,10 +106,9 @@
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
-            tools:text="增加攻击：10" />
+            tools:text="增加防御：10" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

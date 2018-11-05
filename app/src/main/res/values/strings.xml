@@ -55,21 +55,21 @@
     <string name="string_pk_msg_life">生命上限：%1$d</string>
 
 
-    <string name="medicines_msg_price">需要金钱：%1$d</string>
+    <string name="medicines_msg_price">售价：%1$d</string>
     <string name="medicines_msg_life">增加当前生命：%1$d</string>
     <string name="medicines_msg_life_up">增加生命上限：%1$d</string>
 
-    <string name="shop_attack_msg_price">需要金钱：%1$d</string>
+    <string name="shop_attack_msg_price">售价：%1$d</string>
     <string name="shop_attack_msg_attack">装备后增加攻击：%1$d</string>
     <string name="shop_attack_msg_armor">装备后增加护甲：%1$d</string>
     <string name="shop_attack_msg_life">装备后增加生命：%1$d</string>
 
-    <string name="shop_armor_msg_price">需要金钱：%1$d</string>
+    <string name="shop_armor_msg_price">售价：%1$d</string>
     <string name="shop_armor_msg_attack">装备后增加攻击：%1$d</string>
     <string name="shop_armor_msg_armor">装备后增加护甲：%1$d</string>
     <string name="shop_armor_msg_life">装备后增加生命：%1$d</string>
 
-    <string name="shop_accessories_msg_price">需要金钱：%1$d</string>
+    <string name="shop_accessories_msg_price">售价：%1$d</string>
     <string name="shop_accessories_msg_attack">装备后增加攻击：%1$d</string>
     <string name="shop_accessories_msg_armor">装备后增加护甲：%1$d</string>
     <string name="shop_accessories_msg_life">装备后增加生命：%1$d</string>

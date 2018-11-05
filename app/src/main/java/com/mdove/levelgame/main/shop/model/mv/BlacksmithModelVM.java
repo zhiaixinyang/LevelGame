@@ -7,6 +7,7 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Weapons;
+import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
 import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 
 /**
@@ -21,6 +22,7 @@ public class BlacksmithModelVM {
     public ObservableField<String> type = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
     public ObservableField<String> btnName = new ObservableField<>();
+    public ObservableField<Integer> src = new ObservableField<>();
 
     public BlacksmithModelVM(Weapons model) {
         id.set(model.id);
@@ -36,6 +38,7 @@ public class BlacksmithModelVM {
         life.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_life), 0));
         armor.set("");
         type.set(model.type);
+        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
         if (model.armor > 0) {
             armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), model.armor));
         }
@@ -59,6 +62,7 @@ public class BlacksmithModelVM {
         life.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_life), 0));
         armor.set("");
         type.set(model.type);
+        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
         if (model.armor > 0) {
             armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), model.armor));
         }
@@ -82,6 +86,7 @@ public class BlacksmithModelVM {
         armor.set(String.format(App.getAppContext().getString(R.string.shop_accessories_msg_armor), model.armor));
         life.set(String.format(App.getAppContext().getString(R.string.shop_accessories_msg_life), model.life));
         type.set(model.type);
+        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
         if (model.armor > 0) {
             armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), model.armor));
         }

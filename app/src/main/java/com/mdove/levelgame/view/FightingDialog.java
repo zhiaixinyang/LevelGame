@@ -13,6 +13,7 @@ import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
+import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.utils.SystemUtils;
@@ -28,7 +29,7 @@ import io.reactivex.disposables.Disposable;
 public class FightingDialog extends AppCompatDialog {
     private DialogFightingBinding binding;
     private HeroAttrModelVM myVm;
-    private MonstersModelVM enVm;
+    private FightMonstersVM enVm;
     private Monsters monster;
     private Context context;
     private Disposable heroDisposable;
@@ -52,7 +53,7 @@ public class FightingDialog extends AppCompatDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myVm = new HeroAttrModelVM(HeroManager.getInstance().getHeroAttributes());
-        enVm = new MonstersModelVM(monster);
+        enVm = new FightMonstersVM(monster);
 
         binding.setEnemyVm(enVm);
         binding.setMyVm(myVm);

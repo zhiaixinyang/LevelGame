@@ -11,7 +11,7 @@
 
         <variable
             name="enemyVm"
-            type="com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM" />
+            type="com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

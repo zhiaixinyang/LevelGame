@@ -106,7 +106,6 @@
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="增加攻击：10" />
@@ -119,7 +118,6 @@
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="增加攻击：10" />

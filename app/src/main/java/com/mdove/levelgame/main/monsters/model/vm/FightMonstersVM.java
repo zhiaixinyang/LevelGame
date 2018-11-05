@@ -7,18 +7,12 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.entity.Monsters;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by MDove on 2018/10/21.
  */
 
-public class MonstersModelVM {
+public class FightMonstersVM {
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<String> exp = new ObservableField<>();
     public ObservableField<Long> monsterPlaceId = new ObservableField<>();
@@ -44,7 +38,7 @@ public class MonstersModelVM {
     public ObservableField<Boolean> isLimitCount = new ObservableField<>();
     private int limitCountInt;
 
-    public MonstersModelVM(Monsters model) {
+    public FightMonstersVM(Monsters model) {
         id.set(model.id);
         exp.set(String.format(App.getAppContext().getString(R.string.monsters_msg_exp), model.exp));
         monsterPlaceId.set(model.monsterPlaceId);
@@ -64,7 +58,7 @@ public class MonstersModelVM {
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));
         money.set(String.format(App.getAppContext().getString(R.string.monsters_msg_money), model.money));
-        life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_life), model.life));
+        life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_life), curLife, lifeInit));
         type.set(model.type);
         lifeProgress.set(100);
 
@@ -75,7 +69,7 @@ public class MonstersModelVM {
             btnText.set("攻击");
             isBusinessman.set(false);
         }
-        harm.set(0 + "");
+        harm.set(0+"");
     }
 
     private void resetLifeProgress(int curLife) {

@@ -41,6 +41,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_gray_round"
             android:layout_marginStart="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+            android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             android:padding="3dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -90,8 +92,7 @@
             android:text="@{vm.price}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/iv_src"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="需要金钱：10" />
 
@@ -103,8 +104,7 @@
             android:text="@{vm.life}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tv_attack"
+            app:layout_constraintLeft_toRightOf="@+id/tv_life_up"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="增加生命：10" />
 
@@ -116,8 +116,7 @@
             android:text="@{vm.lifeUp}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tv_life"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="生命上限：10" />
 

@@ -117,79 +117,81 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     @SuppressLint("CheckResult")
     @Override
     public void onItemBtnClick(String type, final Long id) {
-//        new FightingDialog(view.getContext()).show();
-//        return;
-        Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(id)).unique();
-        if (monsters != null && monsters.isBusinessman == 0) {
-            BusinessmanActivity.start(view.getContext(), id);
-            return;
-        }
-        MonstersModelVM modelVM = null;
-        int uiIndex = -1;
-        for (MonstersModelVM monstersModel : realData) {
-            if (monstersModel.id.get() == id) {
-                modelVM = monstersModel;
-                uiIndex = realData.indexOf(monstersModel);
-            }
-        }
 
-        if (modelVM != null && uiIndex != -1) {
-            final MonstersModelVM finalModelVM = modelVM;
-            final int finalUiIndex = uiIndex;
-            Observable.just(1)
-                    .flatMap(new Function<Integer, ObservableSource<AttackResp>>() {
-                        @Override
-                        public ObservableSource<AttackResp> apply(Integer integer) throws Exception {
-                            return Observable.just(HeroAttributesManager.getInstance().attack(id));
-                        }
-                    }).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<AttackResp>() {
-                        @Override
-                        public void accept(AttackResp resp) throws Exception {
-                            switch (resp.attackStatus) {
-                                case HeroAttributesManager.ATTACK_STATUS_ERROR: {
-                                    view.showLoadingDialog(view.getContext().getString(R.string.string_error));
-                                    break;
-                                }
-                                case HeroAttributesManager.ATTACK_STATUS_NO_POWER: {
-                                    ToastHelper.shortToast(view.getContext().getString(R.string.string_no_power));
-                                    break;
-                                }
-                                case HeroAttributesManager.ATTACK_STATUS_FAIL: {
-                                    ToastHelper.shortToast(view.getContext().getString(R.string.string_attack_fail));
-                                    break;
-                                }
-                                case HeroAttributesManager.ATTACK_STATUS_WIN: {
-                                    finalModelVM.resetLimitCount(resp.curCount);
-                                    view.attackUI(finalUiIndex);
-                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
-                                            , String.format(view.getContext().getString(R.string.string_attack_win), resp.money, resp.exp, resp.life), true);
-                                    break;
-                                }
-                                case HeroAttributesManager.ATTACK_STATUS_HAS_DROP_GOODS: {
-                                    finalModelVM.resetLimitCount(resp.curCount);
-                                    view.attackUI(finalUiIndex);
-                                    String dropGood = "";
-                                    for (String name : resp.dropGoods) {
-                                        dropGood = name + "、";
-                                    }
-                                    dropGood = dropGood.substring(0, dropGood.length() - 1);
-                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
-                                            , String.format(view.getContext().getString(R.string.string_attack_win_has_goods), resp.money, resp.exp, resp.life, dropGood), true);
-                                    break;
-                                }
-                                case HeroAttributesManager.ATTACK_STATUS_NO_COUNT: {
-                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
-                                            , view.getString(R.string.string_attack_win_no_count), true);
-                                    break;
-                                }
-                                default:
-                                    break;
-                            }
-                            initPower();
-                            view.dismissLoadingDialog();
-                        }
-                    });
-        }
+        Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(id)).unique();
+        new FightingDialog(view.getContext(), monsters).show();
+        return;
+
+//        if (monsters != null && monsters.isBusinessman == 0) {
+//            BusinessmanActivity.start(view.getContext(), id);
+//            return;
+//        }
+//        MonstersModelVM modelVM = null;
+//        int uiIndex = -1;
+//        for (MonstersModelVM monstersModel : realData) {
+//            if (monstersModel.id.get() == id) {
+//                modelVM = monstersModel;
+//                uiIndex = realData.indexOf(monstersModel);
+//            }
+//        }
+//
+//        if (modelVM != null && uiIndex != -1) {
+//            final MonstersModelVM finalModelVM = modelVM;
+//            final int finalUiIndex = uiIndex;
+//            Observable.just(1)
+//                    .flatMap(new Function<Integer, ObservableSource<AttackResp>>() {
+//                        @Override
+//                        public ObservableSource<AttackResp> apply(Integer integer) throws Exception {
+//                            return Observable.just(HeroAttributesManager.getInstance().attack(id));
+//                        }
+//                    }).observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Consumer<AttackResp>() {
+//                        @Override
+//                        public void accept(AttackResp resp) throws Exception {
+//                            switch (resp.attackStatus) {
+//                                case HeroAttributesManager.ATTACK_STATUS_ERROR: {
+//                                    view.showLoadingDialog(view.getContext().getString(R.string.string_error));
+//                                    break;
+//                                }
+//                                case HeroAttributesManager.ATTACK_STATUS_NO_POWER: {
+//                                    ToastHelper.shortToast(view.getContext().getString(R.string.string_no_power));
+//                                    break;
+//                                }
+//                                case HeroAttributesManager.ATTACK_STATUS_FAIL: {
+//                                    ToastHelper.shortToast(view.getContext().getString(R.string.string_attack_fail));
+//                                    break;
+//                                }
+//                                case HeroAttributesManager.ATTACK_STATUS_WIN: {
+//                                    finalModelVM.resetLimitCount(resp.curCount);
+//                                    view.attackUI(finalUiIndex);
+//                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
+//                                            , String.format(view.getContext().getString(R.string.string_attack_win), resp.money, resp.exp, resp.life), true);
+//                                    break;
+//                                }
+//                                case HeroAttributesManager.ATTACK_STATUS_HAS_DROP_GOODS: {
+//                                    finalModelVM.resetLimitCount(resp.curCount);
+//                                    view.attackUI(finalUiIndex);
+//                                    String dropGood = "";
+//                                    for (String name : resp.dropGoods) {
+//                                        dropGood = name + "、";
+//                                    }
+//                                    dropGood = dropGood.substring(0, dropGood.length() - 1);
+//                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
+//                                            , String.format(view.getContext().getString(R.string.string_attack_win_has_goods), resp.money, resp.exp, resp.life, dropGood), true);
+//                                    break;
+//                                }
+//                                case HeroAttributesManager.ATTACK_STATUS_NO_COUNT: {
+//                                    MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_attack_win_title)
+//                                            , view.getString(R.string.string_attack_win_no_count), true);
+//                                    break;
+//                                }
+//                                default:
+//                                    break;
+//                            }
+//                            initPower();
+//                            view.dismissLoadingDialog();
+//                        }
+//                    });
+//        }
     }
 }

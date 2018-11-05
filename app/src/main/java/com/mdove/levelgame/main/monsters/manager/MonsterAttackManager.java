@@ -5,6 +5,7 @@ import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.HeroAttributesWrapper;
+import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
 import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 
 import java.util.concurrent.TimeUnit;
@@ -43,6 +44,8 @@ public class MonsterAttackManager {
                         int enemyConsumeLife = wrapper.computeHarmLife(heroRealAttack);
                         if (wrapper.realCurLife() <= 0) {
                             // return 新状态
+                            throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD,
+                                    AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD, AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD);
                         }
                         return enemyConsumeLife;
                     }

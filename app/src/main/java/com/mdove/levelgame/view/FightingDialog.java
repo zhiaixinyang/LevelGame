@@ -14,6 +14,7 @@ import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
+import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
 import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
@@ -86,7 +87,11 @@ public class FightingDialog extends AppCompatDialog {
 
             @Override
             public void onError(Throwable e) {
-
+                if (e instanceof AttackMonsterException) {
+                    AttackMonsterException exception = (AttackMonsterException) e;
+                    dismiss();
+                    MyDialog.showMyDialog(context, exception.errorTitle, exception.errorMsg, true);
+                }
             }
 
             @Override

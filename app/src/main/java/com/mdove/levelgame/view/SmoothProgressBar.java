@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.databinding.BindingAdapter;
+import android.databinding.InverseBindingAdapter;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
@@ -53,12 +55,27 @@ public abstract class SmoothProgressBar extends View {
         drawForeground(canvas, currentProgress);
     }
 
+    // xml-> app:progress
+    @BindingAdapter(value = "progress")
+    public static void setDateBindingProgress(HorizontalSmoothProgressBar bar, int progress) {
+        bar.setProgress(progress);
+    }
+
+    @InverseBindingAdapter(attribute = "progress")
+    public static int getDateBindingProgress(HorizontalSmoothProgressBar bar) {
+        return bar.getProgress();
+    }
+
+    public int getProgress() {
+        return (int) targetProgress;
+    }
+
     public void setProgress(int progress) {
         if (this.targetProgress == progress) {
             return;
         }
         this.targetProgress = progress;
-        if (currentProgress >= targetProgress) {
+        if (progress <= 0) {
             return;
         }
         stopAutoIncrement();

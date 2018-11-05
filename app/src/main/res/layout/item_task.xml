@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.mdove.levelgame.main.task.data.TaskModelVM" />
+
+        <variable
+            name="handler"
+            type="com.mdove.levelgame.main.task.data.TaskItemHandler" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/item_blacksmith_normal_margin"
+        android:layout_marginLeft="@dimen/item_blacksmith_normal_margin"
+        android:layout_marginRight="@dimen/item_blacksmith_normal_margin"
+        android:background="@drawable/bg_white_round"
+        android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:htmlColorText="@{vm.name}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="武器名字" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

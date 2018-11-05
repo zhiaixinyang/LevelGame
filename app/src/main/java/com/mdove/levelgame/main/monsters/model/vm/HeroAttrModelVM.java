@@ -23,7 +23,6 @@ public class HeroAttrModelVM {
     public ObservableField<Long> monsterPlaceId = new ObservableField<>();
 
     public ObservableField<String> name = new ObservableField<>();
-    public ObservableField<Long> dropGoodsId = new ObservableField<>();
     public ObservableField<String> tips = new ObservableField<>();
 
     public ObservableField<String> attack = new ObservableField<>();
@@ -32,30 +31,26 @@ public class HeroAttrModelVM {
     public ObservableField<String> type = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
     public int lifeInit;
-    public ObservableField<String> limitCount = new ObservableField<>();
-    public ObservableField<String> power = new ObservableField<>();
+    public int curLife;
     public ObservableField<Integer> lifeProgress = new ObservableField<>();
-
+    public ObservableField<String> harm = new ObservableField<>();
     public ObservableField<String> btnText = new ObservableField<>();
-    public ObservableField<Boolean> isSpecial = new ObservableField<>();
-    public ObservableField<Boolean> isBusinessman = new ObservableField<>();
-    public ObservableField<Boolean> isLimitCount = new ObservableField<>();
-    private int limitCountInt;
 
     public HeroAttrModelVM(HeroAttributes model) {
         id.set(model.id);
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));
         money.set(String.format(App.getAppContext().getString(R.string.monsters_msg_money), model.money));
-        life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_life), model.maxLife));
-        lifeProgress.set(100);
+        life.set(String.format(App.getAppContext().getString(R.string.hero_msg_has_life), model.curLife, model.maxLife));
+        lifeProgress.set(model.curLife / model.maxLife);
         Observable.interval(1, TimeUnit.SECONDS)
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
-                        lifeProgress.set((int) (100-aLong));
+                        lifeProgress.set((int) (100 - aLong));
                     }
                 });
+        harm.set(0 + "");
     }
 
     public void resetLifeProgress(int curLife) {
@@ -63,5 +58,11 @@ public class HeroAttrModelVM {
         BigDecimal bg = new BigDecimal(progress);
         float real = bg.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
         lifeProgress.set((int) (real * 100));
+    }
+
+    public void resetLife(int consume) {
+        curLife -= consume;
+        resetLifeProgress(curLife);
+        life.set(String.format(App.getAppContext().getString(R.string.hero_msg_has_life), curLife, lifeInit));
     }
 }

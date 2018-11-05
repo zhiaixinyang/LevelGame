@@ -1,11 +1,6 @@
 package com.mdove.levelgame.base;
 
 
-
-import android.app.Activity;
-
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
@@ -21,7 +16,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by MBENBEN on 2018/10/21.
+ * Created by MDove on 2018/10/21.
  */
 public class RxTransformerHelper {
 

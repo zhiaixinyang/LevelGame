@@ -18,6 +18,7 @@ import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
+import com.mdove.levelgame.greendao.TaskDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Adventure;
@@ -29,6 +30,7 @@ import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.MonstersPlace;
+import com.mdove.levelgame.greendao.entity.Task;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
@@ -76,6 +78,8 @@ public class InitDataFileUtils {
 
         AccessoriesDao accessoriesDao = DatabaseManager.getInstance().getAccessoriesDao();
         accessoriesDao.deleteAll();
+        TaskDao taskDao = DatabaseManager.getInstance().getTaskDao();
+        taskDao.deleteAll();
 
         List<Accessories> accessories = getInitAccessories();
         for (Accessories accessorie : accessories) {
@@ -96,6 +100,10 @@ public class InitDataFileUtils {
             dropGoodsDao.insert(dropGood);
         }
 
+        List<Task> tasks = getInitTask();
+        for (Task task : tasks) {
+            taskDao.insert(task);
+        }
         List<MainMenu> mainMenus = getInitmainMenu();
         for (MainMenu mainMenu : mainMenus) {
             mainMenuDao.insert(mainMenu);
@@ -148,7 +156,6 @@ public class InitDataFileUtils {
         if (monstersPlaceModels == null) {
             monstersPlaceModels = getInitMonstersPlace();
         }
-
 
 
         for (Material material : getInitMaterials()) {
@@ -275,6 +282,16 @@ public class InitDataFileUtils {
                 ConstAssetsFileName.ASSETS_MAIN_MENU);
         if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<MainMenu>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<Task> getInitTask() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_TASKS);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<Task>>() {
             }.getType());
         }
         return null;

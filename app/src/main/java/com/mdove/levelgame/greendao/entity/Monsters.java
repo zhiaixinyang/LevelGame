@@ -53,12 +53,14 @@ public class Monsters {
     public int limitCount;
     // 当前还剩了
     public int curCount;
-    @Generated(hash = 1997362167)
+    // 攻击速度，毫秒级（对应Rx的弹射间隔，此值越来越低）
+    public long attackSpeed;
+    @Generated(hash = 1961512431)
     public Monsters(Long id, int life, String type, int attack, int armor,
             int money, String tips, String name, long dropGoodsId,
             long monsterPlaceId, long exp, int consumePower, int isBusinessman,
             String sellGoodsJson, int isShow, int isLimitCount, int limitCount,
-            int curCount) {
+            int curCount, long attackSpeed) {
         this.id = id;
         this.life = life;
         this.type = type;
@@ -77,6 +79,7 @@ public class Monsters {
         this.isLimitCount = isLimitCount;
         this.limitCount = limitCount;
         this.curCount = curCount;
+        this.attackSpeed = attackSpeed;
     }
     @Generated(hash = 1349461748)
     public Monsters() {
@@ -188,5 +191,11 @@ public class Monsters {
     }
     public void setCurCount(int curCount) {
         this.curCount = curCount;
+    }
+    public long getAttackSpeed() {
+        return this.attackSpeed;
+    }
+    public void setAttackSpeed(long attackSpeed) {
+        this.attackSpeed = attackSpeed;
     }
 }

@@ -1,0 +1,218 @@
+# To enable ProGuard in your project, edit project.properties
+# to define the proguard.config property as described in that file.
+#
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+-keepclassmembers class com.renrenche.carpublish.webapp.WebAppInterface { # fqcn.of.javascript.interface.for.webview {
+   public *;
+}
+
+# 百度地图 混淆配置
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-dontwarn com.baidu.**
+
+# oneapm 混淆配置
+-keep class org.apache.http.impl.client.**
+-dontwarn org.apache.commons.**
+-keep class com.blueware.** { *; }
+-dontwarn com.blueware.**
+-keep class com.oneapm.** {*;}
+-dontwarn com.oneapm.**
+-keepattributes Exceptions, Signature, InnerClasses
+-keepattributes SourceFile, LineNumberTable
+
+# 友盟统计分析 混淆配置
+-keepclassmembers class *{
+    public <init> (org.json.JSONObject);
+}
+-keep public class com.renrenche.carpublish.R$*{
+    public static final int *;
+}
+-keepclassmembers enum *{
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# 友盟在线参数 混淆配置
+# http://dev.umeng.com/online-parameters/android-doc/intergration
+-keepclassmembers class * {
+    public <init> (org.json.JSONObject); # 官方文档是这样 public (org.json.JSONObject);
+}
+-keep class com.umeng.onlineconfig.OnlineConfigAgent{
+    public <fields>;
+    public <methods>;
+}
+-keep class com.umeng.onlineconfig.OnlineConfigLog{
+    public <fields>;
+    public <methods>;
+}
+-keep interface com.umeng.onlineconfig.UmengOnlineConfigureListener{
+    public <methods>;
+}
+
+# 七牛sdk 混淆配置
+
+# 不混淆model
+
+# 不混淆自身Fragment
+-keep class * extends android.app.Fragment
+
+
+#推送混淆
+-dontwarn com.igexin.**
+-keep class com.igexin.** { *; }
+-keep class org.json.** { *; }
+-keep class com.renrenche.carpublish.receiver.RrcPushMsgReceiver{*;}
+
+
+-keep public class * extends android.app.Activity{
+	public <fields>;
+	public <methods>;
+}
+-keep public class * extends android.app.Application{
+	public <fields>;
+	public <methods>;
+}
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keepclasseswithmembers class * {
+	public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+	public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepattributes *Annotation*
+
+-keepclasseswithmembernames class *{
+	native <methods>;
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+-keep class android.support.v4.** {*;}
+-keep public class * extends android.support.v4.app.Fragment
+# support-v7
+-keep class android.support.v7.internal.** { *; }
+-keep interface android.support.v7.internal.** { *; }
+
+#-optimizationpasses 7
+#-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+-dontoptimize
+-dontusemixedcaseclassnames
+-verbose
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-dontwarn dalvik.**
+#-overloadaggressively
+
+#@proguard_debug_start
+# ------------------ Keep LineNumbers and properties ---------------- #
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+-renamesourcefileattribute TbsSdkJava
+#@proguard_debug_end
+
+### Retrofit, OkHttp, Gson ###
+-keepattributes Signature
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+-dontwarn com.squareup.okhttp.**
+
+-dontwarn okhttp3.**
+-keep class okhttp3.** { *; }
+-dontwarn rx.**
+-keepclasseswithmembers class * {
+    @retrofit.http.* <methods>;
+}
+-keep class sun.misc.Unsafe { *; }
+-dontwarn java.nio.file.*
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-keep class com.squareup.okhttp.** { *; }
+-dontwarn okio.**
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+   rx.internal.util.atomic.LinkedQueueNode producerNode;
+   rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+     long producerIndex;
+     long consumerIndex;
+ }
+ -dontwarn sun.misc.Unsafe
+ -dontwarn com.tencent.smtt.sdk.**
+
+
+### RxJava ##
+-dontwarn org.mockito.**
+-dontwarn org.junit.**
+-dontwarn org.robolectric.**
+-dontwarn org.joda.**
+-dontwarn com.umeng.**
+
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+ long producerIndex;
+ long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+### okhttp ###
+#-keep class com.bumptech.glide.integration.okhttp.OkHttpGlideModule
+
+# Umeng begin
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+-keep public class com.renrenche.sale.R$*{
+public static final int *;
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+#umeng end
+
+#feedback start
+-keep class com.taobao.** {*;}
+-keep class com.alibaba.** {*;}
+-dontwarn com.taobao.**
+-dontwarn com.alibaba.**
+-keep class com.ut.** {*;}
+-dontwarn com.ut.**
+-keep class com.ta.** {*;}
+-dontwarn com.ta.**
+#feedback end

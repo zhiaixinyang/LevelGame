@@ -67,6 +67,7 @@ public class App extends Application {
             heroAttributes.maxLife = 100;
             heroAttributes.lifeIncrease = 20;
             heroAttributes.bodyPower = 100;
+            heroAttributes.attackSpeed = 1500;
             heroAttributes.days = 1;
             dao.insert(heroAttributes);
             // 初始化数据库

@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "<font color=\"#43A047\">任务：击杀小喽啰</font>",
+    "tips": "击杀3个小喽啰。",
+    "type":"H1",
+    "award_money": 30,
+    "award_exy": 50,
+    "award_attack": 0,
+    "award_armor": 0,
+    "award_max_life": 0
+  },
+  {
+    "id": 2,
+    "name": "<font color=\"#43A047\">任务：击杀山贼头目</font>",
+    "tips": "击杀1个[BOSS]-山贼头目。",
+    "award_money": 200,
+    "award_exy": 200,
+    "type":"H2",
+    "award_attack": 10,
+    "award_armor": 5,
+    "award_max_life": 20
+  }
+]

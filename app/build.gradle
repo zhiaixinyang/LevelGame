@@ -55,9 +55,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            shrinkResources false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.sweetSignConfig
         }
 
@@ -96,7 +96,7 @@ kapt {
 }
 
 greendao {
-    schemaVersion 12
+    schemaVersion 1
     daoPackage 'com.mdove.levelgame.greendao'
     targetGenDir 'src/main/java'
 }

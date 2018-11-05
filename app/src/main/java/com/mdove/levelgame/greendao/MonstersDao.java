@@ -42,6 +42,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         public final static Property IsLimitCount = new Property(15, int.class, "isLimitCount", false, "IS_LIMIT_COUNT");
         public final static Property LimitCount = new Property(16, int.class, "limitCount", false, "LIMIT_COUNT");
         public final static Property CurCount = new Property(17, int.class, "curCount", false, "CUR_COUNT");
+        public final static Property AttackSpeed = new Property(18, long.class, "attackSpeed", false, "ATTACK_SPEED");
     }
 
 
@@ -74,7 +75,8 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
                 "\"IS_SHOW\" INTEGER NOT NULL ," + // 14: isShow
                 "\"IS_LIMIT_COUNT\" INTEGER NOT NULL ," + // 15: isLimitCount
                 "\"LIMIT_COUNT\" INTEGER NOT NULL ," + // 16: limitCount
-                "\"CUR_COUNT\" INTEGER NOT NULL );"); // 17: curCount
+                "\"CUR_COUNT\" INTEGER NOT NULL ," + // 17: curCount
+                "\"ATTACK_SPEED\" INTEGER NOT NULL );"); // 18: attackSpeed
     }
 
     /** Drops the underlying database table. */
@@ -124,6 +126,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         stmt.bindLong(16, entity.getIsLimitCount());
         stmt.bindLong(17, entity.getLimitCount());
         stmt.bindLong(18, entity.getCurCount());
+        stmt.bindLong(19, entity.getAttackSpeed());
     }
 
     @Override
@@ -167,6 +170,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         stmt.bindLong(16, entity.getIsLimitCount());
         stmt.bindLong(17, entity.getLimitCount());
         stmt.bindLong(18, entity.getCurCount());
+        stmt.bindLong(19, entity.getAttackSpeed());
     }
 
     @Override
@@ -194,7 +198,8 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
             cursor.getInt(offset + 14), // isShow
             cursor.getInt(offset + 15), // isLimitCount
             cursor.getInt(offset + 16), // limitCount
-            cursor.getInt(offset + 17) // curCount
+            cursor.getInt(offset + 17), // curCount
+            cursor.getLong(offset + 18) // attackSpeed
         );
         return entity;
     }
@@ -219,6 +224,7 @@ public class MonstersDao extends AbstractDao<Monsters, Long> {
         entity.setIsLimitCount(cursor.getInt(offset + 15));
         entity.setLimitCount(cursor.getInt(offset + 16));
         entity.setCurCount(cursor.getInt(offset + 17));
+        entity.setAttackSpeed(cursor.getLong(offset + 18));
      }
     
     @Override

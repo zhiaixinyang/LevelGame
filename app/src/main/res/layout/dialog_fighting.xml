@@ -101,12 +101,12 @@
                 android:text="@{myVm.harm}"
                 android:textColor="@color/red_700"
                 android:textSize="24sp"
-                android:rotation="20"
+                tools:text="-99"
                 app:layout_constraintBottom_toTopOf="@+id/pb"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="-99" />
+                />
 
             <com.mdove.levelgame.view.HorizontalSmoothProgressBar
                 android:id="@+id/pb"
@@ -139,12 +139,12 @@
                 android:text="@{enemyVm.harm}"
                 android:textColor="@color/red_700"
                 android:textSize="24sp"
-                android:rotation="20"
                 app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="-99" />
+                tools:text="-99"
+                />
 
             <TextView
                 android:id="@+id/tv_enemy_name"

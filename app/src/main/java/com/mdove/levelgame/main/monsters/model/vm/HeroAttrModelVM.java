@@ -38,6 +38,7 @@ public class HeroAttrModelVM {
 
     public HeroAttrModelVM(HeroAttributes model) {
         lifeInit = model.maxLife;
+        curLife = model.curLife;
         id.set(model.id);
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));

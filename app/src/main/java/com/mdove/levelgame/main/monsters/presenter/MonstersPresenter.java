@@ -79,6 +79,11 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     }
 
     @Override
+    public void initMoney() {
+        view.showMoneyText(String.format(view.getString(R.string.string_activity_monsters_money), HeroManager.getInstance().getHeroAttributes().money));
+    }
+
+    @Override
     public void heroRest() {
         final int restStatus = HeroAttributesManager.getInstance().heroRest();
         if (restStatus == 0 || restStatus == 2) {

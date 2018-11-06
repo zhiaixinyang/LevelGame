@@ -21,11 +21,11 @@ import java.util.List;
  * @author xubin@jiandaola.com
  */
 public abstract class SmoothProgressBar extends View {
-    public static final int MIN_PROGRESS_DURATION = 200;
-    public static final int TOTAL_PROGRESS_DURATION = 3600;
-    public static final int LAST_DELAY_DURATION = 600;
+    public static final int MIN_PROGRESS_DURATION = 100;
+    public static final int TOTAL_PROGRESS_DURATION = 1800;
+    public static final int LAST_DELAY_DURATION = 300;
 
-    public static final int AUTO_INCREMENT_TOTAL_DURATION = 120 * 1000;// 120s
+    public static final int AUTO_INCREMENT_TOTAL_DURATION = 60 * 1000;// 120s
     private final List<WeakReference<SmoothProgressListener>> progressListeners =
             new ArrayList<>();
     private boolean isAutoIncrement = false;

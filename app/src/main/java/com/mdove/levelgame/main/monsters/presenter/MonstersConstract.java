@@ -18,6 +18,8 @@ public interface MonstersConstract {
 
         void initPower();
 
+        void initMoney();
+
         void heroRest();
 
         void onItemBtnClick(String type, Long id);
@@ -27,6 +29,7 @@ public interface MonstersConstract {
         void attackUI(int index);
 
         void showPowerText(String content);
+        void showMoneyText(String content);
 
         void showData(List<MonstersModelVM> data);
     }

@@ -259,6 +259,27 @@ public class HeroAttributesManager {
         return attackResp;
     }
 
+    public void saveMoney(long money) {
+        heroAttributes.money += money;
+        save();
+    }
+
+    public void heroLevel(long exp) {
+        long levelExp = getLevelExp(heroAttributes);
+        if (heroAttributes.experience + exp >= levelExp) {
+            heroAttributes.level += 1;
+            heroAttributes.experience = (heroAttributes.experience + exp) - levelExp;
+
+            heroAttributes.attack += heroAttributes.attackIncrease;
+            heroAttributes.armor += heroAttributes.armorIncrease;
+            heroAttributes.curLife += heroAttributes.lifeIncrease;
+            heroAttributes.maxLife += heroAttributes.lifeIncrease;
+        } else {
+            heroAttributes.experience += exp;
+        }
+        save();
+    }
+
     // 判断体力是否够用，够用直接减少
     public boolean computePowerIsHas(long usePower) {
         if (heroAttributes.bodyPower - usePower < 0) {

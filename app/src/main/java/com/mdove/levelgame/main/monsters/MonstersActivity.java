@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
     private static final String EXTRA_MONSTERS_PLACE_ID = "extra_monsters_place_id";
     private static final String EXTRA_MONSTERS_PLACE_NAME = "extra_monsters_place_name";
     private RecyclerView rlv;
-    private TextView tvPower;
+    private TextView tvPower, tvMoney;
     private TextView btnRest;
     private MonstersPresenter presenter;
     private MonstersAdapter adapter;
@@ -65,6 +66,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
 
         rlv = findViewById(R.id.rlv);
         tvPower = findViewById(R.id.tv_power);
+        tvMoney = findViewById(R.id.tv_money);
         btnRest = findViewById(R.id.btn_rest);
         btnRest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +85,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         super.onResume();
         if (presenter != null) {
             presenter.initPower();
+            presenter.initMoney();
         }
     }
 
@@ -95,6 +98,11 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
     @Override
     public void showPowerText(String content) {
         tvPower.setText(content);
+    }
+
+    @Override
+    public void showMoneyText(String content) {
+        tvMoney.setText(Html.fromHtml(content));
     }
 
     @Override

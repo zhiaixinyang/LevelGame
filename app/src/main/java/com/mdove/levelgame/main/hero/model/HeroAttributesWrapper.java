@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.hero.model;
 
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 
@@ -72,6 +73,11 @@ public class HeroAttributesWrapper {
     public int realArmor() {
         resetAttributes();
         return armor;
+    }
+
+    public void awardMonster(Monsters monsters) {
+        HeroAttributesManager.getInstance().heroLevel(monsters.exp);
+        HeroAttributesManager.getInstance().saveMoney(monsters.money);
     }
 
     public int realCurLife() {

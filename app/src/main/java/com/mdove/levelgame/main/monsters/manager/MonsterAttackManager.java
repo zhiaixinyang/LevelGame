@@ -40,7 +40,7 @@ public class MonsterAttackManager {
                 .map(new Function<Long, Integer>() {
                     @Override
                     public Integer apply(Long aLong) throws Exception {
-                        if (!HeroAttributesManager.getInstance().computeCurLife()){
+                        if (!HeroAttributesManager.getInstance().computeCurLife()) {
                             throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE,
                                     AttackMonsterException.ERROR_TITLE_HERO_IS_NO_LIFE, AttackMonsterException.ERROR_MSG_HERO_IS_NO_LIFE);
                         }
@@ -55,9 +55,10 @@ public class MonsterAttackManager {
                         int heroRealAttack = HeroAttributesWrapper.getInstance().realAttack();
                         int enemyConsumeLife = wrapper.computeHarmLife(heroRealAttack);
                         if (wrapper.realCurLife() <= 0) {
+                            HeroAttributesWrapper.getInstance().awardMonster(monsters);
                             throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD,
                                     AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD,
-                                    AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD+String.format(App.getAppContext().getString(R.string.string_attack_win_new), monsters.money, monsters.exp));
+                                    AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_new), monsters.money, monsters.exp));
                         }
                         return enemyConsumeLife;
                     }

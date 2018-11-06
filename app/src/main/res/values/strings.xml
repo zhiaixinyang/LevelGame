@@ -89,8 +89,8 @@
     <string name="string_attack_fail">攻击失败</string>
     <string name="string_attack_win_title">攻击成功</string>
     <string name="string_attack_win_no_count">此怪物可攻击次数不足。\n可尝试#休息#</string>
-    <string name="string_attack_win">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。</string>
-    <string name="string_attack_win_new">攻击成功，获得金钱：%1$d；获得经验：%2$d。</string>
+    <string name="string_attack_win">攻击成功。<br />获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。</string>
+    <string name="string_attack_win_new"><![CDATA[击杀怪物成功。<br />获得<font color="#FB8C00">金钱：%1$d</font>；获得经验：%2$d。]]></string>
     <string name="string_attack_win_has_goods">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。<br />掉落：%4$s</string>
     <string name="string_buy_medicines_fail">购买失败，钱不够</string>
     <string name="string_buy_medicines_suc">购买成功，当前生命值增加：%1$d；减少金钱：%2$d。</string>
@@ -107,6 +107,7 @@
     <string name="string_no_hold_on_armor">未装备铠甲</string>
     <string name="string_no_hold_on_accessories">未装备饰品</string>
     <string name="string_activity_monsters_power">当前体力：%1$d / %2$d</string>
+    <string name="string_activity_monsters_money"><![CDATA[当前金钱：<font color="#FB8C00">%1$d</font>]]></string>
 
     <string name="string_no_can_rest_title">无法休息</string>
     <string name="string_no_can_rest_pos_btn">保卫家乡</string>

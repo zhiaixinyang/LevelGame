@@ -3,12 +3,11 @@ package com.mdove.levelgame.main.shop.manager;
 import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
-import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.App;
+import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.PackagesDao;
-import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
-import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
@@ -90,7 +89,7 @@ public class BlacksmithManager {
                         // 生成新装备
                         newPk(weapon);
                         blacksmithResp.isSuc = true;
-                        blacksmithResp.title = "升级成功";
+                        blacksmithResp.title = App.getAppContext().getString(R.string.string_blacksmith_update_suc);
                         blacksmithResp.content = weapon.name + "升级成功。";
                     } else {
                         resetPkSelectStatus();

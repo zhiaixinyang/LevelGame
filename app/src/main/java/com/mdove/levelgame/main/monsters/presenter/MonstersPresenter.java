@@ -17,21 +17,27 @@ import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.home.HomeActivity;
 import com.mdove.levelgame.main.home.MainActivity;
+import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager;
+import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
+import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.shop.BusinessmanActivity;
 import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.FightingDialog;
 import com.mdove.levelgame.view.MyDialog;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
@@ -84,6 +90,15 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     }
 
     @Override
+    public void initlife() {
+        HeroAttributes heroAttributes = HeroManager.getInstance().getHeroAttributes();
+        float progress = (float) heroAttributes.curLife / heroAttributes.maxLife;
+        BigDecimal bg = new BigDecimal(progress);
+        float real = bg.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+        view.showLifeText((int) (real * 100), String.format(view.getString(R.string.string_activity_monsters_hero_life), heroAttributes.curLife, heroAttributes.maxLife));
+    }
+
+    @Override
     public void heroRest() {
         final int restStatus = HeroAttributesManager.getInstance().heroRest();
         if (restStatus == 0 || restStatus == 2) {
@@ -122,11 +137,51 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     @SuppressLint("CheckResult")
     @Override
     public void onItemBtnClick(String type, final Long id) {
-
         Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(id)).unique();
-        new FightingDialog(view.getContext(), monsters).show();
-        return;
+        final FightingDialog dialog = new FightingDialog(view.getContext(), monsters);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                updateUI();
+            }
+        });
+        MonsterAttackManager.getInstance().attackEnemyPre(monsters)
+                .subscribe(new Observer<Boolean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        dialog.show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof AttackMonsterException) {
+                            AttackMonsterException exception = (AttackMonsterException) e;
+                            switch (exception.errorCode) {
+                                case AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE:
+                                case AttackMonsterException.ERROR_CODE_HERO_NO_POWER:
+                                case AttackMonsterException.ERROR_CODE_HERO_NO_COUNT:
+                                case AttackMonsterException.ERROR_CODE_MONSTER_IS_QUICK_ATTACK:
+                                case AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD: {
+                                    MyDialog.showMyDialog(view.getContext(), exception.errorTitle, exception.errorMsg, true);
+                                    updateUI();
+                                    break;
+                                }
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 //        if (monsters != null && monsters.isBusinessman == 0) {
 //            BusinessmanActivity.start(view.getContext(), id);
 //            return;
@@ -198,5 +253,11 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 //                        }
 //                    });
 //        }
+    }
+
+    private void updateUI() {
+        initPower();
+        initMoney();
+        initlife();
     }
 }

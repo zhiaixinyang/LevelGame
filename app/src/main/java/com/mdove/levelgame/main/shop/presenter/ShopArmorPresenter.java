@@ -8,6 +8,7 @@ import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BuyArmorResp;
 import com.mdove.levelgame.main.shop.model.mv.ShopArmorModelVM;
 import com.mdove.levelgame.utils.ToastHelper;
+import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +47,13 @@ public class ShopArmorPresenter implements ShopArmorContract.IShopArmorPresenter
                 break;
             }
             case HeroBuyManager.BUY_ARMOR_STATUS_FAIL: {
-                ToastHelper.shortToast(view.getContext().getString(R.string.string_buy_medicines_fail));
+                MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_error),
+                        view.getContext().getString(R.string.string_buy_content_error), true);
                 break;
             }
             case HeroBuyManager.BUY_ARMOR_STATUS_SUC: {
-                ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_armor_suc),  resp.price));
+                MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_suc),
+                        String.format(view.getContext().getString(R.string.string_buy_content_suc), resp.name, resp.price), true);
                 break;
             }
             default:

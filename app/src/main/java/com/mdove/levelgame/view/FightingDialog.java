@@ -1,15 +1,19 @@
 package com.mdove.levelgame.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.databinding.DialogFightingBinding;
 import com.mdove.levelgame.greendao.entity.Monsters;
+import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
@@ -21,6 +25,7 @@ import com.mdove.levelgame.utils.SystemUtils;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by MDove on 2018/11/1.
@@ -70,7 +75,7 @@ public class FightingDialog extends AppCompatDialog {
                 : screenWidth * percent);
     }
 
-    private void computeAttack(Monsters monster) {
+    private void computeAttack(final Monsters monster) {
         MonsterAttackManager.getInstance().attackEnemy(monster).subscribe(new Observer<Integer>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -80,7 +85,11 @@ public class FightingDialog extends AppCompatDialog {
             @Override
             public void onNext(Integer integer) {
                 enVm.resetLife(integer);
-                enVm.harm.set(-integer + "");
+                if (integer == 0) {
+                    enVm.harm.set(context.getString(R.string.string_attack_no_harm));
+                } else {
+                    enVm.harm.set(-integer + "");
+                }
             }
 
             @Override
@@ -122,7 +131,11 @@ public class FightingDialog extends AppCompatDialog {
             @Override
             public void onNext(Integer integer) {
                 myVm.resetLife(integer);
-                myVm.harm.set(-integer + "");
+                if (integer == 0) {
+                    myVm.harm.set(context.getString(R.string.string_attack_no_harm));
+                } else {
+                    myVm.harm.set(-integer + "");
+                }
             }
 
             @Override
@@ -147,4 +160,5 @@ public class FightingDialog extends AppCompatDialog {
             }
         });
     }
+
 }

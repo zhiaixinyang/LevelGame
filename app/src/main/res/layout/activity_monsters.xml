@@ -11,16 +11,44 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
-        android:gravity="right"
         android:ellipsize="end"
+        android:gravity="right"
+        android:maxLines="1"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="@+id/btn_rest"
-        app:layout_constraintRight_toLeftOf="@+id/tv_power"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_power"
         app:layout_constraintTop_toTopOf="@+id/btn_rest"
         tools:text="当前金钱99" />
+
+    <TextView
+        android:id="@+id/tv_life"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="当前生命99" />
+
+    <com.mdove.levelgame.view.HorizontalSmoothProgressBar
+        android:id="@+id/pb_hero"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
+        app:hspBackgroundProgressColor="@color/red_300"
+        app:hspForegroundProgressColor="@color/red_700"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_life" />
 
     <TextView
         android:id="@+id/tv_power"
@@ -30,9 +58,9 @@
         android:gravity="right"
         android:textColor="@color/black"
         android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@+id/btn_rest"
         app:layout_constraintBottom_toBottomOf="@+id/btn_rest"
         app:layout_constraintRight_toLeftOf="@+id/btn_rest"
-        app:layout_constraintTop_toTopOf="@+id/btn_rest"
         tools:text="当前体力" />
 
     <TextView
@@ -52,16 +80,18 @@
         android:textColor="@color/blue_700"
         android:textSize="16sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/pb_hero"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlv"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_rest" />
 </android.support.constraint.ConstraintLayout>

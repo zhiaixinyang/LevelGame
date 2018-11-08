@@ -23,8 +23,10 @@ import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
+import com.mdove.levelgame.main.hero.model.HeroAttributesWrapper;
 import com.mdove.levelgame.main.monsters.manager.AdventureManager;
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager;
+import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 import com.mdove.levelgame.model.DropGoodsModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
@@ -290,8 +292,26 @@ public class HeroAttributesManager {
         }
     }
 
-    // 攻击次数判断
-    public boolean computeLimitConut(Monsters monsters) {
+    // 是否秒杀
+    public boolean isQuickAttack(Monsters monsters, HeroAttributesWrapper wrapper) {
+        int attackCount = monsters.life / wrapper.realAttack();
+        if (wrapper.realAttack() > monsters.life) {
+            attackCount = 1;
+        }
+        return attackCount == 1 ? true : false;
+    }
+
+    // 是否被秒杀
+    public boolean isMonsterQuickAttack(MonsterWrapper monsters, HeroAttributesWrapper wrapper) {
+        int attackCount = wrapper.realCurLife() / monsters.realAttack();
+        if (monsters.realAttack() > wrapper.realCurLife()) {
+            attackCount = 1;
+        }
+        return attackCount == 1 ? true : false;
+    }
+
+    // 剩余攻击次数判断
+    public boolean computeLimitCount(Monsters monsters) {
         boolean isCan = true;
         if (monsters != null) {
             if (monsters.isLimitCount == 0) {

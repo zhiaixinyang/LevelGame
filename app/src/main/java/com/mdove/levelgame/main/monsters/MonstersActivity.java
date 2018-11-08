@@ -18,6 +18,7 @@ import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.monsters.presenter.MonstersConstract;
 import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter;
+import com.mdove.levelgame.view.HorizontalSmoothProgressBar;
 
 import java.util.List;
 
@@ -29,8 +30,9 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
     private static final String EXTRA_MONSTERS_PLACE_ID = "extra_monsters_place_id";
     private static final String EXTRA_MONSTERS_PLACE_NAME = "extra_monsters_place_name";
     private RecyclerView rlv;
-    private TextView tvPower, tvMoney;
+    private TextView tvPower, tvMoney, tvLife;
     private TextView btnRest;
+    private HorizontalSmoothProgressBar horizontalSmoothProgressBar;
     private MonstersPresenter presenter;
     private MonstersAdapter adapter;
     private long monsterPlaceId;
@@ -67,7 +69,9 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         rlv = findViewById(R.id.rlv);
         tvPower = findViewById(R.id.tv_power);
         tvMoney = findViewById(R.id.tv_money);
+        tvLife = findViewById(R.id.tv_life);
         btnRest = findViewById(R.id.btn_rest);
+        horizontalSmoothProgressBar = findViewById(R.id.pb_hero);
         btnRest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +90,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         if (presenter != null) {
             presenter.initPower();
             presenter.initMoney();
+            presenter.initlife();
         }
     }
 
@@ -97,7 +102,13 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
 
     @Override
     public void showPowerText(String content) {
-        tvPower.setText(content);
+        tvPower.setText(Html.fromHtml(content));
+    }
+
+    @Override
+    public void showLifeText(int progress, String content) {
+        tvLife.setText(Html.fromHtml(content));
+        horizontalSmoothProgressBar.setProgress(progress);
     }
 
     @Override

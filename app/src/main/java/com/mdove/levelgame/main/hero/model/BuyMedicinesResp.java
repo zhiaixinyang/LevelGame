@@ -11,4 +11,6 @@ public class BuyMedicinesResp extends BaseBuy{
     public int life;
     // 增加生命上限
     public int lifeUp;
+    // 道具名字
+    public String name;
 }

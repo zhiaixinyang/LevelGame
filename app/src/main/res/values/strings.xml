@@ -93,9 +93,12 @@
     <string name="string_attack_win_new"><![CDATA[击杀怪物成功。<br />获得<font color="#FB8C00">金钱：%1$d</font>；获得经验：%2$d。]]></string>
     <string name="string_attack_win_has_goods">攻击成功，获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。<br />掉落：%4$s</string>
     <string name="string_buy_medicines_fail">购买失败，钱不够</string>
-    <string name="string_buy_medicines_suc">购买成功，当前生命值增加：%1$d；减少金钱：%2$d。</string>
-    <string name="string_buy_medicines_suc_and_up">购买成功，当前生命值增加：%1$d；增加生命上限：%3$d；减少金钱：%2$d。</string>
-    <string name="string_buy_attack_suc">购买成功，减少金钱：%1$d。</string>
+    <string name="string_buy_medicines_suc"><![CDATA[购买%3$s成功，当前生命值增加：%1$d；减少金钱：%2$d。]]></string>
+    <string name="string_buy_medicines_suc_and_up"><![CDATA[购买%4$s成功，当前生命值增加：%1$d；增加生命上限：%3$d；减少金钱：%2$d。]]></string>
+    <string name="string_buy_content_suc"><![CDATA[购买%1$s成功，减少金钱：%2$d。]]></string>
+    <string name="string_buy_title_suc">购买成功</string>
+    <string name="string_buy_title_error">购买失败</string>
+    <string name="string_buy_content_error"><![CDATA[购买失败，<font color="#D32F2F">钱不够。</font>]]></string>
     <string name="string_buy_armor_suc">购买成功，减少金钱：%1$d。</string>
     <string name="string_buy_base_suc">购买成功，减少金钱：%1$d。</string>
     <string name="string_buy_base_fail">购买失败，钱不够</string>
@@ -108,6 +111,7 @@
     <string name="string_no_hold_on_accessories">未装备饰品</string>
     <string name="string_activity_monsters_power">当前体力：%1$d / %2$d</string>
     <string name="string_activity_monsters_money"><![CDATA[当前金钱：<font color="#FB8C00">%1$d</font>]]></string>
+    <string name="string_activity_monsters_hero_life"><![CDATA[当前生命：<font color="#000000">%1$d / %2$d</font>]]></string>
 
     <string name="string_no_can_rest_title">无法休息</string>
     <string name="string_no_can_rest_pos_btn">保卫家乡</string>
@@ -125,4 +129,9 @@
     <string name="string_big_monsters_show_title">魔王现世</string>
     <string name="string_big_monsters_show_content">兄dei，抄家伙干魔王，保家卫国了！</string>
     <string name="string_start_fighting">开始战斗</string>
+    <string name="string_blacksmith_update_suc"><![CDATA[CDATA<font color=\"#FB8C00\">升级成功</font>]]></string>
+    <string name="string_blacksmith_update_error"><![CDATA[CDATA<font color=\"#D32F2F\">升级失败</font>]]></string>
+    <string name="string_blacksmith_mix_suc"><![CDATA[CDATA<font color=\"#FB8C00\">合成成功</font>]]></string>
+    <string name="string_blacksmith_mix_error"><![CDATA[CDATA<font color=\"#D32F2F\">合成失败</font>]]></string>
+    <string name="string_attack_no_harm">无法破防</string>
 </resources>

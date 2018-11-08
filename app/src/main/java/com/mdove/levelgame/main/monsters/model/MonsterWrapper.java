@@ -36,6 +36,9 @@ public class MonsterWrapper {
     // 计算伤害并更新数据库
     public int computeHarmLife(int heroAttack) {
         int harm = heroAttack - armor;
+        if (harm < 0) {
+            harm = 0;
+        }
         curLife -= harm;
         // 此时代表怪物已死
         if (curLife <= 0) {

@@ -3,6 +3,8 @@ package com.mdove.levelgame.main.hero.manager;
 import android.text.TextUtils;
 
 import com.mdove.levelgame.App;
+import com.mdove.levelgame.greendao.ArmorsDao;
+import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
@@ -70,35 +72,33 @@ public class HeroBuyManager {
     public BuyMedicinesResp buyMedicines(long id) {
         BuyMedicinesResp resp = new BuyMedicinesResp();
         resp.buyStatus = BUY_MEDICINES_STATUS_ERROR;
-        Medicines medicine = null;
-        List<Medicines> medicines = InitDataFileUtils.getInitMedicines();
-        for (Medicines model : medicines) {
-            if (model.id == id) {
-                medicine = model;
-            }
-        }
-        // 没钱
-        if (heroAttributes.money - medicine.price < 0) {
-            resp.buyStatus = BUY_MEDICINES_STATUS_FAIL;
-        } else {// 购买成功
-            resp.buyStatus = BUY_MEDICINES_STATUS_SUC;
-            // 先判断能否增加生命上限
-            if (medicine.lifeUp > 0) {
-                heroAttributes.maxLife += medicine.lifeUp;
-            }
-            // 当前生命超出上限，舍弃
-            if (heroAttributes.curLife + medicine.life > heroAttributes.maxLife) {
-                heroAttributes.curLife = heroAttributes.maxLife;
-            } else {
-                heroAttributes.curLife += medicine.life;
-            }
-            // 扣钱
-            heroAttributes.money -= medicine.price;
+        Medicines medicine = DatabaseManager.getInstance().getMedicinesDao().queryBuilder()
+                .where(MedicinesDao.Properties.Id.eq(id)).unique();
+        if (medicine != null) {
+            // 没钱
+            if (heroAttributes.money - medicine.price < 0) {
+                resp.buyStatus = BUY_MEDICINES_STATUS_FAIL;
+            } else {// 购买成功
+                resp.buyStatus = BUY_MEDICINES_STATUS_SUC;
+                // 先判断能否增加生命上限
+                if (medicine.lifeUp > 0) {
+                    heroAttributes.maxLife += medicine.lifeUp;
+                }
+                // 当前生命超出上限，舍弃
+                if (heroAttributes.curLife + medicine.life > heroAttributes.maxLife) {
+                    heroAttributes.curLife = heroAttributes.maxLife;
+                } else {
+                    heroAttributes.curLife += medicine.life;
+                }
+                // 扣钱
+                heroAttributes.money -= medicine.price;
 
-            // 构建Resp
-            resp.life = medicine.life;
-            resp.price = medicine.price;
-            resp.lifeUp = medicine.lifeUp;
+                // 构建Resp
+                resp.life = medicine.life;
+                resp.price = medicine.price;
+                resp.lifeUp = medicine.lifeUp;
+                resp.name = medicine.name;
+            }
         }
         return resp;
     }
@@ -107,14 +107,7 @@ public class HeroBuyManager {
         BuyArmorResp resp = new BuyArmorResp();
         resp.buyStatus = BUY_ARMOR_STATUS_ERROR;
 
-        List<ShopArmorModel> data = InitDataFileUtils.getShopArmors();
-        ShopArmorModel realData = null;
-        for (ShopArmorModel model : data) {
-            if (model.id == id) {
-                realData = model;
-                break;
-            }
-        }
+        Armors realData = DatabaseManager.getInstance().getArmorsDao().queryBuilder().where(ArmorsDao.Properties.Id.eq(id)).unique();
         // 购买逻辑
         if (realData != null) {
             // 钱够
@@ -122,6 +115,7 @@ public class HeroBuyManager {
                 resp.buyStatus = BUY_ARMOR_STATUS_SUC;
                 resp.price = realData.price;
                 resp.armor = realData.armor;
+                resp.name = realData.name;
                 resp.attack = realData.attack;
 
                 heroAttributes.money -= realData.price;
@@ -216,6 +210,7 @@ public class HeroBuyManager {
                 resp.price = realData.price;
                 resp.armor = realData.armor;
                 resp.attack = realData.attack;
+                resp.name = realData.name;
 
                 heroAttributes.money -= realData.price;
 

@@ -12,6 +12,7 @@ import com.mdove.levelgame.main.hero.model.BuyMedicinesResp;
 import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
 import com.mdove.levelgame.main.shop.model.mv.ShopAttackModelVM;
 import com.mdove.levelgame.utils.ToastHelper;
+import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,16 +67,21 @@ public class ShopMedicinesPresenter implements ShopMedicinesContract.IShopMedici
                         break;
                     }
                     case HeroBuyManager.BUY_MEDICINES_STATUS_FAIL: {
-                        ToastHelper.shortToast(view.getContext().getString(R.string.string_buy_medicines_fail));
+                        MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_error),
+                                view.getContext().getString(R.string.string_buy_content_error), true);
                         break;
                     }
                     case HeroBuyManager.BUY_MEDICINES_STATUS_SUC: {
+                        String content;
                         if (buyMedicinesResp.lifeUp > 0) {
-                            ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_medicines_suc_and_up), buyMedicinesResp.life,
-                                    buyMedicinesResp.price, buyMedicinesResp.lifeUp));
+                            content = String.format(view.getContext().getString(R.string.string_buy_medicines_suc_and_up), buyMedicinesResp.life,
+                                    buyMedicinesResp.price, buyMedicinesResp.lifeUp, buyMedicinesResp.name);
                         } else {
-                            ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_medicines_suc), buyMedicinesResp.life, buyMedicinesResp.price));
+                            content = String.format(view.getContext().getString(R.string.string_buy_medicines_suc),
+                                    buyMedicinesResp.life, buyMedicinesResp.price, buyMedicinesResp.name);
                         }
+                        MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_suc),
+                                content, true);
                         break;
                     }
                     default:

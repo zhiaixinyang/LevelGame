@@ -14,6 +14,8 @@ import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.functions.Function;
 
 /**
@@ -34,24 +36,41 @@ public class MonsterAttackManager {
         heroAttributes = HeroManager.getInstance().getHeroAttributes();
     }
 
+    public Observable<Boolean> attackEnemyPre(final Monsters monsters) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
+                if (!HeroAttributesManager.getInstance().computeCurLife()) {
+                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE,
+                            AttackMonsterException.ERROR_TITLE_HERO_IS_NO_LIFE, AttackMonsterException.ERROR_MSG_HERO_IS_NO_LIFE);
+                }
+                if (!HeroAttributesManager.getInstance().computePowerIsHas(monsters.consumePower)) {
+                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_POWER,
+                            AttackMonsterException.ERROR_TITLE_HERO_NO_POWER, AttackMonsterException.ERROR_MSG_HERO_NO_POWER);
+                }
+                if (!HeroAttributesManager.getInstance().computeLimitCount(monsters)) {
+                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_COUNT,
+                            AttackMonsterException.ERROR_TITLE_HERO_NO_COUNT, AttackMonsterException.ERROR_MSG_HERO_NO_COUNT);
+                }
+                if (HeroAttributesManager.getInstance().isQuickAttack(monsters, HeroAttributesWrapper.getInstance())) {
+                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_QUICK_ATTACK,
+                            AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD, AttackMonsterException.ERROR_MSG_HERO_IS_QUICK_ATTACK);
+                }
+                if (HeroAttributesManager.getInstance().isMonsterQuickAttack(new MonsterWrapper(monsters), HeroAttributesWrapper.getInstance())) {
+                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTER_IS_QUICK_ATTACK,
+                            AttackMonsterException.ERROR_TITLE_HERO_IS_DEAD, AttackMonsterException.ERROR_MSG_MONSTER_IS_QUICK_ATTACK);
+                }
+                e.onNext(true);
+            }
+        });
+    }
+
     public Observable<Integer> attackEnemy(final Monsters monsters) {
         final MonsterWrapper wrapper = new MonsterWrapper(monsters);
         return Observable.interval(heroAttributes.attackSpeed, TimeUnit.MILLISECONDS)
                 .map(new Function<Long, Integer>() {
                     @Override
                     public Integer apply(Long aLong) throws Exception {
-                        if (!HeroAttributesManager.getInstance().computeCurLife()) {
-                            throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE,
-                                    AttackMonsterException.ERROR_TITLE_HERO_IS_NO_LIFE, AttackMonsterException.ERROR_MSG_HERO_IS_NO_LIFE);
-                        }
-                        if (!HeroAttributesManager.getInstance().computePowerIsHas(monsters.consumePower)) {
-                            throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_POWER,
-                                    AttackMonsterException.ERROR_TITLE_HERO_NO_POWER, AttackMonsterException.ERROR_MSG_HERO_NO_POWER);
-                        }
-                        if (!HeroAttributesManager.getInstance().computeLimitConut(monsters)) {
-                            throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_COUNT,
-                                    AttackMonsterException.ERROR_TITLE_HERO_NO_COUNT, AttackMonsterException.ERROR_MSG_HERO_NO_COUNT);
-                        }
                         int heroRealAttack = HeroAttributesWrapper.getInstance().realAttack();
                         int enemyConsumeLife = wrapper.computeHarmLife(heroRealAttack);
                         if (wrapper.realCurLife() <= 0) {

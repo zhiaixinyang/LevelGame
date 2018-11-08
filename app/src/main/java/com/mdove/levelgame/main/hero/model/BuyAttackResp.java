@@ -11,4 +11,8 @@ public class BuyAttackResp extends BaseBuy{
     public int attack;
     // 增加防御
     public int armor;
+    // 增加血上限
+    public int life;
+    // 道具名字
+    public String name;
 }

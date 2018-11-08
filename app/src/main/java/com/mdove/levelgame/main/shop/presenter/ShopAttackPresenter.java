@@ -4,12 +4,11 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BuyAttackResp;
-import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 import com.mdove.levelgame.main.shop.model.mv.ShopAttackModelVM;
 import com.mdove.levelgame.utils.ToastHelper;
+import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +47,13 @@ public class ShopAttackPresenter implements ShopAttackContract.IShopAttackPresen
                 break;
             }
             case HeroBuyManager.BUY_ATTACK_STATUS_FAIL: {
-                ToastHelper.shortToast(view.getContext().getString(R.string.string_buy_medicines_fail));
+                MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_error),
+                        view.getContext().getString(R.string.string_buy_content_error), true);
                 break;
             }
             case HeroBuyManager.BUY_ATTACK_STATUS_SUC: {
-                ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_attack_suc), resp.price));
+                MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_suc),
+                        String.format(view.getContext().getString(R.string.string_buy_content_suc),resp.name, resp.price), true);
                 break;
             }
             default:

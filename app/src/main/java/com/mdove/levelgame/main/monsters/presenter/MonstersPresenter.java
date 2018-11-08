@@ -166,6 +166,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                                 case AttackMonsterException.ERROR_CODE_HERO_NO_POWER:
                                 case AttackMonsterException.ERROR_CODE_HERO_NO_COUNT:
                                 case AttackMonsterException.ERROR_CODE_MONSTER_IS_QUICK_ATTACK:
+                                case AttackMonsterException.ERROR_CODE_HERO_IS_QUICK_ATTACK_IS_DROP:
                                 case AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD: {
                                     MyDialog.showMyDialog(view.getContext(), exception.errorTitle, exception.errorMsg, true);
                                     updateUI();
@@ -259,5 +260,6 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
         initPower();
         initMoney();
         initlife();
+        initData(monstersPlaceId);
     }
 }

@@ -1,10 +1,6 @@
 package com.mdove.levelgame.main.monsters.model;
 
-import com.mdove.levelgame.greendao.MonstersDao;
-import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Monsters;
-import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.main.hero.manager.HeroManager;
 
 /**
  * @author MDove on 2018/11/2
@@ -18,6 +14,7 @@ public class MonsterWrapper {
     private int maxLife;
     // 攻击速度，毫秒级（对应Rx的弹射间隔，此值越来越低）
     public long attackSpeed = 1500;
+    public int isBusinessman = 1;
 
     public MonsterWrapper(Monsters monsters) {
         this.monsters = monsters;
@@ -25,6 +22,7 @@ public class MonsterWrapper {
         armor = monsters.armor;
         curLife = monsters.life;
         maxLife = monsters.life;
+        this.isBusinessman = monsters.isBusinessman;
     }
 
 

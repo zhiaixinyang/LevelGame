@@ -294,20 +294,41 @@ public class HeroAttributesManager {
 
     // 是否秒杀
     public boolean isQuickAttack(Monsters monsters, HeroAttributesWrapper wrapper) {
-        int attackCount = monsters.life / wrapper.realAttack();
-        if (wrapper.realAttack() > monsters.life) {
-            attackCount = 1;
+        // 跳过商人
+        if (monsters.isBusinessman == 0) {
+            return false;
         }
-        return attackCount == 1 ? true : false;
+        wrapper.awardMonster(monsters);
+        int attackCount = monsters.life / wrapper.realAttack();
+        // 30/25 也会为1，但此时不属于秒杀
+        if (attackCount == 1) {
+            if (wrapper.realAttack() > monsters.life) {
+                attackCount = 1;
+            }
+            if (monsters.life >= wrapper.realAttack() && monsters.life < wrapper.realAttack() * 2) {
+                attackCount = 2;
+            }
+        }
+        return attackCount <= 1 ? true : false;
     }
 
     // 是否被秒杀
     public boolean isMonsterQuickAttack(MonsterWrapper monsters, HeroAttributesWrapper wrapper) {
-        int attackCount = wrapper.realCurLife() / monsters.realAttack();
-        if (monsters.realAttack() > wrapper.realCurLife()) {
-            attackCount = 1;
+        // 跳过商人
+        if (monsters.isBusinessman == 0) {
+            return false;
         }
-        return attackCount == 1 ? true : false;
+        int attackCount = wrapper.realCurLife() / monsters.realAttack();
+
+        if (attackCount == 1) {
+            if (monsters.realAttack() > wrapper.realCurLife()) {
+                attackCount = 1;
+            }
+            if (wrapper.realCurLife() >= monsters.realAttack() && wrapper.realCurLife() < monsters.realAttack() * 2) {
+                attackCount = 2;
+            }
+        }
+        return attackCount <= 1 ? true : false;
     }
 
     // 剩余攻击次数判断
@@ -315,7 +336,7 @@ public class HeroAttributesManager {
         boolean isCan = true;
         if (monsters != null) {
             if (monsters.isLimitCount == 0) {
-                if (monsters.curCount == 0) {
+                if (monsters.curCount <= 0) {
                     isCan = false;
                 }
             }
@@ -434,7 +455,7 @@ public class HeroAttributesManager {
     }
 
     // 爆装备计算
-    private List<String> dropGoods(Long dropGoodsId) {
+    public List<String> dropGoods(Long dropGoodsId) {
         List<String> data = new ArrayList<>();
         DropGoods dropGoods = DatabaseManager.getInstance().getDropGoodsDao().queryBuilder().where(DropGoodsDao.Properties.Id.eq(dropGoodsId)).unique();
         if (dropGoods != null) {

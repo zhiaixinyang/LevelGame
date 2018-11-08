@@ -101,6 +101,7 @@ public class FightingDialog extends AppCompatDialog {
                         case AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE:
                         case AttackMonsterException.ERROR_CODE_HERO_NO_POWER:
                         case AttackMonsterException.ERROR_CODE_HERO_NO_COUNT:
+                        case AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD_IS_DROP:
                         case AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD: {
                             if (heroDisposable.isDisposed()) {
                                 return;

@@ -5,11 +5,15 @@ package com.mdove.levelgame.main.monsters.manager.exception;
  */
 public class AttackMonsterException extends RuntimeException {
     public static final int ERROR_CODE_MONSTERS_IS_DEAD = 1;
+    // 战斗胜利，并掉落装备
+    public static final int ERROR_CODE_MONSTERS_IS_DEAD_IS_DROP = 7;
     public static final int ERROR_CODE_HERO_IS_DEAD = 2;
     public static final int ERROR_CODE_HERO_NO_POWER = 3;
     public static final int ERROR_CODE_HERO_NO_COUNT = 4;
     // 秒杀敌人
     public static final int ERROR_CODE_HERO_IS_QUICK_ATTACK = 5;
+    // 秒杀敌人,且掉落装备
+    public static final int ERROR_CODE_HERO_IS_QUICK_ATTACK_IS_DROP = 8;
     // 被敌人秒杀
     public static final int ERROR_CODE_MONSTER_IS_QUICK_ATTACK = 6;
     // 濒死，生命0

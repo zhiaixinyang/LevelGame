@@ -1,5 +1,7 @@
 package com.mdove.levelgame.main.monsters.manager;
 
+import android.text.TextUtils;
+
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.RxTransformerHelper;
@@ -11,6 +13,7 @@ import com.mdove.levelgame.main.hero.model.HeroAttributesWrapper;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
 import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -53,8 +56,25 @@ public class MonsterAttackManager {
                             AttackMonsterException.ERROR_TITLE_HERO_NO_COUNT, AttackMonsterException.ERROR_MSG_HERO_NO_COUNT);
                 }
                 if (HeroAttributesManager.getInstance().isQuickAttack(monsters, HeroAttributesWrapper.getInstance())) {
+                    // 掉落装备逻辑
+                    String content = AttackMonsterException.ERROR_MSG_HERO_IS_QUICK_ATTACK;
+                    List<String> dropGoods = HeroAttributesManager.getInstance().dropGoods(monsters.dropGoodsId);
+                    String dropGood = "";
+                    if (dropGoods != null && dropGoods.size() > 0) {
+                        for (String name : dropGoods) {
+                            dropGood += name + "、";
+                        }
+                        dropGood = dropGood.substring(0, dropGood.length() - 1);
+                    }
+                    if (!TextUtils.isEmpty(dropGood)) {
+                        content += String.format(App.getAppContext().getString(R.string.string_attack_win_is_drop_new),
+                                monsters.money, monsters.exp, dropGood);
+                    }else{
+                        content += String.format(App.getAppContext().getString(R.string.string_attack_win_new),
+                                monsters.money, monsters.exp);
+                    }
                     throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_QUICK_ATTACK,
-                            AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD, AttackMonsterException.ERROR_MSG_HERO_IS_QUICK_ATTACK);
+                            AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD, content);
                 }
                 if (HeroAttributesManager.getInstance().isMonsterQuickAttack(new MonsterWrapper(monsters), HeroAttributesWrapper.getInstance())) {
                     throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTER_IS_QUICK_ATTACK,
@@ -75,9 +95,24 @@ public class MonsterAttackManager {
                         int enemyConsumeLife = wrapper.computeHarmLife(heroRealAttack);
                         if (wrapper.realCurLife() <= 0) {
                             HeroAttributesWrapper.getInstance().awardMonster(monsters);
-                            throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD,
-                                    AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD,
-                                    AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_new), monsters.money, monsters.exp));
+                            // 掉落装备
+                            List<String> dropGoods = HeroAttributesManager.getInstance().dropGoods(monsters.dropGoodsId);
+                            if (dropGoods != null && dropGoods.size() > 0) {
+                                String dropGood = "";
+                                for (String name : dropGoods) {
+                                    dropGood += name + "、";
+                                }
+                                dropGood = dropGood.substring(0, dropGood.length() - 1);
+                                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD_IS_DROP,
+                                        AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD,
+                                        AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_is_drop_new),
+                                                monsters.money, monsters.exp, dropGood));
+
+                            } else {
+                                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD,
+                                        AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD,
+                                        AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_new), monsters.money, monsters.exp));
+                            }
                         }
                         return enemyConsumeLife;
                     }

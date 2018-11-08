@@ -29,6 +29,7 @@ public class MainMenuDao extends AbstractDao<MainMenu, Long> {
         public final static Property Tips = new Property(2, String.class, "tips", false, "TIPS");
         public final static Property ClickId = new Property(3, Long.class, "clickId", false, "CLICK_ID");
         public final static Property BtnText = new Property(4, String.class, "btnText", false, "BTN_TEXT");
+        public final static Property Type = new Property(5, String.class, "type", false, "TYPE");
     }
 
 
@@ -48,7 +49,8 @@ public class MainMenuDao extends AbstractDao<MainMenu, Long> {
                 "\"NAME\" TEXT," + // 1: name
                 "\"TIPS\" TEXT," + // 2: tips
                 "\"CLICK_ID\" INTEGER," + // 3: clickId
-                "\"BTN_TEXT\" TEXT);"); // 4: btnText
+                "\"BTN_TEXT\" TEXT," + // 4: btnText
+                "\"TYPE\" TEXT);"); // 5: type
     }
 
     /** Drops the underlying database table. */
@@ -85,6 +87,11 @@ public class MainMenuDao extends AbstractDao<MainMenu, Long> {
         if (btnText != null) {
             stmt.bindString(5, btnText);
         }
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(6, type);
+        }
     }
 
     @Override
@@ -115,6 +122,11 @@ public class MainMenuDao extends AbstractDao<MainMenu, Long> {
         if (btnText != null) {
             stmt.bindString(5, btnText);
         }
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(6, type);
+        }
     }
 
     @Override
@@ -129,7 +141,8 @@ public class MainMenuDao extends AbstractDao<MainMenu, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // tips
             cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // clickId
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // btnText
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // btnText
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // type
         );
         return entity;
     }
@@ -141,6 +154,7 @@ public class MainMenuDao extends AbstractDao<MainMenu, Long> {
         entity.setTips(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setClickId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
         entity.setBtnText(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

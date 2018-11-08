@@ -69,6 +69,11 @@ public class WeaponsIconMap {
         map.put("G1", R.mipmap.g1);
         map.put("G2", R.mipmap.g2);
         map.put("G3", R.mipmap.g3);
+        map.put("main1", R.mipmap.main_1);
+        map.put("main2", R.mipmap.main_2);
+        map.put("main3", R.mipmap.main_3);
+        map.put("main4", R.mipmap.main_4);
+        map.put("main5", R.mipmap.main_5);
     }
 
     public int getSrc(String type) {

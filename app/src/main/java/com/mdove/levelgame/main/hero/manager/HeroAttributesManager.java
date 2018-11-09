@@ -298,16 +298,17 @@ public class HeroAttributesManager {
         if (monsters.isBusinessman == 0) {
             return false;
         }
-        wrapper.awardMonster(monsters);
-        int attackCount = monsters.life / wrapper.realAttack();
+        int attackCount = monsters.life / (wrapper.realAttack() - monsters.armor);
         // 30/25 也会为1，但此时不属于秒杀
         if (attackCount == 1) {
-            if (wrapper.realAttack() > monsters.life) {
-                attackCount = 1;
-            }
-            if (monsters.life >= wrapper.realAttack() && monsters.life < wrapper.realAttack() * 2) {
+            if (monsters.life >= (wrapper.realAttack() - monsters.armor)
+                    && monsters.life < (wrapper.realAttack() - monsters.armor) * 2) {
                 attackCount = 2;
             }
+        }
+        if (attackCount <= 1) {
+            // 计算普通奖励
+            wrapper.awardMonster(monsters);
         }
         return attackCount <= 1 ? true : false;
     }
@@ -318,13 +319,15 @@ public class HeroAttributesManager {
         if (monsters.isBusinessman == 0) {
             return false;
         }
-        int attackCount = wrapper.realCurLife() / monsters.realAttack();
-
+        int attackCount = wrapper.realCurLife() / (monsters.realAttack() - wrapper.realArmor());
+        // 此情况对应怪物无法破防
+        if (monsters.realAttack() - wrapper.realArmor() < 0) {
+            attackCount = 2;
+        }
         if (attackCount == 1) {
-            if (monsters.realAttack() > wrapper.realCurLife()) {
-                attackCount = 1;
-            }
-            if (wrapper.realCurLife() >= monsters.realAttack() && wrapper.realCurLife() < monsters.realAttack() * 2) {
+            // 如果当前血量大于敌人伤害的一倍，小于2倍，说明不属于被秒杀
+            if (wrapper.realCurLife() >= (monsters.realAttack() - wrapper.realArmor())
+                    && wrapper.realCurLife() < (monsters.realAttack() - wrapper.realArmor()) * 2) {
                 attackCount = 2;
             }
         }

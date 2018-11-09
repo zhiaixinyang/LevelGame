@@ -29,7 +29,7 @@
   },
   {
     "id": 7,
-    "types": "[{\"type\":\"E4\",\"probability\":1},{\"type\":\"E9\",\"probability\":0.3}]"
+    "types": "[{\"type\":\"E4\",\"probability\":0.6},{\"type\":\"E9\",\"probability\":0.8}]"
   },
   {
     "id": 8,

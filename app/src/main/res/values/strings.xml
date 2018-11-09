@@ -86,7 +86,7 @@
     <string name="string_attack_loading_msg">攻击中...2秒后结束</string>
     <string name="string_error">程序出错，请重试</string>
     <string name="string_no_power">体力不足，请尝试 #休息#</string>
-    <string name="string_attack_fail">攻击失败</string>
+    <string name="string_attack_fail"><![CDATA[<font color="#D32F2F">攻击失败</font>]]></string>
     <string name="string_attack_win_title">攻击成功</string>
     <string name="string_attack_win_no_count">此怪物可攻击次数不足。\n可尝试#休息#</string>
     <string name="string_attack_win">攻击成功。<br />获得金钱：%1$d；获得经验：%2$d；损失生命：%3$d。</string>
@@ -130,9 +130,9 @@
     <string name="string_big_monsters_show_title">魔王现世</string>
     <string name="string_big_monsters_show_content">兄dei，抄家伙干魔王，保家卫国了！</string>
     <string name="string_start_fighting">开始战斗</string>
-    <string name="string_blacksmith_update_suc"><![CDATA[font color=\"#FB8C00\">升级成功</font>]]></string>
-    <string name="string_blacksmith_update_error"><![CDATA[<font color=\"#D32F2F\">升级失败</font>]]></string>
-    <string name="string_blacksmith_mix_suc"><![CDATA[<font color=\"#FB8C00\">合成成功</font>]]></string>
-    <string name="string_blacksmith_mix_error"><![CDATA[<font color=\"#D32F2F\">合成失败</font>]]></string>
+    <string name="string_blacksmith_update_suc"><![CDATA[<font color="#43A047">升级成功</font>]]></string>
+    <string name="string_blacksmith_update_error"><![CDATA[<font color="#D32F2F">升级失败</font>]]></string>
+    <string name="string_blacksmith_mix_suc"><![CDATA[<font color="#FBC02D">合成成功</font>]]></string>
+    <string name="string_blacksmith_mix_error"><![CDATA[<font color="#D32F2F">合成失败</font>]]></string>
     <string name="string_attack_no_harm">无法破防</string>
 </resources>

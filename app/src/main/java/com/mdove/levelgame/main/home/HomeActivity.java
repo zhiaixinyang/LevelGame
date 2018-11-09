@@ -10,9 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
 import android.view.View;
 
+import com.mdove.levelgame.BuildConfig;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.databinding.ActivityHomeBinding;
+import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
+import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.home.adapter.HomeAdapter;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.HomeActionHandler;
@@ -60,6 +63,16 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         presenter.initBigMonsterInvade();
 
         binding.setHandler(new HomeActionHandler(presenter));
+
+        binding.ivBigMonster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (BuildConfig.DEBUG) {
+                    HeroManager.getInstance().getHeroAttributes().money += 1000;
+                    HeroManager.getInstance().save();
+                }
+            }
+        });
     }
 
     @Override

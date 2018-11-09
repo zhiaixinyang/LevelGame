@@ -26,7 +26,7 @@
             android:id="@+id/iv_src"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/item_hero_equip_normal_margin"
+            android:layout_margin="@dimen/item_hero_equip_normal_margin"
             android:background="@drawable/bg_gray_round"
             android:padding="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,49 +54,44 @@
             tools:text="装备名字" />
 
         <TextView
-            android:id="@+id/tv_tips"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/item_hero_equip_normal_margin"
-            android:layout_marginStart="@dimen/item_hero_equip_normal_margin"
-            android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
-            android:textColor="@color/gray_plus"
-            android:textSize="12sp"
-            app:htmlColorText="@{vm.tips}"
-            app:layout_constraintLeft_toRightOf="@+id/iv_src"
-            app:layout_constraintRight_toLeftOf="@+id/btn_take_off"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            tools:text="装备介绍" />
-
-        <TextView
             android:id="@+id/tv_attack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
             android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
-            android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="@dimen/item_hero_equip_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/iv_src"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name"
             tools:text="装备攻击" />
 
         <TextView
             android:id="@+id/tv_armor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
             android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
-            android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
             android:text="@{vm.armor}"
             android:textColor="@color/black"
             android:textSize="@dimen/item_hero_equip_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            app:layout_constraintTop_toTopOf="@+id/tv_name"
             tools:text="装备防御" />
+
+        <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_hero_equip_normal_margin"
+            android:textColor="@color/gray_plus"
+            android:textSize="12sp"
+            app:htmlColorText="@{vm.tips}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
+            app:layout_constraintRight_toLeftOf="@+id/btn_take_off"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="装备介绍" />
 
         <TextView
             android:id="@+id/btn_take_off"

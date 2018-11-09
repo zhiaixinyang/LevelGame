@@ -30,7 +30,7 @@ import io.reactivex.ObservableOnSubscribe;
  */
 
 public class BlacksmithManager {
-    private static final String TO_COPPER_TYPE = "A9";
+    private static final String TO_COPPER_TYPE = "A10";
     private static final String TO_STRENGTHEN_TYPE = "A11";
 
     // 强化已满级
@@ -435,10 +435,11 @@ public class BlacksmithManager {
                                 resp.status = STRENGTHEN_STATUS_SUC;
                                 pk.strengthenLevel = nextLevel;
                                 resp.level = pk.strengthenLevel;
-                                resp.strengthId=hasMaterial.id;
+                                resp.strengthId = hasMaterial.id;
                                 packagesDao.update(pk);
                                 return resp;
                             } else {
+                                resp.strengthId = hasMaterial.id;
                                 resp.status = STRENGTHEN_STATUS_FAIL;
                                 return resp;
                             }
@@ -472,9 +473,49 @@ public class BlacksmithManager {
                                 resp.status = STRENGTHEN_STATUS_SUC;
                                 pk.strengthenLevel = nextLevel;
                                 resp.level = pk.strengthenLevel;
+                                resp.strengthId = hasMaterial.id;
                                 packagesDao.update(pk);
                                 return resp;
                             } else {
+                                resp.strengthId = hasMaterial.id;
+                                resp.status = STRENGTHEN_STATUS_FAIL;
+                                return resp;
+                            }
+                        }
+                    } else {
+                        resp.status = STRENGTHEN_STATUS_MAX;
+                        return resp;
+                    }
+                }
+            } else if (ob instanceof Accessories) {// 强化装备为：饰品
+                Accessories model = (Accessories) ob;
+                if (model.isCanStrengthen == 0) {
+                    List<StrengthenNeedModel> needModels = JsonUtil.decode(model.strengthenFormula, new TypeToken<List<StrengthenNeedModel>>() {
+                    }.getType());
+                    int nextLevel = pk.strengthenLevel + 1;
+                    // 可强化
+                    if (nextLevel <= needModels.size()) {
+                        // 数组越界问题
+                        StrengthenNeedModel needModel = needModels.get(nextLevel - 1);
+                        HasMaterial hasMaterial = hasMaterial(needModel.type);
+                        if (!hasMaterial.isHas) {
+                            resp.status = STRENGTHEN_STATUS_NO_MATERIAL;
+                            return resp;
+                        } else {
+                            // 材料足够，先删强化石
+                            packagesDao.delete(packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique());
+                            float probability = needModel.probability * 100;
+                            int random = new Random(System.currentTimeMillis()).nextInt(100);
+                            // 强化成功
+                            if (random <= probability) {
+                                resp.status = STRENGTHEN_STATUS_SUC;
+                                pk.strengthenLevel = nextLevel;
+                                resp.level = pk.strengthenLevel;
+                                resp.strengthId = hasMaterial.id;
+                                packagesDao.update(pk);
+                                return resp;
+                            } else {
+                                resp.strengthId = hasMaterial.id;
                                 resp.status = STRENGTHEN_STATUS_FAIL;
                                 return resp;
                             }

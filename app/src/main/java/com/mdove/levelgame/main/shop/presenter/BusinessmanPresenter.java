@@ -93,11 +93,14 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
                     public void accept(BaseBuy baseBuy) throws Exception {
                         switch (baseBuy.buyStatus) {
                             case HeroBuyManager.BUY_BASE_STATUS_SUC: {
-                                ToastHelper.shortToast(String.format(view.getContext().getString(R.string.string_buy_base_suc), baseBuy.price));
+                                MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_suc),
+                                        String.format(view.getContext().getString(R.string.string_buy_content_suc), baseBuy.name, baseBuy.price), true);
+
                                 break;
                             }
                             case HeroBuyManager.BUY_BASE_STATUS_FAIL: {
-                                ToastHelper.shortToast(view.getContext().getString(R.string.string_buy_base_fail));
+                                MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_error),
+                                        view.getContext().getString(R.string.string_buy_content_error), true);
                                 break;
                             }
                             case HeroBuyManager.BUY_BASE_STATUS_ERROR: {

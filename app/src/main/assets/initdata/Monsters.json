@@ -122,7 +122,7 @@
     "tips": "百年前，战神落败，麾下数万将士皆战死沙场。如今亡魂凝聚，风云突变。<br/><font color=\"#D32F2F\">掉落：战胜令（材料）、战神信物。</font>",
     "attack": 500,
     "armor": 350,
-    "life": 3000,
+    "life": 1000,
     "money": 0,
     "type": "C7",
     "is_businessman": 1,

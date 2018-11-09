@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
 
 /**
  * @author MDove on 2018/10/29
@@ -14,6 +15,7 @@ public class SellGoodsModelVM {
     public ObservableField<String> type = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();
     public ObservableField<String> btnText = new ObservableField<>();
+    public ObservableField<Integer> src = new ObservableField<>();
     public ObservableField<Long> realPrice = new ObservableField<>();
     // 0表示是可购买的，1表示可合成，2表示可升级
     public int status;
@@ -23,6 +25,7 @@ public class SellGoodsModelVM {
         this.tips.set(tips);
         this.type.set(type);
         this.status = status;
+        src.set(WeaponsIconMap.getInstance().getSrc(type));
         if (status == 0) {
             this.price.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_price), price));
             btnText.set("购买");

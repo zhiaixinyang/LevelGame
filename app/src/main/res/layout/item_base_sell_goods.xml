@@ -22,6 +22,24 @@
         android:background="@drawable/bg_white_round"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
+        <FrameLayout
+            android:id="@+id/iv_src"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_shop_attack_normal_margin"
+            android:background="@drawable/bg_gray_round"
+            android:padding="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@{vm.src}"
+                tools:src="@mipmap/i7" />
+        </FrameLayout>
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
@@ -31,7 +49,7 @@
             app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="商品名字" />
 
@@ -44,7 +62,7 @@
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@+id/btn_buy"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="商品介绍" />
 
@@ -74,7 +92,7 @@
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="需要金钱：10" />
 

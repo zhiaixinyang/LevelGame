@@ -29,6 +29,7 @@ public class MonstersPlaceDao extends AbstractDao<MonstersPlace, Long> {
         public final static Property Tips = new Property(2, String.class, "tips", false, "TIPS");
         public final static Property IsShow = new Property(3, int.class, "isShow", false, "IS_SHOW");
         public final static Property IsAdventure = new Property(4, int.class, "isAdventure", false, "IS_ADVENTURE");
+        public final static Property Type = new Property(5, String.class, "type", false, "TYPE");
     }
 
 
@@ -48,7 +49,8 @@ public class MonstersPlaceDao extends AbstractDao<MonstersPlace, Long> {
                 "\"NAME\" TEXT," + // 1: name
                 "\"TIPS\" TEXT," + // 2: tips
                 "\"IS_SHOW\" INTEGER NOT NULL ," + // 3: isShow
-                "\"IS_ADVENTURE\" INTEGER NOT NULL );"); // 4: isAdventure
+                "\"IS_ADVENTURE\" INTEGER NOT NULL ," + // 4: isAdventure
+                "\"TYPE\" TEXT);"); // 5: type
     }
 
     /** Drops the underlying database table. */
@@ -77,6 +79,11 @@ public class MonstersPlaceDao extends AbstractDao<MonstersPlace, Long> {
         }
         stmt.bindLong(4, entity.getIsShow());
         stmt.bindLong(5, entity.getIsAdventure());
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(6, type);
+        }
     }
 
     @Override
@@ -99,6 +106,11 @@ public class MonstersPlaceDao extends AbstractDao<MonstersPlace, Long> {
         }
         stmt.bindLong(4, entity.getIsShow());
         stmt.bindLong(5, entity.getIsAdventure());
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(6, type);
+        }
     }
 
     @Override
@@ -113,7 +125,8 @@ public class MonstersPlaceDao extends AbstractDao<MonstersPlace, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // tips
             cursor.getInt(offset + 3), // isShow
-            cursor.getInt(offset + 4) // isAdventure
+            cursor.getInt(offset + 4), // isAdventure
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // type
         );
         return entity;
     }
@@ -125,6 +138,7 @@ public class MonstersPlaceDao extends AbstractDao<MonstersPlace, Long> {
         entity.setTips(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setIsShow(cursor.getInt(offset + 3));
         entity.setIsAdventure(cursor.getInt(offset + 4));
+        entity.setType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

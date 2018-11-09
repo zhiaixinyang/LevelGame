@@ -41,7 +41,7 @@ public class FightingDialog extends AppCompatDialog {
     private Disposable monstersDisposable;
 
     public FightingDialog(Context context, Monsters monster) {
-        super(context);
+        super(context,R.style.BaseDialog);
         this.context = context;
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_fighting,
                 null, false);

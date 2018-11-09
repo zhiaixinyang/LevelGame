@@ -25,7 +25,7 @@
   },
   {
     "id": 6,
-    "types": "[{\"type\":\"E1\",\"probability\":0.25},{\"type\":\"E2\",\"probability\":0.25},{\"type\":\"E3\",\"probability\":0.25}]"
+    "types": "[{\"type\":\"E1\",\"probability\":0.35},{\"type\":\"E2\",\"probability\":0.35},{\"type\":\"E3\",\"probability\":0.35}]"
   },
   {
     "id": 7,

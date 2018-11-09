@@ -17,6 +17,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
+        android:elevation="12dp"
         android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_height="wrap_content">
 
@@ -41,9 +42,10 @@
                 android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
                 android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/gray_plus"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 app:htmlColorText="@{vm.tips}"
+                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/btn_in"

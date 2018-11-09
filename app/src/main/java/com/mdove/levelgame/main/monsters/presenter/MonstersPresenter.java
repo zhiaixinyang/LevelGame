@@ -137,7 +137,13 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     @SuppressLint("CheckResult")
     @Override
     public void onItemBtnClick(String type, final Long id) {
+        // 野外商人
         Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder().where(MonstersDao.Properties.Id.eq(id)).unique();
+        if (monsters != null && monsters.isBusinessman == 0) {
+            BusinessmanActivity.start(view.getContext(), id);
+            return;
+        }
+        // 战斗逻辑
         final FightingDialog dialog = new FightingDialog(view.getContext(), monsters);
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override

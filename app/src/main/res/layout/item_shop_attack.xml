@@ -26,7 +26,8 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_shop_attack_normal_margin"
+            android:layout_marginTop="@dimen/item_shop_attack_normal_margin"
+            android:layout_marginLeft="@dimen/item_shop_attack_normal_margin"
             android:gravity="center"
             app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
@@ -59,14 +60,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/item_shop_attack_normal_margin"
             android:layout_marginEnd="@dimen/item_shop_attack_normal_margin"
-            android:layout_marginTop="@dimen/item_shop_attack_normal_margin"
             app:htmlColorText="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:layout_constraintRight_toLeftOf="@+id/btn_buy"
             app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            tools:text="武器介绍" />
+            app:layout_constraintBottom_toTopOf="@+id/tv_attack"
+            tools:text="武器介绍武器介绍武器介绍武器介绍武器介绍武器介绍武器介绍武器介绍武器介绍武器介绍武器介绍" />
 
         <TextView
             android:id="@+id/btn_buy"
@@ -106,6 +107,7 @@
             android:text="@{vm.attack}"
             android:textColor="@color/black"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/iv_src"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="增加攻击：10" />
@@ -120,6 +122,7 @@
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/tv_attack"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加攻击：10" />
 
     </android.support.constraint.ConstraintLayout>

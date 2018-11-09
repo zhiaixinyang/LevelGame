@@ -23,16 +23,34 @@
         android:background="@drawable/bg_white_round"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
+        <FrameLayout
+            android:id="@+id/iv_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_shop_attack_normal_margin"
+            android:background="@drawable/bg_gray_round"
+            android:padding="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@{vm.src}"
+                tools:src="@mipmap/i7" />
+        </FrameLayout>
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_monsters_place_btn_normal_margin"
             android:gravity="center"
-            app:htmlColorText="@{vm.name}"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:htmlColorText="@{vm.name}"
+            app:layout_constraintLeft_toRightOf="@+id/iv_place"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="野区名字" />
 
@@ -46,7 +64,7 @@
             android:textSize="12sp"
             app:htmlColorText="@{vm.tips}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_place"
             app:layout_constraintRight_toLeftOf="@+id/btn_go"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="野区介绍" />

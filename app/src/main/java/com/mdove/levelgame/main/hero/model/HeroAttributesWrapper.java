@@ -56,7 +56,7 @@ public class HeroAttributesWrapper {
     public int computeHarmLife(int enemyAttack) {
         HeroAttributes heroAttributes = resetAttributes();
         int harm = enemyAttack - armor;
-        if (harm > 0) {
+        if (harm < 0) {
             harm = 0;
         }
         heroAttributes.curLife -= harm;

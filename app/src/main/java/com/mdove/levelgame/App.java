@@ -71,9 +71,9 @@ public class App extends Application {
             heroAttributes.days = 1;
             dao.insert(heroAttributes);
             // 初始化数据库
-            InitDataFileUtils.initData();
             AppConfig.setFirstLogin();
         }
+        InitDataFileUtils.initData();
         resetPkSelectStatus();
     }
 

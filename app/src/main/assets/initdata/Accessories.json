@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "<font color=\"#D32F2F\">东皇钟</font>",
-    "tips": "<font color=\"#D32F2F\">神器</font>之一。<br/>传说中上古之神用于封印魔王所铸神器。魔王封印之后，神器便失去踪迹...<br/>合成公式：鬼神甲 + 玄武甲",
+    "tips": "<font color=\"#D32F2F\">神器</font>之一。<br/>传说中上古之神用于封印魔王所铸神器。魔王封印之后，神器便失去踪迹...<br/>合成公式：真·战神印 + 玄武甲",
     "attack": 400,
     "armor": 550,
     "life": 300,
@@ -13,7 +13,7 @@
     "is_can_update": 1,
     "is_special": 0,
     "is_can_mixture": 0,
-    "mixture_formula": "[{\"type\":\"B8\"},{\"type\":\"E7\"}]"
+    "mixture_formula": "[{\"type\":\"G3\"},{\"type\":\"E7\"}]"
   },
   {
     "id": 2,

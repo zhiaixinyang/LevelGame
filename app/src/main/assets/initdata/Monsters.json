@@ -281,7 +281,7 @@
     "is_limit_count": 0,
     "attack_speed": 1500,
     "limit_count": 1,
-    "cur_count": 1,
+    "cur_count": 3,
     "is_show": 1,
     "monster_place_id": 3,
     "drop_goods_id": 10,

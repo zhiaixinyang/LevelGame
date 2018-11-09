@@ -52,6 +52,7 @@ public class WeaponsIconMap {
         map.put("B6", R.mipmap.b6);
         map.put("B7", R.mipmap.b7);
         map.put("B8", R.mipmap.b8);
+        map.put("B9", R.mipmap.b8);
         map.put("D1", R.mipmap.d1);
         map.put("D2", R.mipmap.d2);
         map.put("D3", R.mipmap.d3);

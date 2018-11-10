@@ -27,7 +27,6 @@
     "strengthen": 0,
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
-
     "is_can_update": 1,
     "is_special": 1,
     "is_can_mixture": 1
@@ -60,7 +59,6 @@
     "strengthen": 0,
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
-
     "is_can_update": 1,
     "is_special": 1,
     "is_can_mixture": 1
@@ -77,7 +75,6 @@
     "strengthen": 0,
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
-
     "is_can_update": 1,
     "is_special": 1,
     "is_can_mixture": 1
@@ -96,7 +93,6 @@
     "is_special": 0,
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
-
     "mixture_formula": "[{\"type\":\"B5\"},{\"type\":\"E4\"}]",
     "is_can_mixture": 0
   },
@@ -137,7 +133,7 @@
   {
     "id": 9,
     "name": "<font color=\"#D32F2F\">轩辕甲</font>",
-    "tips": "合成公式：轩辕之灵 + 鬼神甲 + 真·战神甲",
+    "tips": "轩辕氏常披挂此甲在战场上拼杀。<br/>合成公式：轩辕之灵 + 鬼神甲 + 真·战神甲",
     "attack": 200,
     "armor": 1000,
     "price": 2,
@@ -149,6 +145,23 @@
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "mixture_formula": "[{\"type\":\"B8\"},{\"type\":\"B6\"},{\"type\":\"E10\"}]",
+    "is_can_mixture": 0
+  },
+  {
+    "id": 10,
+    "name": "<font color=\"#FBC02D\">重甲</font>",
+    "tips": "前期颇为好用的防具。<br/>合成公式：布衣 + 布甲 + 铜矿石",
+    "attack": 5,
+    "armor": 40,
+    "price": 2,
+    "type": "B10",
+    "belong_monster_id": "1002,",
+    "strengthen": 0,
+    "is_can_update": 1,
+    "is_special": 0,
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "mixture_formula": "[{\"type\":\"B1\"},{\"type\":\"B2\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
   }
 ]

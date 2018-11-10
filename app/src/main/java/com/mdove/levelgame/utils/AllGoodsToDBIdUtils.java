@@ -75,7 +75,6 @@ public class AllGoodsToDBIdUtils {
         }else if (type.startsWith("J")) {
             dbType = DB_TYPE_IS_SKILL;
         }
-
         return dbType;
     }
 }

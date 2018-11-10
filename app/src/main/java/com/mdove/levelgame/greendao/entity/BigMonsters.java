@@ -36,16 +36,17 @@ public class BigMonsters {
     public int isGone;
     // 魔王是否死亡
     public int isDead;
+    public int days;
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
     /** Used for active entity operations. */
     @Generated(hash = 996161192)
     private transient BigMonstersDao myDao;
-    @Generated(hash = 1800320174)
+    @Generated(hash = 220682870)
     public BigMonsters(Long id, String name, String tips, int attack, int armor,
             int life, String type, long monsterPlaceId, long exp, int money,
-            Long dropGoodsId, long consumePower, int isGone, int isDead) {
+            Long dropGoodsId, long consumePower, int isGone, int isDead, int days) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -60,6 +61,7 @@ public class BigMonsters {
         this.consumePower = consumePower;
         this.isGone = isGone;
         this.isDead = isDead;
+        this.days = days;
     }
     @Generated(hash = 888610162)
     public BigMonsters() {
@@ -147,6 +149,12 @@ public class BigMonsters {
     }
     public void setIsDead(int isDead) {
         this.isDead = isDead;
+    }
+    public int getDays() {
+        return this.days;
+    }
+    public void setDays(int days) {
+        this.days = days;
     }
     @Generated(hash = 37712599)
     private transient Long dropGoods__resolvedKey;

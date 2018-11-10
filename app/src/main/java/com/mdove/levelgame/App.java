@@ -54,6 +54,7 @@ public class App extends Application {
 //        HeroManager.getInstance().save();
         if (!AppConfig.isFirstLogin()) {
             HeroAttributesDao dao = DatabaseManager.getInstance().getHeroAttributesDao();
+            dao.deleteAll();
             HeroAttributes heroAttributes = new HeroAttributes();
             heroAttributes.armor = 10;
             heroAttributes.armorIncrease = 3;
@@ -72,9 +73,9 @@ public class App extends Application {
             heroAttributes.days = 1;
             dao.insert(heroAttributes);
             // 初始化数据库
+            InitDataFileUtils.initData();
             AppConfig.setFirstLogin();
         }
-        InitDataFileUtils.initData();
         resetPkSelectStatus();
     }
 

@@ -114,21 +114,16 @@ public class HeroAttributesManager {
     }
 
     public boolean goneBigMonster() {
-        boolean isGone = true;
-        if (heroAttributes.days == 10) {
-            isGone = computeBigMonster(1);
-        } else if (heroAttributes.days == 30) {
-            // 三十天大魔王
-            isGone = computeBigMonster(2);
-        } else if (heroAttributes.days == 50) {
-            // 五十天大魔王
-            isGone = computeBigMonster(3);
-        }
+        boolean isGone;
+        isGone = computeBigMonster(heroAttributes.days);
         return isGone;
     }
 
-    private boolean computeBigMonster(long id) {
-        BigMonsters bigMonsters = bigMonstersDao.queryBuilder().where(BigMonstersDao.Properties.Id.eq(id)).unique();
+    private boolean computeBigMonster(int days) {
+        BigMonsters bigMonsters = bigMonstersDao.queryBuilder().where(BigMonstersDao.Properties.Days.eq(days)).unique();
+        if (bigMonsters == null) {
+            return true;
+        }
         // 如果魔王没死，说明魔王还没出现
         if (bigMonsters.isDead == 1) {
             //让大魔王出现
@@ -298,10 +293,15 @@ public class HeroAttributesManager {
         if (monsters.isBusinessman == 0) {
             return false;
         }
+        // 无法破防，说明为0，提前处理，免得分母0异常
+        if ((wrapper.realAttack() - monsters.armor) <= 0) {
+            return false;
+        }
         int attackCount = monsters.life / (wrapper.realAttack() - monsters.armor);
+
         // 30/25 也会为1，但此时不属于秒杀
         if (attackCount == 1) {
-            if (monsters.life >= (wrapper.realAttack() - monsters.armor)
+            if (monsters.life > (wrapper.realAttack() - monsters.armor)
                     && monsters.life < (wrapper.realAttack() - monsters.armor) * 2) {
                 attackCount = 2;
             }
@@ -319,14 +319,14 @@ public class HeroAttributesManager {
         if (monsters.isBusinessman == 0) {
             return false;
         }
-        int attackCount = wrapper.realCurLife() / (monsters.realAttack() - wrapper.realArmor());
-        // 此情况对应怪物无法破防
-        if (monsters.realAttack() - wrapper.realArmor() < 0) {
-            attackCount = 2;
+        // 无法破防，说明为0，提前处理，免得分母0异常
+        if ((monsters.realAttack() - wrapper.realArmor()) <= 0) {
+            return false;
         }
+        int attackCount = wrapper.realCurLife() / (monsters.realAttack() - wrapper.realArmor());
         if (attackCount == 1) {
             // 如果当前血量大于敌人伤害的一倍，小于2倍，说明不属于被秒杀
-            if (wrapper.realCurLife() >= (monsters.realAttack() - wrapper.realArmor())
+            if (wrapper.realCurLife() > (monsters.realAttack() - wrapper.realArmor())
                     && wrapper.realCurLife() < (monsters.realAttack() - wrapper.realArmor()) * 2) {
                 attackCount = 2;
             }

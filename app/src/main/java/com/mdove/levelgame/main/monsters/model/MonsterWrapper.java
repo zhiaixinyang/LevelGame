@@ -33,7 +33,7 @@ public class MonsterWrapper {
     public int realAttack() {
         // 减去英雄忽视的攻击
         int realAttack;
-        realAttack = (int) wrapper.getInnerSkillModel().ignoreAttackProbability * attack;
+        realAttack = (int) ((1 - wrapper.getInnerSkillModel().ignoreAttackProbability) * attack);
         return realAttack;
     }
 
@@ -64,8 +64,8 @@ public class MonsterWrapper {
     // 为以后增加技能/特殊属性做准备
     public int realArmor() {
         // 减去英雄忽视的护甲
-        int realArmor = armor;
-        realArmor = (int) wrapper.getInnerSkillModel().ignoreArmorProbability * armor;
+        int realArmor;
+        realArmor = (int) ((1 - wrapper.getInnerSkillModel().ignoreArmorProbability) * armor);
         return realArmor;
     }
 }

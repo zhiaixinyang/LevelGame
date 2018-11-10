@@ -92,24 +92,12 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     @Override
     public void initBigMonsterInvade() {
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
-        List<BigMonsters> bigMonsters = bigMonstersDao.loadAll();
+        List<BigMonsters> bigMonsters = bigMonstersDao.queryBuilder().where(BigMonstersDao.Properties.IsDead.eq(1)).list();
         if (bigMonsters != null && bigMonsters.size() > 0) {
-            BigMonsters one = bigMonsters.get(0);
-            if (one.isGone == 0 && one.isDead == 1) {
+            BigMonsters bigMonster = bigMonsters.get(0);
+            if (bigMonster.isGone == 0) {
                 view.showBigMonsterInvade(String.format(view.getString(R.string.string_big_monsters_distance_invade),
-                        10 - HeroManager.getInstance().getHeroAttributes().days));
-                return;
-            }
-            BigMonsters two = bigMonsters.get(1);
-            if (two.isGone == 0 && two.isDead == 1) {
-                view.showBigMonsterInvade(String.format(view.getString(R.string.string_big_monsters_distance_invade),
-                        30 - HeroManager.getInstance().getHeroAttributes().days));
-                return;
-            }
-            BigMonsters three = bigMonsters.get(2);
-            if (three.isGone == 0 && three.isDead == 1) {
-                view.showBigMonsterInvade(String.format(view.getString(R.string.string_big_monsters_distance_invade),
-                        50 - HeroManager.getInstance().getHeroAttributes().days));
+                        bigMonster.days - HeroManager.getInstance().getHeroAttributes().days));
                 return;
             }
         }

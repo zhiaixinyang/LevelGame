@@ -1,12 +1,10 @@
 package com.mdove.levelgame.main.hero.model;
 
 import android.databinding.ObservableField;
-import android.view.View;
 
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
-import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
-import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
+import com.mdove.levelgame.greendao.utils.SrcIconMap;
 
 /**
  * @author MDove on 2018/10/23
@@ -35,7 +33,7 @@ public class HeroPackageModelVM {
         nameInit = name;
         this.strengthen.set(strengthen);
         this.tips.set(tips);
-        src.set(WeaponsIconMap.getInstance().getSrc(type));
+        src.set(SrcIconMap.getInstance().getSrc(type));
 
         if (strengthen > 0) {
             this.name.set(String.format(App.getAppContext().getString(R.string.string_pk_msg_name_strengthen), name, strengthen));

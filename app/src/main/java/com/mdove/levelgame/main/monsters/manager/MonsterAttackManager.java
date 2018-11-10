@@ -91,8 +91,7 @@ public class MonsterAttackManager {
                 .map(new Function<Long, Integer>() {
                     @Override
                     public Integer apply(Long aLong) throws Exception {
-                        int heroRealAttack = HeroAttributesWrapper.getInstance().realAttack();
-                        int enemyConsumeLife = wrapper.computeHarmLife(heroRealAttack);
+                        int enemyConsumeLife = wrapper.computeHarmLife();
                         if (wrapper.realCurLife() <= 0) {
                             HeroAttributesWrapper.getInstance().awardMonster(monsters);
                             // 掉落装备

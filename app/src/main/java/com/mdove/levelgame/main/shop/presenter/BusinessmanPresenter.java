@@ -9,6 +9,7 @@ import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Monsters;
+import com.mdove.levelgame.greendao.entity.Skill;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
@@ -68,7 +69,7 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
                     } else if (oj instanceof Material) {
                         Material material = (Material) oj;
                         data.add(new SellGoodsModelVM(temp.price, material.name, material.tips, material.type, 0));
-                    }else if (oj instanceof Accessories) {
+                    } else if (oj instanceof Accessories) {
                         Accessories accessories = (Accessories) oj;
                         int status = 0;
                         if (accessories.isCanMixture == 0) {
@@ -77,6 +78,10 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
                             status = 2;
                         }
                         data.add(new SellGoodsModelVM(temp.price, accessories.name, accessories.tips, accessories.type, status));
+                    } else if (oj instanceof Skill) {
+                        Skill skill = (Skill) oj;
+                        int status = 3;
+                        data.add(new SellGoodsModelVM(temp.price, skill.name, skill.tips, skill.type, status));
                     }
                 }
             }
@@ -85,9 +90,10 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
     }
 
     @Override
-    public void onItemBtnClick(int status,String type, long price) {
-        switch (status){
-            case 0:{
+    public void onItemBtnClick(int status, String type, long price) {
+        switch (status) {
+            case 3:
+            case 0: {
                 HeroBuyManager.getInstance().buy(type, price).subscribe(new Consumer<BaseBuy>() {
                     @Override
                     public void accept(BaseBuy baseBuy) throws Exception {
@@ -116,7 +122,7 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
             }
             // 装备对应升级/合成
             case 1:
-            case 2:{
+            case 2: {
                 BlacksmithManager.getInstance().goodsUpdate(type).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
                     @Override
                     public void accept(BlacksmithManager.BlacksmithResp blacksmithResp) throws Exception {

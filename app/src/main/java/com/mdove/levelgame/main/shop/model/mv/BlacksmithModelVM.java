@@ -7,8 +7,7 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.Weapons;
-import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
-import com.mdove.levelgame.main.shop.model.ShopAttackModel;
+import com.mdove.levelgame.greendao.utils.SrcIconMap;
 
 /**
  * @author zhaojing on 2018/10/28
@@ -38,7 +37,7 @@ public class BlacksmithModelVM {
         life.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_life), 0));
         armor.set("");
         type.set(model.type);
-        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
+        src.set(SrcIconMap.getInstance().getSrc(model.type));
         if (model.armor > 0) {
             armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), model.armor));
         }
@@ -62,7 +61,7 @@ public class BlacksmithModelVM {
         life.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_life), 0));
         armor.set("");
         type.set(model.type);
-        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
+        src.set(SrcIconMap.getInstance().getSrc(model.type));
         if (model.armor > 0) {
             armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), model.armor));
         }
@@ -86,7 +85,7 @@ public class BlacksmithModelVM {
         armor.set(String.format(App.getAppContext().getString(R.string.shop_accessories_msg_armor), model.armor));
         life.set(String.format(App.getAppContext().getString(R.string.shop_accessories_msg_life), model.life));
         type.set(model.type);
-        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
+        src.set(SrcIconMap.getInstance().getSrc(model.type));
         if (model.armor > 0) {
             armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), model.armor));
         }

@@ -18,6 +18,7 @@ import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
+import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.TaskDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Accessories;
@@ -30,6 +31,7 @@ import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.MonstersPlace;
+import com.mdove.levelgame.greendao.entity.Skill;
 import com.mdove.levelgame.greendao.entity.Task;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
@@ -48,6 +50,7 @@ import java.util.List;
 public class InitDataFileUtils {
     private static List<ShopArmorModel> shopArmorModels;
     private static List<Weapons> weapons;
+    private static List<Skill> skills;
     private static List<Armors> armors;
     private static List<ShopAttackModel> shopAttackModels;
     private static List<MonstersModel> monstersModels;
@@ -80,6 +83,8 @@ public class InitDataFileUtils {
         accessoriesDao.deleteAll();
         TaskDao taskDao = DatabaseManager.getInstance().getTaskDao();
         taskDao.deleteAll();
+        SkillDao skillDao = DatabaseManager.getInstance().getSkillDao();
+        skillDao.deleteAll();
 
         List<Accessories> accessories = getInitAccessories();
         for (Accessories accessorie : accessories) {
@@ -157,6 +162,10 @@ public class InitDataFileUtils {
             monstersPlaceModels = getInitMonstersPlace();
         }
 
+        skills = getInitSkill();
+        for (Skill skill : skills) {
+            skillDao.insert(skill);
+        }
 
         for (Material material : getInitMaterials()) {
             materialDao.insert(material);
@@ -205,6 +214,16 @@ public class InitDataFileUtils {
             }.getType());
         }
         return weapons;
+    }
+
+    public static List<Skill> getInitSkill() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_SKILL);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<Skill>>() {
+            }.getType());
+        }
+        return skills;
     }
 
     public static List<ShopAttackModel> getShopWeapons() {

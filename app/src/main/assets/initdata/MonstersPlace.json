@@ -3,7 +3,7 @@
     "id": 1,
     "name": "荒山野岭",
     "is_show": 0,
-    "is_adventure":1,
+    "is_adventure": 1,
     "type": "I1",
     "tips": "强盗多有出没，“小心”金银财宝。"
   },
@@ -12,7 +12,7 @@
     "name": "妖怪大道",
     "is_show": 0,
     "type": "I2",
-    "is_adventure":1,
+    "is_adventure": 1,
     "tips": "吸天地之灵气，取日月之精华。奇珍异宝，风水圣地~"
   },
   {
@@ -20,7 +20,7 @@
     "name": "试炼营地",
     "is_show": 0,
     "type": "I4",
-    "is_adventure":1,
+    "is_adventure": 1,
     "tips": "曾经的军营，由于部队的撤离，如今已经被改造成了训练场。"
   },
   {
@@ -28,7 +28,7 @@
     "name": "古战场",
     "is_show": 0,
     "type": "I3",
-    "is_adventure":1,
+    "is_adventure": 1,
     "tips": "数百年前，曾有几十万军队埋骨于此。英雄折戟，将星陨落。听，那不甘心的哀嚎！"
   },
   {
@@ -36,7 +36,7 @@
     "name": "<font color=\"#ffffff\">铸剑山庄</font>",
     "is_show": 1,
     "type": "I5",
-    "is_adventure":0,
+    "is_adventure": 0,
     "tips": "此处必然有高人！！"
   },
   {
@@ -44,7 +44,7 @@
     "name": "天外天",
     "type": "I6",
     "is_show": 0,
-    "is_adventure":1,
+    "is_adventure": 1,
     "tips": "传说中<font color=\"#D32F2F\">神兽</font>生活的地方。"
   },
   {
@@ -52,7 +52,7 @@
     "name": "宁神塔",
     "is_show": 0,
     "type": "I7",
-    "is_adventure":1,
+    "is_adventure": 1,
     "tips": "上古之神死后永远安息于此..."
   }
 ]

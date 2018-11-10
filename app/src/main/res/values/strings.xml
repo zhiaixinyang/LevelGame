@@ -27,6 +27,7 @@
     <string name="string_fragment_title_update_armor">打造铠甲</string>
     <string name="string_fragment_title_update_accessories">打造饰品</string>
     <string name="string_fragment_title_package">我的道具</string>
+    <string name="string_fragment_title_skill">我的技能</string>
     <string name="string_medicine_shop">购买药品</string>
     <string name="string_rest">休息</string>
     <string name="string_rest_loading_msg">休息中...5秒后结束</string>

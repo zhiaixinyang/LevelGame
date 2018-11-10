@@ -3,10 +3,7 @@ package com.mdove.levelgame.main.home.model;
 import android.databinding.ObservableField;
 
 import com.mdove.levelgame.greendao.entity.MainMenu;
-import com.mdove.levelgame.greendao.entity.Weapons;
-import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
-
-import io.reactivex.Observable;
+import com.mdove.levelgame.greendao.utils.SrcIconMap;
 
 /**
  * @author MDove on 2018/10/31
@@ -25,6 +22,6 @@ public class MainMenuModelVM {
         name.set(mainMenu.name);
         tips.set(mainMenu.tips);
         btnText.set(mainMenu.btnText);
-        src.set(WeaponsIconMap.getInstance().getSrc(mainMenu.getType()));
+        src.set(SrcIconMap.getInstance().getSrc(mainMenu.getType()));
     }
 }

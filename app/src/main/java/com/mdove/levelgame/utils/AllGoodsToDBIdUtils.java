@@ -5,6 +5,7 @@ import com.mdove.levelgame.greendao.AccessoriesDao;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.MaterialDao;
+import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
@@ -18,6 +19,7 @@ public class AllGoodsToDBIdUtils {
     public static final int DB_TYPE_IS_ARMOR = 2;
     public static final int DB_TYPE_IS_MATERIALS = 3;
     public static final int DB_TYPE_IS_ACCESSORIES = 4;
+    public static final int DB_TYPE_IS_SKILL = 5;
 
     private static class SingletonHolder {
         static final AllGoodsToDBIdUtils INSTANCE = new AllGoodsToDBIdUtils();
@@ -52,6 +54,10 @@ public class AllGoodsToDBIdUtils {
                 ob = DatabaseManager.getInstance().getAccessoriesDao().queryBuilder().where(AccessoriesDao.Properties.Type.eq(type)).unique();
                 break;
             }
+            case DB_TYPE_IS_SKILL: {
+                ob = DatabaseManager.getInstance().getSkillDao().queryBuilder().where(SkillDao.Properties.Type.eq(type)).unique();
+                break;
+            }
         }
         return ob;
     }
@@ -66,6 +72,8 @@ public class AllGoodsToDBIdUtils {
             dbType = DB_TYPE_IS_MATERIALS;
         } else if (type.startsWith("G")) {
             dbType = DB_TYPE_IS_ACCESSORIES;
+        }else if (type.startsWith("J")) {
+            dbType = DB_TYPE_IS_SKILL;
         }
 
         return dbType;

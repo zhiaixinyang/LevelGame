@@ -1,6 +1,5 @@
 package com.mdove.levelgame.main.hero.presenter;
 
-import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;

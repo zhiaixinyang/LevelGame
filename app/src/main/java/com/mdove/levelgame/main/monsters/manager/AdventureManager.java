@@ -29,7 +29,8 @@ public class AdventureManager {
     private AdventureManager() {
     }
 
-    public void setAdventure() {
+    public boolean setAdventure() {
+        boolean isShow = false;
         List<Adventure> adventures = DatabaseManager.getInstance().getAdventureDao().loadAll();
         if (adventures != null && adventures.size() > 0) {
             for (Adventure adventure : adventures) {
@@ -39,19 +40,28 @@ public class AdventureManager {
                 Monsters monsters = DatabaseManager.getInstance().getMonstersDao().queryBuilder()
                         .where(MonstersDao.Properties.Type.eq(adventure.type)).unique();
                 // 奇遇出现
-                if (monstersPlace != null && monsters != null && days == adventure.days) {
+                if (monstersPlace != null && monsters != null && days == adventure.days && adventure.isCycle == 1 ||
+                        monstersPlace != null && monsters != null && days % adventure.days == 0 && adventure.isCycle == 0) {
+                    // 第一个对应，奇遇日期只有一天；第二个对应循环
                     monsters.isShow = 0;
                     monstersPlace.isShow = 0;
                     DatabaseManager.getInstance().getMonstersDao().update(monsters);
                     DatabaseManager.getInstance().getMonstersPlaceDao().update(monstersPlace);
+                    isShow = true;
                 }
-                if (days > adventure.days && monstersPlace.isShow == 0 && monsters.isShow == 0) {
+                // 奇遇消失
+                if (days > adventure.days && monstersPlace.isShow == 0 && monsters.isShow == 0 && adventure.isCycle == 1 ||
+                        monstersPlace != null && monsters != null && days % adventure.days != 0 && adventure.isCycle == 0) {
                     monsters.isShow = 1;
-                    monstersPlace.isShow = 1;
+                    if (monstersPlace.isAdventure==0) {
+                        monstersPlace.isShow = 1;
+                    }
                     DatabaseManager.getInstance().getMonstersDao().update(monsters);
                     DatabaseManager.getInstance().getMonstersPlaceDao().update(monstersPlace);
+                    isShow = false;
                 }
             }
         }
+        return isShow;
     }
 }

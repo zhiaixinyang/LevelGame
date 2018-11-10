@@ -27,6 +27,15 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property Tips = new Property(2, String.class, "tips", false, "TIPS");
+        public final static Property Type = new Property(3, String.class, "type", false, "TYPE");
+        public final static Property AttackHeavy = new Property(4, float.class, "attackHeavy", false, "ATTACK_HEAVY");
+        public final static Property AttackHeavyProbability = new Property(5, float.class, "attackHeavyProbability", false, "ATTACK_HEAVY_PROBABILITY");
+        public final static Property BloodSuckProbability = new Property(6, float.class, "bloodSuckProbability", false, "BLOOD_SUCK_PROBABILITY");
+        public final static Property IgnoreArmorProbability = new Property(7, float.class, "ignoreArmorProbability", false, "IGNORE_ARMOR_PROBABILITY");
+        public final static Property IgnoreAttackProbability = new Property(8, float.class, "ignoreAttackProbability", false, "IGNORE_ATTACK_PROBABILITY");
+        public final static Property RealAttack = new Property(9, long.class, "realAttack", false, "REAL_ATTACK");
+        public final static Property Dizziness = new Property(10, long.class, "dizziness", false, "DIZZINESS");
+        public final static Property DizzinessProbability = new Property(11, float.class, "dizzinessProbability", false, "DIZZINESS_PROBABILITY");
     }
 
 
@@ -44,7 +53,16 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"SKILL\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
-                "\"TIPS\" TEXT);"); // 2: tips
+                "\"TIPS\" TEXT," + // 2: tips
+                "\"TYPE\" TEXT," + // 3: type
+                "\"ATTACK_HEAVY\" REAL NOT NULL ," + // 4: attackHeavy
+                "\"ATTACK_HEAVY_PROBABILITY\" REAL NOT NULL ," + // 5: attackHeavyProbability
+                "\"BLOOD_SUCK_PROBABILITY\" REAL NOT NULL ," + // 6: bloodSuckProbability
+                "\"IGNORE_ARMOR_PROBABILITY\" REAL NOT NULL ," + // 7: ignoreArmorProbability
+                "\"IGNORE_ATTACK_PROBABILITY\" REAL NOT NULL ," + // 8: ignoreAttackProbability
+                "\"REAL_ATTACK\" INTEGER NOT NULL ," + // 9: realAttack
+                "\"DIZZINESS\" INTEGER NOT NULL ," + // 10: dizziness
+                "\"DIZZINESS_PROBABILITY\" REAL NOT NULL );"); // 11: dizzinessProbability
     }
 
     /** Drops the underlying database table. */
@@ -71,6 +89,19 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         if (tips != null) {
             stmt.bindString(3, tips);
         }
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(4, type);
+        }
+        stmt.bindDouble(5, entity.getAttackHeavy());
+        stmt.bindDouble(6, entity.getAttackHeavyProbability());
+        stmt.bindDouble(7, entity.getBloodSuckProbability());
+        stmt.bindDouble(8, entity.getIgnoreArmorProbability());
+        stmt.bindDouble(9, entity.getIgnoreAttackProbability());
+        stmt.bindLong(10, entity.getRealAttack());
+        stmt.bindLong(11, entity.getDizziness());
+        stmt.bindDouble(12, entity.getDizzinessProbability());
     }
 
     @Override
@@ -91,6 +122,19 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         if (tips != null) {
             stmt.bindString(3, tips);
         }
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(4, type);
+        }
+        stmt.bindDouble(5, entity.getAttackHeavy());
+        stmt.bindDouble(6, entity.getAttackHeavyProbability());
+        stmt.bindDouble(7, entity.getBloodSuckProbability());
+        stmt.bindDouble(8, entity.getIgnoreArmorProbability());
+        stmt.bindDouble(9, entity.getIgnoreAttackProbability());
+        stmt.bindLong(10, entity.getRealAttack());
+        stmt.bindLong(11, entity.getDizziness());
+        stmt.bindDouble(12, entity.getDizzinessProbability());
     }
 
     @Override
@@ -103,7 +147,16 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         Skill entity = new Skill( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // tips
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // tips
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // type
+            cursor.getFloat(offset + 4), // attackHeavy
+            cursor.getFloat(offset + 5), // attackHeavyProbability
+            cursor.getFloat(offset + 6), // bloodSuckProbability
+            cursor.getFloat(offset + 7), // ignoreArmorProbability
+            cursor.getFloat(offset + 8), // ignoreAttackProbability
+            cursor.getLong(offset + 9), // realAttack
+            cursor.getLong(offset + 10), // dizziness
+            cursor.getFloat(offset + 11) // dizzinessProbability
         );
         return entity;
     }
@@ -113,6 +166,15 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setTips(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setType(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setAttackHeavy(cursor.getFloat(offset + 4));
+        entity.setAttackHeavyProbability(cursor.getFloat(offset + 5));
+        entity.setBloodSuckProbability(cursor.getFloat(offset + 6));
+        entity.setIgnoreArmorProbability(cursor.getFloat(offset + 7));
+        entity.setIgnoreAttackProbability(cursor.getFloat(offset + 8));
+        entity.setRealAttack(cursor.getLong(offset + 9));
+        entity.setDizziness(cursor.getLong(offset + 10));
+        entity.setDizzinessProbability(cursor.getFloat(offset + 11));
      }
     
     @Override

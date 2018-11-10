@@ -3,8 +3,7 @@ package com.mdove.levelgame.main.monsters.model.vm;
 import android.databinding.ObservableField;
 
 import com.mdove.levelgame.greendao.entity.MonstersPlace;
-import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
-import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
+import com.mdove.levelgame.greendao.utils.SrcIconMap;
 
 /**
  * Created by MDove on 2018/10/21.
@@ -20,6 +19,6 @@ public class MonstersPlaceModelVM {
         name.set(model.name);
         tips.set(model.tips);
         id.set(model.id);
-        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
+        src.set(SrcIconMap.getInstance().getSrc(model.type));
     }
 }

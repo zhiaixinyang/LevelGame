@@ -26,8 +26,12 @@ public class AppConfig implements IAppConfig {
     }
 
     public static void setFirstLogin() {
+        setFirstLogin(true);
+    }
+
+    public static void setFirstLogin(boolean login) {
         SharedPreferences.Editor editor = initSharedPreferences().edit();
-        editor.putBoolean(KEY_FIRST_LOGIN, true);
+        editor.putBoolean(KEY_FIRST_LOGIN, login);
         editor.apply();
     }
 
@@ -36,7 +40,7 @@ public class AppConfig implements IAppConfig {
         return preferences.getLong(KEY_UPDATE_DB, 0);
     }
 
-    public static void setDBVersion(long version){
+    public static void setDBVersion(long version) {
         SharedPreferences.Editor editor = initSharedPreferences().edit();
         editor.putLong(KEY_UPDATE_DB, version);
         editor.apply();

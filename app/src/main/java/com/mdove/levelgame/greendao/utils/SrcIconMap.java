@@ -11,9 +11,9 @@ import java.util.Map;
  * Created by MDove on 2018/11/2.
  */
 
-public class WeaponsIconMap {
+public class SrcIconMap {
     private static final class Holder {
-        private static final WeaponsIconMap INSTANCE = new WeaponsIconMap();
+        private static final SrcIconMap INSTANCE = new SrcIconMap();
     }
 
     /**
@@ -21,13 +21,13 @@ public class WeaponsIconMap {
      *
      * @return
      */
-    public static WeaponsIconMap getInstance() {
+    public static SrcIconMap getInstance() {
         return Holder.INSTANCE;
     }
 
     private Map<String, Integer> map;
 
-    private WeaponsIconMap() {
+    private SrcIconMap() {
         map = new HashMap<>();
         map.put("A1", R.mipmap.a1);
         map.put("A2", R.mipmap.a2);
@@ -82,6 +82,7 @@ public class WeaponsIconMap {
         map.put("I5", R.mipmap.i5);
         map.put("I6", R.mipmap.i6);
         map.put("I7", R.mipmap.i7);
+        map.put("J1", R.mipmap.j1);
     }
 
     public int getSrc(String type) {

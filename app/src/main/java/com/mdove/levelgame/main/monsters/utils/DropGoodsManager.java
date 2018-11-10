@@ -13,6 +13,7 @@ import com.mdove.levelgame.utils.JsonUtil;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author MDove on 2018/10/26
@@ -32,34 +33,13 @@ public class DropGoodsManager {
         dropGoodsDao = DatabaseManager.getInstance().getDropGoodsDao();
     }
 
-    /**
-     * @param id DropGoods的id
-     * @return
-     */
-    public DropGoodsResp getDropGoods(long id) {
-        DropGoodsResp resp = new DropGoodsResp();
-        DropGoods dropGood = dropGoodsDao.queryBuilder().where(DropGoodsDao.Properties.Id.eq(id)).unique();
-        if (dropGood != null) {
-            List<DropGoodsModel> goodsModels = JsonUtil.decode(dropGood.types, new TypeToken<List<DropGoodsModel>>() {
-            }.getType());
-            for (DropGoodsModel model : goodsModels) {
-
-            }
-        }
-        return null;
-    }
-
-    private void compute(DropGoodsResp resp, String type, float probability) {
-        int typeResp = AllGoodsToDBIdUtils.getInstance().getDBType(type);
-        switch (typeResp){
-            case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK:{
-
-                break;
-            }
-            case AllGoodsToDBIdUtils.DB_TYPE_IS_ARMOR:{
-                break;
-            }
-            default:break;
+    public boolean isHitProbability(float probability) {
+        float probabilityInt = probability * 100;
+        int random = new Random(System.currentTimeMillis()).nextInt(100);
+        if (random <= probabilityInt) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

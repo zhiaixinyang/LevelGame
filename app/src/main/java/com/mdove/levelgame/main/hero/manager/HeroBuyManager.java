@@ -12,6 +12,7 @@ import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Packages;
+import com.mdove.levelgame.greendao.entity.Skill;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
@@ -132,6 +133,10 @@ public class HeroBuyManager {
         return resp;
     }
 
+    public Observable<BaseBuy> study(String type, long price) {
+        return buy(type, price);
+    }
+
     public Observable<BaseBuy> buy(String type, long price) {
         final BaseBuy baseBuy = new BaseBuy();
 
@@ -167,6 +172,16 @@ public class HeroBuyManager {
                     baseBuy.price = price;
                 } else {
                     baseBuy.price = model.price;
+                }
+            } else if (oj instanceof Skill) {
+                Skill model = (Skill) oj;
+                baseBuy.name = model.name;
+                baseBuy.tips = model.tips;
+                baseBuy.type = model.type;
+                if (price > 0) {
+                    baseBuy.price = price;
+                } else {
+                    baseBuy.price = 0;
                 }
             }
             // 开始购买

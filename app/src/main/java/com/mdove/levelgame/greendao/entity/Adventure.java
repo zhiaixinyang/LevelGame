@@ -16,12 +16,15 @@ public class Adventure {
     public String type;
     public int days;
     public long monsterPlaceId;
-    @Generated(hash = 510663910)
-    public Adventure(Long id, String type, int days, long monsterPlaceId) {
+    public int isCycle;
+    @Generated(hash = 1428979129)
+    public Adventure(Long id, String type, int days, long monsterPlaceId,
+            int isCycle) {
         this.id = id;
         this.type = type;
         this.days = days;
         this.monsterPlaceId = monsterPlaceId;
+        this.isCycle = isCycle;
     }
     @Generated(hash = 1184037432)
     public Adventure() {
@@ -50,4 +53,11 @@ public class Adventure {
     public void setMonsterPlaceId(long monsterPlaceId) {
         this.monsterPlaceId = monsterPlaceId;
     }
+    public int getIsCycle() {
+        return this.isCycle;
+    }
+    public void setIsCycle(int isCycle) {
+        this.isCycle = isCycle;
+    }
+
 }

@@ -5,7 +5,7 @@ import android.databinding.ObservableField;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.entity.Medicines;
-import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
+import com.mdove.levelgame.greendao.utils.SrcIconMap;
 
 /**
  * Created by MBENBEN on 2018/10/21.
@@ -27,6 +27,6 @@ public class MedicinesModelVM {
         price.set(String.format(App.getAppContext().getString(R.string.medicines_msg_price), medicines.price));
         life.set(String.format(App.getAppContext().getString(R.string.medicines_msg_life), medicines.life));
         lifeUp.set(String.format(App.getAppContext().getString(R.string.medicines_msg_life_up), medicines.lifeUp));
-        src.set(WeaponsIconMap.getInstance().getSrc(medicines.type));
+        src.set(SrcIconMap.getInstance().getSrc(medicines.type));
     }
 }

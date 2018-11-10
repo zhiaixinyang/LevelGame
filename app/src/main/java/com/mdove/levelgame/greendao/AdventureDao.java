@@ -28,6 +28,7 @@ public class AdventureDao extends AbstractDao<Adventure, Long> {
         public final static Property Type = new Property(1, String.class, "type", false, "TYPE");
         public final static Property Days = new Property(2, int.class, "days", false, "DAYS");
         public final static Property MonsterPlaceId = new Property(3, long.class, "monsterPlaceId", false, "MONSTER_PLACE_ID");
+        public final static Property IsCycle = new Property(4, int.class, "isCycle", false, "IS_CYCLE");
     }
 
 
@@ -46,7 +47,8 @@ public class AdventureDao extends AbstractDao<Adventure, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TYPE\" TEXT," + // 1: type
                 "\"DAYS\" INTEGER NOT NULL ," + // 2: days
-                "\"MONSTER_PLACE_ID\" INTEGER NOT NULL );"); // 3: monsterPlaceId
+                "\"MONSTER_PLACE_ID\" INTEGER NOT NULL ," + // 3: monsterPlaceId
+                "\"IS_CYCLE\" INTEGER NOT NULL );"); // 4: isCycle
     }
 
     /** Drops the underlying database table. */
@@ -70,6 +72,7 @@ public class AdventureDao extends AbstractDao<Adventure, Long> {
         }
         stmt.bindLong(3, entity.getDays());
         stmt.bindLong(4, entity.getMonsterPlaceId());
+        stmt.bindLong(5, entity.getIsCycle());
     }
 
     @Override
@@ -87,6 +90,7 @@ public class AdventureDao extends AbstractDao<Adventure, Long> {
         }
         stmt.bindLong(3, entity.getDays());
         stmt.bindLong(4, entity.getMonsterPlaceId());
+        stmt.bindLong(5, entity.getIsCycle());
     }
 
     @Override
@@ -100,7 +104,8 @@ public class AdventureDao extends AbstractDao<Adventure, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // type
             cursor.getInt(offset + 2), // days
-            cursor.getLong(offset + 3) // monsterPlaceId
+            cursor.getLong(offset + 3), // monsterPlaceId
+            cursor.getInt(offset + 4) // isCycle
         );
         return entity;
     }
@@ -111,6 +116,7 @@ public class AdventureDao extends AbstractDao<Adventure, Long> {
         entity.setType(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDays(cursor.getInt(offset + 2));
         entity.setMonsterPlaceId(cursor.getLong(offset + 3));
+        entity.setIsCycle(cursor.getInt(offset + 4));
      }
     
     @Override

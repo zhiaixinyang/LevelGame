@@ -14,6 +14,7 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.main.hero.fragment.HeroEquipFragment;
 import com.mdove.levelgame.main.hero.fragment.HeroPackageFragment;
+import com.mdove.levelgame.main.hero.fragment.HeroSkillFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class HeroPackagesActivity extends BaseActivity {
     private List<Fragment> fragments;
     private HeroEquipFragment heroEquipFragment;
     private HeroPackageFragment heroPackageFragment;
+    private HeroSkillFragment heroSkillFragment;
 
     public static void start(Context context) {
         Intent start = new Intent(context, HeroPackagesActivity.class);
@@ -51,12 +53,14 @@ public class HeroPackagesActivity extends BaseActivity {
         tab = findViewById(R.id.tab);
         vp = findViewById(R.id.vp);
 
-        titles = new String[]{getString(R.string.string_fragment_title_equip), getString(R.string.string_fragment_title_package)};
+        titles = new String[]{getString(R.string.string_fragment_title_equip), getString(R.string.string_fragment_title_package), getString(R.string.string_fragment_title_skill)};
         fragments = new ArrayList<>();
         heroEquipFragment = HeroEquipFragment.newInstance();
         heroPackageFragment = HeroPackageFragment.newInstance();
+        heroSkillFragment = HeroSkillFragment.Companion.newInstance();
         fragments.add(heroEquipFragment);
         fragments.add(heroPackageFragment);
+        fragments.add(heroSkillFragment);
 
         vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -83,6 +87,7 @@ public class HeroPackagesActivity extends BaseActivity {
             heroEquipFragment.notifyEquipUpdateUI(position);
         }
     }
+
     //通知Packages页面增加刚刚脱掉的装备
     public void notifyPackageAddUI(long pkiId) {
         if (heroPackageFragment != null) {

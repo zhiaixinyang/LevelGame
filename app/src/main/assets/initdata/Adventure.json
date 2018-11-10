@@ -3,6 +3,14 @@
     "id": 1,
     "monster_place_id": 5,
     "type": "C13",
+    "is_cycle": 1,
     "days": 10
+  },
+  {
+    "id": 2,
+    "monster_place_id": 7,
+    "type": "C19",
+    "is_cycle": 0,
+    "days": 2
   }
 ]

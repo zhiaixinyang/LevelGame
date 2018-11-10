@@ -5,9 +5,7 @@ import android.databinding.ObservableField;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.entity.Armors;
-import com.mdove.levelgame.greendao.utils.WeaponsIconMap;
-import com.mdove.levelgame.main.shop.model.ShopArmorModel;
-import com.mdove.levelgame.main.shop.model.ShopAttackModel;
+import com.mdove.levelgame.greendao.utils.SrcIconMap;
 
 /**
  * @author zhaojing on 2018/10/22
@@ -31,6 +29,6 @@ public class ShopArmorModelVM {
         }
         armor.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_armor), model.armor));
         price.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_price), model.price));
-        src.set(WeaponsIconMap.getInstance().getSrc(model.type));
+        src.set(SrcIconMap.getInstance().getSrc(model.type));
     }
 }

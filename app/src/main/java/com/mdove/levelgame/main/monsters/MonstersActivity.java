@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.main.monsters.adapter.MonstersAdapter;
+import com.mdove.levelgame.main.monsters.manager.AdventureManager;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.monsters.presenter.MonstersConstract;
@@ -87,10 +88,16 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
     @Override
     protected void onResume() {
         super.onResume();
-        if (presenter != null) {
-            presenter.initPower();
-            presenter.initMoney();
-            presenter.initlife();
+        // 奇遇设置
+        boolean isShow = AdventureManager.getInstance().setAdventure();
+        if (presenter == null) {
+            return;
+        }
+        presenter.initPower();
+        presenter.initMoney();
+        presenter.initlife();
+        if (isShow) {
+            presenter.initData(monsterPlaceId);
         }
     }
 

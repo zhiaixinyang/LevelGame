@@ -7,9 +7,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
+import com.mdove.levelgame.BuildConfig;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
+import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.databinding.ActivityHeroAttributesBinding;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.model.HeroAttributesModelVM;
@@ -50,6 +53,15 @@ public class HeroAttributesActivity extends BaseActivity implements HeroAttribut
         presenter.subscribe(this);
 
         presenter.initData();
+
+        if (BuildConfig.DEBUG){
+            binding.tvDays.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppConfig.setFirstLogin(false);
+                }
+            });
+        }
     }
 
     private void initToolbar() {

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "<font color=\"#43A047\">[被动]战神附体</font>",
+    "tips": "技能效果：<br/>有50%的几率对敌人造成1.5倍普通攻击伤害；并造成额外100点<font color=\"#43A047\">真实伤害</font>。<br/>附带：普通攻击20%吸血效果。<br/>附带：攻击时无视对手50%防御。<br/>附带：防御时无视对手50%攻击。",
+    "type": "J1",
+    "attack_heavy": 1.5,
+    "attack_heavy_probability": 0.5,
+    "blood_suck_probability": 0.2,
+    "ignore_armor_probability": 0.5,
+    "ignore_attack_probability": 0.5,
+    "real_attack": 100,
+    "dizziness": 3000,
+    "dizziness_probability": 0.5
+  },
+  {
+    "id": 2,
+    "name": "<font color=\"#43A047\">任务：击杀小喽啰</font>",
+    "tips": "击杀3个小喽啰。",
+    "type": "J2",
+    "attack_heavy": 1.5,
+    "attack_heavy_probability": 0.5,
+    "blood_suck_probability": 0.2,
+    "ignore_armor_probability": 0.5,
+    "ignore_attack_probability": 0.5,
+    "real_attack": 100,
+    "dizziness": 3000
+  }
+]

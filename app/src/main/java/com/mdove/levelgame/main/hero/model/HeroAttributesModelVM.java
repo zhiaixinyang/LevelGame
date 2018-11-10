@@ -12,6 +12,7 @@ import com.mdove.levelgame.greendao.entity.HeroAttributes;
 
 public class HeroAttributesModelVM {
     public ObservableField<String> attack = new ObservableField<>();
+    public ObservableField<String> attackSpeed = new ObservableField<>();
     public ObservableField<String> armor = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
     public ObservableField<String> money = new ObservableField<>();
@@ -26,6 +27,7 @@ public class HeroAttributesModelVM {
         life.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_life), heroAttributes.curLife, heroAttributes.maxLife, heroAttributes.lifeIncrease));
         money.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_money), heroAttributes.money));
         level.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_level), heroAttributes.level));
+        attackSpeed.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_attack_speed), heroAttributes.attackSpeed));
         days.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_days), heroAttributes.days));
         needExperience.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_need_exp), heroAttributes.experience, getLevelExp(heroAttributes)));
         bodyPower.set(String.format(App.getAppContext().getString(R.string.hero_attributes_msg_body_power), heroAttributes.bodyPower, 100));

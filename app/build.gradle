@@ -96,7 +96,7 @@ kapt {
 }
 
 greendao {
-    schemaVersion 1
+    schemaVersion 2
     daoPackage 'com.mdove.levelgame.greendao'
     targetGenDir 'src/main/java'
 }

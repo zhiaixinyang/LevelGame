@@ -25,15 +25,32 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-                <TextView
-                    android:id="@+id/btn_attributes"
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="12dp"
-                    android:text="查看属性"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:layout_marginRight="16dp">
+
+                    <TextView
+                        android:id="@+id/btn_go_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="24dp"
+                        android:layout_toLeftOf="@+id/btn_attributes"
+                        android:text="回村"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/btn_attributes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="查看属性"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 

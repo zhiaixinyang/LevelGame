@@ -81,6 +81,7 @@
     <string name="hero_attributes_msg_days">当前天数：%1$d</string>
     <string name="hero_attributes_msg_need_exp">距离升级：%1$d / %2$d</string>
     <string name="hero_attributes_msg_body_power">当前体力：%1$d / %2$d</string>
+    <string name="hero_attributes_msg_attack_speed">攻击间隔：%1$d 毫秒</string>
     <string name="hero_attributes_msg_life"><![CDATA[当前生命：%1$d / %2$d <font color="#D32F2F">成长：%3$d</font>]]></string>
     <string name="hero_attributes_msg_level">当前等级：%1$d</string>
     <string name="string_attack_loading_msg">攻击中...2秒后结束</string>

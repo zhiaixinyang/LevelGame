@@ -42,12 +42,14 @@ public class Weapons {
     public String strengthenFormula;
     // 此装备属于哪个monster（1000表示武器商店，1001表示防具商店，1002表示铁匠铺）通过split(",")去截
     public String belongMonsterId;
-    @Generated(hash = 1405960489)
+    // 此值为多少，就降低多少攻击间隔，毫秒级（对应Rx的弹射间隔，此值越来越低）
+    public long attackSpeed;
+    @Generated(hash = 2106988558)
     public Weapons(Long id, String name, String tips, int attack, int armor,
             long price, String type, int isCanStrengthen, int isCanUpdate,
             int isCanMixture, int isSpecial, String mixtureFormula,
-            String updateFormula, String strengthenFormula,
-            String belongMonsterId) {
+            String updateFormula, String strengthenFormula, String belongMonsterId,
+            long attackSpeed) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -63,6 +65,7 @@ public class Weapons {
         this.updateFormula = updateFormula;
         this.strengthenFormula = strengthenFormula;
         this.belongMonsterId = belongMonsterId;
+        this.attackSpeed = attackSpeed;
     }
     @Generated(hash = 1666722499)
     public Weapons() {
@@ -156,6 +159,12 @@ public class Weapons {
     }
     public void setBelongMonsterId(String belongMonsterId) {
         this.belongMonsterId = belongMonsterId;
+    }
+    public long getAttackSpeed() {
+        return this.attackSpeed;
+    }
+    public void setAttackSpeed(long attackSpeed) {
+        this.attackSpeed = attackSpeed;
     }
 
 }

@@ -529,12 +529,14 @@ public class HeroAttributesManager {
     public void takeOffAttack(long strengthen, Weapons weapons) {
         heroAttributes.attack -= (1 + strengthen * 0.2) * (weapons.attack);
         heroAttributes.armor -= (1 + strengthen * 0.2) * weapons.armor;
+        heroAttributes.attackSpeed += weapons.attackSpeed;
         save();
     }
 
     public void holdOnAttack(long strengthen, Weapons weapons) {
         heroAttributes.attack += (1 + strengthen * 0.2) * (weapons.attack);
         heroAttributes.armor += (1 + strengthen * 0.2) * (weapons.armor);
+        heroAttributes.attackSpeed -= weapons.attackSpeed;
         save();
     }
 

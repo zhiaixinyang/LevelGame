@@ -29,13 +29,11 @@ public class BigFightMonstersVM {
     public ObservableField<String> life = new ObservableField<>();
     public int lifeInit;
     public int curLife;
-    public ObservableField<String> limitCount = new ObservableField<>();
     public ObservableField<String> power = new ObservableField<>();
     public ObservableField<Integer> lifeProgress = new ObservableField<>();
     public ObservableField<String> harm = new ObservableField<>();
     public ObservableField<String> btnText = new ObservableField<>();
     public ObservableField<Boolean> isBusinessman = new ObservableField<>();
-    public ObservableField<Boolean> isLimitCount = new ObservableField<>();
 
     public BigFightMonstersVM(BigMonsters model) {
         id.set(model.id);

@@ -12,6 +12,7 @@ import com.mdove.levelgame.databinding.DialogBigFightingBinding;
 import com.mdove.levelgame.databinding.DialogFightingBinding;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.Monsters;
+import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
@@ -33,7 +34,7 @@ public class BigFightingDialog extends AppCompatDialog {
     private DialogBigFightingBinding binding;
     private HeroAttrModelVM myVm;
     private BigFightMonstersVM enVm;
-    private BigMonsters monster;
+    private BigMonsters bigMonsters;
     private Context context;
     private Disposable heroDisposable;
     private Disposable monstersDisposable;
@@ -48,7 +49,7 @@ public class BigFightingDialog extends AppCompatDialog {
         paramsWindow.width = getWindowWidth();
         setCancelable(true);
         setCanceledOnTouchOutside(false);
-        this.monster = monster;
+        bigMonsters = monster;
         heroDisposable = new CompositeDisposable();
     }
 
@@ -56,11 +57,11 @@ public class BigFightingDialog extends AppCompatDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myVm = new HeroAttrModelVM(HeroManager.getInstance().getHeroAttributes());
-        enVm = new BigFightMonstersVM(monster);
+        enVm = new BigFightMonstersVM(bigMonsters);
 
         binding.setEnemyVm(enVm);
         binding.setMyVm(myVm);
-        computeAttack(BigMonsterHelper.Companion.bigMonsterToMonster(monster));
+        computeAttack(BigMonsterHelper.Companion.bigMonsterToMonster(bigMonsters));
     }
 
     protected int getWindowWidth() {
@@ -107,6 +108,9 @@ public class BigFightingDialog extends AppCompatDialog {
                             if (!monstersDisposable.isDisposed()) {
                                 monstersDisposable.dispose();
                             }
+                            bigMonsters.isDead = 0;
+                            bigMonsters.isGone = 0;
+                            DatabaseManager.getInstance().getBigMonstersDao().update(bigMonsters);
                             MyDialog.showMyDialog(context, exception.errorTitle, exception.errorMsg, true);
                             break;
                         }

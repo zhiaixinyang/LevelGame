@@ -1,5 +1,7 @@
 package com.mdove.levelgame.main.home.presenter;
 
+import android.content.DialogInterface;
+
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
@@ -100,7 +102,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 view.showBigMonsterInvade(String.format(view.getString(R.string.string_big_monsters_distance_invade),
                         bigMonster.days - HeroManager.getInstance().getHeroAttributes().days));
                 return;
-            }else{
+            } else {
                 view.showBigMonsterInvade(view.getString(R.string.string_big_monsters_is_show));
             }
         }
@@ -110,6 +112,13 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     public void onClickBigMonsters(BigMonstersModelVM vm) {
         initBigMonster();
         final BigFightingDialog dialog = new BigFightingDialog(view.getContext(), vm.bigMonsters);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                initBigMonster();
+                initBigMonsterInvade();
+            }
+        });
         dialog.show();
         return;
 

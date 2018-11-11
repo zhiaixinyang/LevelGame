@@ -11,6 +11,8 @@ class BigMonsterHelper {
         fun bigMonsterToMonster(bigMonsters: BigMonsters): Monsters {
             var monster = Monsters()
             monster.armor = bigMonsters.armor
+            monster.life = bigMonsters.life
+            monster.isLimitCount = 1
             monster.attack = bigMonsters.attack
             monster.attackSpeed = bigMonsters.attackSpeed
             monster.money = bigMonsters.money

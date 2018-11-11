@@ -52,7 +52,7 @@
             android:layout_margin="@dimen/main_btn_normal_margin"
             android:background="@drawable/bg_white_round"
             android:gravity="center"
-            app:htmlColorText="@{vm.attack}"
+            app:htmlColorText="@{vm.attackSpeed}"
             android:textColor="@color/black"
             android:textSize="@dimen/main_btn_normal_text_size"
             app:layout_constraintLeft_toLeftOf="parent"

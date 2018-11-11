@@ -1,54 +1,49 @@
 package com.mdove.levelgame.view;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.databinding.DialogBigFightingBinding;
 import com.mdove.levelgame.databinding.DialogFightingBinding;
+import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.Monsters;
-import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
+import com.mdove.levelgame.main.monsters.model.vm.BigFightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
-import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
+import com.mdove.levelgame.main.monsters.utils.BigMonsterHelper;
 import com.mdove.levelgame.utils.SystemUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 /**
- * Created by MDove on 2018/11/1.
+ * Created by MDove on 2018/11/11.
  */
 
-public class FightingDialog extends AppCompatDialog {
-    private DialogFightingBinding binding;
+public class BigFightingDialog extends AppCompatDialog {
+    private DialogBigFightingBinding binding;
     private HeroAttrModelVM myVm;
-    private FightMonstersVM enVm;
-    private Monsters monster;
+    private BigFightMonstersVM enVm;
+    private BigMonsters monster;
     private Context context;
     private Disposable heroDisposable;
     private Disposable monstersDisposable;
 
-    public FightingDialog(Context context, Monsters monster) {
+    public BigFightingDialog(Context context, BigMonsters monster) {
         super(context,R.style.BaseDialog);
         this.context = context;
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_fighting,
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_big_fighting,
                 null, false);
         setContentView(binding.getRoot());
-
         WindowManager.LayoutParams paramsWindow = getWindow().getAttributes();
         paramsWindow.width = getWindowWidth();
         setCancelable(true);
@@ -61,14 +56,11 @@ public class FightingDialog extends AppCompatDialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myVm = new HeroAttrModelVM(HeroManager.getInstance().getHeroAttributes());
-        enVm = new FightMonstersVM(monster);
+        enVm = new BigFightMonstersVM(monster);
 
         binding.setEnemyVm(enVm);
         binding.setMyVm(myVm);
-        AnimationDrawable anim= (AnimationDrawable) context.getResources().getDrawable(R.drawable.anim_skill_1);
-        binding.anim.setBackground(anim);
-        anim.start();
-        computeAttack(monster);
+        computeAttack(BigMonsterHelper.Companion.bigMonsterToMonster(monster));
     }
 
     protected int getWindowWidth() {

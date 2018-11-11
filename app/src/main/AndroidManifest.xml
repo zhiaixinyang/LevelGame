@@ -10,15 +10,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.home.HomeActivity"
+        <!--<activity android:name=".TestActivity"-->
+        <activity
+            android:name=".main.home.HomeActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".main.monsters.MonstersPlaceActivity"
             android:launchMode="singleTask"
@@ -39,15 +42,18 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".main.hero.HeroPackagesActivity"
+        <activity
+            android:name=".main.hero.HeroPackagesActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".main.shop.BlacksmithActivity"
+        <activity
+            android:name=".main.shop.BlacksmithActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".main.shop.BusinessmanActivity"
+        <activity
+            android:name=".main.shop.BusinessmanActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
     </application>

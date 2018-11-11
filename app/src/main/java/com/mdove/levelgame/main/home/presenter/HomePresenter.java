@@ -16,6 +16,7 @@ import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
 import com.mdove.levelgame.main.shop.BlacksmithActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
 import com.mdove.levelgame.utils.ToastHelper;
+import com.mdove.levelgame.view.BigFightingDialog;
 import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
@@ -99,47 +100,54 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 view.showBigMonsterInvade(String.format(view.getString(R.string.string_big_monsters_distance_invade),
                         bigMonster.days - HeroManager.getInstance().getHeroAttributes().days));
                 return;
+            }else{
+                view.showBigMonsterInvade(view.getString(R.string.string_big_monsters_is_show));
             }
         }
     }
 
     @Override
     public void onClickBigMonsters(BigMonstersModelVM vm) {
-        AttackResp resp = HeroAttributesManager.getInstance().attackBigMonsters(vm.id.get());
-        switch (resp.attackStatus) {
-            case HeroAttributesManager.ATTACK_STATUS_ERROR: {
-                ToastHelper.shortToast(view.getContext().getString(R.string.string_error));
-                break;
-            }
-            case HeroAttributesManager.ATTACK_STATUS_NO_POWER: {
-                ToastHelper.shortToast(view.getContext().getString(R.string.string_no_power));
-                break;
-            }
-            case HeroAttributesManager.ATTACK_STATUS_FAIL: {
-                ToastHelper.shortToast(view.getContext().getString(R.string.string_attack_fail));
-                break;
-            }
-            case HeroAttributesManager.ATTACK_STATUS_WIN: {
-                MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_attack_big_monster_suc)
-                        , String.format(view.getContext().getString(R.string.string_attack_win), resp.money, resp.exp, resp.life), true);
-                // 刷新时间
-                initBigMonsterInvade();
-                break;
-            }
-            case HeroAttributesManager.ATTACK_STATUS_HAS_DROP_GOODS: {
-                String dropGood = "";
-                for (String name : resp.dropGoods) {
-                    dropGood = name + "、";
-                }
-                dropGood = dropGood.substring(0, dropGood.length() - 1);
-                MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_attack_big_monster_suc)
-                        , String.format(view.getContext().getString(R.string.string_attack_win_has_goods), resp.money, resp.exp, resp.life, dropGood), true);
-                break;
-            }
-            default:
-                break;
-        }
         initBigMonster();
+        final BigFightingDialog dialog = new BigFightingDialog(view.getContext(), vm.bigMonsters);
+        dialog.show();
+        return;
+
+//        AttackResp resp = HeroAttributesManager.getInstance().attackBigMonsters(vm.id.get());
+//        switch (resp.attackStatus) {
+//            case HeroAttributesManager.ATTACK_STATUS_ERROR: {
+//                ToastHelper.shortToast(view.getContext().getString(R.string.string_error));
+//                break;
+//            }
+//            case HeroAttributesManager.ATTACK_STATUS_NO_POWER: {
+//                ToastHelper.shortToast(view.getContext().getString(R.string.string_no_power));
+//                break;
+//            }
+//            case HeroAttributesManager.ATTACK_STATUS_FAIL: {
+//                MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_attack_big_monster_fail)
+//                        , view.getContext().getString(R.string.string_attack_fail), true);
+//                break;
+//            }
+//            case HeroAttributesManager.ATTACK_STATUS_WIN: {
+//                MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_attack_big_monster_suc)
+//                        , String.format(view.getContext().getString(R.string.string_attack_win), resp.money, resp.exp, resp.life), true);
+//                // 刷新时间
+//                initBigMonsterInvade();
+//                break;
+//            }
+//            case HeroAttributesManager.ATTACK_STATUS_HAS_DROP_GOODS: {
+//                String dropGood = "";
+//                for (String name : resp.dropGoods) {
+//                    dropGood = name + "、";
+//                }
+//                dropGood = dropGood.substring(0, dropGood.length() - 1);
+//                MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_attack_big_monster_suc)
+//                        , String.format(view.getContext().getString(R.string.string_attack_win_has_goods), resp.money, resp.exp, resp.life, dropGood), true);
+//                break;
+//            }
+//            default:
+//                break;
+//        }
     }
 
 

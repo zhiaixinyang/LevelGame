@@ -13,7 +13,7 @@
 
         <variable
             name="enemyVm"
-            type="com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM" />
+            type="com.mdove.levelgame.main.monsters.model.vm.BigFightMonstersVM" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -25,15 +25,15 @@
             android:id="@+id/layout_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/bg_gray_round"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_big_fight_monster"
             app:layout_constraintTop_toTopOf="parent">
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/layout_my"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_blacksmith_normal_margin"
+                android:layout_margin="@dimen/big_fight_normal_margin"
                 android:background="@drawable/bg_white_round"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -96,6 +96,13 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_height="wrap_content">
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animation_view"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:lottie_fileName="fight_harm.json"
+                        app:lottie_loop="true"
+                        app:lottie_autoPlay="true" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,13 +111,6 @@
                         android:textColor="@color/red_700"
                         android:textSize="24sp"
                         tools:text="-99" />
-                    <!--<com.airbnb.lottie.LottieAnimationView-->
-                        <!--android:id="@+id/animation_view"-->
-                        <!--android:layout_width="60dp"-->
-                        <!--android:layout_height="60dp"-->
-                        <!--app:lottie_fileName="fight_harm.json"-->
-                        <!--app:lottie_loop="true"-->
-                        <!--app:lottie_autoPlay="true" />-->
                 </FrameLayout>
 
                 <com.mdove.levelgame.view.HorizontalSmoothProgressBar
@@ -133,29 +133,28 @@
                 android:id="@+id/layout_enemy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_blacksmith_normal_margin"
+                android:layout_margin="@dimen/big_fight_normal_margin"
                 android:background="@drawable/bg_white_round"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_my">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/pb_enemy"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/anim"
-                        android:layout_width="80dp"
-                        android:background="@drawable/anim_skill_1"
-                        android:layout_height="80dp"
-                        />
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:lottie_fileName="fight_harm.json"
+                        app:lottie_loop="true"
+                        app:lottie_autoPlay="true" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{enemyVm.harm}"
-                        android:gravity="center"
                         android:textColor="@color/red_700"
                         android:layout_gravity="center"
                         android:textSize="24sp"
@@ -233,7 +232,7 @@
             android:id="@+id/ic_start_fight"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@mipmap/ic_start_fight"
+            android:src="@mipmap/ic_start_big_fight"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 

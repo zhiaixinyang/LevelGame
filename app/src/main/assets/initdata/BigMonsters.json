@@ -3,7 +3,7 @@
     "id": 1,
     "name": "第三天魔王",
     "tips": "只有击败我，才可以正常进行游戏！",
-    "attack": 100,
+    "attack": 90,
     "armor": 30,
     "money": 0,
     "life": 500,
@@ -12,6 +12,7 @@
     "drop_goods_id": 100,
     "exp": 0,
     "days": 3,
+    "attack_speed": 1500,
     "consume_power": 0,
     "is_dead": 1,
     "is_gone": 0
@@ -29,6 +30,7 @@
     "drop_goods_id": 100,
     "exp": 0,
     "days": 5,
+    "attack_speed": 1500,
     "consume_power": 0,
     "is_dead": 1,
     "is_gone": 0
@@ -43,6 +45,7 @@
     "life": 800,
     "type": "C103",
     "days": 8,
+    "attack_speed": 1500,
     "monster_place_id": 0,
     "drop_goods_id": 100,
     "exp": 0,

@@ -37,16 +37,18 @@ public class BigMonsters {
     // 魔王是否死亡
     public int isDead;
     public int days;
+    public long attackSpeed;
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
     /** Used for active entity operations. */
     @Generated(hash = 996161192)
     private transient BigMonstersDao myDao;
-    @Generated(hash = 220682870)
+    @Generated(hash = 71181210)
     public BigMonsters(Long id, String name, String tips, int attack, int armor,
             int life, String type, long monsterPlaceId, long exp, int money,
-            Long dropGoodsId, long consumePower, int isGone, int isDead, int days) {
+            Long dropGoodsId, long consumePower, int isGone, int isDead, int days,
+            long attackSpeed) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -62,6 +64,7 @@ public class BigMonsters {
         this.isGone = isGone;
         this.isDead = isDead;
         this.days = days;
+        this.attackSpeed = attackSpeed;
     }
     @Generated(hash = 888610162)
     public BigMonsters() {
@@ -156,6 +159,12 @@ public class BigMonsters {
     public void setDays(int days) {
         this.days = days;
     }
+    public long getAttackSpeed() {
+        return this.attackSpeed;
+    }
+    public void setAttackSpeed(long attackSpeed) {
+        this.attackSpeed = attackSpeed;
+    }
     @Generated(hash = 37712599)
     private transient Long dropGoods__resolvedKey;
     /** To-one relationship, resolved on first access. */
@@ -225,5 +234,4 @@ public class BigMonsters {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getBigMonstersDao() : null;
     }
-
 }

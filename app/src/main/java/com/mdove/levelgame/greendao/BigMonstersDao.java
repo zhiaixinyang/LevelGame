@@ -44,6 +44,7 @@ public class BigMonstersDao extends AbstractDao<BigMonsters, Long> {
         public final static Property IsGone = new Property(12, int.class, "isGone", false, "IS_GONE");
         public final static Property IsDead = new Property(13, int.class, "isDead", false, "IS_DEAD");
         public final static Property Days = new Property(14, int.class, "days", false, "DAYS");
+        public final static Property AttackSpeed = new Property(15, long.class, "attackSpeed", false, "ATTACK_SPEED");
     }
 
     private DaoSession daoSession;
@@ -76,7 +77,8 @@ public class BigMonstersDao extends AbstractDao<BigMonsters, Long> {
                 "\"CONSUME_POWER\" INTEGER NOT NULL ," + // 11: consumePower
                 "\"IS_GONE\" INTEGER NOT NULL ," + // 12: isGone
                 "\"IS_DEAD\" INTEGER NOT NULL ," + // 13: isDead
-                "\"DAYS\" INTEGER NOT NULL );"); // 14: days
+                "\"DAYS\" INTEGER NOT NULL ," + // 14: days
+                "\"ATTACK_SPEED\" INTEGER NOT NULL );"); // 15: attackSpeed
     }
 
     /** Drops the underlying database table. */
@@ -123,6 +125,7 @@ public class BigMonstersDao extends AbstractDao<BigMonsters, Long> {
         stmt.bindLong(13, entity.getIsGone());
         stmt.bindLong(14, entity.getIsDead());
         stmt.bindLong(15, entity.getDays());
+        stmt.bindLong(16, entity.getAttackSpeed());
     }
 
     @Override
@@ -163,6 +166,7 @@ public class BigMonstersDao extends AbstractDao<BigMonsters, Long> {
         stmt.bindLong(13, entity.getIsGone());
         stmt.bindLong(14, entity.getIsDead());
         stmt.bindLong(15, entity.getDays());
+        stmt.bindLong(16, entity.getAttackSpeed());
     }
 
     @Override
@@ -193,7 +197,8 @@ public class BigMonstersDao extends AbstractDao<BigMonsters, Long> {
             cursor.getLong(offset + 11), // consumePower
             cursor.getInt(offset + 12), // isGone
             cursor.getInt(offset + 13), // isDead
-            cursor.getInt(offset + 14) // days
+            cursor.getInt(offset + 14), // days
+            cursor.getLong(offset + 15) // attackSpeed
         );
         return entity;
     }
@@ -215,6 +220,7 @@ public class BigMonstersDao extends AbstractDao<BigMonsters, Long> {
         entity.setIsGone(cursor.getInt(offset + 12));
         entity.setIsDead(cursor.getInt(offset + 13));
         entity.setDays(cursor.getInt(offset + 14));
+        entity.setAttackSpeed(cursor.getLong(offset + 15));
      }
     
     @Override

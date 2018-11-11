@@ -11,19 +11,21 @@ import com.mdove.levelgame.greendao.entity.BigMonsters;
  */
 
 public class BigMonstersModelVM {
-    public ObservableField<Long> id=new ObservableField<>();
-    public ObservableField<String> name=new ObservableField<>();
-    public ObservableField<String> tips=new ObservableField<>();
-    public ObservableField<String> attack=new ObservableField<>();
-    public ObservableField<String> armor=new ObservableField<>();
-    public ObservableField<String> life=new ObservableField<>();
+    public ObservableField<Long> id = new ObservableField<>();
+    public ObservableField<String> name = new ObservableField<>();
+    public ObservableField<String> tips = new ObservableField<>();
+    public ObservableField<String> attack = new ObservableField<>();
+    public ObservableField<String> armor = new ObservableField<>();
+    public ObservableField<String> life = new ObservableField<>();
+    public BigMonsters bigMonsters;
 
-    public BigMonstersModelVM(BigMonsters bigMonsters){
+    public BigMonstersModelVM(BigMonsters bigMonsters) {
+        this.bigMonsters = bigMonsters;
         id.set(bigMonsters.id);
-        name.set(String.format(App.getAppContext().getString(R.string.string_big_monsters_name),bigMonsters.name));
+        name.set(String.format(App.getAppContext().getString(R.string.string_big_monsters_name), bigMonsters.name));
         tips.set(bigMonsters.tips);
-        attack.set(String.format(App.getAppContext().getString(R.string.string_big_monsters_attack),bigMonsters.attack));
-        armor.set(String.format(App.getAppContext().getString(R.string.string_big_monsters_armor),bigMonsters.armor));
-        life.set(String.format(App.getAppContext().getString(R.string.string_big_monsters_life),bigMonsters.life));
+        attack.set(String.format(App.getAppContext().getString(R.string.string_big_monsters_attack), bigMonsters.attack));
+        armor.set(String.format(App.getAppContext().getString(R.string.string_big_monsters_armor), bigMonsters.armor));
+        life.set(String.format(App.getAppContext().getString(R.string.string_big_monsters_life), bigMonsters.life));
     }
 }

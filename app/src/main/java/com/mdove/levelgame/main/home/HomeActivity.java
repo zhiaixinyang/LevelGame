@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
 
@@ -23,6 +27,7 @@ import com.mdove.levelgame.main.home.model.MainActionHandler;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.home.presenter.HomeContract;
 import com.mdove.levelgame.main.home.presenter.HomePresenter;
+import com.mdove.levelgame.utils.DensityUtil;
 
 import java.util.List;
 
@@ -33,6 +38,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     private HomePresenter presenter;
     private HomeAdapter adapter;
     private ActivityHomeBinding binding;
+    private boolean isAniming = false;
 
     public static void start(Context context) {
         Intent start = new Intent(context, HomeActivity.class);
@@ -73,6 +79,39 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
                 }
             }
         });
+        binding.rlv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && !isAniming) {
+                    showView();
+                } else if (dy < 0 && !isAniming) {
+                    hideView();
+                }
+            }
+        });
+    }
+
+    private void showView() {
+        ViewCompat.animate(binding.layoutBigMonsters)
+                .translationY(binding.layoutBigMonsters.getHeight() +
+                        DensityUtil.dip2px(getContext(), getResources().getDimension(R.dimen.main_btn_normal_margin)))
+                .setDuration(300)
+                .setListener(listener)
+                .start();
+    }
+
+    private void hideView() {
+        ViewCompat.animate(binding.layoutBigMonsters)
+                .translationY(0)
+                .setDuration(300)
+                .setListener(listener)
+                .start();
     }
 
     @Override
@@ -93,7 +132,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
             binding.layoutBigMonsters.setVisibility(View.VISIBLE);
             binding.setVm(vm);
         } else {
-            binding.layoutBigMonsters.setVisibility(View.GONE);
+            binding.layoutBigMonsters.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -101,4 +140,21 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     public void showBigMonsterInvade(String days) {
         binding.tvInvade.setText(Html.fromHtml(days));
     }
+
+    private ViewPropertyAnimatorListener listener = new ViewPropertyAnimatorListener() {
+        @Override
+        public void onAnimationStart(View view) {
+            isAniming = true;
+        }
+
+        @Override
+        public void onAnimationEnd(View view) {
+            isAniming = false;
+        }
+
+        @Override
+        public void onAnimationCancel(View view) {
+            isAniming = false;
+        }
+    };
 }

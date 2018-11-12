@@ -80,6 +80,7 @@ public class SrcIconMap {
         map.put("main3", R.mipmap.main_3);
         map.put("main4", R.mipmap.main_4);
         map.put("main5", R.mipmap.main_5);
+        map.put("main6", R.mipmap.main_6);
         map.put("I1", R.mipmap.i1);
         map.put("I2", R.mipmap.i2);
         map.put("I3", R.mipmap.i3);

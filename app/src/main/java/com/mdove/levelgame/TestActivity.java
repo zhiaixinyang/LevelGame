@@ -3,8 +3,10 @@ package com.mdove.levelgame;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -21,12 +23,26 @@ import io.reactivex.schedulers.Schedulers;
  * @author zhaojing on 2018/10/24
  */
 public class TestActivity extends AppCompatActivity {
+    private BottomSheetBehavior mBottomSheetBehavior;
+
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.content_test);
+        findViewById(R.id.haha).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else if (mBottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+            }
+        });
+        mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.hehe));
+
 
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override

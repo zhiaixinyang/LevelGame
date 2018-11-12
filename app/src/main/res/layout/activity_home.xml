@@ -56,17 +56,35 @@
             app:layout_constraintBottom_toBottomOf="@+id/iv_big_monster"
             tools:text="距离魔王进攻" />
 
+        <FrameLayout
+            android:id="@+id/layout_line"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1002:38"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/main_btn_normal_margin"
+            app:layout_constraintTop_toBottomOf="@+id/tv_invade"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_bg_link" />
+        </FrameLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rlv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:overScrollMode="never"
             android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toTopOf="@+id/layout_big_monsters"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_invade" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_line" />
         <FrameLayout
             android:id="@+id/bg_layout"
             android:layout_width="0dp"
@@ -90,7 +108,7 @@
             android:layout_margin="@dimen/main_btn_normal_margin"
             android:background="@drawable/bg_red_round"
             android:onClick="@{()->handler.onClickBigMonsters(vm)}"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
@@ -118,7 +136,7 @@
                 android:textSize="14sp"
                 app:htmlColorText="@{vm.attack}"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn_big_monsters_armor"
                 app:layout_constraintTop_toBottomOf="@+id/btn_big_monsters_name"
                 tools:text="攻击" />
 
@@ -131,9 +149,9 @@
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:htmlColorText="@{vm.armor}"
-                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_big_monsters_attack"
+                app:layout_constraintLeft_toRightOf="@+id/btn_big_monsters_attack"
+                app:layout_constraintTop_toBottomOf="@+id/btn_big_monsters_name"
                 tools:text="护甲" />
 
             <TextView

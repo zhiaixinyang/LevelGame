@@ -1,61 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:background="@drawable/bg_white_round"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            tools:text="标题"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center_horizontal"
-            tools:text="内容"
-            android:lineSpacingExtra="8dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginTop="30dp">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_round"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/btn_cancel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:gravity="center"
-                android:text="@string/string_dialog_cancel"
-                android:textColor="@color/gray_plus"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/btn_submit"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:gravity="center"
-                android:text="@string/string_dialog_ok"
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="标题" />
+
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="内容" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="@string/string_dialog_cancel"
+                    android:textColor="@color/gray_plus"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/btn_submit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="@string/string_dialog_ok"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>

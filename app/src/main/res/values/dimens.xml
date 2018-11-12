@@ -6,6 +6,7 @@
     <dimen name="item_monsters_place_btn_normal_margin">8dp</dimen>
     <dimen name="item_monsters_place_normal_margin">16dp</dimen>
     <dimen name="item_shop_attack_normal_margin">8dp</dimen>
+    <dimen name="item_monster_place_normal_margin">12dp</dimen>
     <dimen name="item_shop_armor_normal_margin">8dp</dimen>
     <dimen name="item_hero_equip_text_size">14sp</dimen>
     <dimen name="item_hero_equip_normal_margin">8dp</dimen>

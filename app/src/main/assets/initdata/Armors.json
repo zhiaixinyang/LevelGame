@@ -133,7 +133,7 @@
   {
     "id": 9,
     "name": "<font color=\"#D32F2F\">轩辕甲</font>",
-    "tips": "轩辕氏常披挂此甲在战场上拼杀。<br/>合成公式：轩辕之灵 + 鬼神甲 + 真·战神甲",
+    "tips": "轩辕氏常披挂此甲在战场上拼杀。<br/>合成公式：轩辕之灵 + 真·战神甲",
     "attack": 200,
     "armor": 1000,
     "price": 2,
@@ -144,7 +144,7 @@
     "is_special": 0,
     "is_can_strengthen": 0,
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
-    "mixture_formula": "[{\"type\":\"B8\"},{\"type\":\"B6\"},{\"type\":\"E10\"}]",
+    "mixture_formula": "[{\"type\":\"B6\"},{\"type\":\"E10\"}]",
     "is_can_mixture": 0
   },
   {

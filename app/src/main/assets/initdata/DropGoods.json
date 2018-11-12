@@ -37,7 +37,7 @@
   },
   {
     "id": 9,
-    "types": "[{\"type\":\"E7\",\"probability\":0.4}]"
+    "types": "[{\"type\":\"E7\",\"probability\":0.6}]"
   },
   {
     "id": 10,
@@ -45,15 +45,19 @@
   },
   {
     "id": 11,
-    "types": "[{\"type\":\"E10\",\"probability\":0.4}]"
+    "types": "[{\"type\":\"E10\",\"probability\":0.6}]"
   },
   {
     "id": 12,
-    "types": "[{\"type\":\"E11\",\"probability\":0.4}]"
+    "types": "[{\"type\":\"E11\",\"probability\":0.6}]"
   },
   {
     "id": 13,
     "types": "[{\"type\":\"B3\",\"probability\":0.4}]"
+  },
+  {
+    "id": 14,
+    "types": "[{\"type\":\"E12\",\"probability\":0.6}]"
   },
   {
     "id": 100,

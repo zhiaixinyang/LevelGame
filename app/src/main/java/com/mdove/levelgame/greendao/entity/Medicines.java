@@ -25,9 +25,11 @@ public class Medicines {
     // 价格
     public int price;
     public String type;
-    @Generated(hash = 1852803510)
+    public long attack;
+    public long armor;
+    @Generated(hash = 1868990318)
     public Medicines(Long id, String name, String tips, int life, int lifeUp,
-            int price, String type) {
+            int price, String type, long attack, long armor) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -35,6 +37,8 @@ public class Medicines {
         this.lifeUp = lifeUp;
         this.price = price;
         this.type = type;
+        this.attack = attack;
+        this.armor = armor;
     }
     @Generated(hash = 1436234687)
     public Medicines() {
@@ -81,5 +85,16 @@ public class Medicines {
     public void setType(String type) {
         this.type = type;
     }
-
+    public long getAttack() {
+        return this.attack;
+    }
+    public void setAttack(long attack) {
+        this.attack = attack;
+    }
+    public long getArmor() {
+        return this.armor;
+    }
+    public void setArmor(long armor) {
+        this.armor = armor;
+    }
 }

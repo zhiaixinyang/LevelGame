@@ -20,7 +20,7 @@
         android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
-        android:background="@drawable/bg_white_round"
+        android:background="@drawable/bg_white_round_t_80"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
 
         <FrameLayout

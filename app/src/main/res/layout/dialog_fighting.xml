@@ -18,8 +18,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/layout_main"
@@ -89,29 +89,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_name"
                     tools:text="我方生命：99/99" />
 
-                <FrameLayout
+                <TextView
                     android:layout_width="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@+id/pb"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{myVm.harm}"
+                    android:textColor="@color/red_700"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{myVm.harm}"
-                        android:layout_gravity="center"
-                        android:textColor="@color/red_700"
-                        android:textSize="24sp"
-                        tools:text="-99" />
-                    <!--<com.airbnb.lottie.LottieAnimationView-->
-                        <!--android:id="@+id/animation_view"-->
-                        <!--android:layout_width="60dp"-->
-                        <!--android:layout_height="60dp"-->
-                        <!--app:lottie_fileName="fight_harm.json"-->
-                        <!--app:lottie_loop="true"-->
-                        <!--app:lottie_autoPlay="true" />-->
-                </FrameLayout>
+                    tools:text="-99" />
 
                 <com.mdove.levelgame.view.HorizontalSmoothProgressBar
                     android:id="@+id/pb"
@@ -129,38 +118,40 @@
                     app:myCtrlProgress="@{myVm}" />
             </android.support.constraint.ConstraintLayout>
 
+            <ImageView
+                android:layout_width="@dimen/dialog_fight_ic_monster_w_h"
+                android:layout_height="@dimen/dialog_fight_ic_monster_w_h"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/ic_monster_1"
+                app:layout_constraintTop_toBottomOf="@+id/layout_my" />
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/layout_enemy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_blacksmith_normal_margin"
+                android:layout_marginBottom="@dimen/item_blacksmith_normal_margin"
+                android:layout_marginLeft="@dimen/item_blacksmith_normal_margin"
+                android:layout_marginRight="@dimen/item_blacksmith_normal_margin"
+                android:layout_marginTop="110dp"
                 android:background="@drawable/bg_white_round"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_my">
 
-                <FrameLayout
+                <TextView
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@{enemyVm.harm}"
+                    android:textColor="@color/red_700"
+                    android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/anim"
-                        android:layout_width="80dp"
-                        android:background="@drawable/anim_skill_1"
-                        android:layout_height="80dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{enemyVm.harm}"
-                        android:gravity="center"
-                        android:textColor="@color/red_700"
-                        android:layout_gravity="center"
-                        android:textSize="24sp"
-                        tools:text="-99" />
-                </FrameLayout>
+                    tools:text="-99" />
 
                 <TextView
                     android:id="@+id/tv_enemy_name"
@@ -229,6 +220,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_enemy_life" />
             </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
+
         <ImageView
             android:id="@+id/ic_start_fight"
             android:layout_width="80dp"

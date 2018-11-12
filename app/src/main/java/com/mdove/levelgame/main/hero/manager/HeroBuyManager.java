@@ -91,6 +91,17 @@ public class HeroBuyManager {
                 } else {
                     heroAttributes.curLife += medicine.life;
                 }
+                resp.attack = 0;
+                resp.armor = 0;
+                // 攻击防御逻辑
+                if (medicine.attack > 0) {
+                    heroAttributes.attack += medicine.attack;
+                    resp.attack = medicine.attack;
+                }
+                if (medicine.armor > 0) {
+                    heroAttributes.armor += medicine.armor;
+                    resp.armor = medicine.armor;
+                }
                 // 扣钱
                 heroAttributes.money -= medicine.price;
 

@@ -9,6 +9,8 @@ public class BuyMedicinesResp extends BaseBuy{
     public int price;
     // 增加生命
     public int life;
+    public long attack;
+    public long armor;
     // 增加生命上限
     public int lifeUp;
     // 道具名字

@@ -65,9 +65,6 @@ public class FightingDialog extends AppCompatDialog {
 
         binding.setEnemyVm(enVm);
         binding.setMyVm(myVm);
-        AnimationDrawable anim= (AnimationDrawable) context.getResources().getDrawable(R.drawable.anim_skill_1);
-        binding.anim.setBackground(anim);
-        anim.start();
         computeAttack(monster);
     }
 

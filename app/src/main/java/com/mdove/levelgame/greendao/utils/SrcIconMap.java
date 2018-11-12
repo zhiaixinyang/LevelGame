@@ -90,10 +90,10 @@ public class SrcIconMap {
 
     public int getSrc(String type) {
         if (TextUtils.isEmpty(type)) {
-            return R.mipmap.ic_launcher;
+            return R.mipmap.no_ic;
         }
         if (map.get(type) == null) {
-            return R.mipmap.ic_launcher;
+            return R.mipmap.no_ic;
         }
         return map.get(type);
     }

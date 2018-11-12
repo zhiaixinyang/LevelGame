@@ -75,7 +75,7 @@ public class ShopMedicinesPresenter implements ShopMedicinesContract.IShopMedici
                         String content;
                         if (buyMedicinesResp.lifeUp > 0) {
                             content = String.format(view.getContext().getString(R.string.string_buy_medicines_suc_and_up), buyMedicinesResp.life,
-                                    buyMedicinesResp.price, buyMedicinesResp.lifeUp, buyMedicinesResp.name);
+                                    buyMedicinesResp.price, buyMedicinesResp.lifeUp, buyMedicinesResp.name, buyMedicinesResp.attack, buyMedicinesResp.armor);
                         } else {
                             content = String.format(view.getContext().getString(R.string.string_buy_medicines_suc),
                                     buyMedicinesResp.life, buyMedicinesResp.price, buyMedicinesResp.name);

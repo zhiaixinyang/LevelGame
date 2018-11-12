@@ -58,7 +58,7 @@ public class DataBindingAdapter {
         if (vm.isBusinessman.get()) {
             view.setBackgroundResource(R.drawable.bg_businessman);
         }else{
-            view.setBackgroundResource(R.drawable.bg_white_round);
+            view.setBackgroundResource(R.drawable.bg_white_round_t_80);
         }
     }
 

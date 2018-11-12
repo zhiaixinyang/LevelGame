@@ -31,6 +31,8 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         public final static Property LifeUp = new Property(4, int.class, "lifeUp", false, "LIFE_UP");
         public final static Property Price = new Property(5, int.class, "price", false, "PRICE");
         public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
+        public final static Property Attack = new Property(7, long.class, "attack", false, "ATTACK");
+        public final static Property Armor = new Property(8, long.class, "armor", false, "ARMOR");
     }
 
 
@@ -52,7 +54,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
                 "\"LIFE\" INTEGER NOT NULL ," + // 3: life
                 "\"LIFE_UP\" INTEGER NOT NULL ," + // 4: lifeUp
                 "\"PRICE\" INTEGER NOT NULL ," + // 5: price
-                "\"TYPE\" TEXT);"); // 6: type
+                "\"TYPE\" TEXT," + // 6: type
+                "\"ATTACK\" INTEGER NOT NULL ," + // 7: attack
+                "\"ARMOR\" INTEGER NOT NULL );"); // 8: armor
     }
 
     /** Drops the underlying database table. */
@@ -87,6 +91,8 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         if (type != null) {
             stmt.bindString(7, type);
         }
+        stmt.bindLong(8, entity.getAttack());
+        stmt.bindLong(9, entity.getArmor());
     }
 
     @Override
@@ -115,6 +121,8 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         if (type != null) {
             stmt.bindString(7, type);
         }
+        stmt.bindLong(8, entity.getAttack());
+        stmt.bindLong(9, entity.getArmor());
     }
 
     @Override
@@ -131,7 +139,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
             cursor.getInt(offset + 3), // life
             cursor.getInt(offset + 4), // lifeUp
             cursor.getInt(offset + 5), // price
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // type
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
+            cursor.getLong(offset + 7), // attack
+            cursor.getLong(offset + 8) // armor
         );
         return entity;
     }
@@ -145,6 +155,8 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         entity.setLifeUp(cursor.getInt(offset + 4));
         entity.setPrice(cursor.getInt(offset + 5));
         entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setAttack(cursor.getLong(offset + 7));
+        entity.setArmor(cursor.getLong(offset + 8));
      }
     
     @Override

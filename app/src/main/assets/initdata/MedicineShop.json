@@ -6,6 +6,8 @@
     "price": 20,
     "life": 20,
     "life_up": 0,
+    "attack": 0,
+    "armor": 0,
     "type": "D1"
   },
   {
@@ -15,6 +17,8 @@
     "price": 30,
     "life_up": 0,
     "life": 35,
+    "attack": 0,
+    "armor": 0,
     "type": "D2"
   },
   {
@@ -24,6 +28,8 @@
     "price": 100,
     "life_up": 0,
     "life": 180,
+    "attack": 0,
+    "armor": 0,
     "type": "D3"
   },
   {
@@ -32,7 +38,29 @@
     "tips": "雪莲性温、微苦，功能祛风除湿，“强身健体”！",
     "price": 50,
     "life": 0,
-    "life_up": 10,
+    "life_up": 25,
     "type": "D4"
+  },
+  {
+    "id": 5,
+    "name": "大力丸",
+    "tips": "嗑药！必须嗑药！！<br/>增加15攻击力。",
+    "price": 50,
+    "life": 0,
+    "attack": 15,
+    "armor": 0,
+    "life_up": 0,
+    "type": "D5"
+  },
+  {
+    "id": 6,
+    "name": "强体丸",
+    "tips": "嗑药！必须嗑药！！<br/>增加10防御力。",
+    "price": 50,
+    "life": 0,
+    "attack": 0,
+    "armor": 10,
+    "life_up": 0,
+    "type": "D6"
   }
 ]

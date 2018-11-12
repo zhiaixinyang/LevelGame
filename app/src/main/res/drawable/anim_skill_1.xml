@@ -4,23 +4,29 @@
     <!-- 定义一个动画帧，Drawable为img0，持续时间50毫秒 -->
     <item
         android:drawable="@drawable/skill_1"
-        android:duration="100" />
+        android:duration="125" />
     <item
         android:drawable="@drawable/skill_2"
-        android:duration="100" />
+        android:duration="125" />
     <item
         android:drawable="@drawable/skill_3"
-        android:duration="100" />
+        android:duration="125" />
     <item
         android:drawable="@drawable/skill_4"
-        android:duration="100" />
+        android:duration="125" />
     <item
         android:drawable="@drawable/skill_5"
-        android:duration="100" />
+        android:duration="125" />
     <item
         android:drawable="@drawable/skill_6"
-        android:duration="100" />
+        android:duration="125" />
     <item
         android:drawable="@drawable/skill_7"
-        android:duration="100" />
+        android:duration="125" />
+    <item
+        android:drawable="@drawable/skill_8"
+        android:duration="125" />
+    <item
+        android:drawable="@drawable/skill_9"
+        android:duration="125" />
 </animation-list>

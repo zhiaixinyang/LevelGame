@@ -58,6 +58,8 @@
 
     <string name="medicines_msg_price">售价：%1$d</string>
     <string name="medicines_msg_life">增加当前生命：%1$d</string>
+    <string name="medicines_msg_attack">增加攻击：%1$d</string>
+    <string name="medicines_msg_armor">增加防御：%1$d</string>
     <string name="medicines_msg_life_up">增加生命上限：%1$d</string>
 
     <string name="shop_attack_msg_price">售价：%1$d</string>
@@ -139,4 +141,5 @@
     <string name="string_blacksmith_mix_error"><![CDATA[<font color="#D32F2F">合成失败</font>]]></string>
     <string name="string_attack_no_harm">无法破防</string>
     <string name="string_big_monsters_is_show">魔王已经入侵！</string>
+    <string name="string_hero_name">伟大的英雄</string>
 </resources>

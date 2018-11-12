@@ -16,6 +16,8 @@ public class MedicinesModelVM {
     public ObservableField<String> tips = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
+    public ObservableField<String> attack = new ObservableField<>();
+    public ObservableField<String> armor = new ObservableField<>();
     public ObservableField<String> lifeUp = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();
     public ObservableField<Integer> src = new ObservableField<>();
@@ -26,6 +28,8 @@ public class MedicinesModelVM {
         name.set(medicines.name);
         price.set(String.format(App.getAppContext().getString(R.string.medicines_msg_price), medicines.price));
         life.set(String.format(App.getAppContext().getString(R.string.medicines_msg_life), medicines.life));
+        armor.set(String.format(App.getAppContext().getString(R.string.medicines_msg_armor), medicines.armor));
+        attack.set(String.format(App.getAppContext().getString(R.string.medicines_msg_attack), medicines.attack));
         lifeUp.set(String.format(App.getAppContext().getString(R.string.medicines_msg_life_up), medicines.lifeUp));
         src.set(SrcIconMap.getInstance().getSrc(medicines.type));
     }

@@ -62,11 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_medicines_normal_margin"
             android:gravity="center"
-            android:text="@{vm.tips}"
+            app:htmlColorText="@{vm.tips}"
             android:textColor="@color/gray_plus"
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/iv_src"
-            app:layout_constraintBottom_toTopOf="@+id/tv_life"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:text="药品介绍" />
 
@@ -88,7 +87,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_attack"
+            android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_medicines_normal_margin"
@@ -104,12 +103,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/item_medicines_normal_margin"
+            android:layout_marginTop="@dimen/item_medicines_normal_margin"
             android:text="@{vm.life}"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/tv_life_up"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
-            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="增加生命：10" />
 
         <TextView
@@ -117,13 +116,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/item_medicines_normal_margin"
+            android:layout_marginTop="@dimen/item_medicines_normal_margin"
             android:text="@{vm.lifeUp}"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/iv_src"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_tips"
             tools:text="生命上限：10" />
+
+        <TextView
+            android:id="@+id/tv_attack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/item_medicines_normal_margin"
+            android:layout_marginTop="@dimen/item_medicines_normal_margin"
+            android:layout_marginBottom="@dimen/item_medicines_normal_margin"
+            android:text="@{vm.attack}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/iv_src"
+            app:layout_constraintTop_toBottomOf="@+id/tv_life_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="增加攻击：10" />
+
+        <TextView
+            android:id="@+id/tv_armor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_medicines_normal_margin"
+            android:layout_marginBottom="@dimen/item_medicines_normal_margin"
+            android:layout_marginLeft="@dimen/item_medicines_normal_margin"
+            android:text="@{vm.armor}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_attack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_life_up"
+            tools:text="增加防御：10" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -40,6 +40,7 @@ public class HeroAttrModelVM {
         lifeInit = model.maxLife;
         curLife = model.curLife;
         id.set(model.id);
+        name.set(App.getAppContext().getString(R.string.string_hero_name));
         attack.set(String.format(App.getAppContext().getString(R.string.monsters_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.monsters_msg_armor), model.armor));
         money.set(String.format(App.getAppContext().getString(R.string.monsters_msg_money), model.money));

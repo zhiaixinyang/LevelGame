@@ -69,7 +69,7 @@ public class FightMonstersVM {
             btnText.set("攻击");
             isBusinessman.set(false);
         }
-        harm.set(0+"");
+        harm.set("");
     }
 
     private void resetLifeProgress(int curLife) {

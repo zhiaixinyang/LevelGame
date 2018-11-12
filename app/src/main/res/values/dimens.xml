@@ -17,4 +17,5 @@
     <dimen name="item_medicines_normal_margin">8dp</dimen>
     <dimen name="item_base_list_normal_margin">8dp</dimen>
     <dimen name="dialog_fight_ic_monster_w_h">90dp</dimen>
+    <dimen name="dialog_fight_ic_hero_w_h">80dp</dimen>
 </resources>

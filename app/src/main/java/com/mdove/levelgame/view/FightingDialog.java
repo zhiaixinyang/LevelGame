@@ -1,5 +1,7 @@
 package com.mdove.levelgame.view;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,8 +13,11 @@ import android.support.v7.app.AppCompatDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
+import android.view.animation.AnimationSet;
+import android.view.animation.BounceInterpolator;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.base.RxTransformerHelper;
 import com.mdove.levelgame.databinding.DialogFightingBinding;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
@@ -22,8 +27,12 @@ import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterExceptio
 import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
+import com.mdove.levelgame.utils.AnimationUtils;
 import com.mdove.levelgame.utils.SystemUtils;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -41,9 +50,10 @@ public class FightingDialog extends AppCompatDialog {
     private Context context;
     private Disposable heroDisposable;
     private Disposable monstersDisposable;
+    private AnimationDrawable attackAnim;
 
     public FightingDialog(Context context, Monsters monster) {
-        super(context,R.style.BaseDialog);
+        super(context, R.style.BaseDialog);
         this.context = context;
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_fighting,
                 null, false);
@@ -51,7 +61,7 @@ public class FightingDialog extends AppCompatDialog {
 
         WindowManager.LayoutParams paramsWindow = getWindow().getAttributes();
         paramsWindow.width = getWindowWidth();
-        setCancelable(true);
+        setCancelable(false);
         setCanceledOnTouchOutside(false);
         this.monster = monster;
         heroDisposable = new CompositeDisposable();
@@ -65,7 +75,14 @@ public class FightingDialog extends AppCompatDialog {
 
         binding.setEnemyVm(enVm);
         binding.setMyVm(myVm);
+        initAttackAnim();
         computeAttack(monster);
+    }
+
+    private void initAttackAnim() {
+        attackAnim = (AnimationDrawable) context.getResources().getDrawable(R.drawable.anim_skill_1);
+        binding.anim.setBackground(attackAnim);
+        attackAnim.start();
     }
 
     protected int getWindowWidth() {
@@ -92,6 +109,20 @@ public class FightingDialog extends AppCompatDialog {
                     enVm.harm.set(context.getString(R.string.string_attack_no_harm));
                 } else {
                     enVm.harm.set(-integer + "");
+                    AnimatorSet set = new AnimatorSet();
+                    set.playTogether(ObjectAnimator.ofFloat(binding.tvHarm, "scaleX", 1F, 2F, 1F),
+                            ObjectAnimator.ofFloat(binding.tvHarm, "scaleY", 1F, 2F, 1F));
+                    set.setDuration(750);
+                    set.setInterpolator(new BounceInterpolator());
+                    set.start();
+                    Observable.just(1).delay(750, TimeUnit.MILLISECONDS)
+                            .compose(RxTransformerHelper.<Integer>schedulerTransf())
+                            .subscribe(new Consumer<Integer>() {
+                                @Override
+                                public void accept(Integer integer) throws Exception {
+                                    enVm.harm.set("");
+                                }
+                            });
                 }
             }
 

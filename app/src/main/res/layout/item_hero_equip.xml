@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,9 +14,7 @@
             type="com.mdove.levelgame.main.hero.model.handler.HasEquipHandler" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
-                android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_marginTop="4dp"
                 android:text="@{vm.life}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
@@ -77,22 +77,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_attack"
                 tools:text="增加生命：10" />
 
-            <android.support.constraint.ConstraintLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_life">
 
                 <FrameLayout
                     android:id="@+id/iv_src"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/bg_gray_round"
-                    android:padding="3dp"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_tips"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_tips">
+                    android:padding="3dp">
 
                     <ImageView
                         android:layout_width="40dp"
@@ -103,25 +99,24 @@
 
                 <TextView
                     android:id="@+id/tv_tips"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
                     android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                    android:layout_toLeftOf="@+id/btn_take_off"
+                    android:layout_toRightOf="@+id/iv_src"
                     android:gravity="left|center"
+                    android:text="武器介绍"
                     android:textColor="@color/gray_plus"
                     android:textSize="12sp"
-                    app:htmlColorText="@{vm.tips}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/iv_src"
-                    app:layout_constraintRight_toLeftOf="@+id/btn_take_off"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="武器介绍武器介绍武介介绍武器介绍武器介绍武介绍武器介绍武器介绍" />
-
+                    app:htmlColorText="@{vm.tips}" />
 
                 <TextView
                     android:id="@+id/btn_take_off"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:background="@drawable/bg_take_off_equip_gray_plus"
                     android:onClick="@{()->handler.onClickTakeOff(vm)}"
                     android:paddingBottom="4dp"
@@ -130,12 +125,8 @@
                     android:paddingTop="4dp"
                     android:text="脱下"
                     android:textColor="@color/gray_plus"
-                    android:textSize="@dimen/item_hero_equip_text_size"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+                    android:textSize="@dimen/item_hero_equip_text_size" />
+            </RelativeLayout>
         </android.support.constraint.ConstraintLayout>
-
     </android.support.constraint.ConstraintLayout>
 </layout>

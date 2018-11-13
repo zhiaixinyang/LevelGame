@@ -28,75 +28,91 @@
             android:layout_width="match_parent"
             android:background="@drawable/ic_item_hero_package_bg"
             android:layout_height="wrap_content">
-            <FrameLayout
-                android:id="@+id/iv_src"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_gray_round"
-                android:padding="3dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@{vm.src}"
-                    tools:src="@mipmap/a1" />
-            </FrameLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_life"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="@dimen/item_double_layer_margin"
+                app:layout_constraintRight_toLeftOf="@+id/btn_sell"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:id="@+id/iv_src"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/bg_gray_round"
+                    android:padding="3dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@{vm.src}"
+                        tools:src="@mipmap/a1" />
+                </FrameLayout>
+                <TextView
+                    android:id="@+id/tv_tips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
+                    android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
+                    android:textColor="@color/gray_plus"
+                    android:textSize="12sp"
+                    android:layout_centerVertical="true"
+                    app:htmlColorText="@{vm.tips}"
+                    android:layout_toRightOf="@+id/iv_src"
+                    tools:text="简介装装备简介装装备简介装简介装装备简介装装备简介装装备简介装备简介装装备简介装装备简介装" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/item_hero_equip_text_size"
+                android:textSize="16sp"
                 app:htmlColorText="@{vm.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_life"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="装备名字" />
+                app:layout_constraintTop_toTopOf="@+id/tv_attack"
+                tools:text="武器名字" />
 
             <TextView
                 android:id="@+id/tv_attack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
+                android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
                 android:text="@{vm.attack}"
                 android:textColor="@color/black"
-                android:textSize="@dimen/item_hero_equip_text_size"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                android:textSize="12sp"
                 app:layout_constraintLeft_toRightOf="@+id/tv_name"
-                app:layout_constraintTop_toTopOf="@+id/tv_name"
-                tools:text="装备攻击" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="增加攻击：10" />
 
             <TextView
                 android:id="@+id/tv_armor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
+                android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
                 android:text="@{vm.armor}"
                 android:textColor="@color/black"
-                android:textSize="@dimen/item_hero_equip_text_size"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                android:textSize="12sp"
                 app:layout_constraintLeft_toRightOf="@+id/tv_attack"
-                app:layout_constraintTop_toTopOf="@+id/tv_name"
-                tools:text="装备防御" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="增加防御：10" />
 
             <TextView
-                android:id="@+id/tv_tips"
-                android:layout_width="0dp"
+                android:id="@+id/tv_life"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
-                android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
-                android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
-                android:textColor="@color/gray_plus"
+                android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_marginTop="@dimen/item_double_layer_margin"
+                android:text="@{vm.life}"
+                android:textColor="@color/black"
                 android:textSize="12sp"
-                app:htmlColorText="@{vm.tips}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/iv_src"
-                app:layout_constraintRight_toLeftOf="@+id/btn_sell"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                tools:text="装备简介装备简介备简介装备简介装备简介备简介装备简介装备简介备简介装备简介装备简介备简介" />
+                app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_attack"
+                tools:text="增加生命：10" />
 
             <TextView
                 android:id="@+id/btn_sell"
@@ -120,7 +136,6 @@
                 android:id="@+id/btn_equip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
                 android:background="@drawable/bg_take_off_equip_blue"
                 android:onClick="@{()->handler.onClickEquip(vm)}"
                 android:paddingBottom="4dp"
@@ -139,8 +154,6 @@
                 android:id="@+id/btn_strengthen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
-                android:layout_marginTop="@dimen/item_hero_equip_normal_margin"
                 android:background="@drawable/bg_take_off_equip_blue"
                 android:onClick="@{()->handler.onClickStrengthen(vm)}"
                 android:paddingBottom="4dp"
@@ -153,8 +166,8 @@
                 android:visibility="@{vm.isMaterials?View.GONE:View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_equip" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_equip"
+                />
         </android.support.constraint.ConstraintLayout>
-
     </android.support.constraint.ConstraintLayout>
 </layout>

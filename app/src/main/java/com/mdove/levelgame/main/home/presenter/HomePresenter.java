@@ -3,6 +3,7 @@ package com.mdove.levelgame.main.home.presenter;
 import android.content.DialogInterface;
 
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.MainMenu;
@@ -12,6 +13,7 @@ import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
+import com.mdove.levelgame.main.home.SettingActivity;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
@@ -109,6 +111,11 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     }
 
     @Override
+    public void onClickSetting() {
+        SettingActivity.Companion.start(view.getContext());
+    }
+
+    @Override
     public void onClickBigMonsters(BigMonstersModelVM vm) {
         initBigMonster();
         final BigFightingDialog dialog = new BigFightingDialog(view.getContext(), vm.bigMonsters);
@@ -157,6 +164,14 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 //            default:
 //                break;
 //        }
+    }
+
+    @Override
+    public void initGuide() {
+        if (!AppConfig.isShowGuide()) {
+            AppConfig.setShowGuide();
+            view.showGuide();
+        }
     }
 
 

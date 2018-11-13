@@ -33,6 +33,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
         public final static Property Attack = new Property(7, long.class, "attack", false, "ATTACK");
         public final static Property Armor = new Property(8, long.class, "armor", false, "ARMOR");
+        public final static Property LimitCount = new Property(9, int.class, "limitCount", false, "LIMIT_COUNT");
+        public final static Property IsLimitCount = new Property(10, int.class, "isLimitCount", false, "IS_LIMIT_COUNT");
+        public final static Property CurCount = new Property(11, int.class, "curCount", false, "CUR_COUNT");
     }
 
 
@@ -56,7 +59,10 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
                 "\"PRICE\" INTEGER NOT NULL ," + // 5: price
                 "\"TYPE\" TEXT," + // 6: type
                 "\"ATTACK\" INTEGER NOT NULL ," + // 7: attack
-                "\"ARMOR\" INTEGER NOT NULL );"); // 8: armor
+                "\"ARMOR\" INTEGER NOT NULL ," + // 8: armor
+                "\"LIMIT_COUNT\" INTEGER NOT NULL ," + // 9: limitCount
+                "\"IS_LIMIT_COUNT\" INTEGER NOT NULL ," + // 10: isLimitCount
+                "\"CUR_COUNT\" INTEGER NOT NULL );"); // 11: curCount
     }
 
     /** Drops the underlying database table. */
@@ -93,6 +99,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         }
         stmt.bindLong(8, entity.getAttack());
         stmt.bindLong(9, entity.getArmor());
+        stmt.bindLong(10, entity.getLimitCount());
+        stmt.bindLong(11, entity.getIsLimitCount());
+        stmt.bindLong(12, entity.getCurCount());
     }
 
     @Override
@@ -123,6 +132,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         }
         stmt.bindLong(8, entity.getAttack());
         stmt.bindLong(9, entity.getArmor());
+        stmt.bindLong(10, entity.getLimitCount());
+        stmt.bindLong(11, entity.getIsLimitCount());
+        stmt.bindLong(12, entity.getCurCount());
     }
 
     @Override
@@ -141,7 +153,10 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
             cursor.getInt(offset + 5), // price
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
             cursor.getLong(offset + 7), // attack
-            cursor.getLong(offset + 8) // armor
+            cursor.getLong(offset + 8), // armor
+            cursor.getInt(offset + 9), // limitCount
+            cursor.getInt(offset + 10), // isLimitCount
+            cursor.getInt(offset + 11) // curCount
         );
         return entity;
     }
@@ -157,6 +172,9 @@ public class MedicinesDao extends AbstractDao<Medicines, Long> {
         entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setAttack(cursor.getLong(offset + 7));
         entity.setArmor(cursor.getLong(offset + 8));
+        entity.setLimitCount(cursor.getInt(offset + 9));
+        entity.setIsLimitCount(cursor.getInt(offset + 10));
+        entity.setCurCount(cursor.getInt(offset + 11));
      }
     
     @Override

@@ -24,9 +24,10 @@ public class ShopAttackModelVM {
         tips.set(model.tips);
         name.set(model.name);
         attack.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_attack), model.attack));
-        armor.set("");
         if (model.armor > 0) {
             armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), model.armor));
+        } else {
+            armor.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_armor), 0));
         }
         price.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_price), model.price));
         src.set(SrcIconMap.getInstance().getSrc(model.type));

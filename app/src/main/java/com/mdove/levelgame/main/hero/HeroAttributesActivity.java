@@ -15,6 +15,8 @@ import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.databinding.ActivityHeroAttributesBinding;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
+import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
+import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.HeroAttributesModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroAttributesContract;
 import com.mdove.levelgame.main.hero.presenter.HeroAttributesPresenter;
@@ -22,13 +24,16 @@ import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
 import com.mdove.levelgame.utils.ToastHelper;
 
 /**
- * Created by MBENBEN on 2018/10/21.
+ * Created by MDove on 2018/10/21.
  */
 
 public class HeroAttributesActivity extends BaseActivity implements HeroAttributesContract.IHeroAttributesView {
     private ActivityHeroAttributesBinding binding;
     private HeroAttributesPresenter presenter;
     private Toolbar mToolbar;
+    private long clickTime = 0;
+    private boolean isStartClick = false;
+    private long clickCount = 0;
 
     public static void start(Context context) {
         Intent start = new Intent(context, HeroAttributesActivity.class);
@@ -54,7 +59,7 @@ public class HeroAttributesActivity extends BaseActivity implements HeroAttribut
 
         presenter.initData();
 
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             binding.tvDays.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -62,6 +67,24 @@ public class HeroAttributesActivity extends BaseActivity implements HeroAttribut
                 }
             });
         }
+        binding.tvBodyPower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isStartClick = true;
+                if (isStartClick && System.currentTimeMillis() - clickTime > 1500) {
+                    clickCount++;
+                } else {
+                    clickTime = System.currentTimeMillis();
+                    clickCount++;
+                }
+                if (clickCount == 5) {
+                    isStartClick = false;
+                    clickCount = 0;
+                    HeroAttributesManager.getInstance().resetPower();
+                    ToastHelper.shortToast(getString(R.string.string_faker_power));
+                }
+            }
+        });
     }
 
     private void initToolbar() {

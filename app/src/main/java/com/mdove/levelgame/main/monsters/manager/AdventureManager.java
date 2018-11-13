@@ -50,10 +50,10 @@ public class AdventureManager {
                     isShow = true;
                 }
                 // 奇遇消失
-                if (days > adventure.days && monstersPlace.isShow == 0 && monsters.isShow == 0 && adventure.isCycle == 1 ||
+                if (days > adventure.days && monstersPlace != null && monstersPlace.isShow == 0 && monsters != null && monsters.isShow == 0 && adventure.isCycle == 1 ||
                         monstersPlace != null && monsters != null && days % adventure.days != 0 && adventure.isCycle == 0) {
                     monsters.isShow = 1;
-                    if (monstersPlace.isAdventure==0) {
+                    if (monstersPlace.isAdventure == 0) {
                         monstersPlace.isShow = 1;
                     }
                     DatabaseManager.getInstance().getMonstersDao().update(monsters);

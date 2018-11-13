@@ -53,25 +53,6 @@ public class App extends Application {
 //        HeroManager.getInstance().getHeroAttributes().days = 9;
 //        HeroManager.getInstance().save();
         if (!AppConfig.isFirstLogin()) {
-            HeroAttributesDao dao = DatabaseManager.getInstance().getHeroAttributesDao();
-            dao.deleteAll();
-            HeroAttributes heroAttributes = new HeroAttributes();
-            heroAttributes.armor = 10;
-            heroAttributes.armorIncrease = 3;
-            heroAttributes.attack = 20;
-            heroAttributes.attackIncrease = 5;
-            heroAttributes.baseExp = 100;
-            heroAttributes.experience = 0;
-            heroAttributes.expMultiple = 2;
-            heroAttributes.money = 0;
-            heroAttributes.level = 1;
-            heroAttributes.curLife = 100;
-            heroAttributes.maxLife = 100;
-            heroAttributes.lifeIncrease = 20;
-            heroAttributes.bodyPower = 100;
-            heroAttributes.attackSpeed = 1500;
-            heroAttributes.days = 1;
-            dao.insert(heroAttributes);
             // 初始化数据库
             InitDataFileUtils.initData();
             AppConfig.setFirstLogin();

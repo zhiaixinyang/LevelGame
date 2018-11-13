@@ -21,8 +21,11 @@ public interface HomeContract {
 
         void initBigMonsterInvade();
 
+        void onClickSetting();
+
         void onClickBigMonsters(BigMonstersModelVM vm);
 
+        void initGuide();
     }
 
     interface IHomeView extends BaseView {
@@ -31,5 +34,7 @@ public interface HomeContract {
         void showBigMonsters(BigMonstersModelVM vm);
 
         void showBigMonsterInvade(String days);
+
+        void showGuide();
     }
 }

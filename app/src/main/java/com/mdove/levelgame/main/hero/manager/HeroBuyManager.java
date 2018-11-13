@@ -3,6 +3,7 @@ package com.mdove.levelgame.main.hero.manager;
 import android.text.TextUtils;
 
 import com.mdove.levelgame.App;
+import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.PackagesDao;
@@ -24,6 +25,7 @@ import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
 import com.mdove.levelgame.main.shop.model.ShopArmorModel;
 import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
+import com.mdove.levelgame.utils.ToastHelper;
 
 import java.util.List;
 
@@ -40,6 +42,8 @@ public class HeroBuyManager {
     public static final int BUY_MEDICINES_STATUS_SUC = 1;
     // 没钱购买失败
     public static final int BUY_MEDICINES_STATUS_FAIL = 2;
+    // 次数不足
+    public static final int BUY_MEDICINES_STATUS_FAIL_NO_COUNT = 7;
     public static final int BUY_MEDICINES_STATUS_ERROR = 3;
 
     public static final int BUY_ATTACK_STATUS_SUC = 4;
@@ -79,8 +83,11 @@ public class HeroBuyManager {
             // 没钱
             if (heroAttributes.money - medicine.price < 0) {
                 resp.buyStatus = BUY_MEDICINES_STATUS_FAIL;
+            } else if (medicine.isLimitCount == 0 && medicine.curCount <= 0) {
+                resp.buyStatus = BUY_MEDICINES_STATUS_FAIL_NO_COUNT;
             } else {// 购买成功
                 resp.buyStatus = BUY_MEDICINES_STATUS_SUC;
+                medicine.curCount--;
                 // 先判断能否增加生命上限
                 if (medicine.lifeUp > 0) {
                     heroAttributes.maxLife += medicine.lifeUp;
@@ -110,6 +117,9 @@ public class HeroBuyManager {
                 resp.price = medicine.price;
                 resp.lifeUp = medicine.lifeUp;
                 resp.name = medicine.name;
+                DatabaseManager.getInstance().getMedicinesDao().update(medicine);
+                save();
+
             }
         }
         return resp;

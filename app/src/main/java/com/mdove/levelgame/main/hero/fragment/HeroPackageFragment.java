@@ -20,9 +20,7 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
 
 
     public static HeroPackageFragment newInstance() {
-
         Bundle args = new Bundle();
-
         HeroPackageFragment fragment = new HeroPackageFragment();
         fragment.setArguments(args);
         return fragment;

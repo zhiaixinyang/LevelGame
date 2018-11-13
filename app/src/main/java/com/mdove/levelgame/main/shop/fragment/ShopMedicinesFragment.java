@@ -50,4 +50,9 @@ public class ShopMedicinesFragment extends BaseListFragment implements ShopMedic
     public void showData(List<MedicinesModelVM> data) {
         getAdapter().setData(data);
     }
+
+    @Override
+    public void notifyUI(int position) {
+        getAdapter().notifyItemChanged(position);
+    }
 }

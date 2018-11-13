@@ -123,12 +123,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_life"
                     app:myCtrlProgress="@{myVm}" />
             </android.support.constraint.ConstraintLayout>
-
+            <ImageView
+                android:layout_width="@dimen/dialog_fight_ic_monster_w_h"
+                android:layout_height="@dimen/dialog_fight_ic_monster_w_h"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:src="@mipmap/ic_big_monster"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_my" />
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/layout_enemy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/big_fight_normal_margin"
+                android:layout_marginLeft="@dimen/big_fight_normal_margin"
+                android:layout_marginRight="@dimen/big_fight_normal_margin"
+                android:layout_marginBottom="@dimen/big_fight_normal_margin"
+                android:layout_marginTop="100dp"
                 android:background="@drawable/bg_white_round"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_my">

@@ -42,7 +42,7 @@ public class ShopMedicinesPresenter implements ShopMedicinesContract.IShopMedici
     @Override
     public void initData() {
         data = new ArrayList<>();
-        List<Medicines> medicines = InitDataFileUtils.getInitMedicines();
+        List<Medicines> medicines = DatabaseManager.getInstance().getMedicinesDao().loadAll();
         for (Medicines model : medicines) {
             data.add(new MedicinesModelVM(model));
         }
@@ -71,6 +71,11 @@ public class ShopMedicinesPresenter implements ShopMedicinesContract.IShopMedici
                                 view.getContext().getString(R.string.string_buy_content_error), true);
                         break;
                     }
+                    case HeroBuyManager.BUY_MEDICINES_STATUS_FAIL_NO_COUNT: {
+                        MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_error),
+                                view.getContext().getString(R.string.string_buy_content_error_no_count), true);
+                        break;
+                    }
                     case HeroBuyManager.BUY_MEDICINES_STATUS_SUC: {
                         String content;
                         if (buyMedicinesResp.lifeUp > 0) {
@@ -80,6 +85,7 @@ public class ShopMedicinesPresenter implements ShopMedicinesContract.IShopMedici
                             content = String.format(view.getContext().getString(R.string.string_buy_medicines_suc),
                                     buyMedicinesResp.life, buyMedicinesResp.price, buyMedicinesResp.name);
                         }
+                        notifyUI(id);
                         MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_suc),
                                 content, true);
                         break;
@@ -89,5 +95,19 @@ public class ShopMedicinesPresenter implements ShopMedicinesContract.IShopMedici
                 }
             }
         });
+    }
+
+    private void notifyUI(long id) {
+        int position = -1;
+        for (MedicinesModelVM vm : data) {
+            if (vm.id.get() == id) {
+                vm.resetLimitCount();
+                position = data.indexOf(vm);
+                break;
+            }
+        }
+        if (position != -1) {
+            view.notifyUI(position);
+        }
     }
 }

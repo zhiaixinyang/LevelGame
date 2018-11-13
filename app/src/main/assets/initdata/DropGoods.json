@@ -59,9 +59,10 @@
     "id": 14,
     "types": "[{\"type\":\"E12\",\"probability\":0.6}]"
   },
+  // 魔王掉落
   {
     "id": 100,
-    "types": "[{\"type\":\"A1\",\"probability\":0.4},{\"type\":\"A2\",\"probability\":0.1}]"
+    "types": "[{\"type\":\"E13\",\"probability\":0.2}]"
   },
   {
     "id": 101,

@@ -8,6 +8,8 @@
     "life_up": 0,
     "attack": 0,
     "armor": 0,
+    "is_limit_count": 1,
+    "limit_count": 0,
     "type": "D1"
   },
   {
@@ -18,6 +20,9 @@
     "life_up": 0,
     "life": 35,
     "attack": 0,
+    "is_limit_count": 1,
+    "limit_count": 0,
+    "cur_count": 0,
     "armor": 0,
     "type": "D2"
   },
@@ -29,6 +34,9 @@
     "life_up": 0,
     "life": 180,
     "attack": 0,
+    "is_limit_count": 0,
+    "limit_count": 2,
+    "cur_count": 2,
     "armor": 0,
     "type": "D3"
   },
@@ -39,6 +47,9 @@
     "price": 50,
     "life": 0,
     "life_up": 25,
+    "is_limit_count": 0,
+    "limit_count": 5,
+    "cur_count": 5,
     "type": "D4"
   },
   {
@@ -49,6 +60,9 @@
     "life": 0,
     "attack": 15,
     "armor": 0,
+    "is_limit_count": 0,
+    "cur_count": 3,
+    "limit_count": 3,
     "life_up": 0,
     "type": "D5"
   },
@@ -61,6 +75,9 @@
     "attack": 0,
     "armor": 10,
     "life_up": 0,
+    "is_limit_count": 0,
+    "cur_count": 3,
+    "limit_count": 3,
     "type": "D6"
   }
 ]

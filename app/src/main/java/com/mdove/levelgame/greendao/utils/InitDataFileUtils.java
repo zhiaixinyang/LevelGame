@@ -13,11 +13,13 @@ import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DropGoodsDao;
+import com.mdove.levelgame.greendao.HeroAttributesDao;
 import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
+import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.TaskDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
@@ -26,6 +28,7 @@ import com.mdove.levelgame.greendao.entity.Adventure;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.DropGoods;
+import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
@@ -61,6 +64,25 @@ public class InitDataFileUtils {
     private static List<Adventure> adventures;
 
     public static void initData() {
+        HeroAttributesDao dao = DatabaseManager.getInstance().getHeroAttributesDao();
+        dao.deleteAll();
+        HeroAttributes heroAttributes = new HeroAttributes();
+        heroAttributes.armor = 10;
+        heroAttributes.armorIncrease = 3;
+        heroAttributes.attack = 20;
+        heroAttributes.attackIncrease = 5;
+        heroAttributes.baseExp = 100;
+        heroAttributes.experience = 0;
+        heroAttributes.expMultiple = 2;
+        heroAttributes.money = 0;
+        heroAttributes.level = 1;
+        heroAttributes.curLife = 100;
+        heroAttributes.maxLife = 100;
+        heroAttributes.lifeIncrease = 20;
+        heroAttributes.bodyPower = 100;
+        heroAttributes.attackSpeed = 1500;
+        heroAttributes.days = 1;
+        dao.insert(heroAttributes);
         AllGoodsDao allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();
         allGoodsDao.deleteAll();
         WeaponsDao weaponsDao = DatabaseManager.getInstance().getWeaponsDao();
@@ -99,6 +121,8 @@ public class InitDataFileUtils {
         dropGoodsDao.deleteAll();
         MaterialDao materialDao = DatabaseManager.getInstance().getMaterialDao();
         materialDao.deleteAll();
+        PackagesDao packagesDao = DatabaseManager.getInstance().getPackagesDao();
+        packagesDao.deleteAll();
 
         List<DropGoods> dropGoods = getInitDropGoods();
         for (DropGoods dropGood : dropGoods) {

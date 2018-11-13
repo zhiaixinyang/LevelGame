@@ -19,5 +19,7 @@ public interface ShopMedicinesContract {
 
     interface IShopMedicinesView extends BaseView {
         void showData(List<MedicinesModelVM> data);
+
+        void notifyUI(int position);
     }
 }

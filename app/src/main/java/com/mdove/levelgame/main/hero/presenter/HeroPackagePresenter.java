@@ -624,7 +624,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 @Override
                                 public void accept(HeroAttributesManager.SellResp sellResp1) throws Exception {
                                     if (sellResp1.sellMoney > 0) {
-                                        ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), sellResp1.sellMoney));
+                                        MyDialog.showMyDialog(view.getContext(),view.getString(R.string.string_sells_suc_title)
+                                                ,String.format(view.getString(R.string.string_sells_suc), sellResp1.sellMoney),true);
                                         deleteById(sellResp.pkId);
                                     }
                                 }
@@ -634,7 +635,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
                 } else {
                     if (sellResp.sellMoney > 0) {
-                        ToastHelper.shortToast(String.format(view.getString(R.string.string_sells_suc), sellResp.sellMoney));
+                        MyDialog.showMyDialog(view.getContext(),view.getString(R.string.string_sells_suc_title)
+                                ,String.format(view.getString(R.string.string_sells_suc), sellResp.sellMoney),true);
                         deleteById(sellResp.pkId);
                     }
                 }

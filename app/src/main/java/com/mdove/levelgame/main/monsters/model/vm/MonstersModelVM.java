@@ -34,13 +34,13 @@ public class MonstersModelVM {
     public ObservableField<String> life = new ObservableField<>();
     public int lifeInit;
     public int curLife;
-    public ObservableField<String> limitCount = new ObservableField<>();
     public ObservableField<String> power = new ObservableField<>();
     public ObservableField<Integer> lifeProgress = new ObservableField<>();
     public ObservableField<String> harm = new ObservableField<>();
     public ObservableField<String> btnText = new ObservableField<>();
     public ObservableField<Boolean> isSpecial = new ObservableField<>();
     public ObservableField<Boolean> isBusinessman = new ObservableField<>();
+    public ObservableField<String> limitCount = new ObservableField<>();
     public ObservableField<Boolean> isLimitCount = new ObservableField<>();
     private int limitCountInt;
 

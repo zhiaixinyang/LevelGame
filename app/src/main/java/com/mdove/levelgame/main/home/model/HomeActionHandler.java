@@ -13,6 +13,10 @@ public class HomeActionHandler {
         this.presenter = presenter;
     }
 
+    public void onClickSetting(){
+        presenter.onClickSetting();
+    }
+
     public void onClickBigMonsters(BigMonstersModelVM vm) {
         presenter.onClickBigMonsters(vm);
     }

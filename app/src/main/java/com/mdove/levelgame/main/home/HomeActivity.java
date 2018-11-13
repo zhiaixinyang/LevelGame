@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.ViewCompat;
@@ -28,6 +29,9 @@ import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.home.presenter.HomeContract;
 import com.mdove.levelgame.main.home.presenter.HomePresenter;
 import com.mdove.levelgame.utils.DensityUtil;
+import com.mdove.levelgame.view.guideview.Guide;
+import com.mdove.levelgame.view.guideview.GuideBuilder;
+import com.mdove.levelgame.view.guideview.component.CommonComponent;
 
 import java.util.List;
 
@@ -67,6 +71,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         presenter.initMenu();
         presenter.initBigMonster();
         presenter.initBigMonsterInvade();
+        presenter.initGuide();
 
         binding.setHandler(new HomeActionHandler(presenter));
 
@@ -139,6 +144,26 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     @Override
     public void showBigMonsterInvade(String days) {
         binding.tvInvade.setText(Html.fromHtml(days));
+    }
+
+    @Override
+    public void showGuide() {
+        final GuideBuilder optionBuilder = new GuideBuilder();
+        optionBuilder.addComponent(new CommonComponent(getString(R.string.string_guide_title)));
+        optionBuilder.setTargetView(binding.btnSetting)
+                .setAlpha(150)
+                .setHighTargetCorner(20)
+                .setOverlayTarget(false)
+                .setOutsideTouchable(false);
+        //Guide必须要在GuideBuilder之后初始化
+        final Guide optionGuide = optionBuilder.createGuide();
+        optionGuide.setShouldCheckLocInWindow(true);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                optionGuide.show(HomeActivity.this);
+            }
+        },100);
     }
 
     private ViewPropertyAnimatorListener listener = new ViewPropertyAnimatorListener() {

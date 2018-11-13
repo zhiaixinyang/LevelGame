@@ -23,9 +23,10 @@ public class ShopArmorModelVM {
         id.set(model.id);
         tips.set(model.tips);
         name.set(model.name);
-        attack.set("");
         if (model.attack > 0) {
             attack.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_attack), model.attack));
+        }else{
+            attack.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_attack), 0));
         }
         armor.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_armor), model.armor));
         price.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_price), model.price));

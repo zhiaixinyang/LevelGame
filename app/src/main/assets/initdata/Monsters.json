@@ -54,7 +54,7 @@
     "is_businessman": 1,
     "monster_place_id": 1,
     "drop_goods_id": 3,
-    "consume_power": 25,
+    "consume_power": 10,
     "exp": 50
   },
   {
@@ -74,7 +74,7 @@
     "is_businessman": 1,
     "monster_place_id": 1,
     "drop_goods_id": 4,
-    "consume_power": 10,
+    "consume_power": 25,
     "exp": 30
   },
   {
@@ -253,9 +253,9 @@
     "id": 14,
     "name": "<font color=\"#D32F2F\">神兽·玄武</font>",
     "tips": "传说中的四大神兽之一。<br/>击败有几率获得：玄武甲；可用于合成神器：<font color=\"#D32F2F\">东皇钟</font>。",
-    "attack": 300,
-    "armor": 800,
-    "life": 3000,
+    "attack": 500,
+    "armor": 1200,
+    "life": 5000,
     "money": 0,
     "type": "C14",
     "is_limit_count": 0,
@@ -330,26 +330,26 @@
     "consume_power": 30,
     "exp": 0
   },
-  {
-    "id": 18,
-    "name": "盘古残魂",
-    "tips": "上古之神-盘古残存在人世间的灵魂...<br/>击败有几率获得：盘古之灵。<br/>可用于合成神器：<font color=\"#D32F2F\">盘古斧</font>。",
-    "attack": 1500,
-    "armor": 300,
-    "life": 6000,
-    "money": 0,
-    "type": "C18",
-    "is_limit_count": 0,
-    "attack_speed": 1500,
-    "limit_count": 1,
-    "cur_count": 1,
-    "is_show": 0,
-    "monster_place_id": 7,
-    "drop_goods_id": 12,
-    "is_businessman": 1,
-    "consume_power": 30,
-    "exp": 0
-  },
+//  {
+//    "id": 18,
+//    "name": "盘古残魂",
+//    "tips": "上古之神-盘古残存在人世间的灵魂...<br/>击败有几率获得：盘古之灵。<br/>可用于合成神器：<font color=\"#D32F2F\">盘古斧</font>。",
+//    "attack": 1500,
+//    "armor": 300,
+//    "life": 6000,
+//    "money": 0,
+//    "type": "C18",
+//    "is_limit_count": 0,
+//    "attack_speed": 1500,
+//    "limit_count": 1,
+//    "cur_count": 1,
+//    "is_show": 0,
+//    "monster_place_id": 7,
+//    "drop_goods_id": 12,
+//    "is_businessman": 1,
+//    "consume_power": 30,
+//    "exp": 0
+//  },
   {
     "id": 19,
     "name": "蚩尤残魂",
@@ -369,25 +369,26 @@
     "is_businessman": 1,
     "consume_power": 30,
     "exp": 0
-  },
-  {
-    // 在Adventure中有奇遇
-    "id": 20,
-    "name": "元始天尊",
-    "tips": "道教最高神三清之一。<br/>教授特殊神技！",
-    "attack": 99999,
-    "armor": 99999,
-    "life": 99999,
-    "money": 0,
-    "type": "C20",
-    "is_show": 1,
-    "monster_place_id": 7,
-    "attack_speed": 1500,
-    "drop_goods_id": 0,
-    "is_limit_count": 1,
-    "is_businessman": 0,
-    "consume_power": 0,
-    "sell_goods_json": "[{\"type\":\"J1\",\"price\":1000}]",
-    "exp": 0
   }
+//,
+//  {
+//     在Adventure中有奇遇
+//    "id": 20,
+//    "name": "元始天尊",
+//    "tips": "道教最高神三清之一。<br/>教授特殊神技！",
+//    "attack": 99999,
+//    "armor": 99999,
+//    "life": 99999,
+//    "money": 0,
+//    "type": "C20",
+//    "is_show": 1,
+//    "monster_place_id": 7,
+//    "attack_speed": 1500,
+//    "drop_goods_id": 0,
+//    "is_limit_count": 1,
+//    "is_businessman": 0,
+//    "consume_power": 0,
+//    "sell_goods_json": "[{\"type\":\"J1\",\"price\":1000}]",
+//    "exp": 0
+//  }
 ]

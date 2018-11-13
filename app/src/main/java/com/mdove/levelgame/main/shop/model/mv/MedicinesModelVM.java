@@ -8,7 +8,7 @@ import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.utils.SrcIconMap;
 
 /**
- * Created by MBENBEN on 2018/10/21.
+ * Created by MDove on 2018/10/21.
  */
 
 public class MedicinesModelVM {
@@ -21,6 +21,10 @@ public class MedicinesModelVM {
     public ObservableField<String> lifeUp = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();
     public ObservableField<Integer> src = new ObservableField<>();
+    public ObservableField<String> limitCount = new ObservableField<>();
+    public ObservableField<Boolean> isLimitCount = new ObservableField<>();
+    private int limitCountInt;
+    private int curlimitCountInt;
 
     public MedicinesModelVM(Medicines medicines) {
         id.set(medicines.id);
@@ -32,5 +36,20 @@ public class MedicinesModelVM {
         attack.set(String.format(App.getAppContext().getString(R.string.medicines_msg_attack), medicines.attack));
         lifeUp.set(String.format(App.getAppContext().getString(R.string.medicines_msg_life_up), medicines.lifeUp));
         src.set(SrcIconMap.getInstance().getSrc(medicines.type));
+        limitCountInt = medicines.limitCount;
+        curlimitCountInt = medicines.curCount;
+        if (medicines.isLimitCount == 0) {
+            isLimitCount.set(true);
+            limitCount.set(String.format(App.getAppContext().getString(R.string.string_buy_msg_has_count), medicines.curCount, medicines.limitCount));
+        } else {
+            isLimitCount.set(false);
+        }
+    }
+
+    public void resetLimitCount() {
+        curlimitCountInt--;
+        if (isLimitCount.get()) {
+            limitCount.set(String.format(App.getAppContext().getString(R.string.string_buy_msg_has_count), curlimitCountInt, limitCountInt));
+        }
     }
 }

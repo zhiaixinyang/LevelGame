@@ -9,6 +9,7 @@ import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.MaterialDao;
+import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
@@ -18,6 +19,7 @@ import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.DropGoods;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Material;
+import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
@@ -94,9 +96,8 @@ public class HeroAttributesManager {
             // 特殊怪物出现设置
             SpecialMonsterManager.getInstance().setShowSpecialMonster();
 
-            MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
-
             // 重置所有怪物次数
+            MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
             List<Monsters> data = monstersDao.loadAll();
             if (data != null && data.size() > 0) {
                 for (Monsters monster : data) {
@@ -105,6 +106,19 @@ public class HeroAttributesManager {
                     } else {
                         monster.curCount = monster.limitCount;
                         monstersDao.update(monster);
+                    }
+                }
+            }
+            // 重置所有道具购买次数
+            MedicinesDao medicinesDao = DatabaseManager.getInstance().getMedicinesDao();
+            List<Medicines> medicines = medicinesDao.loadAll();
+            if (medicines != null && medicines.size() > 0) {
+                for (Medicines medicine : medicines) {
+                    if (medicine.isLimitCount == 1) {
+                        continue;
+                    } else {
+                        medicine.curCount = medicine.limitCount;
+                        medicinesDao.update(medicine);
                     }
                 }
             }
@@ -587,6 +601,11 @@ public class HeroAttributesManager {
             levelExp = heroAttributes.level * heroAttributes.expMultiple * heroAttributes.baseExp;
         }
         return levelExp;
+    }
+
+    public void resetPower() {
+        heroAttributes.bodyPower = 100;
+        save();
     }
 
     public void save() {

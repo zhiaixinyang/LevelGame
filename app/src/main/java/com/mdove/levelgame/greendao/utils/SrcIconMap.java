@@ -75,6 +75,7 @@ public class SrcIconMap {
         map.put("E10", R.mipmap.e10);
         map.put("E11", R.mipmap.e10);
         map.put("E12", R.mipmap.e10);
+        map.put("E13", R.mipmap.e13);
         map.put("G1", R.mipmap.g1);
         map.put("G2", R.mipmap.g2);
         map.put("G3", R.mipmap.g3);

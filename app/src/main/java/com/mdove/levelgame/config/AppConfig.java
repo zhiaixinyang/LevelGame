@@ -35,6 +35,22 @@ public class AppConfig implements IAppConfig {
         editor.apply();
     }
 
+    public static boolean isShowGuide() {
+        SharedPreferences preferences = initSharedPreferences();
+        return preferences.getBoolean(KEY_IS_SHOW_GUIDE, false);
+    }
+
+    public static void setShowGuide() {
+        setShowGuide(true);
+    }
+
+    public static void setShowGuide(boolean isShow) {
+        SharedPreferences.Editor editor = initSharedPreferences().edit();
+        editor.putBoolean(KEY_IS_SHOW_GUIDE, isShow);
+        editor.apply();
+    }
+
+
     public static long getDBVersion() {
         SharedPreferences preferences = initSharedPreferences();
         return preferences.getLong(KEY_UPDATE_DB, 0);

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_light">
+    <RelativeLayout
+        android:id="@+id/layout_banner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/margin_feedback"
+        android:layout_marginLeft="@dimen/margin_feedback"
+        android:layout_marginRight="@dimen/margin_feedback"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.mdove.levelgame.view.marqueeview.MarqueeView
+            android:id="@+id/mv"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_white_round"
+            app:mvAnimDuration="500"
+            app:mvDirection="top_to_bottom"
+            app:mvInterval="3000"
+            />
+        <ImageView
+            android:layout_width="@dimen/_30dp"
+            android:src="@mipmap/ic_speaker"
+            android:layout_marginLeft="@dimen/margin_feedback"
+            android:layout_centerVertical="true"
+            android:layout_height="@dimen/_30dp" />
+    </RelativeLayout>
+
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="@dimen/margin_feedback"
+        android:layout_marginRight="@dimen/margin_feedback"
+        android:layout_marginTop="@dimen/margin_feedback"
+        android:background="@drawable/bg_white_round"
+        android:gravity="top"
+        android:hint="说出你的，吐槽/反馈~"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_banner"
+        android:padding="@dimen/margin_feedback"
+        android:textSize="@dimen/_16sp"
+        />
+
+    <TextView
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/et_content"
+        android:layout_margin="@dimen/margin_feedback"
+        android:background="@drawable/bg_white_round"
+        android:gravity="center"
+        android:text="@string/string_feedback_btn_ok"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_content" />
+</android.support.constraint.ConstraintLayout>

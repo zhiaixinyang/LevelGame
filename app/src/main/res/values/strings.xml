@@ -158,6 +158,7 @@
     <string name="string_re_start_loading">正在重置数据，请稍候...</string>
     <string name="string_faker_power">你触发了“作弊”代码，体力恢复至100。</string>
     <string name="string_update_mes">更新公告</string>
+    <string name="string_feed_back">反馈 / 吐槽</string>
     <string name="string_update_mes_content"><![CDATA[V1.01版本更新<br/>1、修复药品购买次数Bug。<br/>2、修复一直UI显示Bug。<br/>3、修复重置游戏Bug。<br/>4、增加技能玩法（测试版本）。（目前仅支持被动技能）]]></string>
 
     <!--更新String-->
@@ -175,5 +176,10 @@
     <string name="string_study_err_has_study_content"><![CDATA[%1$s 学习失败，此技能已经学习完毕！]]></string>
     <string name="string_study_suc_content"><![CDATA[%1$s学习成功，消耗%2$d点技能点。]]></string>
     <string name="string_activity_home_skill">技能大师</string>
+    <string name="string_feedback_btn_ok">吐槽/反馈</string>
+    <string name="string_no_network">无网络，请保证网络畅通~</string>
+    <string name="string_feedback_err">反馈失败，请重试一下~</string>
+    <string name="string_sendback_content_is_empty">这啥也不写，让我很难办呀。</string>
+    <string name="string_feedback_suc">反馈成功，我们的开发帅逼，已经开始关注咯。</string>
 
 </resources>

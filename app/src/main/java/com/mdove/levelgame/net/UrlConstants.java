@@ -6,5 +6,5 @@ package com.mdove.levelgame.net;
  */
 public class UrlConstants {
 
-    public static final String HOST_API_ONLINE = "http://120.27.4.196:8888/PasswordGuard/";
+    public static final String HOST_API_ONLINE = "https://www.ohonor.xyz/";
 }

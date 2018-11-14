@@ -14,6 +14,7 @@ import com.mdove.levelgame.base.BaseActivity
 import com.mdove.levelgame.base.RxTransformerHelper
 import com.mdove.levelgame.config.AppConfig
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils
+import com.mdove.levelgame.main.feedback.FeedBackActivity
 import com.mdove.levelgame.main.home.presenter.SettingContract
 import com.mdove.levelgame.utils.ToastHelper
 import com.mdove.levelgame.view.MyDialog
@@ -29,6 +30,7 @@ class SettingActivity : BaseActivity() {
     lateinit var btnHelp: TextView
     lateinit var btnReStart: TextView
     lateinit var btnUpdateMes: TextView
+    lateinit var btnFeedBack: TextView
     override fun isNeedCustomLayout(): Boolean {
         return false
     }
@@ -51,6 +53,7 @@ class SettingActivity : BaseActivity() {
         btnHelp = findViewById(R.id.btn_help)
         btnReStart = findViewById(R.id.btn_re_start)
         btnUpdateMes = findViewById(R.id.btn_update_mes)
+        btnFeedBack = findViewById(R.id.btn_feed_back)
 
         btnReStart.setOnClickListener {
             MyDialog.showMyDialog(context, getString(R.string.string_re_start_dialog_title), getString(R.string.string_re_start_dialog_content)
@@ -70,5 +73,8 @@ class SettingActivity : BaseActivity() {
         }
         btnHelp.setOnClickListener { MyDialog.showMyDialog(context, getString(R.string.string_setting_help_title), getString(R.string.string_setting_help_content), true) }
         btnUpdateMes.setOnClickListener { MyDialog.showMyDialog(context, getString(R.string.string_update_mes), getString(R.string.string_update_mes_content), true) }
+        btnFeedBack.setOnClickListener {
+            FeedBackActivity.start(context)
+        }
     }
 }

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mdove.levelgame">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -68,6 +69,9 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".main.feedback.FeedBackActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <service android:name=".update.UpdateAppService" />
     </application>
 

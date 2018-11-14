@@ -81,6 +81,7 @@ public class InitDataFileUtils {
         heroAttributes.lifeIncrease = 20;
         heroAttributes.bodyPower = 100;
         heroAttributes.attackSpeed = 1500;
+        heroAttributes.skillCount = 1;
         heroAttributes.days = 1;
         dao.insert(heroAttributes);
         AllGoodsDao allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();

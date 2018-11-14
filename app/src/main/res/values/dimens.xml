@@ -22,4 +22,5 @@
     <dimen name="item_double_layer_margin">4dp</dimen>
     <dimen name="item_setting_size">18sp</dimen>
     <dimen name="item_setting_normal_margin">8dp</dimen>
+    <dimen name="dialog_update_btn_size">18sp</dimen>
 </resources>

@@ -96,7 +96,7 @@ kapt {
 }
 
 greendao {
-    schemaVersion 1
+    schemaVersion 2
     daoPackage 'com.mdove.levelgame.greendao'
     targetGenDir 'src/main/java'
 }
@@ -116,7 +116,7 @@ dependencies {
     implementation dependencies.recyclerView
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverterGson
-    implementation dependencies.retrofitAdapterRxJava
+    implementation dependencies.retrofitAdapter2RxJava
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 

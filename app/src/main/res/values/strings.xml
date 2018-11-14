@@ -86,6 +86,7 @@
     <string name="hero_attributes_msg_days">当前天数：%1$d</string>
     <string name="hero_attributes_msg_need_exp">距离升级：%1$d / %2$d</string>
     <string name="hero_attributes_msg_body_power">当前体力：%1$d / %2$d</string>
+    <string name="hero_attributes_msg_skill_count">技能点：%1$d / %2$d</string>
     <string name="hero_attributes_msg_attack_speed">攻击间隔：%1$d 毫秒</string>
     <string name="hero_attributes_msg_level">当前等级：%1$d</string>
     <string name="string_attack_loading_msg">攻击中...2秒后结束</string>
@@ -156,4 +157,22 @@
     <string name="string_place_re_start">数据被重置，可以正常游戏啦~</string>
     <string name="string_re_start_loading">正在重置数据，请稍候...</string>
     <string name="string_faker_power">你触发了“作弊”代码，体力恢复至100。</string>
+    <string name="string_update_mes">更新公告</string>
+    <string name="string_update_mes_content"><![CDATA[V1.01版本更新<br/>1、修复药品购买次数Bug。<br/>2、修复一直UI显示Bug。<br/>3、增加技能玩法（测试版本）。（目前仅支持被动技能）]]></string>
+
+    <!--更新String-->
+    <string name="update_title">发现全新版本</string>
+    <string name="update_desc">一个全新的版本被发出，尝试更新一下？ </string>
+    <string name="update_ok">没毛病，老铁</string>
+    <string name="update_cancel">我拒绝</string>
+    <string name="string_update_success">新的安装包下载成功</string>
+    <string name="string_update_err">更新包下载失败</string>
+
+    <string name="string_need_skill_count">所需技能点：%1$d</string>
+    <string name="string_study_suc_title">学习成功</string>
+    <string name="string_study_err_title">学习失败</string>
+    <string name="string_study_err_content"><![CDATA[%1$s 学习失败，可用技能点不足！]]></string>
+    <string name="string_study_suc_content"><![CDATA[%1$s学习成功，消耗%2$d点技能点。]]></string>
+    <string name="string_activity_home_skill">技能大师</string>
+
 </resources>

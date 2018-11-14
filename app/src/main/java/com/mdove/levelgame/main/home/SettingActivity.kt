@@ -28,6 +28,7 @@ import java.util.function.Consumer
 class SettingActivity : BaseActivity() {
     lateinit var btnHelp: TextView
     lateinit var btnReStart: TextView
+    lateinit var btnUpdateMes: TextView
     override fun isNeedCustomLayout(): Boolean {
         return false
     }
@@ -49,6 +50,7 @@ class SettingActivity : BaseActivity() {
 
         btnHelp = findViewById(R.id.btn_help)
         btnReStart = findViewById(R.id.btn_re_start)
+        btnUpdateMes = findViewById(R.id.btn_update_mes)
 
         btnReStart.setOnClickListener {
             MyDialog.showMyDialog(context, getString(R.string.string_re_start_dialog_title), getString(R.string.string_re_start_dialog_content)
@@ -67,5 +69,6 @@ class SettingActivity : BaseActivity() {
             })
         }
         btnHelp.setOnClickListener { MyDialog.showMyDialog(context, getString(R.string.string_setting_help_title), getString(R.string.string_setting_help_content), true) }
+        btnUpdateMes.setOnClickListener { MyDialog.showMyDialog(context, getString(R.string.string_update_mes), getString(R.string.string_update_mes_content), true) }
     }
 }

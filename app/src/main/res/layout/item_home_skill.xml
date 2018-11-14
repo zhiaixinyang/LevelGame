@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.mdove.levelgame.main.skill.model.HomeSkillModelVM" />
+
+        <variable
+            name="handler"
+            type="com.mdove.levelgame.main.skill.model.HomeSkillHandler" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
+        android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
+        android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
+        android:background="@drawable/bg_white_round">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:onClick="@{()->handler.onClickStudy(vm)}"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_item_hero_package_bg">
+
+            <FrameLayout
+                android:id="@+id/iv_src"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_gray_round"
+                android:padding="3dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@{vm.src}"
+                    tools:src="@mipmap/a1" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/item_hero_equip_text_size"
+                app:htmlColorText="@{vm.name}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="技能名字" />
+
+            <TextView
+                android:id="@+id/tv_need_skill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red_700"
+                android:textSize="12sp"
+                android:text="@{vm.needSkillCount}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_name"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                tools:text="所需技能点" />
+
+            <TextView
+                android:id="@+id/tv_tips"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_hero_equip_normal_margin"
+                android:textColor="@color/gray_plus"
+                android:textSize="12sp"
+                app:htmlColorText="@{vm.tips}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/iv_src"
+                app:layout_constraintRight_toLeftOf="@+id/btn_equip"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                tools:text="技能简介技能简介技能简介技能简介技能简介技能简介技能简介技能简介技能简介技能简介技能简介" />
+
+            <TextView
+                android:id="@+id/btn_equip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_take_off_equip_blue"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:text="@{vm.btnName}"
+                android:textColor="@color/blue_700"
+                android:textSize="@dimen/item_hero_equip_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

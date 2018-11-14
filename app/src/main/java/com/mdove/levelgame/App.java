@@ -26,6 +26,9 @@ import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
+import com.mdove.levelgame.net.ApiServer;
+import com.mdove.levelgame.net.RetrofitUtil;
+import com.mdove.levelgame.net.UrlConstants;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
@@ -36,6 +39,7 @@ import java.util.List;
 
 public class App extends Application {
     public static Context mAppContext;
+    private static ApiServer mApiServer;
 
     @Override
     public void onCreate() {
@@ -79,4 +83,10 @@ public class App extends Application {
         return mAppContext;
     }
 
+    public static ApiServer getApiServer() {
+        if (mApiServer == null) {
+            mApiServer = RetrofitUtil.create(UrlConstants.HOST_API_ONLINE, ApiServer.class);
+        }
+        return mApiServer;
+    }
 }

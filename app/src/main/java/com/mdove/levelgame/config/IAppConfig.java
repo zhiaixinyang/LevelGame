@@ -9,4 +9,6 @@ public interface IAppConfig {
 
     String KEY_UPDATE_DB = "key_update_db";
     String KEY_IS_SHOW_GUIDE = "key_is_show_guide";
+    String KEY_ORDER_TODAY_TIME = "key_order_today_time";
+
 }

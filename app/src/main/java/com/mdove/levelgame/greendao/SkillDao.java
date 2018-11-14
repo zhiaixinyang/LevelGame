@@ -36,6 +36,8 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         public final static Property RealAttack = new Property(9, long.class, "realAttack", false, "REAL_ATTACK");
         public final static Property Dizziness = new Property(10, long.class, "dizziness", false, "DIZZINESS");
         public final static Property DizzinessProbability = new Property(11, float.class, "dizzinessProbability", false, "DIZZINESS_PROBABILITY");
+        public final static Property BelongType = new Property(12, String.class, "belongType", false, "BELONG_TYPE");
+        public final static Property NeedSkillCount = new Property(13, int.class, "needSkillCount", false, "NEED_SKILL_COUNT");
     }
 
 
@@ -62,7 +64,9 @@ public class SkillDao extends AbstractDao<Skill, Long> {
                 "\"IGNORE_ATTACK_PROBABILITY\" REAL NOT NULL ," + // 8: ignoreAttackProbability
                 "\"REAL_ATTACK\" INTEGER NOT NULL ," + // 9: realAttack
                 "\"DIZZINESS\" INTEGER NOT NULL ," + // 10: dizziness
-                "\"DIZZINESS_PROBABILITY\" REAL NOT NULL );"); // 11: dizzinessProbability
+                "\"DIZZINESS_PROBABILITY\" REAL NOT NULL ," + // 11: dizzinessProbability
+                "\"BELONG_TYPE\" TEXT," + // 12: belongType
+                "\"NEED_SKILL_COUNT\" INTEGER NOT NULL );"); // 13: needSkillCount
     }
 
     /** Drops the underlying database table. */
@@ -102,6 +106,12 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         stmt.bindLong(10, entity.getRealAttack());
         stmt.bindLong(11, entity.getDizziness());
         stmt.bindDouble(12, entity.getDizzinessProbability());
+ 
+        String belongType = entity.getBelongType();
+        if (belongType != null) {
+            stmt.bindString(13, belongType);
+        }
+        stmt.bindLong(14, entity.getNeedSkillCount());
     }
 
     @Override
@@ -135,6 +145,12 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         stmt.bindLong(10, entity.getRealAttack());
         stmt.bindLong(11, entity.getDizziness());
         stmt.bindDouble(12, entity.getDizzinessProbability());
+ 
+        String belongType = entity.getBelongType();
+        if (belongType != null) {
+            stmt.bindString(13, belongType);
+        }
+        stmt.bindLong(14, entity.getNeedSkillCount());
     }
 
     @Override
@@ -156,7 +172,9 @@ public class SkillDao extends AbstractDao<Skill, Long> {
             cursor.getFloat(offset + 8), // ignoreAttackProbability
             cursor.getLong(offset + 9), // realAttack
             cursor.getLong(offset + 10), // dizziness
-            cursor.getFloat(offset + 11) // dizzinessProbability
+            cursor.getFloat(offset + 11), // dizzinessProbability
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // belongType
+            cursor.getInt(offset + 13) // needSkillCount
         );
         return entity;
     }
@@ -175,6 +193,8 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         entity.setRealAttack(cursor.getLong(offset + 9));
         entity.setDizziness(cursor.getLong(offset + 10));
         entity.setDizzinessProbability(cursor.getFloat(offset + 11));
+        entity.setBelongType(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setNeedSkillCount(cursor.getInt(offset + 13));
      }
     
     @Override

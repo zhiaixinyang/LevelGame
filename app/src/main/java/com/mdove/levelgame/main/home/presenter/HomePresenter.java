@@ -2,7 +2,9 @@ package com.mdove.levelgame.main.home.presenter;
 
 import android.content.DialogInterface;
 
+import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.base.RxTransformerHelper;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
@@ -12,19 +14,23 @@ import com.mdove.levelgame.main.hero.HeroAttributesActivity;
 import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
-import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.home.SettingActivity;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
 import com.mdove.levelgame.main.shop.BlacksmithActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
-import com.mdove.levelgame.utils.ToastHelper;
+import com.mdove.levelgame.main.skill.HeroSkillManager;
+import com.mdove.levelgame.main.skill.HomeSkillActivity;
+import com.mdove.levelgame.update.UpdateDialog;
+import com.mdove.levelgame.update.UpdateStatusManager;
+import com.mdove.levelgame.update.model.RealUpdate;
 import com.mdove.levelgame.view.BigFightingDialog;
-import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.functions.Consumer;
 
 /**
  * @author MDove on 2018/10/31
@@ -35,6 +41,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     private static final int INTENT_TO_BLACKSMITH = 3;
     private static final int INTENT_TO_HERO_ATTR = 4;
     private static final int INTENT_TO_HERO_PACKAGE = 5;
+    private static final int INTENT_TO_HOME_SKILL = 6;
     private HomeContract.IHomeView view;
 
     @Override
@@ -57,6 +64,9 @@ public class HomePresenter implements HomeContract.IHomePresenter {
             }
             case INTENT_TO_HERO_PACKAGE: {
                 HeroPackagesActivity.start(view.getContext());
+                break;
+            }case INTENT_TO_HOME_SKILL: {
+                HomeSkillActivity.Companion.start(view.getContext());
                 break;
             }
             default:
@@ -172,6 +182,35 @@ public class HomePresenter implements HomeContract.IHomePresenter {
             AppConfig.setShowGuide();
             view.showGuide();
         }
+    }
+
+    @Override
+    public void checkUpdate(String version) {
+        App.getApiServer().checkUpdate(version)
+                .compose(RxTransformerHelper.<RealUpdate>schedulerTransf())
+                .subscribe(new Consumer<RealUpdate>() {
+                    @Override
+                    public void accept(RealUpdate realUpdate) throws Exception {
+                        switch (realUpdate.getCheck()) {
+                            case "true": {
+                                if (UpdateStatusManager.isShowUpdateDialog()) {
+                                    showUpgradeDialog(realUpdate);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
+    }
+
+
+    private void showUpgradeDialog(final RealUpdate result) {
+        new UpdateDialog(view.getContext(), result.getSrc()).show();
     }
 
 

@@ -26,6 +26,9 @@ public interface HomeContract {
         void onClickBigMonsters(BigMonstersModelVM vm);
 
         void initGuide();
+
+        void checkUpdate(String version);
+
     }
 
     interface IHomeView extends BaseView {

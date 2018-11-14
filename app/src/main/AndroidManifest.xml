@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mdove.levelgame">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -56,9 +58,17 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".main.home.SettingActivity"
+        <activity
+            android:name=".main.home.SettingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".main.skill.HomeSkillActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".update.UpdateAppService" />
     </application>
 
 </manifest>

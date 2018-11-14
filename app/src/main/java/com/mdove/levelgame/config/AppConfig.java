@@ -61,4 +61,15 @@ public class AppConfig implements IAppConfig {
         editor.putLong(KEY_UPDATE_DB, version);
         editor.apply();
     }
+
+    public static void setAppOrderTodayTime(long time) {
+        SharedPreferences.Editor editor = initSharedPreferences().edit();
+        editor.putLong(KEY_ORDER_TODAY_TIME, time);
+        editor.apply();
+    }
+
+    public static long getAppOrderTodayTime() {
+        SharedPreferences preferences = initSharedPreferences();
+        return preferences.getLong(KEY_ORDER_TODAY_TIME, 0);
+    }
 }

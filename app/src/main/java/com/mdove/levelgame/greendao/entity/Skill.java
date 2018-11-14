@@ -30,11 +30,14 @@ public class Skill {
     public long dizziness;
     // 眩晕几率 如：0.2（应对被动）
     public float dizzinessProbability;
-    @Generated(hash = 1418234454)
+    public String belongType;
+    public int needSkillCount;
+    @Generated(hash = 481896070)
     public Skill(Long id, String name, String tips, String type, float attackHeavy,
             float attackHeavyProbability, float bloodSuckProbability,
             float ignoreArmorProbability, float ignoreAttackProbability,
-            long realAttack, long dizziness, float dizzinessProbability) {
+            long realAttack, long dizziness, float dizzinessProbability,
+            String belongType, int needSkillCount) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -47,6 +50,8 @@ public class Skill {
         this.realAttack = realAttack;
         this.dizziness = dizziness;
         this.dizzinessProbability = dizzinessProbability;
+        this.belongType = belongType;
+        this.needSkillCount = needSkillCount;
     }
     @Generated(hash = 1993658816)
     public Skill() {
@@ -123,5 +128,16 @@ public class Skill {
     public void setDizzinessProbability(float dizzinessProbability) {
         this.dizzinessProbability = dizzinessProbability;
     }
-    
+    public String getBelongType() {
+        return this.belongType;
+    }
+    public void setBelongType(String belongType) {
+        this.belongType = belongType;
+    }
+    public int getNeedSkillCount() {
+        return this.needSkillCount;
+    }
+    public void setNeedSkillCount(int needSkillCount) {
+        this.needSkillCount = needSkillCount;
+    }
 }

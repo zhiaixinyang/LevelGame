@@ -36,11 +36,13 @@ public class HeroAttributes {
     public int days;
     // 攻击速度，毫秒级（对应Rx的弹射间隔，此值越来越低）
     public long attackSpeed;
-    @Generated(hash = 865538211)
+    // 剩余技能点
+    public int skillCount;
+    @Generated(hash = 952374529)
     public HeroAttributes(Long id, int attack, int attackIncrease, int armor,
             int armorIncrease, int curLife, int lifeIncrease, int maxLife,
             int money, int level, long experience, long baseExp, int expMultiple,
-            int bodyPower, int days, long attackSpeed) {
+            int bodyPower, int days, long attackSpeed, int skillCount) {
         this.id = id;
         this.attack = attack;
         this.attackIncrease = attackIncrease;
@@ -57,6 +59,7 @@ public class HeroAttributes {
         this.bodyPower = bodyPower;
         this.days = days;
         this.attackSpeed = attackSpeed;
+        this.skillCount = skillCount;
     }
     @Generated(hash = 219453175)
     public HeroAttributes() {
@@ -156,5 +159,11 @@ public class HeroAttributes {
     }
     public void setAttackSpeed(long attackSpeed) {
         this.attackSpeed = attackSpeed;
+    }
+    public int getSkillCount() {
+        return this.skillCount;
+    }
+    public void setSkillCount(int skillCount) {
+        this.skillCount = skillCount;
     }
 }

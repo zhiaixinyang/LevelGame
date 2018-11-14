@@ -28,6 +28,7 @@ import com.mdove.levelgame.main.home.model.MainActionHandler;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.home.presenter.HomeContract;
 import com.mdove.levelgame.main.home.presenter.HomePresenter;
+import com.mdove.levelgame.utils.AppUtils;
 import com.mdove.levelgame.utils.DensityUtil;
 import com.mdove.levelgame.view.guideview.Guide;
 import com.mdove.levelgame.view.guideview.GuideBuilder;
@@ -72,6 +73,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         presenter.initBigMonster();
         presenter.initBigMonsterInvade();
         presenter.initGuide();
+        presenter.checkUpdate(AppUtils.getAPPVersionCodeFromAPP(this));
 
         binding.setHandler(new HomeActionHandler(presenter));
 

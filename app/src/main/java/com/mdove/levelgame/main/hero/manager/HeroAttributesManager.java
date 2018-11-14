@@ -280,6 +280,7 @@ public class HeroAttributesManager {
         long levelExp = getLevelExp(heroAttributes);
         if (heroAttributes.experience + exp >= levelExp) {
             heroAttributes.level += 1;
+            heroAttributes.skillCount++;
             heroAttributes.experience = (heroAttributes.experience + exp) - levelExp;
 
             heroAttributes.attack += heroAttributes.attackIncrease;

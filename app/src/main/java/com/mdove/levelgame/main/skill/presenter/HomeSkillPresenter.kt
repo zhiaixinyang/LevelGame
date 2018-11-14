@@ -42,6 +42,10 @@ class HomeSkillPresenter : HomeSkillContract.ISkillPresenter {
                             MyDialog.showMyDialog(view.context, view.getString(R.string.string_study_err_title)
                                     , String.format(view.getString(R.string.string_study_err_content), t.name), true)
                         }
+                        HeroSkillManager.CODE_STATUS_STUDY_ERROR_HAS_STUDY -> {
+                            MyDialog.showMyDialog(view.context, view.getString(R.string.string_study_err_title)
+                                    , String.format(view.getString(R.string.string_study_err_has_study_content), t.name), true)
+                        }
                     }
                 }, {
                 })

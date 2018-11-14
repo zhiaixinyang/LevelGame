@@ -30,7 +30,7 @@ class HeroSkillPresenter : HeroSkillContract.IHeroSkillPresenter {
         val position = data
                 .firstOrNull { it.type.get().equals(pk.type) }
                 ?.let {
-                    it.reName(true)
+                    it.reName(pk.isEquip == 0)
                     data.indexOf(it)
                 }
                 ?: -1

@@ -37,6 +37,7 @@ import com.mdove.levelgame.greendao.entity.MonstersPlace;
 import com.mdove.levelgame.greendao.entity.Skill;
 import com.mdove.levelgame.greendao.entity.Task;
 import com.mdove.levelgame.greendao.entity.Weapons;
+import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
 import com.mdove.levelgame.main.shop.model.ShopArmorModel;
@@ -84,6 +85,9 @@ public class InitDataFileUtils {
         heroAttributes.skillCount = 1;
         heroAttributes.days = 1;
         dao.insert(heroAttributes);
+
+        HeroManager.getInstance().resetAttr();
+
         AllGoodsDao allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();
         allGoodsDao.deleteAll();
         WeaponsDao weaponsDao = DatabaseManager.getInstance().getWeaponsDao();

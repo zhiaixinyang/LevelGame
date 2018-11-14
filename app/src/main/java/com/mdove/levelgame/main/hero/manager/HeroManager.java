@@ -29,6 +29,11 @@ public class HeroManager {
         return heroAttributes;
     }
 
+    public void resetAttr(){
+        heroAttributesDao = DatabaseManager.getInstance().getHeroAttributesDao();
+        heroAttributes = heroAttributesDao.queryBuilder().unique();
+    }
+
     public void save() {
         heroAttributesDao.update(heroAttributes);
     }

@@ -102,4 +102,6 @@ public class HeroAttributesActivity extends BaseActivity implements HeroAttribut
     public void showData(HeroAttributesModelVM vm) {
         binding.setVm(vm);
     }
+
+
 }

@@ -14,13 +14,10 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.databinding.ActivityHeroAttributesBinding;
-import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
-import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.HeroAttributesModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroAttributesContract;
 import com.mdove.levelgame.main.hero.presenter.HeroAttributesPresenter;
-import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
 import com.mdove.levelgame.utils.ToastHelper;
 
 /**
@@ -63,7 +60,7 @@ public class HeroAttributesActivity extends BaseActivity implements HeroAttribut
             binding.tvDays.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AppConfig.setFirstLogin(false);
+                    AppConfig.setHasLogin(false);
                 }
             });
         }
@@ -81,6 +78,7 @@ public class HeroAttributesActivity extends BaseActivity implements HeroAttribut
                     isStartClick = false;
                     clickCount = 0;
                     HeroAttributesManager.getInstance().resetPower();
+                    presenter.initData();
                     ToastHelper.shortToast(getString(R.string.string_faker_power));
                 }
             }

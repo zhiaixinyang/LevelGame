@@ -247,7 +247,7 @@
     "is_limit_count": 1,
     "is_businessman": 0,
     "consume_power": 0,
-    "sell_goods_json": "[{\"type\":\"A15\",\"price\":50}]",
+    "sell_goods_json": "[{\"type\":\"A15\",\"price\":50},{\"type\":\"A13\",\"price\":50}]",
     "exp": 0
   },
   {
@@ -370,7 +370,28 @@
     "is_businessman": 1,
     "consume_power": 30,
     "exp": 0
-  }
+  },
+    {
+      "id": 20,
+      "name": "<font color=\"#7B1FA2\">送铜矿大侠</font>",
+      "tips": "<font color=\"#7B1FA2\">奇遇怪物，只在特定时机出现一次。击杀后必定掉落一个：铜矿石！</font>",
+      "attack": 0,
+      "armor": 0,
+      "life": 666,
+      "money": 0,
+      "type": "C20",
+      "is_show": 1,
+      "monster_place_id": 6,
+      "attack_speed": 1500,
+      "drop_goods_id": 0,
+      "is_limit_count": 0,
+      "limit_count": 1,
+      "cur_count": 1,
+      "is_businessman": 1,
+      "consume_power": 0,
+      "drop_goods_id": 15,
+      "exp": 0
+    }
   //,
   //  {
   //     在Adventure中有奇遇

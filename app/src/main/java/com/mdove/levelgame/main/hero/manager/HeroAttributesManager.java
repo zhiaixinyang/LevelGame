@@ -87,7 +87,8 @@ public class HeroAttributesManager {
             heroAttributes.bodyPower = 100;
             heroAttributes.days += 1;
 
-            if (heroAttributes.days == 10 || heroAttributes.days == 30 || heroAttributes.days == 50) {
+            if (heroAttributes.days == 3 || heroAttributes.days == 5 || heroAttributes.days == 8
+                    || heroAttributes.days == 10 || heroAttributes.days == 13 || heroAttributes.days == 15) {
                 resetStatus = 2;
             }
 
@@ -589,10 +590,12 @@ public class HeroAttributesManager {
         content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_attack), heroAttributes.attack, heroAttributes.attackIncrease) + "<br/>";
         content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_armor), heroAttributes.armor, heroAttributes.armorIncrease) + "<br/>";
         content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_life), heroAttributes.curLife, heroAttributes.maxLife, heroAttributes.lifeIncrease) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_attack_speed), heroAttributes.attackSpeed) + "<br/>";
         content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_money), heroAttributes.money) + "<br/>";
         content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_level), heroAttributes.level) + "<br/>";
         content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_days), heroAttributes.days) + "<br/>";
         content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_need_exp), heroAttributes.experience, getLevelExp(heroAttributes)) + "<br/>";
+        content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_skill_count), heroAttributes.skillCount, heroAttributes.level) + "<br/>";
         content += String.format(App.getAppContext().getString(R.string.hero_attributes_msg_body_power), heroAttributes.bodyPower, 100);
         return content;
     }

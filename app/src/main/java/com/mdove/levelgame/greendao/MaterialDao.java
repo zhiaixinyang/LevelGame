@@ -29,6 +29,8 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property Tips = new Property(3, String.class, "tips", false, "TIPS");
         public final static Property Price = new Property(4, long.class, "price", false, "PRICE");
+        public final static Property IsCanMixture = new Property(5, int.class, "isCanMixture", false, "IS_CAN_MIXTURE");
+        public final static Property MixtureFormula = new Property(6, String.class, "mixtureFormula", false, "MIXTURE_FORMULA");
     }
 
 
@@ -48,7 +50,9 @@ public class MaterialDao extends AbstractDao<Material, Long> {
                 "\"TYPE\" TEXT," + // 1: type
                 "\"NAME\" TEXT," + // 2: name
                 "\"TIPS\" TEXT," + // 3: tips
-                "\"PRICE\" INTEGER NOT NULL );"); // 4: price
+                "\"PRICE\" INTEGER NOT NULL ," + // 4: price
+                "\"IS_CAN_MIXTURE\" INTEGER NOT NULL ," + // 5: isCanMixture
+                "\"MIXTURE_FORMULA\" TEXT);"); // 6: mixtureFormula
     }
 
     /** Drops the underlying database table. */
@@ -81,6 +85,12 @@ public class MaterialDao extends AbstractDao<Material, Long> {
             stmt.bindString(4, tips);
         }
         stmt.bindLong(5, entity.getPrice());
+        stmt.bindLong(6, entity.getIsCanMixture());
+ 
+        String mixtureFormula = entity.getMixtureFormula();
+        if (mixtureFormula != null) {
+            stmt.bindString(7, mixtureFormula);
+        }
     }
 
     @Override
@@ -107,6 +117,12 @@ public class MaterialDao extends AbstractDao<Material, Long> {
             stmt.bindString(4, tips);
         }
         stmt.bindLong(5, entity.getPrice());
+        stmt.bindLong(6, entity.getIsCanMixture());
+ 
+        String mixtureFormula = entity.getMixtureFormula();
+        if (mixtureFormula != null) {
+            stmt.bindString(7, mixtureFormula);
+        }
     }
 
     @Override
@@ -121,7 +137,9 @@ public class MaterialDao extends AbstractDao<Material, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // type
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // tips
-            cursor.getLong(offset + 4) // price
+            cursor.getLong(offset + 4), // price
+            cursor.getInt(offset + 5), // isCanMixture
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // mixtureFormula
         );
         return entity;
     }
@@ -133,6 +151,8 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setTips(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setPrice(cursor.getLong(offset + 4));
+        entity.setIsCanMixture(cursor.getInt(offset + 5));
+        entity.setMixtureFormula(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

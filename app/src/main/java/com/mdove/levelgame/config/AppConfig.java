@@ -20,18 +20,18 @@ public class AppConfig implements IAppConfig {
         return sPrefs;
     }
 
-    public static boolean isFirstLogin() {
+    public static boolean isHasLogin() {
         SharedPreferences preferences = initSharedPreferences();
-        return preferences.getBoolean(KEY_FIRST_LOGIN, false);
+        return preferences.getBoolean(KEY_HAS_LOGIN, false);
     }
 
-    public static void setFirstLogin() {
-        setFirstLogin(true);
+    public static void setHasLogin() {
+        setHasLogin(true);
     }
 
-    public static void setFirstLogin(boolean login) {
+    public static void setHasLogin(boolean login) {
         SharedPreferences.Editor editor = initSharedPreferences().edit();
-        editor.putBoolean(KEY_FIRST_LOGIN, login);
+        editor.putBoolean(KEY_HAS_LOGIN, login);
         editor.apply();
     }
 

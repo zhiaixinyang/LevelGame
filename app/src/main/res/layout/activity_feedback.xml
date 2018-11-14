@@ -22,7 +22,7 @@
             android:background="@drawable/bg_white_round"
             app:mvAnimDuration="500"
             app:mvDirection="top_to_bottom"
-            app:mvInterval="3000"
+            app:mvInterval="1500"
             />
         <ImageView
             android:layout_width="@dimen/_30dp"

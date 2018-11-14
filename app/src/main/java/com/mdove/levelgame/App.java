@@ -9,7 +9,6 @@ import com.mdove.levelgame.greendao.AdventureDao;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
-import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
 import com.mdove.levelgame.greendao.MainMenuDao;
@@ -20,12 +19,9 @@ import com.mdove.levelgame.greendao.MonstersPlaceDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
-import com.mdove.levelgame.greendao.entity.HeroAttributes;
-import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
-import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.net.ApiServer;
 import com.mdove.levelgame.net.RetrofitUtil;
 import com.mdove.levelgame.net.UrlConstants;
@@ -56,10 +52,10 @@ public class App extends Application {
 
 //        HeroManager.getInstance().getHeroAttributes().days = 9;
 //        HeroManager.getInstance().save();
-        if (!AppConfig.isFirstLogin()) {
+        if (!AppConfig.isHasLogin()) {
             // 初始化数据库
             InitDataFileUtils.initData();
-            AppConfig.setFirstLogin();
+            AppConfig.setHasLogin();
         }
         resetPkSelectStatus();
     }

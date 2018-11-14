@@ -8,6 +8,7 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
+import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
@@ -56,6 +57,8 @@ public class BlacksmithManager {
             return attackUpdate((Weapons) oj);
         } else if (oj != null && oj instanceof Armors) {
             return armorUpdate((Armors) oj);
+        } else if (oj != null && oj instanceof Material) {
+            return armorUpdate((Material) oj);
         } else {
             return armorUpdate((Accessories) oj);
         }
@@ -131,6 +134,61 @@ public class BlacksmithManager {
                         blacksmithResp.content = weapon.name + "合成成功。";
                     } else {
                         // 重置pk中材料的选择状态
+                        resetPkSelectStatus();
+                        blacksmithResp.isSuc = false;
+                        blacksmithResp.title = "合成失败";
+                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
+                    }
+                } else {
+                    blacksmithResp.isSuc = false;
+                    blacksmithResp.title = "未知错误";
+                    blacksmithResp.content = "获取升级材料异常：null。";
+                }
+            }
+        } else {
+            blacksmithResp.isSuc = false;
+            blacksmithResp.title = "未知错误";
+            blacksmithResp.content = "未找到对应升级的装备...";
+        }
+        return Observable.create(new ObservableOnSubscribe<BlacksmithResp>() {
+            @Override
+            public void subscribe(ObservableEmitter<BlacksmithResp> e) throws Exception {
+                e.onNext(blacksmithResp);
+            }
+        });
+    }
+
+    private Observable<BlacksmithResp> armorUpdate(Material material) {
+        final BlacksmithResp blacksmithResp = new BlacksmithResp();
+        if (material != null) {
+            if (material.isCanMixture == 0) {
+                // 可合成
+                // 判断材料是否完全
+                String formula = material.mixtureFormula;
+                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
+                }.getType());
+                if (need != null && need.size() > 0) {
+                    List<HasMaterial> hasMaterials = new ArrayList<>();
+                    for (NeedMaterial type : need) {
+                        hasMaterials.add(hasMaterial(type.type));
+                    }
+                    boolean isSuc = true;
+                    for (HasMaterial attack : hasMaterials) {
+                        if (!attack.isHas) {
+                            isSuc = false;
+                            break;
+                        }
+                    }
+                    // 合成成功
+                    if (isSuc) {
+                        // 删除低级材料（装备+石头，直接从Pk中）
+                        deleteMaterial(hasMaterials);
+                        // 生成新装备
+                        newPk(material);
+                        blacksmithResp.isSuc = true;
+                        blacksmithResp.title = "合成成功";
+                        blacksmithResp.content = material.name + "合成成功。";
+                    } else {
                         resetPkSelectStatus();
                         blacksmithResp.isSuc = false;
                         blacksmithResp.title = "合成失败";
@@ -351,6 +409,16 @@ public class BlacksmithManager {
             }
         }
     }
+
+    private void newPk(Material material) {
+        Packages packages = new Packages();
+        packages.isEquip = 1;
+        packages.isSelect = 1;
+        packages.strengthenLevel = 0;
+        packages.type = material.type;
+        DatabaseManager.getInstance().getPackagesDao().insert(packages);
+    }
+
 
     private void newPk(Weapons weapon) {
         Packages packages = new Packages();

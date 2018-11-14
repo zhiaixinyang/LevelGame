@@ -68,7 +68,11 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
                         data.add(new SellGoodsModelVM(temp.price, armors.name, armors.tips, armors.type, status));
                     } else if (oj instanceof Material) {
                         Material material = (Material) oj;
-                        data.add(new SellGoodsModelVM(temp.price, material.name, material.tips, material.type, 0));
+                        int status = 0;
+                        if (material.isCanMixture == 0) {
+                            status = 1;
+                        }
+                        data.add(new SellGoodsModelVM(temp.price, material.name, material.tips, material.type, status));
                     } else if (oj instanceof Accessories) {
                         Accessories accessories = (Accessories) oj;
                         int status = 0;
@@ -92,6 +96,7 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
     @Override
     public void onItemBtnClick(int status, String type, long price) {
         switch (status) {
+            // 3表示技能
             case 3:
             case 0: {
                 HeroBuyManager.getInstance().buy(type, price).subscribe(new Consumer<BaseBuy>() {

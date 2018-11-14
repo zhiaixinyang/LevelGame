@@ -5,7 +5,7 @@ package com.mdove.levelgame.config;
  */
 
 public interface IAppConfig {
-    String KEY_FIRST_LOGIN = "key_first_login";
+    String KEY_HAS_LOGIN = "key_first_login";
 
     String KEY_UPDATE_DB = "key_update_db";
     String KEY_IS_SHOW_GUIDE = "key_is_show_guide";

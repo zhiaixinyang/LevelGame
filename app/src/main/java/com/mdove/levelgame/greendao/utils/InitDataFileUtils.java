@@ -1,7 +1,5 @@
 package com.mdove.levelgame.greendao.utils;
 
-import android.databinding.DataBindingUtil;
-
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.config.AppConfig;
@@ -118,7 +116,7 @@ public class InitDataFileUtils {
             accessoriesDao.insert(accessorie);
         }
 
-        if (!AppConfig.isFirstLogin()) {
+        if (!AppConfig.isHasLogin()) {
             bigMonstersDao.deleteAll();
             monstersPlaceDao.deleteAll();
         }
@@ -203,7 +201,7 @@ public class InitDataFileUtils {
         for (Adventure adventure : adventures) {
             adventureDao.insert(adventure);
         }
-        if (!AppConfig.isFirstLogin()) {
+        if (!AppConfig.isHasLogin()) {
             List<BigMonsters> bigMonsters = getInitBigMonsters();
             for (BigMonsters b : bigMonsters) {
                 bigMonstersDao.insert(b);

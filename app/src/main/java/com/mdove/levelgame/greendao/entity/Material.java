@@ -19,13 +19,20 @@ public class Material {
     public String name;
     public String tips;
     public long price;
-    @Generated(hash = 1136677447)
-    public Material(Long id, String type, String name, String tips, long price) {
+    // 是否可以合成
+    public int isCanMixture;
+    // 合成公式 json
+    public String mixtureFormula;
+    @Generated(hash = 97262922)
+    public Material(Long id, String type, String name, String tips, long price,
+            int isCanMixture, String mixtureFormula) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.tips = tips;
         this.price = price;
+        this.isCanMixture = isCanMixture;
+        this.mixtureFormula = mixtureFormula;
     }
     @Generated(hash = 1176792654)
     public Material() {
@@ -60,5 +67,16 @@ public class Material {
     public void setPrice(long price) {
         this.price = price;
     }
-
+    public int getIsCanMixture() {
+        return this.isCanMixture;
+    }
+    public void setIsCanMixture(int isCanMixture) {
+        this.isCanMixture = isCanMixture;
+    }
+    public String getMixtureFormula() {
+        return this.mixtureFormula;
+    }
+    public void setMixtureFormula(String mixtureFormula) {
+        this.mixtureFormula = mixtureFormula;
+    }
 }

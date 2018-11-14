@@ -129,13 +129,13 @@
                 android:layout_margin="@dimen/main_btn_normal_margin"
                 android:background="@drawable/ic_bg_hero_attr"
                 android:gravity="center"
-                android:text="@{vm.level}"
+                android:text="@{vm.skillCount}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/main_btn_normal_text_size"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_level"
-                tools:text="等级"/>
+                tools:text="技能点"/>
             <TextView
                 android:id="@+id/tv_exp"
                 android:layout_width="match_parent"
@@ -143,13 +143,13 @@
                 android:layout_margin="@dimen/main_btn_normal_margin"
                 android:background="@drawable/ic_bg_hero_attr"
                 android:gravity="center"
-                android:text="@{vm.skillCount}"
+                android:text="@{vm.needExperience}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/main_btn_normal_text_size"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_skill_count"
-                tools:text="技能点"/>
+                tools:text="升级所需经验"/>
             <TextView
                 android:id="@+id/tv_body_power"
                 android:layout_width="match_parent"

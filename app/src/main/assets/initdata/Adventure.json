@@ -8,9 +8,9 @@
   },
   {
     "id": 2,
-    "monster_place_id": 7,
+    "monster_place_id": 6,
     "type": "C20",
-    "is_cycle": 0,
-    "days": 2
+    "is_cycle": 1,
+    "days": 3
   }
 ]

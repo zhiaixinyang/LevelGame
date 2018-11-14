@@ -20,7 +20,7 @@ public class ToastHelper {
     private static boolean DEBUG = BuildConfig.DEBUG;
     private static Toast mToast;
 
-    private static boolean CUSTOM_STYLE = true;
+    private static boolean CUSTOM_STYLE = false;
 
     public static void setCustomStyle(boolean enable) {
         CUSTOM_STYLE = enable;

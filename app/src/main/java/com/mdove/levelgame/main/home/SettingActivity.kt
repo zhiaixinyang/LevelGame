@@ -3,11 +3,7 @@ package com.mdove.levelgame.main.home
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.databinding.generated.callback.OnClickListener
-import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
 import android.widget.TextView
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.BaseActivity
@@ -15,13 +11,10 @@ import com.mdove.levelgame.base.RxTransformerHelper
 import com.mdove.levelgame.config.AppConfig
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils
 import com.mdove.levelgame.main.feedback.FeedBackActivity
-import com.mdove.levelgame.main.home.presenter.SettingContract
 import com.mdove.levelgame.utils.ToastHelper
 import com.mdove.levelgame.view.MyDialog
 import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
-import java.util.function.Consumer
 
 /**
  * Created by MDove on 2018/11/13.
@@ -60,9 +53,9 @@ class SettingActivity : BaseActivity() {
                     , "不点错了", "确定", false, {
                 showLoadingDialog(getString(R.string.string_re_start_loading))
                 Observable.create(ObservableOnSubscribe<Int> { e ->
-                    AppConfig.setFirstLogin(false)
+                    AppConfig.setHasLogin(false)
                     InitDataFileUtils.initData()
-                    AppConfig.setFirstLogin()
+                    AppConfig.setHasLogin()
                     e.onNext(0)
                 }).compose(RxTransformerHelper.schedulerTransf()).subscribe {
                     dismissLoadingDialog()

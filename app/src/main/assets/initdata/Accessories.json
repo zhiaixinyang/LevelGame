@@ -5,7 +5,7 @@
     "tips": "<font color=\"#D32F2F\">神器</font>之一。<br/>传说中上古之神用于封印魔王所铸神器。魔王封印之后，神器便失去踪迹...<br/>合成公式：真·战神印 + 玄武甲",
     "attack": 400,
     "armor": 550,
-    "life": 300,
+    "life": 800,
     "price": 2,
     "type": "G1",
     "is_can_strengthen": 0,

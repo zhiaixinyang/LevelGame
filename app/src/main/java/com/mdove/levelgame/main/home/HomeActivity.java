@@ -13,7 +13,10 @@ import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mdove.levelgame.BuildConfig;
 import com.mdove.levelgame.R;
@@ -30,6 +33,7 @@ import com.mdove.levelgame.main.home.presenter.HomeContract;
 import com.mdove.levelgame.main.home.presenter.HomePresenter;
 import com.mdove.levelgame.utils.AppUtils;
 import com.mdove.levelgame.utils.DensityUtil;
+import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.guideview.Guide;
 import com.mdove.levelgame.view.guideview.GuideBuilder;
 import com.mdove.levelgame.view.guideview.component.CommonComponent;
@@ -44,6 +48,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     private HomeAdapter adapter;
     private ActivityHomeBinding binding;
     private boolean isAniming = false;
+    private long clickTime = 0;
 
     public static void start(Context context) {
         Intent start = new Intent(context, HomeActivity.class);
@@ -111,10 +116,21 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
                 .setDuration(300)
                 .setListener(listener)
                 .start();
+
+        ViewCompat.animate(binding.bgLayout)
+                .translationY(binding.layoutBigMonsters.getHeight())
+                .setDuration(300)
+                .setListener(listener)
+                .start();
     }
 
     private void hideView() {
         ViewCompat.animate(binding.layoutBigMonsters)
+                .translationY(0)
+                .setDuration(300)
+                .setListener(listener)
+                .start();
+        ViewCompat.animate(binding.bgLayout)
                 .translationY(0)
                 .setDuration(300)
                 .setListener(listener)
@@ -165,7 +181,26 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
             public void run() {
                 optionGuide.show(HomeActivity.this);
             }
-        },100);
+        }, 100);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exit() {
+        if ((System.currentTimeMillis() - clickTime) > 1000) {
+            ToastHelper.shortToast(getString(R.string.string_exit_game));
+            clickTime = System.currentTimeMillis();
+        } else {
+            this.finish();
+        }
+
     }
 
     private ViewPropertyAnimatorListener listener = new ViewPropertyAnimatorListener() {

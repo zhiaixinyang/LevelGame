@@ -55,6 +55,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         if (!(context instanceof Activity)) {
             start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         }
+        start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(start);
     }
 

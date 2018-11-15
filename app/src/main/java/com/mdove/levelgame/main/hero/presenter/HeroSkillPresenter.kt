@@ -5,6 +5,7 @@ import com.mdove.levelgame.greendao.SkillDao
 import com.mdove.levelgame.greendao.entity.Packages
 import com.mdove.levelgame.greendao.entity.Skill
 import com.mdove.levelgame.greendao.utils.DatabaseManager
+import com.mdove.levelgame.main.hero.model.HeroAttributesWrapper
 import com.mdove.levelgame.main.hero.model.HeroSkillModelVM
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils
 
@@ -24,6 +25,7 @@ class HeroSkillPresenter : HeroSkillContract.IHeroSkillPresenter {
     }
 
     override fun onClickEquip(vm: HeroSkillModelVM) {
+        HeroAttributesWrapper.getInstance().resetSkill()
         var pk = DatabaseManager.getInstance().packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(vm.type.get())).unique()
         pk.isEquip = if (pk.isEquip == 0) 1 else 0
         DatabaseManager.getInstance().packagesDao.update(pk)

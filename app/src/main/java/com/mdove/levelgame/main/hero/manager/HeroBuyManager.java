@@ -119,7 +119,6 @@ public class HeroBuyManager {
                 resp.name = medicine.name;
                 DatabaseManager.getInstance().getMedicinesDao().update(medicine);
                 save();
-
             }
         }
         return resp;

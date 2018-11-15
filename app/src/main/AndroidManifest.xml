@@ -15,7 +15,7 @@
         <!--<activity android:name=".TestActivity"-->
         <activity
             android:name=".main.home.HomeActivity"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

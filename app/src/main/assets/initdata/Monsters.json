@@ -247,7 +247,7 @@
     "is_limit_count": 1,
     "is_businessman": 0,
     "consume_power": 0,
-    "sell_goods_json": "[{\"type\":\"A15\",\"price\":50},{\"type\":\"A13\",\"price\":50}]",
+    "sell_goods_json": "[{\"type\":\"A15\",\"price\":50},{\"type\":\"E5\",\"price\":50}]",
     "exp": 0
   },
   {

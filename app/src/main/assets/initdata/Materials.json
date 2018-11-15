@@ -4,6 +4,7 @@
     "name": "铁矿石",
     "tips": "用于升级 [可升级] 的装备。",
     "price": 2,
+    "is_can_mixture": 1,
     "type": "E1"
   },
   {

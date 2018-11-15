@@ -43,8 +43,13 @@ public class HeroAttributesWrapper {
 
     // 获取最新的Attributes值
     private HeroAttributes resetAttributes() {
-        equipSkill = new ArrayList<>();
         HeroAttributes heroAttributes = HeroManager.getInstance().getHeroAttributes();
+        resetAttributes(heroAttributes);
+        return heroAttributes;
+    }
+
+    public void resetSkill() {
+        equipSkill = new ArrayList<>();
         List<Packages> packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.IsEquip.eq(0)).list();
         if (packages != null) {
             for (Packages pk : packages) {
@@ -57,8 +62,6 @@ public class HeroAttributesWrapper {
                 }
             }
         }
-        resetAttributes(heroAttributes);
-        return heroAttributes;
     }
 
     private void resetAttributes(HeroAttributes heroAttributes) {

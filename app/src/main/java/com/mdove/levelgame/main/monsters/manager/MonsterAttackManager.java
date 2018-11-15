@@ -47,14 +47,15 @@ public class MonsterAttackManager {
                     throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE,
                             AttackMonsterException.ERROR_TITLE_HERO_IS_NO_LIFE, AttackMonsterException.ERROR_MSG_HERO_IS_NO_LIFE);
                 }
-                if (!HeroAttributesManager.getInstance().computePowerIsHas(monsters.consumePower)) {
-                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_POWER,
-                            AttackMonsterException.ERROR_TITLE_HERO_NO_POWER, AttackMonsterException.ERROR_MSG_HERO_NO_POWER);
-                }
                 if (!HeroAttributesManager.getInstance().computeLimitCount(monsters)) {
                     throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_COUNT,
                             AttackMonsterException.ERROR_TITLE_HERO_NO_COUNT, AttackMonsterException.ERROR_MSG_HERO_NO_COUNT);
                 }
+                if (!HeroAttributesManager.getInstance().computePowerIsHas(monsters.consumePower)) {
+                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_POWER,
+                            AttackMonsterException.ERROR_TITLE_HERO_NO_POWER, AttackMonsterException.ERROR_MSG_HERO_NO_POWER);
+                }
+
                 if (HeroAttributesManager.getInstance().isQuickAttack(monsters, HeroAttributesWrapper.getInstance())) {
                     // 掉落装备逻辑
                     String content = AttackMonsterException.ERROR_MSG_HERO_IS_QUICK_ATTACK;

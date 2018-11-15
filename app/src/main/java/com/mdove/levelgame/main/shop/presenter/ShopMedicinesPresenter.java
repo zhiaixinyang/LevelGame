@@ -94,6 +94,11 @@ public class ShopMedicinesPresenter implements ShopMedicinesContract.IShopMedici
                         break;
                 }
             }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+
+            }
         });
     }
 

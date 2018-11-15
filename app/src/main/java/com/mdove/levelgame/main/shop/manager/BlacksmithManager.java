@@ -439,6 +439,7 @@ public class BlacksmithManager {
     private void newPk(Armors armors) {
         Packages packages = new Packages();
         packages.isEquip = 1;
+        packages.isSelect = 1;
         packages.strengthenLevel = 0;
         packages.type = armors.type;
         DatabaseManager.getInstance().getPackagesDao().insert(packages);
@@ -447,6 +448,7 @@ public class BlacksmithManager {
     private void newPk(Accessories accessories) {
         Packages packages = new Packages();
         packages.isEquip = 1;
+        packages.isSelect = 1;
         packages.strengthenLevel = 0;
         packages.type = accessories.type;
         DatabaseManager.getInstance().getPackagesDao().insert(packages);

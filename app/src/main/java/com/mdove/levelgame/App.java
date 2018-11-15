@@ -48,7 +48,7 @@ public class App extends Application {
                 AdventureDao.class, MainMenuDao.class, SkillDao.class, AccessoriesDao.class);
 
         CrashReport.setIsDevelopmentDevice(mAppContext, true);
-        CrashReport.initCrashReport(getApplicationContext(), "544aec74cc", false);
+        CrashReport.initCrashReport(getApplicationContext(), "b2c7f14477", true);
 
 //        HeroManager.getInstance().getHeroAttributes().days = 9;
 //        HeroManager.getInstance().save();

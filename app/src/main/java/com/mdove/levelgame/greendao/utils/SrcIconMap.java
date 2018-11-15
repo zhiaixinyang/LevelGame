@@ -47,6 +47,7 @@ public class SrcIconMap {
         map.put("A16", R.mipmap.a16);
         map.put("A17", R.mipmap.a17);
         map.put("A18", R.mipmap.a15);
+        map.put("A19", R.mipmap.a19);
         map.put("B1", R.mipmap.b1);
         map.put("B2", R.mipmap.b2);
         map.put("B3", R.mipmap.b3);
@@ -55,8 +56,9 @@ public class SrcIconMap {
         map.put("B6", R.mipmap.b6);
         map.put("B7", R.mipmap.b7);
         map.put("B8", R.mipmap.b8);
-        map.put("B9", R.mipmap.b8);
+        map.put("B9", R.mipmap.b9);
         map.put("B10", R.mipmap.b4);
+        map.put("B11", R.mipmap.b9);
         map.put("D1", R.mipmap.d1);
         map.put("D2", R.mipmap.d2);
         map.put("D3", R.mipmap.d3);
@@ -76,9 +78,11 @@ public class SrcIconMap {
         map.put("E11", R.mipmap.e10);
         map.put("E12", R.mipmap.e10);
         map.put("E13", R.mipmap.e13);
+        map.put("E14", R.mipmap.e14);
         map.put("G1", R.mipmap.g1);
         map.put("G2", R.mipmap.g2);
         map.put("G3", R.mipmap.g3);
+        map.put("G4", R.mipmap.g4);
         map.put("main1", R.mipmap.main_1);
         map.put("main2", R.mipmap.main_2);
         map.put("main3", R.mipmap.main_3);
@@ -95,6 +99,7 @@ public class SrcIconMap {
         map.put("J1", R.mipmap.j1);
         map.put("J2", R.mipmap.j2);
         map.put("J3", R.mipmap.j3);
+        map.put("J4", R.mipmap.j4);
     }
 
     public int getSrc(String type) {

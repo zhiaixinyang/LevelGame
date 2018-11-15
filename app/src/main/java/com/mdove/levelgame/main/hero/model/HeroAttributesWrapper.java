@@ -39,6 +39,7 @@ public class HeroAttributesWrapper {
     private HeroAttributesWrapper() {
         innerSkillModel = new InnerSkillModel();
         resetAttributes();
+        resetSkill();
     }
 
     // 获取最新的Attributes值
@@ -62,6 +63,7 @@ public class HeroAttributesWrapper {
                 }
             }
         }
+        computeSkills();
     }
 
     private void resetAttributes(HeroAttributes heroAttributes) {
@@ -71,7 +73,6 @@ public class HeroAttributesWrapper {
         curLife = heroAttributes.curLife;
         maxLife = heroAttributes.maxLife;
         attackSpeed = heroAttributes.attackSpeed;
-        computeSkills();
     }
 
     // 为以后增加技能/特殊属性做准备
@@ -103,6 +104,15 @@ public class HeroAttributesWrapper {
         HeroManager.getInstance().save();
         curLife = heroAttributes.curLife;
         return harm;
+    }
+
+    public void setHeroBloodSuck(int suck) {
+        HeroAttributes heroAttributes = resetAttributes();
+        heroAttributes.curLife += suck;
+        if (heroAttributes.curLife > heroAttributes.maxLife) {
+            heroAttributes.curLife = heroAttributes.maxLife;
+        }
+        HeroManager.getInstance().save();
     }
 
     // 为以后增加技能/特殊属性做准备

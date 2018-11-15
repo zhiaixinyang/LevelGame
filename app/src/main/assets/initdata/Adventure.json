@@ -12,5 +12,12 @@
     "type": "C20",
     "is_cycle": 1,
     "days": 3
+  },
+  {
+    "id": 3,
+    "monster_place_id": 4,
+    "type": "C22",
+    "is_cycle": 0,
+    "days": 5
   }
 ]

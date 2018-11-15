@@ -33,14 +33,13 @@
                 android:id="@+id/layout_my"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
                 android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/bg_white_round"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                >
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -99,9 +98,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
-                    android:text="@{myVm.harm}"
                     android:textColor="@color/red_700"
                     android:textSize="24sp"
+                    app:htmlColorText="@{myVm.harm}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -123,14 +122,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_life"
                     app:myCtrlProgress="@{myVm}" />
             </android.support.constraint.ConstraintLayout>
+
             <ImageView
                 android:layout_width="@dimen/dialog_fight_ic_hero_w_h"
                 android:layout_height="@dimen/dialog_fight_ic_hero_w_h"
-                android:src="@mipmap/ic_fight_hero"
                 android:layout_marginRight="20dp"
+                android:src="@mipmap/ic_fight_hero"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:layout_width="@dimen/dialog_fight_ic_monster_w_h"
                 android:layout_height="@dimen/dialog_fight_ic_monster_w_h"
@@ -217,6 +217,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_enemy_life" />
+
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -228,19 +229,18 @@
                     <ImageView
                         android:id="@+id/anim"
                         android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        />
+                        android:layout_height="60dp" />
 
                     <TextView
                         android:id="@+id/tv_harm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="5dp"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="@{enemyVm.harm}"
+                        android:padding="10dp"
                         android:textColor="@color/red_700"
                         android:textSize="20sp"
+                        app:htmlColorText="@{enemyVm.harm}"
                         tools:text="-99" />
                 </FrameLayout>
             </android.support.constraint.ConstraintLayout>

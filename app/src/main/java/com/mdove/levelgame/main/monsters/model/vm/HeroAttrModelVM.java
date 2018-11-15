@@ -57,7 +57,10 @@ public class HeroAttrModelVM {
     }
 
     public void resetLife(int consume) {
-        curLife -= consume;
+        curLife += consume;
+        if (curLife > lifeInit) {
+            curLife = lifeInit;
+        }
         resetLifeProgress(curLife);
         life.set(String.format(App.getAppContext().getString(R.string.hero_msg_has_life), curLife, lifeInit));
     }

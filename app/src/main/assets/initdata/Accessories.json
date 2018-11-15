@@ -45,5 +45,21 @@
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"G2\"},{\"type\":\"E2\"},{\"type\":\"E8\"}]",
     "is_can_mixture": 0
+  },
+  {
+    "id": 4,
+    "name": "<font color=\"#D32F2F\">真·东皇钟</font>",
+    "tips": "<font color=\"#D32F2F\">神器</font>之一。<br/>传说中上古之神用于封印魔王所铸神器。魔王封印之后，神器便失去踪迹...<br/>合成公式：<font color=\"#D32F2F\">东皇钟</font> + 玄武甲 + 青龙爪",
+    "attack": 400,
+    "armor": 550,
+    "life": 800,
+    "price": 2,
+    "type": "G4",
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "is_can_update": 1,
+    "is_special": 0,
+    "is_can_mixture": 0,
+    "mixture_formula": "[{\"type\":\"G3\"},{\"type\":\"E7\"},{\"type\":\"E14\"}]"
   }
 ]

@@ -163,5 +163,22 @@
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "mixture_formula": "[{\"type\":\"B1\"},{\"type\":\"B2\"},{\"type\":\"E2\"}]",
     "is_can_mixture": 0
+  },
+  {
+    "id": 11,
+    "name": "<font color=\"#D32F2F\">真·轩辕甲</font>",
+    "tips": "轩辕氏常披挂此甲在战场上拼杀。<br/>合成公式：轩辕之灵 + <font color=\"#D32F2F\">轩辕甲</font> + <font color=\"#FBC02D\">鬼神甲</font>",
+    "attack": 700,
+    "armor": 1250,
+    "price": 2,
+    "type": "B11",
+    "belong_monster_id": "1002,",
+    "strengthen": 0,
+    "is_can_update": 1,
+    "is_special": 0,
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.6},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.4}]",
+    "mixture_formula": "[{\"type\":\"B8\"},{\"type\":\"B9\"},{\"type\":\"E10\"}]",
+    "is_can_mixture": 0
   }
 ]

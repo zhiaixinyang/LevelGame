@@ -24,6 +24,7 @@ import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
+import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
@@ -96,19 +97,24 @@ public class FightingDialog extends AppCompatDialog {
     }
 
     private void computeAttack(final Monsters monster) {
-        MonsterAttackManager.getInstance().attackEnemy(monster).subscribe(new Observer<Integer>() {
+        MonsterAttackManager.getInstance().attackEnemy(monster).subscribe(new Observer<MonsterWrapper.HarmResp>() {
             @Override
             public void onSubscribe(Disposable d) {
                 heroDisposable = d;
             }
 
             @Override
-            public void onNext(Integer integer) {
-                enVm.resetLife(integer);
-                if (integer == 0) {
+            public void onNext(MonsterWrapper.HarmResp resp) {
+                if (resp.harm == 0) {
                     enVm.harm.set(context.getString(R.string.string_attack_no_harm));
                 } else {
-                    enVm.harm.set(-integer + "");
+                    enVm.resetLife(-resp.harm);
+                    String harmStr = String.format(context.getString(R.string.string_hero_attack_harm), resp.harm);
+                    if (resp.heroSuck > 0) {
+                        myVm.resetLife(resp.heroSuck);
+                        harmStr = String.format(context.getString(R.string.string_hero_attack_harm_with_suck), resp.harm, resp.heroSuck);
+                    }
+                    enVm.harm.set(harmStr);
                     AnimatorSet set = new AnimatorSet();
                     set.playTogether(ObjectAnimator.ofFloat(binding.tvHarm, "scaleX", 1F, 2F, 1F),
                             ObjectAnimator.ofFloat(binding.tvHarm, "scaleY", 1F, 2F, 1F));
@@ -165,10 +171,10 @@ public class FightingDialog extends AppCompatDialog {
 
             @Override
             public void onNext(Integer integer) {
-                myVm.resetLife(integer);
                 if (integer == 0) {
                     myVm.harm.set(context.getString(R.string.string_attack_no_harm));
                 } else {
+                    myVm.resetLife(-integer);
                     myVm.harm.set(-integer + "");
                 }
             }

@@ -70,7 +70,7 @@ public class MonsterAttackManager {
                     if (!TextUtils.isEmpty(dropGood)) {
                         content += String.format(App.getAppContext().getString(R.string.string_attack_win_is_drop_new),
                                 monsters.money, monsters.exp, dropGood);
-                    }else{
+                    } else {
                         content += String.format(App.getAppContext().getString(R.string.string_attack_win_new),
                                 monsters.money, monsters.exp);
                     }
@@ -86,14 +86,14 @@ public class MonsterAttackManager {
         });
     }
 
-    public Observable<Integer> attackEnemy(final Monsters monsters) {
+    public Observable<MonsterWrapper.HarmResp> attackEnemy(final Monsters monsters) {
         final MonsterWrapper wrapper = new MonsterWrapper(monsters);
         return Observable.interval(heroAttributes.attackSpeed, TimeUnit.MILLISECONDS)
-                .map(new Function<Long, Integer>() {
+                .map(new Function<Long, MonsterWrapper.HarmResp>() {
                     @Override
-                    public Integer apply(Long aLong) throws Exception {
-                        int enemyConsumeLife = wrapper.computeHarmLife();
-                        if (wrapper.realCurLife() <= 0) {
+                    public MonsterWrapper.HarmResp apply(Long aLong) throws Exception {
+                        MonsterWrapper.HarmResp resp = wrapper.computeHarmLife();
+                        if (resp.isDead) {
                             HeroAttributesWrapper.getInstance().awardMonster(monsters);
                             // 掉落装备
                             List<String> dropGoods = HeroAttributesManager.getInstance().dropGoods(monsters.dropGoodsId);
@@ -114,9 +114,9 @@ public class MonsterAttackManager {
                                         AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_new), monsters.money, monsters.exp));
                             }
                         }
-                        return enemyConsumeLife;
+                        return resp;
                     }
-                }).compose(RxTransformerHelper.<Integer>schedulerTransf());
+                }).compose(RxTransformerHelper.<MonsterWrapper.HarmResp>schedulerTransf());
     }
 
     public Observable<Integer> attackHero(final Monsters monsters) {

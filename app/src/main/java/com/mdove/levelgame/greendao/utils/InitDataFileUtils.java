@@ -51,17 +51,7 @@ import java.util.List;
  */
 
 public class InitDataFileUtils {
-    private static List<ShopArmorModel> shopArmorModels;
-    private static List<Weapons> weapons;
-    private static List<Skill> skills;
-    private static List<Armors> armors;
-    private static List<ShopAttackModel> shopAttackModels;
-    private static List<MonstersModel> monstersModels;
-    private static List<Monsters> monsters;
-    private static List<Medicines> medicines;
     private static List<MonstersPlaceModel> monstersPlaceModels;
-    private static List<MonstersPlace> monstersPlaces;
-    private static List<Adventure> adventures;
 
     public static void initData() {
         HeroAttributesDao dao = DatabaseManager.getInstance().getHeroAttributesDao();
@@ -113,11 +103,6 @@ public class InitDataFileUtils {
         SkillDao skillDao = DatabaseManager.getInstance().getSkillDao();
         skillDao.deleteAll();
 
-        List<Accessories> accessories = getInitAccessories();
-        for (Accessories accessorie : accessories) {
-            accessoriesDao.insert(accessorie);
-        }
-
         if (!AppConfig.isHasLogin()) {
             bigMonstersDao.deleteAll();
             monstersPlaceDao.deleteAll();
@@ -143,16 +128,7 @@ public class InitDataFileUtils {
             mainMenuDao.insert(mainMenu);
         }
 
-        shopArmorModels = getShopArmors();
-        for (ShopArmorModel model : shopArmorModels) {
-            AllGoods goods = new AllGoods();
-            goods.type = model.type;
-            goods.goodsId = model.id;
-            allGoodsDao.insert(goods);
-        }
-
-        weapons = getInitWeapons();
-        for (Weapons model : weapons) {
+        for (Weapons model : getInitWeapons()) {
             AllGoods goods = new AllGoods();
             goods.type = model.type;
             goods.goodsId = model.id;
@@ -160,8 +136,31 @@ public class InitDataFileUtils {
             weaponsDao.insert(model);
         }
 
-        armors = getInitArmors();
-        for (Armors model : armors) {
+        for (Accessories accessorie : getInitAccessories()) {
+            AllGoods goods = new AllGoods();
+            goods.type = accessorie.type;
+            goods.goodsId = accessorie.id;
+            allGoodsDao.insert(goods);
+            accessoriesDao.insert(accessorie);
+        }
+
+        for (Material material : getInitMaterials()) {
+            AllGoods goods = new AllGoods();
+            goods.type = material.type;
+            goods.goodsId = material.id;
+            allGoodsDao.insert(goods);
+            materialDao.insert(material);
+        }
+
+        for (Skill skill : getInitSkill()) {
+            AllGoods goods = new AllGoods();
+            goods.type = skill.type;
+            goods.goodsId = skill.id;
+            allGoodsDao.insert(goods);
+            skillDao.insert(skill);
+        }
+
+        for (Armors model : getInitArmors()) {
             AllGoods goods = new AllGoods();
             goods.type = model.type;
             goods.goodsId = model.id;
@@ -169,21 +168,11 @@ public class InitDataFileUtils {
             armorsDao.insert(model);
         }
 
-        shopAttackModels = getShopWeapons();
-        for (ShopAttackModel model : shopAttackModels) {
-            AllGoods goods = new AllGoods();
-            goods.type = model.type;
-            goods.goodsId = model.id;
-            allGoodsDao.insert(goods);
-        }
-
-        monsters = getInitMonstersBase();
-        for (Monsters monsters : monsters) {
+        for (Monsters monsters : getInitMonsters()) {
             monstersDao.insert(monsters);
         }
 
-        medicines = getInitMedicines();
-        for (Medicines medicine : medicines) {
+        for (Medicines medicine : getInitMedicines()) {
             medicinesDao.insert(medicine);
         }
 
@@ -191,25 +180,14 @@ public class InitDataFileUtils {
             monstersPlaceModels = getInitMonstersPlace();
         }
 
-        skills = getInitSkill();
-        for (Skill skill : skills) {
-            skillDao.insert(skill);
-        }
-
-        for (Material material : getInitMaterials()) {
-            materialDao.insert(material);
-        }
-        List<Adventure> adventures = getInitAdventure();
-        for (Adventure adventure : adventures) {
+        for (Adventure adventure : getInitAdventure()) {
             adventureDao.insert(adventure);
         }
         if (!AppConfig.isHasLogin()) {
-            List<BigMonsters> bigMonsters = getInitBigMonsters();
-            for (BigMonsters b : bigMonsters) {
+            for (BigMonsters b : getInitBigMonsters()) {
                 bigMonstersDao.insert(b);
             }
-            monstersPlaces = getInitMonstersPlaceBase();
-            for (MonstersPlace monstersPlace : monstersPlaces) {
+            for (MonstersPlace monstersPlace : getInitMonstersPlaceBase()) {
                 monstersPlaceDao.insert(monstersPlace);
             }
         }
@@ -222,17 +200,7 @@ public class InitDataFileUtils {
             return JsonUtil.decode(json, new TypeToken<List<Armors>>() {
             }.getType());
         }
-        return armors;
-    }
-
-    public static List<ShopArmorModel> getShopArmors() {
-        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
-                ConstAssetsFileName.ASSETS_ARMORS);
-        if (json != null) {
-            return JsonUtil.decode(json, new TypeToken<List<ShopArmorModel>>() {
-            }.getType());
-        }
-        return shopArmorModels;
+        return null;
     }
 
     public static List<Weapons> getInitWeapons() {
@@ -242,7 +210,7 @@ public class InitDataFileUtils {
             return JsonUtil.decode(json, new TypeToken<List<Weapons>>() {
             }.getType());
         }
-        return weapons;
+        return null;
     }
 
     public static List<Skill> getInitSkill() {
@@ -252,37 +220,17 @@ public class InitDataFileUtils {
             return JsonUtil.decode(json, new TypeToken<List<Skill>>() {
             }.getType());
         }
-        return skills;
+        return null;
     }
 
-    public static List<ShopAttackModel> getShopWeapons() {
-        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
-                ConstAssetsFileName.ASSETS_WEAPONS);
-        if (json != null) {
-            return JsonUtil.decode(json, new TypeToken<List<ShopAttackModel>>() {
-            }.getType());
-        }
-        return shopAttackModels;
-    }
-
-    public static List<MonstersModel> getInitMonsters() {
-        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
-                ConstAssetsFileName.ASSETS_MONSTERS);
-        if (json != null) {
-            return JsonUtil.decode(json, new TypeToken<List<MonstersModel>>() {
-            }.getType());
-        }
-        return monstersModels;
-    }
-
-    public static List<Monsters> getInitMonstersBase() {
+    public static List<Monsters> getInitMonsters() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_MONSTERS);
         if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<Monsters>>() {
             }.getType());
         }
-        return monsters;
+        return null;
     }
 
     public static List<MonstersPlaceModel> getInitMonstersPlace() {
@@ -362,7 +310,7 @@ public class InitDataFileUtils {
             return JsonUtil.decode(json, new TypeToken<List<MonstersPlace>>() {
             }.getType());
         }
-        return monstersPlaces;
+        return null;
     }
 
     public static List<Medicines> getInitMedicines() {
@@ -372,7 +320,7 @@ public class InitDataFileUtils {
             return JsonUtil.decode(json, new TypeToken<List<Medicines>>() {
             }.getType());
         }
-        return medicines;
+        return null;
     }
 
     public static List<Material> getInitMaterials() {

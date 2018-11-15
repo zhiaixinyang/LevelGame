@@ -16,6 +16,7 @@ import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
+import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 import com.mdove.levelgame.main.monsters.model.vm.BigFightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.HeroAttrModelVM;
@@ -75,19 +76,19 @@ public class BigFightingDialog extends AppCompatDialog {
     }
 
     private void computeAttack(final Monsters monster) {
-        MonsterAttackManager.getInstance().attackEnemy(monster).subscribe(new Observer<Integer>() {
+        MonsterAttackManager.getInstance().attackEnemy(monster).subscribe(new Observer<MonsterWrapper.HarmResp>() {
             @Override
             public void onSubscribe(Disposable d) {
                 heroDisposable = d;
             }
 
             @Override
-            public void onNext(Integer integer) {
-                enVm.resetLife(integer);
-                if (integer == 0) {
+            public void onNext(MonsterWrapper.HarmResp resp) {
+                if (resp.harm == 0) {
                     enVm.harm.set(context.getString(R.string.string_attack_no_harm));
                 } else {
-                    enVm.harm.set(-integer + "");
+                    enVm.resetLife(resp.harm);
+                    enVm.harm.set(-resp.harm + "");
                 }
             }
 

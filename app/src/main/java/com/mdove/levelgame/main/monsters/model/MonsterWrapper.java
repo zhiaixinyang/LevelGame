@@ -1,6 +1,5 @@
 package com.mdove.levelgame.main.monsters.model;
 
-import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.main.hero.model.HeroAttributesWrapper;
 
@@ -37,14 +36,21 @@ public class MonsterWrapper {
         return realAttack;
     }
 
-    public int computeHarmLife() {
+    public HarmResp computeHarmLife() {
         int harm;
-        harm = computeHarmLife(wrapper.realAttack());
-        return harm;
+        HarmResp resp = new HarmResp();
+        harm = computeHarmLife(wrapper.realAttack(), resp);
+        resp.harm = harm;
+        // 吸血计算
+        if (wrapper.getInnerSkillModel().bloodSuckProbability > 0) {
+            resp.heroSuck = (int) (harm * wrapper.getInnerSkillModel().bloodSuckProbability);
+            wrapper.setHeroBloodSuck(resp.heroSuck);
+        }
+        return resp;
     }
 
     // 计算伤害并更新数据库
-    public int computeHarmLife(int heroAttack) {
+    public int computeHarmLife(int heroAttack, HarmResp resp) {
         int harm = heroAttack - realArmor();
         if (harm < 0) {
             harm = 0;
@@ -53,6 +59,7 @@ public class MonsterWrapper {
         // 此时代表怪物已死
         if (curLife <= 0) {
             curLife = 0;
+            resp.isDead = true;
         }
         return harm;
     }
@@ -67,5 +74,13 @@ public class MonsterWrapper {
         int realArmor;
         realArmor = (int) ((1 - wrapper.getInnerSkillModel().ignoreArmorProbability) * armor);
         return realArmor;
+    }
+
+    public class HarmResp {
+        public int harm;
+        // 英雄吸血
+        public int heroSuck = 0;
+        // 是否死亡
+        public boolean isDead = false;
     }
 }

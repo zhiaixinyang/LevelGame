@@ -80,7 +80,7 @@ public class FightMonstersVM {
     }
 
     public void resetLife(int consume) {
-        curLife -= consume;
+        curLife += consume;
         resetLifeProgress(curLife);
         life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_life), curLife, lifeInit));
     }

@@ -217,7 +217,7 @@
     "id": 15,
     "name": "<font color=\"#D32F2F\">龙渊剑</font>",
     "tips": "<font color=\"#D32F2F\">神器</font>之一。相传欧冶子和干将铸此剑。剑成之后，俯视剑身，如同登高山而下望深渊，飘渺而深邃仿佛有巨龙盘卧。是名龙渊。<br/>合成公式：干将·莫邪<br/><font color=\"#D32F2F\">[特性]</font>：降低500攻击间隔。",
-    "attack": 500,
+    "attack": 600,
     "armor": 100,
     "attack_speed": 500,
     "price": 2,
@@ -277,6 +277,23 @@
     "belong_monster_id": "1002,",
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"A14\"},{\"type\":\"A9\"},{\"type\":\"E12\"}]",
+    "is_can_mixture": 0
+  },
+  {
+    "id": 19,
+    "name": "<font color=\"#D32F2F\">真·龙渊剑</font>",
+    "tips": "<font color=\"#D32F2F\">神器</font>之一。相传欧冶子和干将铸此剑。剑成之后，俯视剑身，如同登高山而下望深渊，飘渺而深邃仿佛有巨龙盘卧。是名龙渊。<br/>合成公式：蚩尤之灵 + <font color=\"#D32F2F\">龙渊剑</font> + <font color=\"#43A047\">修罗斧</font><br/><font color=\"#D32F2F\">[特性]</font>：降低750攻击间隔。",
+    "attack": 1000,
+    "armor": 200,
+    "attack_speed": 750,
+    "price": 2,
+    "type": "A19",
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "is_can_update": 1,
+    "belong_monster_id": "1002,",
+    "is_special": 0,
+    "mixture_formula": "[{\"type\":\"A18\"},{\"type\":\"A17\"},{\"type\":\"E12\"}]",
     "is_can_mixture": 0
   }
 ]

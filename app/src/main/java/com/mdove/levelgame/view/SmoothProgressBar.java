@@ -53,6 +53,7 @@ public abstract class SmoothProgressBar extends View {
         super.onDraw(canvas);
         drawBackground(canvas);
         drawForeground(canvas, currentProgress);
+        invalidate();
     }
 
     // xml-> app:progress

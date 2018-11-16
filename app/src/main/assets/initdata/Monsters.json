@@ -357,7 +357,7 @@
     "tips": "上古之神-蚩尤残存在人世间的灵魂...<br/>击败有几率获得：蚩尤之灵。<br/>可用于合成神器：<font color=\"#D32F2F\">龙渊剑</font>。",
     "attack": 2000,
     "armor": 0,
-    "life": 2000,
+    "life": 20000,
     "money": 0,
     "type": "C19",
     "is_limit_count": 0,

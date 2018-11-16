@@ -17,7 +17,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
         android:background="@drawable/bg_adventure"

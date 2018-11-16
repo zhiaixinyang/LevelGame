@@ -51,7 +51,7 @@ public class BigFightMonstersVM {
         life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_life), curLife, lifeInit));
         type.set(model.type);
         lifeProgress.set(100);
-        harm.set(0+"");
+        harm.set(0 + "");
     }
 
     private void resetLifeProgress(int curLife) {
@@ -62,7 +62,7 @@ public class BigFightMonstersVM {
     }
 
     public void resetLife(int consume) {
-        curLife -= consume;
+        curLife += consume;
         resetLifeProgress(curLife);
         life.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_life), curLife, lifeInit));
     }

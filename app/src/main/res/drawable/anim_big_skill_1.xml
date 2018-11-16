@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item
+        android:drawable="@drawable/skill_big_1"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_2"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_3"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_4"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_5"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_6"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_7"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_8"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_9"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_10"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_11"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_12"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_13"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/skill_big_14"
+        android:duration="100" />
+</animation-list>

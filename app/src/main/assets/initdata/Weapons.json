@@ -259,7 +259,7 @@
     "belong_monster_id": "1002,",
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
     "is_special": 0,
-    "update_formula": "[{\"type\":\"A18\"},{\"type\":\"E1\"},{\"type\":\"E5\"},{\"type\":\"E1\"}]",
+    "update_formula": "[{\"type\":\"A16\"},{\"type\":\"E1\"},{\"type\":\"E5\"},{\"type\":\"E1\"}]",
     "is_can_mixture": 1
   },
   {

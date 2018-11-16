@@ -111,5 +111,45 @@
     "is_can_mixture": 1,
     "tips": "击败<font color=\"#D32F2F\">神兽·青龙</font>所掉落。<br/>可用于合成神器：<font color=\"#D32F2F\">真·东皇钟</font>。",
     "type": "E14"
+  },
+  {
+    "id": 15,
+    "name": "魔王头骨",
+    "price": 2,
+    "is_can_mixture": 1,
+    "tips": "击败<font color=\"#D32F2F\">入侵魔王</font>所掉落。<br/>可用于合成：<font color=\"#7B1FA2\">凤凰羽衣</font>。<br/>合成公式：凤凰羽 + 魔王头骨 + 金砂",
+    "type": "E15"
+  },
+  {
+    "id": 16,
+    "name": "金砂",
+    "price": 2,
+    "is_can_mixture": 1,
+    "tips": "价格不菲，可以用作某些装备的材料。",
+    "type": "E16"
+  },
+  {
+    "id": 17,
+    "name": "魔王之魂",
+    "price": 2,
+    "is_can_mixture": 1,
+    "tips": "击败<font color=\"#D32F2F\">入侵魔王</font>所掉落。<br/>可用于合成：<font color=\"#7B1FA2\">白虎之力</font>。<br/>合成公式：白虎牙 + 魔王之魂 + 金砂",
+    "type": "E17"
+  },
+  {
+    "id": 18,
+    "name": "白虎牙",
+    "price": 2,
+    "is_can_mixture": 1,
+    "tips": "击败<font color=\"#D32F2F\">神兽·白虎</font>所掉落。<br/>可用于合成神器：<font color=\"#7B1FA2\">白虎之力</font>。<br/>合成公式：白虎牙 + 魔王之魂 + 金砂",
+    "type": "E18"
+  },
+  {
+    "id": 19,
+    "name": "凤凰羽",
+    "price": 2,
+    "is_can_mixture": 1,
+    "tips": "击败<font color=\"#D32F2F\">神兽·朱雀</font>所掉落。<br/>可用于合成神器：<font color=\"#7B1FA2\">凤凰羽衣</font>。<br/>合成公式：凤凰羽 + 魔王头骨 + 金砂",
+    "type": "E19"
   }
 ]

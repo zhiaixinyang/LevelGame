@@ -62,14 +62,22 @@
   {
     "id": 15,
     "types": "[{\"type\":\"E2\",\"probability\":1}]"
+  },
+  {
+    "id": 16,
+    "types": "[{\"type\":\"E14\",\"probability\":0.6}]"
+  },
+  {
+    "id": 17,
+    "types": "[{\"type\":\"E18\",\"probability\":0.6}]"
   },{
-  "id": 16,
-  "types": "[{\"type\":\"E14\",\"probability\":0.6}]"
+  "id": 18,
+  "types": "[{\"type\":\"E19\",\"probability\":0.6}]"
 },
   // 魔王掉落
   {
     "id": 100,
-    "types": "[{\"type\":\"E13\",\"probability\":0.2}]"
+    "types": "[{\"type\":\"E13\",\"probability\":0.2},{\"type\":\"E17\",\"probability\":0.5},{\"type\":\"E15\",\"probability\":0.5}]"
   },
   {
     "id": 101,

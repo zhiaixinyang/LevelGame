@@ -37,7 +37,7 @@
     "tips": "技能效果：<br/>防御时无视对手20%攻击。",
     "type": "J3",
     "attack_heavy": 0,
-    "need_skill_count": 2,
+    "need_skill_count": 3,
     "attack_heavy_probability": 0,
     "blood_suck_probability": 0,
     "ignore_armor_probability": 0,
@@ -58,7 +58,7 @@
     "ignore_armor_probability": 0,
     "ignore_attack_probability": 0,
     "real_attack": 0,
-    "need_skill_count": 2,
+    "need_skill_count": 4,
     "belong_type":"main6",
     "dizziness": 0,
     "dizziness_probability": 0

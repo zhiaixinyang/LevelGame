@@ -613,6 +613,10 @@ public class HeroAttributesManager {
         save();
     }
 
+    public void resetHeroAttr() {
+        heroAttributes = HeroManager.getInstance().getHeroAttributes();
+    }
+
     public void save() {
         HeroManager.getInstance().save();
     }

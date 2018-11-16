@@ -1,12 +1,15 @@
 package com.mdove.levelgame;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -43,11 +46,30 @@ public class TestActivity extends AppCompatActivity {
         });
         mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.hehe));
 
+        Observable
+                .just(0)
+                .map(new Function<Integer, String>() {
+                    @Override
+                    public String apply(Integer integer) throws Exception {
+                        return integer.toString();
+                    }
+                })
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Log.d("RxJava", s);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d("RxJava", throwable.getMessage());
+                    }
+                });
 
         Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-                Log.d("aaa",  "subscribeOn111" + Thread.currentThread().getName());
+                Log.d("aaa", "subscribeOn111" + Thread.currentThread().getName());
                 e.onNext(111);
             }
         }).subscribeOn(Schedulers.io())
@@ -55,7 +77,7 @@ public class TestActivity extends AppCompatActivity {
                 .flatMap(new Function<Integer, ObservableSource<Integer>>() {
                     @Override
                     public ObservableSource<Integer> apply(Integer integer) throws Exception {
-                        Log.d("aaa",  "observeOn222" + Thread.currentThread().getName());
+                        Log.d("aaa", "observeOn222" + Thread.currentThread().getName());
 
                         return Observable.create(new ObservableOnSubscribe<Integer>() {
                             @Override
@@ -70,11 +92,11 @@ public class TestActivity extends AppCompatActivity {
                 .flatMap(new Function<Integer, ObservableSource<Integer>>() {
                     @Override
                     public ObservableSource<Integer> apply(Integer integer) throws Exception {
-                        Log.d("aaa",  "observeOn333" + Thread.currentThread().getName());
+                        Log.d("aaa", "observeOn333" + Thread.currentThread().getName());
                         return Observable.create(new ObservableOnSubscribe<Integer>() {
                             @Override
                             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-                                Log.d("aaa",  "subscribeOn333" + Thread.currentThread().getName());
+                                Log.d("aaa", "subscribeOn333" + Thread.currentThread().getName());
                                 e.onNext(333);
                             }
                         }).subscribeOn(Schedulers.io());
@@ -84,7 +106,7 @@ public class TestActivity extends AppCompatActivity {
                 .flatMap(new Function<Integer, ObservableSource<Integer>>() {
                     @Override
                     public ObservableSource<Integer> apply(Integer integer) throws Exception {
-                        Log.d("aaa",  "observeOn444" + Thread.currentThread().getName());
+                        Log.d("aaa", "observeOn444" + Thread.currentThread().getName());
                         return Observable.create(new ObservableOnSubscribe<Integer>() {
                             @Override
                             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
@@ -101,5 +123,15 @@ public class TestActivity extends AppCompatActivity {
                         Log.d("aaa", "observeOn!!!" + Thread.currentThread().getName());
                     }
                 });
+    }
+
+    class TestAdapter {
+        public List<String> data;
+        public Context context;
+
+        public TestAdapter(List<String> data, Context context) {
+            this.data = data;
+            this.context = context;
+        }
     }
 }

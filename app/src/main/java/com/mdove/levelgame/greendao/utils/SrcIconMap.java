@@ -59,6 +59,7 @@ public class SrcIconMap {
         map.put("B9", R.mipmap.b9);
         map.put("B10", R.mipmap.b4);
         map.put("B11", R.mipmap.b9);
+        map.put("B12", R.mipmap.b12);
         map.put("D1", R.mipmap.d1);
         map.put("D2", R.mipmap.d2);
         map.put("D3", R.mipmap.d3);
@@ -79,10 +80,16 @@ public class SrcIconMap {
         map.put("E12", R.mipmap.e10);
         map.put("E13", R.mipmap.e13);
         map.put("E14", R.mipmap.e14);
+        map.put("E15", R.mipmap.e15);
+        map.put("E16", R.mipmap.e16);
+        map.put("E17", R.mipmap.e17);
+        map.put("E18", R.mipmap.e18);
+        map.put("E19", R.mipmap.e19);
         map.put("G1", R.mipmap.g1);
         map.put("G2", R.mipmap.g2);
         map.put("G3", R.mipmap.g3);
         map.put("G4", R.mipmap.g4);
+        map.put("G5", R.mipmap.g5);
         map.put("main1", R.mipmap.main_1);
         map.put("main2", R.mipmap.main_2);
         map.put("main3", R.mipmap.main_3);

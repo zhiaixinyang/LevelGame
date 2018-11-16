@@ -33,7 +33,7 @@
   {
     "id": 3,
     "name": "<font color=\"#7B1FA2\">真·战神印</font>",
-    "tips": "合成公式：战神印+战神遗骸+铜矿石",
+    "tips": "合成公式：战神印 + 战神遗骸 + 铜矿石",
     "attack": 300,
     "armor": 300,
     "life": 500,
@@ -50,9 +50,9 @@
     "id": 4,
     "name": "<font color=\"#D32F2F\">真·东皇钟</font>",
     "tips": "<font color=\"#D32F2F\">神器</font>之一。<br/>传说中上古之神用于封印魔王所铸神器。魔王封印之后，神器便失去踪迹...<br/>合成公式：<font color=\"#D32F2F\">东皇钟</font> + 玄武甲 + 青龙爪",
-    "attack": 400,
-    "armor": 550,
-    "life": 800,
+    "attack": 550,
+    "armor": 800,
+    "life": 2000,
     "price": 2,
     "type": "G4",
     "is_can_strengthen": 0,
@@ -61,5 +61,21 @@
     "is_special": 0,
     "is_can_mixture": 0,
     "mixture_formula": "[{\"type\":\"G3\"},{\"type\":\"E7\"},{\"type\":\"E14\"}]"
+  },
+  {
+    "id": 5,
+    "name": "<font color=\"#7B1FA2\">白虎之力</font>",
+    "tips": "蕴含了<font color=\"#D32F2F\">神兽·白虎</font>无尽的力量...<br/>合成公式：白虎牙 + 魔王之魂 + 金砂",
+    "attack": 300,
+    "armor": 200,
+    "life": 300,
+    "price": 2,
+    "type": "G5",
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "is_can_update": 1,
+    "is_special": 0,
+    "mixture_formula": "[{\"type\":\"E18\"},{\"type\":\"E17\"},{\"type\":\"E16\"}]",
+    "is_can_mixture": 0
   }
 ]

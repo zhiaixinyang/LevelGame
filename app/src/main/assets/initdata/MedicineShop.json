@@ -48,8 +48,8 @@
     "life": 0,
     "life_up": 25,
     "is_limit_count": 0,
-    "limit_count": 5,
-    "cur_count": 5,
+    "limit_count": 3,
+    "cur_count": 3,
     "type": "D4"
   },
   {
@@ -61,8 +61,8 @@
     "attack": 15,
     "armor": 0,
     "is_limit_count": 0,
-    "cur_count": 3,
-    "limit_count": 3,
+    "cur_count": 2,
+    "limit_count": 2,
     "life_up": 0,
     "type": "D5"
   },
@@ -76,8 +76,8 @@
     "armor": 10,
     "life_up": 0,
     "is_limit_count": 0,
-    "cur_count": 3,
-    "limit_count": 3,
+    "cur_count": 2,
+    "limit_count": 2,
     "type": "D6"
   }
 ]

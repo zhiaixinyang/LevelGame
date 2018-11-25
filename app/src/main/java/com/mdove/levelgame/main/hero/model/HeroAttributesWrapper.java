@@ -1,5 +1,7 @@
 package com.mdove.levelgame.main.hero.model;
 
+import android.os.Bundle;
+
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
@@ -10,9 +12,16 @@ import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.monsters.utils.DropGoodsManager;
+import com.mdove.levelgame.main.task.TaskManager;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+
+import retrofit2.Retrofit;
 
 /**
  * @author MDove on 2018/11/2
@@ -130,9 +139,18 @@ public class HeroAttributesWrapper {
             monsters.curCount--;
             DatabaseManager.getInstance().getMonstersDao().update(monsters);
         }
+        TaskManager.Companion.getInstance().computeTask(monsters.type);
         HeroAttributesManager.getInstance().heroLevel(monsters.exp);
         HeroAttributesManager.getInstance().saveMoney(monsters.money);
     }
+
+    PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(1, new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return o2 - o1;
+        }
+    });
+
 
     public int realCurLife() {
         return curLife;

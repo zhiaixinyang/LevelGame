@@ -56,7 +56,7 @@
     "price": 2,
     "type": "G4",
     "is_can_strengthen": 0,
-    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8},{\"level\":\"1\",\"type\":\"E4\",\"probability\":0.6},{\"level\":\"1\",\"type\":\"E5\",\"probability\":0.4}]",
     "is_can_update": 1,
     "is_special": 0,
     "is_can_mixture": 0,

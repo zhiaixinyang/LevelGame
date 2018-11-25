@@ -37,10 +37,10 @@ public class IOUtils {
     }
 
     /**
-     * Read the Stream content as a string (use utf-8).
+     * Read the Stream tips as a string (use utf-8).
      *
      * @param is The stream to read
-     * @return The String content
+     * @return The String tips
      * @throws IOException IOException
      */
     public static String readString(InputStream is) throws IOException {
@@ -48,10 +48,10 @@ public class IOUtils {
     }
 
     /**
-     * Read the Stream content as a string.
+     * Read the Stream tips as a string.
      *
      * @param is The stream to read
-     * @return The String content
+     * @return The String tips
      * @throws IOException IOException
      */
     public static String readString(InputStream is, String encoding) throws IOException {
@@ -288,10 +288,10 @@ public class IOUtils {
     }
 
     /**
-     * Read file content to a String (always use utf-8).
+     * Read file tips to a String (always use utf-8).
      *
      * @param file The file to read
-     * @return The String content
+     * @return The String tips
      * @throws IOException IOException
      */
     public static String readString(File file) throws IOException {
@@ -299,10 +299,10 @@ public class IOUtils {
     }
 
     /**
-     * Read file content to a String.
+     * Read file tips to a String.
      *
      * @param file The file to read
-     * @return The String content
+     * @return The String tips
      * @throws IOException IOException
      */
     public static String readString(File file, String encoding) throws IOException {
@@ -310,7 +310,7 @@ public class IOUtils {
     }
 
     /**
-     * Read binary content of a file.
+     * Read binary tips of a file.
      * <p>
      * <b>Warning: Do not use on large file !</b>
      * </p>
@@ -332,7 +332,7 @@ public class IOUtils {
     }
 
     /**
-     * Read binary content of a stream.
+     * Read binary tips of a stream.
      * <p>
      * <b>Warning: Do not use on large stream !</b>
      * </p>
@@ -358,9 +358,9 @@ public class IOUtils {
     }
 
     /**
-     * Write String content to a stream (always use utf-8).
+     * Write String tips to a stream (always use utf-8).
      *
-     * @param content The content to read
+     * @param content The tips to read
      * @param os      The stream to write
      * @throws IOException IOException
      */
@@ -369,9 +369,9 @@ public class IOUtils {
     }
 
     /**
-     * Write String content to a stream (always use utf-8).
+     * Write String tips to a stream (always use utf-8).
      *
-     * @param content The content to read
+     * @param content The tips to read
      * @param os      The stream to write
      * @throws IOException IOException
      */

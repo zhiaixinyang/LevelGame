@@ -38,8 +38,7 @@
     "btn_text": "查看",
     "type": "main5",
     "click_id": 5
-  }
-,
+  },
   {
     "id": 6,
     "name": "技能大师",
@@ -47,5 +46,13 @@
     "btn_text": "进入",
     "type": "main6",
     "click_id": 6
+  },
+  {
+    "id": 7,
+    "name": "任务",
+    "tips": "少侠，进来帮我做几个任务可好？",
+    "btn_text": "进入",
+    "type": "main7",
+    "click_id": 7
   }
 ]

@@ -16,5 +16,6 @@ class TaskContract {
 
     interface ITaskView : BaseView {
         fun showData(data: ArrayList<TaskModelVM>)
+        fun notifyUI(position: Int)
     }
 }

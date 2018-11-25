@@ -72,6 +72,11 @@
         <activity android:name=".main.feedback.FeedBackActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".main.task.TaskActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
         <service android:name=".update.UpdateAppService" />
     </application>
 

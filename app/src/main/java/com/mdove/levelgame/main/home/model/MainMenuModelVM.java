@@ -45,6 +45,12 @@ public class MainMenuModelVM {
             case "main5": {
                 return R.mipmap.ic_home_item_5;
             }
+            case "main6": {
+                return R.mipmap.ic_home_item_4;
+            }
+            case "main7": {
+                return R.mipmap.ic_home_item_3;
+            }
             default: {
                 return R.mipmap.ic_home_item_3;
             }

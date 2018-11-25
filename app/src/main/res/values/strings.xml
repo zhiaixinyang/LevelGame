@@ -159,7 +159,7 @@
     <string name="string_faker_power">你触发了“作弊”代码，体力恢复至100。</string>
     <string name="string_update_mes">更新公告</string>
     <string name="string_feed_back">反馈 / 吐槽</string>
-    <string name="string_update_mes_content"><![CDATA[V1.01版本更新<br/>1、修复药品购买次数Bug。<br/>2、修复已知UI显示Bug。<br/>3、修复重置游戏Bug。<br/>4、增加技能玩法<br/>5、增加更多的奇遇/特殊怪物。<br/>6、增加全新装备，增加部分装备属性，增强部分魔王属性。]]></string>
+    <string name="string_update_mes_content"><![CDATA[V1.01版本更新<br/>1、修复药品购买次数Bug。<br/>2、修复已知UI显示Bug。<br/>3、修复重置游戏Bug。<br/>4、增加技能玩法<br/>5、增加更多的奇遇/特殊怪物。<br/>6、增加全新装备，增加部分装备属性，增强部分魔王属性。V1.02版本更新<br/>1、增加任务系统<br/>2、战斗中增加撤退功能]]></string>
 
     <!--更新String-->
     <string name="update_title">发现全新版本</string>
@@ -186,5 +186,12 @@
     <string name="string_hero_attack_harm"><![CDATA[<font color="#D32F2F">-%1$d</font>]]></string>
     <string name="string_hero_attack_harm_with_suck"><![CDATA[<font color="#D32F2F">-%1$d</font><font color="#43A047">+%2$d</font>]]></string>
     <string name="string_retreat">撤退</string>
+    <string name="string_task_has_start">任务已经领取。</string>
+    <string name="string_task_suc"><![CDATA[恭喜你，任务完成。<br/>奖励攻击：%1$d<br/>奖励防御：%2$d<br/>奖励金钱：%3$d<br/>奖励经验：%4$d<br/>奖励生命值：%5$d]]></string>
+    <string name="string_task_suc_title">任务完成</string>
+    <string name="string_task_has_start_title">领取失败</string>
+    <string name="string_task_has_start_error">领取失败，缺少对应资源。</string>
+    <string name="string_task_start_title">领取成功</string>
+    <string name="string_task_count">任务需求：%1$d / %2$d</string>
 
 </resources>

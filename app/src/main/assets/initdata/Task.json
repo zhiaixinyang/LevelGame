@@ -3,12 +3,18 @@
     "id": 1,
     "name": "<font color=\"#43A047\">任务：击杀小喽啰</font>",
     "tips": "击杀3个小喽啰。",
-    "type":"H1",
+    // status 0代表击杀（可拓展）count（代表status对应要完成的数目）
+    "task_content_type": "[{\"status\":\"0\",\"type\":\"C1\",\"count\":3}]",
+    "attack_count": 0,
+    "type": "H1",
+    "consume_power": 10,
+    "consume_money": 0,
+    "task_status": 0,
     "award_money": 30,
     "award_exy": 50,
-    "award_attack": 0,
-    "award_armor": 0,
-    "award_max_life": 0
+    "award_attack": 10,
+    "award_armor": 5,
+    "award_max_life": 15
   },
   {
     "id": 2,
@@ -16,7 +22,12 @@
     "tips": "击杀1个[BOSS]-山贼头目。",
     "award_money": 200,
     "award_exy": 200,
-    "type":"H2",
+    "task_content_type": "[{\"status\":\"0\",\"type\":\"C5\",\"count\":1}]",
+    "attack_count": 0,
+    "consume_power": 30,
+    "consume_money": 0,
+    "type": "H2",
+    "task_status": 0,
     "award_attack": 10,
     "award_armor": 5,
     "award_max_life": 20

@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AnimationSet;
 import android.view.animation.BounceInterpolator;
@@ -76,6 +77,20 @@ public class FightingDialog extends AppCompatDialog {
 
         binding.setEnemyVm(enVm);
         binding.setMyVm(myVm);
+
+        binding.tvRetreat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (heroDisposable != null && !heroDisposable.isDisposed()) {
+                    heroDisposable.dispose();
+                }
+                if (monstersDisposable != null && !monstersDisposable.isDisposed()) {
+                    monstersDisposable.dispose();
+                }
+                dismiss();
+            }
+        });
+
         initAttackAnim();
         computeAttack(monster);
     }

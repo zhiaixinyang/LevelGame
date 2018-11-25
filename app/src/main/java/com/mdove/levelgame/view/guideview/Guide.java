@@ -139,7 +139,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
 
   private MaskView onCreateView(Activity activity) {
     ViewGroup content = (ViewGroup) activity.findViewById(android.R.id.content);
-    // ViewGroup content = (ViewGroup) activity.getWindow().getDecorView();
+    // ViewGroup tips = (ViewGroup) activity.getWindow().getDecorView();
     MaskView maskView = new MaskView(activity);
     maskView.setFullingColor(activity.getResources().getColor(mConfiguration.mFullingColorId));
     maskView.setFullingAlpha(mConfiguration.mAlpha);
@@ -153,7 +153,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
     maskView.setOverlayTarget(mConfiguration.mOverlayTarget);
     maskView.setOnKeyListener(this);
 
-    // For removing the height of status bar we need the root content view's
+    // For removing the height of status bar we need the root tips view's
     // location on screen
     int parentX = 0;
     int parentY = 0;
@@ -184,9 +184,9 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
         e.printStackTrace();
       }
     }
-    // if (content != null) {
+    // if (tips != null) {
     // int[] loc = new int[2];
-    // content.getLocationInWindow(loc);
+    // tips.getLocationInWindow(loc);
     // parentX = loc[0];
     // parentY = loc[1];
     // }

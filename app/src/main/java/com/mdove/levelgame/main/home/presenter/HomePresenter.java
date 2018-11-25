@@ -22,6 +22,7 @@ import com.mdove.levelgame.main.shop.BlacksmithActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
 import com.mdove.levelgame.main.skill.HeroSkillManager;
 import com.mdove.levelgame.main.skill.HomeSkillActivity;
+import com.mdove.levelgame.main.task.TaskActivity;
 import com.mdove.levelgame.update.UpdateDialog;
 import com.mdove.levelgame.update.UpdateStatusManager;
 import com.mdove.levelgame.update.model.RealUpdate;
@@ -42,6 +43,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     private static final int INTENT_TO_HERO_ATTR = 4;
     private static final int INTENT_TO_HERO_PACKAGE = 5;
     private static final int INTENT_TO_HOME_SKILL = 6;
+    private static final int INTENT_TO_HOME_TASK = 7;
     private HomeContract.IHomeView view;
 
     @Override
@@ -65,8 +67,13 @@ public class HomePresenter implements HomeContract.IHomePresenter {
             case INTENT_TO_HERO_PACKAGE: {
                 HeroPackagesActivity.start(view.getContext());
                 break;
-            }case INTENT_TO_HOME_SKILL: {
+            }
+            case INTENT_TO_HOME_SKILL: {
                 HomeSkillActivity.Companion.start(view.getContext());
+                break;
+            }
+            case INTENT_TO_HOME_TASK: {
+                TaskActivity.Companion.start(view.getContext());
                 break;
             }
             default:

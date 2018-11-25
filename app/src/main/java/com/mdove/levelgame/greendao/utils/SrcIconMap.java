@@ -96,6 +96,7 @@ public class SrcIconMap {
         map.put("main4", R.mipmap.main_4);
         map.put("main5", R.mipmap.main_5);
         map.put("main6", R.mipmap.main_6);
+        map.put("main7", R.mipmap.main_7);
         map.put("I1", R.mipmap.i1);
         map.put("I2", R.mipmap.i2);
         map.put("I3", R.mipmap.i3);
@@ -107,6 +108,8 @@ public class SrcIconMap {
         map.put("J2", R.mipmap.j2);
         map.put("J3", R.mipmap.j3);
         map.put("J4", R.mipmap.j4);
+        map.put("H1", R.mipmap.h1);
+        map.put("H2", R.mipmap.h2);
     }
 
     public int getSrc(String type) {

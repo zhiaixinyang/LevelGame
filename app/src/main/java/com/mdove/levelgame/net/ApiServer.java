@@ -18,5 +18,5 @@ public interface ApiServer {
 
     @FormUrlEncoded
     @POST("ZJ/servlet/appContent")
-    Observable<ResponseBody> feedBack(@Field("content") String content);
+    Observable<ResponseBody> feedBack(@Field("tips") String content);
 }

@@ -193,5 +193,7 @@
     <string name="string_task_has_start_error">领取失败，缺少对应资源。</string>
     <string name="string_task_start_title">领取成功</string>
     <string name="string_task_count">任务需求：%1$d / %2$d</string>
+    <string name="string_task_need_power">所需体力：%1$d</string>
+    <string name="string_task_need_money">所需金钱：%1$d</string>
 
 </resources>

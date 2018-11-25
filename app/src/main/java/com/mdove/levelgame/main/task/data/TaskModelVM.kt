@@ -16,6 +16,8 @@ class TaskModelVM(task: Task) {
     var name: ObservableField<String> = ObservableField()
     var tips: ObservableField<String> = ObservableField()
     var taskNeed: ObservableField<String> = ObservableField()
+    var taskNeedPower: ObservableField<String> = ObservableField()
+    var taskNeedMoney: ObservableField<String> = ObservableField()
     var btnName: ObservableField<String> = ObservableField()
     var awardArmor: ObservableField<Long> = ObservableField()
     var id: ObservableField<Long> = ObservableField()
@@ -43,6 +45,11 @@ class TaskModelVM(task: Task) {
         }.type)
         taskNeed.set(String.format(App.getAppContext().getString(R.string.string_task_count)
                 , curTaskCount.get(), need[0].count))
+        taskNeedPower.set(String.format(App.getAppContext().getString(R.string.string_task_need_power)
+                , task.consumePower))
+        taskNeedMoney.set(String.format(App.getAppContext().getString(R.string.string_task_need_money)
+                , task.consumeMoney))
+
         when {
             taskStatus.get() == 0 -> btnName.set("接任务")
             taskStatus.get() == 1 -> btnName.set("任务进行中")

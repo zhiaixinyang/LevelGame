@@ -88,7 +88,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_armor"
+                android:id="@+id/tv_need"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/item_shop_attack_normal_margin"
@@ -99,6 +99,31 @@
                 app:layout_constraintLeft_toRightOf="@+id/iv_src"
                 app:layout_constraintTop_toBottomOf="@+id/tv_tips"
                 tools:text="任务需求：0/3" />
+
+            <TextView
+                android:id="@+id/tv_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/item_shop_attack_normal_margin"
+                android:text="@{vm.taskNeed}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/item_double_layer_margin"
+                app:layout_constraintLeft_toRightOf="@+id/tv_need"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+                tools:text="所需体力：30" />
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/item_shop_attack_normal_margin"
+                android:text="@{vm.taskNeed}"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/item_double_layer_margin"
+                app:layout_constraintLeft_toRightOf="@+id/tv_power"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tips"
+                tools:text="所需金钱：30" />
         </android.support.constraint.ConstraintLayout>
 
 

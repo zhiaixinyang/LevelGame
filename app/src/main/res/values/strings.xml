@@ -159,7 +159,7 @@
     <string name="string_faker_power">你触发了“作弊”代码，体力恢复至100。</string>
     <string name="string_update_mes">更新公告</string>
     <string name="string_feed_back">反馈 / 吐槽</string>
-    <string name="string_update_mes_content"><![CDATA[V1.01版本更新<br/>1、修复药品购买次数Bug。<br/>2、修复已知UI显示Bug。<br/>3、修复重置游戏Bug。<br/>4、增加技能玩法<br/>5、增加更多的奇遇/特殊怪物。<br/>6、增加全新装备，增加部分装备属性，增强部分魔王属性。V1.02版本更新<br/>1、增加任务系统<br/>2、战斗中增加撤退功能]]></string>
+    <string name="string_update_mes_content"><![CDATA[<font color="#2962FF">V1.01版本更新</font><br/>1、修复药品购买次数Bug。<br/>2、修复已知UI显示Bug。<br/>3、修复重置游戏Bug。<br/>4、增加技能玩法<br/>5、增加更多的奇遇/特殊怪物。<br/>6、增加全新装备，增加部分装备属性，增强部分魔王属性。<br/><font color="#2962FF">V1.02版本更新</font><br/>1、增加任务系统<br/>2、战斗中增加撤退功能]]></string>
 
     <!--更新String-->
     <string name="update_title">发现全新版本</string>

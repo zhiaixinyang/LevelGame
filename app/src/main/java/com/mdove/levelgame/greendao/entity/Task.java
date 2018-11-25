@@ -25,11 +25,12 @@ public class Task {
     public int consumeMoney;
     // 0代表可被任务，1表示进行中，2代表可以提交了
     public int taskStatus;
-    @Generated(hash = 919068896)
+    public String consumeFormula;
+    @Generated(hash = 1822552119)
     public Task(Long id, long attackCount, String taskContentType, String name,
             String tips, String type, long awardMoney, long awardExp,
             long awardAttack, long awardArmor, long awardMaxLife, int consumePower,
-            int consumeMoney, int taskStatus) {
+            int consumeMoney, int taskStatus, String consumeFormula) {
         this.id = id;
         this.attackCount = attackCount;
         this.taskContentType = taskContentType;
@@ -44,6 +45,7 @@ public class Task {
         this.consumePower = consumePower;
         this.consumeMoney = consumeMoney;
         this.taskStatus = taskStatus;
+        this.consumeFormula = consumeFormula;
     }
     @Generated(hash = 733837707)
     public Task() {
@@ -132,5 +134,10 @@ public class Task {
     public void setTaskStatus(int taskStatus) {
         this.taskStatus = taskStatus;
     }
-
+    public String getConsumeFormula() {
+        return this.consumeFormula;
+    }
+    public void setConsumeFormula(String consumeFormula) {
+        this.consumeFormula = consumeFormula;
+    }
 }

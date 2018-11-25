@@ -600,7 +600,7 @@ public class BlacksmithManager {
         return resp;
     }
 
-    private HasMaterial hasMaterial(String type) {
+    public HasMaterial hasMaterial(String type) {
         HasMaterial material = new HasMaterial();
         List<Packages> packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder()
                 .where(PackagesDao.Properties.Type.eq(type), PackagesDao.Properties.IsSelect.eq(1)).list();

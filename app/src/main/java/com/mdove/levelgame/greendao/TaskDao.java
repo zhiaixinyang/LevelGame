@@ -38,6 +38,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
         public final static Property ConsumePower = new Property(11, int.class, "consumePower", false, "CONSUME_POWER");
         public final static Property ConsumeMoney = new Property(12, int.class, "consumeMoney", false, "CONSUME_MONEY");
         public final static Property TaskStatus = new Property(13, int.class, "taskStatus", false, "TASK_STATUS");
+        public final static Property ConsumeFormula = new Property(14, String.class, "consumeFormula", false, "CONSUME_FORMULA");
     }
 
 
@@ -66,7 +67,8 @@ public class TaskDao extends AbstractDao<Task, Long> {
                 "\"AWARD_MAX_LIFE\" INTEGER NOT NULL ," + // 10: awardMaxLife
                 "\"CONSUME_POWER\" INTEGER NOT NULL ," + // 11: consumePower
                 "\"CONSUME_MONEY\" INTEGER NOT NULL ," + // 12: consumeMoney
-                "\"TASK_STATUS\" INTEGER NOT NULL );"); // 13: taskStatus
+                "\"TASK_STATUS\" INTEGER NOT NULL ," + // 13: taskStatus
+                "\"CONSUME_FORMULA\" TEXT);"); // 14: consumeFormula
     }
 
     /** Drops the underlying database table. */
@@ -112,6 +114,11 @@ public class TaskDao extends AbstractDao<Task, Long> {
         stmt.bindLong(12, entity.getConsumePower());
         stmt.bindLong(13, entity.getConsumeMoney());
         stmt.bindLong(14, entity.getTaskStatus());
+ 
+        String consumeFormula = entity.getConsumeFormula();
+        if (consumeFormula != null) {
+            stmt.bindString(15, consumeFormula);
+        }
     }
 
     @Override
@@ -151,6 +158,11 @@ public class TaskDao extends AbstractDao<Task, Long> {
         stmt.bindLong(12, entity.getConsumePower());
         stmt.bindLong(13, entity.getConsumeMoney());
         stmt.bindLong(14, entity.getTaskStatus());
+ 
+        String consumeFormula = entity.getConsumeFormula();
+        if (consumeFormula != null) {
+            stmt.bindString(15, consumeFormula);
+        }
     }
 
     @Override
@@ -174,7 +186,8 @@ public class TaskDao extends AbstractDao<Task, Long> {
             cursor.getLong(offset + 10), // awardMaxLife
             cursor.getInt(offset + 11), // consumePower
             cursor.getInt(offset + 12), // consumeMoney
-            cursor.getInt(offset + 13) // taskStatus
+            cursor.getInt(offset + 13), // taskStatus
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // consumeFormula
         );
         return entity;
     }
@@ -195,6 +208,7 @@ public class TaskDao extends AbstractDao<Task, Long> {
         entity.setConsumePower(cursor.getInt(offset + 11));
         entity.setConsumeMoney(cursor.getInt(offset + 12));
         entity.setTaskStatus(cursor.getInt(offset + 13));
+        entity.setConsumeFormula(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
      }
     
     @Override

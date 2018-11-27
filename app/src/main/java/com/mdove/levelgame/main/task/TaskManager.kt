@@ -56,7 +56,7 @@ class TaskManager {
                         if (hasMaterial.hasMaterial != null) {
                             DatabaseManager.getInstance().packagesDao.delete(
                                     DatabaseManager.getInstance().packagesDao.queryBuilder()
-                                            .where(PackagesDao.Properties.Id.eq(hasMaterial.hasMaterial.id)).unique())
+                                            .where(PackagesDao.Properties.Id.eq(hasMaterial.hasMaterial!!.id)).unique())
                         }
                         HeroManager.getInstance().save()
                         DatabaseManager.getInstance().taskDao.update(task)
@@ -96,7 +96,7 @@ class TaskManager {
             }.type)
             taskContentTypes.any {
                 resp.hasMaterial = BlacksmithManager.getInstance().hasMaterial(it.type)
-                resp.hasMaterial.isHas
+                resp.hasMaterial!!.isHas
             }
         } else {
             true
@@ -106,7 +106,7 @@ class TaskManager {
 
     inner class HasMaterialsResp {
         var has = false
-        lateinit var hasMaterial: BlacksmithManager.HasMaterial
+        var hasMaterial: BlacksmithManager.HasMaterial? = null
     }
 
     fun comptuteAward(task: Task, resp: TaskResp) {
@@ -125,7 +125,7 @@ class TaskManager {
         if (hasMaterial.has && hasMaterial.hasMaterial != null) {
             DatabaseManager.getInstance().packagesDao.delete(
                     DatabaseManager.getInstance().packagesDao.queryBuilder()
-                            .where(PackagesDao.Properties.Id.eq(hasMaterial.hasMaterial.id)).unique())
+                            .where(PackagesDao.Properties.Id.eq(hasMaterial.hasMaterial!!.id)).unique())
         }
 
         task.taskStatus = 0
@@ -138,7 +138,7 @@ class TaskManager {
         hasTasks.forEach { task ->
             val taskContentTypes = JsonUtil.decode<List<TaskContentModel>>(task.taskContentType, object : TypeToken<List<TaskContentModel>>() {
             }.type)
-            var taskContentType = taskContentTypes.first { monster ->
+            var taskContentType = taskContentTypes.firstOrNull { monster ->
                 monster.type == deadMonsterType
             }
             if (taskContentType != null) {

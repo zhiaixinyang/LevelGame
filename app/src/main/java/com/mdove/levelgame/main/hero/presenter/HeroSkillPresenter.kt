@@ -25,7 +25,6 @@ class HeroSkillPresenter : HeroSkillContract.IHeroSkillPresenter {
     }
 
     override fun onClickEquip(vm: HeroSkillModelVM) {
-        HeroAttributesWrapper.getInstance().resetSkill()
         var pk = DatabaseManager.getInstance().packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(vm.type.get())).unique()
         pk.isEquip = if (pk.isEquip == 0) 1 else 0
         DatabaseManager.getInstance().packagesDao.update(pk)
@@ -39,6 +38,7 @@ class HeroSkillPresenter : HeroSkillContract.IHeroSkillPresenter {
         if (position != -1) {
             view.notifyUI(position)
         }
+        HeroAttributesWrapper.getInstance().resetSkill()
     }
 
     override fun initData() {

@@ -44,12 +44,13 @@ public class Weapons {
     public String belongMonsterId;
     // 此值为多少，就降低多少攻击间隔，毫秒级（对应Rx的弹射间隔，此值越来越低）
     public long attackSpeed;
-    @Generated(hash = 2106988558)
+    public int position;
+    @Generated(hash = 1781209819)
     public Weapons(Long id, String name, String tips, int attack, int armor,
             long price, String type, int isCanStrengthen, int isCanUpdate,
             int isCanMixture, int isSpecial, String mixtureFormula,
             String updateFormula, String strengthenFormula, String belongMonsterId,
-            long attackSpeed) {
+            long attackSpeed, int position) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -66,6 +67,7 @@ public class Weapons {
         this.strengthenFormula = strengthenFormula;
         this.belongMonsterId = belongMonsterId;
         this.attackSpeed = attackSpeed;
+        this.position = position;
     }
     @Generated(hash = 1666722499)
     public Weapons() {
@@ -165,6 +167,12 @@ public class Weapons {
     }
     public void setAttackSpeed(long attackSpeed) {
         this.attackSpeed = attackSpeed;
+    }
+    public int getPosition() {
+        return this.position;
+    }
+    public void setPosition(int position) {
+        this.position = position;
     }
 
 }

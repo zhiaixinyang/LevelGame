@@ -40,6 +40,7 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
         public final static Property StrengthenFormula = new Property(13, String.class, "strengthenFormula", false, "STRENGTHEN_FORMULA");
         public final static Property IsSpecial = new Property(14, int.class, "isSpecial", false, "IS_SPECIAL");
         public final static Property BelongMonsterId = new Property(15, String.class, "belongMonsterId", false, "BELONG_MONSTER_ID");
+        public final static Property Position = new Property(16, int.class, "position", false, "POSITION");
     }
 
 
@@ -70,7 +71,8 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
                 "\"UPDATE_FORMULA\" TEXT," + // 12: updateFormula
                 "\"STRENGTHEN_FORMULA\" TEXT," + // 13: strengthenFormula
                 "\"IS_SPECIAL\" INTEGER NOT NULL ," + // 14: isSpecial
-                "\"BELONG_MONSTER_ID\" TEXT);"); // 15: belongMonsterId
+                "\"BELONG_MONSTER_ID\" TEXT," + // 15: belongMonsterId
+                "\"POSITION\" INTEGER NOT NULL );"); // 16: position
     }
 
     /** Drops the underlying database table. */
@@ -130,6 +132,7 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
         if (belongMonsterId != null) {
             stmt.bindString(16, belongMonsterId);
         }
+        stmt.bindLong(17, entity.getPosition());
     }
 
     @Override
@@ -183,6 +186,7 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
         if (belongMonsterId != null) {
             stmt.bindString(16, belongMonsterId);
         }
+        stmt.bindLong(17, entity.getPosition());
     }
 
     @Override
@@ -208,7 +212,8 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // updateFormula
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // strengthenFormula
             cursor.getInt(offset + 14), // isSpecial
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15) // belongMonsterId
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // belongMonsterId
+            cursor.getInt(offset + 16) // position
         );
         return entity;
     }
@@ -231,6 +236,7 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
         entity.setStrengthenFormula(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setIsSpecial(cursor.getInt(offset + 14));
         entity.setBelongMonsterId(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setPosition(cursor.getInt(offset + 16));
      }
     
     @Override

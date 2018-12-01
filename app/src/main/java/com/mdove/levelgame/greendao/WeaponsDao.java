@@ -40,6 +40,7 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         public final static Property StrengthenFormula = new Property(13, String.class, "strengthenFormula", false, "STRENGTHEN_FORMULA");
         public final static Property BelongMonsterId = new Property(14, String.class, "belongMonsterId", false, "BELONG_MONSTER_ID");
         public final static Property AttackSpeed = new Property(15, long.class, "attackSpeed", false, "ATTACK_SPEED");
+        public final static Property Position = new Property(16, int.class, "position", false, "POSITION");
     }
 
 
@@ -70,7 +71,8 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
                 "\"UPDATE_FORMULA\" TEXT," + // 12: updateFormula
                 "\"STRENGTHEN_FORMULA\" TEXT," + // 13: strengthenFormula
                 "\"BELONG_MONSTER_ID\" TEXT," + // 14: belongMonsterId
-                "\"ATTACK_SPEED\" INTEGER NOT NULL );"); // 15: attackSpeed
+                "\"ATTACK_SPEED\" INTEGER NOT NULL ," + // 15: attackSpeed
+                "\"POSITION\" INTEGER NOT NULL );"); // 16: position
     }
 
     /** Drops the underlying database table. */
@@ -130,6 +132,7 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
             stmt.bindString(15, belongMonsterId);
         }
         stmt.bindLong(16, entity.getAttackSpeed());
+        stmt.bindLong(17, entity.getPosition());
     }
 
     @Override
@@ -183,6 +186,7 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
             stmt.bindString(15, belongMonsterId);
         }
         stmt.bindLong(16, entity.getAttackSpeed());
+        stmt.bindLong(17, entity.getPosition());
     }
 
     @Override
@@ -208,7 +212,8 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // updateFormula
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // strengthenFormula
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // belongMonsterId
-            cursor.getLong(offset + 15) // attackSpeed
+            cursor.getLong(offset + 15), // attackSpeed
+            cursor.getInt(offset + 16) // position
         );
         return entity;
     }
@@ -231,6 +236,7 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         entity.setStrengthenFormula(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setBelongMonsterId(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
         entity.setAttackSpeed(cursor.getLong(offset + 15));
+        entity.setPosition(cursor.getInt(offset + 16));
      }
     
     @Override

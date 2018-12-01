@@ -195,5 +195,6 @@
     <string name="string_task_count">任务需求：%1$d / %2$d</string>
     <string name="string_task_need_power">所需体力：%1$d</string>
     <string name="string_task_need_money">所需金钱：%1$d</string>
+    <string name="string_empty">空空如也</string>
 
 </resources>

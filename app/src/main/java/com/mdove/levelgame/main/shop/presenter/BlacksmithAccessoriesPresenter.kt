@@ -1,5 +1,6 @@
 package com.mdove.levelgame.main.shop.presenter
 
+import com.mdove.levelgame.greendao.AccessoriesDao
 import com.mdove.levelgame.greendao.entity.Accessories
 import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager
@@ -22,7 +23,8 @@ class BlacksmithAccessoriesPresenter : BlacksmithAccessoriesContract.IBlacksmith
     lateinit var vmData: ArrayList<BlacksmithModelVM>
     override fun initData() {
         vmData = ArrayList()
-        var data = DatabaseManager.getInstance().accessoriesDao.queryBuilder().list()
+        var data = DatabaseManager.getInstance().accessoriesDao.queryBuilder()
+                .orderAsc(AccessoriesDao.Properties.Position).list()
         for (items in data) {
             vmData.add(BlacksmithModelVM(items as Accessories))
         }

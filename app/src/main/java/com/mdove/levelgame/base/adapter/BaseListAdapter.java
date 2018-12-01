@@ -9,10 +9,30 @@ import java.util.List;
  */
 public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<T> data;
+    private OnDataEmptyListener mListener;
+    private RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            if (mListener == null) {
+                return;
+            }
+            if (data.size() == 0 || data == null) {
+                mListener.onEmpty(true);
+            } else {
+                mListener.onEmpty(false);
+            }
+        }
+    };
 
     public void setData(List<T> data) {
         this.data = data;
+        registerAdapterDataObserver(observer);
         notifyDataSetChanged();
+    }
+
+    public void setListener(OnDataEmptyListener listener) {
+        mListener = listener;
     }
 
     public List<T> getData() {
@@ -31,5 +51,9 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     @Override
     public int getItemCount() {
         return data == null ? 0 : data.size();
+    }
+
+    public interface OnDataEmptyListener {
+        void onEmpty(boolean isEmpty);
     }
 }

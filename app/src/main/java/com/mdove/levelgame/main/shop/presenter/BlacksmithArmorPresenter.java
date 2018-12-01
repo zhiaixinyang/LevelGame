@@ -39,7 +39,8 @@ public class BlacksmithArmorPresenter implements BlacksmithArmorContract.IBlacks
         List<BlacksmithModelVM> data = new ArrayList<>();
         // 因为铁匠铺是死的，所以BelongMonsterId直接匹配字符串
         List<Armors> armors = DatabaseManager.getInstance().getArmorsDao().queryBuilder()
-                .where(ArmorsDao.Properties.BelongMonsterId.eq("1002,")).list();
+                .where(ArmorsDao.Properties.BelongMonsterId.eq("1002,"))
+                .orderAsc(ArmorsDao.Properties.Position).list();
         if (armors != null && armors.size() > 0) {
             for (Armors armor : armors) {
                 data.add(new BlacksmithModelVM(armor));

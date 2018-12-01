@@ -34,11 +34,13 @@ public class Accessories {
     // 出售是否弹dialog
     public int isSpecial;
     public String belongMonsterId;
-    @Generated(hash = 569723552)
+    public int position;
+    @Generated(hash = 1217271394)
     public Accessories(Long id, String name, String tips, int attack, int armor,
             int life, long price, String type, int isCanStrengthen, int isCanUpdate,
             int isCanMixture, String mixtureFormula, String updateFormula,
-            String strengthenFormula, int isSpecial, String belongMonsterId) {
+            String strengthenFormula, int isSpecial, String belongMonsterId,
+            int position) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -55,6 +57,7 @@ public class Accessories {
         this.strengthenFormula = strengthenFormula;
         this.isSpecial = isSpecial;
         this.belongMonsterId = belongMonsterId;
+        this.position = position;
     }
     @Generated(hash = 1483837939)
     public Accessories() {
@@ -155,4 +158,11 @@ public class Accessories {
     public void setBelongMonsterId(String belongMonsterId) {
         this.belongMonsterId = belongMonsterId;
     }
+    public int getPosition() {
+        return this.position;
+    }
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
 }

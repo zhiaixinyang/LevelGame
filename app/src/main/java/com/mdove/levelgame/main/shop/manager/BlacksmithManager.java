@@ -1,5 +1,6 @@
 package com.mdove.levelgame.main.shop.manager;
 
+import android.arch.persistence.room.util.StringUtil;
 import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
@@ -466,6 +467,8 @@ public class BlacksmithManager {
                         HeroAttributesManager.getInstance().takeOffAttack(packages.strengthenLevel, (Weapons) oj);
                     } else if (oj != null && oj instanceof Armors) {
                         HeroAttributesManager.getInstance().takeOffArmor(packages.strengthenLevel, (Armors) oj);
+                    } else if (oj != null && oj instanceof Accessories) {
+                        HeroAttributesManager.getInstance().takeOffAccessories(packages.strengthenLevel, (Accessories) oj);
                     }
                 }
                 packagesDao.delete(packages);
@@ -602,8 +605,16 @@ public class BlacksmithManager {
 
     public HasMaterial hasMaterial(String type) {
         HasMaterial material = new HasMaterial();
-        List<Packages> packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder()
-                .where(PackagesDao.Properties.Type.eq(type), PackagesDao.Properties.IsSelect.eq(1)).list();
+        List<Packages> packages = null;
+        // 因为龙渊有俩个版本A15和A18
+        if (TextUtils.equals(type, "A15") || TextUtils.equals(type, "A18")) {
+            packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder()
+                    .where(PackagesDao.Properties.Type.eq("A15"), PackagesDao.Properties.IsSelect.eq(1))
+                    .whereOr(PackagesDao.Properties.Type.eq("A18"), PackagesDao.Properties.IsSelect.eq(1)).list();
+        } else {
+            packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder()
+                    .where(PackagesDao.Properties.Type.eq(type), PackagesDao.Properties.IsSelect.eq(1)).list();
+        }
         Packages pk = null;
         if (packages != null && packages.size() > 0) {
             pk = packages.get(0);

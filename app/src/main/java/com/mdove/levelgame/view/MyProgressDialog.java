@@ -19,7 +19,7 @@ import com.mdove.levelgame.R;
 import java.text.NumberFormat;
 
 /**
- * Created by MBENBEN on 2018/10/21.
+ * Created by MDove on 2018/10/21.
  */
 
 public class MyProgressDialog  extends AlertDialog {

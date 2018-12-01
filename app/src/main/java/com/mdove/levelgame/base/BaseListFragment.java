@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
@@ -21,6 +22,7 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
     private RecyclerView rlv;
     private BaseListAdapter adapter;
     private MyProgressDialog progressDialog;
+    private FrameLayout layoutEmpty;
 
     @Nullable
     @Override
@@ -32,12 +34,23 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rlv = view.findViewById(R.id.rlv);
+        layoutEmpty = view.findViewById(R.id.layout_empty);
         rlv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         initData();
 
         adapter = createAdapter();
         rlv.setAdapter(adapter);
+        adapter.setListener(new BaseListAdapter.OnDataEmptyListener() {
+            @Override
+            public void onEmpty(boolean isEmpty) {
+                if (isEmpty){
+                    layoutEmpty.setVisibility(View.VISIBLE);
+                }else{
+                    layoutEmpty.setVisibility(View.GONE);
+                }
+            }
+        });
 
         loadData();
     }

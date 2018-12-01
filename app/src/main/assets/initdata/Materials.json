@@ -93,7 +93,7 @@
     "name": "蚩尤之灵",
     "price": 2,
     "is_can_mixture": 1,
-    "tips": "击败蚩尤残魂所掉落的材料。<br/>可用于合成：<font color=\"#D32F2F\">龙渊剑</font>。<br/>公式：盘古之灵 + 修罗斧 + 干将·莫邪",
+    "tips": "击败蚩尤残魂所掉落的材料。<br/>可用于合成：<font color=\"#D32F2F\">龙渊剑</font>、<font color=\"#D32F2F\">真·龙渊剑</font>",
     "type": "E12"
   },
   {

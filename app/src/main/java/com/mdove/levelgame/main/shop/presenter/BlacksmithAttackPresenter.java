@@ -39,7 +39,8 @@ public class BlacksmithAttackPresenter implements BlacksmithAttackContract.IBlac
         List<BlacksmithModelVM> data = new ArrayList<>();
         // 因为铁匠铺是死的，所以BelongMonsterId直接匹配字符串
         List<Weapons> weapons = DatabaseManager.getInstance().getWeaponsDao().queryBuilder()
-                .where(WeaponsDao.Properties.BelongMonsterId.eq("1002,")).list();
+                .where(WeaponsDao.Properties.BelongMonsterId.eq("1002,"))
+                .orderAsc(WeaponsDao.Properties.Position).list();
         if (weapons != null && weapons.size() > 0) {
             for (Weapons weapon : weapons) {
                 data.add(new BlacksmithModelVM(weapon));

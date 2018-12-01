@@ -78,7 +78,7 @@
   // 魔王掉落
   {
     "id": 100,
-    "types": "[{\"type\":\"E13\",\"probability\":0.2},{\"type\":\"E17\",\"probability\":0.5},{\"type\":\"E15\",\"probability\":0.5}]"
+    "types": "[{\"type\":\"E13\",\"probability\":0.2},{\"type\":\"E17\",\"probability\":0.3},{\"type\":\"E15\",\"probability\":0.3}]"
   },
   {
     "id": 101,

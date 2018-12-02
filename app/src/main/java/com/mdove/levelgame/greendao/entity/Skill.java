@@ -1,5 +1,7 @@
 package com.mdove.levelgame.greendao.entity;
 
+import com.mdove.levelgame.model.BaseBlacksmithModel;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -8,7 +10,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by MDove on 2018/11/10.
  */
 @Entity
-public class Skill {
+public class Skill extends BaseBlacksmithModel{
     @Id
     public Long id;
     public String name;
@@ -139,5 +141,10 @@ public class Skill {
     }
     public void setNeedSkillCount(int needSkillCount) {
         this.needSkillCount = needSkillCount;
+    }
+
+    @Override
+    public void constructorBlacksmithModel() {
+
     }
 }

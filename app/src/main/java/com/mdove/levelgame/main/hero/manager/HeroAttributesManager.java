@@ -13,7 +13,6 @@ import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
-import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.DropGoods;
@@ -30,9 +29,9 @@ import com.mdove.levelgame.main.monsters.manager.AdventureManager;
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager;
 import com.mdove.levelgame.main.monsters.model.MonsterWrapper;
 import com.mdove.levelgame.model.DropGoodsModel;
+import com.mdove.levelgame.model.IAttrsModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
-import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +166,7 @@ public class HeroAttributesManager {
         Packages pk = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique();
         int money = 0;
         if (pk != null) {
-            Object attack = AllGoodsToDBIdUtils.getInstance().getObjectFromType(pk.type);
+            Object attack = AllGoodsToDBIdUtils.getInstance().getBlacksmithModelFromType(pk.type);
             if (attack != null && attack instanceof Weapons) {
                 Weapons weapons = (Weapons) attack;
                 money = (int) (weapons.price / 2);
@@ -543,45 +542,21 @@ public class HeroAttributesManager {
         return name;
     }
 
-    public void takeOffAttack(long strengthen, Weapons weapons) {
-        heroAttributes.attack -= (1 + strengthen * 0.2) * (weapons.attack);
-        heroAttributes.armor -= (1 + strengthen * 0.2) * weapons.armor;
-        heroAttributes.attackSpeed += weapons.attackSpeed;
+    public void takeOff(long strengthen, IAttrsModel model){
+        heroAttributes.attack -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseAttack);
+        heroAttributes.armor -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseArmor);
+        heroAttributes.attackSpeed += model.getAttrsModel().baseAttackSpeed;
+        heroAttributes.maxLife -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
+        heroAttributes.curLife -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
         save();
     }
 
-    public void holdOnAttack(long strengthen, Weapons weapons) {
-        heroAttributes.attack += (1 + strengthen * 0.2) * (weapons.attack);
-        heroAttributes.armor += (1 + strengthen * 0.2) * (weapons.armor);
-        heroAttributes.attackSpeed -= weapons.attackSpeed;
-        save();
-    }
-
-    public void takeOffArmor(long strengthen, Armors armors) {
-        heroAttributes.attack -= (1 + strengthen * 0.2) * (armors.attack);
-        heroAttributes.armor -= (1 + strengthen * 0.2) * (armors.armor);
-        save();
-    }
-
-    public void holdOnArmor(long strengthen, Armors armors) {
-        heroAttributes.attack += (1 + strengthen * 0.2) * (armors.attack);
-        heroAttributes.armor += (1 + strengthen * 0.2) * (armors.armor);
-        save();
-    }
-
-    public void takeOffAccessories(long strengthen, Accessories accessories) {
-        heroAttributes.attack -= (1 + strengthen * 0.2) * (accessories.attack);
-        heroAttributes.armor -= (1 + strengthen * 0.2) * (accessories.armor);
-        heroAttributes.maxLife -= (1 + strengthen * 0.2) * (accessories.life);
-        heroAttributes.curLife -= (1 + strengthen * 0.2) * (accessories.life);
-        save();
-    }
-
-    public void holdOnAccessories(long strengthen, Accessories accessories) {
-        heroAttributes.attack += (1 + strengthen * 0.2) * (accessories.attack);
-        heroAttributes.armor += (1 + strengthen * 0.2) * (accessories.armor);
-        heroAttributes.maxLife += (1 + strengthen * 0.2) * (accessories.life);
-        heroAttributes.curLife += (1 + strengthen * 0.2) * (accessories.life);
+    public void holdOn(long strengthen, IAttrsModel model) {
+        heroAttributes.attack += (1 + strengthen * 0.2) * (model.getAttrsModel().baseAttack);
+        heroAttributes.armor += (1 + strengthen * 0.2) * (model.getAttrsModel().baseArmor);
+        heroAttributes.attackSpeed -= model.getAttrsModel().baseAttackSpeed;
+        heroAttributes.maxLife += (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
+        heroAttributes.curLife += (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
         save();
     }
 

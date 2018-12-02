@@ -21,7 +21,6 @@ import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
 import com.mdove.levelgame.main.shop.model.StrengthenResp;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
-import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
@@ -489,30 +488,30 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                 if (goodsEquipResp.holdOnAttack != null) {
                     // 先减少脱掉装备的属性
                     if (goodsEquipResp.takeOffAttack != null) {
-                        HeroAttributesManager.getInstance().takeOffAttack(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAttack);
+                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAttack);
                     }
                     // 增加穿装备属性
-                    HeroAttributesManager.getInstance().holdOnAttack(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAttack);
+                    HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAttack);
                     attackSuc = true;
                 }
                 // 穿的装备是护甲
                 if (goodsEquipResp.holdOnArmor != null) {
                     // 先减少脱掉装备的属性
                     if (goodsEquipResp.takeOffArmor != null) {
-                        HeroAttributesManager.getInstance().takeOffArmor(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffArmor);
+                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffArmor);
                     }
                     // 增加穿装备属性
-                    HeroAttributesManager.getInstance().holdOnArmor(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnArmor);
+                    HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnArmor);
                     armorSuc = true;
                 }
                 // 穿的装备是饰品
                 if (goodsEquipResp.holdOnAccessories != null) {
                     // 先减少脱掉装备的属性
                     if (goodsEquipResp.takeOffAccessories != null) {
-                        HeroAttributesManager.getInstance().takeOffAccessories(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAccessories);
+                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAccessories);
                     }
                     // 增加穿装备属性
-                    HeroAttributesManager.getInstance().holdOnAccessories(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAccessories);
+                    HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAccessories);
                     accessoriesSuc = true;
                 }
 
@@ -553,7 +552,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
     @Override
     public void onClickStrengthen(HeroPackageModelVM vm) {
-        StrengthenResp resp = BlacksmithManager.getInstance().strengthenGoods(vm.pkId.get(), vm.type.get());
+        StrengthenResp resp = BlacksmithManager.getInstance().strengthen(vm.pkId.get(), vm.type.get());
         switch (resp.status) {
             case BlacksmithManager.STRENGTHEN_STATUS_SUC: {
                 MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_strengthen_title)

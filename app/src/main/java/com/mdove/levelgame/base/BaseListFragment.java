@@ -56,6 +56,14 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (adapter!=null){
+            adapter.unRegisterAdapter();
+        }
+    }
+
+    @Override
     public void showLoadingDialog(final String msg) {
         if (getActivity().isFinishing()) {
             return;

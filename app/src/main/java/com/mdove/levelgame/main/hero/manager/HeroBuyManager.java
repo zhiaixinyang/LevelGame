@@ -1,9 +1,5 @@
 package com.mdove.levelgame.main.hero.manager;
 
-import android.text.TextUtils;
-
-import com.mdove.levelgame.App;
-import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.PackagesDao;
@@ -16,23 +12,15 @@ import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Skill;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.main.hero.model.BaseBuy;
 import com.mdove.levelgame.main.hero.model.BuyArmorResp;
 import com.mdove.levelgame.main.hero.model.BuyAttackResp;
 import com.mdove.levelgame.main.hero.model.BuyMedicinesResp;
-import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
-import com.mdove.levelgame.main.shop.model.ShopArmorModel;
-import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
-import com.mdove.levelgame.utils.ToastHelper;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by MDove on 2018/10/20.
@@ -160,7 +148,7 @@ public class HeroBuyManager {
     public Observable<BaseBuy> buy(String type, long price) {
         final BaseBuy baseBuy = new BaseBuy();
 
-        Object oj = AllGoodsToDBIdUtils.getInstance().getObjectFromType(type);
+        Object oj = AllGoodsToDBIdUtils.getInstance().getBlacksmithModelFromType(type);
         if (oj != null) {
             // 构建BaseBuy
             if (oj instanceof Weapons) {

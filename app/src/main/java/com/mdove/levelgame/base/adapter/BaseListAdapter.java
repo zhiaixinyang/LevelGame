@@ -31,6 +31,15 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         notifyDataSetChanged();
     }
 
+    public void unRegisterAdapter() {
+        if (observer != null) {
+            unregisterAdapterDataObserver(observer);
+        }
+        if (mListener != null) {
+            mListener = null;
+        }
+    }
+
     public void setListener(OnDataEmptyListener listener) {
         mListener = listener;
     }

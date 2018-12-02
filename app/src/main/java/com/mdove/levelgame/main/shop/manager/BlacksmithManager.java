@@ -1,21 +1,18 @@
 package com.mdove.levelgame.main.shop.manager;
 
-import android.arch.persistence.room.util.StringUtil;
 import android.text.TextUtils;
 
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.PackagesDao;
-import com.mdove.levelgame.greendao.entity.Accessories;
-import com.mdove.levelgame.greendao.entity.Armors;
-import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Packages;
-import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
+import com.mdove.levelgame.model.BaseBlacksmithModel;
 import com.mdove.levelgame.main.shop.model.StrengthenNeedModel;
 import com.mdove.levelgame.main.shop.model.StrengthenResp;
+import com.mdove.levelgame.model.IAttrsModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.utils.JsonUtil;
 
@@ -53,25 +50,17 @@ public class BlacksmithManager {
     }
 
     public Observable<BlacksmithResp> goodsUpdate(String type) {
-        Object oj = AllGoodsToDBIdUtils.getInstance().getObjectFromType(type);
-        if (oj != null && oj instanceof Weapons) {
-            return attackUpdate((Weapons) oj);
-        } else if (oj != null && oj instanceof Armors) {
-            return armorUpdate((Armors) oj);
-        } else if (oj != null && oj instanceof Material) {
-            return armorUpdate((Material) oj);
-        } else {
-            return armorUpdate((Accessories) oj);
-        }
+        return updateAndMixture(AllGoodsToDBIdUtils.getInstance().getBlacksmithModelFromType(type));
+
     }
 
-    private Observable<BlacksmithResp> attackUpdate(Weapons weapon) {
+    private Observable<BlacksmithResp> updateAndMixture(BaseBlacksmithModel weapon) {
         final BlacksmithResp blacksmithResp = new BlacksmithResp();
         if (weapon != null) {
             // 可升级
-            if (weapon.isCanUpdate == 0) {
+            if (weapon.canUpdate == 0) {
                 // 判断材料是否完全
-                String formula = weapon.updateFormula;
+                String formula = weapon.updateFormulas;
                 List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
                 }.getType());
                 if (need != null && need.size() > 0) {
@@ -94,7 +83,7 @@ public class BlacksmithManager {
                         newPk(weapon);
                         blacksmithResp.isSuc = true;
                         blacksmithResp.title = App.getAppContext().getString(R.string.string_blacksmith_update_suc);
-                        blacksmithResp.content = weapon.name + "升级成功。";
+                        blacksmithResp.content = weapon.myName + "升级成功。";
                     } else {
                         resetPkSelectStatus();
                         blacksmithResp.isSuc = false;
@@ -106,10 +95,10 @@ public class BlacksmithManager {
                     blacksmithResp.title = "未知错误";
                     blacksmithResp.content = "获取升级材料异常：null。";
                 }
-            } else if (weapon.isCanMixture == 0) {
+            } else if (weapon.canMixture == 0) {
                 // 可合成
                 // 判断材料是否完全
-                String formula = weapon.mixtureFormula;
+                String formula = weapon.mixtureFormulas;
                 List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
                 }.getType());
                 if (need != null && need.size() > 0) {
@@ -132,7 +121,7 @@ public class BlacksmithManager {
                         newPk(weapon);
                         blacksmithResp.isSuc = true;
                         blacksmithResp.title = "合成成功";
-                        blacksmithResp.content = weapon.name + "合成成功。";
+                        blacksmithResp.content = weapon.myName + "合成成功。";
                     } else {
                         // 重置pk中材料的选择状态
                         resetPkSelectStatus();
@@ -145,6 +134,10 @@ public class BlacksmithManager {
                     blacksmithResp.title = "未知错误";
                     blacksmithResp.content = "获取升级材料异常：null。";
                 }
+            } else {
+                blacksmithResp.isSuc = false;
+                blacksmithResp.title = "未知错误";
+                blacksmithResp.content = "未找到对应升级的装备...";
             }
         } else {
             blacksmithResp.isSuc = false;
@@ -158,248 +151,6 @@ public class BlacksmithManager {
             }
         });
     }
-
-    private Observable<BlacksmithResp> armorUpdate(Material material) {
-        final BlacksmithResp blacksmithResp = new BlacksmithResp();
-        if (material != null) {
-            if (material.isCanMixture == 0) {
-                // 可合成
-                // 判断材料是否完全
-                String formula = material.mixtureFormula;
-                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
-                }.getType());
-                if (need != null && need.size() > 0) {
-                    List<HasMaterial> hasMaterials = new ArrayList<>();
-                    for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
-                    }
-                    boolean isSuc = true;
-                    for (HasMaterial attack : hasMaterials) {
-                        if (!attack.isHas) {
-                            isSuc = false;
-                            break;
-                        }
-                    }
-                    // 合成成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials);
-                        // 生成新装备
-                        newPk(material);
-                        blacksmithResp.isSuc = true;
-                        blacksmithResp.title = "合成成功";
-                        blacksmithResp.content = material.name + "合成成功。";
-                    } else {
-                        resetPkSelectStatus();
-                        blacksmithResp.isSuc = false;
-                        blacksmithResp.title = "合成失败";
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
-                    }
-                } else {
-                    blacksmithResp.isSuc = false;
-                    blacksmithResp.title = "未知错误";
-                    blacksmithResp.content = "获取升级材料异常：null。";
-                }
-            }
-        } else {
-            blacksmithResp.isSuc = false;
-            blacksmithResp.title = "未知错误";
-            blacksmithResp.content = "未找到对应升级的装备...";
-        }
-        return Observable.create(new ObservableOnSubscribe<BlacksmithResp>() {
-            @Override
-            public void subscribe(ObservableEmitter<BlacksmithResp> e) throws Exception {
-                e.onNext(blacksmithResp);
-            }
-        });
-    }
-
-    private Observable<BlacksmithResp> armorUpdate(Armors armor) {
-        final BlacksmithResp blacksmithResp = new BlacksmithResp();
-        if (armor != null) {
-            // 可升级
-            if (armor.isCanUpdate == 0) {
-                // 判断材料是否完全
-                String formula = armor.updateFormula;
-                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
-                }.getType());
-                if (need != null && need.size() > 0) {
-                    List<HasMaterial> hasMaterials = new ArrayList<>();
-                    for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
-                    }
-                    boolean isSuc = true;
-                    for (HasMaterial material : hasMaterials) {
-                        if (!material.isHas) {
-                            isSuc = false;
-                            break;
-                        }
-                    }
-                    // 升级成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials);
-                        // 生成新装备
-                        newPk(armor);
-                        blacksmithResp.isSuc = true;
-                        blacksmithResp.title = "升级成功";
-                        blacksmithResp.content = armor.name + "升级成功。";
-                    } else {
-                        resetPkSelectStatus();
-                        blacksmithResp.isSuc = false;
-                        blacksmithResp.title = "升级失败";
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
-                    }
-                } else {
-                    blacksmithResp.isSuc = false;
-                    blacksmithResp.title = "未知错误";
-                    blacksmithResp.content = "获取升级材料异常：null。";
-                }
-            } else if (armor.isCanMixture == 0) {
-                // 可合成
-                // 判断材料是否完全
-                String formula = armor.mixtureFormula;
-                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
-                }.getType());
-                if (need != null && need.size() > 0) {
-                    List<HasMaterial> hasMaterials = new ArrayList<>();
-                    for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
-                    }
-                    boolean isSuc = true;
-                    for (HasMaterial attack : hasMaterials) {
-                        if (!attack.isHas) {
-                            isSuc = false;
-                            break;
-                        }
-                    }
-                    // 合成成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials);
-                        // 生成新装备
-                        newPk(armor);
-                        blacksmithResp.isSuc = true;
-                        blacksmithResp.title = "合成成功";
-                        blacksmithResp.content = armor.name + "合成成功。";
-                    } else {
-                        resetPkSelectStatus();
-                        blacksmithResp.isSuc = false;
-                        blacksmithResp.title = "合成失败";
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
-                    }
-                } else {
-                    blacksmithResp.isSuc = false;
-                    blacksmithResp.title = "未知错误";
-                    blacksmithResp.content = "获取升级材料异常：null。";
-                }
-            }
-        } else {
-            blacksmithResp.isSuc = false;
-            blacksmithResp.title = "未知错误";
-            blacksmithResp.content = "未找到对应升级的装备...";
-        }
-        return Observable.create(new ObservableOnSubscribe<BlacksmithResp>() {
-            @Override
-            public void subscribe(ObservableEmitter<BlacksmithResp> e) throws Exception {
-                e.onNext(blacksmithResp);
-            }
-        });
-    }
-
-    private Observable<BlacksmithResp> armorUpdate(Accessories accessories) {
-        final BlacksmithResp blacksmithResp = new BlacksmithResp();
-        if (accessories != null) {
-            // 可升级
-            if (accessories.isCanUpdate == 0) {
-                // 判断材料是否完全
-                String formula = accessories.updateFormula;
-                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
-                }.getType());
-                if (need != null && need.size() > 0) {
-                    List<HasMaterial> hasMaterials = new ArrayList<>();
-                    for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
-                    }
-                    boolean isSuc = true;
-                    for (HasMaterial material : hasMaterials) {
-                        if (!material.isHas) {
-                            isSuc = false;
-                            break;
-                        }
-                    }
-                    // 升级成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials);
-                        // 生成新装备
-                        newPk(accessories);
-                        blacksmithResp.isSuc = true;
-                        blacksmithResp.title = "升级成功";
-                        blacksmithResp.content = accessories.name + "升级成功。";
-                    } else {
-                        resetPkSelectStatus();
-                        blacksmithResp.isSuc = false;
-                        blacksmithResp.title = "升级失败";
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
-                    }
-                } else {
-                    blacksmithResp.isSuc = false;
-                    blacksmithResp.title = "未知错误";
-                    blacksmithResp.content = "获取升级材料异常：null。";
-                }
-            } else if (accessories.isCanMixture == 0) {
-                // 可合成
-                // 判断材料是否完全
-                String formula = accessories.mixtureFormula;
-                List<NeedMaterial> need = JsonUtil.decode(formula, new TypeToken<List<NeedMaterial>>() {
-                }.getType());
-                if (need != null && need.size() > 0) {
-                    List<HasMaterial> hasMaterials = new ArrayList<>();
-                    for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
-                    }
-                    boolean isSuc = true;
-                    for (HasMaterial attack : hasMaterials) {
-                        if (!attack.isHas) {
-                            isSuc = false;
-                            break;
-                        }
-                    }
-                    // 合成成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials);
-                        // 生成新装备
-                        newPk(accessories);
-                        blacksmithResp.isSuc = true;
-                        blacksmithResp.title = "合成成功";
-                        blacksmithResp.content = accessories.name + "合成成功。";
-                    } else {
-                        resetPkSelectStatus();
-                        blacksmithResp.isSuc = false;
-                        blacksmithResp.title = "合成失败";
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。";
-                    }
-                } else {
-                    blacksmithResp.isSuc = false;
-                    blacksmithResp.title = "未知错误";
-                    blacksmithResp.content = "获取升级材料异常：null。";
-                }
-            }
-        } else {
-            blacksmithResp.isSuc = false;
-            blacksmithResp.title = "未知错误";
-            blacksmithResp.content = "未找到对应升级的装备...";
-        }
-        return Observable.create(new ObservableOnSubscribe<BlacksmithResp>() {
-            @Override
-            public void subscribe(ObservableEmitter<BlacksmithResp> e) throws Exception {
-                e.onNext(blacksmithResp);
-            }
-        });
-    }
-
 
     private void resetPkSelectStatus() {
         List<Packages> packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder().list();
@@ -411,47 +162,19 @@ public class BlacksmithManager {
         }
     }
 
-    private void newPk(Material material) {
+    private void newPk(BaseBlacksmithModel model) {
         Packages packages = new Packages();
         packages.isEquip = 1;
         packages.isSelect = 1;
         packages.strengthenLevel = 0;
-        packages.type = material.type;
-        DatabaseManager.getInstance().getPackagesDao().insert(packages);
-    }
-
-
-    private void newPk(Weapons weapon) {
-        Packages packages = new Packages();
-        packages.isEquip = 1;
-        packages.isSelect = 1;
-        packages.strengthenLevel = 0;
-        // 这俩个是[服务：换]铜矿石...
-        if (TextUtils.equals(weapon.type, TO_COPPER_TYPE)) {
+        packages.type = model.myType;
+        if (TextUtils.equals(model.myType, TO_COPPER_TYPE)) {
             packages.type = "E2";
-        } else if (TextUtils.equals(weapon.type, TO_STRENGTHEN_TYPE)) {
+        } else if (TextUtils.equals(model.myType, TO_STRENGTHEN_TYPE)) {
             packages.type = "E3";
         } else {
-            packages.type = weapon.type;
+            packages.type = model.myType;
         }
-        DatabaseManager.getInstance().getPackagesDao().insert(packages);
-    }
-
-    private void newPk(Armors armors) {
-        Packages packages = new Packages();
-        packages.isEquip = 1;
-        packages.isSelect = 1;
-        packages.strengthenLevel = 0;
-        packages.type = armors.type;
-        DatabaseManager.getInstance().getPackagesDao().insert(packages);
-    }
-
-    private void newPk(Accessories accessories) {
-        Packages packages = new Packages();
-        packages.isEquip = 1;
-        packages.isSelect = 1;
-        packages.strengthenLevel = 0;
-        packages.type = accessories.type;
         DatabaseManager.getInstance().getPackagesDao().insert(packages);
     }
 
@@ -462,13 +185,9 @@ public class BlacksmithManager {
             if (packages != null) {
                 // 如果删除的装备是已经装备的，则先脱掉装备
                 if (packages.isEquip == 0) {
-                    Object oj = AllGoodsToDBIdUtils.getInstance().getObjectFromType(packages.type);
-                    if (oj != null && oj instanceof Weapons) {
-                        HeroAttributesManager.getInstance().takeOffAttack(packages.strengthenLevel, (Weapons) oj);
-                    } else if (oj != null && oj instanceof Armors) {
-                        HeroAttributesManager.getInstance().takeOffArmor(packages.strengthenLevel, (Armors) oj);
-                    } else if (oj != null && oj instanceof Accessories) {
-                        HeroAttributesManager.getInstance().takeOffAccessories(packages.strengthenLevel, (Accessories) oj);
+                    IAttrsModel oj = AllGoodsToDBIdUtils.getInstance().getAttrsModelFromType(packages.type);
+                    if (oj != null) {
+                        HeroAttributesManager.getInstance().takeOff(packages.strengthenLevel, (IAttrsModel) oj);
                     }
                 }
                 packagesDao.delete(packages);
@@ -476,127 +195,48 @@ public class BlacksmithManager {
         }
     }
 
-    public StrengthenResp strengthenGoods(long pkId, String type) {
+    public StrengthenResp strengthen(long pkId, String type) {
         StrengthenResp resp = new StrengthenResp();
         resp.status = STRENGTHEN_STATUS_ERROR;
-        Object ob = AllGoodsToDBIdUtils.getInstance().getObjectFromType(type);
+        BaseBlacksmithModel model = AllGoodsToDBIdUtils.getInstance().getBlacksmithModelFromType(type);
         PackagesDao packagesDao = DatabaseManager.getInstance().getPackagesDao();
         Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique();
-        if (ob != null && pk != null) {
+        if (model != null && pk != null) {
             // 强化装备为：武器
-            if (ob instanceof Weapons) {
-                Weapons model = (Weapons) ob;
-                if (model.isCanStrengthen == 0) {
-                    List<StrengthenNeedModel> needModels = JsonUtil.decode(model.strengthenFormula, new TypeToken<List<StrengthenNeedModel>>() {
-                    }.getType());
-                    int nextLevel = pk.strengthenLevel + 1;
-                    // 可强化
-                    if (nextLevel <= needModels.size()) {
-                        // 数组越界问题
-                        StrengthenNeedModel needModel = needModels.get(nextLevel - 1);
-                        HasMaterial hasMaterial = hasMaterial(needModel.type);
-                        if (!hasMaterial.isHas) {
-                            resp.status = STRENGTHEN_STATUS_NO_MATERIAL;
+            if (model.canStrengthen == 0) {
+                List<StrengthenNeedModel> needModels = JsonUtil.decode(model.strengthenFormulas, new TypeToken<List<StrengthenNeedModel>>() {
+                }.getType());
+                int nextLevel = pk.strengthenLevel + 1;
+                // 可强化
+                if (nextLevel <= needModels.size()) {
+                    // 数组越界问题
+                    StrengthenNeedModel needModel = needModels.get(nextLevel - 1);
+                    HasMaterial hasMaterial = hasMaterial(needModel.type);
+                    if (!hasMaterial.isHas) {
+                        resp.status = STRENGTHEN_STATUS_NO_MATERIAL;
+                        return resp;
+                    } else {
+                        // 材料足够，先删强化石
+                        packagesDao.delete(packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique());
+                        float probability = needModel.probability * 100;
+                        int random = new Random(System.currentTimeMillis()).nextInt(100);
+                        // 强化成功
+                        if (random <= probability) {
+                            resp.status = STRENGTHEN_STATUS_SUC;
+                            pk.strengthenLevel = nextLevel;
+                            resp.level = pk.strengthenLevel;
+                            resp.strengthId = hasMaterial.id;
+                            packagesDao.update(pk);
                             return resp;
                         } else {
-                            // 材料足够，先删强化石
-                            packagesDao.delete(packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique());
-                            float probability = needModel.probability * 100;
-                            int random = new Random(System.currentTimeMillis()).nextInt(100);
-                            // 强化成功
-                            if (random <= probability) {
-                                resp.status = STRENGTHEN_STATUS_SUC;
-                                pk.strengthenLevel = nextLevel;
-                                resp.level = pk.strengthenLevel;
-                                resp.strengthId = hasMaterial.id;
-                                packagesDao.update(pk);
-                                return resp;
-                            } else {
-                                resp.strengthId = hasMaterial.id;
-                                resp.status = STRENGTHEN_STATUS_FAIL;
-                                return resp;
-                            }
-                        }
-                    } else {
-                        resp.status = STRENGTHEN_STATUS_MAX;
-                        return resp;
-                    }
-                }
-            } else if (ob instanceof Armors) {// 强化装备为：防具
-                Armors model = (Armors) ob;
-                if (model.isCanStrengthen == 0) {
-                    List<StrengthenNeedModel> needModels = JsonUtil.decode(model.strengthenFormula, new TypeToken<List<StrengthenNeedModel>>() {
-                    }.getType());
-                    int nextLevel = pk.strengthenLevel + 1;
-                    // 可强化
-                    if (nextLevel <= needModels.size()) {
-                        // 数组越界问题
-                        StrengthenNeedModel needModel = needModels.get(nextLevel - 1);
-                        HasMaterial hasMaterial = hasMaterial(needModel.type);
-                        if (!hasMaterial.isHas) {
-                            resp.status = STRENGTHEN_STATUS_NO_MATERIAL;
+                            resp.strengthId = hasMaterial.id;
+                            resp.status = STRENGTHEN_STATUS_FAIL;
                             return resp;
-                        } else {
-                            // 材料足够，先删强化石
-                            packagesDao.delete(packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique());
-                            float probability = needModel.probability * 100;
-                            int random = new Random(System.currentTimeMillis()).nextInt(100);
-                            // 强化成功
-                            if (random <= probability) {
-                                resp.status = STRENGTHEN_STATUS_SUC;
-                                pk.strengthenLevel = nextLevel;
-                                resp.level = pk.strengthenLevel;
-                                resp.strengthId = hasMaterial.id;
-                                packagesDao.update(pk);
-                                return resp;
-                            } else {
-                                resp.strengthId = hasMaterial.id;
-                                resp.status = STRENGTHEN_STATUS_FAIL;
-                                return resp;
-                            }
                         }
-                    } else {
-                        resp.status = STRENGTHEN_STATUS_MAX;
-                        return resp;
                     }
-                }
-            } else if (ob instanceof Accessories) {// 强化装备为：饰品
-                Accessories model = (Accessories) ob;
-                if (model.isCanStrengthen == 0) {
-                    List<StrengthenNeedModel> needModels = JsonUtil.decode(model.strengthenFormula, new TypeToken<List<StrengthenNeedModel>>() {
-                    }.getType());
-                    int nextLevel = pk.strengthenLevel + 1;
-                    // 可强化
-                    if (nextLevel <= needModels.size()) {
-                        // 数组越界问题
-                        StrengthenNeedModel needModel = needModels.get(nextLevel - 1);
-                        HasMaterial hasMaterial = hasMaterial(needModel.type);
-                        if (!hasMaterial.isHas) {
-                            resp.status = STRENGTHEN_STATUS_NO_MATERIAL;
-                            return resp;
-                        } else {
-                            // 材料足够，先删强化石
-                            packagesDao.delete(packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique());
-                            float probability = needModel.probability * 100;
-                            int random = new Random(System.currentTimeMillis()).nextInt(100);
-                            // 强化成功
-                            if (random <= probability) {
-                                resp.status = STRENGTHEN_STATUS_SUC;
-                                pk.strengthenLevel = nextLevel;
-                                resp.level = pk.strengthenLevel;
-                                resp.strengthId = hasMaterial.id;
-                                packagesDao.update(pk);
-                                return resp;
-                            } else {
-                                resp.strengthId = hasMaterial.id;
-                                resp.status = STRENGTHEN_STATUS_FAIL;
-                                return resp;
-                            }
-                        }
-                    } else {
-                        resp.status = STRENGTHEN_STATUS_MAX;
-                        return resp;
-                    }
+                } else {
+                    resp.status = STRENGTHEN_STATUS_MAX;
+                    return resp;
                 }
             }
         }

@@ -15,6 +15,7 @@ import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.model.HeroEquipModelVM;
+import com.mdove.levelgame.model.IAttrsModel;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
 import com.mdove.levelgame.view.MyDialog;
 
@@ -210,114 +211,45 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
 
     @Override
     public void onClickTakeOff(final HeroEquipModelVM vm) {
-        final String type = vm.type.get();
-        Observable.create(new ObservableOnSubscribe<Integer>() {
+        Observable.create(new ObservableOnSubscribe<IAttrsModel>() {
             @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+            public void subscribe(ObservableEmitter<IAttrsModel> e) throws Exception {
                 // 获取是武器还是防具
-                int type = AllGoodsToDBIdUtils.getInstance().getDBType(vm.type.get());
-                e.onNext(type);
+                e.onNext(AllGoodsToDBIdUtils.getInstance().getAttrsModelFromType(vm.type.get()));
             }
-        }).compose(RxTransformerHelper.<Integer>schedulerTransf())
-                .map(new Function<Integer, GoodsEquipResp>() {
+        }).compose(RxTransformerHelper.<IAttrsModel>schedulerTransf())
+                .map(new Function<IAttrsModel, GoodsEquipResp>() {
                     @Override
-                    public GoodsEquipResp apply(Integer integer) throws Exception {
-                        switch (integer) {
-                            // 武器逻辑
-                            case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
-                                GoodsEquipResp model = new GoodsEquipResp();
-                                // 从库中找到所脱武器
-                                Weapons takeOffAttack = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(type)).unique();
-                                // 从所有持有的装备(Packages)中，重置isEquip的状态
-                                Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(vm.type.get())
-                                        , PackagesDao.Properties.IsEquip.eq(Integer.valueOf(0))).unique();
-                                if (pk != null) {
-                                    // 更新脱装备的状态
-                                    pk.isEquip = 1;
-                                    packagesDao.update(pk);
-                                    model.takeOffType = pk.type;
-                                    model.takeOffPkId = pk.id;
-                                    model.takeOffStrengthen = pk.strengthenLevel;
-                                    model.takeOffAttack = takeOffAttack;
-                                }
-                                return model;
-                            }
-                            // 防具逻辑
-                            case AllGoodsToDBIdUtils.DB_TYPE_IS_ARMOR: {
-                                GoodsEquipResp model = new GoodsEquipResp();
-                                // 从库中找到脱的铠甲
-                                Armors takeOffArmor = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(type)).unique();
-                                // 从所有持有的装备(Packages)中，重置isEquip的状态
-                                Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(vm.type.get())
-                                        , PackagesDao.Properties.IsEquip.eq(Integer.valueOf(0))).unique();
-                                if (pk != null) {
-                                    // 更新脱装备的状态
-                                    pk.isEquip = 1;
-                                    packagesDao.update(pk);
-                                    model.takeOffType = pk.type;
-                                    model.takeOffPkId = pk.id;
-                                    model.takeOffStrengthen = pk.strengthenLevel;
-                                    model.takeOffArmor = takeOffArmor;
-                                }
-                                return model;
-                            }
-                            // 饰品逻辑
-                            case AllGoodsToDBIdUtils.DB_TYPE_IS_ACCESSORIES: {
-                                GoodsEquipResp model = new GoodsEquipResp();
-                                // 从库中找到脱的铠甲
-                                Accessories takeOffAccessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(type)).unique();
-                                // 从所有持有的装备(Packages)中，重置isEquip的状态
-                                Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(vm.type.get())
-                                        , PackagesDao.Properties.IsEquip.eq(Integer.valueOf(0))).unique();
-                                if (pk != null) {
-                                    // 更新脱装备的状态
-                                    pk.isEquip = 1;
-                                    packagesDao.update(pk);
-                                    model.takeOffType = pk.type;
-                                    model.takeOffPkId = pk.id;
-                                    model.takeOffStrengthen = pk.strengthenLevel;
-                                    model.takeOffAccessories = takeOffAccessories;
-                                }
-                                return model;
-                            }
-                            default:
-                                break;
+                    public GoodsEquipResp apply(IAttrsModel model) throws Exception {
+                        GoodsEquipResp resp = new GoodsEquipResp();
+                        // 从所有持有的装备(Packages)中，重置isEquip的状态
+                        Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(vm.type.get())
+                                , PackagesDao.Properties.IsEquip.eq(Integer.valueOf(0))).unique();
+                        if (pk != null) {
+                            // 更新脱装备的状态
+                            pk.isEquip = 1;
+                            packagesDao.update(pk);
+                            resp.takeOffType = pk.type;
+                            resp.takeOffPkId = pk.id;
+                            resp.takeOffStrengthen = pk.strengthenLevel;
+                            resp.takeOffModel = model;
                         }
-                        return null;
+                        return resp;
                     }
                 }).map(new Function<GoodsEquipResp, NotifyResp>() {
             @Override
             public NotifyResp apply(GoodsEquipResp goodsEquipResp) throws Exception {
                 // 更新英雄属性
-                boolean attackSuc = false;
-                boolean armorSuc = false;
-                boolean accessoriesSuc = false;
-                // 减少脱掉武器的属性
-                if (goodsEquipResp.takeOffAttack != null) {
-                    HeroAttributesManager.getInstance().takeOffAttack(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAttack);
-                    attackSuc = true;
-                }
-                // 减少脱掉护甲的属性
-                if (goodsEquipResp.takeOffArmor != null) {
-                    HeroAttributesManager.getInstance().takeOffArmor(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffArmor);
-                    armorSuc = true;
-                }
-                // 减少脱掉饰品的属性
-                if (goodsEquipResp.takeOffAccessories != null) {
-                    HeroAttributesManager.getInstance().takeOffAccessories(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAccessories);
-                    accessoriesSuc = true;
+                boolean takeOffSuc = false;
+                if (goodsEquipResp.takeOffModel != null) {
+                    HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffModel);
+                    takeOffSuc = true;
                 }
                 NotifyResp resp = null;
-                if (armorSuc || attackSuc || accessoriesSuc) {
+                if (takeOffSuc) {
                     resp = new NotifyResp();
                     resp.takeOffOnId = goodsEquipResp.takeOffPkId;
-                    if (armorSuc) {
-                        resp.takeOffPosition = 2;
-                    } else if (attackSuc) {
-                        resp.takeOffPosition = 1;
-                    } else if (accessoriesSuc) {
-                        resp.takeOffPosition = 3;
-                    }
+                    resp.takeOffType = goodsEquipResp.takeOffType;
                 }
                 return resp;
             }
@@ -330,7 +262,7 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
             public void onNext(NotifyResp resp) {
                 view.dismissLoadingDialog();
                 if (resp.takeOffOnId != -1) {
-                    takeOffById(resp.takeOffPosition);
+                    takeOffByType(resp.takeOffType);
                     view.notifyPackageAddUI(resp.takeOffOnId);
                 } else {
                     MyDialog.showAlert("脱下装备失败", "未知错误", true, view.getContext());
@@ -349,18 +281,27 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
         });
     }
 
-    private void takeOffById(int position) {
+    private void takeOffByType(String type) {
+        int position = -1;
+        if (equipData == null) {
+            return;
+        }
+        for (HeroEquipModelVM modelVM : equipData) {
+            if (!TextUtils.isEmpty(modelVM.type.get()) && modelVM.type.get().equals(type)) {
+                position = equipData.indexOf(modelVM);
+            }
+        }
         switch (position) {
             case 1: {
-                equipData.set(1, new HeroEquipModelVM((long) -1,view.getString(R.string.string_no_hold_on_attack), 0, view.getString(R.string.string_no_hold_on_attack), 0, 0, 0, "-1", false, 1));
+                equipData.set(1, new HeroEquipModelVM((long) -1, view.getString(R.string.string_no_hold_on_attack), 0, view.getString(R.string.string_no_hold_on_attack), 0, 0, 0, "-1", false, 1));
                 break;
             }
             case 2: {
-                equipData.set(2, new HeroEquipModelVM((long) -1,view.getString(R.string.string_no_hold_on_armor), 0, view.getString(R.string.string_no_hold_on_armor), 0, 0, 0, "-1", false, 2));
+                equipData.set(2, new HeroEquipModelVM((long) -1, view.getString(R.string.string_no_hold_on_armor), 0, view.getString(R.string.string_no_hold_on_armor), 0, 0, 0, "-1", false, 2));
                 break;
             }
             case 3: {
-                equipData.set(3, new HeroEquipModelVM((long) -1,view.getString(R.string.string_no_hold_on_accessories), 0, view.getString(R.string.string_no_hold_on_accessories), 0, 0, 0, "-1", false, 3));
+                equipData.set(3, new HeroEquipModelVM((long) -1, view.getString(R.string.string_no_hold_on_accessories), 0, view.getString(R.string.string_no_hold_on_accessories), 0, 0, 0, "-1", false, 3));
                 break;
             }
             default:
@@ -376,14 +317,16 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
         // 用于查强化等级
         public long takeOffStrengthen;
         // 用于外部计算属性增减
+        public IAttrsModel takeOffModel;
+
         public Weapons takeOffAttack;
         public Armors takeOffArmor;
         public Accessories takeOffAccessories;
     }
 
     private class NotifyResp {
+        // 在装备页脱装备，不能单纯的delete，需要添加未装备的占位符(通过id去计算position)
+        public String takeOffType;
         public long takeOffOnId = -1;
-        // 在装备页脱装备，不能单纯的delete，需要添加未装备的占位符
-        public int takeOffPosition = -1;
     }
 }

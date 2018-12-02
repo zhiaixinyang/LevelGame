@@ -1,15 +1,14 @@
 package com.mdove.levelgame.utils;
 
-import com.mdove.levelgame.App;
 import com.mdove.levelgame.greendao.AccessoriesDao;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
-import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
+import com.mdove.levelgame.model.BaseBlacksmithModel;
+import com.mdove.levelgame.model.IAttrsModel;
 
 /**
  * @author MDove on 2018/10/23
@@ -35,8 +34,27 @@ public class AllGoodsToDBIdUtils {
         allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();
     }
 
-    public Object getObjectFromType(String type) {
-        Object ob = null;
+    public IAttrsModel getAttrsModelFromType(String type) {
+        IAttrsModel ob = null;
+        switch (getDBType(type)) {
+            case DB_TYPE_IS_ATTACK: {
+                ob = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.Type.eq(type)).unique();
+                break;
+            }
+            case DB_TYPE_IS_ARMOR: {
+                ob = DatabaseManager.getInstance().getArmorsDao().queryBuilder().where(ArmorsDao.Properties.Type.eq(type)).unique();
+                break;
+            }
+            case DB_TYPE_IS_ACCESSORIES: {
+                ob = DatabaseManager.getInstance().getAccessoriesDao().queryBuilder().where(AccessoriesDao.Properties.Type.eq(type)).unique();
+                break;
+            }
+        }
+        return ob;
+    }
+
+    public BaseBlacksmithModel getBlacksmithModelFromType(String type) {
+        BaseBlacksmithModel ob = null;
         switch (getDBType(type)) {
             case DB_TYPE_IS_ATTACK: {
                 ob = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.Type.eq(type)).unique();
@@ -59,6 +77,7 @@ public class AllGoodsToDBIdUtils {
                 break;
             }
         }
+        ob.constructorBlacksmithModel();
         return ob;
     }
 

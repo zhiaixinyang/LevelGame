@@ -1,5 +1,9 @@
 package com.mdove.levelgame.greendao.entity;
 
+import com.mdove.levelgame.model.BaseAttrsModel;
+import com.mdove.levelgame.model.BaseBlacksmithModel;
+import com.mdove.levelgame.model.IAttrsModel;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -8,7 +12,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by MDove on 2018/10/20.
  */
 @Entity
-public class Weapons {
+public class Weapons extends BaseBlacksmithModel implements IAttrsModel{
     @Id(autoincrement = true)
     public Long id;
 
@@ -175,4 +179,22 @@ public class Weapons {
         this.position = position;
     }
 
+    @Override
+    public void constructorBlacksmithModel() {
+        canMixture = isCanStrengthen;
+        canUpdate = isCanUpdate;
+        canMixture = isCanMixture;
+
+        myName = name;
+        myType = type;
+
+        strengthenFormulas = strengthenFormula;
+        updateFormulas = updateFormula;
+        mixtureFormulas = mixtureFormula;
+    }
+
+    @Override
+    public BaseAttrsModel getAttrsModel() {
+        return new BaseAttrsModel(attack,armor,0,0);
+    }
 }

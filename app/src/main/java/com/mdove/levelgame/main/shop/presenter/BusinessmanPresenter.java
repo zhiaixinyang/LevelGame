@@ -12,7 +12,6 @@ import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.Skill;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BaseBuy;
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
@@ -46,7 +45,7 @@ public class BusinessmanPresenter implements BusinessmanContract.IBusinessmanPre
             List<SellGoodsTemp> sellGoodsTemps = JsonUtil.decode(monsters.sellGoodsJson, new TypeToken<List<SellGoodsTemp>>() {
             }.getType());
             for (SellGoodsTemp temp : sellGoodsTemps) {
-                Object oj = AllGoodsToDBIdUtils.getInstance().getObjectFromType(temp.type);
+                Object oj = AllGoodsToDBIdUtils.getInstance().getBlacksmithModelFromType(temp.type);
                 if (oj != null) {
                     if (oj instanceof Weapons) {
                         Weapons weapons = (Weapons) oj;

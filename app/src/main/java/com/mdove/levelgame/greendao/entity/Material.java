@@ -1,8 +1,9 @@
 package com.mdove.levelgame.greendao.entity;
 
+import com.mdove.levelgame.model.BaseBlacksmithModel;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -11,7 +12,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * 材料 type：E
  */
 @Entity
-public class Material {
+public class Material extends BaseBlacksmithModel{
     @Id(autoincrement = true)
     public Long id;
 
@@ -78,5 +79,15 @@ public class Material {
     }
     public void setMixtureFormula(String mixtureFormula) {
         this.mixtureFormula = mixtureFormula;
+    }
+
+    @Override
+    public void constructorBlacksmithModel() {
+        canMixture = isCanMixture;
+
+        myName = name;
+        myType = type;
+
+        mixtureFormulas = mixtureFormula;
     }
 }

@@ -2,6 +2,8 @@ package com.mdove.levelgame.base.adapter;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.mdove.levelgame.base.BaseActivity;
+
 import java.util.List;
 
 /**
@@ -25,9 +27,12 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         }
     };
 
+    public BaseListAdapter(){
+        registerAdapterDataObserver(observer);
+    }
+
     public void setData(List<T> data) {
         this.data = data;
-        registerAdapterDataObserver(observer);
         notifyDataSetChanged();
     }
 

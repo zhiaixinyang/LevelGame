@@ -1,9 +1,14 @@
 package com.mdove.levelgame.main.task
 
+import android.app.Activity
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
+import android.support.v7.app.AppCompatActivity
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.RxTransformerHelper
 import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.task.data.TaskModelVM
+import com.mdove.levelgame.main.task.data.TaskViewModel
 import com.mdove.levelgame.view.MyDialog
 
 /**
@@ -13,6 +18,14 @@ import com.mdove.levelgame.view.MyDialog
 class TaskPresenter : TaskContract.ITaskPresenter {
     lateinit var view: TaskContract.ITaskView
     lateinit var data: ArrayList<TaskModelVM>
+    lateinit var taskViewModel: TaskViewModel
+
+    override fun subscribe(view: TaskContract.ITaskView?) {
+        this.view = view!!
+        taskViewModel= ViewModelProviders.of(view.context as AppCompatActivity)
+                .get(TaskViewModel::class.java)
+    }
+
     override fun onItemBtnOnClick(modelVM: TaskModelVM) {
         var position: Int = -1
         TaskManager.instance.startTask(modelVM.id.get())
@@ -48,16 +61,9 @@ class TaskPresenter : TaskContract.ITaskPresenter {
     }
 
     override fun initData() {
-        data = ArrayList()
-        var data = DatabaseManager.getInstance().taskDao.queryBuilder().list()
-        for (it in data) {
-            this.data.add(TaskModelVM(it))
+        taskViewModel?.let {
+            it.initData()
         }
-        view.showData(this.data)
-    }
-
-    override fun subscribe(view: TaskContract.ITaskView?) {
-        this.view = view!!
     }
 
     override fun unSubscribe() {

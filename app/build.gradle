@@ -118,6 +118,11 @@ dependencies {
     implementation dependencies.retrofitConverterGson
     implementation dependencies.retrofitAdapter2RxJava
 
+    // alternatively, just ViewModel
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    // alternatively, just LiveData
+    implementation "android.arch.lifecycle:livedata:1.1.1"
+
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
     implementation 'org.greenrobot:greendao:3.2.0'

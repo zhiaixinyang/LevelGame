@@ -55,6 +55,7 @@ class HeroSkillPresenter : HeroSkillContract.IHeroSkillPresenter {
                 }
             }
         }
+
         view.showData(this.data)
     }
 }

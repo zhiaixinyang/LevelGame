@@ -2,6 +2,7 @@ package com.mdove.levelgame;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.di.DaggerAppComponent;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by MDove on 2018/2/9.
@@ -64,11 +66,6 @@ public class App extends DaggerApplication {
         resetPkSelectStatus();
     }
 
-    @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerAppComponent.builder().create(this);
-    }
-
     // 没次重启，重置材料选择状态
     public void resetPkSelectStatus() {
         List<Packages> packages = DatabaseManager.getInstance().getPackagesDao().loadAll();
@@ -93,5 +90,10 @@ public class App extends DaggerApplication {
             mApiServer = RetrofitUtil.create(UrlConstants.HOST_API_ONLINE, ApiServer.class);
         }
         return mApiServer;
+    }
+
+    @Override
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppComponent.builder().create(this);
     }
 }

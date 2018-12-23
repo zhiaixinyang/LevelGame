@@ -7,20 +7,19 @@ import com.mdove.levelgame.base.RxTransformerHelper
 import com.mdove.levelgame.main.task.data.TaskModelVM
 import com.mdove.levelgame.main.task.data.TaskViewModel
 import com.mdove.levelgame.view.MyDialog
-import javax.inject.Inject
 
 /**
  * @author MDove on 2018/11/5
  *
  */
-class TaskPresenter @Inject constructor() : TaskContract.ITaskPresenter {
+class TaskPresenter : TaskContract.ITaskPresenter {
     lateinit var view: TaskContract.ITaskView
     lateinit var data: ArrayList<TaskModelVM>
     lateinit var taskViewModel: TaskViewModel
 
     override fun subscribe(view: TaskContract.ITaskView?) {
         this.view = view!!
-        taskViewModel= ViewModelProviders.of(view.context as AppCompatActivity)
+        taskViewModel = ViewModelProviders.of(view.context as AppCompatActivity)
                 .get(TaskViewModel::class.java)
     }
 

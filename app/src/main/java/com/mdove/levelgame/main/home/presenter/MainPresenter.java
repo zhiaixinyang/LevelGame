@@ -58,7 +58,7 @@ public class MainPresenter implements MainContract.IMainPresenter {
 
     @Override
     public void onClickGoShop() {
-        ShopActivity.start(mView.getContext());
+        ShopActivity.Companion.start(mView.getContext());
     }
 
     @Override

@@ -53,7 +53,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 MonstersPlaceActivity.start(view.getContext());
                 break;
             case INTENT_TO_SHOP: {
-                ShopActivity.start(view.getContext());
+                ShopActivity.Companion.start(view.getContext());
                 break;
             }
             case INTENT_TO_BLACKSMITH: {

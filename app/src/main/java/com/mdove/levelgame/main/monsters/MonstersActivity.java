@@ -15,7 +15,6 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.main.monsters.adapter.MonstersAdapter;
 import com.mdove.levelgame.main.monsters.manager.AdventureManager;
-import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.monsters.presenter.MonstersConstract;
 import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter;
@@ -65,7 +64,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         presenter = new MonstersPresenter();
         presenter.subscribe(this);
 
-        adapter = new MonstersAdapter(this, presenter);
+        adapter = new MonstersAdapter(presenter);
 
         rlv = findViewById(R.id.rlv);
         tvPower = findViewById(R.id.tv_power);

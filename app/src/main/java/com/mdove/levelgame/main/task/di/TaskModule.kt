@@ -2,6 +2,7 @@ package com.mdove.levelgame.main.task.di
 
 import com.mdove.levelgame.main.task.TaskPresenter
 import com.mdove.levelgame.main.task.adapter.TaskAdapter
+import com.ss.android.buzz.dependencies.ActivityScope
 import dagger.Module
 import dagger.Provides
 
@@ -10,8 +11,10 @@ import dagger.Provides
  */
 @Module
 class TaskModule {
+
+    @ActivityScope
     @Provides
-    fun providesTaskAdapter(presenter: TaskPresenter): TaskAdapter {
-        return TaskAdapter(presenter)
+    fun providesPresenter():TaskPresenter{
+        return TaskPresenter()
     }
 }

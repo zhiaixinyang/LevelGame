@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.skill.di
 
 import com.mdove.levelgame.main.skill.HomeSkillActivity
+import com.ss.android.buzz.dependencies.ActivityScope
 import dagger.Component
 
 /**

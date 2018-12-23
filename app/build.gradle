@@ -121,6 +121,7 @@ dependencies {
     kapt dependencies.dagger.compiler
     implementation dependencies.dagger.android
     kapt dependencies.dagger.processor
+    implementation dependencies.dagger.support
 
     // alternatively, just ViewModel
     implementation "android.arch.lifecycle:viewmodel:1.1.1"

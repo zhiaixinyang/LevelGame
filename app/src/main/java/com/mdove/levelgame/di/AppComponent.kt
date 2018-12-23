@@ -2,8 +2,8 @@ package com.mdove.levelgame.di
 
 import com.mdove.levelgame.App
 import dagger.Component
-import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 /**
@@ -12,7 +12,7 @@ import javax.inject.Singleton
  * 先只用AndroidInjectionModule编译，然后App中继承DaggerApplication...
  */
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, BuildersModule::class])
+@Component(modules = [AndroidSupportInjectionModule::class, BuildersModule::class])
 interface AppComponent : AndroidInjector<App> {
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<App>()

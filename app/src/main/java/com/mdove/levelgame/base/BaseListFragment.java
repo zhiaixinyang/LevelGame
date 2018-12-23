@@ -15,9 +15,6 @@ import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.utils.InflateUtils;
 import com.mdove.levelgame.view.MyProgressDialog;
 
-import java.util.List;
-
-
 public abstract class BaseListFragment extends Fragment implements BaseView {
     private RecyclerView rlv;
     private BaseListAdapter adapter;

@@ -4,13 +4,14 @@ import android.support.v7.widget.RecyclerView;
 
 import com.mdove.levelgame.base.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author zhaojing on 2018/10/22
  */
 public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<T> data;
+    protected List<T> data =new ArrayList<>();
     private OnDataEmptyListener mListener;
     private RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
         @Override
@@ -27,7 +28,7 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         }
     };
 
-    public BaseListAdapter(){
+    public BaseListAdapter() {
         registerAdapterDataObserver(observer);
     }
 

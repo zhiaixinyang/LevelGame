@@ -15,6 +15,8 @@ import com.mdove.levelgame.main.shop.presenter.BlacksmithArmorPresenter;
 import com.mdove.levelgame.main.shop.presenter.BlacksmithPresenter;
 import com.mdove.levelgame.utils.InflateUtils;
 
+import java.util.List;
+
 
 /**
  * Created by MDove on 2018/10/30.
@@ -35,6 +37,11 @@ public class BlacksmithArmorAdapter extends BaseListAdapter<BlacksmithModelVM> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder)holder).bind(getData().get(position));
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -2,6 +2,7 @@ package com.ss.android.uilib.recyclerview
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.mdove.levelgame.base.adapter.BaseListAdapter
 
 /**
  * 封装了EmptyView，HeaderView，FooterView的Adapter
@@ -11,7 +12,7 @@ import android.view.ViewGroup
  *
  * 如设置了headerView的第一个Bean，listPosition为0，但是adapterPosition为1
  */
-abstract class RecyclerViewAdapterEx<VH : RecyclerView.ViewHolder, Bean : Any> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class RecyclerViewAdapterEx<VH : RecyclerView.ViewHolder, Bean : Any> : BaseListAdapter<Bean>() {
     companion object {
         private const val TYPE_EMPTY = ViewHolderProducer.VIEW_TYPE_EMPTY
         private const val TYPE_HEADER = ViewHolderProducer.VIEW_TYPE_HEADER
@@ -22,8 +23,6 @@ abstract class RecyclerViewAdapterEx<VH : RecyclerView.ViewHolder, Bean : Any> :
     private var mHeaderViewProducer: ViewHolderProducer? = null
     private var mFooterViewProducer: ViewHolderProducer? = null
     private var mIsEmpty: Boolean = false
-
-    abstract val list: MutableList<Bean>
 
     /**
      * equivalent to [.getItemViewType]
@@ -55,12 +54,12 @@ abstract class RecyclerViewAdapterEx<VH : RecyclerView.ViewHolder, Bean : Any> :
     }
 
     fun getAdapterPosition(bean: Bean): Int {
-        val listIndex = list.indexOf(bean)
+        val listIndex = data.indexOf(bean)
         return if (listIndex >= 0 && mHeaderViewProducer != null) listIndex + 1 else listIndex
     }
 
     fun getBeanByAdapterPosition(adapterPosition: Int): Bean {
-        return list[getListPosition(adapterPosition)]
+        return data[getListPosition(adapterPosition)]
     }
 
     fun getListPosition(adapterPosition: Int): Int {
@@ -142,7 +141,7 @@ abstract class RecyclerViewAdapterEx<VH : RecyclerView.ViewHolder, Bean : Any> :
     }
 
     override fun getItemCount(): Int {
-        var result = list.size
+        var result = getData().size
         if (result == 0 && mEmptyViewProducer != null) {
             mIsEmpty = true
             return if (mHeaderViewProducer == null) 1 else 2

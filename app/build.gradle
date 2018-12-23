@@ -117,6 +117,10 @@ dependencies {
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverterGson
     implementation dependencies.retrofitAdapter2RxJava
+    implementation dependencies.dagger.core
+    kapt dependencies.dagger.compiler
+    implementation dependencies.dagger.android
+    kapt dependencies.dagger.processor
 
     // alternatively, just ViewModel
     implementation "android.arch.lifecycle:viewmodel:1.1.1"

@@ -22,4 +22,14 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="BlinkSlideView">
+        <attr name="auto_start" format="boolean|reference"/>
+        <attr name="repeat" format="integer|reference"/>
+        <attr name="round" format="dimension|reference"/>
+        <attr name="round_top_left" format="dimension|reference"/>
+        <attr name="round_top_right" format="dimension|reference"/>
+        <attr name="round_bottom_left" format="dimension|reference"/>
+        <attr name="round_bottom_right" format="dimension|reference"/>
+    </declare-styleable>
+
 </resources>

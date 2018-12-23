@@ -9,7 +9,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.mdove.levelgame.R;
@@ -32,6 +30,8 @@ import com.mdove.levelgame.view.MyProgressDialog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
+import dagger.android.AndroidInjection;
 
 /**
  * @author MDove on 2018/10/29.
@@ -47,6 +47,7 @@ public abstract class BaseListActivity<T> extends AppCompatActivity implements B
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        androidInject();
         super.onCreate(savedInstanceState);
         //hideStatusBar();
         super.setContentView(R.layout.activity_base_list);
@@ -86,6 +87,17 @@ public abstract class BaseListActivity<T> extends AppCompatActivity implements B
         mRlv.setAdapter(adapter);
 
         loadData();
+    }
+
+    // 不使用AndroidInjection注入的可以复写false
+    public boolean enableAndroidInject() {
+        return true;
+    }
+
+    private void androidInject() {
+        if (enableAndroidInject()) {
+            AndroidInjection.inject(this);
+        }
     }
 
     public abstract BaseListAdapter<T> createAdapter();

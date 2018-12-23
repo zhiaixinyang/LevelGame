@@ -10,7 +10,6 @@ import com.mdove.levelgame.base.adapter.BaseListAdapter
 import com.mdove.levelgame.main.task.adapter.TaskAdapter
 import com.mdove.levelgame.main.task.data.TaskModelVM
 import com.mdove.levelgame.main.task.data.TaskViewModel
-import com.mdove.levelgame.main.task.di.DaggerTaskComponent
 import javax.inject.Inject
 
 /**
@@ -21,6 +20,9 @@ import javax.inject.Inject
 class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
     @Inject
     lateinit var presenter: TaskPresenter
+    @Inject
+    lateinit var adapter: TaskAdapter
+
     lateinit var viewModel: TaskViewModel
 
     companion object {
@@ -34,7 +36,7 @@ class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
     }
 
     override fun createAdapter(): BaseListAdapter<TaskModelVM> {
-        return TaskAdapter(presenter)
+        return adapter
     }
 
     override fun onResume() {
@@ -47,7 +49,6 @@ class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
     }
 
     override fun initData(intent: Intent?) {
-        presenter = DaggerTaskComponent.builder().build().getPresenter()
         presenter.subscribe(this)
         viewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
 

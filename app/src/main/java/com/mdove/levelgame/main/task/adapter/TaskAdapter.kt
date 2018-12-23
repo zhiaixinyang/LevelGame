@@ -9,11 +9,12 @@ import com.mdove.levelgame.main.task.TaskPresenter
 import com.mdove.levelgame.main.task.data.TaskItemHandler
 import com.mdove.levelgame.main.task.data.TaskModelVM
 import com.mdove.levelgame.utils.InflateUtils
+import javax.inject.Inject
 
 /**
  * Created by MDove on 2018/11/24.
  */
-class TaskAdapter(presenter: TaskPresenter) : BaseListAdapter<TaskModelVM>() {
+class TaskAdapter @Inject constructor(presenter: TaskPresenter) : BaseListAdapter<TaskModelVM>() {
     var presenter = presenter
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(InflateUtils.bindingInflate(parent!!, R.layout.item_task))

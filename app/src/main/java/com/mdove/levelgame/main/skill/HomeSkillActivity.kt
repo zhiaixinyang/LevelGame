@@ -7,16 +7,22 @@ import com.mdove.levelgame.R
 import com.mdove.levelgame.base.BaseListActivity
 import com.mdove.levelgame.base.adapter.BaseListAdapter
 import com.mdove.levelgame.main.skill.adapter.HomeSkillAdapter
+import com.mdove.levelgame.main.skill.di.DaggerSkillComponent
+import com.mdove.levelgame.main.skill.di.SkillComponent
 import com.mdove.levelgame.main.skill.model.HomeSkillModelVM
 import com.mdove.levelgame.main.skill.presenter.HomeSkillContract
 import com.mdove.levelgame.main.skill.presenter.HomeSkillPresenter
+import javax.inject.Inject
 
 /**
  * Created by MDove on 2018/11/14.
  */
 
 class HomeSkillActivity : BaseListActivity<HomeSkillModelVM>(), HomeSkillContract.ISkillView {
+    @Inject
     lateinit var presenter: HomeSkillPresenter
+    @Inject
+    lateinit var adapter: HomeSkillAdapter
 
     companion object {
         fun start(context: Context) {
@@ -29,16 +35,21 @@ class HomeSkillActivity : BaseListActivity<HomeSkillModelVM>(), HomeSkillContrac
     }
 
     override fun createAdapter(): BaseListAdapter<HomeSkillModelVM> {
-        return HomeSkillAdapter(presenter)
+        return adapter
+    }
+
+    override fun enableAndroidInject(): Boolean {
+        return false
     }
 
     override fun loadData() {
-        title=getString(R.string.string_activity_home_skill)
+        title = getString(R.string.string_activity_home_skill)
         presenter.initData()
     }
 
     override fun initData(intent: Intent?) {
-        presenter = HomeSkillPresenter()
+        DaggerSkillComponent.create().inject(this)
+
         presenter.subscribe(this)
     }
 

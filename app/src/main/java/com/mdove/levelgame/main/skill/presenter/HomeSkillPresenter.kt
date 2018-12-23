@@ -5,13 +5,13 @@ import com.mdove.levelgame.base.RxTransformerHelper
 import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.skill.HeroSkillManager
 import com.mdove.levelgame.main.skill.model.HomeSkillModelVM
-import com.mdove.levelgame.utils.log.LogUtils
 import com.mdove.levelgame.view.MyDialog
+import javax.inject.Inject
 
 /**
  * Created by MDove on 2018/11/14.
  */
-class HomeSkillPresenter : HomeSkillContract.ISkillPresenter {
+class HomeSkillPresenter @Inject constructor() : HomeSkillContract.ISkillPresenter {
     lateinit var view: HomeSkillContract.ISkillView
     lateinit var data: ArrayList<HomeSkillModelVM>
     override fun subscribe(view: HomeSkillContract.ISkillView?) {

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.mdove.levelgame.config.AppConfig;
+import com.mdove.levelgame.di.DaggerAppComponent;
 import com.mdove.levelgame.greendao.AccessoriesDao;
 import com.mdove.levelgame.greendao.AdventureDao;
 import com.mdove.levelgame.greendao.AllGoodsDao;
@@ -29,11 +30,14 @@ import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+
 /**
  * Created by MDove on 2018/2/9.
  */
 
-public class App extends Application {
+public class App extends DaggerApplication {
     public static Context mAppContext;
     private static ApiServer mApiServer;
 
@@ -58,6 +62,11 @@ public class App extends Application {
             AppConfig.setHasLogin();
         }
         resetPkSelectStatus();
+    }
+
+    @Override
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppComponent.builder().create(this);
     }
 
     // 没次重启，重置材料选择状态

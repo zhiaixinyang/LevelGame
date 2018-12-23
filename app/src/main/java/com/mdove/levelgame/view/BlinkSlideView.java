@@ -21,7 +21,7 @@ import android.widget.FrameLayout;
 import com.mdove.levelgame.R;
 
 /**
- * Created by MDoveon 2018/12/17.
+ * Created by MDove on 2018/12/17.
  * 闪光滑动控件，内置一张闪光图，平滑地从做到右滑动，无限重复
  * 做的比较简单，定制需求可以再扩展
  */

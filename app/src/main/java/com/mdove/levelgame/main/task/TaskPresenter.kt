@@ -1,21 +1,19 @@
 package com.mdove.levelgame.main.task
 
-import android.app.Activity
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.RxTransformerHelper
-import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.task.data.TaskModelVM
 import com.mdove.levelgame.main.task.data.TaskViewModel
 import com.mdove.levelgame.view.MyDialog
+import javax.inject.Inject
 
 /**
  * @author MDove on 2018/11/5
  *
  */
-class TaskPresenter : TaskContract.ITaskPresenter {
+class TaskPresenter @Inject constructor() : TaskContract.ITaskPresenter {
     lateinit var view: TaskContract.ITaskView
     lateinit var data: ArrayList<TaskModelVM>
     lateinit var taskViewModel: TaskViewModel

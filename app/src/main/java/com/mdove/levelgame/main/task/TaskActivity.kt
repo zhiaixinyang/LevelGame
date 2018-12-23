@@ -10,13 +10,18 @@ import com.mdove.levelgame.base.adapter.BaseListAdapter
 import com.mdove.levelgame.main.task.adapter.TaskAdapter
 import com.mdove.levelgame.main.task.data.TaskModelVM
 import com.mdove.levelgame.main.task.data.TaskViewModel
+import com.mdove.levelgame.main.task.di.DaggerTaskComponent
+import javax.inject.Inject
 
 /**
  * Created by MDove on 2018/11/24.
+ *
+ * Dagger文档：https://google.github.io/dagger/users-guide
  */
 class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
+    @Inject
     lateinit var presenter: TaskPresenter
-    lateinit var viewModel :TaskViewModel
+    lateinit var viewModel: TaskViewModel
 
     companion object {
         fun start(context: Context) {
@@ -42,13 +47,13 @@ class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
     }
 
     override fun initData(intent: Intent?) {
-        presenter = TaskPresenter()
+        presenter = DaggerTaskComponent.builder().build().getPresenter()
         presenter.subscribe(this)
-        viewModel=ViewModelProviders.of(this).get(TaskViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
 
         val tasksObserver = Observer<MutableList<TaskModelVM>> { data ->
             adapter?.let {
-                it.data=data
+                it.data = data
             }
         }
 

@@ -1,5 +1,8 @@
 package com.mdove.levelgame.base;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.LifecycleRegistry;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,37 +15,51 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.base.kotlin.ActivityLauncher;
+import com.mdove.levelgame.base.kotlin.JobHandler;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.home.HomeActivity;
-import com.mdove.levelgame.utils.DensityUtil;
 import com.mdove.levelgame.view.MyDialog;
 import com.mdove.levelgame.view.MyProgressDialog;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import kotlinx.coroutines.Job;
+import kotlinx.coroutines.JobImpl;
+import kotlinx.coroutines.JobKt;
+
 /**
  * @author MDove on 2018/2/14.
  */
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView, ActivityLauncher, LifecycleOwner
+        , JobHandler {
     private MyProgressDialog progressDialog;
     private Toolbar mToolbar;
     private TextView mLayoutEmpty;
     private FrameLayout mContentContainer;
     private TextView btnAttr, btnGoHome;
     private List<IBackHandler> mBackHandlers = new ArrayList<>();
+    private LifecycleRegistry mLifecycleRegistry = new LifecycleRegistry(this);
+    private ResultHandleHelper mResultHandlerHelper = new ResultHandleHelper(this);
+
+    @Override
+    public Job getJob() {
+        return JobKt.Job(null);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -254,6 +271,38 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     }
 
+    @Override
+    public void addResultHandler(int requestCode, IResultHandler handler) {
+        mResultHandlerHelper.addHandler(requestCode, handler);
+    }
+
+    @Override
+    public boolean removeResultHandler(@NotNull IResultHandler handler) {
+        return mResultHandlerHelper.removeHandler(handler);
+    }
+
+    @Override
+    public IResultHandler removeResultHandler(int requestCode) {
+        return mResultHandlerHelper.removeHandler(requestCode);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mResultHandlerHelper.handleActivityResult(this, requestCode, resultCode, data);
+    }
+
+    @Override
+    public void startActForResult(@NotNull Intent intent, int requestCode, @Nullable Bundle options) {
+        ActivityCompat.startActivityForResult(this, intent, requestCode, options);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLifecycleRegistry.markState(Lifecycle.State.DESTROYED);
+    }
+
     public interface IBackHandler {
         boolean handleBackPressed(boolean fromKey);
     }
@@ -301,6 +350,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             }
         });
     }
+
+    @Override
+    public Lifecycle getLifecycle() {
+        return mLifecycleRegistry;
+    }
+
 
     @Override
     public Context getContext() {

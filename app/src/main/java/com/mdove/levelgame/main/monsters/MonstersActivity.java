@@ -1,6 +1,8 @@
 package com.mdove.levelgame.main.monsters;
 
 import android.app.Activity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
 import com.mdove.levelgame.main.monsters.adapter.MonstersAdapter;
 import com.mdove.levelgame.main.monsters.manager.AdventureManager;
+import com.mdove.levelgame.main.monsters.model.MonstersViewModel;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.monsters.presenter.MonstersConstract;
 import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter;
@@ -37,6 +40,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
     private MonstersAdapter adapter;
     private long monsterPlaceId;
     private String title;
+    private MonstersViewModel mViewModel;
 
     public static void start(Context context, long monsterPlaceId, String title) {
         Intent start = new Intent(context, MonstersActivity.class);
@@ -81,7 +85,17 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         rlv.setLayoutManager(new LinearLayoutManager(this));
         rlv.setAdapter(adapter);
 
-        presenter.initData(monsterPlaceId);
+        mViewModel = ViewModelProviders.of(this).get(MonstersViewModel.class);
+        mViewModel.loadMonsters(monsterPlaceId);
+        mViewModel.getMonstersData().observe(this, new Observer<List<MonstersModelVM>>() {
+            @Override
+            public void onChanged(@Nullable List<MonstersModelVM> monstersModelVMS) {
+                adapter.setData(monstersModelVMS);
+            }
+        });
+
+//        presenter.initData(monsterPlaceId);
+
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.greenrobot.greendao'
 
 def getVersionCodeProperty() {
@@ -89,6 +90,7 @@ android {
     dataBinding {
         enabled = true
     }
+
 }
 
 kapt {
@@ -111,9 +113,10 @@ dependencies {
     implementation dependencies.constranintLayout
     implementation dependencies.cardView
     implementation dependencies.design
+    implementation dependencies.recyclerView
+
     implementation dependencies.rxAndroid
     implementation dependencies.rxJava
-    implementation dependencies.recyclerView
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverterGson
     implementation dependencies.retrofitAdapter2RxJava
@@ -123,21 +126,20 @@ dependencies {
     kapt dependencies.dagger.processor
     implementation dependencies.dagger.support
 
-    // alternatively, just ViewModel
-    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    implementation dependencies.kotlin.core
+    implementation dependencies.kotlin.coroutines
+    implementation dependencies.kotlin.coroutines_android
+
     implementation "android.arch.lifecycle:extensions:1.1.1"
-    // alternatively, just LiveData
-    implementation "android.arch.lifecycle:livedata:1.1.1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
     implementation 'org.greenrobot:greendao:3.2.0'
-    implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:crashreport:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
     kapt 'com.android.databinding:compiler:3.0.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.airbnb.android:lottie:2.0.0'
-    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
 }
 repositories {
     mavenCentral()

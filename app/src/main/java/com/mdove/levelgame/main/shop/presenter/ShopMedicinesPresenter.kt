@@ -35,9 +35,9 @@ class ShopMedicinesPresenter : ShopMedicinesContract.IShopMedicinesPresenter {
         mView.showData(data)
     }
 
-    override fun onItemBtnClick(id: Long?) {
+    override fun onItemBtnClick(id: Long) {
         Observable.create(ObservableOnSubscribe<BuyMedicinesResp> { e ->
-            val resp = HeroBuyManager.getInstance().buyMedicines(id!!)
+            val resp = HeroBuyManager.getInstance().buyMedicines(id)
             e.onNext(resp)
         }).subscribe({ buyMedicinesResp ->
             when (buyMedicinesResp.buyStatus) {
@@ -53,22 +53,21 @@ class ShopMedicinesPresenter : ShopMedicinesContract.IShopMedicinesPresenter {
                             mView.context.getString(R.string.string_buy_content_error_no_count), true)
                 }
                 HeroBuyManager.BUY_MEDICINES_STATUS_SUC -> {
-                    val content: String
-                    if (buyMedicinesResp.lifeUp > 0) {
-                        content = String.format(mView.context.getString(R.string.string_buy_medicines_suc_and_up), buyMedicinesResp.life,
+                    val content: String = if (buyMedicinesResp.lifeUp > 0) {
+                        String.format(mView.context.getString(R.string.string_buy_medicines_suc_and_up), buyMedicinesResp.life,
                                 buyMedicinesResp.price, buyMedicinesResp.lifeUp, buyMedicinesResp.name, buyMedicinesResp.attack, buyMedicinesResp.armor)
                     } else {
-                        content = String.format(mView.context.getString(R.string.string_buy_medicines_suc),
+                        String.format(mView.context.getString(R.string.string_buy_medicines_suc),
                                 buyMedicinesResp.life, buyMedicinesResp.price, buyMedicinesResp.name)
                     }
-                    notifyUI(id!!)
+                    notifyUI(id)
                     MyDialog.showMyDialog(mView.context, mView.context.getString(R.string.string_buy_title_suc),
                             content, true)
                 }
                 else -> {
                 }
             }
-        }, { })
+        }, {})
     }
 
     private fun notifyUI(id: Long) {

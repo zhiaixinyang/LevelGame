@@ -28,7 +28,7 @@ class MonstersRepository {
         return data
     }
 
-    suspend fun loadDataFromPlaceId(placeId: Long): MutableList<MonstersModelVM> {
+    private fun loadDataFromPlaceId(placeId: Long): MutableList<MonstersModelVM> {
         var data = mutableListOf<MonstersModelVM>()
         // 特殊怪物出现设置
         SpecialMonsterManager.getInstance().setShowSpecialMonster()

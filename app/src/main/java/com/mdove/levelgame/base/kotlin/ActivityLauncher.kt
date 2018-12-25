@@ -1,9 +1,6 @@
 package com.mdove.levelgame.base.kotlin
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.OnLifecycleEvent
+import android.arch.lifecycle.*
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -41,9 +38,8 @@ interface ActivityLauncher : LifecycleOwner {
         private val isHandled = AtomicBoolean(false)
 
         fun onCreate() {
-            launcher.lifecycle.addObserver(object : LifecycleObserver {
-                @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-                fun onDestroy(owner: LifecycleOwner) {
+            launcher.lifecycle.addObserver(object : DefaultLifecycleObserver {
+                override fun onDestroy(owner: LifecycleOwner) {
                     resultHandlerMap.clear()
                     isHandled.set(false)
                 }

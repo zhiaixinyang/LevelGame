@@ -278,7 +278,8 @@ public class HeroAttributesManager {
 
     public void heroLevel(long exp) {
         long levelExp = getLevelExp(heroAttributes);
-        if (heroAttributes.experience + exp >= levelExp) {
+        long endExp = heroAttributes.experience + exp;
+        if (endExp >= levelExp) {
             heroAttributes.level += 1;
             heroAttributes.skillCount++;
             heroAttributes.experience = (heroAttributes.experience + exp) - levelExp;
@@ -287,6 +288,8 @@ public class HeroAttributesManager {
             heroAttributes.armor += heroAttributes.armorIncrease;
             heroAttributes.curLife += heroAttributes.lifeIncrease;
             heroAttributes.maxLife += heroAttributes.lifeIncrease;
+            heroLevel(0);
+            return;
         } else {
             heroAttributes.experience += exp;
         }
@@ -542,7 +545,7 @@ public class HeroAttributesManager {
         return name;
     }
 
-    public void takeOff(long strengthen, IAttrsModel model){
+    public void takeOff(long strengthen, IAttrsModel model) {
         heroAttributes.attack -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseAttack);
         heroAttributes.armor -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseArmor);
         heroAttributes.attackSpeed += model.getAttrsModel().baseAttackSpeed;

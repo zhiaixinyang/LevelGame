@@ -19,24 +19,24 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
         android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
+        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:background="@drawable/bg_white_round">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:onClick="@{()->handler.onClickStudy(vm)}"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_item_hero_package_bg">
+            android:background="@drawable/ic_item_hero_package_bg"
+            android:onClick="@{()->handler.onClickStudy(vm)}">
 
             <FrameLayout
                 android:id="@+id/iv_src"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/bg_gray_round"
                 android:padding="3dp"
-                android:layout_marginTop="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name">
@@ -63,12 +63,12 @@
                 android:id="@+id/tv_need_skill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{vm.needSkillCount}"
                 android:textColor="@color/red_700"
                 android:textSize="12sp"
-                android:text="@{vm.needSkillCount}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_name"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
                 tools:text="所需技能点" />
 
             <TextView
@@ -89,13 +89,13 @@
                 android:id="@+id/btn_equip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_take_off_equip_blue"
-                android:paddingBottom="4dp"
+                android:background="@{vm.skill.hasStudy==1?@drawable/bg_red:@drawable/bg_blue}"
                 android:paddingLeft="8dp"
-                android:paddingRight="8dp"
                 android:paddingTop="4dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="4dp"
                 android:text="@{vm.btnName}"
-                android:textColor="@color/blue_700"
+                android:textColor="@{vm.skill.hasStudy==1?@color/red_600:@color/blue_700}"
                 android:textSize="@dimen/item_hero_equip_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

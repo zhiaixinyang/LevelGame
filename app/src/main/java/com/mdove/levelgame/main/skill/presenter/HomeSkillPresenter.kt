@@ -46,6 +46,8 @@ class HomeSkillPresenter : HomeSkillContract.ISkillPresenter {
                             MyDialog.showMyDialog(view.context, view.getString(R.string.string_study_err_title)
                                     , String.format(view.getString(R.string.string_study_err_has_study_content), t.name), true)
                         }
+                        else -> {
+                        }
                     }
                 }, {
                 })

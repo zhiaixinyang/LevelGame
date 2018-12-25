@@ -491,6 +491,26 @@
     "is_businessman": 1,
     "consume_power": 30,
     "exp": 100
+  },
+  {
+    "id": 26,
+    "name": "副本-三国",
+    "tips": "三国系列副本",
+    "attack": 0,
+    "armor": 0,
+    "money": 0,
+    "life": 0,
+    "type": "C26",
+    "is_businessman": 2,
+    "fb_type": "[{\"type\":\"H1\",\"price\":50}]",
+    "monster_place_id": 1,
+    "drop_goods_id": 1,
+    "exp": 10,
+    "is_limit_count": 1,
+    "limit_count": 0,
+    "attack_speed": 1500,
+    "is_show": 0,
+    "consume_power": 10
   }
   //,
   //  {

@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "<font color=\"#1976d2\">[副本]赤壁之战</font>",
+    "tips": "副本赤壁",
+    "type": "H1",
+    "is_limit_count": 0,
+    "limit_count": 1,
+    "cur_count": 1,
+    "consume_power": 30
+  }
+]

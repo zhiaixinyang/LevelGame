@@ -42,7 +42,7 @@ public class Monsters {
     public long exp;
     // 体力消耗
     public int consumePower;
-    // 是否是商人
+    // 是否是商人(1表示普通怪物，0表示商人，2表示副本)
     public int isBusinessman;
     // 卖出商品的json
     public String sellGoodsJson;

@@ -6,12 +6,11 @@ import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.skill.HeroSkillManager
 import com.mdove.levelgame.main.skill.model.HomeSkillModelVM
 import com.mdove.levelgame.view.MyDialog
-import javax.inject.Inject
 
 /**
  * Created by MDove on 2018/11/14.
  */
-class HomeSkillPresenter @Inject constructor() : HomeSkillContract.ISkillPresenter {
+class HomeSkillPresenter : HomeSkillContract.ISkillPresenter {
     lateinit var view: HomeSkillContract.ISkillView
     lateinit var data: ArrayList<HomeSkillModelVM>
     override fun subscribe(view: HomeSkillContract.ISkillView?) {
@@ -35,6 +34,7 @@ class HomeSkillPresenter @Inject constructor() : HomeSkillContract.ISkillPresent
                 .subscribe({ t ->
                     when (t.status) {
                         HeroSkillManager.CODE_STATUS_STUDY_SUC -> {
+                            view.refreshStudyStatus(findPostionById(t.skillId))
                             MyDialog.showMyDialog(view.context, view.getString(R.string.string_study_suc_title)
                                     , String.format(view.getString(R.string.string_study_suc_content), t.name, t.needSkillCount), true)
                         }
@@ -49,5 +49,20 @@ class HomeSkillPresenter @Inject constructor() : HomeSkillContract.ISkillPresent
                     }
                 }, {
                 })
+    }
+
+    fun findPostionById(id: Long): Int {
+        var position = data.firstOrNull {
+            it.skill.id == id
+        }.apply {
+            this?.refreshBtnName(1)
+        }?.let {
+            data.indexOf(it)
+        }
+
+        if (position == null) {
+            position = -1
+        }
+        return position
     }
 }

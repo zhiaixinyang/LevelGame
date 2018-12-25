@@ -18,6 +18,7 @@ import javax.inject.Inject
  */
 
 class HomeSkillActivity : BaseListActivity<HomeSkillModelVM>(), HomeSkillContract.ISkillView {
+
     @Inject
     lateinit var presenter: HomeSkillPresenter
     @Inject
@@ -53,5 +54,9 @@ class HomeSkillActivity : BaseListActivity<HomeSkillModelVM>(), HomeSkillContrac
 
     override fun showData(data: ArrayList<HomeSkillModelVM>) {
         adapter.data = data
+    }
+
+    override fun refreshStudyStatus(postion: Int) {
+        adapter.refreshBtnName(postion)
     }
 }

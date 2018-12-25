@@ -197,4 +197,7 @@
     <string name="string_task_need_money">所需金钱：%1$d</string>
     <string name="string_empty">空空如也</string>
 
+    <string name="string_skill_has_study">已学习</string>
+    <string name="string_skill_to_study">学习</string>
+
 </resources>

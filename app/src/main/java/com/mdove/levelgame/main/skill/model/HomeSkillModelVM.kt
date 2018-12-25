@@ -10,7 +10,7 @@ import com.mdove.levelgame.greendao.utils.SrcIconMap
  * Created by MDove on 2018/11/14.
  */
 class HomeSkillModelVM(skill: Skill) {
-    var skill=skill
+    var skill = skill
     var pkId = ObservableField<Long>()
     var name = ObservableField<String>()
     var btnName = ObservableField<String>()
@@ -26,6 +26,21 @@ class HomeSkillModelVM(skill: Skill) {
         type.set(skill.type)
         name.set(skill.name)
         needSkillCount.set(String.format(App.getAppContext().getString(R.string.string_need_skill_count), skill.needSkillCount))
-        btnName.set("学习")
+
+        val string = if (skill.hasStudy == 1) {
+            App.mAppContext.getString(R.string.string_skill_has_study)
+        } else {
+            App.mAppContext.getString(R.string.string_skill_to_study)
+        }
+        btnName.set(string)
+    }
+
+    fun refreshBtnName(hasStudy: Int) {
+        val string = if (hasStudy == 1) {
+            App.mAppContext.getString(R.string.string_skill_has_study)
+        } else {
+            App.mAppContext.getString(R.string.string_skill_to_study)
+        }
+        btnName.set(string)
     }
 }

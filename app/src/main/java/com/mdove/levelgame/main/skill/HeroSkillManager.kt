@@ -43,7 +43,11 @@ class HeroSkillManager private constructor() {
         }
         // 学习技能
         if (heroAttributes.skillCount >= skill.needSkillCount) {
+            skill.hasStudy = 1
+            DatabaseManager.getInstance().skillDao.update(skill)
+
             resp.status = CODE_STATUS_STUDY_SUC
+            resp.skillId = skill.id
             resp.needSkillCount = skill.needSkillCount
             heroAttributes.skillCount -= skill.needSkillCount
             var pk = Packages()
@@ -63,6 +67,7 @@ class HeroSkillManager private constructor() {
 
     inner class StudySkillResp {
         lateinit var name: String
+        var skillId = 0L
         var status = 0
         var needSkillCount = 0
     }

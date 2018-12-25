@@ -34,12 +34,14 @@ public class Skill extends BaseBlacksmithModel{
     public float dizzinessProbability;
     public String belongType;
     public int needSkillCount;
-    @Generated(hash = 481896070)
+    public int hasStudy;
+
+    @Generated(hash = 1712019914)
     public Skill(Long id, String name, String tips, String type, float attackHeavy,
             float attackHeavyProbability, float bloodSuckProbability,
             float ignoreArmorProbability, float ignoreAttackProbability,
             long realAttack, long dizziness, float dizzinessProbability,
-            String belongType, int needSkillCount) {
+            String belongType, int needSkillCount, int hasStudy) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -54,97 +56,135 @@ public class Skill extends BaseBlacksmithModel{
         this.dizzinessProbability = dizzinessProbability;
         this.belongType = belongType;
         this.needSkillCount = needSkillCount;
+        this.hasStudy = hasStudy;
     }
+
     @Generated(hash = 1993658816)
     public Skill() {
-    }
-    public Long getId() {
-        return this.id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getName() {
-        return this.name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getTips() {
-        return this.tips;
-    }
-    public void setTips(String tips) {
-        this.tips = tips;
-    }
-    public String getType() {
-        return this.type;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-    public float getAttackHeavy() {
-        return this.attackHeavy;
-    }
-    public void setAttackHeavy(float attackHeavy) {
-        this.attackHeavy = attackHeavy;
-    }
-    public float getAttackHeavyProbability() {
-        return this.attackHeavyProbability;
-    }
-    public void setAttackHeavyProbability(float attackHeavyProbability) {
-        this.attackHeavyProbability = attackHeavyProbability;
-    }
-    public float getBloodSuckProbability() {
-        return this.bloodSuckProbability;
-    }
-    public void setBloodSuckProbability(float bloodSuckProbability) {
-        this.bloodSuckProbability = bloodSuckProbability;
-    }
-    public float getIgnoreArmorProbability() {
-        return this.ignoreArmorProbability;
-    }
-    public void setIgnoreArmorProbability(float ignoreArmorProbability) {
-        this.ignoreArmorProbability = ignoreArmorProbability;
-    }
-    public float getIgnoreAttackProbability() {
-        return this.ignoreAttackProbability;
-    }
-    public void setIgnoreAttackProbability(float ignoreAttackProbability) {
-        this.ignoreAttackProbability = ignoreAttackProbability;
-    }
-    public long getRealAttack() {
-        return this.realAttack;
-    }
-    public void setRealAttack(long realAttack) {
-        this.realAttack = realAttack;
-    }
-    public long getDizziness() {
-        return this.dizziness;
-    }
-    public void setDizziness(long dizziness) {
-        this.dizziness = dizziness;
-    }
-    public float getDizzinessProbability() {
-        return this.dizzinessProbability;
-    }
-    public void setDizzinessProbability(float dizzinessProbability) {
-        this.dizzinessProbability = dizzinessProbability;
-    }
-    public String getBelongType() {
-        return this.belongType;
-    }
-    public void setBelongType(String belongType) {
-        this.belongType = belongType;
-    }
-    public int getNeedSkillCount() {
-        return this.needSkillCount;
-    }
-    public void setNeedSkillCount(int needSkillCount) {
-        this.needSkillCount = needSkillCount;
     }
 
     @Override
     public void constructorBlacksmithModel() {
 
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTips() {
+        return this.tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public float getAttackHeavy() {
+        return this.attackHeavy;
+    }
+
+    public void setAttackHeavy(float attackHeavy) {
+        this.attackHeavy = attackHeavy;
+    }
+
+    public float getAttackHeavyProbability() {
+        return this.attackHeavyProbability;
+    }
+
+    public void setAttackHeavyProbability(float attackHeavyProbability) {
+        this.attackHeavyProbability = attackHeavyProbability;
+    }
+
+    public float getBloodSuckProbability() {
+        return this.bloodSuckProbability;
+    }
+
+    public void setBloodSuckProbability(float bloodSuckProbability) {
+        this.bloodSuckProbability = bloodSuckProbability;
+    }
+
+    public float getIgnoreArmorProbability() {
+        return this.ignoreArmorProbability;
+    }
+
+    public void setIgnoreArmorProbability(float ignoreArmorProbability) {
+        this.ignoreArmorProbability = ignoreArmorProbability;
+    }
+
+    public float getIgnoreAttackProbability() {
+        return this.ignoreAttackProbability;
+    }
+
+    public void setIgnoreAttackProbability(float ignoreAttackProbability) {
+        this.ignoreAttackProbability = ignoreAttackProbability;
+    }
+
+    public long getRealAttack() {
+        return this.realAttack;
+    }
+
+    public void setRealAttack(long realAttack) {
+        this.realAttack = realAttack;
+    }
+
+    public long getDizziness() {
+        return this.dizziness;
+    }
+
+    public void setDizziness(long dizziness) {
+        this.dizziness = dizziness;
+    }
+
+    public float getDizzinessProbability() {
+        return this.dizzinessProbability;
+    }
+
+    public void setDizzinessProbability(float dizzinessProbability) {
+        this.dizzinessProbability = dizzinessProbability;
+    }
+
+    public String getBelongType() {
+        return this.belongType;
+    }
+
+    public void setBelongType(String belongType) {
+        this.belongType = belongType;
+    }
+
+    public int getNeedSkillCount() {
+        return this.needSkillCount;
+    }
+
+    public void setNeedSkillCount(int needSkillCount) {
+        this.needSkillCount = needSkillCount;
+    }
+
+    public int getHasStudy() {
+        return this.hasStudy;
+    }
+
+    public void setHasStudy(int hasStudy) {
+        this.hasStudy = hasStudy;
     }
 }

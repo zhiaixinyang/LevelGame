@@ -38,6 +38,7 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         public final static Property DizzinessProbability = new Property(11, float.class, "dizzinessProbability", false, "DIZZINESS_PROBABILITY");
         public final static Property BelongType = new Property(12, String.class, "belongType", false, "BELONG_TYPE");
         public final static Property NeedSkillCount = new Property(13, int.class, "needSkillCount", false, "NEED_SKILL_COUNT");
+        public final static Property HasStudy = new Property(14, int.class, "hasStudy", false, "HAS_STUDY");
     }
 
 
@@ -66,7 +67,8 @@ public class SkillDao extends AbstractDao<Skill, Long> {
                 "\"DIZZINESS\" INTEGER NOT NULL ," + // 10: dizziness
                 "\"DIZZINESS_PROBABILITY\" REAL NOT NULL ," + // 11: dizzinessProbability
                 "\"BELONG_TYPE\" TEXT," + // 12: belongType
-                "\"NEED_SKILL_COUNT\" INTEGER NOT NULL );"); // 13: needSkillCount
+                "\"NEED_SKILL_COUNT\" INTEGER NOT NULL ," + // 13: needSkillCount
+                "\"HAS_STUDY\" INTEGER NOT NULL );"); // 14: hasStudy
     }
 
     /** Drops the underlying database table. */
@@ -112,6 +114,7 @@ public class SkillDao extends AbstractDao<Skill, Long> {
             stmt.bindString(13, belongType);
         }
         stmt.bindLong(14, entity.getNeedSkillCount());
+        stmt.bindLong(15, entity.getHasStudy());
     }
 
     @Override
@@ -151,6 +154,7 @@ public class SkillDao extends AbstractDao<Skill, Long> {
             stmt.bindString(13, belongType);
         }
         stmt.bindLong(14, entity.getNeedSkillCount());
+        stmt.bindLong(15, entity.getHasStudy());
     }
 
     @Override
@@ -174,7 +178,8 @@ public class SkillDao extends AbstractDao<Skill, Long> {
             cursor.getLong(offset + 10), // dizziness
             cursor.getFloat(offset + 11), // dizzinessProbability
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // belongType
-            cursor.getInt(offset + 13) // needSkillCount
+            cursor.getInt(offset + 13), // needSkillCount
+            cursor.getInt(offset + 14) // hasStudy
         );
         return entity;
     }
@@ -195,6 +200,7 @@ public class SkillDao extends AbstractDao<Skill, Long> {
         entity.setDizzinessProbability(cursor.getFloat(offset + 11));
         entity.setBelongType(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setNeedSkillCount(cursor.getInt(offset + 13));
+        entity.setHasStudy(cursor.getInt(offset + 14));
      }
     
     @Override

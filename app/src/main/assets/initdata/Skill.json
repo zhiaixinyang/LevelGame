@@ -9,10 +9,11 @@
     "blood_suck_probability": 0.2,
     "ignore_armor_probability": 0.5,
     "ignore_attack_probability": 0.5,
-    "belong_type":"null",
+    "belong_type": "null",
     "need_skill_count": 10,
     "real_attack": 100,
     "dizziness": 3000,
+    "has_study": 0,
     "dizziness_probability": 0.5
   },
   {
@@ -27,8 +28,9 @@
     "ignore_armor_probability": 0,
     "ignore_attack_probability": 0,
     "real_attack": 0,
-    "belong_type":"main6",
+    "belong_type": "main6",
     "dizziness": 0,
+    "has_study": 0,
     "dizziness_probability": 0
   },
   {
@@ -43,8 +45,9 @@
     "ignore_armor_probability": 0,
     "ignore_attack_probability": 0.2,
     "real_attack": 0,
-    "belong_type":"main6",
+    "belong_type": "main6",
     "dizziness": 0,
+    "has_study": 0,
     "dizziness_probability": 0
   },
   {
@@ -59,8 +62,9 @@
     "ignore_attack_probability": 0,
     "real_attack": 0,
     "need_skill_count": 4,
-    "belong_type":"main6",
+    "belong_type": "main6",
     "dizziness": 0,
+    "has_study": 0,
     "dizziness_probability": 0
   }
 ]

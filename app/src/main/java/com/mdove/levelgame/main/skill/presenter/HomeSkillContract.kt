@@ -15,5 +15,6 @@ class HomeSkillContract {
 
     interface ISkillView : BaseView {
         fun showData(data: ArrayList<HomeSkillModelVM>)
+        fun refreshStudyStatus(postion:Int)
     }
 }

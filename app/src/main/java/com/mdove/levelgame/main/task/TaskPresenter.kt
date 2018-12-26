@@ -7,6 +7,8 @@ import com.mdove.levelgame.base.RxTransformerHelper
 import com.mdove.levelgame.main.task.data.TaskModelVM
 import com.mdove.levelgame.main.task.data.TaskViewModel
 import com.mdove.levelgame.view.MyDialog
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * @author MDove on 2018/11/5

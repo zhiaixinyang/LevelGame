@@ -8,7 +8,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by MDove on 2018/12/25.
  */
 @Entity
-public class FB {
+public class FbMonsters {
     @Id
     public Long id;
     public String name;
@@ -18,9 +18,11 @@ public class FB {
     public int limitCount;
     public int curCount;
     public int consumePower;
-    @Generated(hash = 1474305914)
-    public FB(Long id, String name, String tips, String type, int isLimitCount,
-            int limitCount, int curCount, int consumePower) {
+    public long fbPlaceId;
+    @Generated(hash = 1817103974)
+    public FbMonsters(Long id, String name, String tips, String type,
+            int isLimitCount, int limitCount, int curCount, int consumePower,
+            long fbPlaceId) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -29,9 +31,10 @@ public class FB {
         this.limitCount = limitCount;
         this.curCount = curCount;
         this.consumePower = consumePower;
+        this.fbPlaceId = fbPlaceId;
     }
-    @Generated(hash = 1719339594)
-    public FB() {
+    @Generated(hash = 1708338996)
+    public FbMonsters() {
     }
     public Long getId() {
         return this.id;
@@ -80,5 +83,11 @@ public class FB {
     }
     public void setConsumePower(int consumePower) {
         this.consumePower = consumePower;
+    }
+    public long getFbPlaceId() {
+        return this.fbPlaceId;
+    }
+    public void setFbPlaceId(long fbPlaceId) {
+        this.fbPlaceId = fbPlaceId;
     }
 }

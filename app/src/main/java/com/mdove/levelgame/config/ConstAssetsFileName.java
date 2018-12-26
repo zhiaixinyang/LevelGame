@@ -13,7 +13,8 @@ public class ConstAssetsFileName {
     public static final String ASSETS_MONSTERS_PLACE = CONFIG + "MonstersPlace.json";
     public static final String ASSETS_BIG_MONSTERS = CONFIG + "BigMonsters.json";
     public static final String ASSETS_DROP_GOODS = CONFIG + "DropGoods.json";
-    public static final String ASSETS_FB = CONFIG + "Fb.json";
+    public static final String ASSETS_FB_MONSTER = CONFIG + "FbMonster.json";
+    public static final String ASSETS_FB_PLACE = CONFIG + "FbPlace.json";
     public static final String ASSETS_MEDICINES_SHOP = CONFIG + "MedicineShop.json";
     public static final String ASSETS_MATERIALS = CONFIG + "Materials.json";
     public static final String ASSETS_ADVENTURE = CONFIG + "Adventure.json";

@@ -39,6 +39,8 @@
     <color name="pickerview_topbar_title">#000000</color>
     <color name="bgColor_overlay">#60000000</color>
 
+    <color name="transparent">#00000000</color>
+
     <!-- 九宫格锁 -->
     <color name="pomegranate">#f4511e</color>
     <color name="lockColorControlNormal">#FFFFFF</color>

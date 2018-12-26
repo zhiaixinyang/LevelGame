@@ -1,7 +1,6 @@
 package com.mdove.levelgame.greendao.utils;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.mdove.levelgame.greendao.AccessoriesDao;
 import com.mdove.levelgame.greendao.AdventureDao;
@@ -11,7 +10,8 @@ import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DaoMaster;
 import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.DropGoodsDao;
-import com.mdove.levelgame.greendao.FBDao;
+import com.mdove.levelgame.greendao.FbMonstersDao;
+import com.mdove.levelgame.greendao.FbPlaceDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
 import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.MaterialDao;
@@ -55,7 +55,8 @@ public class DatabaseManager {
     private AccessoriesDao accessoriesDao;
     private TaskDao taskDao;
     private SkillDao skillDao;
-    private FBDao mFBDao;
+    private FbPlaceDao mFbPlaceDao;
+    private FbMonstersDao mFbMonstersDao;
 
     private static final class Holder {
         private static final DatabaseManager INSTANCE = new DatabaseManager();
@@ -99,7 +100,8 @@ public class DatabaseManager {
         accessoriesDao = mDaoSession.getAccessoriesDao();
         taskDao = mDaoSession.getTaskDao();
         skillDao = mDaoSession.getSkillDao();
-        mFBDao = mDaoSession.getFBDao();
+        mFbPlaceDao = mDaoSession.getFbPlaceDao();
+        mFbMonstersDao = mDaoSession.getFbMonstersDao();
     }
 
     public MaterialDao getMaterialDao() {
@@ -167,8 +169,12 @@ public class DatabaseManager {
         return adventureDao;
     }
 
-    public FBDao getFBDao() {
-        return mFBDao;
+    public FbPlaceDao getFbPlaceDao() {
+        return mFbPlaceDao;
+    }
+
+    public FbMonstersDao getFbMonstersDao() {
+        return mFbMonstersDao;
     }
 
     public TaskDao getTaskDao() {

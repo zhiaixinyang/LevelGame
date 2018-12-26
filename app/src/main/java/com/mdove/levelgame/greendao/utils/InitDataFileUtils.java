@@ -11,7 +11,8 @@ import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DropGoodsDao;
-import com.mdove.levelgame.greendao.FBDao;
+import com.mdove.levelgame.greendao.FbMonstersDao;
+import com.mdove.levelgame.greendao.FbPlaceDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
 import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.MaterialDao;
@@ -27,7 +28,8 @@ import com.mdove.levelgame.greendao.entity.Adventure;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.DropGoods;
-import com.mdove.levelgame.greendao.entity.FB;
+import com.mdove.levelgame.greendao.entity.FbMonsters;
+import com.mdove.levelgame.greendao.entity.FbPlace;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.entity.Material;
@@ -39,10 +41,7 @@ import com.mdove.levelgame.greendao.entity.Task;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
-import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
-import com.mdove.levelgame.main.shop.model.ShopArmorModel;
-import com.mdove.levelgame.main.shop.model.ShopAttackModel;
 import com.mdove.levelgame.utils.FileUtil;
 import com.mdove.levelgame.utils.JsonUtil;
 
@@ -94,8 +93,10 @@ public class InitDataFileUtils {
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
         AdventureDao adventureDao = DatabaseManager.getInstance().getAdventureDao();
         adventureDao.deleteAll();
-        FBDao fbDao = DatabaseManager.getInstance().getFBDao();
-        fbDao.deleteAll();
+        FbPlaceDao fbPlaceDao = DatabaseManager.getInstance().getFbPlaceDao();
+        fbPlaceDao.deleteAll();
+        FbMonstersDao fbMonstersDao = DatabaseManager.getInstance().getFbMonstersDao();
+        fbMonstersDao.deleteAll();
         MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
         mainMenuDao.deleteAll();
 
@@ -179,8 +180,12 @@ public class InitDataFileUtils {
             medicinesDao.insert(medicine);
         }
 
-        for (FB fb : getInitFb()) {
-            fbDao.insert(fb);
+        for (FbMonsters fbMonsters : getInitFbMonsters()) {
+            fbMonstersDao.insert(fbMonsters);
+        }
+
+        for (FbPlace fbPlace : getInitFbPlace()) {
+            fbPlaceDao.insert(fbPlace);
         }
 
         if (monstersPlaceModels == null) {
@@ -270,11 +275,21 @@ public class InitDataFileUtils {
         return null;
     }
 
-    public static List<FB> getInitFb() {
+    public static List<FbMonsters> getInitFbMonsters() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
-                ConstAssetsFileName.ASSETS_FB);
+                ConstAssetsFileName.ASSETS_FB_MONSTER);
         if (json != null) {
-            return JsonUtil.decode(json, new TypeToken<List<FB>>() {
+            return JsonUtil.decode(json, new TypeToken<List<FbMonsters>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<FbPlace> getInitFbPlace() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_FB_PLACE);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<FbPlace>>() {
             }.getType());
         }
         return null;

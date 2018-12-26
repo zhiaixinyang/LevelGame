@@ -14,7 +14,6 @@ import com.mdove.levelgame.base.BaseNormalDialog;
 /**
  * Created by MDove on 2018/10/21.
  */
-
 public class MyDialog {
 
     public static void showConfirm(String title, String msg, boolean cancelable, Context context, DialogInterface.OnClickListener positiveListener) {

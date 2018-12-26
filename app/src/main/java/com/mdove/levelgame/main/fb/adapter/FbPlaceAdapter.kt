@@ -20,7 +20,7 @@ class FbPlaceAdapter(val presenter:FbPlacePresenter) :BaseListAdapter<FbPlaceVM>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolder(InflateUtils.bindingInflate(parent!!, R.layout.item_home_skill))
+        return ViewHolder(InflateUtils.bindingInflate(parent!!, R.layout.item_fb_place))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {

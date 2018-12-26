@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <!--<activity android:name=".TestActivity"-->
         <activity
-            android:name=".main.home.HomeActivity"
+            android:name="com.mdove.levelgame.main.home.HomeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>

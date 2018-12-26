@@ -2,6 +2,7 @@ package com.mdove.levelgame.main.fb.ui
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
@@ -25,8 +26,10 @@ class FbPlaceEnterView @JvmOverloads constructor(context: Context, attrs: Attrib
     init {
         View.inflate(context, R.layout.view_fb_place_enter_view, this)
         rlv = findViewById(R.id.rlv)
+        rlv.layoutManager = LinearLayoutManager(context)
         presenter = FbPlacePresenter()
         adapter = FbPlaceAdapter(presenter)
+        rlv.adapter = adapter
         presenter.subscribe(this)
         presenter.initData()
     }

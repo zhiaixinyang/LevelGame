@@ -74,6 +74,23 @@ public class InitDataFileUtils {
         heroAttributes.attackSpeed = 1500;
         heroAttributes.skillCount = 1;
         heroAttributes.days = 1;
+        heroAttributes.liLiang = 0;
+        heroAttributes.liLiangExp = 0;
+        heroAttributes.liLiangBaseExp = 100;
+        heroAttributes.liLiangExpMultiple = 2;
+        heroAttributes.minJie = 0;
+        heroAttributes.minJieExp = 0;
+        heroAttributes.minJieBaseExp = 100;
+        heroAttributes.minJieExpMultiple = 2;
+        heroAttributes.zhiHui = 0;
+        heroAttributes.zhiHuiExp = 0;
+        heroAttributes.zhiHuiBaseExp = 100;
+        heroAttributes.zhiHuiExpMultiple = 2;
+        heroAttributes.qiangZhuang = 0;
+        heroAttributes.qiangZhuangExp = 0;
+        heroAttributes.qiangZhuangBaseExp = 100;
+        heroAttributes.qiangZhuangExpMultiple = 2;
+
         dao.insert(heroAttributes);
 
         HeroManager.getInstance().resetAttr();

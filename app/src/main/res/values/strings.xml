@@ -78,6 +78,12 @@
     <string name="shop_accessories_msg_armor">增加护甲：%1$d</string>
     <string name="shop_accessories_msg_life">增加生命：%1$d</string>
 
+    <string name="hero_attributes_liliang_and_exp">当前力量：%1$d 经验:%2$d / %3$d</string>
+    <string name="hero_attributes_minjie_and_exp">当前敏捷：%1$d 经验:%2$d / %3$d</string>
+    <string name="hero_attributes_zhihui_and_exp">当前智慧：%1$d 经验:%2$d / %3$d</string>
+    <string name="hero_attributes_qiangzhuang_and_exp">当前强壮：%1$d 经验:%2$d / %3$d</string>
+
+
     <string name="hero_attributes_msg_attack"><![CDATA[当前攻击：%1$d <font color="#64b5f6">成长：%2$d</font>]]></string>
     <string name="hero_attributes_msg_armor"><![CDATA[当前护甲：%1$d <font color="#64b5f6">成长：%2$d</font>]]></string>
     <string name="hero_attributes_msg_life"><![CDATA[当前生命：%1$d / %2$d <font color="#64b5f6">成长：%3$d</font>]]></string>
@@ -159,7 +165,9 @@
     <string name="string_faker_power">你触发了“作弊”代码，体力恢复至100。</string>
     <string name="string_update_mes">更新公告</string>
     <string name="string_feed_back">反馈 / 吐槽</string>
-    <string name="string_update_mes_content"><![CDATA[<font color="#2962FF">V1.01版本更新</font><br/>1、修复药品购买次数Bug。<br/>2、修复已知UI显示Bug。<br/>3、修复重置游戏Bug。<br/>4、增加技能玩法<br/>5、增加更多的奇遇/特殊怪物。<br/>6、增加全新装备，增加部分装备属性，增强部分魔王属性。<br/><font color="#2962FF">V1.02版本更新</font><br/>1、增加任务系统<br/>2、战斗中增加撤退功能]]></string>
+    <string name="string_update_mes_content"><![CDATA[<font color="#2962FF">V1.01版本更新</font><br/>1、修复药品购买次数Bug。<br/>2、修复已知UI显示Bug。<br/>3、修复重置游戏Bug。<br/>4、增加技能玩法<br/>5、增加更多的奇遇/特殊怪物。<br/>6、增加全新装备，增加部分装备属性，增强部分魔王属性。<br/>
+    <font color="#2962FF">V1.02版本更新</font><br/>1、增加任务系统<br/>2、战斗中增加撤退功能<br/>3、修复Bug<br/>
+    <font color="#2962FF">V1.03版本更新</font><br/>1、允许取消魔王入侵玩法<br/>2、增加力量、敏捷、智慧、强壮属性<br/>3、装备增加属性限制]]></string>
 
     <!--更新String-->
     <string name="update_title">发现全新版本</string>
@@ -200,9 +208,9 @@
     <string name="string_skill_has_study">已学习</string>
     <string name="string_skill_to_study">学习</string>
     <string name="string_setting_big_monsters">取消魔王入侵玩法</string>
-    <string name="string_setting_switch_big_monster_title">取消魔王入侵</string>
-    <string name="string_setting_switch_cancel_big_monster_title">恢复魔王入侵</string>
+    <string name="string_setting_switch_big_monster_title">[取消]魔王入侵</string>
+    <string name="string_setting_switch_cancel_big_monster_title">[恢复]魔王入侵</string>
     <string name="string_setting_switch_cancel_big_monster_content">恢复魔王入侵。注意：需要重置游戏！！！</string>
-    <string name="string_setting_switch_big_monster_content">取消魔王入侵。注意：取消后，如果重新开启将重置游戏！</string>
+    <string name="string_setting_switch_big_monster_content">取消魔王入侵，取消后魔王将不再入侵。注意：取消后，如果重新开启，将重置游戏！</string>
 
 </resources>

@@ -1,17 +1,13 @@
 package com.mdove.levelgame.greendao.entity;
 
+import com.mdove.levelgame.greendao.utils.IntegerConverter;
+
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+
+import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.ToOne;
-import org.greenrobot.greendao.DaoException;
-
-import com.mdove.levelgame.greendao.DaoSession;
-import com.mdove.levelgame.greendao.DropGoodsDao;
-
-import org.greenrobot.greendao.annotation.NotNull;
-
-import com.mdove.levelgame.greendao.MonstersDao;
 
 /**
  * Created by MDove on 2018/10/20.
@@ -55,12 +51,23 @@ public class Monsters {
     public int curCount;
     // 攻击速度，毫秒级（对应Rx的弹射间隔，此值越来越低）
     public long attackSpeed;
-    @Generated(hash = 1961512431)
+    // 经验随机，下标0，1
+    @Convert(columnType = String.class, converter = IntegerConverter.class)
+    public List<Integer> expLiLiang;
+    @Convert(columnType = String.class, converter = IntegerConverter.class)
+    public List<Integer> expMinJie;
+    @Convert(columnType = String.class, converter = IntegerConverter.class)
+    public List<Integer> expZhiHui;
+    @Convert(columnType = String.class, converter = IntegerConverter.class)
+    public List<Integer> expQiangZhuang;
+    @Generated(hash = 750128625)
     public Monsters(Long id, int life, String type, int attack, int armor,
             int money, String tips, String name, long dropGoodsId,
             long monsterPlaceId, long exp, int consumePower, int isBusinessman,
             String sellGoodsJson, int isShow, int isLimitCount, int limitCount,
-            int curCount, long attackSpeed) {
+            int curCount, long attackSpeed, List<Integer> expLiLiang,
+            List<Integer> expMinJie, List<Integer> expZhiHui,
+            List<Integer> expQiangZhuang) {
         this.id = id;
         this.life = life;
         this.type = type;
@@ -80,6 +87,10 @@ public class Monsters {
         this.limitCount = limitCount;
         this.curCount = curCount;
         this.attackSpeed = attackSpeed;
+        this.expLiLiang = expLiLiang;
+        this.expMinJie = expMinJie;
+        this.expZhiHui = expZhiHui;
+        this.expQiangZhuang = expQiangZhuang;
     }
     @Generated(hash = 1349461748)
     public Monsters() {
@@ -198,4 +209,29 @@ public class Monsters {
     public void setAttackSpeed(long attackSpeed) {
         this.attackSpeed = attackSpeed;
     }
+    public List<Integer> getExpLiLiang() {
+        return this.expLiLiang;
+    }
+    public void setExpLiLiang(List<Integer> expLiLiang) {
+        this.expLiLiang = expLiLiang;
+    }
+    public List<Integer> getExpMinJie() {
+        return this.expMinJie;
+    }
+    public void setExpMinJie(List<Integer> expMinJie) {
+        this.expMinJie = expMinJie;
+    }
+    public List<Integer> getExpZhiHui() {
+        return this.expZhiHui;
+    }
+    public void setExpZhiHui(List<Integer> expZhiHui) {
+        this.expZhiHui = expZhiHui;
+    }
+    public List<Integer> getExpQiangZhuang() {
+        return this.expQiangZhuang;
+    }
+    public void setExpQiangZhuang(List<Integer> expQiangZhuang) {
+        this.expQiangZhuang = expQiangZhuang;
+    }
+
 }

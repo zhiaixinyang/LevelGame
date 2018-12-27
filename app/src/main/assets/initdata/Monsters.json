@@ -11,6 +11,22 @@
     "is_businessman": 1,
     "monster_place_id": 1,
     "drop_goods_id": 1,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "exp": 10,
     "is_limit_count": 1,
     "limit_count": 0,
@@ -28,6 +44,22 @@
     "money": 30,
     "type": "C2",
     "is_show": 0,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_limit_count": 1,
     "limit_count": 0,
     "attack_speed": 1500,
@@ -47,6 +79,22 @@
     "money": 150,
     "type": "C3",
     "is_show": 0,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_limit_count": 0,
     "limit_count": 2,
     "cur_count": 2,
@@ -67,6 +115,22 @@
     "life": 100,
     "is_show": 0,
     "type": "C4",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_limit_count": 0,
     "limit_count": 2,
     "cur_count": 2,
@@ -87,6 +151,22 @@
     "money": 100,
     "type": "C5",
     "is_show": 0,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_businessman": 1,
     "monster_place_id": 1,
     "attack_speed": 1500,
@@ -106,6 +186,22 @@
     "money": 0,
     "type": "C6",
     "is_show": 0,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_businessman": 1,
     "is_limit_count": 0,
     "attack_speed": 1500,
@@ -125,6 +221,22 @@
     "life": 1000,
     "money": 50,
     "type": "C7",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_businessman": 1,
     "is_limit_count": 0,
     "limit_count": 1,
@@ -145,6 +257,22 @@
     "life": 100,
     "money": 0,
     "type": "C8",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_limit_count": 1,
     "is_show": 0,
     "attack_speed": 1500,
@@ -163,6 +291,22 @@
     "life": 200,
     "money": 0,
     "type": "C9",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_show": 0,
     "is_limit_count": 0,
     "limit_count": 3,
@@ -184,6 +328,22 @@
     "attack_speed": 1500,
     "money": 0,
     "type": "C10",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_show": 0,
     "monster_place_id": 4,
     "is_limit_count": 1,
@@ -203,6 +363,22 @@
     "is_show": 0,
     "attack_speed": 1500,
     "type": "C11",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_limit_count": 0,
     "limit_count": 1,
     "cur_count": 1,
@@ -221,6 +397,22 @@
     "life": 99999,
     "money": 0,
     "type": "C12",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_show": 0,
     "is_limit_count": 1,
     "monster_place_id": 2,
@@ -241,6 +433,22 @@
     "money": 0,
     "type": "C13",
     "is_show": 1,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "monster_place_id": 5,
     "attack_speed": 1500,
     "drop_goods_id": 0,
@@ -259,6 +467,22 @@
     "life": 5000,
     "money": 100,
     "type": "C14",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_limit_count": 0,
     "limit_count": 1,
     "cur_count": 1,
@@ -279,6 +503,22 @@
     "life": 3000,
     "money": 50,
     "type": "C15",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_limit_count": 0,
     "attack_speed": 1500,
     "limit_count": 1,
@@ -303,6 +543,22 @@
     "is_limit_count": 1,
     "limit_count": 0,
     "cur_count": 0,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_show": 1,
     "monster_place_id": 3,
     "drop_goods_id": 10,
@@ -322,6 +578,22 @@
     "type": "C17",
     "is_limit_count": 0,
     "limit_count": 1,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "attack_speed": 1500,
     "cur_count": 1,
     "is_show": 0,
@@ -358,6 +630,22 @@
     "attack": 2000,
     "armor": 0,
     "life": 20000,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "money": 0,
     "type": "C19",
     "is_limit_count": 0,
@@ -380,6 +668,22 @@
     "life": 666,
     "money": 0,
     "type": "C20",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_show": 1,
     "monster_place_id": 6,
     "attack_speed": 1500,
@@ -400,6 +704,22 @@
     "armor": 0,
     "life": 666,
     "money": 0,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "type": "C21",
     "is_limit_count": 0,
     "limit_count": 1,
@@ -419,6 +739,22 @@
     "attack": 0,
     "armor": 0,
     "life": 666,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "money": 200,
     "type": "C22",
     "is_limit_count": 0,
@@ -439,6 +775,22 @@
     "attack": 3500,
     "armor": 2000,
     "life": 12000,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "money": 100,
     "type": "C23",
     "is_limit_count": 0,
@@ -461,6 +813,22 @@
     "life": 1000,
     "money": 100,
     "type": "C24",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "is_limit_count": 0,
     "limit_count": 1,
     "cur_count": 1,
@@ -479,6 +847,22 @@
     "attack": 300,
     "armor": 500,
     "life": 1000,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "money": 100,
     "type": "C25",
     "is_limit_count": 0,
@@ -498,6 +882,22 @@
     "tips": "三国系列副本",
     "attack": 0,
     "armor": 0,
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
     "money": 0,
     "life": 0,
     "type": "C26",

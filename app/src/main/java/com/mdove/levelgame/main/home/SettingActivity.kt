@@ -87,7 +87,7 @@ class SettingActivity : BaseActivity() {
         }
     }
 
-    fun restartGame() {
+    private fun restartGame() {
         showLoadingDialog(getString(R.string.string_re_start_loading))
         Observable.create(ObservableOnSubscribe<Int> { e ->
             AppConfig.setHasLogin(false)

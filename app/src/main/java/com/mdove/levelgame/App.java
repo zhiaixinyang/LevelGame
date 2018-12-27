@@ -1,8 +1,6 @@
 package com.mdove.levelgame;
 
-import android.app.Application;
 import android.content.Context;
-import android.support.v4.app.Fragment;
 
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.di.DaggerAppComponent;
@@ -33,7 +31,6 @@ import java.util.List;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
-import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * Created by MDove on 2018/2/9.

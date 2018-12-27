@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Random;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import retrofit2.Retrofit;
@@ -142,6 +143,15 @@ public class HeroAttributesWrapper {
         TaskManager.Companion.getInstance().computeTask(monsters.type);
         HeroAttributesManager.getInstance().heroLevel(monsters.exp);
         HeroAttributesManager.getInstance().saveMoney(monsters.money);
+
+        int liLiangRandmo = monsters.getExpLiLiang().get(0) + new Random(System.currentTimeMillis()).nextInt(monsters.getExpLiLiang().get(1) - monsters.getExpLiLiang().get(0));
+        int minJieRandmo = monsters.getExpMinJie().get(0) + new Random(System.currentTimeMillis()).nextInt(monsters.getExpMinJie().get(1) - monsters.getExpMinJie().get(0));
+        int zhiHuiRandmo = monsters.getExpZhiHui().get(0) + new Random(System.currentTimeMillis()).nextInt(monsters.getExpZhiHui().get(1) - monsters.getExpZhiHui().get(0));
+        int qiangZhuangRandmo = monsters.getExpQiangZhuang().get(0) + new Random(System.currentTimeMillis()).nextInt(monsters.getExpQiangZhuang().get(1) - monsters.getExpQiangZhuang().get(0));
+        HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_LILIANG, liLiangRandmo);
+        HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_MINJIE, minJieRandmo);
+        HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_ZHIHUI, zhiHuiRandmo);
+        HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_QIANGZHUANG, qiangZhuangRandmo);
     }
 
     PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(1, new Comparator<Integer>() {

@@ -51,12 +51,19 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
     public String belongMonsterId;
     public int position;
 
-    @Generated(hash = 478471913)
+    public int needLevel;
+    public int needLiLiang;
+    public int needMinJie;
+    public int needZhiHui;
+    public int needQiangZhuang;
+
+    @Generated(hash = 499008905)
     public Armors(Long id, String name, String tips, int attack, int armor,
-                  long price, String type, int strengthen, int isCanStrengthen,
-                  int isCanUpdate, int isCanMixture, int isSpecial, String mixtureFormula,
-                  String updateFormula, String strengthenFormula, String belongMonsterId,
-                  int position) {
+            long price, String type, int strengthen, int isCanStrengthen,
+            int isCanUpdate, int isCanMixture, int isSpecial, String mixtureFormula,
+            String updateFormula, String strengthenFormula, String belongMonsterId,
+            int position, int needLevel, int needLiLiang, int needMinJie,
+            int needZhiHui, int needQiangZhuang) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -74,10 +81,34 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
         this.strengthenFormula = strengthenFormula;
         this.belongMonsterId = belongMonsterId;
         this.position = position;
+        this.needLevel = needLevel;
+        this.needLiLiang = needLiLiang;
+        this.needMinJie = needMinJie;
+        this.needZhiHui = needZhiHui;
+        this.needQiangZhuang = needQiangZhuang;
     }
 
     @Generated(hash = 1024617871)
     public Armors() {
+    }
+
+    @Override
+    public void constructorBlacksmithModel() {
+        canMixture = isCanStrengthen;
+        canUpdate = isCanUpdate;
+        canMixture = isCanMixture;
+
+        myName = name;
+        myType = type;
+
+        strengthenFormulas = strengthenFormula;
+        updateFormulas = updateFormula;
+        mixtureFormulas = mixtureFormula;
+    }
+
+    @Override
+    public BaseAttrsModel getAttrsModel() {
+        return new BaseAttrsModel(attack, armor, 0, 0);
     }
 
     public Long getId() {
@@ -216,22 +247,43 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
         this.position = position;
     }
 
-    @Override
-    public void constructorBlacksmithModel() {
-        canMixture = isCanStrengthen;
-        canUpdate = isCanUpdate;
-        canMixture = isCanMixture;
-
-        myName = name;
-        myType = type;
-
-        strengthenFormulas = strengthenFormula;
-        updateFormulas = updateFormula;
-        mixtureFormulas = mixtureFormula;
+    public int getNeedLevel() {
+        return this.needLevel;
     }
 
-    @Override
-    public BaseAttrsModel getAttrsModel() {
-        return new BaseAttrsModel(attack, armor, 0, 0);
+    public void setNeedLevel(int needLevel) {
+        this.needLevel = needLevel;
+    }
+
+    public int getNeedLiLiang() {
+        return this.needLiLiang;
+    }
+
+    public void setNeedLiLiang(int needLiLiang) {
+        this.needLiLiang = needLiLiang;
+    }
+
+    public int getNeedMinJie() {
+        return this.needMinJie;
+    }
+
+    public void setNeedMinJie(int needMinJie) {
+        this.needMinJie = needMinJie;
+    }
+
+    public int getNeedZhiHui() {
+        return this.needZhiHui;
+    }
+
+    public void setNeedZhiHui(int needZhiHui) {
+        this.needZhiHui = needZhiHui;
+    }
+
+    public int getNeedQiangZhuang() {
+        return this.needQiangZhuang;
+    }
+
+    public void setNeedQiangZhuang(int needQiangZhuang) {
+        this.needQiangZhuang = needQiangZhuang;
     }
 }

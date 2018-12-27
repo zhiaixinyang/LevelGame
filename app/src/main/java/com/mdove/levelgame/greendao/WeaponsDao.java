@@ -41,6 +41,11 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         public final static Property BelongMonsterId = new Property(14, String.class, "belongMonsterId", false, "BELONG_MONSTER_ID");
         public final static Property AttackSpeed = new Property(15, long.class, "attackSpeed", false, "ATTACK_SPEED");
         public final static Property Position = new Property(16, int.class, "position", false, "POSITION");
+        public final static Property NeedLevel = new Property(17, int.class, "needLevel", false, "NEED_LEVEL");
+        public final static Property NeedLiLiang = new Property(18, int.class, "needLiLiang", false, "NEED_LI_LIANG");
+        public final static Property NeedMinJie = new Property(19, int.class, "needMinJie", false, "NEED_MIN_JIE");
+        public final static Property NeedZhiHui = new Property(20, int.class, "needZhiHui", false, "NEED_ZHI_HUI");
+        public final static Property NeedQiangZhuang = new Property(21, int.class, "needQiangZhuang", false, "NEED_QIANG_ZHUANG");
     }
 
 
@@ -72,7 +77,12 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
                 "\"STRENGTHEN_FORMULA\" TEXT," + // 13: strengthenFormula
                 "\"BELONG_MONSTER_ID\" TEXT," + // 14: belongMonsterId
                 "\"ATTACK_SPEED\" INTEGER NOT NULL ," + // 15: attackSpeed
-                "\"POSITION\" INTEGER NOT NULL );"); // 16: position
+                "\"POSITION\" INTEGER NOT NULL ," + // 16: position
+                "\"NEED_LEVEL\" INTEGER NOT NULL ," + // 17: needLevel
+                "\"NEED_LI_LIANG\" INTEGER NOT NULL ," + // 18: needLiLiang
+                "\"NEED_MIN_JIE\" INTEGER NOT NULL ," + // 19: needMinJie
+                "\"NEED_ZHI_HUI\" INTEGER NOT NULL ," + // 20: needZhiHui
+                "\"NEED_QIANG_ZHUANG\" INTEGER NOT NULL );"); // 21: needQiangZhuang
     }
 
     /** Drops the underlying database table. */
@@ -133,6 +143,11 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         }
         stmt.bindLong(16, entity.getAttackSpeed());
         stmt.bindLong(17, entity.getPosition());
+        stmt.bindLong(18, entity.getNeedLevel());
+        stmt.bindLong(19, entity.getNeedLiLiang());
+        stmt.bindLong(20, entity.getNeedMinJie());
+        stmt.bindLong(21, entity.getNeedZhiHui());
+        stmt.bindLong(22, entity.getNeedQiangZhuang());
     }
 
     @Override
@@ -187,6 +202,11 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         }
         stmt.bindLong(16, entity.getAttackSpeed());
         stmt.bindLong(17, entity.getPosition());
+        stmt.bindLong(18, entity.getNeedLevel());
+        stmt.bindLong(19, entity.getNeedLiLiang());
+        stmt.bindLong(20, entity.getNeedMinJie());
+        stmt.bindLong(21, entity.getNeedZhiHui());
+        stmt.bindLong(22, entity.getNeedQiangZhuang());
     }
 
     @Override
@@ -213,7 +233,12 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // strengthenFormula
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // belongMonsterId
             cursor.getLong(offset + 15), // attackSpeed
-            cursor.getInt(offset + 16) // position
+            cursor.getInt(offset + 16), // position
+            cursor.getInt(offset + 17), // needLevel
+            cursor.getInt(offset + 18), // needLiLiang
+            cursor.getInt(offset + 19), // needMinJie
+            cursor.getInt(offset + 20), // needZhiHui
+            cursor.getInt(offset + 21) // needQiangZhuang
         );
         return entity;
     }
@@ -237,6 +262,11 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         entity.setBelongMonsterId(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
         entity.setAttackSpeed(cursor.getLong(offset + 15));
         entity.setPosition(cursor.getInt(offset + 16));
+        entity.setNeedLevel(cursor.getInt(offset + 17));
+        entity.setNeedLiLiang(cursor.getInt(offset + 18));
+        entity.setNeedMinJie(cursor.getInt(offset + 19));
+        entity.setNeedZhiHui(cursor.getInt(offset + 20));
+        entity.setNeedQiangZhuang(cursor.getInt(offset + 21));
      }
     
     @Override

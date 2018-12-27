@@ -40,12 +40,19 @@ public class Accessories extends BaseBlacksmithModel implements IAttrsModel {
     public String belongMonsterId;
     public int position;
 
-    @Generated(hash = 1217271394)
+    public int needLevel;
+    public int needLiLiang;
+    public int needMinJie;
+    public int needZhiHui;
+    public int needQiangZhuang;
+
+    @Generated(hash = 51940045)
     public Accessories(Long id, String name, String tips, int attack, int armor,
-                       int life, long price, String type, int isCanStrengthen, int isCanUpdate,
-                       int isCanMixture, String mixtureFormula, String updateFormula,
-                       String strengthenFormula, int isSpecial, String belongMonsterId,
-                       int position) {
+            int life, long price, String type, int isCanStrengthen, int isCanUpdate,
+            int isCanMixture, String mixtureFormula, String updateFormula,
+            String strengthenFormula, int isSpecial, String belongMonsterId,
+            int position, int needLevel, int needLiLiang, int needMinJie,
+            int needZhiHui, int needQiangZhuang) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -63,6 +70,15 @@ public class Accessories extends BaseBlacksmithModel implements IAttrsModel {
         this.isSpecial = isSpecial;
         this.belongMonsterId = belongMonsterId;
         this.position = position;
+        this.needLevel = needLevel;
+        this.needLiLiang = needLiLiang;
+        this.needMinJie = needMinJie;
+        this.needZhiHui = needZhiHui;
+        this.needQiangZhuang = needQiangZhuang;
+    }
+
+    @Generated(hash = 1483837939)
+    public Accessories() {
     }
 
     @Override
@@ -79,8 +95,9 @@ public class Accessories extends BaseBlacksmithModel implements IAttrsModel {
         mixtureFormulas = mixtureFormula;
     }
 
-    @Generated(hash = 1483837939)
-    public Accessories() {
+    @Override
+    public BaseAttrsModel getAttrsModel() {
+        return new BaseAttrsModel(attack, armor, life, 0);
     }
 
     public Long getId() {
@@ -219,8 +236,43 @@ public class Accessories extends BaseBlacksmithModel implements IAttrsModel {
         this.position = position;
     }
 
-    @Override
-    public BaseAttrsModel getAttrsModel() {
-        return new BaseAttrsModel(attack, armor, life, 0);
+    public int getNeedLevel() {
+        return this.needLevel;
+    }
+
+    public void setNeedLevel(int needLevel) {
+        this.needLevel = needLevel;
+    }
+
+    public int getNeedLiLiang() {
+        return this.needLiLiang;
+    }
+
+    public void setNeedLiLiang(int needLiLiang) {
+        this.needLiLiang = needLiLiang;
+    }
+
+    public int getNeedMinJie() {
+        return this.needMinJie;
+    }
+
+    public void setNeedMinJie(int needMinJie) {
+        this.needMinJie = needMinJie;
+    }
+
+    public int getNeedZhiHui() {
+        return this.needZhiHui;
+    }
+
+    public void setNeedZhiHui(int needZhiHui) {
+        this.needZhiHui = needZhiHui;
+    }
+
+    public int getNeedQiangZhuang() {
+        return this.needQiangZhuang;
+    }
+
+    public void setNeedQiangZhuang(int needQiangZhuang) {
+        this.needQiangZhuang = needQiangZhuang;
     }
 }

@@ -38,11 +38,36 @@ public class HeroAttributes {
     public long attackSpeed;
     // 剩余技能点
     public int skillCount;
-    @Generated(hash = 952374529)
+    // 力量属性
+    public int liLiang;
+    public long liLiangExp;
+    public long liLiangBaseExp;
+    public int liLiangExpMultiple;
+    // 敏捷
+    public int minJie;
+    public long minJieExp;
+    public long minJieBaseExp;
+    public int minJieExpMultiple;
+    // 智慧
+    public int zhiHui;
+    public long zhiHuiExp;
+    public long zhiHuiBaseExp;
+    public int zhiHuiExpMultiple;
+    // 强壮
+    public int qiangZhuang;
+    public long qiangZhuangExp;
+    public long qiangZhuangBaseExp;
+    public int qiangZhuangExpMultiple;
+    @Generated(hash = 1615012901)
     public HeroAttributes(Long id, int attack, int attackIncrease, int armor,
             int armorIncrease, int curLife, int lifeIncrease, int maxLife,
             int money, int level, long experience, long baseExp, int expMultiple,
-            int bodyPower, int days, long attackSpeed, int skillCount) {
+            int bodyPower, int days, long attackSpeed, int skillCount, int liLiang,
+            long liLiangExp, long liLiangBaseExp, int liLiangExpMultiple,
+            int minJie, long minJieExp, long minJieBaseExp, int minJieExpMultiple,
+            int zhiHui, long zhiHuiExp, long zhiHuiBaseExp, int zhiHuiExpMultiple,
+            int qiangZhuang, long qiangZhuangExp, long qiangZhuangBaseExp,
+            int qiangZhuangExpMultiple) {
         this.id = id;
         this.attack = attack;
         this.attackIncrease = attackIncrease;
@@ -60,6 +85,22 @@ public class HeroAttributes {
         this.days = days;
         this.attackSpeed = attackSpeed;
         this.skillCount = skillCount;
+        this.liLiang = liLiang;
+        this.liLiangExp = liLiangExp;
+        this.liLiangBaseExp = liLiangBaseExp;
+        this.liLiangExpMultiple = liLiangExpMultiple;
+        this.minJie = minJie;
+        this.minJieExp = minJieExp;
+        this.minJieBaseExp = minJieBaseExp;
+        this.minJieExpMultiple = minJieExpMultiple;
+        this.zhiHui = zhiHui;
+        this.zhiHuiExp = zhiHuiExp;
+        this.zhiHuiBaseExp = zhiHuiBaseExp;
+        this.zhiHuiExpMultiple = zhiHuiExpMultiple;
+        this.qiangZhuang = qiangZhuang;
+        this.qiangZhuangExp = qiangZhuangExp;
+        this.qiangZhuangBaseExp = qiangZhuangBaseExp;
+        this.qiangZhuangExpMultiple = qiangZhuangExpMultiple;
     }
     @Generated(hash = 219453175)
     public HeroAttributes() {
@@ -166,4 +207,101 @@ public class HeroAttributes {
     public void setSkillCount(int skillCount) {
         this.skillCount = skillCount;
     }
+    public int getLiLiang() {
+        return this.liLiang;
+    }
+    public void setLiLiang(int liLiang) {
+        this.liLiang = liLiang;
+    }
+    public long getLiLiangExp() {
+        return this.liLiangExp;
+    }
+    public void setLiLiangExp(long liLiangExp) {
+        this.liLiangExp = liLiangExp;
+    }
+    public long getLiLiangBaseExp() {
+        return this.liLiangBaseExp;
+    }
+    public void setLiLiangBaseExp(long liLiangBaseExp) {
+        this.liLiangBaseExp = liLiangBaseExp;
+    }
+    public int getLiLiangExpMultiple() {
+        return this.liLiangExpMultiple;
+    }
+    public void setLiLiangExpMultiple(int liLiangExpMultiple) {
+        this.liLiangExpMultiple = liLiangExpMultiple;
+    }
+    public int getMinJie() {
+        return this.minJie;
+    }
+    public void setMinJie(int minJie) {
+        this.minJie = minJie;
+    }
+    public long getMinJieExp() {
+        return this.minJieExp;
+    }
+    public void setMinJieExp(long minJieExp) {
+        this.minJieExp = minJieExp;
+    }
+    public long getMinJieBaseExp() {
+        return this.minJieBaseExp;
+    }
+    public void setMinJieBaseExp(long minJieBaseExp) {
+        this.minJieBaseExp = minJieBaseExp;
+    }
+    public int getMinJieExpMultiple() {
+        return this.minJieExpMultiple;
+    }
+    public void setMinJieExpMultiple(int minJieExpMultiple) {
+        this.minJieExpMultiple = minJieExpMultiple;
+    }
+    public int getZhiHui() {
+        return this.zhiHui;
+    }
+    public void setZhiHui(int zhiHui) {
+        this.zhiHui = zhiHui;
+    }
+    public long getZhiHuiExp() {
+        return this.zhiHuiExp;
+    }
+    public void setZhiHuiExp(long zhiHuiExp) {
+        this.zhiHuiExp = zhiHuiExp;
+    }
+    public long getZhiHuiBaseExp() {
+        return this.zhiHuiBaseExp;
+    }
+    public void setZhiHuiBaseExp(long zhiHuiBaseExp) {
+        this.zhiHuiBaseExp = zhiHuiBaseExp;
+    }
+    public int getZhiHuiExpMultiple() {
+        return this.zhiHuiExpMultiple;
+    }
+    public void setZhiHuiExpMultiple(int zhiHuiExpMultiple) {
+        this.zhiHuiExpMultiple = zhiHuiExpMultiple;
+    }
+    public int getQiangZhuang() {
+        return this.qiangZhuang;
+    }
+    public void setQiangZhuang(int qiangZhuang) {
+        this.qiangZhuang = qiangZhuang;
+    }
+    public long getQiangZhuangExp() {
+        return this.qiangZhuangExp;
+    }
+    public void setQiangZhuangExp(long qiangZhuangExp) {
+        this.qiangZhuangExp = qiangZhuangExp;
+    }
+    public long getQiangZhuangBaseExp() {
+        return this.qiangZhuangBaseExp;
+    }
+    public void setQiangZhuangBaseExp(long qiangZhuangBaseExp) {
+        this.qiangZhuangBaseExp = qiangZhuangBaseExp;
+    }
+    public int getQiangZhuangExpMultiple() {
+        return this.qiangZhuangExpMultiple;
+    }
+    public void setQiangZhuangExpMultiple(int qiangZhuangExpMultiple) {
+        this.qiangZhuangExpMultiple = qiangZhuangExpMultiple;
+    }
+   
 }

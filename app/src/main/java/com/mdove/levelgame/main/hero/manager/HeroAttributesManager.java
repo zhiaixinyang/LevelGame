@@ -61,6 +61,12 @@ public class HeroAttributesManager {
     // 次数不够
     public static final int ATTACK_STATUS_NO_COUNT = 6;
 
+
+    public static final int ATTRIBUTE_TYPE_LILIANG = 100;
+    public static final int ATTRIBUTE_TYPE_MINJIE = 101;
+    public static final int ATTRIBUTE_TYPE_ZHIHUI = 102;
+    public static final int ATTRIBUTE_TYPE_QIANGZHUANG = 103;
+
     private HeroAttributes heroAttributes;
 
     private static class SingletonHolder {
@@ -129,7 +135,7 @@ public class HeroAttributesManager {
     }
 
     public boolean goneBigMonster() {
-        if (!AppConfig.enableBigMonster()){
+        if (!AppConfig.enableBigMonster()) {
             return true;
         }
         boolean isGone;
@@ -206,6 +212,7 @@ public class HeroAttributesManager {
         });
     }
 
+    @Deprecated
     public AttackResp attackBigMonsters(long bigMonstersId) {
         AttackResp attackResp = new AttackResp();
         int attackStatus = ATTACK_STATUS_ERROR;
@@ -300,6 +307,64 @@ public class HeroAttributesManager {
         save();
     }
 
+    public void heroAttributesLevel(int type, long exp) {
+        long levelExp = getAttributeExp(type, heroAttributes);
+        switch (type) {
+            case ATTRIBUTE_TYPE_LILIANG: {
+                long endExp = heroAttributes.liLiangExp + exp;
+                if (endExp >= levelExp) {
+                    heroAttributes.liLiang += 1;
+                    heroAttributes.liLiangExp = (heroAttributes.liLiangExp + exp) - levelExp;
+                    heroAttributesLevel(type, 0);
+                    return;
+                } else {
+                    heroAttributes.liLiangExp += exp;
+                }
+                break;
+            }
+            case ATTRIBUTE_TYPE_MINJIE: {
+                long endExp = heroAttributes.minJieExp + exp;
+                if (endExp >= levelExp) {
+                    heroAttributes.minJie += 1;
+                    heroAttributes.minJieExp = (heroAttributes.minJieExp + exp) - levelExp;
+                    heroAttributesLevel(type, 0);
+                    return;
+                } else {
+                    heroAttributes.minJieExp += exp;
+                }
+                break;
+            }
+            case ATTRIBUTE_TYPE_ZHIHUI: {
+                long endExp = heroAttributes.zhiHuiExp + exp;
+                if (endExp >= levelExp) {
+                    heroAttributes.zhiHui += 1;
+                    heroAttributes.zhiHuiExp = (heroAttributes.zhiHuiExp + exp) - levelExp;
+                    heroAttributesLevel(type, 0);
+                    return;
+                } else {
+                    heroAttributes.zhiHuiExp += exp;
+                }
+                break;
+            }
+            case ATTRIBUTE_TYPE_QIANGZHUANG: {
+                long endExp = heroAttributes.qiangZhuangExp + exp;
+                if (endExp >= levelExp) {
+                    heroAttributes.qiangZhuang += 1;
+                    heroAttributes.qiangZhuangExp = (heroAttributes.qiangZhuangExp + exp) - levelExp;
+                    heroAttributesLevel(type, 0);
+                    return;
+                } else {
+                    heroAttributes.qiangZhuangExp += exp;
+                }
+                break;
+            }
+            default: {
+                return;
+            }
+        }
+        save();
+    }
+
     // 判断体力是否够用，够用直接减少
     public boolean computePowerIsHas(long usePower) {
         if (heroAttributes.bodyPower - usePower < 0) {
@@ -381,6 +446,7 @@ public class HeroAttributesManager {
         return isCan;
     }
 
+    @Deprecated
     public AttackResp attack(long monstersId) {
         AttackResp attackResp = new AttackResp();
         int attackStatus = ATTACK_STATUS_ERROR;
@@ -582,10 +648,47 @@ public class HeroAttributesManager {
         return content;
     }
 
-    private long getLevelExp(HeroAttributes heroAttributes) {
+    public long getLevelExp(HeroAttributes heroAttributes) {
         long levelExp = heroAttributes.baseExp;
         if (heroAttributes.level > 1) {
             levelExp = heroAttributes.level * heroAttributes.expMultiple * heroAttributes.baseExp;
+        }
+        return levelExp;
+    }
+
+    public long getAttributeExp(int type, HeroAttributes heroAttributes) {
+        long levelExp = 0;
+        switch (type) {
+            case ATTRIBUTE_TYPE_LILIANG: {
+                levelExp = heroAttributes.liLiangBaseExp;
+                if (heroAttributes.liLiang > 1) {
+                    levelExp = heroAttributes.liLiang * heroAttributes.liLiangExpMultiple * heroAttributes.liLiangBaseExp;
+                }
+                break;
+            }
+            case ATTRIBUTE_TYPE_MINJIE: {
+                levelExp = heroAttributes.minJieBaseExp;
+                if (heroAttributes.minJie > 1) {
+                    levelExp = heroAttributes.minJie * heroAttributes.minJieExpMultiple * heroAttributes.minJieBaseExp;
+                }
+                break;
+            }
+            case ATTRIBUTE_TYPE_ZHIHUI: {
+                levelExp = heroAttributes.zhiHuiBaseExp;
+                if (heroAttributes.zhiHui > 1) {
+                    levelExp = heroAttributes.zhiHui * heroAttributes.zhiHuiExpMultiple * heroAttributes.zhiHuiBaseExp;
+                }
+                break;
+            }
+            case ATTRIBUTE_TYPE_QIANGZHUANG: {
+                levelExp = heroAttributes.qiangZhuangBaseExp;
+                if (heroAttributes.qiangZhuang > 1) {
+                    levelExp = heroAttributes.qiangZhuang * heroAttributes.qiangZhuangExpMultiple * heroAttributes.qiangZhuangBaseExp;
+                }
+                break;
+            }
+            default: {
+            }
         }
         return levelExp;
     }

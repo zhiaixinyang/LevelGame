@@ -18,6 +18,7 @@ import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
+import com.mdove.levelgame.main.hero.util.EquipUtils;
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
 import com.mdove.levelgame.main.shop.model.StrengthenResp;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
@@ -336,6 +337,11 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
                                 // 拿到需要穿的装备（通过type从武器库中取）
                                 Weapons holdOnWeapon = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(type)).unique();
+                                if (EquipUtils.enableEquip(holdOnWeapon.needLevel, holdOnWeapon.needLiLiang, holdOnWeapon.needMinJie,
+                                        holdOnWeapon.needZhiHui, holdOnWeapon.needQiangZhuang).getRespCode() == 1) {
+                                    model.respStatus = 1;
+                                    return model;
+                                }
                                 // 更新Pk穿上装备库(通过id)
                                 Packages holdOnPk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(id)
                                         , PackagesDao.Properties.IsEquip.eq(1)).unique();
@@ -385,6 +391,11 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
                                 // 拿到需要穿的装备（通过type从防具库中取）
                                 Armors holdOnArmor = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(type)).unique();
+                                if (EquipUtils.enableEquip(holdOnArmor.needLevel, holdOnArmor.needLiLiang, holdOnArmor.needMinJie,
+                                        holdOnArmor.needZhiHui, holdOnArmor.needQiangZhuang).getRespCode() == 1) {
+                                    model.respStatus = 1;
+                                    return model;
+                                }
                                 // 更新Pk穿上装备库(通过id)
                                 Packages holdOnPk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(id)
                                         , PackagesDao.Properties.IsEquip.eq(1)).unique();
@@ -436,6 +447,11 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
                                 // 拿到需要穿的装备（通过type从防具库中取）
                                 Accessories holdOnAccessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(type)).unique();
+                                if (EquipUtils.enableEquip(holdOnAccessories.needLevel, holdOnAccessories.needLiLiang, holdOnAccessories.needMinJie,
+                                        holdOnAccessories.needZhiHui, holdOnAccessories.needQiangZhuang).getRespCode() == 1) {
+                                    model.respStatus = 1;
+                                    return model;
+                                }
                                 // 更新Pk穿上装备库(通过id)
                                 Packages holdOnPk = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(id)
                                         , PackagesDao.Properties.IsEquip.eq(1)).unique();
@@ -484,6 +500,11 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                 boolean attackSuc = false;
                 boolean armorSuc = false;
                 boolean accessoriesSuc = false;
+                if (goodsEquipResp.respStatus == 1) {
+                    NotifyResp resp = new NotifyResp();
+                    resp.respCode = 1;
+                    return resp;
+                }
                 // 穿的装备是武器
                 if (goodsEquipResp.holdOnAttack != null) {
                     // 先减少脱掉装备的属性
@@ -531,8 +552,10 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
             @Override
             public void onNext(NotifyResp resp) {
                 view.dismissLoadingDialog();
-                if (resp != null) {
+                if (resp != null && resp.respCode == 0) {
                     updateFromEquip(resp.holdOnId, resp.takeOffOnId);
+                } else if (resp != null && resp.respCode == 1) {
+                    MyDialog.showAlert("装备失败", "属性不足", true, view.getContext());
                 } else {
                     MyDialog.showAlert("装备失败", "未知错误", true, view.getContext());
                 }
@@ -623,8 +646,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 @Override
                                 public void accept(HeroAttributesManager.SellResp sellResp1) throws Exception {
                                     if (sellResp1.sellMoney > 0) {
-                                        MyDialog.showMyDialog(view.getContext(),view.getString(R.string.string_sells_suc_title)
-                                                ,String.format(view.getString(R.string.string_sells_suc), sellResp1.sellMoney),true);
+                                        MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_sells_suc_title)
+                                                , String.format(view.getString(R.string.string_sells_suc), sellResp1.sellMoney), true);
                                         deleteById(sellResp.pkId);
                                     }
                                 }
@@ -634,8 +657,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
                 } else {
                     if (sellResp.sellMoney > 0) {
-                        MyDialog.showMyDialog(view.getContext(),view.getString(R.string.string_sells_suc_title)
-                                ,String.format(view.getString(R.string.string_sells_suc), sellResp.sellMoney),true);
+                        MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_sells_suc_title)
+                                , String.format(view.getString(R.string.string_sells_suc), sellResp.sellMoney), true);
                         deleteById(sellResp.pkId);
                     }
                 }
@@ -655,6 +678,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
     // 临时封装了脱掉装备的Id和穿装备的Id
     private class GoodsEquipResp {
+        // 0表示成功，1表示属性不足
+        public int respStatus;
         public long holdOnPkId;
         public long takeOffPkId;
         public String holdOnType;
@@ -672,6 +697,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
     }
 
     private class NotifyResp {
+        // 0 成功，1属性不足
+        public int respCode = 0;
         public long holdOnId = -1;
         public long takeOffOnId = -1;
     }

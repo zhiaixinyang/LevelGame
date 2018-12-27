@@ -46,7 +46,6 @@ public class HeroBuyManager {
     public static final int BUY_BASE_STATUS_FAIL = 11;
     public static final int BUY_BASE_STATUS_ERROR = 12;
 
-    private HeroAttributes heroAttributes;
     private PackagesDao packagesDao;
 
     private static class SingletonHolder {
@@ -54,7 +53,6 @@ public class HeroBuyManager {
     }
 
     private HeroBuyManager() {
-        heroAttributes = HeroManager.getInstance().getHeroAttributes();
         packagesDao = DatabaseManager.getInstance().getPackagesDao();
     }
 
@@ -63,6 +61,7 @@ public class HeroBuyManager {
     }
 
     public BuyMedicinesResp buyMedicines(long id) {
+        HeroAttributes heroAttributes = HeroManager.getInstance().getHeroAttributes();
         BuyMedicinesResp resp = new BuyMedicinesResp();
         resp.buyStatus = BUY_MEDICINES_STATUS_ERROR;
         Medicines medicine = DatabaseManager.getInstance().getMedicinesDao().queryBuilder()
@@ -113,6 +112,7 @@ public class HeroBuyManager {
     }
 
     public BuyArmorResp buyArmor(long id) {
+        HeroAttributes heroAttributes = HeroManager.getInstance().getHeroAttributes();
         BuyArmorResp resp = new BuyArmorResp();
         resp.buyStatus = BUY_ARMOR_STATUS_ERROR;
 
@@ -146,6 +146,7 @@ public class HeroBuyManager {
     }
 
     public Observable<BaseBuy> buy(String type, long price) {
+        HeroAttributes heroAttributes = HeroManager.getInstance().getHeroAttributes();
         final BaseBuy baseBuy = new BaseBuy();
 
         Object oj = AllGoodsToDBIdUtils.getInstance().getBlacksmithModelFromType(type);
@@ -221,6 +222,7 @@ public class HeroBuyManager {
     }
 
     public BuyAttackResp buyAttack(long id) {
+        HeroAttributes heroAttributes = HeroManager.getInstance().getHeroAttributes();
         BuyAttackResp resp = new BuyAttackResp();
         resp.buyStatus = BUY_ATTACK_STATUS_ERROR;
 

@@ -11,6 +11,7 @@ import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.fb.FbDialog;
+import com.mdove.levelgame.main.hero.HeroAttributesActivity;
 import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
@@ -60,9 +61,9 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 break;
             }
             case INTENT_TO_HERO_ATTR: {
-                new FbDialog(view.getContext(),R.style.fb_dialog)
-                        .show();
-//                HeroAttributesActivity.start(view.getContext());
+//                new FbDialog(view.getContext(),R.style.fb_dialog)
+//                        .show();
+                HeroAttributesActivity.start(view.getContext());
                 break;
             }
             case INTENT_TO_HERO_PACKAGE: {

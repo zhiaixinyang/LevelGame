@@ -32,4 +32,19 @@
         <attr name="round_bottom_right" format="dimension|reference"/>
     </declare-styleable>
 
+    <!-- 使用上边声明的属性 -->
+    <declare-styleable name="PercentageHProgressBarView">
+        <!-- 自定义进度条3 -->
+        <attr name="myprogress_unreach_color" format="color"/>
+        <attr name="myprogress_unreach_height" format="dimension"/>
+        <attr name="myprogress_reach_color" format="color"/>
+        <attr name="myprogress_reach_height" format="dimension"/>
+
+        <attr name="myprogress_text_offset" format="dimension"/>
+        <attr name="myprogress_text_size" format="dimension"/>
+        <attr name="myprogress_text_color" format="color"/>
+
+        <attr name="myprogress_round_radius" format="dimension"/>
+    </declare-styleable>
+
 </resources>

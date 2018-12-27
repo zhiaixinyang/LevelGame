@@ -10,318 +10,325 @@
             type="com.mdove.levelgame.main.hero.model.HeroAttributesModelVM" />
     </data>
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/gray_light">
 
-        <android.support.constraint.ConstraintLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray_light">
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppBarLayout">
 
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/app_bar"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                android:theme="@style/AppBarLayout">
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="@string/activity_title_hero_attributes" />
+        </android.support.design.widget.AppBarLayout>
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_scrollFlags="scroll|enterAlways"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:title="@string/activity_title_hero_attributes" />
-            </android.support.design.widget.AppBarLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
-            <TextView
-                android:id="@+id/tv_attack"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:htmlColorText="@{vm.attack}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/app_bar"
-                tools:text="攻击" />
-
-            <TextView
-                android:id="@+id/tv_attack_speed"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:htmlColorText="@{vm.attackSpeed}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_attack"
-                tools:text="攻击间隔" />
-
-            <TextView
-                android:id="@+id/tv_armor"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:htmlColorText="@{vm.armor}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_attack_speed"
-                tools:text="护甲" />
-
-            <TextView
-                android:id="@+id/tv_life"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:htmlColorText="@{vm.life}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_armor"
-                tools:text="生命" />
-
-            <TextView
-                android:id="@+id/tv_money"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:text="@{vm.money}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_life"
-                tools:text="金钱" />
-
-            <TextView
-                android:id="@+id/tv_level"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:text="@{vm.level}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_money"
-                tools:text="等级" />
-
-            <TextView
-                android:id="@+id/tv_skill_count"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:text="@{vm.skillCount}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_level"
-                tools:text="技能点" />
-
-            <TextView
-                android:id="@+id/tv_exp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:text="@{vm.needExperience}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_skill_count"
-                tools:text="升级所需经验" />
-
-            <TextView
-                android:id="@+id/tv_body_power"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:text="@{vm.bodyPower}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_exp"
-                tools:text="当前体力" />
-
-            <TextView
-                android:id="@+id/tv_days"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_btn_normal_height"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:gravity="center"
-                android:text="@{vm.days}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/main_btn_normal_text_size"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_body_power"
-                tools:text="日期" />
-
-            <LinearLayout
-                android:id="@+id/layout_liliang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:orientation="vertical"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_days">
+                android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/tv_liliang"
+                    android:id="@+id/tv_attack"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:htmlColorText="@{vm.attack}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="攻击" />
+
+                <TextView
+                    android:id="@+id/tv_attack_speed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:htmlColorText="@{vm.attackSpeed}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_attack"
+                    tools:text="攻击间隔" />
+
+                <TextView
+                    android:id="@+id/tv_armor"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:htmlColorText="@{vm.armor}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_attack_speed"
+                    tools:text="护甲" />
+
+                <TextView
+                    android:id="@+id/tv_life"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:htmlColorText="@{vm.life}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_armor"
+                    tools:text="生命" />
+
+                <TextView
+                    android:id="@+id/tv_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:text="@{vm.money}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_life"
+                    tools:text="金钱" />
+
+                <TextView
+                    android:id="@+id/tv_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:text="@{vm.level}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_money"
+                    tools:text="等级" />
+
+                <TextView
+                    android:id="@+id/tv_skill_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:text="@{vm.skillCount}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_level"
+                    tools:text="技能点" />
+
+                <TextView
+                    android:id="@+id/tv_exp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:text="@{vm.needExperience}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_skill_count"
+                    tools:text="升级所需经验" />
+
+                <TextView
+                    android:id="@+id/tv_body_power"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:text="@{vm.bodyPower}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_exp"
+                    tools:text="当前体力" />
+
+                <TextView
+                    android:id="@+id/tv_days"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_btn_normal_height"
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="center"
+                    android:text="@{vm.days}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/main_btn_normal_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_body_power"
+                    tools:text="日期" />
+
+                <LinearLayout
+                    android:id="@+id/layout_liliang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/main_btn_normal_margin"
-                    android:gravity="center"
-                    android:text="@{vm.liLiang}"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/main_btn_normal_text_size"
-                    tools:text="力量 99/100" />
+                    android:background="@drawable/bg_white_round"
+                    android:orientation="vertical"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_days">
 
-                <com.mdove.levelgame.view.PercentageHProgressBarView
-                    android:id="@+id/pb_liliang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/main_btn_normal_margin"
-                    android:layout_marginRight="@dimen/main_btn_normal_margin"
-                    android:layout_marginBottom="@dimen/main_btn_normal_margin"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:progress="@{vm.liLiangProgress}" />
+                    <TextView
+                        android:id="@+id/tv_liliang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/main_btn_normal_margin"
+                        android:gravity="center"
+                        android:text="@{vm.liLiang}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/main_btn_normal_text_size"
+                        tools:text="力量 99/100" />
 
-            </LinearLayout>
+                    <com.mdove.levelgame.view.PercentageHProgressBarView
+                        android:id="@+id/pb_liliang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/main_btn_normal_margin"
+                        android:layout_marginRight="@dimen/main_btn_normal_margin"
+                        android:layout_marginBottom="@dimen/main_btn_normal_margin"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:progress="@{vm.liLiangProgress}" />
 
-            <LinearLayout
-                android:id="@+id/layout_minjie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                android:orientation="vertical"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_liliang">
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_minjie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/main_btn_normal_margin"
-                    android:gravity="center"
-                    android:text="@{vm.minJie}"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/main_btn_normal_text_size"
-                    tools:text="力量 99/100" />
-
-                <com.mdove.levelgame.view.PercentageHProgressBarView
-                    android:id="@+id/pb_minjie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/main_btn_normal_margin"
-                    android:layout_marginRight="@dimen/main_btn_normal_margin"
-                    android:layout_marginBottom="@dimen/main_btn_normal_margin"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:progress="@{vm.minJieProgress}" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_zhihui"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_minjie">
-
-                <TextView
-                    android:id="@+id/tv_zhihui"
+                <LinearLayout
+                    android:id="@+id/layout_minjie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/main_btn_normal_margin"
-                    android:gravity="center"
-                    android:text="@{vm.zhiHui}"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/main_btn_normal_text_size"
-                    tools:text="力量 99/100" />
+                    android:background="@drawable/bg_white_round"
+                    android:orientation="vertical"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_liliang">
 
-                <com.mdove.levelgame.view.PercentageHProgressBarView
-                    android:id="@+id/pb_zhihui"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/main_btn_normal_margin"
-                    android:layout_marginRight="@dimen/main_btn_normal_margin"
-                    android:layout_marginBottom="@dimen/main_btn_normal_margin"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:progress="@{vm.zhiHuiProgress}" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_minjie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/main_btn_normal_margin"
+                        android:gravity="center"
+                        android:text="@{vm.minJie}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/main_btn_normal_text_size"
+                        tools:text="力量 99/100" />
 
+                    <com.mdove.levelgame.view.PercentageHProgressBarView
+                        android:id="@+id/pb_minjie"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/main_btn_normal_margin"
+                        android:layout_marginRight="@dimen/main_btn_normal_margin"
+                        android:layout_marginBottom="@dimen/main_btn_normal_margin"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:progress="@{vm.minJieProgress}" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/layout_qiangzhuang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/main_btn_normal_margin"
-                android:background="@drawable/bg_white_round"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_zhihui">
-
-                <TextView
-                    android:id="@+id/tv_qiangzhuang"
+                <LinearLayout
+                    android:id="@+id/layout_zhihui"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/main_btn_normal_margin"
-                    android:gravity="center"
-                    android:text="@{vm.qiangZhuang}"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/main_btn_normal_text_size"
-                    tools:text="力量 99/100" />
+                    android:background="@drawable/bg_white_round"
+                    android:orientation="vertical"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_minjie">
 
-                <com.mdove.levelgame.view.PercentageHProgressBarView
-                    android:id="@+id/pb_qiangzhuang"
+                    <TextView
+                        android:id="@+id/tv_zhihui"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/main_btn_normal_margin"
+                        android:gravity="center"
+                        android:text="@{vm.zhiHui}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/main_btn_normal_text_size"
+                        tools:text="力量 99/100" />
+
+                    <com.mdove.levelgame.view.PercentageHProgressBarView
+                        android:id="@+id/pb_zhihui"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/main_btn_normal_margin"
+                        android:layout_marginRight="@dimen/main_btn_normal_margin"
+                        android:layout_marginBottom="@dimen/main_btn_normal_margin"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:progress="@{vm.zhiHuiProgress}" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layout_qiangzhuang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/main_btn_normal_margin"
-                    android:layout_marginRight="@dimen/main_btn_normal_margin"
-                    android:layout_marginBottom="@dimen/main_btn_normal_margin"
-                    android:padding="20dp"
-                    android:progress="@{vm.qiangZhuangProgress}" />
-            </LinearLayout>
+                    android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:background="@drawable/bg_white_round"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_zhihui">
 
-        </android.support.constraint.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/tv_qiangzhuang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/main_btn_normal_margin"
+                        android:gravity="center"
+                        android:text="@{vm.qiangZhuang}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/main_btn_normal_text_size"
+                        tools:text="力量 99/100" />
 
-    </ScrollView>
+                    <com.mdove.levelgame.view.PercentageHProgressBarView
+                        android:id="@+id/pb_qiangzhuang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/main_btn_normal_margin"
+                        android:layout_marginRight="@dimen/main_btn_normal_margin"
+                        android:layout_marginBottom="@dimen/main_btn_normal_margin"
+                        android:padding="20dp"
+                        android:progress="@{vm.qiangZhuangProgress}" />
+                </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+
 </layout>

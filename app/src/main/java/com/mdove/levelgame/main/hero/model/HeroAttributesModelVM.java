@@ -65,7 +65,7 @@ public class HeroAttributesModelVM {
         long qiangZhuangExp = heroAttributes.qiangZhuangExp;
         long qiangZhunagLevelExp = HeroAttributesManager.getInstance().getAttributeExp(HeroAttributesManager.ATTRIBUTE_TYPE_QIANGZHUANG, heroAttributes);
         qiangZhuangProgress.set((int)(((float) qiangZhuangExp / (float) qiangZhunagLevelExp) * 100));
-        qiangZhuang.set(String.format(App.getAppContext().getString(R.string.hero_attributes_zhihui_and_exp),
+        qiangZhuang.set(String.format(App.getAppContext().getString(R.string.hero_attributes_qiangzhuang_and_exp),
                 heroAttributes.qiangZhuang, qiangZhuangExp, qiangZhunagLevelExp));
     }
 }

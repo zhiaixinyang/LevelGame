@@ -1,4 +1,4 @@
-package com.mdove.levelgame.view;
+package com.mdove.levelgame.view.base;
 
 import android.app.Activity;
 import android.app.Dialog;

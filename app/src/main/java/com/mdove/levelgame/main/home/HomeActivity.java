@@ -1,6 +1,8 @@
 package com.mdove.levelgame.main.home;
 
 import android.app.Activity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -27,6 +29,7 @@ import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.home.adapter.HomeAdapter;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.HomeActionHandler;
+import com.mdove.levelgame.main.home.model.HomeUIViewModel;
 import com.mdove.levelgame.main.home.model.MainActionHandler;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.home.presenter.HomeContract;
@@ -49,6 +52,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     private ActivityHomeBinding binding;
     private boolean isAniming = false;
     private long clickTime = 0;
+    private HomeUIViewModel mHomeUIViewModel;
 
     public static void start(Context context) {
         Intent start = new Intent(context, HomeActivity.class);
@@ -108,6 +112,17 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
                 }
             }
         });
+
+        mHomeUIViewModel = ViewModelProviders.of(this).get(HomeUIViewModel.class);
+        mHomeUIViewModel.getEnableBigMonster().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                binding.ivBigMonster.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
+                binding.tvInvade.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
+                showBigMonsters(null);
+            }
+        });
+        mHomeUIViewModel.initUI();
     }
 
     private void showView() {
@@ -141,6 +156,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     @Override
     protected void onResume() {
         super.onResume();
+        mHomeUIViewModel.initUI();
         presenter.initBigMonsterInvade();
         presenter.initBigMonster();
     }

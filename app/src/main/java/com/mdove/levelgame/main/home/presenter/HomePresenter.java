@@ -102,6 +102,9 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 
     @Override
     public void initBigMonster() {
+        if (!AppConfig.isSwitchBigMonster()){
+            return;
+        }
         if (HeroAttributesManager.getInstance().goneBigMonster()) {
             view.showBigMonsters(null);
         } else {
@@ -114,6 +117,9 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 
     @Override
     public void initBigMonsterInvade() {
+        if (!AppConfig.isSwitchBigMonster()){
+            return;
+        }
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
         List<BigMonsters> bigMonsters = bigMonstersDao.queryBuilder().where(BigMonstersDao.Properties.IsDead.eq(1)).list();
         if (bigMonsters != null && bigMonsters.size() > 0) {

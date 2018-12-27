@@ -34,8 +34,8 @@ class FbPlaceEnterView @JvmOverloads constructor(context: Context, attrs: Attrib
         presenter.initData()
     }
 
-    fun setListener(action: () -> Unit) {
-        findViewById<TextView>(R.id.tv_btn).setDebounceOnClickListener {
+    fun setDismissListener(action: () -> Unit) {
+        findViewById<TextView>(R.id.btn_close).setDebounceOnClickListener {
             action()
         }
     }

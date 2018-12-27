@@ -199,5 +199,6 @@
 
     <string name="string_skill_has_study">已学习</string>
     <string name="string_skill_to_study">学习</string>
+    <string name="string_setting_big_monsters">取消魔王入侵玩法</string>
 
 </resources>

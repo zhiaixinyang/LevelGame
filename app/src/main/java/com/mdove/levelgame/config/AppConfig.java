@@ -40,6 +40,18 @@ public class AppConfig implements IAppConfig {
         return preferences.getBoolean(KEY_IS_SHOW_GUIDE, false);
     }
 
+    public static void setSwitchBigMonster(boolean bigMonster) {
+        SharedPreferences.Editor editor = initSharedPreferences().edit();
+        editor.putBoolean(KEY_SWITCH_BIG_MONSTER, bigMonster);
+        editor.apply();
+    }
+
+    public static boolean isSwitchBigMonster() {
+        SharedPreferences preferences = initSharedPreferences();
+        return preferences.getBoolean(KEY_SWITCH_BIG_MONSTER, true );
+    }
+
+
     public static void setShowGuide() {
         setShowGuide(true);
     }

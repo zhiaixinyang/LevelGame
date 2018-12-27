@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.SwitchCompat
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.BaseActivity
@@ -24,6 +26,9 @@ class SettingActivity : BaseActivity() {
     lateinit var btnReStart: TextView
     lateinit var btnUpdateMes: TextView
     lateinit var btnFeedBack: TextView
+    lateinit var switchBigMonster: SwitchCompat
+    lateinit var layoutBigMonster: RelativeLayout
+
     override fun isNeedCustomLayout(): Boolean {
         return false
     }
@@ -47,10 +52,12 @@ class SettingActivity : BaseActivity() {
         btnReStart = findViewById(R.id.btn_re_start)
         btnUpdateMes = findViewById(R.id.btn_update_mes)
         btnFeedBack = findViewById(R.id.btn_feed_back)
+        switchBigMonster = findViewById(R.id.toggle_switch_big_monster)
+        layoutBigMonster = findViewById(R.id.layout_big_monster)
 
         btnReStart.setOnClickListener {
             MyDialog.showMyDialog(context, getString(R.string.string_re_start_dialog_title), getString(R.string.string_re_start_dialog_content)
-                    , "不点错了", "确定", false, {
+                    , "不点错了", "确定", false) {
                 showLoadingDialog(getString(R.string.string_re_start_loading))
                 Observable.create(ObservableOnSubscribe<Int> { e ->
                     AppConfig.setHasLogin(false)
@@ -62,12 +69,18 @@ class SettingActivity : BaseActivity() {
                     HomeActivity.start(context)
                     ToastHelper.shortToast(getString(R.string.string_place_re_start))
                 }
-            })
+            }
         }
         btnHelp.setOnClickListener { MyDialog.showMyDialog(context, getString(R.string.string_setting_help_title), getString(R.string.string_setting_help_content), true) }
         btnUpdateMes.setOnClickListener { MyDialog.showMyDialog(context, getString(R.string.string_update_mes), getString(R.string.string_update_mes_content), true) }
         btnFeedBack.setOnClickListener {
             FeedBackActivity.start(context)
+        }
+
+        switchBigMonster.isChecked = AppConfig.isSwitchBigMonster()
+        layoutBigMonster.setOnClickListener {
+            switchBigMonster.isChecked = !switchBigMonster.isChecked
+            AppConfig.setSwitchBigMonster(switchBigMonster.isChecked)
         }
     }
 }

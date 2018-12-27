@@ -58,15 +58,19 @@ class FbPlaceContainerView(context: Context) {
     }
 
     private fun initListener() {
-        fbPlaceContainerView.setListener {
-            TransitionManager.endTransitions(containerView)
-            TransitionManager.go(scene2, transition1To2)
-            currentScene = scene2
+        fbPlaceContainerView.setDismissListener {
+            //            TransitionManager.endTransitions(containerView)
+//            TransitionManager.go(scene2, transition1To2)
+//            currentScene = scene2
         }
         fbMonstersEnterView.setListener {
             TransitionManager.endTransitions(containerView)
             TransitionManager.go(scene1, transition2To1)
             currentScene = scene1
         }
+    }
+
+    fun setOnDismissListener(action: () -> Unit) {
+        fbPlaceContainerView.setDismissListener(action)
     }
 }

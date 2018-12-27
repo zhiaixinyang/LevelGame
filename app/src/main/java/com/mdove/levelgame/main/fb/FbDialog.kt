@@ -6,14 +6,14 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.WindowManager
 import com.mdove.levelgame.R
-import com.mdove.levelgame.view.MDoveDialog
+import com.mdove.levelgame.view.base.MDoveDialog
 
 /**
  * Created by MDove on 2018/12/26.
  */
 class FbDialog(context: Context, theme: Int = android.R.style.Theme_Black_NoTitleBar_Fullscreen) : MDoveDialog(context, theme) {
 
-    private var fbContainerView: FbPlaceContainerView? = null
+    private lateinit var fbContainerView: FbPlaceContainerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,5 +31,9 @@ class FbDialog(context: Context, theme: Int = android.R.style.Theme_Black_NoTitl
         lp.width = WindowManager.LayoutParams.MATCH_PARENT
         lp.height = WindowManager.LayoutParams.MATCH_PARENT
         window.attributes = lp
+
+        fbContainerView.setOnDismissListener {
+            dismiss()
+        }
     }
 }

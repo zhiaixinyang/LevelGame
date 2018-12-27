@@ -102,7 +102,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 
     @Override
     public void initBigMonster() {
-        if (!AppConfig.isSwitchBigMonster()){
+        if (!AppConfig.enableBigMonster()){
             return;
         }
         if (HeroAttributesManager.getInstance().goneBigMonster()) {
@@ -117,7 +117,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 
     @Override
     public void initBigMonsterInvade() {
-        if (!AppConfig.isSwitchBigMonster()){
+        if (!AppConfig.enableBigMonster()){
             return;
         }
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();

@@ -57,18 +57,8 @@ class SettingActivity : BaseActivity() {
 
         btnReStart.setOnClickListener {
             MyDialog.showMyDialog(context, getString(R.string.string_re_start_dialog_title), getString(R.string.string_re_start_dialog_content)
-                    , "不点错了", "确定", false) {
-                showLoadingDialog(getString(R.string.string_re_start_loading))
-                Observable.create(ObservableOnSubscribe<Int> { e ->
-                    AppConfig.setHasLogin(false)
-                    InitDataFileUtils.initData()
-                    AppConfig.setHasLogin()
-                    e.onNext(0)
-                }).compose(RxTransformerHelper.schedulerTransf()).subscribe {
-                    dismissLoadingDialog()
-                    HomeActivity.start(context)
-                    ToastHelper.shortToast(getString(R.string.string_place_re_start))
-                }
+                    , "不，点错了", "确定", false) {
+                restartGame()
             }
         }
         btnHelp.setOnClickListener { MyDialog.showMyDialog(context, getString(R.string.string_setting_help_title), getString(R.string.string_setting_help_content), true) }
@@ -77,10 +67,37 @@ class SettingActivity : BaseActivity() {
             FeedBackActivity.start(context)
         }
 
-        switchBigMonster.isChecked = AppConfig.isSwitchBigMonster()
+        switchBigMonster.isChecked = AppConfig.enableBigMonster()
+        switchBigMonster.isClickable = false
         layoutBigMonster.setOnClickListener {
-            switchBigMonster.isChecked = !switchBigMonster.isChecked
-            AppConfig.setSwitchBigMonster(switchBigMonster.isChecked)
+            if (switchBigMonster.isChecked) {
+                MyDialog.showMyDialog(context, getString(R.string.string_setting_switch_big_monster_title), getString(R.string.string_setting_switch_big_monster_content)
+                        , "不，点错了", "确定", false) {
+                    switchBigMonster.isChecked = false
+                    AppConfig.setSwitchBigMonster(switchBigMonster.isChecked)
+                }
+            } else {
+                MyDialog.showMyDialog(context, getString(R.string.string_setting_switch_cancel_big_monster_title), getString(R.string.string_setting_switch_cancel_big_monster_content)
+                        , "不，点错了", "确定", false) {
+                    switchBigMonster.isChecked = true
+                    AppConfig.setSwitchBigMonster(switchBigMonster.isChecked)
+                    restartGame()
+                }
+            }
+        }
+    }
+
+    fun restartGame() {
+        showLoadingDialog(getString(R.string.string_re_start_loading))
+        Observable.create(ObservableOnSubscribe<Int> { e ->
+            AppConfig.setHasLogin(false)
+            InitDataFileUtils.initData()
+            AppConfig.setHasLogin()
+            e.onNext(0)
+        }).compose(RxTransformerHelper.schedulerTransf()).subscribe {
+            dismissLoadingDialog()
+            HomeActivity.start(context)
+            ToastHelper.shortToast(getString(R.string.string_place_re_start))
         }
     }
 }

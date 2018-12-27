@@ -46,7 +46,7 @@ public class AppConfig implements IAppConfig {
         editor.apply();
     }
 
-    public static boolean isSwitchBigMonster() {
+    public static boolean enableBigMonster() {
         SharedPreferences preferences = initSharedPreferences();
         return preferences.getBoolean(KEY_SWITCH_BIG_MONSTER, true );
     }

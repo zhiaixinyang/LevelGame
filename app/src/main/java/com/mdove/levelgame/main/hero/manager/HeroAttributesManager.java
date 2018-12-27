@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.reflect.TypeToken;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
+import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.DropGoodsDao;
@@ -128,6 +129,9 @@ public class HeroAttributesManager {
     }
 
     public boolean goneBigMonster() {
+        if (!AppConfig.enableBigMonster()){
+            return true;
+        }
         boolean isGone;
         isGone = computeBigMonster(heroAttributes.days);
         return isGone;

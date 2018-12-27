@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.mdove.levelgame.App;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseNormalDialog;
+import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Monsters;
@@ -122,7 +123,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                 .subscribe(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
-                        if (restStatus == 2) {
+                        if (restStatus == 2 && AppConfig.enableBigMonster()) {
                             MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_big_monsters_show_title),
                                     view.getString(R.string.string_big_monsters_show_content), true);
                         }

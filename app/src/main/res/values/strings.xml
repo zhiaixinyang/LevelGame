@@ -200,5 +200,9 @@
     <string name="string_skill_has_study">已学习</string>
     <string name="string_skill_to_study">学习</string>
     <string name="string_setting_big_monsters">取消魔王入侵玩法</string>
+    <string name="string_setting_switch_big_monster_title">取消魔王入侵</string>
+    <string name="string_setting_switch_cancel_big_monster_title">恢复魔王入侵</string>
+    <string name="string_setting_switch_cancel_big_monster_content">恢复魔王入侵。注意：需要重置游戏！！！</string>
+    <string name="string_setting_switch_big_monster_content">取消魔王入侵。注意：取消后，如果重新开启将重置游戏！</string>
 
 </resources>

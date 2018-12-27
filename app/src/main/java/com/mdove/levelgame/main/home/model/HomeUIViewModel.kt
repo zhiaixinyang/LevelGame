@@ -11,10 +11,10 @@ class HomeUIViewModel : ViewModel() {
     val enableBigMonster = MutableLiveData<Boolean>()
 
     init {
-        enableBigMonster.value = AppConfig.isSwitchBigMonster()
+        enableBigMonster.value = AppConfig.enableBigMonster()
     }
 
     fun initUI() {
-        enableBigMonster.value = AppConfig.isSwitchBigMonster()
+        enableBigMonster.value = AppConfig.enableBigMonster()
     }
 }

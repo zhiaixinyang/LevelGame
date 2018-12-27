@@ -46,25 +46,25 @@ public class HeroAttributesModelVM {
 
         long liliangExp = heroAttributes.liLiangExp;
         long liliangLevelExp = HeroAttributesManager.getInstance().getAttributeExp(HeroAttributesManager.ATTRIBUTE_TYPE_LILIANG, heroAttributes);
-        liLiangProgress.set((int) (((float) liliangExp / (float) liliangLevelExp)) * 100);
+        liLiangProgress.set((int)(((float) liliangExp / (float) liliangLevelExp) * 100));
         liLiang.set(String.format(App.getAppContext().getString(R.string.hero_attributes_liliang_and_exp),
                 heroAttributes.liLiang, liliangExp, liliangLevelExp));
 
         long minJieExp = heroAttributes.minJieExp;
         long minJieLevelExp = HeroAttributesManager.getInstance().getAttributeExp(HeroAttributesManager.ATTRIBUTE_TYPE_MINJIE, heroAttributes);
-        minJieProgress.set((int) (((float) minJieExp / (float) minJieLevelExp)) * 100);
+        minJieProgress.set((int)(((float) minJieExp / (float) minJieLevelExp) * 100));
         minJie.set(String.format(App.getAppContext().getString(R.string.hero_attributes_minjie_and_exp),
                 heroAttributes.minJie, minJieExp, minJieLevelExp));
 
         long zhiHuiExp = heroAttributes.zhiHuiExp;
         long zhiHuiLevelExp = HeroAttributesManager.getInstance().getAttributeExp(HeroAttributesManager.ATTRIBUTE_TYPE_ZHIHUI, heroAttributes);
-        zhiHuiProgress.set((int) (((float) zhiHuiExp / (float) zhiHuiLevelExp)) * 100);
+        zhiHuiProgress.set((int)(((float) zhiHuiExp / (float) zhiHuiLevelExp) * 100));
         zhiHui.set(String.format(App.getAppContext().getString(R.string.hero_attributes_zhihui_and_exp),
                 heroAttributes.zhiHui, zhiHuiExp, zhiHuiLevelExp));
 
         long qiangZhuangExp = heroAttributes.qiangZhuangExp;
         long qiangZhunagLevelExp = HeroAttributesManager.getInstance().getAttributeExp(HeroAttributesManager.ATTRIBUTE_TYPE_QIANGZHUANG, heroAttributes);
-        qiangZhuangProgress.set((int) (((float) qiangZhuangExp / (float) qiangZhunagLevelExp)) * 100);
+        qiangZhuangProgress.set((int)(((float) qiangZhuangExp / (float) qiangZhunagLevelExp) * 100));
         qiangZhuang.set(String.format(App.getAppContext().getString(R.string.hero_attributes_zhihui_and_exp),
                 heroAttributes.qiangZhuang, qiangZhuangExp, qiangZhunagLevelExp));
     }

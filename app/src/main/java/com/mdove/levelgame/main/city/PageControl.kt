@@ -15,7 +15,11 @@ class PageControl {
     }
 
     fun invokeActionCityLoadingClick() {
-        actionEnterCityLoading?.invoke()
-        actionCityLoadingClick?.invoke()
+        if (::actionEnterCityLoading.isInitialized) {
+            actionEnterCityLoading.invoke()
+        }
+        if (::actionCityLoadingClick.isInitialized) {
+            actionCityLoadingClick.invoke()
+        }
     }
 }

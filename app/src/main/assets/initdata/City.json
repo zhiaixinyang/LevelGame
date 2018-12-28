@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "name": "城市A",
+    "tips": "城市A！！",
+    "type": "city1",
+    "menu_btn_list_id": [
+      1,
+      2,
+      3
+    ],
+    "enable_open": 0,
+    "click_id": 1
+  },
+  {
+    "id": 2,
+    "name": "城市B",
+    "tips": "城市B！！",
+    "type": "city2",
+    "menu_btn_list_id": [
+      1,
+      2,
+      3
+    ],
+    "enable_open": 0,
+    "click_id": 2
+  },
+  {
+    "id": 3,
+    "name": "城市C",
+    "tips": "城市C！！",
+    "type": "city3",
+    "menu_btn_list_id": [
+      1,
+      2,
+      3
+    ],
+    "enable_open": 1,
+    "click_id": 3
+  },
+  {
+    "id": 4,
+    "name": "城市D",
+    "tips": "城市D！！",
+    "type": "city4",
+    "menu_btn_list_id": [
+      1,
+      2,
+      3
+    ],
+    "enable_open": 1,
+    "click_id": 4
+  },
+  {
+    "id": 5,
+    "name": "城市E",
+    "tips": "城市E！！",
+    "type": "city5",
+    "menu_btn_list_id": [
+      1,
+      2,
+      3
+    ],
+    "enable_open": 1,
+    "click_id": 5
+  }
+]

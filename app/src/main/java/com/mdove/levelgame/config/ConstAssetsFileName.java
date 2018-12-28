@@ -19,6 +19,7 @@ public class ConstAssetsFileName {
     public static final String ASSETS_MATERIALS = CONFIG + "Materials.json";
     public static final String ASSETS_ADVENTURE = CONFIG + "Adventure.json";
     public static final String ASSETS_MAIN_MENU = CONFIG + "MainMenu.json";
+    public static final String ASSETS_CITY = CONFIG + "City.json";
     public static final String ASSETS_ACCESSORIES = CONFIG + "Accessories.json";
     public static final String ASSETS_TASKS = CONFIG + "Task.json";
     public static final String ASSETS_SKILL = CONFIG + "Skill.json";

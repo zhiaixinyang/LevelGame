@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import com.mdove.levelgame.R;
 
 /**
- * @author xubin@jiandaola.com
+ * Created by MDove on 2018/10/21.
  */
 public class HorizontalSmoothProgressBar extends SmoothProgressBar {
     private final Paint foregroundPaint;

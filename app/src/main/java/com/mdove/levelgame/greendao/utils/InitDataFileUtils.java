@@ -10,6 +10,7 @@ import com.mdove.levelgame.greendao.AllGoods;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
+import com.mdove.levelgame.greendao.CityDao;
 import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.FbMonstersDao;
 import com.mdove.levelgame.greendao.FbPlaceDao;
@@ -27,6 +28,7 @@ import com.mdove.levelgame.greendao.entity.Accessories;
 import com.mdove.levelgame.greendao.entity.Adventure;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
+import com.mdove.levelgame.greendao.entity.City;
 import com.mdove.levelgame.greendao.entity.DropGoods;
 import com.mdove.levelgame.greendao.entity.FbMonsters;
 import com.mdove.levelgame.greendao.entity.FbPlace;
@@ -123,6 +125,8 @@ public class InitDataFileUtils {
         taskDao.deleteAll();
         SkillDao skillDao = DatabaseManager.getInstance().getSkillDao();
         skillDao.deleteAll();
+        CityDao cityDao = DatabaseManager.getInstance().getCityDao();
+        cityDao.deleteAll();
 
         if (!AppConfig.isHasLogin()) {
             bigMonstersDao.deleteAll();
@@ -147,6 +151,10 @@ public class InitDataFileUtils {
         List<MainMenu> mainMenus = getInitmainMenu();
         for (MainMenu mainMenu : mainMenus) {
             mainMenuDao.insert(mainMenu);
+        }
+
+        for (City city : getInitCity()) {
+            cityDao.insert(city);
         }
 
         for (Weapons model : getInitWeapons()) {
@@ -327,6 +335,16 @@ public class InitDataFileUtils {
                 ConstAssetsFileName.ASSETS_MAIN_MENU);
         if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<MainMenu>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<City> getInitCity() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_CITY);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<City>>() {
             }.getType());
         }
         return null;

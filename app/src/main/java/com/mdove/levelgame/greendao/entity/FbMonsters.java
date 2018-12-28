@@ -9,7 +9,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class FbMonsters {
-    @Id
+    @Id(autoincrement = true)
     public Long id;
     public String name;
     public String tips;

@@ -11,7 +11,7 @@ import com.mdove.levelgame.view.base.MDoveDialog
 /**
  * Created by MDove on 2018/12/26.
  */
-class FbDialog(context: Context, theme: Int = android.R.style.Theme_Black_NoTitleBar_Fullscreen) : MDoveDialog(context, theme) {
+class CityDialog(context: Context, theme: Int = android.R.style.Theme_Black_NoTitleBar_Fullscreen) : MDoveDialog(context, theme) {
 
     private lateinit var fbContainerView: CityContainerView
 
@@ -35,5 +35,13 @@ class FbDialog(context: Context, theme: Int = android.R.style.Theme_Black_NoTitl
         fbContainerView.setOnDismissListener {
             dismiss()
         }
+        fbContainerView.setDismiss {
+            dismiss()
+        }
+
+        setCancelable(false)
+    }
+
+    override fun onBackPressed() {
     }
 }

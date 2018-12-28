@@ -25,7 +25,7 @@ public abstract class SmoothProgressBar extends View {
     public static final int TOTAL_PROGRESS_DURATION = 1800;
     public static final int LAST_DELAY_DURATION = 300;
 
-    public static final int AUTO_INCREMENT_TOTAL_DURATION = 60 * 1000;// 120s
+    public static final int AUTO_INCREMENT_TOTAL_DURATION = 5 * 1000;
     private final List<WeakReference<SmoothProgressListener>> progressListeners =
             new ArrayList<>();
     private boolean isAutoIncrement = false;
@@ -152,14 +152,21 @@ public abstract class SmoothProgressBar extends View {
         }
         int duration = (int) (AUTO_INCREMENT_TOTAL_DURATION * (100 - currentProgress) / 100);
         autoIncrementAnimator =
-                ValueAnimator.ofFloat(currentProgress, 99).setDuration(duration);
+                ValueAnimator.ofFloat(currentProgress, 100).setDuration(duration);
         autoIncrementAnimator.setInterpolator(new LinearInterpolator());
         autoIncrementAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 currentProgress = (Float) animation.getAnimatedValue();
+                if (currentProgress == 100) {
+                    for (WeakReference<SmoothProgressListener> smoothProgressListener : progressListeners) {
+                        smoothProgressListener.get().onProgressComplete();
+                    }
+                    return;
+                }
                 invalidate();
             }
+
         });
         autoIncrementAnimator.start();
     }

@@ -10,7 +10,7 @@ import com.mdove.levelgame.greendao.BigMonstersDao;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.main.fb.FbDialog;
+import com.mdove.levelgame.main.fb.CityDialog;
 import com.mdove.levelgame.main.hero.HeroAttributesActivity;
 import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
@@ -50,7 +50,8 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     public void onClickItemId(MainMenuModelVM vm) {
         switch (vm.id.get().intValue()) {
             case INTENT_TO_MONSTERS_PLACE:
-                MonstersPlaceActivity.start(view.getContext());
+//                MonstersPlaceActivity.start(view.getContext());
+                new CityDialog(view.getContext(), R.style.fb_dialog).show();
                 break;
             case INTENT_TO_SHOP: {
                 ShopActivity.Companion.start(view.getContext());
@@ -61,7 +62,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 break;
             }
             case INTENT_TO_HERO_ATTR: {
-//                new FbDialog(view.getContext(),R.style.fb_dialog)
+//                new CityDialog(view.getContext(),R.style.fb_dialog)
 //                        .show();
                 HeroAttributesActivity.start(view.getContext());
                 break;
@@ -103,7 +104,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 
     @Override
     public void initBigMonster() {
-        if (!AppConfig.enableBigMonster()){
+        if (!AppConfig.enableBigMonster()) {
             return;
         }
         if (HeroAttributesManager.getInstance().goneBigMonster()) {
@@ -118,7 +119,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 
     @Override
     public void initBigMonsterInvade() {
-        if (!AppConfig.enableBigMonster()){
+        if (!AppConfig.enableBigMonster()) {
             return;
         }
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();

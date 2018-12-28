@@ -7,6 +7,7 @@ import com.mdove.levelgame.greendao.AdventureDao;
 import com.mdove.levelgame.greendao.AllGoodsDao;
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.BigMonstersDao;
+import com.mdove.levelgame.greendao.CityDao;
 import com.mdove.levelgame.greendao.DaoMaster;
 import com.mdove.levelgame.greendao.DaoSession;
 import com.mdove.levelgame.greendao.DropGoodsDao;
@@ -57,6 +58,7 @@ public class DatabaseManager {
     private SkillDao skillDao;
     private FbPlaceDao mFbPlaceDao;
     private FbMonstersDao mFbMonstersDao;
+    private CityDao mCityDao;
 
     private static final class Holder {
         private static final DatabaseManager INSTANCE = new DatabaseManager();
@@ -102,6 +104,7 @@ public class DatabaseManager {
         skillDao = mDaoSession.getSkillDao();
         mFbPlaceDao = mDaoSession.getFbPlaceDao();
         mFbMonstersDao = mDaoSession.getFbMonstersDao();
+        mCityDao = mDaoSession.getCityDao();
     }
 
     public MaterialDao getMaterialDao() {
@@ -183,6 +186,10 @@ public class DatabaseManager {
 
     public AccessoriesDao getAccessoriesDao() {
         return accessoriesDao;
+    }
+
+    public CityDao getCityDao() {
+        return mCityDao;
     }
 
     /**

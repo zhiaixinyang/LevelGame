@@ -9,28 +9,34 @@ import android.view.View
 import android.widget.TextView
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.kotlin.setDebounceOnClickListener
+import com.mdove.levelgame.main.city.PageControl
+import com.mdove.levelgame.main.city.model.CityVM
+import com.mdove.levelgame.main.city.presenter.CityPresenter
+import com.mdove.levelgame.main.city.presenter.contract.CityContract
+import com.mdove.levelgame.main.city.ui.ICityView
 import com.mdove.levelgame.main.fb.adapter.CityAdapter
-import com.mdove.levelgame.main.fb.adapter.FbPlaceAdapter
 import com.mdove.levelgame.main.fb.presenter.FbPlacePresenter
 import com.mdove.levelgame.main.fb.presenter.contract.FbPlaceContract
 import com.mdove.levelgame.main.fb.viewmodel.FbPlaceVM
 
 /**
- * Created by MDove on 2018/12/26.
+ * Created by MDove on 2018/12/28.
  */
-class FbPlaceEnterView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
-        ConstraintLayout(context, attrs, defStyle), FbPlaceContract.IFbPlaceView {
+class CityEnterView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
+        ConstraintLayout(context, attrs, defStyle), CityContract.ICityView, ICityView {
+
     private var rlv: RecyclerView
-    private var adapter: FbPlaceAdapter
-    private var presenter: FbPlacePresenter
+    private var mAdapter: CityAdapter
+    private var presenter: CityPresenter
+    private lateinit var pageControl: PageControl
 
     init {
-        View.inflate(context, R.layout.view_fb_place_enter_view, this)
+        View.inflate(context, R.layout.view_city_enter_view, this)
         rlv = findViewById(R.id.rlv)
         rlv.layoutManager = LinearLayoutManager(context)
-        presenter = FbPlacePresenter()
-        adapter = FbPlaceAdapter(presenter)
-        rlv.adapter = adapter
+        presenter = CityPresenter()
+        mAdapter = CityAdapter(presenter)
+        rlv.adapter = mAdapter
         presenter.subscribe(this)
         presenter.initData()
     }
@@ -41,11 +47,19 @@ class FbPlaceEnterView @JvmOverloads constructor(context: Context, attrs: Attrib
         }
     }
 
+    override fun registerPageControl(pageControl: PageControl) {
+        this.pageControl = pageControl
+    }
+
+    override fun onClickCity() {
+        pageControl.invokeActionCityLoadingClick()
+    }
+
     override fun dismissLoadingDialog() {
     }
 
-    override fun showData(data: MutableList<FbPlaceVM>?) {
-        adapter.data = data
+    override fun showData(data: MutableList<CityVM>?) {
+        mAdapter.data = data
     }
 
     override fun getString(stringId: Int): String {

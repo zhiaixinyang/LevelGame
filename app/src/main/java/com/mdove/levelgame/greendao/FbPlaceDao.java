@@ -48,7 +48,7 @@ public class FbPlaceDao extends AbstractDao<FbPlace, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"FB_PLACE\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"NAME\" TEXT," + // 1: name
                 "\"TIPS\" TEXT," + // 2: tips
                 "\"TYPE\" TEXT," + // 3: type

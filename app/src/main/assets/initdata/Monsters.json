@@ -12,20 +12,20 @@
     "monster_place_id": 1,
     "drop_goods_id": 1,
     "exp_li_liang": [
-      5,
-      10
+      1,
+      5
     ],
     "exp_min_jie": [
-      5,
-      10
+      1,
+      5
     ],
     "exp_zhi_hui": [
-      5,
-      10
+      1,
+      5
     ],
     "exp_qiang_zhuang": [
-      5,
-      10
+      1,
+      5
     ],
     "exp": 10,
     "is_limit_count": 1,
@@ -45,19 +45,19 @@
     "type": "C2",
     "is_show": 0,
     "exp_li_liang": [
-      5,
+      1,
       10
     ],
     "exp_min_jie": [
-      5,
+      1,
       10
     ],
     "exp_zhi_hui": [
-      5,
+      1,
       10
     ],
     "exp_qiang_zhuang": [
-      5,
+      1,
       10
     ],
     "is_limit_count": 1,
@@ -81,19 +81,19 @@
     "is_show": 0,
     "exp_li_liang": [
       5,
-      10
+      5
     ],
     "exp_min_jie": [
       5,
-      10
+      5
     ],
     "exp_zhi_hui": [
       5,
-      10
+      5
     ],
     "exp_qiang_zhuang": [
       5,
-      10
+      5
     ],
     "is_limit_count": 0,
     "limit_count": 2,
@@ -152,20 +152,20 @@
     "type": "C5",
     "is_show": 0,
     "exp_li_liang": [
-      5,
-      10
+      50,
+      50
     ],
     "exp_min_jie": [
-      5,
-      10
+      50,
+      50
     ],
     "exp_zhi_hui": [
-      5,
-      10
+      50,
+      50
     ],
     "exp_qiang_zhuang": [
-      5,
-      10
+      50,
+      50
     ],
     "is_businessman": 1,
     "monster_place_id": 1,

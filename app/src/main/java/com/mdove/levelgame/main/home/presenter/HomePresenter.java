@@ -7,7 +7,10 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.RxTransformerHelper;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.greendao.BigMonstersDao;
+import com.mdove.levelgame.greendao.CityDao;
+import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
+import com.mdove.levelgame.greendao.entity.City;
 import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.fb.CityDialog;
@@ -31,7 +34,11 @@ import com.mdove.levelgame.view.BigFightingDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
  * @author MDove on 2018/10/31
@@ -91,15 +98,45 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 
     @Override
     public void initMenu() {
-        List<MainMenuModelVM> data = new ArrayList<>();
-
-        List<MainMenu> mainMenus = DatabaseManager.getInstance().getMainMenuDao().loadAll();
-        if (mainMenus != null && mainMenus.size() > 0) {
-            for (MainMenu mainMenu : mainMenus) {
-                data.add(new MainMenuModelVM(mainMenu));
+        view.showLoadingDialog(view.getString(R.string.string_init_home_loading));
+        Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> e) throws Exception {
+                e.onNext(AppConfig.getCurPlaceId());
             }
-        }
-        view.showMenu(data);
+        }).map(new Function<Long, List<Integer>>() {
+            @Override
+            public List<Integer> apply(Long aLong) throws Exception {
+                City city = DatabaseManager.getInstance().getCityDao().queryBuilder().where(CityDao.Properties.Id.eq(aLong)).unique();
+                List<Integer> btnIds = null;
+                if (city != null) {
+                    btnIds = city.menuBtnListId;
+                }
+                return btnIds;
+            }
+        }).map(new Function<List<Integer>, List<MainMenuModelVM>>() {
+            @Override
+            public List<MainMenuModelVM> apply(List<Integer> integers) throws Exception {
+                List<MainMenuModelVM> mainMenus = null;
+                if (integers != null) {
+                    MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
+                    for (Integer id : integers) {
+                        MainMenu mainMenu = mainMenuDao.queryBuilder().where(MainMenuDao.Properties.Id.eq(id)).unique();
+                        if (mainMenu != null) {
+                            mainMenus.add(new MainMenuModelVM(mainMenu));
+                        }
+                    }
+                }
+                return mainMenus;
+            }
+        }).compose(RxTransformerHelper.schedulerTransf())
+                .subscribe(new Consumer<List<MainMenuModelVM>>() {
+                    @Override
+                    public void accept(List<MainMenuModelVM> mainMenuModelVMS) throws Exception {
+                        view.showMenu(mainMenuModelVMS);
+                        view.dismissLoadingDialog();
+                    }
+                });
     }
 
     @Override

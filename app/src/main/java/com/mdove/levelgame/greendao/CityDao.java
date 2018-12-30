@@ -34,6 +34,9 @@ public class CityDao extends AbstractDao<City, Long> {
         public final static Property MenuBtnListId = new Property(4, String.class, "menuBtnListId", false, "MENU_BTN_LIST_ID");
         public final static Property EnableOpen = new Property(5, int.class, "enableOpen", false, "ENABLE_OPEN");
         public final static Property ClickId = new Property(6, int.class, "clickId", false, "CLICK_ID");
+        public final static Property IsShow = new Property(7, int.class, "isShow", false, "IS_SHOW");
+        public final static Property IsAdventure = new Property(8, int.class, "isAdventure", false, "IS_ADVENTURE");
+        public final static Property Position = new Property(9, int.class, "position", false, "POSITION");
     }
 
     private final IntegerConverter menuBtnListIdConverter = new IntegerConverter();
@@ -56,7 +59,10 @@ public class CityDao extends AbstractDao<City, Long> {
                 "\"TYPE\" TEXT," + // 3: type
                 "\"MENU_BTN_LIST_ID\" TEXT," + // 4: menuBtnListId
                 "\"ENABLE_OPEN\" INTEGER NOT NULL ," + // 5: enableOpen
-                "\"CLICK_ID\" INTEGER NOT NULL );"); // 6: clickId
+                "\"CLICK_ID\" INTEGER NOT NULL ," + // 6: clickId
+                "\"IS_SHOW\" INTEGER NOT NULL ," + // 7: isShow
+                "\"IS_ADVENTURE\" INTEGER NOT NULL ," + // 8: isAdventure
+                "\"POSITION\" INTEGER NOT NULL );"); // 9: position
     }
 
     /** Drops the underlying database table. */
@@ -95,6 +101,9 @@ public class CityDao extends AbstractDao<City, Long> {
         }
         stmt.bindLong(6, entity.getEnableOpen());
         stmt.bindLong(7, entity.getClickId());
+        stmt.bindLong(8, entity.getIsShow());
+        stmt.bindLong(9, entity.getIsAdventure());
+        stmt.bindLong(10, entity.getPosition());
     }
 
     @Override
@@ -127,6 +136,9 @@ public class CityDao extends AbstractDao<City, Long> {
         }
         stmt.bindLong(6, entity.getEnableOpen());
         stmt.bindLong(7, entity.getClickId());
+        stmt.bindLong(8, entity.getIsShow());
+        stmt.bindLong(9, entity.getIsAdventure());
+        stmt.bindLong(10, entity.getPosition());
     }
 
     @Override
@@ -143,7 +155,10 @@ public class CityDao extends AbstractDao<City, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // type
             cursor.isNull(offset + 4) ? null : menuBtnListIdConverter.convertToEntityProperty(cursor.getString(offset + 4)), // menuBtnListId
             cursor.getInt(offset + 5), // enableOpen
-            cursor.getInt(offset + 6) // clickId
+            cursor.getInt(offset + 6), // clickId
+            cursor.getInt(offset + 7), // isShow
+            cursor.getInt(offset + 8), // isAdventure
+            cursor.getInt(offset + 9) // position
         );
         return entity;
     }
@@ -157,6 +172,9 @@ public class CityDao extends AbstractDao<City, Long> {
         entity.setMenuBtnListId(cursor.isNull(offset + 4) ? null : menuBtnListIdConverter.convertToEntityProperty(cursor.getString(offset + 4)));
         entity.setEnableOpen(cursor.getInt(offset + 5));
         entity.setClickId(cursor.getInt(offset + 6));
+        entity.setIsShow(cursor.getInt(offset + 7));
+        entity.setIsAdventure(cursor.getInt(offset + 8));
+        entity.setPosition(cursor.getInt(offset + 9));
      }
     
     @Override

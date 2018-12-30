@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.widget.FrameLayout
 import com.mdove.levelgame.R
-import com.mdove.levelgame.main.city.PageControl
-import com.mdove.levelgame.main.city.ui.CityEnterLoadingView
-import com.mdove.levelgame.main.city.ui.ICityView
+import com.mdove.levelgame.main.home.city.PageControl
+import com.mdove.levelgame.main.home.city.ui.CityEnterLoadingView
+import com.mdove.levelgame.main.home.city.ui.ICityView
 import com.mdove.levelgame.main.fb.ui.CityEnterView
 
 /**
@@ -20,7 +20,7 @@ class CityContainerView(context: Context) {
         setBackgroundResource(R.drawable.buzz_round_corner_dialog_bg)
     }
 
-    private lateinit var dismiss: () -> Unit
+    private lateinit var loadingDismiss: (placeId: Long) -> Unit
     private lateinit var scene1: Scene
     private lateinit var scene2: Scene
     private lateinit var currentScene: Scene
@@ -34,8 +34,8 @@ class CityContainerView(context: Context) {
 
     init {
         initCity()
-        cityEnterLoadingView.setDismiss {
-            dismiss?.invoke()
+        cityEnterLoadingView.registerLoadingDismiss {
+            loadingDismiss.invoke(it)
         }
     }
 
@@ -74,8 +74,8 @@ class CityContainerView(context: Context) {
         }
     }
 
-    fun setDismiss(action: () -> Unit) {
-        dismiss = action
+    fun registerLoadingDismiss(action: (placeId: Long) -> Unit) {
+        loadingDismiss = action
     }
 
     fun setOnDismissListener(action: () -> Unit) {

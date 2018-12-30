@@ -213,5 +213,6 @@
     <string name="string_setting_switch_cancel_big_monster_content">恢复魔王入侵。注意：需要重置游戏！！！</string>
     <string name="string_setting_switch_big_monster_content">取消魔王入侵，取消后魔王将不再入侵。注意：取消后，如果重新开启，将重置游戏！</string>
     <string name="string_city_enter_loading">正在前往...</string>
+    <string name="string_init_home_loading">初始化中...请稍等</string>
 
 </resources>

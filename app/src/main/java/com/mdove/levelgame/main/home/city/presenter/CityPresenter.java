@@ -1,14 +1,10 @@
-package com.mdove.levelgame.main.city.presenter;
+package com.mdove.levelgame.main.home.city.presenter;
 
 import com.mdove.levelgame.greendao.CityDao;
-import com.mdove.levelgame.greendao.FbPlaceDao;
 import com.mdove.levelgame.greendao.entity.City;
-import com.mdove.levelgame.greendao.entity.FbPlace;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.main.city.model.CityVM;
-import com.mdove.levelgame.main.city.presenter.contract.CityContract;
-import com.mdove.levelgame.main.fb.presenter.contract.FbPlaceContract;
-import com.mdove.levelgame.main.fb.viewmodel.FbPlaceVM;
+import com.mdove.levelgame.main.home.city.model.CityVM;
+import com.mdove.levelgame.main.home.city.presenter.contract.CityContract;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.mdove.levelgame.main.city.ui
+package com.mdove.levelgame.main.home.city.ui
 
-import com.mdove.levelgame.main.city.PageControl
+import com.mdove.levelgame.main.home.city.PageControl
 
 /**
  * Created by MDove on 2018/12/28.

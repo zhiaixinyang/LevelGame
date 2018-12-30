@@ -84,4 +84,15 @@ public class AppConfig implements IAppConfig {
         SharedPreferences preferences = initSharedPreferences();
         return preferences.getLong(KEY_ORDER_TODAY_TIME, 0);
     }
+
+    public static void setCurPlaceId(long cityId) {
+        SharedPreferences.Editor editor = initSharedPreferences().edit();
+        editor.putLong(KEY_CUR_CITY_ID, cityId);
+        editor.apply();
+    }
+
+    public static long getCurPlaceId() {
+        SharedPreferences preferences = initSharedPreferences();
+        return preferences.getLong(KEY_CUR_CITY_ID, 1);
+    }
 }

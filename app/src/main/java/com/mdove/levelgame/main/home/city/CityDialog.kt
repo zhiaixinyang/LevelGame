@@ -35,7 +35,8 @@ class CityDialog(context: Context, theme: Int = android.R.style.Theme_Black_NoTi
         fbContainerView.setOnDismissListener {
             dismiss()
         }
-        fbContainerView.setDismiss {
+        fbContainerView.registerLoadingDismiss {
+
             dismiss()
         }
 

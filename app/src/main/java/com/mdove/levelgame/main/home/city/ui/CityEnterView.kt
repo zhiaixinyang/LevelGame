@@ -9,15 +9,12 @@ import android.view.View
 import android.widget.TextView
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.kotlin.setDebounceOnClickListener
-import com.mdove.levelgame.main.city.PageControl
-import com.mdove.levelgame.main.city.model.CityVM
-import com.mdove.levelgame.main.city.presenter.CityPresenter
-import com.mdove.levelgame.main.city.presenter.contract.CityContract
-import com.mdove.levelgame.main.city.ui.ICityView
+import com.mdove.levelgame.main.home.city.PageControl
+import com.mdove.levelgame.main.home.city.model.CityVM
+import com.mdove.levelgame.main.home.city.presenter.CityPresenter
+import com.mdove.levelgame.main.home.city.presenter.contract.CityContract
+import com.mdove.levelgame.main.home.city.ui.ICityView
 import com.mdove.levelgame.main.fb.adapter.CityAdapter
-import com.mdove.levelgame.main.fb.presenter.FbPlacePresenter
-import com.mdove.levelgame.main.fb.presenter.contract.FbPlaceContract
-import com.mdove.levelgame.main.fb.viewmodel.FbPlaceVM
 
 /**
  * Created by MDove on 2018/12/28.
@@ -51,8 +48,8 @@ class CityEnterView @JvmOverloads constructor(context: Context, attrs: Attribute
         this.pageControl = pageControl
     }
 
-    override fun onClickCity() {
-        pageControl.invokeActionCityLoadingClick()
+    override fun onClickCity(placeId: Long) {
+        pageControl.invokeActionCityLoadingClick(placeId)
     }
 
     override fun dismissLoadingDialog() {

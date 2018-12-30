@@ -5,13 +5,9 @@ import android.view.ViewGroup
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.adapter.BaseListAdapter
 import com.mdove.levelgame.databinding.ItemCityBinding
-import com.mdove.levelgame.databinding.ItemFbPlaceBinding
-import com.mdove.levelgame.main.city.model.CityItemHandler
-import com.mdove.levelgame.main.city.model.CityVM
-import com.mdove.levelgame.main.city.presenter.CityPresenter
-import com.mdove.levelgame.main.fb.presenter.FbPlacePresenter
-import com.mdove.levelgame.main.fb.viewmodel.FbPlaceVM
-import com.mdove.levelgame.main.skill.adapter.HomeSkillAdapter
+import com.mdove.levelgame.main.home.city.model.CityItemHandler
+import com.mdove.levelgame.main.home.city.model.CityVM
+import com.mdove.levelgame.main.home.city.presenter.CityPresenter
 import com.mdove.levelgame.utils.InflateUtils
 
 /**

@@ -1,6 +1,6 @@
-package com.mdove.levelgame.main.city.model
+package com.mdove.levelgame.main.home.city.model
 
-import com.mdove.levelgame.main.city.presenter.CityPresenter
+import com.mdove.levelgame.main.home.city.presenter.CityPresenter
 
 /**
  * Created by MDove on 2018/12/28.

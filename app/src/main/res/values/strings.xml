@@ -214,5 +214,7 @@
     <string name="string_setting_switch_big_monster_content">取消魔王入侵，取消后魔王将不再入侵。注意：取消后，如果重新开启，将重置游戏！</string>
     <string name="string_city_enter_loading">正在前往...</string>
     <string name="string_init_home_loading">初始化中...请稍等</string>
+    <string name="string_enter_place_error_title">进入失败</string>
+    <string name="string_enter_place_error_content">当前已经处在[ %1$s ]之中了</string>
 
 </resources>

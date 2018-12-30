@@ -85,14 +85,15 @@ public class AppConfig implements IAppConfig {
         return preferences.getLong(KEY_ORDER_TODAY_TIME, 0);
     }
 
-    public static void setCurPlaceId(long cityId) {
+    public static void setCurPlaceJson(String curPlaceJson) {
         SharedPreferences.Editor editor = initSharedPreferences().edit();
-        editor.putLong(KEY_CUR_CITY_ID, cityId);
+        editor.putString(KEY_CUR_PLACE_JSON, curPlaceJson);
         editor.apply();
     }
 
-    public static long getCurPlaceId() {
+    public static String getCurPlaceJson() {
         SharedPreferences preferences = initSharedPreferences();
-        return preferences.getLong(KEY_CUR_CITY_ID, 1);
+        return preferences.getString(KEY_CUR_PLACE_JSON, "{\"place_id\":1,\"is_monster_place\":false,\"place_title\":\"桃源村\"}" );
     }
+
 }

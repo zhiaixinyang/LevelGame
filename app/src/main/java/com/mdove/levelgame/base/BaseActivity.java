@@ -341,12 +341,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (isFinishing()) {
             return;
         }
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null && progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
+        runOnUiThread(() -> {
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
             }
         });
     }

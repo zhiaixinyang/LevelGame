@@ -7,14 +7,17 @@ import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.kotlin.setDebounceOnClickListener
+import com.mdove.levelgame.main.fb.adapter.CityAdapter
 import com.mdove.levelgame.main.home.city.PageControl
+import com.mdove.levelgame.main.home.city.model.CityReps
 import com.mdove.levelgame.main.home.city.model.CityVM
 import com.mdove.levelgame.main.home.city.presenter.CityPresenter
 import com.mdove.levelgame.main.home.city.presenter.contract.CityContract
 import com.mdove.levelgame.main.home.city.ui.ICityView
-import com.mdove.levelgame.main.fb.adapter.CityAdapter
+import com.mdove.levelgame.view.MyDialog
 
 /**
  * Created by MDove on 2018/12/28.
@@ -48,8 +51,8 @@ class CityEnterView @JvmOverloads constructor(context: Context, attrs: Attribute
         this.pageControl = pageControl
     }
 
-    override fun onClickCity(placeId: Long) {
-        pageControl.invokeActionCityLoadingClick(placeId)
+    override fun onClickCity(cityReps: CityReps) {
+        pageControl.invokeActionCityLoadingClick(cityReps)
     }
 
     override fun dismissLoadingDialog() {
@@ -66,4 +69,8 @@ class CityEnterView @JvmOverloads constructor(context: Context, attrs: Attribute
     override fun showLoadingDialog(msg: String?) {
     }
 
+    override fun enterPlaceIsCur(placeTitle:String) {
+        MyDialog.showMyDialog(context,getString(R.string.string_enter_place_error_title),
+                String.format(getString(R.string.string_enter_place_error_content),placeTitle),true)
+    }
 }

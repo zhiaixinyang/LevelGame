@@ -160,7 +160,9 @@ public abstract class SmoothProgressBar extends View {
                 currentProgress = (Float) animation.getAnimatedValue();
                 if (currentProgress == 100) {
                     for (WeakReference<SmoothProgressListener> smoothProgressListener : progressListeners) {
-                        smoothProgressListener.get().onProgressComplete();
+                        if (smoothProgressListener.get()!=null){
+                            smoothProgressListener.get().onProgressComplete();
+                        }
                     }
                     return;
                 }

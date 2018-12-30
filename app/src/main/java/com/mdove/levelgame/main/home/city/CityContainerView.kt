@@ -11,6 +11,7 @@ import com.mdove.levelgame.main.home.city.PageControl
 import com.mdove.levelgame.main.home.city.ui.CityEnterLoadingView
 import com.mdove.levelgame.main.home.city.ui.ICityView
 import com.mdove.levelgame.main.fb.ui.CityEnterView
+import com.mdove.levelgame.main.home.city.model.CityReps
 
 /**
  * Created by MDove on 2018/12/26.
@@ -20,7 +21,7 @@ class CityContainerView(context: Context) {
         setBackgroundResource(R.drawable.buzz_round_corner_dialog_bg)
     }
 
-    private lateinit var loadingDismiss: (placeId: Long) -> Unit
+    private lateinit var loadingDismiss: (cityReps: CityReps) -> Unit
     private lateinit var scene1: Scene
     private lateinit var scene2: Scene
     private lateinit var currentScene: Scene
@@ -74,7 +75,7 @@ class CityContainerView(context: Context) {
         }
     }
 
-    fun registerLoadingDismiss(action: (placeId: Long) -> Unit) {
+    fun registerLoadingDismiss(action: (cityReps: CityReps) -> Unit) {
         loadingDismiss = action
     }
 

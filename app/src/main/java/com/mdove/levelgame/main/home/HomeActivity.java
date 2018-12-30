@@ -9,33 +9,33 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.mdove.levelgame.BuildConfig;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
+import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.databinding.ActivityHomeBinding;
-import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.home.adapter.HomeAdapter;
+import com.mdove.levelgame.main.home.city.model.CityReps;
+import com.mdove.levelgame.main.home.model.CityViewModel;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.HomeActionHandler;
 import com.mdove.levelgame.main.home.model.HomeUIViewModel;
-import com.mdove.levelgame.main.home.model.MainActionHandler;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.home.presenter.HomeContract;
 import com.mdove.levelgame.main.home.presenter.HomePresenter;
 import com.mdove.levelgame.utils.AppUtils;
 import com.mdove.levelgame.utils.DensityUtil;
+import com.mdove.levelgame.utils.JsonUtil;
 import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.guideview.Guide;
 import com.mdove.levelgame.view.guideview.GuideBuilder;
@@ -53,6 +53,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     private boolean isAniming = false;
     private long clickTime = 0;
     private HomeUIViewModel mHomeUIViewModel;
+    private CityViewModel mCityViewModel;
 
     public static void start(Context context) {
         Intent start = new Intent(context, HomeActivity.class);
@@ -72,6 +73,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        mCityViewModel = ViewModelProviders.of(this).get(CityViewModel.class);
         presenter = new HomePresenter();
         presenter.subscribe(this);
 
@@ -79,7 +81,6 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         binding.rlv.setLayoutManager(new LinearLayoutManager(this));
         binding.rlv.setAdapter(adapter);
 
-        presenter.initMenu();
         presenter.initBigMonster();
         presenter.initBigMonsterInvade();
         presenter.initGuide();
@@ -87,13 +88,10 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
 
         binding.setHandler(new HomeActionHandler(presenter));
 
-        binding.ivBigMonster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (BuildConfig.DEBUG) {
-                    HeroManager.getInstance().getHeroAttributes().money += 1000;
-                    HeroManager.getInstance().save();
-                }
+        binding.ivBigMonster.setOnClickListener(v -> {
+            if (BuildConfig.DEBUG) {
+                HeroManager.getInstance().getHeroAttributes().money += 1000;
+                HeroManager.getInstance().save();
             }
         });
         binding.rlv.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -114,15 +112,21 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         });
 
         mHomeUIViewModel = ViewModelProviders.of(this).get(HomeUIViewModel.class);
-        mHomeUIViewModel.getEnableBigMonster().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                binding.ivBigMonster.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
-                binding.tvInvade.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
-                showBigMonsters(null);
-            }
+        mHomeUIViewModel.getEnableBigMonster().observe(this, aBoolean -> {
+            binding.ivBigMonster.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
+            binding.tvInvade.setVisibility(aBoolean ? View.VISIBLE : View.GONE);
+            showBigMonsters(null);
         });
         mHomeUIViewModel.initUI();
+
+        mCityViewModel.getCurPlaceId().observe(this, cityReps -> {
+            resetPlace(cityReps);
+        });
+    }
+
+    private void resetPlace(CityReps cityReps){
+        binding.toolbar.setTitle(cityReps.getPlaceTitle());
+        presenter.initMenu(cityReps);
     }
 
     private void showView() {
@@ -156,6 +160,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     @Override
     protected void onResume() {
         super.onResume();
+        resetPlace(JsonUtil.decode(AppConfig.getCurPlaceJson(),CityReps.class));
         mHomeUIViewModel.initUI();
         presenter.initBigMonsterInvade();
         presenter.initBigMonster();

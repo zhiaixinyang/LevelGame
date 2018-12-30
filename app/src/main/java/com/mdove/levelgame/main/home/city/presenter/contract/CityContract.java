@@ -3,6 +3,7 @@ package com.mdove.levelgame.main.home.city.presenter.contract;
 
 import com.mdove.levelgame.base.BasePresenter;
 import com.mdove.levelgame.base.BaseView;
+import com.mdove.levelgame.main.home.city.model.CityReps;
 import com.mdove.levelgame.main.home.city.model.CityVM;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface CityContract {
 
     interface ICityView extends BaseView {
         void showData(List<CityVM> bannerList);
-
-        void onClickCity(Long placeId);
+        void enterPlaceIsCur(String placeTitle);
+        void onClickCity(CityReps cityReps);
     }
 }

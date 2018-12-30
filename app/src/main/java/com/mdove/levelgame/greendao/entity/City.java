@@ -29,10 +29,11 @@ public class City {
     public int isShow;
     public int isAdventure;
     public int position;
-    @Generated(hash = 1435604687)
+    public int isMonsterPlace;
+    @Generated(hash = 29050052)
     public City(Long id, String name, String tips, String type,
             List<Integer> menuBtnListId, int enableOpen, int clickId, int isShow,
-            int isAdventure, int position) {
+            int isAdventure, int position, int isMonsterPlace) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -43,6 +44,7 @@ public class City {
         this.isShow = isShow;
         this.isAdventure = isAdventure;
         this.position = position;
+        this.isMonsterPlace = isMonsterPlace;
     }
     @Generated(hash = 750791287)
     public City() {
@@ -106,5 +108,11 @@ public class City {
     }
     public void setPosition(int position) {
         this.position = position;
+    }
+    public int getIsMonsterPlace() {
+        return this.isMonsterPlace;
+    }
+    public void setIsMonsterPlace(int isMonsterPlace) {
+        this.isMonsterPlace = isMonsterPlace;
     }
 }

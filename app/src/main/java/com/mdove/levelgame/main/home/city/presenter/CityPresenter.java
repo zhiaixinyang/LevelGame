@@ -3,6 +3,7 @@ package com.mdove.levelgame.main.home.city.presenter;
 import com.mdove.levelgame.greendao.CityDao;
 import com.mdove.levelgame.greendao.entity.City;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
+import com.mdove.levelgame.main.home.city.model.CityReps;
 import com.mdove.levelgame.main.home.city.model.CityVM;
 import com.mdove.levelgame.main.home.city.presenter.contract.CityContract;
 
@@ -44,6 +45,14 @@ public class CityPresenter implements CityContract.ICityPresenter {
 
     @Override
     public void onClick(CityVM cityVM) {
-        mView.onClickCity();
+        if (cityVM.isCurPlace().get()){
+            mView.enterPlaceIsCur(cityVM.getName().get());
+            return;
+        }
+        CityReps cityReps=new CityReps();
+        cityReps.setPlaceId(cityVM.getId().get());
+        cityReps.setMonsterPlace(cityVM.isMonsterPlace().get());
+        cityReps.setPlaceTitle(cityVM.getName().get());
+        mView.onClickCity(cityReps);
     }
 }

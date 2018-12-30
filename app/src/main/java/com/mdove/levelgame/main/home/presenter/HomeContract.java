@@ -2,6 +2,7 @@ package com.mdove.levelgame.main.home.presenter;
 
 import com.mdove.levelgame.base.BasePresenter;
 import com.mdove.levelgame.base.BaseView;
+import com.mdove.levelgame.main.home.city.model.CityReps;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 
@@ -15,7 +16,7 @@ public interface HomeContract {
     interface IHomePresenter extends BasePresenter<IHomeView> {
         void onClickItemId(MainMenuModelVM vm);
 
-        void initMenu();
+        void initMenu(CityReps cityReps);
 
         void initBigMonster();
 

@@ -7,11 +7,11 @@
 
         <variable
             name="vm"
-            type="com.mdove.levelgame.main.city.model.CityVM" />
+            type="com.mdove.levelgame.main.home.city.model.CityVM" />
 
         <variable
             name="handler"
-            type="com.mdove.levelgame.main.city.model.CityItemHandler" />
+            type="com.mdove.levelgame.main.home.city.model.CityItemHandler" />
 
     </data>
 

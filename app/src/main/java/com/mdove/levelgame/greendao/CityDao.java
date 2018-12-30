@@ -37,6 +37,7 @@ public class CityDao extends AbstractDao<City, Long> {
         public final static Property IsShow = new Property(7, int.class, "isShow", false, "IS_SHOW");
         public final static Property IsAdventure = new Property(8, int.class, "isAdventure", false, "IS_ADVENTURE");
         public final static Property Position = new Property(9, int.class, "position", false, "POSITION");
+        public final static Property IsMonsterPlace = new Property(10, int.class, "isMonsterPlace", false, "IS_MONSTER_PLACE");
     }
 
     private final IntegerConverter menuBtnListIdConverter = new IntegerConverter();
@@ -62,7 +63,8 @@ public class CityDao extends AbstractDao<City, Long> {
                 "\"CLICK_ID\" INTEGER NOT NULL ," + // 6: clickId
                 "\"IS_SHOW\" INTEGER NOT NULL ," + // 7: isShow
                 "\"IS_ADVENTURE\" INTEGER NOT NULL ," + // 8: isAdventure
-                "\"POSITION\" INTEGER NOT NULL );"); // 9: position
+                "\"POSITION\" INTEGER NOT NULL ," + // 9: position
+                "\"IS_MONSTER_PLACE\" INTEGER NOT NULL );"); // 10: isMonsterPlace
     }
 
     /** Drops the underlying database table. */
@@ -104,6 +106,7 @@ public class CityDao extends AbstractDao<City, Long> {
         stmt.bindLong(8, entity.getIsShow());
         stmt.bindLong(9, entity.getIsAdventure());
         stmt.bindLong(10, entity.getPosition());
+        stmt.bindLong(11, entity.getIsMonsterPlace());
     }
 
     @Override
@@ -139,6 +142,7 @@ public class CityDao extends AbstractDao<City, Long> {
         stmt.bindLong(8, entity.getIsShow());
         stmt.bindLong(9, entity.getIsAdventure());
         stmt.bindLong(10, entity.getPosition());
+        stmt.bindLong(11, entity.getIsMonsterPlace());
     }
 
     @Override
@@ -158,7 +162,8 @@ public class CityDao extends AbstractDao<City, Long> {
             cursor.getInt(offset + 6), // clickId
             cursor.getInt(offset + 7), // isShow
             cursor.getInt(offset + 8), // isAdventure
-            cursor.getInt(offset + 9) // position
+            cursor.getInt(offset + 9), // position
+            cursor.getInt(offset + 10) // isMonsterPlace
         );
         return entity;
     }
@@ -175,6 +180,7 @@ public class CityDao extends AbstractDao<City, Long> {
         entity.setIsShow(cursor.getInt(offset + 7));
         entity.setIsAdventure(cursor.getInt(offset + 8));
         entity.setPosition(cursor.getInt(offset + 9));
+        entity.setIsMonsterPlace(cursor.getInt(offset + 10));
      }
     
     @Override

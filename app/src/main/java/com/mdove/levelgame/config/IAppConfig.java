@@ -13,4 +13,6 @@ public interface IAppConfig {
     String KEY_SWITCH_BIG_MONSTER = "key_switch_big_monster";
     // 记录当前的所处的城市
     String KEY_CUR_CITY_ID = "key_cur_city_id";
+    String KEY_CUR_CITY_IS_MONSTER_PLACE = "key_cur_city_is_monster_place";
+    String KEY_CUR_PLACE_JSON = "key_cur_place_json";
 }

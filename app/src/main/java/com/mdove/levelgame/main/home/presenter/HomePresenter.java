@@ -19,8 +19,10 @@ import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.home.SettingActivity;
+import com.mdove.levelgame.main.home.city.model.CityReps;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
+import com.mdove.levelgame.main.monsters.MonstersActivity;
 import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
 import com.mdove.levelgame.main.shop.BlacksmithActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
@@ -29,6 +31,7 @@ import com.mdove.levelgame.main.task.TaskActivity;
 import com.mdove.levelgame.update.UpdateDialog;
 import com.mdove.levelgame.update.UpdateStatusManager;
 import com.mdove.levelgame.update.model.RealUpdate;
+import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.BigFightingDialog;
 
 import java.util.ArrayList;
@@ -57,7 +60,6 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     public void onClickItemId(MainMenuModelVM vm) {
         switch (vm.id.get().intValue()) {
             case INTENT_TO_MONSTERS_PLACE:
-//                MonstersPlaceActivity.start(view.getContext());
                 new CityDialog(view.getContext(), R.style.fb_dialog).show();
                 break;
             case INTENT_TO_SHOP: {
@@ -69,8 +71,6 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 break;
             }
             case INTENT_TO_HERO_ATTR: {
-//                new CityDialog(view.getContext(),R.style.fb_dialog)
-//                        .show();
                 HeroAttributesActivity.start(view.getContext());
                 break;
             }
@@ -97,45 +97,39 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     }
 
     @Override
-    public void initMenu() {
+    public void initMenu(CityReps cityReps) {
+        if (cityReps.isMonsterPlace()){
+            MonstersActivity.start(view.getContext(),cityReps.getPlaceId(),cityReps.getPlaceTitle());
+            return;
+        }
         view.showLoadingDialog(view.getString(R.string.string_init_home_loading));
-        Observable.create(new ObservableOnSubscribe<Long>() {
-            @Override
-            public void subscribe(ObservableEmitter<Long> e) throws Exception {
-                e.onNext(AppConfig.getCurPlaceId());
+        Observable.just(cityReps.getPlaceId()).map(aLong -> {
+            City city = DatabaseManager.getInstance().getCityDao().queryBuilder().where(CityDao.Properties.Id.eq(aLong)).unique();
+            List<Integer> btnIds = null;
+            if (city != null) {
+                btnIds = city.menuBtnListId;
             }
-        }).map(new Function<Long, List<Integer>>() {
-            @Override
-            public List<Integer> apply(Long aLong) throws Exception {
-                City city = DatabaseManager.getInstance().getCityDao().queryBuilder().where(CityDao.Properties.Id.eq(aLong)).unique();
-                List<Integer> btnIds = null;
-                if (city != null) {
-                    btnIds = city.menuBtnListId;
-                }
-                return btnIds;
-            }
-        }).map(new Function<List<Integer>, List<MainMenuModelVM>>() {
-            @Override
-            public List<MainMenuModelVM> apply(List<Integer> integers) throws Exception {
-                List<MainMenuModelVM> mainMenus = null;
-                if (integers != null) {
-                    MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
-                    for (Integer id : integers) {
-                        MainMenu mainMenu = mainMenuDao.queryBuilder().where(MainMenuDao.Properties.Id.eq(id)).unique();
-                        if (mainMenu != null) {
-                            mainMenus.add(new MainMenuModelVM(mainMenu));
-                        }
+            return btnIds;
+        }).map(integers -> {
+            List<MainMenuModelVM> mainMenus = null;
+            if (integers != null) {
+                mainMenus = new ArrayList<>();
+                MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
+                for (Integer id : integers) {
+                    MainMenu mainMenu = mainMenuDao.queryBuilder().where(MainMenuDao.Properties.Id.eq(id)).unique();
+                    if (mainMenu != null) {
+                        mainMenus.add(new MainMenuModelVM(mainMenu));
                     }
                 }
-                return mainMenus;
             }
+            return mainMenus;
         }).compose(RxTransformerHelper.schedulerTransf())
-                .subscribe(new Consumer<List<MainMenuModelVM>>() {
-                    @Override
-                    public void accept(List<MainMenuModelVM> mainMenuModelVMS) throws Exception {
-                        view.showMenu(mainMenuModelVMS);
-                        view.dismissLoadingDialog();
-                    }
+                .subscribe(mainMenuModelVMS -> {
+                    view.showMenu(mainMenuModelVMS);
+                    view.dismissLoadingDialog();
+                },throwable -> {
+                    ToastHelper.shortToast("出现异常情况，请清除数据再次尝试进入。");
+                    view.dismissLoadingDialog();
                 });
     }
 

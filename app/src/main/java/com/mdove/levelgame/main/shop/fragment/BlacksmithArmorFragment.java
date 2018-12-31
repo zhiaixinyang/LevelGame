@@ -5,12 +5,9 @@ import android.os.Bundle;
 import com.mdove.levelgame.base.BaseListFragment;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.main.shop.adapter.BlacksmithArmorAdapter;
-import com.mdove.levelgame.main.shop.adapter.BlacksmithAttackAdapter;
 import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM;
-import com.mdove.levelgame.main.shop.presenter.BlacksmithArmorContract;
+import com.mdove.levelgame.main.shop.presenter.contract.BlacksmithArmorContract;
 import com.mdove.levelgame.main.shop.presenter.BlacksmithArmorPresenter;
-import com.mdove.levelgame.main.shop.presenter.BlacksmithAttackContract;
-import com.mdove.levelgame.main.shop.presenter.BlacksmithAttackPresenter;
 
 import java.util.List;
 

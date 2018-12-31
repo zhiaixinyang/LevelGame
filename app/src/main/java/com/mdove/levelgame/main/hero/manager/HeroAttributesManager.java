@@ -22,6 +22,7 @@ import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.Packages;
+import com.mdove.levelgame.greendao.entity.RandomAttr;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
@@ -571,6 +572,7 @@ public class HeroAttributesManager {
         float probability = model.probability * 100;
         int random = new Random(System.currentTimeMillis()).nextInt(100);
         if (random <= probability) {
+            Long randomAttrId = computeRandomAttrId(model);
             switch (AllGoodsToDBIdUtils.getInstance().getDBType(model.type)) {
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
                     Weapons weapons = DatabaseManager.getInstance().getWeaponsDao().queryBuilder().where(WeaponsDao.Properties.Type.eq(model.type)).unique();
@@ -578,6 +580,7 @@ public class HeroAttributesManager {
                         Packages packages = new Packages();
                         packages.isEquip = 1;
                         packages.isSelect = 1;
+                        packages.randomAttrId = randomAttrId;
                         packages.type = weapons.type;
                         DatabaseManager.getInstance().getPackagesDao().insert(packages);
                         name = weapons.name;
@@ -589,6 +592,7 @@ public class HeroAttributesManager {
                     if (armors != null) {
                         Packages packages = new Packages();
                         packages.isEquip = 1;
+                        packages.randomAttrId = randomAttrId;
                         packages.isSelect = 1;
                         packages.type = armors.type;
                         DatabaseManager.getInstance().getPackagesDao().insert(packages);
@@ -602,6 +606,7 @@ public class HeroAttributesManager {
                         Packages packages = new Packages();
                         packages.isEquip = 1;
                         packages.isSelect = 1;
+                        packages.randomAttrId = randomAttrId;
                         packages.type = material.type;
                         DatabaseManager.getInstance().getPackagesDao().insert(packages);
                         name = material.name;
@@ -613,6 +618,18 @@ public class HeroAttributesManager {
             }
         }
         return name;
+    }
+
+    // 随机属性计算
+    private Long computeRandomAttrId(DropGoodsModel model) {
+        long id = 0;
+        if (model.randomAttacks != null) {
+            int inv = model.randomAttacks.get(1) - model.randomAttacks.get(0);
+            if (inv==1){
+
+            }
+        }
+        return id;
     }
 
     public void takeOff(long strengthen, IAttrsModel model) {

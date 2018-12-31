@@ -40,82 +40,76 @@ public class MonsterAttackManager {
     }
 
     public Observable<Boolean> attackEnemyPre(final Monsters monsters) {
-        return Observable.create(new ObservableOnSubscribe<Boolean>() {
-            @Override
-            public void subscribe(ObservableEmitter<Boolean> e) throws Exception {
-                if (!HeroAttributesManager.getInstance().computeCurLife()) {
-                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE,
-                            AttackMonsterException.ERROR_TITLE_HERO_IS_NO_LIFE, AttackMonsterException.ERROR_MSG_HERO_IS_NO_LIFE);
-                }
-                if (!HeroAttributesManager.getInstance().computeLimitCount(monsters)) {
-                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_COUNT,
-                            AttackMonsterException.ERROR_TITLE_HERO_NO_COUNT, AttackMonsterException.ERROR_MSG_HERO_NO_COUNT);
-                }
-                if (!HeroAttributesManager.getInstance().computePowerIsHas(monsters.consumePower)) {
-                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_POWER,
-                            AttackMonsterException.ERROR_TITLE_HERO_NO_POWER, AttackMonsterException.ERROR_MSG_HERO_NO_POWER);
-                }
-
-                if (HeroAttributesManager.getInstance().isQuickAttack(monsters, HeroAttributesWrapper.getInstance())) {
-                    // 掉落装备逻辑
-                    String content = AttackMonsterException.ERROR_MSG_HERO_IS_QUICK_ATTACK;
-                    List<String> dropGoods = HeroAttributesManager.getInstance().dropGoods(monsters.dropGoodsId);
-                    String dropGood = "";
-                    if (dropGoods != null && dropGoods.size() > 0) {
-                        for (String name : dropGoods) {
-                            dropGood += name + "、";
-                        }
-                        dropGood = dropGood.substring(0, dropGood.length() - 1);
-                    }
-                    if (!TextUtils.isEmpty(dropGood)) {
-                        content += String.format(App.getAppContext().getString(R.string.string_attack_win_is_drop_new),
-                                monsters.money, monsters.exp, dropGood);
-                    } else {
-                        content += String.format(App.getAppContext().getString(R.string.string_attack_win_new),
-                                monsters.money, monsters.exp);
-                    }
-                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_QUICK_ATTACK,
-                            AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD, content);
-                }
-                if (HeroAttributesManager.getInstance().isMonsterQuickAttack(new MonsterWrapper(monsters), HeroAttributesWrapper.getInstance())) {
-                    throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTER_IS_QUICK_ATTACK,
-                            AttackMonsterException.ERROR_TITLE_HERO_IS_DEAD, AttackMonsterException.ERROR_MSG_MONSTER_IS_QUICK_ATTACK);
-                }
-                e.onNext(true);
+        return Observable.create(e -> {
+            if (!HeroAttributesManager.getInstance().computeCurLife()) {
+                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_NO_LIFE,
+                        AttackMonsterException.ERROR_TITLE_HERO_IS_NO_LIFE, AttackMonsterException.ERROR_MSG_HERO_IS_NO_LIFE);
             }
+            if (!HeroAttributesManager.getInstance().computeLimitCount(monsters)) {
+                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_COUNT,
+                        AttackMonsterException.ERROR_TITLE_HERO_NO_COUNT, AttackMonsterException.ERROR_MSG_HERO_NO_COUNT);
+            }
+            if (!HeroAttributesManager.getInstance().computePowerIsHas(monsters.consumePower)) {
+                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_NO_POWER,
+                        AttackMonsterException.ERROR_TITLE_HERO_NO_POWER, AttackMonsterException.ERROR_MSG_HERO_NO_POWER);
+            }
+
+            if (HeroAttributesManager.getInstance().isQuickAttack(monsters, HeroAttributesWrapper.getInstance())) {
+                // 掉落装备逻辑
+                String content = AttackMonsterException.ERROR_MSG_HERO_IS_QUICK_ATTACK;
+                List<String> dropGoods = HeroAttributesManager.getInstance().dropGoods(monsters.dropGoodsId);
+                String dropGood = "";
+                if (dropGoods != null && dropGoods.size() > 0) {
+                    for (String name : dropGoods) {
+                        dropGood += name + "、";
+                    }
+                    dropGood = dropGood.substring(0, dropGood.length() - 1);
+                }
+                if (!TextUtils.isEmpty(dropGood)) {
+                    content += String.format(App.getAppContext().getString(R.string.string_attack_win_is_drop_new),
+                            monsters.money, monsters.exp, dropGood);
+                } else {
+                    content += String.format(App.getAppContext().getString(R.string.string_attack_win_new),
+                            monsters.money, monsters.exp);
+                }
+                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_QUICK_ATTACK,
+                        AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD, content);
+            }
+            if (HeroAttributesManager.getInstance().isMonsterQuickAttack(new MonsterWrapper(monsters), HeroAttributesWrapper.getInstance())) {
+                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTER_IS_QUICK_ATTACK,
+                        AttackMonsterException.ERROR_TITLE_HERO_IS_DEAD, AttackMonsterException.ERROR_MSG_MONSTER_IS_QUICK_ATTACK);
+            }
+            e.onNext(true);
         });
     }
 
     public Observable<MonsterWrapper.HarmResp> attackEnemy(final Monsters monsters) {
         final MonsterWrapper wrapper = new MonsterWrapper(monsters);
         return Observable.interval(heroAttributes.attackSpeed, TimeUnit.MILLISECONDS)
-                .map(new Function<Long, MonsterWrapper.HarmResp>() {
-                    @Override
-                    public MonsterWrapper.HarmResp apply(Long aLong) throws Exception {
-                        MonsterWrapper.HarmResp resp = wrapper.computeHarmLife();
-                        if (resp.isDead) {
-                            HeroAttributesWrapper.getInstance().awardMonster(monsters);
-                            // 掉落装备
-                            List<String> dropGoods = HeroAttributesManager.getInstance().dropGoods(monsters.dropGoodsId);
-                            if (dropGoods != null && dropGoods.size() > 0) {
-                                String dropGood = "";
-                                for (String name : dropGoods) {
-                                    dropGood += name + "、";
-                                }
-                                dropGood = dropGood.substring(0, dropGood.length() - 1);
-                                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD_IS_DROP,
-                                        AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD,
-                                        AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_is_drop_new),
-                                                monsters.money, monsters.exp, dropGood));
-
-                            } else {
-                                throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD,
-                                        AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD,
-                                        AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_new), monsters.money, monsters.exp));
+                .map(aLong -> {
+                    MonsterWrapper.HarmResp resp = wrapper.computeHarmLife();
+                    if (resp.isDead) {
+                        HeroAttributesWrapper.getInstance().awardMonster(monsters);
+                        // 掉落装备
+                        List<String> dropGoods = HeroAttributesManager.getInstance().dropGoods(monsters.dropGoodsId);
+                        if (dropGoods != null && dropGoods.size() > 0) {
+                            String dropGood = "";
+                            for (String name : dropGoods) {
+                                dropGood += name + "、";
                             }
+                            dropGood = dropGood.substring(0, dropGood.length() - 1);
+                            throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD_IS_DROP,
+                                    AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD,
+                                    AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_is_drop_new),
+                                            monsters.money, monsters.exp, dropGood));
+
+                        } else {
+                            throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_MONSTERS_IS_DEAD,
+                                    AttackMonsterException.ERROR_TITLE_MONSTERS_IS_DEAD,
+                                    AttackMonsterException.ERROR_MSG_MONSTERS_IS_DEAD + String.format(App.getAppContext().getString(R.string.string_attack_win_new), monsters.money, monsters.exp));
                         }
-                        return resp;
                     }
+                    return resp;
                 }).compose(RxTransformerHelper.<MonsterWrapper.HarmResp>schedulerTransf());
     }
 

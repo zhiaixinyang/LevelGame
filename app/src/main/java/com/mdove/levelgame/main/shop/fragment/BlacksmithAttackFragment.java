@@ -6,7 +6,7 @@ import com.mdove.levelgame.base.BaseListFragment;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.main.shop.adapter.BlacksmithAttackAdapter;
 import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM;
-import com.mdove.levelgame.main.shop.presenter.BlacksmithAttackContract;
+import com.mdove.levelgame.main.shop.presenter.contract.BlacksmithAttackContract;
 import com.mdove.levelgame.main.shop.presenter.BlacksmithAttackPresenter;
 
 import java.util.List;

@@ -1,23 +1,24 @@
-package com.mdove.levelgame.main.shop.presenter;
+package com.mdove.levelgame.main.shop.presenter.contract;
 
 import com.mdove.levelgame.base.BasePresenter;
 import com.mdove.levelgame.base.BaseView;
 import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM;
+import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM;
 
 import java.util.List;
 
 /**
- * Created by MDove on 2018/10/30.
+ * Created by MDove on 2018/10/28.
  */
 
-public interface BlacksmithServiceContract {
-    interface IBlacksmithServicePresenter extends BasePresenter<IBlacksmithServiceView> {
+public interface BlacksmithContract {
+    interface IBlacksmithPresenter extends BasePresenter<IBlacksmithView> {
         void initData();
 
         void onItemBtnClick(String type, Long id);
     }
 
-    interface IBlacksmithServiceView extends BaseView {
+    interface IBlacksmithView extends BaseView {
         void showData(List<BlacksmithModelVM> data);
     }
 }

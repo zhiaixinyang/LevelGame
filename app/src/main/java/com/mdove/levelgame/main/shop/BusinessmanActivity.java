@@ -8,7 +8,7 @@ import com.mdove.levelgame.base.BaseListActivity;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.main.shop.adapter.BusinessmanAdapter;
 import com.mdove.levelgame.main.shop.model.mv.SellGoodsModelVM;
-import com.mdove.levelgame.main.shop.presenter.BusinessmanContract;
+import com.mdove.levelgame.main.shop.presenter.contract.BusinessmanContract;
 import com.mdove.levelgame.main.shop.presenter.BusinessmanPresenter;
 
 import java.util.List;

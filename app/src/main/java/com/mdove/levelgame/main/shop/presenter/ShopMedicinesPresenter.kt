@@ -5,6 +5,7 @@ import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager
 import com.mdove.levelgame.main.hero.model.BuyMedicinesResp
 import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM
+import com.mdove.levelgame.main.shop.presenter.contract.ShopMedicinesContract
 import com.mdove.levelgame.utils.ToastHelper
 import com.mdove.levelgame.view.MyDialog
 import io.reactivex.Observable
@@ -26,6 +27,7 @@ class ShopMedicinesPresenter : ShopMedicinesContract.IShopMedicinesPresenter {
     }
 
     override fun initData() {
+        mView.showLoadingDialog(mView.getString(R.string.string_init_data_loading))
         data = mutableListOf()
         val medicines = DatabaseManager.getInstance().medicinesDao.loadAll()
         for (model in medicines) {
@@ -33,6 +35,7 @@ class ShopMedicinesPresenter : ShopMedicinesContract.IShopMedicinesPresenter {
         }
 
         mView.showData(data)
+        mView.dismissLoadingDialog()
     }
 
     override fun onItemBtnClick(id: Long) {

@@ -7,6 +7,7 @@ import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BuyArmorResp;
 import com.mdove.levelgame.main.shop.model.mv.ShopArmorModelVM;
+import com.mdove.levelgame.main.shop.presenter.contract.ShopArmorContract;
 import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.MyDialog;
 
@@ -28,6 +29,7 @@ public class ShopArmorPresenter implements ShopArmorContract.IShopArmorPresenter
 
     @Override
     public void initData() {
+        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
         // 因为防具是死的，所以BelongMonsterId直接匹配字符串
         List<Armors> list = DatabaseManager.getInstance().getArmorsDao().queryBuilder()
                 .where(ArmorsDao.Properties.BelongMonsterId.eq("1001,")).list();
@@ -36,6 +38,7 @@ public class ShopArmorPresenter implements ShopArmorContract.IShopArmorPresenter
             data.add(new ShopArmorModelVM(model));
         }
         view.showData(data);
+        view.dismissLoadingDialog();
     }
 
     @Override

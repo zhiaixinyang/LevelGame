@@ -9,20 +9,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
-import com.mdove.levelgame.main.hero.fragment.HeroEquipFragment;
-import com.mdove.levelgame.main.hero.fragment.HeroPackageFragment;
-import com.mdove.levelgame.main.shop.adapter.BlacksmithAdapter;
 import com.mdove.levelgame.main.shop.fragment.BlacksmithAccessoriesFragment;
 import com.mdove.levelgame.main.shop.fragment.BlacksmithArmorFragment;
 import com.mdove.levelgame.main.shop.fragment.BlacksmithAttackFragment;
-import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM;
-import com.mdove.levelgame.main.shop.presenter.BlacksmithContract;
-import com.mdove.levelgame.main.shop.presenter.BlacksmithPresenter;
 
 import java.util.ArrayList;
 import java.util.List;

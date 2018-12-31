@@ -6,7 +6,7 @@ import com.mdove.levelgame.base.BaseListFragment
 import com.mdove.levelgame.base.adapter.BaseListAdapter
 import com.mdove.levelgame.main.shop.adapter.ShopMedicinesAdapter
 import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM
-import com.mdove.levelgame.main.shop.presenter.ShopMedicinesContract
+import com.mdove.levelgame.main.shop.presenter.contract.ShopMedicinesContract
 import com.mdove.levelgame.main.shop.presenter.ShopMedicinesPresenter
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject

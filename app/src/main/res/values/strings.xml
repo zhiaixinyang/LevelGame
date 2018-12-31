@@ -216,5 +216,6 @@
     <string name="string_init_home_loading">初始化中...请稍等</string>
     <string name="string_enter_place_error_title">进入失败</string>
     <string name="string_enter_place_error_content">当前已经处在[ %1$s ]之中了</string>
+    <string name="string_init_data_loading">数据加载中，请稍等</string>
 
 </resources>

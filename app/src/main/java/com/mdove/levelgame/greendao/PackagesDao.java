@@ -1,13 +1,18 @@
 package com.mdove.levelgame.greendao;
 
+import java.util.List;
+import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.Property;
+import org.greenrobot.greendao.internal.SqlUtils;
 import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
+
+import com.mdove.levelgame.greendao.entity.RandomAttr;
 
 import com.mdove.levelgame.greendao.entity.Packages;
 
@@ -29,7 +34,10 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         public final static Property IsEquip = new Property(2, int.class, "isEquip", false, "IS_EQUIP");
         public final static Property StrengthenLevel = new Property(3, int.class, "strengthenLevel", false, "STRENGTHEN_LEVEL");
         public final static Property IsSelect = new Property(4, int.class, "isSelect", false, "IS_SELECT");
+        public final static Property RandomAttrId = new Property(5, Long.class, "randomAttrId", false, "RANDOM_ATTR_ID");
     }
+
+    private DaoSession daoSession;
 
 
     public PackagesDao(DaoConfig config) {
@@ -38,6 +46,7 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
     
     public PackagesDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
+        this.daoSession = daoSession;
     }
 
     /** Creates the underlying database table. */
@@ -48,7 +57,8 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
                 "\"TYPE\" TEXT," + // 1: type
                 "\"IS_EQUIP\" INTEGER NOT NULL ," + // 2: isEquip
                 "\"STRENGTHEN_LEVEL\" INTEGER NOT NULL ," + // 3: strengthenLevel
-                "\"IS_SELECT\" INTEGER NOT NULL );"); // 4: isSelect
+                "\"IS_SELECT\" INTEGER NOT NULL ," + // 4: isSelect
+                "\"RANDOM_ATTR_ID\" INTEGER);"); // 5: randomAttrId
     }
 
     /** Drops the underlying database table. */
@@ -73,6 +83,11 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         stmt.bindLong(3, entity.getIsEquip());
         stmt.bindLong(4, entity.getStrengthenLevel());
         stmt.bindLong(5, entity.getIsSelect());
+ 
+        Long randomAttrId = entity.getRandomAttrId();
+        if (randomAttrId != null) {
+            stmt.bindLong(6, randomAttrId);
+        }
     }
 
     @Override
@@ -91,6 +106,17 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         stmt.bindLong(3, entity.getIsEquip());
         stmt.bindLong(4, entity.getStrengthenLevel());
         stmt.bindLong(5, entity.getIsSelect());
+ 
+        Long randomAttrId = entity.getRandomAttrId();
+        if (randomAttrId != null) {
+            stmt.bindLong(6, randomAttrId);
+        }
+    }
+
+    @Override
+    protected final void attachEntity(Packages entity) {
+        super.attachEntity(entity);
+        entity.__setDaoSession(daoSession);
     }
 
     @Override
@@ -105,7 +131,8 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // type
             cursor.getInt(offset + 2), // isEquip
             cursor.getInt(offset + 3), // strengthenLevel
-            cursor.getInt(offset + 4) // isSelect
+            cursor.getInt(offset + 4), // isSelect
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5) // randomAttrId
         );
         return entity;
     }
@@ -117,6 +144,7 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         entity.setIsEquip(cursor.getInt(offset + 2));
         entity.setStrengthenLevel(cursor.getInt(offset + 3));
         entity.setIsSelect(cursor.getInt(offset + 4));
+        entity.setRandomAttrId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
      }
     
     @Override
@@ -144,4 +172,95 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         return true;
     }
     
+    private String selectDeep;
+
+    protected String getSelectDeep() {
+        if (selectDeep == null) {
+            StringBuilder builder = new StringBuilder("SELECT ");
+            SqlUtils.appendColumns(builder, "T", getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T0", daoSession.getRandomAttrDao().getAllColumns());
+            builder.append(" FROM PACKAGES T");
+            builder.append(" LEFT JOIN RANDOM_ATTR T0 ON T.\"RANDOM_ATTR_ID\"=T0.\"_id\"");
+            builder.append(' ');
+            selectDeep = builder.toString();
+        }
+        return selectDeep;
+    }
+    
+    protected Packages loadCurrentDeep(Cursor cursor, boolean lock) {
+        Packages entity = loadCurrent(cursor, 0, lock);
+        int offset = getAllColumns().length;
+
+        RandomAttr randomAttr = loadCurrentOther(daoSession.getRandomAttrDao(), cursor, offset);
+        entity.setRandomAttr(randomAttr);
+
+        return entity;    
+    }
+
+    public Packages loadDeep(Long key) {
+        assertSinglePk();
+        if (key == null) {
+            return null;
+        }
+
+        StringBuilder builder = new StringBuilder(getSelectDeep());
+        builder.append("WHERE ");
+        SqlUtils.appendColumnsEqValue(builder, "T", getPkColumns());
+        String sql = builder.toString();
+        
+        String[] keyArray = new String[] { key.toString() };
+        Cursor cursor = db.rawQuery(sql, keyArray);
+        
+        try {
+            boolean available = cursor.moveToFirst();
+            if (!available) {
+                return null;
+            } else if (!cursor.isLast()) {
+                throw new IllegalStateException("Expected unique result, but count was " + cursor.getCount());
+            }
+            return loadCurrentDeep(cursor, true);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+    /** Reads all available rows from the given cursor and returns a list of new ImageTO objects. */
+    public List<Packages> loadAllDeepFromCursor(Cursor cursor) {
+        int count = cursor.getCount();
+        List<Packages> list = new ArrayList<Packages>(count);
+        
+        if (cursor.moveToFirst()) {
+            if (identityScope != null) {
+                identityScope.lock();
+                identityScope.reserveRoom(count);
+            }
+            try {
+                do {
+                    list.add(loadCurrentDeep(cursor, false));
+                } while (cursor.moveToNext());
+            } finally {
+                if (identityScope != null) {
+                    identityScope.unlock();
+                }
+            }
+        }
+        return list;
+    }
+    
+    protected List<Packages> loadDeepAllAndCloseCursor(Cursor cursor) {
+        try {
+            return loadAllDeepFromCursor(cursor);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+
+    /** A raw-style query where you can pass any WHERE clause and arguments. */
+    public List<Packages> queryDeep(String where, String... selectionArg) {
+        Cursor cursor = db.rawQuery(getSelectDeep() + where, selectionArg);
+        return loadDeepAllAndCloseCursor(cursor);
+    }
+ 
 }

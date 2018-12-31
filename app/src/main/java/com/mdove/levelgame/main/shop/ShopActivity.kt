@@ -13,7 +13,7 @@ import com.mdove.levelgame.base.BaseActivity
 import com.mdove.levelgame.main.shop.fragment.ShopArmorFragment
 import com.mdove.levelgame.main.shop.fragment.ShopAttackFragment
 import com.mdove.levelgame.main.shop.fragment.ShopMedicinesFragment
-import com.mdove.levelgame.main.shop.presenter.ShopContract
+import com.mdove.levelgame.main.shop.presenter.contract.ShopContract
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

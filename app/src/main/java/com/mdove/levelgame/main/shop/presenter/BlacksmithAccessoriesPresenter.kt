@@ -1,10 +1,12 @@
 package com.mdove.levelgame.main.shop.presenter
 
+import com.mdove.levelgame.R
 import com.mdove.levelgame.greendao.AccessoriesDao
 import com.mdove.levelgame.greendao.entity.Accessories
 import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager
 import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM
+import com.mdove.levelgame.main.shop.presenter.contract.BlacksmithAccessoriesContract
 import com.mdove.levelgame.view.MyDialog
 import io.reactivex.functions.Consumer
 
@@ -22,6 +24,7 @@ class BlacksmithAccessoriesPresenter : BlacksmithAccessoriesContract.IBlacksmith
     lateinit var view: BlacksmithAccessoriesContract.IBlacksmithAccessoriesView
     lateinit var vmData: ArrayList<BlacksmithModelVM>
     override fun initData() {
+        view.showLoadingDialog(view.getString(R.string.string_init_data_loading))
         vmData = ArrayList()
         var data = DatabaseManager.getInstance().accessoriesDao.queryBuilder()
                 .orderAsc(AccessoriesDao.Properties.Position).list()
@@ -29,6 +32,7 @@ class BlacksmithAccessoriesPresenter : BlacksmithAccessoriesContract.IBlacksmith
             vmData.add(BlacksmithModelVM(items as Accessories))
         }
         view.showData(vmData)
+        view.dismissLoadingDialog()
     }
 
     override fun subscribe(view: BlacksmithAccessoriesContract.IBlacksmithAccessoriesView?) {

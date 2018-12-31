@@ -1,12 +1,11 @@
 package com.mdove.levelgame.main.shop.presenter;
 
 import com.mdove.levelgame.greendao.ArmorsDao;
-import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
-import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
 import com.mdove.levelgame.main.shop.model.mv.BlacksmithModelVM;
+import com.mdove.levelgame.main.shop.presenter.contract.BlacksmithArmorContract;
 import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;

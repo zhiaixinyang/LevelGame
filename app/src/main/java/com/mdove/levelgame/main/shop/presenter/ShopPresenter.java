@@ -1,5 +1,7 @@
 package com.mdove.levelgame.main.shop.presenter;
 
+import com.mdove.levelgame.main.shop.presenter.contract.ShopContract;
+
 public class ShopPresenter implements ShopContract.IMedicinesShopPresenter {
     private ShopContract.IMedicinesShopView view;
 

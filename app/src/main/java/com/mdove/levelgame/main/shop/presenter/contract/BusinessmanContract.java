@@ -1,4 +1,4 @@
-package com.mdove.levelgame.main.shop.presenter;
+package com.mdove.levelgame.main.shop.presenter.contract;
 
 import com.mdove.levelgame.base.BasePresenter;
 import com.mdove.levelgame.base.BaseView;

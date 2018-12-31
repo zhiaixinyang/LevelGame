@@ -7,6 +7,7 @@ import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroBuyManager;
 import com.mdove.levelgame.main.hero.model.BuyAttackResp;
 import com.mdove.levelgame.main.shop.model.mv.ShopAttackModelVM;
+import com.mdove.levelgame.main.shop.presenter.contract.ShopAttackContract;
 import com.mdove.levelgame.utils.ToastHelper;
 import com.mdove.levelgame.view.MyDialog;
 
@@ -28,6 +29,7 @@ public class ShopAttackPresenter implements ShopAttackContract.IShopAttackPresen
 
     @Override
     public void initData() {
+        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
         // 因为武器是死的，所以BelongMonsterId直接匹配字符串
         List<Weapons> weapons = DatabaseManager.getInstance().getWeaponsDao().queryBuilder()
                 .where(WeaponsDao.Properties.BelongMonsterId.eq("1000,")).list();
@@ -36,6 +38,7 @@ public class ShopAttackPresenter implements ShopAttackContract.IShopAttackPresen
             data.add(new ShopAttackModelVM(model));
         }
         view.showData(data);
+        view.dismissLoadingDialog();
     }
 
     @Override
@@ -53,7 +56,7 @@ public class ShopAttackPresenter implements ShopAttackContract.IShopAttackPresen
             }
             case HeroBuyManager.BUY_ATTACK_STATUS_SUC: {
                 MyDialog.showMyDialog(view.getContext(), view.getContext().getString(R.string.string_buy_title_suc),
-                        String.format(view.getContext().getString(R.string.string_buy_content_suc),resp.name, resp.price), true);
+                        String.format(view.getContext().getString(R.string.string_buy_content_suc), resp.name, resp.price), true);
                 break;
             }
             default:

@@ -13,6 +13,7 @@ import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.PackagesDao;
+import com.mdove.levelgame.greendao.RandomAttrDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Armors;
 import com.mdove.levelgame.greendao.entity.BigMonsters;
@@ -69,6 +70,7 @@ public class HeroAttributesManager {
     public static final int ATTRIBUTE_TYPE_QIANGZHUANG = 103;
 
     private HeroAttributes heroAttributes;
+    private RandomAttrDao mRandomAttrDao;
 
     private static class SingletonHolder {
         static final HeroAttributesManager INSTANCE = new HeroAttributesManager();
@@ -81,6 +83,7 @@ public class HeroAttributesManager {
     private HeroAttributesManager() {
         heroAttributes = HeroManager.getInstance().getHeroAttributes();
         bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
+        mRandomAttrDao = DatabaseManager.getInstance().getRandomAttrDao();
     }
 
     public int heroRest() {
@@ -623,13 +626,52 @@ public class HeroAttributesManager {
     // 随机属性计算
     private Long computeRandomAttrId(DropGoodsModel model) {
         long id = 0;
-        if (model.randomAttacks != null) {
-            int inv = model.randomAttacks.get(1) - model.randomAttacks.get(0);
-            if (inv==1){
+        int randomAttack = getRandomAttr(model.randomAttack);
+        int randomArmor = getRandomAttr(model.randomArmor);
+        int randomLife = getRandomAttr(model.randomLife);
+        int randomLiLiang = getRandomAttr(model.randomLiLiang);
+        int randomMinJie = getRandomAttr(model.randomMinJie);
+        int randomZhiHui = getRandomAttr(model.randomZhiHui);
+        int randomQiangZhuang = getRandomAttr(model.randomQiangZhuang);
+        RandomAttr randomAttr = new RandomAttr();
+        randomAttr.randomAttack = randomAttack;
+        randomAttr.randomArmor = randomArmor;
+        randomAttr.randomLife = randomLife;
+        randomAttr.randomLiLiang = randomLiLiang;
+        randomAttr.randomMinJie = randomMinJie;
+        randomAttr.randomZhiHui = randomZhiHui;
+        randomAttr.randomQiangZhuang = randomQiangZhuang;
+        id = mRandomAttrDao.insert(randomAttr);
+        return id;
+    }
 
+    private int getRandomAttr(List<Integer> randomAttrs) {
+        int random = new Random(System.currentTimeMillis()).nextInt(100);
+        int randomAttr = 0;
+        if (randomAttrs != null) {
+            int inv = randomAttrs.get(1) - randomAttrs.get(0);
+            // 0-1的随机特殊处理
+            if (inv == 1) {
+                randomAttr = random <= 80 ? 0 : 1;
+            } else {
+                int needHit = ((inv + 1) * (inv + 2)) / 2;
+                // 从属性0开始匹配是否命中
+                int hitAttr = 0;
+                int preMax = 0;
+                for (int i = inv + 1; i >= 0; i--) {
+                    int max = preMax + (int) (((float) i / (float) needHit) * 100);
+                    preMax = max;
+                    if (random > max) {
+                        hitAttr++;
+                        continue;
+                    } else {
+                        randomAttr = hitAttr;
+                        break;
+                    }
+                }
             }
         }
-        return id;
+        return randomAttr;
     }
 
     public void takeOff(long strengthen, IAttrsModel model) {

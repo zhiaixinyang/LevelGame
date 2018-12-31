@@ -34,14 +34,46 @@ class CityEnterLoadingView @JvmOverloads constructor(context: Context, attrs: At
         progress.addProgressListener {
             if (::disminss.isInitialized) {
                 (context as? AppCompatActivity)?.let {
+                    // City和MonstersPlace中Id的映射
+                    cityReps.placeId = mapMonsterPlaceId(cityReps.placeId)
                     ViewModelProviders.of(it).get(CityViewModel::class.java).curPlaceId.value = cityReps
                 }
-                if(!cityReps.isMonsterPlace) {
+                if (!cityReps.isMonsterPlace) {
                     AppConfig.setCurPlaceJson(JsonUtil.encode(cityReps))
                 }
                 disminss.invoke(cityReps)
             }
         }
+    }
+
+    private fun mapMonsterPlaceId(cityId: Long): Long {
+        var monsterPlaceId: Long = when (cityId) {
+            3.toLong() -> {
+                1
+            }
+            4.toLong() -> {
+                2
+            }
+            5.toLong() -> {
+                4
+            }
+            6.toLong() -> {
+                3
+            }
+            7.toLong() -> {
+                5
+            }
+            8.toLong() -> {
+                6
+            }
+            9.toLong() -> {
+                7
+            }
+            else -> {
+                cityId
+            }
+        }
+        return monsterPlaceId
     }
 
     override fun registerPageControl(pageControl: PageControl) {

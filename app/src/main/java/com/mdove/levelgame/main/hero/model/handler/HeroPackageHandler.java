@@ -1,5 +1,6 @@
 package com.mdove.levelgame.main.hero.model.handler;
 
+import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroPackagePresenter;
 
@@ -13,15 +14,19 @@ public class HeroPackageHandler {
         presenter = packagesPresenter;
     }
 
-    public void onClickEquip(HeroPackageModelVM vm){
+    public void onLongClick(Long pkId){
+        presenter.onLongClick(pkId);
+    }
+
+    public void onClickEquip(HeroPackageModelVM vm) {
         presenter.onClickEquip(vm);
     }
 
-    public void onClickStrengthen(HeroPackageModelVM vm){
+    public void onClickStrengthen(HeroPackageModelVM vm) {
         presenter.onClickStrengthen(vm);
     }
 
-    public void onClickSell(HeroPackageModelVM vm){
+    public void onClickSell(HeroPackageModelVM vm) {
         presenter.onClickSell(vm);
     }
 }

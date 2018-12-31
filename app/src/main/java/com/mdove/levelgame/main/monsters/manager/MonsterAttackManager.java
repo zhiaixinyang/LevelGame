@@ -118,18 +118,15 @@ public class MonsterAttackManager {
         final MonsterWrapper monstersWrapper = new MonsterWrapper(monsters);
 
         return Observable.interval(monsters.attackSpeed, TimeUnit.MILLISECONDS)
-                .map(new Function<Long, Integer>() {
-                    @Override
-                    public Integer apply(Long aLong) throws Exception {
-                        int monsterRealAttack = monstersWrapper.realAttack();
-                        int heroConsumeLife = heroWrapper.computeHarmLife(monsterRealAttack);
-                        if (heroWrapper.realCurLife() <= 0) {
-                            // return 新状态
-                            throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_DEAD,
-                                    AttackMonsterException.ERROR_TITLE_HERO_IS_DEAD, AttackMonsterException.ERROR_MSG_HERO_IS_DEAD);
-                        }
-                        return heroConsumeLife;
+                .map(aLong -> {
+                    int monsterRealAttack = monstersWrapper.realAttack();
+                    int heroConsumeLife = heroWrapper.computeHarmLife(monsterRealAttack);
+                    if (heroWrapper.realCurLife() <= 0) {
+                        // return 新状态
+                        throw new AttackMonsterException(AttackMonsterException.ERROR_CODE_HERO_IS_DEAD,
+                                AttackMonsterException.ERROR_TITLE_HERO_IS_DEAD, AttackMonsterException.ERROR_MSG_HERO_IS_DEAD);
                     }
+                    return heroConsumeLife;
                 }).compose(RxTransformerHelper.<Integer>schedulerTransf());
     }
 }

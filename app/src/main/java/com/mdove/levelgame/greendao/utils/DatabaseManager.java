@@ -20,6 +20,7 @@ import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
 import com.mdove.levelgame.greendao.PackagesDao;
+import com.mdove.levelgame.greendao.RandomAttrDao;
 import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.TaskDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
@@ -59,6 +60,7 @@ public class DatabaseManager {
     private FbPlaceDao mFbPlaceDao;
     private FbMonstersDao mFbMonstersDao;
     private CityDao mCityDao;
+    private RandomAttrDao mRandomAttrDao;
 
     private static final class Holder {
         private static final DatabaseManager INSTANCE = new DatabaseManager();
@@ -105,6 +107,7 @@ public class DatabaseManager {
         mFbPlaceDao = mDaoSession.getFbPlaceDao();
         mFbMonstersDao = mDaoSession.getFbMonstersDao();
         mCityDao = mDaoSession.getCityDao();
+        mRandomAttrDao = mDaoSession.getRandomAttrDao();
     }
 
     public MaterialDao getMaterialDao() {
@@ -190,6 +193,10 @@ public class DatabaseManager {
 
     public CityDao getCityDao() {
         return mCityDao;
+    }
+
+    public RandomAttrDao getRandomAttrDao() {
+        return mRandomAttrDao;
     }
 
     /**

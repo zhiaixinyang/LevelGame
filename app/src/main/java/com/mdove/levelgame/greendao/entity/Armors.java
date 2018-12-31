@@ -59,11 +59,11 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
 
     @Generated(hash = 499008905)
     public Armors(Long id, String name, String tips, int attack, int armor,
-            long price, String type, int strengthen, int isCanStrengthen,
-            int isCanUpdate, int isCanMixture, int isSpecial, String mixtureFormula,
-            String updateFormula, String strengthenFormula, String belongMonsterId,
-            int position, int needLevel, int needLiLiang, int needMinJie,
-            int needZhiHui, int needQiangZhuang) {
+                  long price, String type, int strengthen, int isCanStrengthen,
+                  int isCanUpdate, int isCanMixture, int isSpecial, String mixtureFormula,
+                  String updateFormula, String strengthenFormula, String belongMonsterId,
+                  int position, int needLevel, int needLiLiang, int needMinJie,
+                  int needZhiHui, int needQiangZhuang) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -108,7 +108,7 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
 
     @Override
     public BaseAttrsModel getAttrsModel() {
-        return new BaseAttrsModel(attack, armor, 0, 0);
+        return new BaseAttrsModel(name, tips, attack, armor, 0, 0);
     }
 
     public Long getId() {

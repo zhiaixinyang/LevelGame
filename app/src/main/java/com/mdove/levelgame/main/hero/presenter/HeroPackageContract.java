@@ -18,6 +18,8 @@ public interface HeroPackageContract {
 
         void onClickStrengthen(HeroPackageModelVM vm);
 
+        void onLongClick(long pkId);
+
         void onClickSell(HeroPackageModelVM vm);
 
         void notifyPackageAddUI(long pkId);
@@ -36,6 +38,5 @@ public interface HeroPackageContract {
         void notifyEquipUpdateUI(int position);
 
         void notifyPackageAddUI(long pkId);
-
     }
 }

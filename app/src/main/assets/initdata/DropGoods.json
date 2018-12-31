@@ -1,39 +1,7 @@
 [
   {
-    "id": 0,
-    "random_attack": [
-      0,
-      3
-    ],
-    "random_armor": [
-      0,
-      3
-    ],
-    "random_life": [
-      0,
-      10
-    ],
-    "random_li_liang": [
-      0,
-      1
-    ],
-    "random_min_jie": [
-      0,
-      1
-    ],
-    "random_zhi_hui": [
-      0,
-      1
-    ],
-    "random_qiang_zhuang": [
-      0,
-      1
-    ],
-    "types": "[{\"type\":\"A1\",\"probability\":0.5}]"
-  },
-  {
     "id": 1,
-    "types": "[{\"type\":\"A1\",\"probability\":0.1},{\"type\":\"A3\",\"probability\":0.01}]"
+    "types": "[{\"type\":\"A1\",\"probability\":0.5,\"random_attack\":[0,3],\"random_armor\": [0,3],\"random_life\": [0,10],\"random_li_liang\": [0,1],\"random_min_jie\": [0,1],\"random_zhi_hui\": [0,1],\"random_qiang_zhuang\": [0,1]}]"
   },
   {
     "id": 2,

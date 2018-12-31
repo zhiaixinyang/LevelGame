@@ -12,11 +12,11 @@ public class DropGoodsModel {
     public String type;
     // 几率
     public float probability;
-    public List<Integer> randomAttacks;
-    public List<Integer> randomArmors;
-    public List<Integer> randomLifes;
-    public List<Integer> randomLiLiangs;
-    public List<Integer> randomMinJies;
-    public List<Integer> randomZhiHuis;
-    public List<Integer> randomQiangZhuangs;
+    public List<Integer> randomAttack;
+    public List<Integer> randomArmor;
+    public List<Integer> randomLife;
+    public List<Integer> randomLiLiang;
+    public List<Integer> randomMinJie;
+    public List<Integer> randomZhiHui;
+    public List<Integer> randomQiangZhuang;
 }

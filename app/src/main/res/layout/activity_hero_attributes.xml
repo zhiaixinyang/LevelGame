@@ -301,6 +301,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/main_btn_normal_margin"
+                    android:orientation="vertical"
                     android:background="@drawable/bg_white_round"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"

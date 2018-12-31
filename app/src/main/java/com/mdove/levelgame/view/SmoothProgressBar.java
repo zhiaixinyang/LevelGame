@@ -25,7 +25,7 @@ public abstract class SmoothProgressBar extends View {
     public static final int TOTAL_PROGRESS_DURATION = 1800;
     public static final int LAST_DELAY_DURATION = 300;
 
-    public static final int AUTO_INCREMENT_TOTAL_DURATION = 5 * 1000;
+    public static final int AUTO_INCREMENT_TOTAL_DURATION = 3 * 1000;
     private final List<WeakReference<SmoothProgressListener>> progressListeners =
             new ArrayList<>();
     private boolean isAutoIncrement = false;

@@ -1,7 +1,5 @@
 package com.mdove.levelgame.main.hero.model;
 
-import android.os.Bundle;
-
 import com.mdove.levelgame.greendao.PackagesDao;
 import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
@@ -18,11 +16,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Random;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-
-import retrofit2.Retrofit;
 
 /**
  * @author MDove on 2018/11/2

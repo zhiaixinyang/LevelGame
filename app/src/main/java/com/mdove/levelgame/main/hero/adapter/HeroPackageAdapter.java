@@ -2,6 +2,7 @@ package com.mdove.levelgame.main.hero.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.levelgame.R;
@@ -89,7 +90,12 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
 
         public void bind(HeroPackageModelVM vm) {
             binding.setVm(vm);
-            binding.setHandler(new HeroPackageHandler(presenter));
+            HeroPackageHandler handler = new HeroPackageHandler(presenter);
+            binding.getRoot().setOnLongClickListener(v -> {
+                handler.onLongClick(vm.pkId.get());
+                return false;
+            });
+            binding.setHandler(handler);
         }
     }
 }

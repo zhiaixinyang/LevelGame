@@ -22,6 +22,7 @@ import com.mdove.levelgame.main.hero.util.EquipUtils;
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
 import com.mdove.levelgame.main.shop.model.StrengthenResp;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
+import com.mdove.levelgame.view.CustomPkDialog;
 import com.mdove.levelgame.view.MyDialog;
 
 import java.util.ArrayList;
@@ -634,33 +635,35 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
     }
 
     @Override
-    public void onClickSell(final HeroPackageModelVM vm) {
-        HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), true).subscribe(new Consumer<HeroAttributesManager.SellResp>() {
-            @Override
-            public void accept(final HeroAttributesManager.SellResp sellResp) throws Exception {
-                if (sellResp.sellMoney == -1) {
-                    MyDialog.showMyDialog(view.getContext(), "注意", "装备特殊，是否出售？", "不卖", "卖！", false, new BaseNormalDialog.BaseDialogListener() {
-                        @Override
-                        public void onClick() {
-                            HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), false).subscribe(new Consumer<HeroAttributesManager.SellResp>() {
-                                @Override
-                                public void accept(HeroAttributesManager.SellResp sellResp1) throws Exception {
-                                    if (sellResp1.sellMoney > 0) {
-                                        MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_sells_suc_title)
-                                                , String.format(view.getString(R.string.string_sells_suc), sellResp1.sellMoney), true);
-                                        deleteById(sellResp.pkId);
-                                    }
-                                }
-                            });
-                        }
-                    });
+    public void onLongClick(long pkId) {
+        new CustomPkDialog(view.getContext(), pkId).show();
+    }
 
-                } else {
-                    if (sellResp.sellMoney > 0) {
-                        MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_sells_suc_title)
-                                , String.format(view.getString(R.string.string_sells_suc), sellResp.sellMoney), true);
-                        deleteById(sellResp.pkId);
+    @Override
+    public void onClickSell(final HeroPackageModelVM vm) {
+        HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), true).subscribe(sellResp -> {
+            if (sellResp.sellMoney == -1) {
+                MyDialog.showMyDialog(view.getContext(), "注意", "装备特殊，是否出售？", "不卖", "卖！", false, new BaseNormalDialog.BaseDialogListener() {
+                    @Override
+                    public void onClick() {
+                        HeroAttributesManager.getInstance().sellGoods(vm.pkId.get(), false).subscribe(new Consumer<HeroAttributesManager.SellResp>() {
+                            @Override
+                            public void accept(HeroAttributesManager.SellResp sellResp1) throws Exception {
+                                if (sellResp1.sellMoney > 0) {
+                                    MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_sells_suc_title)
+                                            , String.format(view.getString(R.string.string_sells_suc), sellResp1.sellMoney), true);
+                                    deleteById(sellResp.pkId);
+                                }
+                            }
+                        });
                     }
+                });
+
+            } else {
+                if (sellResp.sellMoney > 0) {
+                    MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_sells_suc_title)
+                            , String.format(view.getString(R.string.string_sells_suc), sellResp.sellMoney), true);
+                    deleteById(sellResp.pkId);
                 }
             }
         });

@@ -91,6 +91,8 @@ public class HomePresenter implements HomeContract.IHomePresenter {
         }
     }
 
+    private CityReps preCityResp;
+
     @Override
     public void subscribe(HomeContract.IHomeView view) {
         this.view = view;
@@ -98,10 +100,14 @@ public class HomePresenter implements HomeContract.IHomePresenter {
 
     @Override
     public void initMenu(CityReps cityReps) {
-        if (cityReps.isMonsterPlace()){
-            MonstersActivity.start(view.getContext(),cityReps.getPlaceId(),cityReps.getPlaceTitle());
+        if (cityReps.isMonsterPlace()) {
+            MonstersActivity.start(view.getContext(), cityReps.getPlaceId(), cityReps.getPlaceTitle());
             return;
         }
+        if (preCityResp != null && preCityResp.getPlaceId() == cityReps.getPlaceId()) {
+            return;
+        }
+        preCityResp = cityReps;
         view.showLoadingDialog(view.getString(R.string.string_init_home_loading));
         Observable.just(cityReps.getPlaceId()).map(aLong -> {
             City city = DatabaseManager.getInstance().getCityDao().queryBuilder().where(CityDao.Properties.Id.eq(aLong)).unique();
@@ -127,7 +133,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 .subscribe(mainMenuModelVMS -> {
                     view.showMenu(mainMenuModelVMS);
                     view.dismissLoadingDialog();
-                },throwable -> {
+                }, throwable -> {
                     ToastHelper.shortToast("出现异常情况，请清除数据再次尝试进入。");
                     view.dismissLoadingDialog();
                 });

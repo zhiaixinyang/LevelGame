@@ -97,7 +97,8 @@ public class Accessories extends BaseBlacksmithModel implements IAttrsModel {
 
     @Override
     public BaseAttrsModel getAttrsModel() {
-        return new BaseAttrsModel(name, tips, attack, armor, life, 0);
+        return new BaseAttrsModel(name, tips, attack, armor, life, 0,
+                needLevel,needLiLiang,needMinJie,needZhiHui,needQiangZhuang);
     }
 
     public Long getId() {

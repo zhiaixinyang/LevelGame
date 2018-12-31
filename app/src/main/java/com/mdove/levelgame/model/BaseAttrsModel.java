@@ -13,12 +13,24 @@ public class BaseAttrsModel {
     public int baseLife;
     public long baseAttackSpeed;
 
-    public BaseAttrsModel(String name, String tips, int baseAttack, int baseArmor, int baseLife, long baseAttackSpeed) {
+    public int baseNeedLevel;
+    public int baseNeedLiLiang;
+    public int baseNeedMinJie;
+    public int baseNeedZhiHui;
+    public int baseNeedQiangZhuang;
+
+    public BaseAttrsModel(String name, String tips, int baseAttack, int baseArmor, int baseLife, long baseAttackSpeed
+            , int needLevel, int liLiang, int minJie, int zhiHui, int qiangZhuang) {
         this.baseAttack = baseAttack;
         this.baseArmor = baseArmor;
         this.baseLife = baseLife;
         this.name = name;
         this.tips = tips;
         this.baseAttackSpeed = baseAttackSpeed;
+        baseNeedLevel = needLevel;
+        baseNeedLiLiang = liLiang;
+        baseNeedMinJie = minJie;
+        baseNeedZhiHui = zhiHui;
+        baseNeedQiangZhuang = qiangZhuang;
     }
 }

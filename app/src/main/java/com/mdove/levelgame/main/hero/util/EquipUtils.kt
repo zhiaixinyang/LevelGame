@@ -16,7 +16,7 @@ class EquipUtils {
             var resp = EnableEquipResp(1)
             if (hero.level >= needLevel && hero.liLiang >= needLiLiang && hero.minJie >= needMinJie
                     && hero.zhiHui >= needZhiHui && hero.qiangZhuang >= needQIangZhuang) {
-                resp.respCode = 1
+                resp.respCode = 0
             }
             return resp
         }

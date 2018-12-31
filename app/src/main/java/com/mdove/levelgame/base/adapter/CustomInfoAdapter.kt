@@ -1,6 +1,7 @@
 package com.mdove.levelgame.base.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.text.Html
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -23,7 +24,7 @@ class CustomInfoAdapter : BaseListAdapter<String>() {
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(info: String) {
-            view.findViewById<TextView>(R.id.tv_info).text = info
+            view.findViewById<TextView>(R.id.tv_info).text = Html.fromHtml(info)
         }
     }
 }

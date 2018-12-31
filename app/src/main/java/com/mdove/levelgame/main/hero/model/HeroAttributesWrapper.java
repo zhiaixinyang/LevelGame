@@ -139,9 +139,9 @@ public class HeroAttributesWrapper {
         HeroAttributesManager.getInstance().saveMoney(monsters.money);
 
         int liLiangRandmo = monsters.getExpLiLiang().get(0) + new Random(System.currentTimeMillis()).nextInt(monsters.getExpLiLiang().get(1) - monsters.getExpLiLiang().get(0));
-        int minJieRandmo = monsters.getExpMinJie().get(0) + new Random(System.currentTimeMillis()).nextInt(monsters.getExpMinJie().get(1) - monsters.getExpMinJie().get(0));
-        int zhiHuiRandmo = monsters.getExpZhiHui().get(0) + new Random(System.currentTimeMillis()).nextInt(monsters.getExpZhiHui().get(1) - monsters.getExpZhiHui().get(0));
-        int qiangZhuangRandmo = monsters.getExpQiangZhuang().get(0) + new Random(System.currentTimeMillis()).nextInt(monsters.getExpQiangZhuang().get(1) - monsters.getExpQiangZhuang().get(0));
+        int minJieRandmo = monsters.getExpMinJie().get(0) + new Random(System.currentTimeMillis() + 1).nextInt(monsters.getExpMinJie().get(1) - monsters.getExpMinJie().get(0));
+        int zhiHuiRandmo = monsters.getExpZhiHui().get(0) + new Random(System.currentTimeMillis() + 2).nextInt(monsters.getExpZhiHui().get(1) - monsters.getExpZhiHui().get(0));
+        int qiangZhuangRandmo = monsters.getExpQiangZhuang().get(0) + new Random(System.currentTimeMillis() + 3).nextInt(monsters.getExpQiangZhuang().get(1) - monsters.getExpQiangZhuang().get(0));
         HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_LILIANG, liLiangRandmo);
         HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_MINJIE, minJieRandmo);
         HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_ZHIHUI, zhiHuiRandmo);

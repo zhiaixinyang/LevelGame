@@ -89,9 +89,9 @@ public abstract class BaseListActivity<T> extends AppCompatActivity implements B
         loadData();
     }
 
-    // 不使用AndroidInjection注入的可以复写false
+    // 使用AndroidInjection注入的可以复写true
     public boolean enableAndroidInject() {
-        return true;
+        return false;
     }
 
     private void androidInject() {

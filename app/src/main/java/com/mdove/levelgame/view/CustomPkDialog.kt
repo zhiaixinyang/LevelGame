@@ -12,6 +12,7 @@ import com.mdove.levelgame.databinding.DialogCustomPkBinding
 import com.mdove.levelgame.greendao.PackagesDao
 import com.mdove.levelgame.greendao.entity.Packages
 import com.mdove.levelgame.greendao.utils.DatabaseManager
+import com.mdove.levelgame.main.hero.manager.HeroManager
 import com.mdove.levelgame.main.hero.model.CustomPkBaseViewModel
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils
 import com.mdove.levelgame.utils.SystemUtils
@@ -19,7 +20,7 @@ import com.mdove.levelgame.utils.SystemUtils
 /**
  * Created by MDove on 2018/12/31.
  */
-class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context) {
+class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context, R.style.BaseDialog) {
     private var mBinding: DialogCustomPkBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_custom_pk,
             null, false)
     private var packages: Packages = DatabaseManager.getInstance().packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique()
@@ -82,43 +83,94 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 }
                 allAttrInfos.add("降低攻击间隔：$strengthenLevel")
             }
+
+            it.baseNeedLevel.takeIf {
+                it > 0
+            }?.let {
+                val string = if (HeroManager.getInstance().heroAttributes.level >= it) {
+                    "<font color=\"#4CAF50\">需要等级：$it</font>"
+                } else {
+                    "<font color=\"#F44336\">需要等级：$it</font>"
+                }
+                allAttrInfos.add(string)
+            }
+            it.baseNeedLiLiang.takeIf {
+                it > 0
+            }?.let {
+                val string = if (HeroManager.getInstance().heroAttributes.liLiang >= it) {
+                    "<font color=\"#4CAF50\">需要力量：$it</font>"
+                } else {
+                    "<font color=\"#F44336\">需要力量：$it</font>"
+                }
+                allAttrInfos.add(string)
+            }
+            it.baseNeedMinJie.takeIf {
+                it > 0
+            }?.let {
+                val string = if (HeroManager.getInstance().heroAttributes.minJie >= it) {
+                    "<font color=\"#4CAF50\">需要敏捷：$it</font>"
+                } else {
+                    "<font color=\"#F44336\">需要敏捷：$it</font>"
+                }
+                allAttrInfos.add(string)
+            }
+            it.baseNeedZhiHui.takeIf {
+                it > 0
+            }?.let {
+                val string = if (HeroManager.getInstance().heroAttributes.zhiHui >= it) {
+                    "<font color=\"#4CAF50\">需要智慧：$it</font>"
+                } else {
+                    "<font color=\"#F44336\">需要智慧：$it</font>"
+                }
+                allAttrInfos.add(string)
+            }
+            it.baseNeedQiangZhuang.takeIf {
+                it > 0
+            }?.let {
+                val string = if (HeroManager.getInstance().heroAttributes.qiangZhuang >= it) {
+                    "<font color=\"#4CAF50\">需要强壮：$it</font>"
+                } else {
+                    "<font color=\"#F44336\">需要强壮：$it</font>"
+                }
+                allAttrInfos.add(string)
+            }
         }
 
         packages.getRandomAttr()?.let {
             it.randomAttack.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("额外增加攻击：$it")
+                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加攻击：$it</font>")
             }
             it.randomArmor.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("额外增加防御：$it")
+                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加防御：$it</font>")
             }
             it.randomLife.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("额外增加生命上限：$it")
+                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加生命上限：$it</font>")
             }
             it.randomLiLiang.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("额外增加力量：$it")
+                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加力量：$it</font>")
             }
             it.randomMinJie.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("额外增加敏捷：$it")
+                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加敏捷：$it</font>")
             }
             it.randomZhiHui.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("额外增加智慧：$it")
+                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加智慧：$it</font>")
             }
             it.randomQiangZhuang.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("额外增加强壮：$it")
+                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加强壮：$it</font>")
             }
         }
 

@@ -13,19 +13,19 @@
     "drop_goods_id": 1,
     "exp_li_liang": [
       1,
-      5
+      7
     ],
     "exp_min_jie": [
       1,
-      5
+      3
     ],
     "exp_zhi_hui": [
       1,
-      5
+      3
     ],
     "exp_qiang_zhuang": [
       1,
-      5
+      3
     ],
     "exp": 10,
     "is_limit_count": 1,
@@ -50,15 +50,15 @@
     ],
     "exp_min_jie": [
       1,
-      10
+      5
     ],
     "exp_zhi_hui": [
       1,
-      10
+      5
     ],
     "exp_qiang_zhuang": [
       1,
-      10
+      5
     ],
     "is_limit_count": 1,
     "limit_count": 0,

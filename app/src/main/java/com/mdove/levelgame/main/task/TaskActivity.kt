@@ -35,6 +35,10 @@ class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
         }
     }
 
+    override fun enableAndroidInject(): Boolean {
+        return true
+    }
+
     override fun createAdapter(): BaseListAdapter<TaskModelVM> {
         return adapter
     }

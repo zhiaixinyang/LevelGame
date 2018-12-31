@@ -106,7 +106,8 @@ public class Weapons extends BaseBlacksmithModel implements IAttrsModel {
 
     @Override
     public BaseAttrsModel getAttrsModel() {
-        return new BaseAttrsModel(name, tips, attack, armor, 0, 0);
+        return new BaseAttrsModel(name, tips, attack, armor, 0, 0,
+                needLevel, needLiLiang, needMinJie, needZhiHui, needQiangZhuang);
     }
 
     public Long getId() {

@@ -213,49 +213,42 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
 
     @Override
     public void onClickTakeOff(final HeroEquipModelVM vm) {
-        Observable.create(new ObservableOnSubscribe<IAttrsModel>() {
-            @Override
-            public void subscribe(ObservableEmitter<IAttrsModel> e) throws Exception {
-                // 获取是武器还是防具
-                e.onNext(AllGoodsToDBIdUtils.getInstance().getAttrsModelFromType(vm.type.get()));
-            }
+        Observable.create((ObservableOnSubscribe<IAttrsModel>) e -> {
+            // 获取是武器还是防具
+            e.onNext(AllGoodsToDBIdUtils.getInstance().getAttrsModelFromType(vm.type.get()));
         }).compose(RxTransformerHelper.<IAttrsModel>schedulerTransf())
-                .map(new Function<IAttrsModel, GoodsEquipResp>() {
-                    @Override
-                    public GoodsEquipResp apply(IAttrsModel model) throws Exception {
-                        GoodsEquipResp resp = new GoodsEquipResp();
-                        // 从所有持有的装备(Packages)中，重置isEquip的状态
-                        Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(vm.type.get())
-                                , PackagesDao.Properties.IsEquip.eq(Integer.valueOf(0))).unique();
-                        if (pk != null) {
-                            // 更新脱装备的状态
-                            pk.isEquip = 1;
-                            packagesDao.update(pk);
-                            resp.takeOffType = pk.type;
-                            resp.takeOffPkId = pk.id;
-                            resp.takeOffStrengthen = pk.strengthenLevel;
-                            resp.takeOffModel = model;
-                        }
-                        return resp;
+                .map(model -> {
+                    GoodsEquipResp resp = new GoodsEquipResp();
+                    // 从所有持有的装备(Packages)中，重置isEquip的状态
+                    Packages pk = packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(vm.type.get())
+                            , PackagesDao.Properties.IsEquip.eq(Integer.valueOf(0))).unique();
+                    if (pk != null) {
+                        // 更新脱装备的状态
+                        pk.isEquip = 1;
+                        packagesDao.update(pk);
+                        resp.takeOffType = pk.type;
+                        resp.takeOffPkId = pk.id;
+                        resp.pk = pk;
+                        resp.takeOffStrengthen = pk.strengthenLevel;
+                        resp.takeOffModel = model;
                     }
-                }).map(new Function<GoodsEquipResp, NotifyResp>() {
-            @Override
-            public NotifyResp apply(GoodsEquipResp goodsEquipResp) throws Exception {
-                // 更新英雄属性
-                boolean takeOffSuc = false;
-                if (goodsEquipResp.takeOffModel != null) {
-                    HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffModel);
-                    takeOffSuc = true;
-                }
-                NotifyResp resp = null;
-                if (takeOffSuc) {
-                    resp = new NotifyResp();
-                    resp.takeOffOnId = goodsEquipResp.takeOffPkId;
-                    resp.takeOffType = goodsEquipResp.takeOffType;
-                }
-                return resp;
-            }
-        }).subscribe(new Observer<NotifyResp>() {
+                    return resp;
+                }).map(goodsEquipResp -> {
+                    // 更新英雄属性
+                    boolean takeOffSuc = false;
+                    if (goodsEquipResp.takeOffModel != null) {
+                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffModel,
+                                goodsEquipResp.pk.getRandomAttr());
+                        takeOffSuc = true;
+                    }
+                    NotifyResp resp = null;
+                    if (takeOffSuc) {
+                        resp = new NotifyResp();
+                        resp.takeOffOnId = goodsEquipResp.takeOffPkId;
+                        resp.takeOffType = goodsEquipResp.takeOffType;
+                    }
+                    return resp;
+                }).subscribe(new Observer<NotifyResp>() {
             @Override
             public void onSubscribe(Disposable d) {
             }
@@ -312,10 +305,11 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
         view.notifyByPosition(position);
 
     }
-    
+
     // 临时封装了脱掉装备的Id和穿装备的Id
     private class GoodsEquipResp {
         public long takeOffPkId;
+        public Packages pk;
         public String takeOffType;
         // 用于查强化等级
         public long takeOffStrengthen;

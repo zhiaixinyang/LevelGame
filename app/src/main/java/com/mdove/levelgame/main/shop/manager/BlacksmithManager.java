@@ -187,7 +187,8 @@ public class BlacksmithManager {
                 if (packages.isEquip == 0) {
                     IAttrsModel oj = AllGoodsToDBIdUtils.getInstance().getAttrsModelFromType(packages.type);
                     if (oj != null) {
-                        HeroAttributesManager.getInstance().takeOff(packages.strengthenLevel, (IAttrsModel) oj);
+                        HeroAttributesManager.getInstance().takeOff(packages.strengthenLevel, (IAttrsModel) oj,
+                                packages.getRandomAttr());
                     }
                 }
                 packagesDao.delete(packages);

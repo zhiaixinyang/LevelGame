@@ -353,8 +353,10 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                     model.holdOnType = holdOnPk.type;
                                     model.holdOnStrengthen = holdOnPk.strengthenLevel;
                                     model.holdOnAttack = holdOnWeapon;
+                                    model.holdOnPk = holdOnPk;
                                 } else {
                                     model.holdOnType = null;
+                                    model.holdOnPk = null;
                                     model.holdOnAttack = null;
                                 }
 
@@ -369,8 +371,10 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                         model.takeOffType = takeOffPk.type;
                                         model.takeOffStrengthen = takeOffPk.strengthenLevel;
                                         model.takeOffAttack = hasHoldOnWeapon;
+                                        model.takeOffPk = takeOffPk;
                                     } else {
                                         model.takeOffType = null;
+                                        model.takeOffPk = null;
                                         model.takeOffAttack = null;
                                     }
                                 }
@@ -406,10 +410,12 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                     packagesDao.update(holdOnPk);
                                     model.holdOnPkId = holdOnPk.id;
                                     model.holdOnType = holdOnPk.type;
+                                    model.holdOnPk = holdOnPk;
                                     model.holdOnStrengthen = holdOnPk.strengthenLevel;
                                     model.holdOnArmor = holdOnArmor;
                                 } else {
                                     model.holdOnType = null;
+                                    model.holdOnPk = null;
                                     model.holdOnArmor = null;
                                 }
 
@@ -423,10 +429,12 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                         takeOffPk.isEquip = 1;
                                         packagesDao.update(takeOffPk);
                                         model.takeOffType = takeOffPk.type;
+                                        model.takeOffPk = takeOffPk;
                                         model.takeOffStrengthen = holdOnPk.strengthenLevel;
                                         model.takeOffArmor = hasHoldOnArmor;
                                     } else {
                                         model.takeOffType = null;
+                                        model.takeOffPk = null;
                                         model.takeOffArmor = null;
                                     }
                                 }
@@ -464,8 +472,10 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                     model.holdOnType = holdOnPk.type;
                                     model.holdOnStrengthen = holdOnPk.strengthenLevel;
                                     model.holdOnAccessories = holdOnAccessories;
+                                    model.holdOnPk = holdOnPk;
                                 } else {
                                     model.holdOnType = null;
+                                    model.holdOnPk = null;
                                     model.holdOnAccessories = null;
                                 }
 
@@ -479,10 +489,12 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                         takeOffPk.isEquip = 1;
                                         packagesDao.update(takeOffPk);
                                         model.takeOffType = takeOffPk.type;
+                                        model.takeOffPk = takeOffPk;
                                         model.takeOffStrengthen = holdOnPk.strengthenLevel;
                                         model.takeOffAccessories = hasHoldOnAccessories;
                                     } else {
                                         model.takeOffType = null;
+                                        model.takeOffPk = null;
                                         model.takeOffAccessories = null;
                                     }
                                 }
@@ -494,57 +506,60 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                         }
                         return null;
                     }
-                }).map(new Function<GoodsEquipResp, NotifyResp>() {
-            @Override
-            public NotifyResp apply(GoodsEquipResp goodsEquipResp) throws Exception {
-                // 更新英雄属性
-                boolean attackSuc = false;
-                boolean armorSuc = false;
-                boolean accessoriesSuc = false;
-                if (goodsEquipResp.respStatus == 1) {
-                    NotifyResp resp = new NotifyResp();
-                    resp.respCode = 1;
-                    return resp;
-                }
-                // 穿的装备是武器
-                if (goodsEquipResp.holdOnAttack != null) {
-                    // 先减少脱掉装备的属性
-                    if (goodsEquipResp.takeOffAttack != null) {
-                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAttack);
-                    }
-                    // 增加穿装备属性
-                    HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAttack);
-                    attackSuc = true;
-                }
-                // 穿的装备是护甲
-                if (goodsEquipResp.holdOnArmor != null) {
-                    // 先减少脱掉装备的属性
-                    if (goodsEquipResp.takeOffArmor != null) {
-                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffArmor);
-                    }
-                    // 增加穿装备属性
-                    HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnArmor);
-                    armorSuc = true;
-                }
-                // 穿的装备是饰品
-                if (goodsEquipResp.holdOnAccessories != null) {
-                    // 先减少脱掉装备的属性
-                    if (goodsEquipResp.takeOffAccessories != null) {
-                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAccessories);
-                    }
-                    // 增加穿装备属性
-                    HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAccessories);
-                    accessoriesSuc = true;
-                }
-
-                NotifyResp resp = null;
-                if (armorSuc || attackSuc || accessoriesSuc) {
-                    resp = new NotifyResp();
-                    resp.holdOnId = goodsEquipResp.holdOnPkId;
-                    resp.takeOffOnId = goodsEquipResp.takeOffPkId;
-                }
+                }).map(goodsEquipResp -> {
+            // 更新英雄属性
+            boolean attackSuc = false;
+            boolean armorSuc = false;
+            boolean accessoriesSuc = false;
+            if (goodsEquipResp.respStatus == 1) {
+                NotifyResp resp = new NotifyResp();
+                resp.respCode = 1;
                 return resp;
             }
+            // 穿的装备是武器
+            if (goodsEquipResp.holdOnAttack != null) {
+                // 先减少脱掉装备的属性
+                if (goodsEquipResp.takeOffAttack != null) {
+                    HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAttack
+                            , goodsEquipResp.takeOffPk.getRandomAttr());
+                }
+                // 增加穿装备属性
+                HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAttack
+                        , goodsEquipResp.holdOnPk.getRandomAttr());
+                attackSuc = true;
+            }
+            // 穿的装备是护甲
+            if (goodsEquipResp.holdOnArmor != null) {
+                // 先减少脱掉装备的属性
+                if (goodsEquipResp.takeOffArmor != null) {
+                    HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffArmor,
+                            goodsEquipResp.takeOffPk.getRandomAttr());
+                }
+                // 增加穿装备属性
+                HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnArmor,
+                        goodsEquipResp.holdOnPk.getRandomAttr());
+                armorSuc = true;
+            }
+            // 穿的装备是饰品
+            if (goodsEquipResp.holdOnAccessories != null) {
+                // 先减少脱掉装备的属性
+                if (goodsEquipResp.takeOffAccessories != null) {
+                    HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffAccessories,
+                            goodsEquipResp.takeOffPk.getRandomAttr());
+                }
+                // 增加穿装备属性
+                HeroAttributesManager.getInstance().holdOn(goodsEquipResp.holdOnStrengthen, goodsEquipResp.holdOnAccessories,
+                        goodsEquipResp.holdOnPk.getRandomAttr());
+                accessoriesSuc = true;
+            }
+
+            NotifyResp resp = null;
+            if (armorSuc || attackSuc || accessoriesSuc) {
+                resp = new NotifyResp();
+                resp.holdOnId = goodsEquipResp.holdOnPkId;
+                resp.takeOffOnId = goodsEquipResp.takeOffPkId;
+            }
+            return resp;
         }).subscribe(new Observer<NotifyResp>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -685,6 +700,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
         public int respStatus;
         public long holdOnPkId;
         public long takeOffPkId;
+        public Packages holdOnPk;
+        public Packages takeOffPk;
         public String holdOnType;
         public String takeOffType;
         // 用于查强化等级

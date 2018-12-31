@@ -38,10 +38,6 @@ class HomeSkillActivity : BaseListActivity<HomeSkillModelVM>(), HomeSkillContrac
         return adapter
     }
 
-    override fun enableAndroidInject(): Boolean {
-        return false
-    }
-
     override fun loadData() {
         title = getString(R.string.string_activity_home_skill)
         presenter.initData()

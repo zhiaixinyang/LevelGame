@@ -659,7 +659,7 @@ public class HeroAttributesManager {
                 int hitAttr = 0;
                 int preMax = 0;
                 for (int i = inv + 1; i >= 0; i--) {
-                    int max = preMax + (int) (((float) i / (float) needHit) * 100);
+                    int max = preMax + (int) ((1 - ((float) i / (float) needHit)) * 100);
                     preMax = max;
                     if (random > max) {
                         hitAttr++;
@@ -674,21 +674,39 @@ public class HeroAttributesManager {
         return randomAttr;
     }
 
-    public void takeOff(long strengthen, IAttrsModel model) {
+    public void takeOff(long strengthen, IAttrsModel model, RandomAttr randomAttr) {
         heroAttributes.attack -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseAttack);
         heroAttributes.armor -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseArmor);
         heroAttributes.attackSpeed += model.getAttrsModel().baseAttackSpeed;
         heroAttributes.maxLife -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
         heroAttributes.curLife -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
+
+        heroAttributes.attack -= randomAttr.randomAttack;
+        heroAttributes.armor -= randomAttr.randomArmor;
+        heroAttributes.curLife -= randomAttr.randomLife;
+        heroAttributes.maxLife -= randomAttr.randomLife;
+        heroAttributes.liLiang -= randomAttr.randomLiLiang;
+        heroAttributes.minJie -= randomAttr.randomMinJie;
+        heroAttributes.zhiHui -= randomAttr.randomZhiHui;
+        heroAttributes.qiangZhuang -= randomAttr.randomQiangZhuang;
         save();
     }
 
-    public void holdOn(long strengthen, IAttrsModel model) {
+    public void holdOn(long strengthen, IAttrsModel model, RandomAttr randomAttr) {
         heroAttributes.attack += (1 + strengthen * 0.2) * (model.getAttrsModel().baseAttack);
         heroAttributes.armor += (1 + strengthen * 0.2) * (model.getAttrsModel().baseArmor);
         heroAttributes.attackSpeed -= model.getAttrsModel().baseAttackSpeed;
         heroAttributes.maxLife += (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
         heroAttributes.curLife += (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
+
+        heroAttributes.attack += randomAttr.randomAttack;
+        heroAttributes.armor += randomAttr.randomArmor;
+        heroAttributes.curLife += randomAttr.randomLife;
+        heroAttributes.maxLife += randomAttr.randomLife;
+        heroAttributes.liLiang += randomAttr.randomLiLiang;
+        heroAttributes.minJie += randomAttr.randomMinJie;
+        heroAttributes.zhiHui += randomAttr.randomZhiHui;
+        heroAttributes.qiangZhuang += randomAttr.randomQiangZhuang;
         save();
     }
 

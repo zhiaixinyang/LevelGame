@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
+import com.mdove.levelgame.main.hero.fragment.HeroPackageDialogFragment;
 import com.mdove.levelgame.main.monsters.adapter.MonstersAdapter;
 import com.mdove.levelgame.main.monsters.manager.AdventureManager;
 import com.mdove.levelgame.main.monsters.model.MonstersViewModel;
@@ -73,6 +74,9 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         rlv = findViewById(R.id.rlv);
         tvPower = findViewById(R.id.tv_power);
         tvMoney = findViewById(R.id.tv_money);
+        tvMoney.setOnClickListener(v -> {
+            new HeroPackageDialogFragment().show(getSupportFragmentManager(),"");
+        });
         tvLife = findViewById(R.id.tv_life);
         btnRest = findViewById(R.id.btn_rest);
         horizontalSmoothProgressBar = findViewById(R.id.pb_hero);

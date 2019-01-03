@@ -12,6 +12,8 @@ import com.mdove.levelgame.main.hero.presenter.HeroEquipPresenter;
 
 import java.util.List;
 
+import kotlinx.coroutines.GlobalScope;
+
 /**
  * @author MDove on 2018/10/30
  */

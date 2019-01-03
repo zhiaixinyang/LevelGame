@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.hero.presenter;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.RxTransformerHelper;
@@ -67,7 +68,17 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
 
     @Override
     public void initData() {
-        initEquipData();
+        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
+        Observable.create((ObservableOnSubscribe<Integer>) e -> {
+            initEquipData();
+            e.onNext(1);
+        }).compose(RxTransformerHelper.schedulerTransf())
+                .subscribe(integer -> {
+                    view.showEquipData(equipData);
+                    view.dismissLoadingDialog();
+                }, throwable -> {
+                    view.dismissLoadingDialog();
+                });
     }
 
     @Override
@@ -154,7 +165,6 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
         if (equipData.size() == 3) {
             equipData.add(new HeroEquipModelVM((long) -1, view.getString(R.string.string_no_hold_on_accessories), 0, view.getString(R.string.string_no_hold_on_accessories), 0, 0, 0, "-1", false, 3));
         }
-        view.showEquipData(equipData);
     }
 
 
@@ -234,21 +244,21 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                     }
                     return resp;
                 }).map(goodsEquipResp -> {
-                    // 更新英雄属性
-                    boolean takeOffSuc = false;
-                    if (goodsEquipResp.takeOffModel != null) {
-                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffModel,
-                                goodsEquipResp.pk.getRandomAttr());
-                        takeOffSuc = true;
-                    }
-                    NotifyResp resp = null;
-                    if (takeOffSuc) {
-                        resp = new NotifyResp();
-                        resp.takeOffOnId = goodsEquipResp.takeOffPkId;
-                        resp.takeOffType = goodsEquipResp.takeOffType;
-                    }
-                    return resp;
-                }).subscribe(new Observer<NotifyResp>() {
+            // 更新英雄属性
+            boolean takeOffSuc = false;
+            if (goodsEquipResp.takeOffModel != null) {
+                HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffModel,
+                        goodsEquipResp.pk.getRandomAttr());
+                takeOffSuc = true;
+            }
+            NotifyResp resp = null;
+            if (takeOffSuc) {
+                resp = new NotifyResp();
+                resp.takeOffOnId = goodsEquipResp.takeOffPkId;
+                resp.takeOffType = goodsEquipResp.takeOffType;
+            }
+            return resp;
+        }).subscribe(new Observer<NotifyResp>() {
             @Override
             public void onSubscribe(Disposable d) {
             }

@@ -71,7 +71,17 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
     @Override
     public void initData() {
-        initPksData();
+        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
+        Observable.create((ObservableOnSubscribe<Integer>) e -> {
+            initPksData();
+            e.onNext(1);
+        }).compose(RxTransformerHelper.schedulerTransf())
+                .subscribe(integer -> {
+                    view.dismissLoadingDialog();
+                    view.showPackage(packageModelVMS);
+                }, throwable -> {
+                    view.dismissLoadingDialog();
+                });
     }
 
     private void deleteById(long pkId) {

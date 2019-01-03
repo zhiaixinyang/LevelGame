@@ -34,7 +34,7 @@ public class DataBindingAdapter {
         }
         TextView textView = main.findViewById(R.id.tv_name);
         TextView btnTakeOff = main.findViewById(R.id.btn_take_off);
-        if (vm.id.get() == -1) {
+        if (vm.pkId.get() == -1) {
             textView.setTextColor(ContextCompat.getColor(main.getContext(), R.color.white));
             main.setBackgroundResource(R.drawable.bg_blue_round);
             btnTakeOff.setVisibility(View.GONE);

@@ -90,7 +90,7 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                 if (!TextUtils.isEmpty(attackType.equipType)) {
                     Weapons weapons = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(attackType.equipType)).unique();
                     if (weapons != null) {
-                        equipData.set(1, new HeroEquipModelVM(weapons.id, weapons.tips, attackType.strengthen, weapons.name, weapons.attack, weapons.armor, 0, weapons.type, true, 1));
+                        equipData.set(1, new HeroEquipModelVM(attackType.pkId, weapons.tips, attackType.strengthen, weapons.name, weapons.attack, weapons.armor, 0, weapons.type, true, 1));
                     }
                 }
                 break;
@@ -101,18 +101,18 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                 if (!TextUtils.isEmpty(armorType.equipType)) {
                     Armors armor = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(armorType.equipType)).unique();
                     if (armor != null) {
-                        equipData.set(2, new HeroEquipModelVM(armor.id, armor.tips, armorType.strengthen, armor.name, armor.attack, armor.armor, 0, armor.type, true, 2));
+                        equipData.set(2, new HeroEquipModelVM(armorType.pkId, armor.tips, armorType.strengthen, armor.name, armor.attack, armor.armor, 0, armor.type, true, 2));
                     }
                 }
                 break;
             }
             case 3: {
                 // 查询装备的饰品
-                InitEquipResp accessoriesType1 = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
-                if (!TextUtils.isEmpty(accessoriesType1.equipType)) {
-                    Accessories accessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(accessoriesType1.equipType)).unique();
+                InitEquipResp accessoriesType = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
+                if (!TextUtils.isEmpty(accessoriesType.equipType)) {
+                    Accessories accessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(accessoriesType.equipType)).unique();
                     if (accessories != null) {
-                        equipData.set(3, new HeroEquipModelVM(accessories.id, accessories.tips, accessoriesType1.strengthen, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type, true, 3));
+                        equipData.set(3, new HeroEquipModelVM(accessoriesType.pkId, accessories.tips, accessoriesType.strengthen, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type, true, 3));
                     }
                 }
                 break;

@@ -34,7 +34,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
     private static final String EXTRA_MONSTERS_PLACE_ID = "extra_monsters_place_id";
     private static final String EXTRA_MONSTERS_PLACE_NAME = "extra_monsters_place_name";
     private RecyclerView rlv;
-    private TextView tvPower, tvMoney, tvLife;
+    private TextView tvPower, tvMoney, tvLife, btnPackage;
     private TextView btnRest;
     private HorizontalSmoothProgressBar horizontalSmoothProgressBar;
     private MonstersPresenter presenter;
@@ -74,29 +74,18 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         rlv = findViewById(R.id.rlv);
         tvPower = findViewById(R.id.tv_power);
         tvMoney = findViewById(R.id.tv_money);
-        tvMoney.setOnClickListener(v -> {
-            new HeroPackageDialogFragment().show(getSupportFragmentManager(),"");
-        });
+        btnPackage = findViewById(R.id.btn_package);
+        btnPackage.setOnClickListener(v -> new HeroPackageDialogFragment().show(getSupportFragmentManager(), ""));
         tvLife = findViewById(R.id.tv_life);
         btnRest = findViewById(R.id.btn_rest);
         horizontalSmoothProgressBar = findViewById(R.id.pb_hero);
-        btnRest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.heroRest();
-            }
-        });
+        btnRest.setOnClickListener(v -> presenter.heroRest());
         rlv.setLayoutManager(new LinearLayoutManager(this));
         rlv.setAdapter(adapter);
 
         mViewModel = ViewModelProviders.of(this).get(MonstersViewModel.class);
         mViewModel.loadMonsters(monsterPlaceId);
-        mViewModel.getMonstersData().observe(this, new Observer<List<MonstersModelVM>>() {
-            @Override
-            public void onChanged(@Nullable List<MonstersModelVM> monstersModelVMS) {
-                adapter.setData(monstersModelVMS);
-            }
-        });
+        mViewModel.getMonstersData().observe(this, monstersModelVMS -> adapter.setData(monstersModelVMS));
 
 //        presenter.initData(monsterPlaceId);
 

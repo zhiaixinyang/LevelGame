@@ -10,7 +10,7 @@ import com.mdove.levelgame.greendao.utils.SrcIconMap;
  * @author MDove on 2018/10/23
  */
 public class HeroEquipModelVM {
-    public ObservableField<Long> id = new ObservableField<>();
+    public ObservableField<Long> pkId = new ObservableField<>();
     public ObservableField<Long> strengthen = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
     public ObservableField<String> attack = new ObservableField<>();
@@ -21,8 +21,8 @@ public class HeroEquipModelVM {
     public ObservableField<Integer> src = new ObservableField<>();
 
     // goodType:1武器2防具3饰品
-    public HeroEquipModelVM(Long id, String tips, long strengthen, String name, int attack, int armor, int life, String type, boolean isEquip, int goodType) {
-        this.id.set(id);
+    public HeroEquipModelVM(long pkId,  String tips, long strengthen, String name, int attack, int armor, int life, String type, boolean isEquip, int goodType) {
+        this.pkId.set(pkId);
         this.strengthen.set(strengthen);
         this.name.set(name);
         this.tips.set(tips);

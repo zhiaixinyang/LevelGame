@@ -22,7 +22,9 @@ import com.mdove.levelgame.main.monsters.model.MonstersViewModel;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.monsters.presenter.MonstersConstract;
 import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter;
+import com.mdove.levelgame.view.CustomMonsterDialog;
 import com.mdove.levelgame.view.HorizontalSmoothProgressBar;
+import com.mdove.levelgame.view.base.OnLongClickEquipListener;
 
 import java.util.List;
 

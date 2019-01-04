@@ -20,17 +20,17 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
         android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
         android:onClick="@{()->handler.onItemBtnOnClick(vm)}"
+        android:onLongClick="@{()->handler.onItemLongBtnOnClick(vm)}"
         app:convertBgBySpecial="@{vm}">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_item_monster_place_bg"
-            >
+            android:background="@drawable/ic_item_monster_place_bg">
 
             <TextView
                 android:id="@+id/tv_name"
@@ -147,8 +147,8 @@
                 android:id="@+id/tv_limit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
                 android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+                android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
                 android:text="@{vm.limitCount}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
@@ -180,13 +180,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
                     android:layout_marginTop="@dimen/item_double_layer_margin"
+                    android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
                     android:background="@{vm.isBusinessman?@drawable/bg_blue_round:@drawable/bg_btn_attack_monsters}"
-                    android:paddingBottom="4dp"
                     android:paddingLeft="12dp"
-                    android:paddingRight="14dp"
                     android:paddingTop="2dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="4dp"
                     android:text="@{vm.btnText}"
                     android:textColor="@color/white"
                     android:textSize="16sp" />

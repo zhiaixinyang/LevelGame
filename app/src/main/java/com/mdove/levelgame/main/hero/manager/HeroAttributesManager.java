@@ -681,14 +681,16 @@ public class HeroAttributesManager {
         heroAttributes.maxLife -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
         heroAttributes.curLife -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
 
-        heroAttributes.attack -= randomAttr.randomAttack;
-        heroAttributes.armor -= randomAttr.randomArmor;
-        heroAttributes.curLife -= randomAttr.randomLife;
-        heroAttributes.maxLife -= randomAttr.randomLife;
-        heroAttributes.liLiang -= randomAttr.randomLiLiang;
-        heroAttributes.minJie -= randomAttr.randomMinJie;
-        heroAttributes.zhiHui -= randomAttr.randomZhiHui;
-        heroAttributes.qiangZhuang -= randomAttr.randomQiangZhuang;
+        if (randomAttr!=null) {
+            heroAttributes.attack -= randomAttr.randomAttack;
+            heroAttributes.armor -= randomAttr.randomArmor;
+            heroAttributes.curLife -= randomAttr.randomLife;
+            heroAttributes.maxLife -= randomAttr.randomLife;
+            heroAttributes.liLiang -= randomAttr.randomLiLiang;
+            heroAttributes.minJie -= randomAttr.randomMinJie;
+            heroAttributes.zhiHui -= randomAttr.randomZhiHui;
+            heroAttributes.qiangZhuang -= randomAttr.randomQiangZhuang;
+        }
         save();
     }
 
@@ -699,14 +701,16 @@ public class HeroAttributesManager {
         heroAttributes.maxLife += (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
         heroAttributes.curLife += (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
 
-        heroAttributes.attack += randomAttr.randomAttack;
-        heroAttributes.armor += randomAttr.randomArmor;
-        heroAttributes.curLife += randomAttr.randomLife;
-        heroAttributes.maxLife += randomAttr.randomLife;
-        heroAttributes.liLiang += randomAttr.randomLiLiang;
-        heroAttributes.minJie += randomAttr.randomMinJie;
-        heroAttributes.zhiHui += randomAttr.randomZhiHui;
-        heroAttributes.qiangZhuang += randomAttr.randomQiangZhuang;
+        if (randomAttr!=null) {
+            heroAttributes.attack += randomAttr.randomAttack;
+            heroAttributes.armor += randomAttr.randomArmor;
+            heroAttributes.curLife += randomAttr.randomLife;
+            heroAttributes.maxLife += randomAttr.randomLife;
+            heroAttributes.liLiang += randomAttr.randomLiLiang;
+            heroAttributes.minJie += randomAttr.randomMinJie;
+            heroAttributes.zhiHui += randomAttr.randomZhiHui;
+            heroAttributes.qiangZhuang += randomAttr.randomQiangZhuang;
+        }
         save();
     }
 

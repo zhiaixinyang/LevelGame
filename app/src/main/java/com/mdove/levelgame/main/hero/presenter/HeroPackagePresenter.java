@@ -320,13 +320,10 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
         final String type = vm.type.get();
         final Long id = vm.pkId.get();
         view.showLoadingDialog(view.getString(R.string.string_equip_loading));
-        Observable.create(new ObservableOnSubscribe<Integer>() {
-            @Override
-            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
-                // 获取是武器还是防具
-                int type = AllGoodsToDBIdUtils.getInstance().getDBType(vm.type.get());
-                e.onNext(type);
-            }
+        Observable.create((ObservableOnSubscribe<Integer>) e -> {
+            // 获取是武器还是防具
+            int type1 = AllGoodsToDBIdUtils.getInstance().getDBType(vm.type.get());
+            e.onNext(type1);
         }).compose(RxTransformerHelper.<Integer>schedulerTransf())
                 .map(new Function<Integer, GoodsEquipResp>() {
                     @Override
@@ -337,8 +334,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 GoodsEquipResp model = new GoodsEquipResp();
 
                                 // 拿到已穿的装备（可能为null）
-                                long hasHoldOnId = getGoodsIdFromPk(EQUIP_STATUS_TYPE_ATTACK);
-                                HasEquipResp hasHoldOnResp = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ATTACK);
+                                long hasHoldOnId = HeroPackagePresenter.this.getGoodsIdFromPk(EQUIP_STATUS_TYPE_ATTACK);
+                                HasEquipResp hasHoldOnResp = HeroPackagePresenter.this.getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ATTACK);
                                 Packages takeOffPk = null;
                                 if (hasHoldOnId != -1) {
                                     model.takeOffPkId = hasHoldOnId;
@@ -395,8 +392,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 GoodsEquipResp model = new GoodsEquipResp();
 
                                 // 拿到已穿的装备（可能为null）
-                                HasEquipResp hasHoldOnResp = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ARMOR);
-                                long hasHoldOnId = getGoodsIdFromPk(EQUIP_STATUS_TYPE_ARMOR);
+                                HasEquipResp hasHoldOnResp = HeroPackagePresenter.this.getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ARMOR);
+                                long hasHoldOnId = HeroPackagePresenter.this.getGoodsIdFromPk(EQUIP_STATUS_TYPE_ARMOR);
                                 Packages takeOffPk = null;
                                 if (hasHoldOnId != -1) {
                                     model.takeOffPkId = hasHoldOnId;
@@ -455,8 +452,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 GoodsEquipResp model = new GoodsEquipResp();
 
                                 // 拿到已穿的装备（可能为null）
-                                HasEquipResp hasHoldOnType = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
-                                long hasHoldOnId = getGoodsIdFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
+                                HasEquipResp hasHoldOnType = HeroPackagePresenter.this.getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
+                                long hasHoldOnId = HeroPackagePresenter.this.getGoodsIdFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
                                 Packages takeOffPk = null;
                                 if (hasHoldOnId != -1) {
                                     model.takeOffPkId = hasHoldOnId;
@@ -511,10 +508,10 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                                 return model;
                             }
 
-                            default:
-                                break;
+                            default: {
+                                return null;
+                            }
                         }
-                        return null;
                     }
                 }).map(goodsEquipResp -> {
             // 更新英雄属性

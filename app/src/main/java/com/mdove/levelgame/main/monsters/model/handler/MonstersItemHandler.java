@@ -19,4 +19,9 @@ public class MonstersItemHandler {
     public void onItemBtnOnClick(MonstersModelVM vm) {
         monstersPresenter.onItemBtnClick(vm.type.get(), vm.id.get());
     }
+
+    public boolean onItemLongBtnOnClick(MonstersModelVM vm) {
+        monstersPresenter.onItemLongBtnOnClick(vm.id.get());
+        return false;
+    }
 }

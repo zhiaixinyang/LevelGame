@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.hero.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdove.levelgame.R;
@@ -17,6 +18,7 @@ import com.mdove.levelgame.utils.InflateUtils;
  */
 public class HeroEquipAdapter extends BaseListAdapter<HeroEquipModelVM> {
     private HeroEquipPresenter presenter;
+    private OnLongClickEquipListener listener;
 
     public HeroEquipAdapter(HeroEquipPresenter presenter) {
         this.presenter = presenter;
@@ -27,7 +29,7 @@ public class HeroEquipAdapter extends BaseListAdapter<HeroEquipModelVM> {
         if (getData() == null) {
             return super.getItemViewType(position);
         }
-        if (getData().get(position).id.get() == -2) {
+        if (getData().get(position).pkId.get() == -2) {
             // 1：title布局
             return 1;
         } else {
@@ -53,29 +55,14 @@ public class HeroEquipAdapter extends BaseListAdapter<HeroEquipModelVM> {
         }
     }
 
-    private int getPositionForId(long id) {
-        int position = -1;
-        for (HeroEquipModelVM model : getData()) {
-            if (model.id.get() == id) {
-                position = getData().indexOf(model);
-            }
-        }
-        return position;
-    }
-
-    public void deleteNotifyPosition(long id) {
-        int position = getPositionForId(id);
-        if (position != -1) {
-            getData().remove(position);
-            notifyItemRemoved(position);
-        }
-    }
-
     public class TitleViewHolder extends RecyclerView.ViewHolder {
-
         public TitleViewHolder(ItemHeroEquipTitleBinding binding) {
             super(binding.getRoot());
         }
+    }
+
+    public void setListener(OnLongClickEquipListener listener) {
+        this.listener = listener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -86,9 +73,19 @@ public class HeroEquipAdapter extends BaseListAdapter<HeroEquipModelVM> {
             this.binding = binding;
         }
 
-        public void bind(HeroEquipModelVM vm) {
+        public void bind(final HeroEquipModelVM vm) {
             binding.setVm(vm);
             binding.setHandler(new HasEquipHandler(presenter));
+            binding.getRoot().setOnLongClickListener(v -> {
+                if (listener != null) {
+                    listener.onLongClick(vm.pkId.get());
+                }
+                return false;
+            });
         }
+    }
+
+    public interface OnLongClickEquipListener {
+        void onLongClick(long pkId);
     }
 }

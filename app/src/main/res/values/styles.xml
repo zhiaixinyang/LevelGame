@@ -13,7 +13,7 @@
         <item name="android:textColorPrimary">@color/white</item>
     </style>
 
-    <style name="BaseDialog" parent="@style/Theme.AppCompat.Light.Dialog">]
+    <style name="BaseDialog" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
@@ -21,13 +21,18 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
-    <style name="UpgradeDialog" parent="@style/Theme.AppCompat.Light.Dialog">]
+    <style name="UpgradeDialog" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
+
+    <style name="AppTheme.HeroPackageDialog" parent="@android:style/Theme.Panel">
+        <item name="android:windowAnimationStyle">@style/BottomInOutAnim</item>
+    </style>
+
 
     <style name="BottomInOutAnim" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>

@@ -26,6 +26,7 @@ import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.shop.BusinessmanActivity;
 import com.mdove.levelgame.utils.ToastHelper;
+import com.mdove.levelgame.view.CustomMonsterDialog;
 import com.mdove.levelgame.view.FightingDialog;
 import com.mdove.levelgame.view.MyDialog;
 
@@ -261,6 +262,11 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
 //                        }
 //                    });
 //        }
+    }
+
+    @Override
+    public void onItemLongBtnOnClick(Long id) {
+        new CustomMonsterDialog(view.getContext(), id).show();
     }
 
     private void updateUI() {

@@ -1,14 +1,13 @@
 package com.mdove.levelgame.main.monsters.adapter
 
-import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.adapter.BaseListAdapter
-import com.mdove.levelgame.databinding.ItemMonstersBinding
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM
 import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter
 import com.mdove.levelgame.utils.InflateUtils
+import com.mdove.levelgame.view.base.OnLongClickEquipListener
 
 /**
  * Created by MDove on 2018/12/23.
@@ -25,8 +24,8 @@ class MonstersAdapter(private val presenter: MonstersPresenter) : BaseListAdapte
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as? MonsterViewHolder)?.let { holder ->
-            data[position]?.let {
-                holder.bind(it)
+            data[position]?.let { vm ->
+                holder.bind(vm)
             }
         }
     }
@@ -38,7 +37,7 @@ class MonstersAdapter(private val presenter: MonstersPresenter) : BaseListAdapte
                     holder.refreshCount(it)
                 }
             }
-        }else{
+        } else {
             super.onBindViewHolder(holder, position, payloads)
         }
     }

@@ -9,6 +9,7 @@ import com.mdove.levelgame.main.hero.adapter.HeroEquipAdapter;
 import com.mdove.levelgame.main.hero.model.HeroEquipModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroEquipContract;
 import com.mdove.levelgame.main.hero.presenter.HeroEquipPresenter;
+import com.mdove.levelgame.view.CustomPkDialog;
 
 import java.util.List;
 
@@ -40,7 +41,9 @@ public class HeroEquipFragment extends BaseListFragment implements HeroEquipCont
 
     @Override
     public BaseListAdapter<HeroEquipModelVM> createAdapter() {
-        return new HeroEquipAdapter(presenter);
+        HeroEquipAdapter adapter = new HeroEquipAdapter(presenter);
+        adapter.setListener((HeroEquipAdapter.OnLongClickEquipListener) pkId -> new CustomPkDialog(getActivity(), pkId).show());
+        return adapter;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.mdove.levelgame.main.hero.presenter
 
+import android.util.Log
 import com.mdove.levelgame.greendao.PackagesDao
 import com.mdove.levelgame.greendao.SkillDao
 import com.mdove.levelgame.greendao.entity.Packages

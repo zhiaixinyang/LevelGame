@@ -25,6 +25,7 @@ public interface MonstersConstract {
         void heroRest();
 
         void onItemBtnClick(String type, Long id);
+        void onItemLongBtnOnClick(Long id);
     }
 
     interface IMonstersView extends BaseView {

@@ -5,6 +5,7 @@ import com.mdove.levelgame.databinding.ItemMonstersBinding
 import com.mdove.levelgame.main.monsters.model.handler.MonstersItemHandler
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM
 import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter
+import com.mdove.levelgame.view.base.OnLongClickEquipListener
 
 /**
  * Created by MDove on 2018/12/23.

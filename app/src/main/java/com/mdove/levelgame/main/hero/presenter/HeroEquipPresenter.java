@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.hero.presenter;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.RxTransformerHelper;
@@ -67,7 +68,17 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
 
     @Override
     public void initData() {
-        initEquipData();
+        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
+        Observable.create((ObservableOnSubscribe<Integer>) e -> {
+            initEquipData();
+            e.onNext(1);
+        }).compose(RxTransformerHelper.schedulerTransf())
+                .subscribe(integer -> {
+                    view.showEquipData(equipData);
+                    view.dismissLoadingDialog();
+                }, throwable -> {
+                    view.dismissLoadingDialog();
+                });
     }
 
     @Override
@@ -79,7 +90,7 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                 if (!TextUtils.isEmpty(attackType.equipType)) {
                     Weapons weapons = weaponsDao.queryBuilder().where(WeaponsDao.Properties.Type.eq(attackType.equipType)).unique();
                     if (weapons != null) {
-                        equipData.set(1, new HeroEquipModelVM(weapons.id, weapons.tips, attackType.strengthen, weapons.name, weapons.attack, weapons.armor, 0, weapons.type, true, 1));
+                        equipData.set(1, new HeroEquipModelVM(attackType.pkId, weapons.tips, attackType.strengthen, weapons.name, weapons.attack, weapons.armor, 0, weapons.type, true, 1));
                     }
                 }
                 break;
@@ -90,18 +101,18 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                 if (!TextUtils.isEmpty(armorType.equipType)) {
                     Armors armor = armorsDao.queryBuilder().where(ArmorsDao.Properties.Type.eq(armorType.equipType)).unique();
                     if (armor != null) {
-                        equipData.set(2, new HeroEquipModelVM(armor.id, armor.tips, armorType.strengthen, armor.name, armor.attack, armor.armor, 0, armor.type, true, 2));
+                        equipData.set(2, new HeroEquipModelVM(armorType.pkId, armor.tips, armorType.strengthen, armor.name, armor.attack, armor.armor, 0, armor.type, true, 2));
                     }
                 }
                 break;
             }
             case 3: {
                 // 查询装备的饰品
-                InitEquipResp accessoriesType1 = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
-                if (!TextUtils.isEmpty(accessoriesType1.equipType)) {
-                    Accessories accessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(accessoriesType1.equipType)).unique();
+                InitEquipResp accessoriesType = getGoodsTypeFromPk(EQUIP_STATUS_TYPE_ACCESSORIES);
+                if (!TextUtils.isEmpty(accessoriesType.equipType)) {
+                    Accessories accessories = accessoriesDao.queryBuilder().where(AccessoriesDao.Properties.Type.eq(accessoriesType.equipType)).unique();
                     if (accessories != null) {
-                        equipData.set(3, new HeroEquipModelVM(accessories.id, accessories.tips, accessoriesType1.strengthen, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type, true, 3));
+                        equipData.set(3, new HeroEquipModelVM(accessoriesType.pkId, accessories.tips, accessoriesType.strengthen, accessories.name, accessories.attack, accessories.armor, accessories.life, accessories.type, true, 3));
                     }
                 }
                 break;
@@ -154,7 +165,6 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
         if (equipData.size() == 3) {
             equipData.add(new HeroEquipModelVM((long) -1, view.getString(R.string.string_no_hold_on_accessories), 0, view.getString(R.string.string_no_hold_on_accessories), 0, 0, 0, "-1", false, 3));
         }
-        view.showEquipData(equipData);
     }
 
 
@@ -234,21 +244,21 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                     }
                     return resp;
                 }).map(goodsEquipResp -> {
-                    // 更新英雄属性
-                    boolean takeOffSuc = false;
-                    if (goodsEquipResp.takeOffModel != null) {
-                        HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffModel,
-                                goodsEquipResp.pk.getRandomAttr());
-                        takeOffSuc = true;
-                    }
-                    NotifyResp resp = null;
-                    if (takeOffSuc) {
-                        resp = new NotifyResp();
-                        resp.takeOffOnId = goodsEquipResp.takeOffPkId;
-                        resp.takeOffType = goodsEquipResp.takeOffType;
-                    }
-                    return resp;
-                }).subscribe(new Observer<NotifyResp>() {
+            // 更新英雄属性
+            boolean takeOffSuc = false;
+            if (goodsEquipResp.takeOffModel != null) {
+                HeroAttributesManager.getInstance().takeOff(goodsEquipResp.takeOffStrengthen, goodsEquipResp.takeOffModel,
+                        goodsEquipResp.pk.getRandomAttr());
+                takeOffSuc = true;
+            }
+            NotifyResp resp = null;
+            if (takeOffSuc) {
+                resp = new NotifyResp();
+                resp.takeOffOnId = goodsEquipResp.takeOffPkId;
+                resp.takeOffType = goodsEquipResp.takeOffType;
+            }
+            return resp;
+        }).subscribe(new Observer<NotifyResp>() {
             @Override
             public void onSubscribe(Disposable d) {
             }

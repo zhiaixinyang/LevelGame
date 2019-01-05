@@ -4,6 +4,7 @@
     "name": "铁矿石",
     "tips": "用于升级 [可升级] 的装备。",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "type": "E1"
   },
@@ -11,6 +12,7 @@
     "id": 2,
     "name": "铜矿石",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "用于升级 [可合成] 的装备。",
     "type": "E2"
@@ -19,6 +21,7 @@
     "id": 3,
     "name": "强化石",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "用于升级 [可强化] 的装备。",
     "type": "E3"
@@ -27,6 +30,7 @@
     "id": 4,
     "name": "战神令（材料）",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "用于合成 [真·战神枪] / [真·战神甲]。<br/><font color=\"#000000\">公式：战胜令（材料） + 战神枪 / 战神甲</font>",
     "type": "E4"
@@ -35,6 +39,7 @@
     "id": 5,
     "name": "域外陨铁",
     "price": 2,
+    "is_count":1,
     "mixture_formula": "[{\"type\":\"E13\"}]",
     "is_can_mixture": 0,
     "tips": "用于合成 [干将] / [莫邪]。<br/><font color=\"#000000\">听说可以用 镇魔符 在某人那里换取。</font>",
@@ -44,6 +49,7 @@
     "id": 6,
     "name": "金银珠宝",
     "price": 600,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "能卖不少钱。",
     "type": "E6"
@@ -52,6 +58,7 @@
     "id": 7,
     "name": "玄武甲",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败<font color=\"#D32F2F\">神兽·玄武</font>所掉落。<br/>可用于合成神器：<font color=\"#D32F2F\">东皇钟</font>。",
     "type": "E7"
@@ -60,6 +67,7 @@
     "id": 8,
     "name": "战神遗骸",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败战神宿敌所掉落的材料。<br/>可用于合成：<font color=\"#7B1FA2\">真·战神印</font>。<br/>公式：战神遗骸 + 战神印",
     "type": "E8"
@@ -68,6 +76,7 @@
     "id": 9,
     "name": "战神信物",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败战神所掉落的材料。<br/>可用于兑换：战神印。",
     "type": "E9"
@@ -76,6 +85,7 @@
     "id": 10,
     "name": "轩辕之灵",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败轩辕残魂所掉落的材料。<br/>可用于合成：<font color=\"#D32F2F\">轩辕甲</font>。<br/>公式：轩辕之灵 + 真·战神甲",
     "type": "E10"
@@ -84,6 +94,7 @@
     "id": 11,
     "name": "盘古之灵",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败盘古残魂所掉落的材料。<br/>可用于合成：<font color=\"#D32F2F\">盘古斧</font>。<br/>公式：盘古之灵 + 修罗斧 + 干将·莫邪",
     "type": "E11"
@@ -92,6 +103,7 @@
     "id": 12,
     "name": "蚩尤之灵",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败蚩尤残魂所掉落的材料。<br/>可用于合成：<font color=\"#D32F2F\">龙渊剑</font>、<font color=\"#D32F2F\">真·龙渊剑</font>",
     "type": "E12"
@@ -100,6 +112,7 @@
     "id": 13,
     "name": "镇魔符",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "传说上古神用于封印魔王的符印，击败魔王有较低的几率掉落的材料。<br/>用处不详（可能只有传说中的人才知道吧）。",
     "type": "E13"
@@ -108,6 +121,7 @@
     "id": 14,
     "name": "青龙爪",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败<font color=\"#D32F2F\">神兽·青龙</font>所掉落。<br/>可用于合成神器：<font color=\"#D32F2F\">真·东皇钟</font>。",
     "type": "E14"
@@ -116,6 +130,7 @@
     "id": 15,
     "name": "魔王头骨",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败<font color=\"#D32F2F\">入侵魔王</font>所掉落。<br/>可用于合成：<font color=\"#7B1FA2\">凤凰羽衣</font>。<br/>合成公式：凤凰羽 + 魔王头骨 + 金砂",
     "type": "E15"
@@ -123,6 +138,7 @@
   {
     "id": 16,
     "name": "金砂",
+    "is_count":1,
     "price": 2,
     "is_can_mixture": 1,
     "tips": "价格不菲，可以用作某些装备的材料。",
@@ -132,6 +148,7 @@
     "id": 17,
     "name": "魔王之魂",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败<font color=\"#D32F2F\">入侵魔王</font>所掉落。<br/>可用于合成：<font color=\"#7B1FA2\">白虎之力</font>。<br/>合成公式：白虎牙 + 魔王之魂 + 金砂",
     "type": "E17"
@@ -140,6 +157,7 @@
     "id": 18,
     "name": "白虎牙",
     "price": 2,
+    "is_count":1,
     "is_can_mixture": 1,
     "tips": "击败<font color=\"#D32F2F\">神兽·白虎</font>所掉落。<br/>可用于合成神器：<font color=\"#7B1FA2\">白虎之力</font>。<br/>合成公式：白虎牙 + 魔王之魂 + 金砂",
     "type": "E18"
@@ -148,6 +166,16 @@
     "id": 19,
     "name": "凤凰羽",
     "price": 2,
+    "is_count":1,
+    "is_can_mixture": 1,
+    "tips": "击败<font color=\"#D32F2F\">神兽·朱雀</font>所掉落。<br/>可用于合成神器：<font color=\"#7B1FA2\">凤凰羽衣</font>。<br/>合成公式：凤凰羽 + 魔王头骨 + 金砂",
+    "type": "E19"
+  },
+  {
+    "id": 20,
+    "name": "星辰碎片",
+    "price": 2,
+    "is_count":0,
     "is_can_mixture": 1,
     "tips": "击败<font color=\"#D32F2F\">神兽·朱雀</font>所掉落。<br/>可用于合成神器：<font color=\"#7B1FA2\">凤凰羽衣</font>。<br/>合成公式：凤凰羽 + 魔王头骨 + 金砂",
     "type": "E19"

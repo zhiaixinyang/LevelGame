@@ -12,6 +12,7 @@ import com.mdove.levelgame.config.AppConfig
 import com.mdove.levelgame.main.home.city.PageControl
 import com.mdove.levelgame.main.home.city.model.CityReps
 import com.mdove.levelgame.main.home.model.CityViewModel
+import com.mdove.levelgame.utils.CityMapUtils
 import com.mdove.levelgame.utils.JsonUtil
 import com.mdove.levelgame.view.HorizontalSmoothProgressBar
 
@@ -35,7 +36,7 @@ class CityEnterLoadingView @JvmOverloads constructor(context: Context, attrs: At
             if (::disminss.isInitialized) {
                 (context as? AppCompatActivity)?.let {
                     // City和MonstersPlace中Id的映射
-                    cityReps.placeId = mapMonsterPlaceId(cityReps.placeId)
+                    cityReps.placeId = CityMapUtils.cityMapMonsterPlace(cityReps.placeId)
                     ViewModelProviders.of(it).get(CityViewModel::class.java).curPlaceId.value = cityReps
                 }
                 if (!cityReps.isMonsterPlace) {
@@ -44,36 +45,6 @@ class CityEnterLoadingView @JvmOverloads constructor(context: Context, attrs: At
                 disminss.invoke(cityReps)
             }
         }
-    }
-
-    private fun mapMonsterPlaceId(cityId: Long): Long {
-        var monsterPlaceId: Long = when (cityId) {
-            3.toLong() -> {
-                1
-            }
-            4.toLong() -> {
-                2
-            }
-            5.toLong() -> {
-                4
-            }
-            6.toLong() -> {
-                3
-            }
-            7.toLong() -> {
-                5
-            }
-            8.toLong() -> {
-                6
-            }
-            9.toLong() -> {
-                7
-            }
-            else -> {
-                cityId
-            }
-        }
-        return monsterPlaceId
     }
 
     override fun registerPageControl(pageControl: PageControl) {

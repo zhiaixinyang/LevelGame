@@ -24,6 +24,8 @@ public class HeroPackageModelVM {
     public ObservableField<String> type = new ObservableField<>();
     public ObservableField<Integer> src = new ObservableField<>();
     public ObservableField<Boolean> isMaterials = new ObservableField<>();
+    public ObservableField<Boolean> isCountType = new ObservableField<>();
+    public ObservableField<String> count = new ObservableField<>();
 
     public HeroPackageModelVM(Long id, String tips, long strengthen, String name, int attack, int armor, int life, String type) {
         pkId.set(id);
@@ -53,6 +55,13 @@ public class HeroPackageModelVM {
         } else {
             isMaterials.set(false);
         }
+        isCountType.set(false);
+        count.set("");
+    }
+
+    public void setCount(int count) {
+        isCountType.set(true);
+        this.count.set("数量：" + count);
     }
 
     public void reName(long strengthen) {

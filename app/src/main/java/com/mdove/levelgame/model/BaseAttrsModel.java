@@ -19,6 +19,11 @@ public class BaseAttrsModel {
     public int baseNeedZhiHui;
     public int baseNeedQiangZhuang;
 
+    public BaseAttrsModel(String name, String tips) {
+        this.name = name;
+        this.tips = tips;
+    }
+
     public BaseAttrsModel(String name, String tips, int baseAttack, int baseArmor, int baseLife, long baseAttackSpeed
             , int needLevel, int liLiang, int minJie, int zhiHui, int qiangZhuang) {
         this.baseAttack = baseAttack;

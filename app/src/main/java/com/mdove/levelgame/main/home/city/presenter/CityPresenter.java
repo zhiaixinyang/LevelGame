@@ -38,7 +38,8 @@ public class CityPresenter implements CityContract.ICityPresenter {
     public void initData() {
         mData = new ArrayList<>();
         List<City> data = mCityDao.queryBuilder()
-                .orderAsc(CityDao.Properties.Position).list();
+                .orderAsc(CityDao.Properties.Position)
+                .where(CityDao.Properties.IsShow.eq(0)).list();
         for (City city : data) {
             mData.add(new CityVM(city));
         }

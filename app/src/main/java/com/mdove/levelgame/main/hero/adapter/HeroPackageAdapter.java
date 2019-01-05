@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.databinding.ItemHeroPackageBinding;
+import com.mdove.levelgame.databinding.ItemHeroPackageMaterialsBinding;
 import com.mdove.levelgame.databinding.ItemHeroPackageTitleBinding;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.main.hero.model.handler.HeroPackageHandler;
@@ -33,7 +34,9 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
         }
         if (getData().get(position).pkId.get() == -3) {
             return 1;
-        } else {
+        }else if (getData().get(position).isMaterials.get()){
+            return 3;
+        }else {
             return 2;
         }
     }
@@ -44,6 +47,8 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
             return new TitleViewHolder((ItemHeroPackageTitleBinding) InflateUtils.bindingInflate(parent, R.layout.item_hero_package_title));
         } else if (viewType == 2) {
             return new ViewHolder((ItemHeroPackageBinding) InflateUtils.bindingInflate(parent, R.layout.item_hero_package));
+        }else if (viewType==3){
+            return new MaterialViewHolder(InflateUtils.bindingInflate(parent, R.layout.item_hero_package_materials));
         }
         return null;
     }
@@ -52,6 +57,8 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
             ((ViewHolder) holder).bind(getData().get(position));
+        }else if (holder instanceof MaterialViewHolder) {
+            ((MaterialViewHolder) holder).bind(getData().get(position));
         }
     }
 
@@ -84,6 +91,24 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
         private ItemHeroPackageBinding binding;
 
         public ViewHolder(ItemHeroPackageBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(HeroPackageModelVM vm) {
+            binding.setVm(vm);
+            HeroPackageHandler handler = new HeroPackageHandler(presenter);
+            binding.getRoot().setOnLongClickListener(v -> {
+                handler.onLongClick(vm.pkId.get());
+                return false;
+            });
+            binding.setHandler(handler);
+        }
+    }
+    public class MaterialViewHolder extends RecyclerView.ViewHolder {
+        private ItemHeroPackageMaterialsBinding binding;
+
+        public MaterialViewHolder(ItemHeroPackageMaterialsBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

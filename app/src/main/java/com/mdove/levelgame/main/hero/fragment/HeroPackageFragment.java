@@ -1,6 +1,9 @@
 package com.mdove.levelgame.main.hero.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.mdove.levelgame.base.BaseListFragment;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
@@ -40,6 +43,22 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
     @Override
     public BaseListAdapter<HeroPackageModelVM> createAdapter() {
         return new HeroPackageAdapter(presenter);
+    }
+
+    @Override
+    protected RecyclerView.LayoutManager customLayoutManager() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (((HeroPackageModelVM) getAdapter().getData().get(position)).isMaterials.get()) {
+                    return 1;
+                } else {
+                    return 4;
+                }
+            }
+        });
+        return gridLayoutManager;
     }
 
     @Override

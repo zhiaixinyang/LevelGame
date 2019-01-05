@@ -39,7 +39,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             var name = it.name
 
             mBinding.vm = CustomPkBaseViewModel(name, it.tips, packages.type)
-            it.baseAttack.takeIf {
+             it.baseAttack.takeIf {
                 it != 0
             }?.let { attack ->
                 var strengthenLevel = ""

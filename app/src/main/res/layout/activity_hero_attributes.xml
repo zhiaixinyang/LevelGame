@@ -305,6 +305,7 @@
                     android:background="@drawable/bg_white_round"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_zhihui">
 
                     <TextView
@@ -325,7 +326,6 @@
                         android:layout_marginLeft="@dimen/main_btn_normal_margin"
                         android:layout_marginRight="@dimen/main_btn_normal_margin"
                         android:layout_marginBottom="@dimen/main_btn_normal_margin"
-                        android:padding="20dp"
                         android:progress="@{vm.qiangZhuangProgress}" />
                 </LinearLayout>
             </android.support.constraint.ConstraintLayout>

@@ -32,7 +32,7 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
         super.onViewCreated(view, savedInstanceState);
         rlv = view.findViewById(R.id.rlv);
         layoutEmpty = view.findViewById(R.id.layout_empty);
-        rlv.setLayoutManager(new LinearLayoutManager(getContext()));
+        rlv.setLayoutManager(customLayoutManager());
 
         initData();
 
@@ -41,9 +41,9 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
         adapter.setListener(new BaseListAdapter.OnDataEmptyListener() {
             @Override
             public void onEmpty(boolean isEmpty) {
-                if (isEmpty){
+                if (isEmpty) {
                     layoutEmpty.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     layoutEmpty.setVisibility(View.GONE);
                 }
             }
@@ -52,10 +52,14 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
         loadData();
     }
 
+    protected RecyclerView.LayoutManager customLayoutManager() {
+        return new LinearLayoutManager(getContext());
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (adapter!=null){
+        if (adapter != null) {
             adapter.unRegisterAdapter();
         }
     }

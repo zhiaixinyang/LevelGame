@@ -409,5 +409,27 @@
     "is_special": 0,
     "mixture_formula": "[{\"type\":\"A18\"},{\"type\":\"A17\"},{\"type\":\"E12\"}]",
     "is_can_mixture": 0
+  },
+  {
+    "id": 20,
+    "name": "<font color=\"#F57C00\">月下美人</font>",
+    "tips": "",
+    "attack": 20,
+    "armor": 0,
+    "price": 50,
+    "position": 2,
+    "type": "A2",
+    "is_can_strengthen": 0,
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "is_can_update": 1,
+    "belong_monster_id": "1003,",
+    "is_can_mixture": 0,
+    "need_level": 3,
+    "need_li_liang": 2,
+    "need_min_jie": 2,
+    "need_zhi_hui": 2,
+    "need_qiang_zhuang": 2,
+    "is_special": 1,
+    "mixture_type": "A7"
   }
 ]

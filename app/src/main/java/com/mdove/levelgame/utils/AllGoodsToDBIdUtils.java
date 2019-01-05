@@ -49,6 +49,10 @@ public class AllGoodsToDBIdUtils {
                 ob = DatabaseManager.getInstance().getAccessoriesDao().queryBuilder().where(AccessoriesDao.Properties.Type.eq(type)).unique();
                 break;
             }
+            case DB_TYPE_IS_MATERIALS: {
+                ob = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(type)).unique();
+                break;
+            }
         }
         return ob;
     }

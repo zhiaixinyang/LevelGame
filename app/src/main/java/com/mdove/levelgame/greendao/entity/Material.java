@@ -1,6 +1,8 @@
 package com.mdove.levelgame.greendao.entity;
 
+import com.mdove.levelgame.model.BaseAttrsModel;
 import com.mdove.levelgame.model.BaseBlacksmithModel;
+import com.mdove.levelgame.model.IAttrsModel;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
@@ -12,7 +14,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * 材料 type：E
  */
 @Entity
-public class Material extends BaseBlacksmithModel{
+public class Material extends BaseBlacksmithModel implements IAttrsModel {
     @Id(autoincrement = true)
     public Long id;
 
@@ -89,5 +91,11 @@ public class Material extends BaseBlacksmithModel{
         myType = type;
 
         mixtureFormulas = mixtureFormula;
+    }
+
+    @Override
+    public BaseAttrsModel getAttrsModel() {
+        return new BaseAttrsModel(name, tips);
+
     }
 }

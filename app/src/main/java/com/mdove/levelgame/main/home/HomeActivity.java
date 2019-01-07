@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.mdove.levelgame.BuildConfig;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
+import com.mdove.levelgame.base.recyclerview.ViewPagerLayoutManager;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.databinding.ActivityHomeBinding;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
@@ -78,7 +79,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         presenter.subscribe(this);
 
         adapter = new HomeAdapter(presenter);
-        binding.rlv.setLayoutManager(new LinearLayoutManager(this));
+        binding.rlv.setLayoutManager(new ViewPagerLayoutManager(this, LinearLayoutManager.VERTICAL));
         binding.rlv.setAdapter(adapter);
 
         presenter.initBigMonster();
@@ -124,7 +125,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         });
     }
 
-    private void resetPlace(CityReps cityReps){
+    private void resetPlace(CityReps cityReps) {
         binding.toolbar.setTitle(cityReps.getPlaceTitle());
         presenter.initMenu(cityReps);
     }
@@ -160,7 +161,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     @Override
     protected void onResume() {
         super.onResume();
-        resetPlace(JsonUtil.decode(AppConfig.getCurPlaceJson(),CityReps.class));
+        resetPlace(JsonUtil.decode(AppConfig.getCurPlaceJson(), CityReps.class));
         mHomeUIViewModel.initUI();
         presenter.initBigMonsterInvade();
         presenter.initBigMonster();

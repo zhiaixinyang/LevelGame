@@ -140,8 +140,8 @@ dependencies {
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
     implementation 'org.greenrobot:greendao:3.2.0'
-    implementation 'com.tencent.bugly:crashreport:latest.release'
-    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+//    implementation 'com.tencent.bugly:crashreport:latest.release'
+//    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
     kapt 'com.android.databinding:compiler:3.0.1'
     implementation 'com.airbnb.android:lottie:2.0.0'
 }

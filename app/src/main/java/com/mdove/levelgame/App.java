@@ -25,7 +25,6 @@ import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
 import com.mdove.levelgame.net.ApiServer;
 import com.mdove.levelgame.net.RetrofitUtil;
 import com.mdove.levelgame.net.UrlConstants;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
 
@@ -50,8 +49,8 @@ public class App extends DaggerApplication {
                 PackagesDao.class, WeaponsDao.class, AllGoodsDao.class, BigMonstersDao.class, MaterialDao.class,
                 AdventureDao.class, MainMenuDao.class, SkillDao.class, AccessoriesDao.class);
 
-        CrashReport.setIsDevelopmentDevice(mAppContext, true);
-        CrashReport.initCrashReport(getApplicationContext(), "b2c7f14477", true);
+        //CrashReport.setIsDevelopmentDevice(mAppContext, true);
+        //CrashReport.initCrashReport(getApplicationContext(), "b2c7f14477", true);
 
 //        HeroManager.getInstance().getHeroAttributes().days = 9;
 //        HeroManager.getInstance().save();

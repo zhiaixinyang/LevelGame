@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
+import com.mdove.levelgame.databinding.ItemCityBtnBinding;
 import com.mdove.levelgame.databinding.ItemMainMenuBinding;
 import com.mdove.levelgame.main.home.model.MainMenuHandler;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
@@ -24,7 +25,7 @@ public class HomeAdapter extends BaseListAdapter<MainMenuModelVM> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder((ItemMainMenuBinding) InflateUtils.bindingInflate(parent, R.layout.item_main_menu));
+        return new ViewHolder( InflateUtils.bindingInflate(parent, R.layout.item_city_btn));
     }
 
     @Override
@@ -33,9 +34,9 @@ public class HomeAdapter extends BaseListAdapter<MainMenuModelVM> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemMainMenuBinding binding;
+        private ItemCityBtnBinding binding;
 
-        public ViewHolder(ItemMainMenuBinding binding) {
+        public ViewHolder(ItemCityBtnBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

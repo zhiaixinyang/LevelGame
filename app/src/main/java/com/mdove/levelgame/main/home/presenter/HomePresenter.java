@@ -1,5 +1,6 @@
 package com.mdove.levelgame.main.home.presenter;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 
 import com.mdove.levelgame.App;
@@ -98,6 +99,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
         this.view = view;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void initMenu(CityReps cityReps) {
         if (cityReps.isMonsterPlace()) {
@@ -121,11 +123,20 @@ public class HomePresenter implements HomeContract.IHomePresenter {
             if (integers != null) {
                 mainMenus = new ArrayList<>();
                 MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
+                List<MainMenu> tempMainMenu = new ArrayList<>();
+                StringBuilder npcGudie = new StringBuilder();
                 for (Integer id : integers) {
                     MainMenu mainMenu = mainMenuDao.queryBuilder().where(MainMenuDao.Properties.Id.eq(id)).unique();
                     if (mainMenu != null) {
-                        mainMenus.add(new MainMenuModelVM(mainMenu));
+                        tempMainMenu.add(mainMenu);
+                        npcGudie.append(mainMenu.name).append(" -> ");
                     }
+                }
+                if (npcGudie.toString().endsWith(" -> ")) {
+                    npcGudie = new StringBuilder(npcGudie.substring(0, npcGudie.length() - 4));
+                }
+                for (MainMenu mainMenu : tempMainMenu) {
+                    mainMenus.add(new MainMenuModelVM(mainMenu, npcGudie.toString()));
                 }
             }
             return mainMenus;

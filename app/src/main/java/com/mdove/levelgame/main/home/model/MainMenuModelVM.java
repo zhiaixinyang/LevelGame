@@ -13,12 +13,13 @@ public class MainMenuModelVM {
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<Long> clickId = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
+    public ObservableField<String> npcGuide = new ObservableField<>();
     public ObservableField<String> tips = new ObservableField<>();
     public ObservableField<String> btnText = new ObservableField<>();
     public ObservableField<Integer> src = new ObservableField<>();
     public ObservableField<Integer> topSrc = new ObservableField<>();
 
-    public MainMenuModelVM(MainMenu mainMenu) {
+    public MainMenuModelVM(MainMenu mainMenu, String npcGudie) {
         id.set(mainMenu.id);
         clickId.set(mainMenu.clickId);
         name.set(mainMenu.name);
@@ -26,6 +27,7 @@ public class MainMenuModelVM {
         btnText.set(mainMenu.btnText);
         src.set(SrcIconMap.getInstance().getSrc(mainMenu.getType()));
         topSrc.set(getItemTopSrc(mainMenu.getType()));
+        this.npcGuide.set(npcGudie);
     }
 
     public int getItemTopSrc(String type) {

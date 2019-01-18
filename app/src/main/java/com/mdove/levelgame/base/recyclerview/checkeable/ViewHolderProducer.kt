@@ -1,4 +1,4 @@
-package com.ss.android.uilib.recyclerview
+package com.mdove.levelgame.base.recyclerview.checkeable
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

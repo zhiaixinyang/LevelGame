@@ -1,4 +1,4 @@
-package com.mdove.levelgame.main.fb
+package com.mdove.levelgame.main.home.city
 
 import android.content.Context
 import android.graphics.Color
@@ -20,7 +20,7 @@ class CityDialog(mContext: Context, theme: Int = android.R.style.Theme_Black_NoT
 
         fbContainerView = CityContainerView(mContext)
 
-        setContentView(fbContainerView?.containerView)
+        setContentView(fbContainerView.outerDrag)
 
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         //一定要在setContentView之后调用，否则无效

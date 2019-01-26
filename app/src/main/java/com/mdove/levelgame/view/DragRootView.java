@@ -40,6 +40,13 @@ public class DragRootView extends RelativeLayout {
     private OnTouchListener mOnInterceptTouchListener;
     private boolean isSlidingOut;
 
+    public DragRootView(Context context) {
+        super(context);
+        mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+        mPaint = new Paint();
+        mPaint.setColor(getResources().getColor(mStatusBarColor));
+    }
+
     public DragRootView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();

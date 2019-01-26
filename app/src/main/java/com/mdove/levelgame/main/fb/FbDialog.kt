@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.WindowManager
 import com.mdove.levelgame.R
+import com.mdove.levelgame.main.home.city.CityContainerView
 import com.mdove.levelgame.view.base.MDoveDialog
 
 /**
@@ -21,7 +22,7 @@ class FbDialog(context: Context, theme: Int = android.R.style.Theme_Black_NoTitl
 
         fbContainerView = CityContainerView(context)
 
-        setContentView(fbContainerView?.containerView)
+        setContentView(fbContainerView.outerDrag)
 
         //设置window背景，默认的背景会有Padding值，不能全屏。当然不一定要是透明，你可以设置其他背景，替换默认的背景即可。
         // [Bugfix] TTINTHELO-1251

@@ -1,4 +1,4 @@
-package com.mdove.levelgame.main.fb.ui
+package com.mdove.levelgame.main.home.city.ui
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
@@ -7,16 +7,14 @@ import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.kotlin.setDebounceOnClickListener
-import com.mdove.levelgame.main.fb.adapter.CityAdapter
 import com.mdove.levelgame.main.home.city.PageControl
+import com.mdove.levelgame.main.home.city.adapter.CityAdapter
 import com.mdove.levelgame.main.home.city.model.CityReps
 import com.mdove.levelgame.main.home.city.model.CityVM
 import com.mdove.levelgame.main.home.city.presenter.CityPresenter
 import com.mdove.levelgame.main.home.city.presenter.contract.CityContract
-import com.mdove.levelgame.main.home.city.ui.ICityView
 import com.mdove.levelgame.view.MyDialog
 
 /**
@@ -69,8 +67,8 @@ class CityEnterView @JvmOverloads constructor(context: Context, attrs: Attribute
     override fun showLoadingDialog(msg: String?) {
     }
 
-    override fun enterPlaceIsCur(placeTitle:String) {
-        MyDialog.showMyDialog(context,getString(R.string.string_enter_place_error_title),
-                String.format(getString(R.string.string_enter_place_error_content),placeTitle),true)
+    override fun enterPlaceIsCur(placeTitle: String) {
+        MyDialog.showMyDialog(context, getString(R.string.string_enter_place_error_title),
+                String.format(getString(R.string.string_enter_place_error_content), placeTitle), true)
     }
 }

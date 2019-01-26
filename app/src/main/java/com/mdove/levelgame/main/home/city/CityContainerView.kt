@@ -1,30 +1,52 @@
-package com.mdove.levelgame.main.fb
+package com.mdove.levelgame.main.home.city
 
+import android.app.ActionBar
 import android.content.Context
 import android.support.transition.*
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import com.mdove.levelgame.R
-import com.mdove.levelgame.main.home.city.PageControl
-import com.mdove.levelgame.main.home.city.ui.CityEnterLoadingView
-import com.mdove.levelgame.main.home.city.ui.ICityView
-import com.mdove.levelgame.main.fb.ui.CityEnterView
 import com.mdove.levelgame.main.home.city.model.CityReps
+import com.mdove.levelgame.main.home.city.ui.CityEnterLoadingView
+import com.mdove.levelgame.main.home.city.ui.CityEnterView
+import com.mdove.levelgame.main.home.city.ui.ICityView
+import com.mdove.levelgame.view.DragRootView
 
 /**
  * Created by MDove on 2018/12/26.
  */
 class CityContainerView(context: Context) {
-    val containerView: ViewGroup = FrameLayout(context).apply {
+    private val containerView: ViewGroup = FrameLayout(context).apply {
+        id = R.id.root_drag_view
+        layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
         setBackgroundResource(R.drawable.buzz_round_corner_dialog_bg)
     }
 
+    val outerDrag: DragRootView = DragRootView(context).apply {
+        layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT)
+        addView(containerView)
+        setOnDragListener(object : DragRootView.OnDragListener {
+            override fun canDragNow(dragView: View?): Boolean {
+                return canDrag
+            }
+
+            override fun onExit(exitView: View?) {
+                dismiss.invoke()
+            }
+
+        })
+    }
+
+    private lateinit var dismiss: () -> Unit
     private lateinit var loadingDismiss: (cityReps: CityReps) -> Unit
     private lateinit var scene1: Scene
     private lateinit var scene2: Scene
     private lateinit var currentScene: Scene
+    private var canDrag = true
     private lateinit var transition1To2: TransitionSet
     private lateinit var transition2To1: TransitionSet
     private val cityEnterView: CityEnterView = CityEnterView(context)
@@ -69,6 +91,7 @@ class CityContainerView(context: Context) {
         (cityEnterLoadingView as ICityView).registerPageControl(pageControl)
 
         pageControl.registerEnterCityLoading {
+            canDrag = false
             TransitionManager.endTransitions(containerView)
             TransitionManager.go(scene2, transition1To2)
             currentScene = scene2
@@ -80,6 +103,7 @@ class CityContainerView(context: Context) {
     }
 
     fun setOnDismissListener(action: () -> Unit) {
+        dismiss = action
         cityEnterView.setDismissListener(action)
     }
 }

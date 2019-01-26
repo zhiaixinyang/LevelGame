@@ -14,17 +14,16 @@ import com.mdove.levelgame.greendao.entity.BigMonsters;
 import com.mdove.levelgame.greendao.entity.City;
 import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
-import com.mdove.levelgame.main.fb.CityDialog;
 import com.mdove.levelgame.main.hero.HeroAttributesActivity;
 import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.home.SettingActivity;
+import com.mdove.levelgame.main.home.city.CityDialog;
 import com.mdove.levelgame.main.home.city.model.CityReps;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.MainMenuModelVM;
 import com.mdove.levelgame.main.monsters.MonstersActivity;
-import com.mdove.levelgame.main.monsters.MonstersPlaceActivity;
 import com.mdove.levelgame.main.shop.BlacksmithActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
 import com.mdove.levelgame.main.skill.HomeSkillActivity;
@@ -39,10 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 /**
  * @author MDove on 2018/10/31

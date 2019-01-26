@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/main_btn_normal_margin"
         android:gravity="center"
-        android:textSize="@dimen/_16sp"
-        android:textColor="@color/black"
         android:text="@string/string_city_enter_loading"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sp"
         app:layout_constraintBottom_toTopOf="@+id/pb_loading" />
 
     <com.mdove.levelgame.view.HorizontalSmoothProgressBar
@@ -26,4 +26,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</merge>
+</android.support.constraint.ConstraintLayout>

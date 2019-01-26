@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.TextView
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.kotlin.setDebounceOnClickListener
-import com.mdove.levelgame.main.fb.adapter.CityAdapter
 import com.mdove.levelgame.main.fb.adapter.FbPlaceAdapter
 import com.mdove.levelgame.main.fb.presenter.FbPlacePresenter
 import com.mdove.levelgame.main.fb.presenter.contract.FbPlaceContract

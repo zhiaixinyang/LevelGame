@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.kotlin.ActivityLauncher;
 import com.mdove.levelgame.base.kotlin.JobHandler;
+import com.mdove.levelgame.base.sliding.BuzzAbsSlideCloseActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.home.HomeActivity;
 import com.mdove.levelgame.view.MyDialog;

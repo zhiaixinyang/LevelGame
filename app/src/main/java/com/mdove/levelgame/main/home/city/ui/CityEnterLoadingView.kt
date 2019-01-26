@@ -6,7 +6,6 @@ import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.util.AttributeSet
 import android.view.View
-import com.google.gson.Gson
 import com.mdove.levelgame.R
 import com.mdove.levelgame.config.AppConfig
 import com.mdove.levelgame.main.home.city.PageControl

@@ -1,4 +1,4 @@
-package com.mdove.levelgame.main.fb.adapter
+package com.mdove.levelgame.main.home.city.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

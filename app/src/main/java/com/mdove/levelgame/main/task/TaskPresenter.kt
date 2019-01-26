@@ -1,5 +1,6 @@
 package com.mdove.levelgame.main.task
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import com.mdove.levelgame.R
@@ -25,6 +26,7 @@ class TaskPresenter : TaskContract.ITaskPresenter {
                 .get(TaskViewModel::class.java)
     }
 
+    @SuppressLint("CheckResult")
     override fun onItemBtnOnClick(modelVM: TaskModelVM) {
         var position: Int = -1
         TaskManager.instance.startTask(modelVM.id.get())
@@ -60,7 +62,7 @@ class TaskPresenter : TaskContract.ITaskPresenter {
     }
 
     override fun initData() {
-        taskViewModel?.let {
+        taskViewModel.let {
             it.initData()
         }
     }

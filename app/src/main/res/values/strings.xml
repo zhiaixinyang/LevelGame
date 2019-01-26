@@ -83,6 +83,10 @@
     <string name="hero_attributes_zhihui_and_exp">当前智慧：%1$d 经验:%2$d / %3$d</string>
     <string name="hero_attributes_qiangzhuang_and_exp">当前强壮：%1$d 经验:%2$d / %3$d</string>
 
+    <plurals name="string_test">
+        <item quantity="one">%s Like</item>
+        <item quantity="other">%s Likes</item>
+    </plurals>
 
     <string name="hero_attributes_msg_attack"><![CDATA[当前攻击：%1$d <font color="#64b5f6">成长：%2$d</font>]]></string>
     <string name="hero_attributes_msg_armor"><![CDATA[当前护甲：%1$d <font color="#64b5f6">成长：%2$d</font>]]></string>

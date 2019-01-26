@@ -45,11 +45,11 @@ class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
 
     override fun onResume() {
         super.onResume()
-        viewModel?.initData()
+        viewModel.initData()
     }
 
     override fun loadData() {
-        viewModel?.initData()
+        viewModel.initData()
     }
 
     override fun initData(intent: Intent?) {
@@ -57,7 +57,7 @@ class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
         viewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
 
         val tasksObserver = Observer<MutableList<TaskModelVM>> { data ->
-            adapter?.let {
+            adapter.let {
                 it.data = data
             }
         }
@@ -75,7 +75,7 @@ class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter?.let {
+        presenter.let {
             presenter.unSubscribe()
         }
     }

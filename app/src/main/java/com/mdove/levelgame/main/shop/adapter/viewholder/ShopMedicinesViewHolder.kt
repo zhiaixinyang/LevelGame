@@ -5,7 +5,6 @@ import com.mdove.levelgame.databinding.ItemMedicinesBinding
 import com.mdove.levelgame.main.shop.model.handler.MedicinesItemHandler
 import com.mdove.levelgame.main.shop.model.mv.MedicinesModelVM
 import com.mdove.levelgame.main.shop.presenter.ShopMedicinesPresenter
-import com.ss.android.uilib.recyclerview.CheckableViewHolder
 
 /**
  * Created by MDove on 2018/12/23.

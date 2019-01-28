@@ -68,7 +68,7 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
 
     @Override
     public void initData() {
-        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
+//        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
         Observable.create((ObservableOnSubscribe<Integer>) e -> {
             initEquipData();
             e.onNext(1);

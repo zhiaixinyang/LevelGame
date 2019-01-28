@@ -31,7 +31,7 @@ class CityContainerView(context: Context) {
         addView(containerView)
         setOnDragListener(object : DragRootView.OnDragListener {
             override fun canDragNow(dragView: View?): Boolean {
-                return canDrag
+                return canDrag && !cityEnterView.canScrollDown()
             }
 
             override fun onExit(exitView: View?) {

@@ -1,17 +1,19 @@
 package com.mdove.levelgame.main.hero.fragment;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.mdove.levelgame.base.BaseListFragment;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.adapter.HeroPackageAdapter;
+import com.mdove.levelgame.main.hero.model.BasePackageModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroPackageContract;
 import com.mdove.levelgame.main.hero.presenter.HeroPackagePresenter;
+import com.mdove.levelgame.main.hero.viewmodel.HeroPackageViewModel;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ import java.util.List;
  */
 public class HeroPackageFragment extends BaseListFragment implements HeroPackageContract.IHeroPackageView {
     private HeroPackagePresenter presenter;
-
+    private HeroPackageViewModel mViewModel;
 
     public static HeroPackageFragment newInstance() {
         Bundle args = new Bundle();
@@ -33,6 +35,10 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
     public void initData() {
         presenter = new HeroPackagePresenter();
         presenter.subscribe(this);
+        mViewModel = ViewModelProviders.of(getActivity()).get(HeroPackageViewModel.class);
+        mViewModel.getPackageAddId().observe(this, pkiId -> {
+            presenter.notifyPackageAddUI(pkiId);
+        });
     }
 
     @Override
@@ -41,7 +47,7 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
     }
 
     @Override
-    public BaseListAdapter<HeroPackageModelVM> createAdapter() {
+    public BaseListAdapter<BasePackageModelVM> createAdapter() {
         return new HeroPackageAdapter(presenter);
     }
 
@@ -51,7 +57,8 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (((HeroPackageModelVM) getAdapter().getData().get(position)).isMaterials.get()) {
+                BasePackageModelVM vm = (BasePackageModelVM) getAdapter().getData().get(position);
+                if (vm instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm).isMaterials.get()) {
                     return 1;
                 } else {
                     return 4;
@@ -62,7 +69,7 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
     }
 
     @Override
-    public void showPackage(List<HeroPackageModelVM> data) {
+    public void showPackage(List<BasePackageModelVM> data) {
         getAdapter().setData(data);
     }
 
@@ -90,6 +97,8 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
                 return;
             }
             activity.notifyEquipUpdateUI(position);
+        } else {
+            mViewModel.getEquipPkPosition().postValue(position);
         }
     }
 

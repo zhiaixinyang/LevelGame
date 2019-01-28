@@ -1,5 +1,6 @@
 package com.mdove.levelgame.main.hero.fragment;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 
 import com.mdove.levelgame.base.BaseListFragment;
@@ -9,6 +10,7 @@ import com.mdove.levelgame.main.hero.adapter.HeroEquipAdapter;
 import com.mdove.levelgame.main.hero.model.HeroEquipModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroEquipContract;
 import com.mdove.levelgame.main.hero.presenter.HeroEquipPresenter;
+import com.mdove.levelgame.main.hero.viewmodel.HeroPackageViewModel;
 import com.mdove.levelgame.view.CustomPkDialog;
 
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 public class HeroEquipFragment extends BaseListFragment implements HeroEquipContract.IHeroEquipView {
     private HeroEquipPresenter presenter;
+    private HeroPackageViewModel mViewModel;
 
     public static HeroEquipFragment newInstance() {
 
@@ -32,6 +35,10 @@ public class HeroEquipFragment extends BaseListFragment implements HeroEquipCont
     public void initData() {
         presenter = new HeroEquipPresenter();
         presenter.subscribe(this);
+        mViewModel = ViewModelProviders.of(getActivity()).get(HeroPackageViewModel.class);
+        mViewModel.getEquipPkPosition().observe(this, position -> {
+            presenter.notifyEquipUpdateUI(position);
+        });
     }
 
     @Override
@@ -75,6 +82,8 @@ public class HeroEquipFragment extends BaseListFragment implements HeroEquipCont
                 return;
             }
             activity.notifyPackageAddUI(pkId);
+        } else {
+            mViewModel.getPackageAddId().setValue(pkId);
         }
     }
 }

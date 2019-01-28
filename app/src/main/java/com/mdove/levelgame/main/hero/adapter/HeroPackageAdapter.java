@@ -8,9 +8,12 @@ import android.view.ViewGroup;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.databinding.ItemHeroPackageBinding;
+import com.mdove.levelgame.databinding.ItemHeroPackageEmptyBinding;
 import com.mdove.levelgame.databinding.ItemHeroPackageMaterialsBinding;
 import com.mdove.levelgame.databinding.ItemHeroPackageTitleBinding;
+import com.mdove.levelgame.main.hero.model.BasePackageModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
+import com.mdove.levelgame.main.hero.model.HeroPkEmptyModelVM;
 import com.mdove.levelgame.main.hero.model.handler.HeroPackageHandler;
 import com.mdove.levelgame.main.hero.presenter.HeroPackagePresenter;
 import com.mdove.levelgame.utils.InflateUtils;
@@ -20,7 +23,7 @@ import java.util.List;
 /**
  * @author MDove on 2018/10/23
  */
-public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
+public class HeroPackageAdapter extends BaseListAdapter<BasePackageModelVM> {
     private HeroPackagePresenter presenter;
 
     public HeroPackageAdapter(HeroPackagePresenter presenter) {
@@ -32,11 +35,14 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
         if (getData() == null) {
             return super.getItemViewType(position);
         }
-        if (getData().get(position).pkId.get() == -3) {
+        BasePackageModelVM vm = getData().get(position);
+        if (vm instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm).pkId.get() == -3) {
             return 1;
-        }else if (getData().get(position).isMaterials.get()){
+        } else if (vm instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm).isMaterials.get()) {
             return 3;
-        }else {
+        } else if (vm instanceof HeroPkEmptyModelVM) {
+            return 4;
+        } else {
             return 2;
         }
     }
@@ -47,8 +53,10 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
             return new TitleViewHolder((ItemHeroPackageTitleBinding) InflateUtils.bindingInflate(parent, R.layout.item_hero_package_title));
         } else if (viewType == 2) {
             return new ViewHolder((ItemHeroPackageBinding) InflateUtils.bindingInflate(parent, R.layout.item_hero_package));
-        }else if (viewType==3){
+        } else if (viewType == 3) {
             return new MaterialViewHolder(InflateUtils.bindingInflate(parent, R.layout.item_hero_package_materials));
+        } else if (viewType == 4) {
+            return new EmptyViewHolder(InflateUtils.bindingInflate(parent, R.layout.item_hero_package_empty));
         }
         return null;
     }
@@ -56,27 +64,10 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
-            ((ViewHolder) holder).bind(getData().get(position));
-        }else if (holder instanceof MaterialViewHolder) {
-            ((MaterialViewHolder) holder).bind(getData().get(position));
-        }
-    }
-
-    private void deleteByPosition(int position) {
-        getData().remove(position);
-        notifyItemRemoved(position);
-    }
-
-    public void deleteByType(String type) {
-        int position = -1;
-        for (HeroPackageModelVM vm : getData()) {
-            if (TextUtils.equals(type, vm.type.get())) {
-                position = getData().indexOf(vm);
-                break;
-            }
-        }
-        if (position != -1) {
-            deleteByPosition(position);
+            ((ViewHolder) holder).bind((HeroPackageModelVM) getData().get(position));
+        } else if (holder instanceof MaterialViewHolder) {
+            ((MaterialViewHolder) holder).bind((HeroPackageModelVM) getData().get(position));
+        } else if (holder instanceof EmptyViewHolder) {
         }
     }
 
@@ -105,6 +96,13 @@ public class HeroPackageAdapter extends BaseListAdapter<HeroPackageModelVM> {
             binding.setHandler(handler);
         }
     }
+
+    public class EmptyViewHolder extends RecyclerView.ViewHolder {
+        public EmptyViewHolder(ItemHeroPackageEmptyBinding binding) {
+            super(binding.getRoot());
+        }
+    }
+
     public class MaterialViewHolder extends RecyclerView.ViewHolder {
         private ItemHeroPackageMaterialsBinding binding;
 

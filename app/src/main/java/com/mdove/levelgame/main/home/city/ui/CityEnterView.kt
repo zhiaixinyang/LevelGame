@@ -45,6 +45,10 @@ class CityEnterView @JvmOverloads constructor(context: Context, attrs: Attribute
         }
     }
 
+    fun canScrollDown(): Boolean {
+        return rlv.canScrollVertically(-1)
+    }
+
     override fun registerPageControl(pageControl: PageControl) {
         this.pageControl = pageControl
     }

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vmOne"
+            type="com.mdove.levelgame.main.home.model.vm.MainMenuModelVM" />
+
+        <variable
+            name="vmTwo"
+            type="com.mdove.levelgame.main.home.model.vm.MainMenuModelVM" />
+
+        <variable
+            name="vmThree"
+            type="com.mdove.levelgame.main.home.model.vm.MainMenuModelVM" />
+
+        <variable
+            name="handler"
+            type="com.mdove.levelgame.main.home.model.MainMenuHandler" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+        android:background="@drawable/bg_white_round_8"
+        android:orientation="horizontal">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_blue_round_8"
+            android:onClick="@{()->handler.onClickById(vmOne)}">
+
+            <TextView
+                android:id="@+id/tv_name_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:htmlColorText="@{vmOne.name}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="按钮名称" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/gray_light"
+                android:textSize="12sp"
+                app:htmlColorText="@{vmOne.tips}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_one"
+                tools:text="按钮介绍按钮介绍按钮介绍按钮介" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_yellow_round_8"
+            android:onClick="@{()->handler.onClickById(vmTwo)}">
+
+            <TextView
+                android:id="@+id/tv_name_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:htmlColorText="@{vmTwo.name}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="按钮名称" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/gray_light"
+                android:textSize="12sp"
+                app:htmlColorText="@{vmTwo.tips}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_two"
+                tools:text="按钮介绍按钮介绍按钮介绍按钮介" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_purple_round_8"
+            android:onClick="@{()->handler.onClickById(vmThree)}">
+
+            <TextView
+                android:id="@+id/tv_name_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:htmlColorText="@{vmThree.name}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="按钮名称" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/gray_light"
+                android:textSize="12sp"
+                app:htmlColorText="@{vmThree.tips}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_three"
+                tools:text="按钮介绍按钮介绍按钮介绍按钮介" />
+        </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</layout>

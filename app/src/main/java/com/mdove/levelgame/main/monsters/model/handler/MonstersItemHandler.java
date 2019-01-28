@@ -1,8 +1,6 @@
 package com.mdove.levelgame.main.monsters.model.handler;
 
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
-import com.mdove.levelgame.main.monsters.model.vm.MonstersPlaceModelVM;
-import com.mdove.levelgame.main.monsters.presenter.MonstersPlacePresenter;
 import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter;
 
 /**

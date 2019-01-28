@@ -1,4 +1,4 @@
-package com.mdove.levelgame.main.home.model;
+package com.mdove.levelgame.main.home.model.vm;
 
 import android.databinding.ObservableField;
 
@@ -9,7 +9,7 @@ import com.mdove.levelgame.greendao.utils.SrcIconMap;
 /**
  * @author MDove on 2018/10/31
  */
-public class MainMenuModelVM {
+public class MainMenuModelVM extends BaseMainMenuVM{
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<Long> clickId = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();

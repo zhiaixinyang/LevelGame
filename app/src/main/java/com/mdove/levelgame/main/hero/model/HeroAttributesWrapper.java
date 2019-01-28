@@ -13,9 +13,7 @@ import com.mdove.levelgame.main.monsters.utils.DropGoodsManager;
 import com.mdove.levelgame.main.task.TaskManager;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Random;
 
 /**
@@ -147,14 +145,6 @@ public class HeroAttributesWrapper {
         HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_ZHIHUI, zhiHuiRandmo);
         HeroAttributesManager.getInstance().heroAttributesLevel(HeroAttributesManager.ATTRIBUTE_TYPE_QIANGZHUANG, qiangZhuangRandmo);
     }
-
-    PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(1, new Comparator<Integer>() {
-        @Override
-        public int compare(Integer o1, Integer o2) {
-            return o2 - o1;
-        }
-    });
-
 
     public int realCurLife() {
         return curLife;

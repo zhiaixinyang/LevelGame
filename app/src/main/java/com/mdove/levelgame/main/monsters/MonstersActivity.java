@@ -1,7 +1,6 @@
 package com.mdove.levelgame.main.monsters;
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.view.View;
 import android.widget.TextView;
 
 import com.mdove.levelgame.R;
@@ -19,12 +17,10 @@ import com.mdove.levelgame.main.hero.fragment.HeroPackageDialogFragment;
 import com.mdove.levelgame.main.monsters.adapter.MonstersAdapter;
 import com.mdove.levelgame.main.monsters.manager.AdventureManager;
 import com.mdove.levelgame.main.monsters.model.MonstersViewModel;
-import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
+import com.mdove.levelgame.main.monsters.model.vm.BaseMonsterModelVM;
 import com.mdove.levelgame.main.monsters.presenter.MonstersConstract;
 import com.mdove.levelgame.main.monsters.presenter.MonstersPresenter;
-import com.mdove.levelgame.view.CustomMonsterDialog;
 import com.mdove.levelgame.view.HorizontalSmoothProgressBar;
-import com.mdove.levelgame.view.base.OnLongClickEquipListener;
 
 import java.util.List;
 
@@ -36,8 +32,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
     private static final String EXTRA_MONSTERS_PLACE_ID = "extra_monsters_place_id";
     private static final String EXTRA_MONSTERS_PLACE_NAME = "extra_monsters_place_name";
     private RecyclerView rlv;
-    private TextView tvPower, tvMoney, tvLife, btnPackage;
-    private TextView btnRest;
+    private TextView tvPower, tvMoney, tvLife;
     private HorizontalSmoothProgressBar horizontalSmoothProgressBar;
     private MonstersPresenter presenter;
     private MonstersAdapter adapter;
@@ -76,12 +71,8 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         rlv = findViewById(R.id.rlv);
         tvPower = findViewById(R.id.tv_power);
         tvMoney = findViewById(R.id.tv_money);
-        btnPackage = findViewById(R.id.btn_package);
-        btnPackage.setOnClickListener(v -> new HeroPackageDialogFragment().show(getSupportFragmentManager(), ""));
         tvLife = findViewById(R.id.tv_life);
-        btnRest = findViewById(R.id.btn_rest);
         horizontalSmoothProgressBar = findViewById(R.id.pb_hero);
-        btnRest.setOnClickListener(v -> presenter.heroRest());
         rlv.setLayoutManager(new LinearLayoutManager(this));
         rlv.setAdapter(adapter);
 
@@ -114,10 +105,14 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         adapter.notifyAttackUI(index);
     }
 
-
     @Override
     public void showPowerText(String content) {
         tvPower.setText(Html.fromHtml(content));
+    }
+
+    @Override
+    public void showMyPackage() {
+        new HeroPackageDialogFragment().show(getSupportFragmentManager(), "");
     }
 
     @Override
@@ -132,7 +127,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
     }
 
     @Override
-    public void showData(List<MonstersModelVM> data) {
+    public void showData(List<BaseMonsterModelVM> data) {
         adapter.setData(data);
     }
 }

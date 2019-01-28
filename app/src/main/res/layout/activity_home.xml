@@ -69,23 +69,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/iv_big_monster"
             tools:text="距离魔王进攻" />
 
-        <FrameLayout
-            android:id="@+id/layout_line"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1002:38"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/main_btn_normal_margin"
-            app:layout_constraintTop_toBottomOf="@+id/tv_invade"
-            app:layout_constraintRight_toRightOf="parent">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_bg_link" />
-        </FrameLayout>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rlv"
             android:layout_width="0dp"
@@ -97,7 +80,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_line" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_big_monster" />
         <FrameLayout
             android:id="@+id/bg_layout"
             android:layout_width="0dp"

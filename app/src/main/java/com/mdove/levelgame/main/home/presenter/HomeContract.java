@@ -4,7 +4,8 @@ import com.mdove.levelgame.base.BasePresenter;
 import com.mdove.levelgame.base.BaseView;
 import com.mdove.levelgame.main.home.city.model.CityReps;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
-import com.mdove.levelgame.main.home.model.MainMenuModelVM;
+import com.mdove.levelgame.main.home.model.vm.BaseMainMenuVM;
+import com.mdove.levelgame.main.home.model.vm.MainMenuModelVM;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public interface HomeContract {
     }
 
     interface IHomeView extends BaseView {
-        void showMenu(List<MainMenuModelVM> data);
+        void showMenu(List<BaseMainMenuVM> data);
 
         void showBigMonsters(BigMonstersModelVM vm);
 

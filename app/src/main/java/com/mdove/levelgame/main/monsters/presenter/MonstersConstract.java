@@ -4,6 +4,7 @@ import com.mdove.levelgame.base.BasePresenter;
 import com.mdove.levelgame.base.BaseView;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
 import com.mdove.levelgame.main.monsters.model.MonstersPlaceModel;
+import com.mdove.levelgame.main.monsters.model.vm.BaseMonsterModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 
 import java.util.List;
@@ -24,7 +25,10 @@ public interface MonstersConstract {
 
         void heroRest();
 
+        void onItemMyPackage();
+
         void onItemBtnClick(String type, Long id);
+
         void onItemLongBtnOnClick(Long id);
     }
 
@@ -33,10 +37,12 @@ public interface MonstersConstract {
 
         void showPowerText(String content);
 
+        void showMyPackage();
+
         void showLifeText(int progress, String content);
 
         void showMoneyText(String content);
 
-        void showData(List<MonstersModelVM> data);
+        void showData(List<BaseMonsterModelVM> data);
     }
 }

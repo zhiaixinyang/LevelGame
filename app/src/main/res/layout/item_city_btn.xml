@@ -1,103 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="vm"
-            type="com.mdove.levelgame.main.home.model.MainMenuModelVM" />
+            type="com.mdove.levelgame.main.home.model.vm.MainMenuModelVM" />
 
         <variable
             name="handler"
             type="com.mdove.levelgame.main.home.model.MainMenuHandler" />
-
     </data>
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="12dp">
+        android:layout_height="100dp"
+        android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
+        android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
+        android:background="@drawable/bg_white_round_8"
+        android:onClick="@{()->handler.onClickById(vm)}">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
-            android:elevation="12dp"
-            android:onClick="@{()->handler.onClickById(vm)}">
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:htmlColorText="@{vm.name}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="按钮名称" />
 
-            <TextView
-                android:id="@+id/tv_tips"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/item_monsters_place_btn_normal_margin"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-                android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:htmlColorText="@{vm.tips}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/btn_in"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍" />
+        <TextView
+            android:id="@+id/tv_tips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/gray_plus"
+            android:textSize="12sp"
+            app:htmlColorText="@{vm.tips}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/btn_in"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:text="按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍按钮介绍" />
 
-            <ImageView
-                android:id="@+id/btn_in"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
-                android:layout_marginRight="@dimen/item_monsters_place_btn_normal_margin"
-                android:layout_marginBottom="@dimen/item_monsters_place_btn_normal_margin"
-                android:src="@{vm.src}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/btn_in"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="12dp"
+            android:src="@{vm.src}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_tips"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@{vm.topSrc}"
-                    tools:src="@mipmap/ic_home_item_1" />
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:htmlColorText="@{vm.name}"
-                    tools:text="按钮名称" />
-            </FrameLayout>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="25dp"
-                android:gravity="center"
-                android:text="@{vm.npcGuide}"
-                android:textColor="@color/gray_plus"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                tools:text="铁匠-任务-出城" />
-
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
 </layout>

@@ -18,11 +18,14 @@ import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
 import com.mdove.levelgame.main.home.HomeActivity;
 import com.mdove.levelgame.main.home.MainActivity;
+import com.mdove.levelgame.main.home.model.vm.TopMainMenuModelVM;
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager;
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager;
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException;
 import com.mdove.levelgame.main.monsters.model.MonstersModel;
+import com.mdove.levelgame.main.monsters.model.vm.BaseMonsterModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM;
+import com.mdove.levelgame.main.monsters.model.vm.MenuMonsterModelVM;
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM;
 import com.mdove.levelgame.main.shop.BusinessmanActivity;
 import com.mdove.levelgame.utils.ToastHelper;
@@ -49,7 +52,7 @@ import io.reactivex.functions.Function;
 
 public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     private MonstersConstract.IMonstersView view;
-    private List<MonstersModelVM> realData;
+    private List<BaseMonsterModelVM> realData;
     private long monstersPlaceId;
 
     @Override
@@ -73,6 +76,7 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
         if (monsters == null || monsters.size() == 0) {
             return;
         }
+        realData.add(new MenuMonsterModelVM());
         for (Monsters monster : monsters) {
             if (monster.monsterPlaceId == monstersPlaceId && monster.isShow == 0) {
                 realData.add(new MonstersModelVM(monster));
@@ -134,6 +138,11 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
                     }
                 });
 
+    }
+
+    @Override
+    public void onItemMyPackage() {
+        view.showMyPackage();
     }
 
     @SuppressLint("CheckResult")

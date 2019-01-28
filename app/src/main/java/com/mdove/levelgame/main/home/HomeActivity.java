@@ -1,7 +1,6 @@
 package com.mdove.levelgame.main.home;
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -17,21 +16,20 @@ import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.google.gson.Gson;
 import com.mdove.levelgame.BuildConfig;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
-import com.mdove.levelgame.base.recyclerview.ViewPagerLayoutManager;
 import com.mdove.levelgame.config.AppConfig;
 import com.mdove.levelgame.databinding.ActivityHomeBinding;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.home.adapter.HomeAdapter;
 import com.mdove.levelgame.main.home.city.model.CityReps;
-import com.mdove.levelgame.main.home.model.CityViewModel;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
+import com.mdove.levelgame.main.home.model.CityViewModel;
 import com.mdove.levelgame.main.home.model.HomeActionHandler;
 import com.mdove.levelgame.main.home.model.HomeUIViewModel;
-import com.mdove.levelgame.main.home.model.MainMenuModelVM;
+import com.mdove.levelgame.main.home.model.vm.BaseMainMenuVM;
+import com.mdove.levelgame.main.home.model.vm.MainMenuModelVM;
 import com.mdove.levelgame.main.home.presenter.HomeContract;
 import com.mdove.levelgame.main.home.presenter.HomePresenter;
 import com.mdove.levelgame.utils.AppUtils;
@@ -79,7 +77,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
         presenter.subscribe(this);
 
         adapter = new HomeAdapter(presenter);
-        binding.rlv.setLayoutManager(new ViewPagerLayoutManager(this, LinearLayoutManager.VERTICAL));
+        binding.rlv.setLayoutManager(new LinearLayoutManager(this));
         binding.rlv.setAdapter(adapter);
 
         presenter.initBigMonster();
@@ -168,7 +166,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.IHomeView
     }
 
     @Override
-    public void showMenu(List<MainMenuModelVM> data) {
+    public void showMenu(List<BaseMainMenuVM> data) {
         adapter.setData(data);
     }
 

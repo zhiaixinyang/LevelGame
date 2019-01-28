@@ -17,7 +17,7 @@ import com.mdove.levelgame.R;
 
 /**
  * DetailRootView
- * Created by zhaoshe on 2017/2/6.
+ * Created by MDove on 2017/2/6.
  */
 public class DragRootView extends RelativeLayout {
 

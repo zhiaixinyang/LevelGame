@@ -1,8 +1,8 @@
 package com.mdove.levelgame.main.home.city
 
-import android.app.ActionBar
 import android.content.Context
 import android.support.transition.*
+import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +37,6 @@ class CityContainerView(context: Context) {
             override fun onExit(exitView: View?) {
                 dismiss.invoke()
             }
-
         })
     }
 

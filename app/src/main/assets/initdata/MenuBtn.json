@@ -5,6 +5,7 @@
     "tips": "出村搞事情，抢钱抢粮抢地盘！！",
     "btn_text": "出村",
     "type": "main1",
+    "position":1,
     "click_id": 1
   },
   {
@@ -13,6 +14,7 @@
     "tips": "走过路过不要错过，买点道具，武装一下自己？",
     "btn_text": "买",
     "type": "main2",
+    "position":2,
     "click_id": 2
   },
   {
@@ -21,6 +23,7 @@
     "tips": "想变强么？来合成强化吧，搏一搏单车变摩托。",
     "btn_text": "进入",
     "type": "main3",
+    "position":3,
     "click_id": 3
   },
   {
@@ -29,6 +32,7 @@
     "tips": "查看一下自己的详细属性。",
     "btn_text": "查看",
     "type": "main4",
+    "position":4,
     "click_id": 4
   },
   {
@@ -37,6 +41,7 @@
     "tips": "查看自己所拥有的道具，以及已装备的道具。",
     "btn_text": "查看",
     "type": "main5",
+    "position":5,
     "click_id": 5
   },
   {
@@ -45,6 +50,7 @@
     "tips": "少侠，我看你骨骼惊奇，我这有一套“从天而降的脚法”，不知有没有兴趣？",
     "btn_text": "进入",
     "type": "main6",
+    "position":6,
     "click_id": 6
   },
   {
@@ -53,6 +59,7 @@
     "tips": "少侠，进来帮我做几个任务可好？",
     "btn_text": "进入",
     "type": "main7",
+    "position":7,
     "click_id": 7
   }
 ]

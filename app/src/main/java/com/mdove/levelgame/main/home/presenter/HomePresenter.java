@@ -22,7 +22,9 @@ import com.mdove.levelgame.main.home.SettingActivity;
 import com.mdove.levelgame.main.home.city.CityDialog;
 import com.mdove.levelgame.main.home.city.model.CityReps;
 import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
-import com.mdove.levelgame.main.home.model.MainMenuModelVM;
+import com.mdove.levelgame.main.home.model.vm.BaseMainMenuVM;
+import com.mdove.levelgame.main.home.model.vm.MainMenuModelVM;
+import com.mdove.levelgame.main.home.model.vm.TopMainMenuModelVM;
 import com.mdove.levelgame.main.monsters.MonstersActivity;
 import com.mdove.levelgame.main.shop.BlacksmithActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
@@ -115,14 +117,20 @@ public class HomePresenter implements HomeContract.IHomePresenter {
             }
             return btnIds;
         }).map(integers -> {
-            List<MainMenuModelVM> mainMenus = null;
+            List<BaseMainMenuVM> mainMenus = null;
             if (integers != null) {
                 mainMenus = new ArrayList<>();
                 MainMenuDao mainMenuDao = DatabaseManager.getInstance().getMainMenuDao();
                 List<MainMenu> tempMainMenu = new ArrayList<>();
+                List<MainMenu> tempTopMainMenu = new ArrayList<>();
                 StringBuilder npcGudie = new StringBuilder();
-                for (Integer id : integers) {
+                for (int i = 0; i < integers.size(); i++) {
+                    int id = integers.get(i);
                     MainMenu mainMenu = mainMenuDao.queryBuilder().where(MainMenuDao.Properties.Id.eq(id)).unique();
+                    if (i <= 2 && mainMenu != null) {
+                        tempTopMainMenu.add(mainMenu);
+                        continue;
+                    }
                     if (mainMenu != null) {
                         tempMainMenu.add(mainMenu);
                         npcGudie.append(mainMenu.name).append(" -> ");
@@ -131,6 +139,9 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 if (npcGudie.toString().endsWith(" -> ")) {
                     npcGudie = new StringBuilder(npcGudie.substring(0, npcGudie.length() - 4));
                 }
+                mainMenus.add(new TopMainMenuModelVM(new MainMenuModelVM(tempTopMainMenu.get(0), npcGudie.toString()),
+                        new MainMenuModelVM(tempTopMainMenu.get(1), npcGudie.toString()),
+                        new MainMenuModelVM(tempTopMainMenu.get(2), npcGudie.toString())));
                 for (MainMenu mainMenu : tempMainMenu) {
                     mainMenus.add(new MainMenuModelVM(mainMenu, npcGudie.toString()));
                 }

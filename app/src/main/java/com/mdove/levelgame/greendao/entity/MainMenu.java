@@ -16,15 +16,17 @@ public class MainMenu {
     public Long clickId;
     public String btnText;
     public String type;
-    @Generated(hash = 155265196)
+    public int position;
+    @Generated(hash = 68722745)
     public MainMenu(Long id, String name, String tips, Long clickId, String btnText,
-            String type) {
+            String type, int position) {
         this.id = id;
         this.name = name;
         this.tips = tips;
         this.clickId = clickId;
         this.btnText = btnText;
         this.type = type;
+        this.position = position;
     }
     @Generated(hash = 1928140747)
     public MainMenu() {
@@ -65,5 +67,10 @@ public class MainMenu {
     public void setType(String type) {
         this.type = type;
     }
-
+    public int getPosition() {
+        return this.position;
+    }
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

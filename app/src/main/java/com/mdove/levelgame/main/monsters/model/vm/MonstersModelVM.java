@@ -7,18 +7,12 @@ import com.mdove.levelgame.R;
 import com.mdove.levelgame.greendao.entity.Monsters;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by MDove on 2018/10/21.
  */
 
-public class MonstersModelVM {
+public class MonstersModelVM extends BaseMonsterModelVM{
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<String> exp = new ObservableField<>();
     public ObservableField<Long> monsterPlaceId = new ObservableField<>();

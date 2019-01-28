@@ -38,15 +38,13 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
 
         adapter = createAdapter();
         rlv.setAdapter(adapter);
-        adapter.setListener(new BaseListAdapter.OnDataEmptyListener() {
-            @Override
-            public void onEmpty(boolean isEmpty) {
-                if (isEmpty) {
-                    layoutEmpty.setVisibility(View.VISIBLE);
-                } else {
-                    layoutEmpty.setVisibility(View.GONE);
-                }
-            }
+        adapter.setListener(isEmpty -> {
+            layoutEmpty.setVisibility(View.GONE);
+//            if (isEmpty) {
+//                layoutEmpty.setVisibility(View.VISIBLE);
+//            } else {
+//                layoutEmpty.setVisibility(View.GONE);
+//            }
         });
 
         loadData();

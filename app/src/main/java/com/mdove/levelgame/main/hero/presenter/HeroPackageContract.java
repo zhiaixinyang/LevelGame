@@ -2,6 +2,7 @@ package com.mdove.levelgame.main.hero.presenter;
 
 import com.mdove.levelgame.base.BasePresenter;
 import com.mdove.levelgame.base.BaseView;
+import com.mdove.levelgame.main.hero.model.BasePackageModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface HeroPackageContract {
     }
 
     interface IHeroPackageView extends BaseView {
-        void showPackage(List<HeroPackageModelVM> data);
+        void showPackage(List<BasePackageModelVM> data);
 
         void notifyByPosition(int position);
 

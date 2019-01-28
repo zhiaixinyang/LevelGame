@@ -45,6 +45,10 @@ class ShopActivity : BaseActivity(), ShopContract.IMedicinesShopView, HasSupport
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shop)
 
+        intent.getStringExtra(SHOP_TITLE)?.let {
+            title = it
+        }
+
         tab = findViewById(R.id.tab)
         vp = findViewById(R.id.vp)
 
@@ -73,11 +77,13 @@ class ShopActivity : BaseActivity(), ShopContract.IMedicinesShopView, HasSupport
     }
 
     companion object {
-        fun start(context: Context) {
+        const val SHOP_TITLE: String = "shop_title"
+        fun start(context: Context, title: String) {
             val start = Intent(context, ShopActivity::class.java)
             if (context !is Activity) {
                 start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             }
+            start.putExtra(SHOP_TITLE, title)
             context.startActivity(start)
         }
     }

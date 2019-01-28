@@ -60,7 +60,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
                 new CityDialog(view.getContext(), R.style.fb_dialog).show();
                 break;
             case INTENT_TO_SHOP: {
-                ShopActivity.Companion.start(view.getContext());
+                ShopActivity.Companion.start(view.getContext(), vm.name.get());
                 break;
             }
             case INTENT_TO_BLACKSMITH: {

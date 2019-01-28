@@ -9,6 +9,7 @@ import com.mdove.levelgame.base.BaseListFragment;
 import com.mdove.levelgame.base.adapter.BaseListAdapter;
 import com.mdove.levelgame.main.hero.HeroPackagesActivity;
 import com.mdove.levelgame.main.hero.adapter.HeroPackageAdapter;
+import com.mdove.levelgame.main.hero.model.BasePackageModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.main.hero.presenter.HeroPackageContract;
 import com.mdove.levelgame.main.hero.presenter.HeroPackagePresenter;
@@ -46,7 +47,7 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
     }
 
     @Override
-    public BaseListAdapter<HeroPackageModelVM> createAdapter() {
+    public BaseListAdapter<BasePackageModelVM> createAdapter() {
         return new HeroPackageAdapter(presenter);
     }
 
@@ -56,7 +57,8 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (((HeroPackageModelVM) getAdapter().getData().get(position)).isMaterials.get()) {
+                BasePackageModelVM vm = (BasePackageModelVM) getAdapter().getData().get(position);
+                if (vm instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm).isMaterials.get()) {
                     return 1;
                 } else {
                     return 4;
@@ -67,7 +69,7 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
     }
 
     @Override
-    public void showPackage(List<HeroPackageModelVM> data) {
+    public void showPackage(List<BasePackageModelVM> data) {
         getAdapter().setData(data);
     }
 

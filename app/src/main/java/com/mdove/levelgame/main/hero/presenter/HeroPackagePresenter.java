@@ -17,8 +17,11 @@ import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.entity.Weapons;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
+import com.mdove.levelgame.main.hero.model.BasePackageModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
+import com.mdove.levelgame.main.hero.model.HeroPkEmptyModelVM;
 import com.mdove.levelgame.main.hero.util.EquipUtils;
+import com.mdove.levelgame.main.hero.viewmodel.HeroPackageViewModel;
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
 import com.mdove.levelgame.main.shop.model.StrengthenResp;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
@@ -46,7 +49,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
     private static final int EQUIP_STATUS_TYPE_ACCESSORIES = 3;
     private HeroPackageContract.IHeroPackageView view;
 
-    private List<HeroPackageModelVM> packageModelVMS;
+    private List<BasePackageModelVM> packageModelVMS;
 
     private PackagesDao packagesDao;
     private WeaponsDao weaponsDao;
@@ -71,13 +74,17 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
     @Override
     public void initData() {
-        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
+//        view.showLoadingDialog(view.getString(R.string.string_init_data_loading));
         Observable.create((ObservableOnSubscribe<Integer>) e -> {
             initPksData();
             e.onNext(1);
         }).compose(RxTransformerHelper.schedulerTransf())
                 .subscribe(integer -> {
                     view.dismissLoadingDialog();
+                    int addEmptyCount = 10 - packageModelVMS.size();
+                    for (int i = 0; i < addEmptyCount; i++) {
+                        packageModelVMS.add(new HeroPkEmptyModelVM());
+                    }
                     view.showPackage(packageModelVMS);
                 }, throwable -> {
                     view.dismissLoadingDialog();
@@ -87,8 +94,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
     private void deleteById(long pkId) {
         int position = -1;
         if (packageModelVMS != null && packageModelVMS.size() > 0) {
-            for (HeroPackageModelVM vm : packageModelVMS) {
-                if (vm.pkId.get() == pkId) {
+            for (BasePackageModelVM vm : packageModelVMS) {
+                if (vm instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm).pkId.get() == pkId) {
                     position = packageModelVMS.indexOf(vm);
                 }
             }
@@ -102,11 +109,11 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
         int removePosition = -1;
         int equipPosition = -1;
         if (packageModelVMS != null && packageModelVMS.size() > 0) {
-            for (HeroPackageModelVM vm : packageModelVMS) {
-                if (vm.pkId.get() == holdOnId) {
+            for (BasePackageModelVM vm : packageModelVMS) {
+                if (vm instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm).pkId.get() == holdOnId) {
                     // Equip页面通过position。重新对页面进行刷新（重新加载对应的值）
                     removePosition = packageModelVMS.indexOf(vm);
-                    int type = AllGoodsToDBIdUtils.getInstance().getDBType(vm.type.get());
+                    int type = AllGoodsToDBIdUtils.getInstance().getDBType(((HeroPackageModelVM) vm).type.get());
                     switch (type) {
                         case AllGoodsToDBIdUtils.DB_TYPE_IS_ATTACK: {
                             equipPosition = 1;
@@ -201,7 +208,7 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
                     Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(pk.type)).unique();
                     if (material != null && pk.isEquip == 1) {
-                        packageModelVMS.add(1,new HeroPackageModelVM(pk.id, material.tips, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
+                        packageModelVMS.add(1, new HeroPackageModelVM(pk.id, material.tips, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
                     }
                     break;
                 }
@@ -605,15 +612,15 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                         , view.getString(R.string.string_strengthen_suc), true);
                 int position = -1;
                 int strengthIdPosition = -1;
-                for (HeroPackageModelVM vm1 : packageModelVMS) {
-                    if (vm1.pkId.get() == vm.pkId.get()) {
+                for (BasePackageModelVM vm1 : packageModelVMS) {
+                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get() == vm.pkId.get()) {
                         position = packageModelVMS.indexOf(vm1);
-                        vm1.reName(resp.level);
+                        ((HeroPackageModelVM) vm1).reName(resp.level);
                         break;
                     }
                 }
-                for (HeroPackageModelVM vm1 : packageModelVMS) {
-                    if (vm1.pkId.get() == resp.strengthId) {
+                for (BasePackageModelVM vm1 : packageModelVMS) {
+                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get() == resp.strengthId) {
                         strengthIdPosition = packageModelVMS.indexOf(vm1);
                         break;
                     }
@@ -627,8 +634,8 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
             }
             case BlacksmithManager.STRENGTHEN_STATUS_FAIL: {
                 int strengthIdPosition = -1;
-                for (HeroPackageModelVM vm1 : packageModelVMS) {
-                    if (vm1.pkId.get() == resp.strengthId) {
+                for (BasePackageModelVM vm1 : packageModelVMS) {
+                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get() == resp.strengthId) {
                         strengthIdPosition = packageModelVMS.indexOf(vm1);
                         break;
                     }

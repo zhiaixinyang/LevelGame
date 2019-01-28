@@ -9,7 +9,7 @@ import com.mdove.levelgame.greendao.utils.SrcIconMap;
 /**
  * @author MDove on 2018/10/23
  */
-public class HeroPackageModelVM {
+public class HeroPackageModelVM extends BasePackageModelVM {
     public ObservableField<Long> pkId = new ObservableField<>();
     public ObservableField<Long> strengthen = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();

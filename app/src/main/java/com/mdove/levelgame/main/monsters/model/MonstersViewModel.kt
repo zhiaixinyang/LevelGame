@@ -9,7 +9,7 @@ import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM
  */
 class MonstersViewModel : ViewModel() {
     private var monsterPlaceId = MutableLiveData<Long>()
-    val monstersData: LiveData<List<MonstersModelVM>> = MediatorLiveData<List<MonstersModelVM>>().apply {
+    val monstersData: LiveData<List<BaseMonsterModelVM>> = MediatorLiveData<List<BaseMonsterModelVM>>().apply {
         addSource(monsterPlaceId) { placeId ->
             placeId?.let {
                 value = repository.loadData(it)

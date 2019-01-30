@@ -18,13 +18,13 @@
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/item_medicines_normal_margin"
         android:layout_marginLeft="@dimen/item_medicines_normal_margin"
         android:layout_marginRight="@dimen/item_medicines_normal_margin"
-        android:background="@drawable/bg_white_round"
-        android:onClick="@{()->handler.onItemBtnOnClick(vm)}">
+        android:layout_marginBottom="@dimen/item_medicines_normal_margin"
+        android:background="@drawable/bg_white_round">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_item_hero_package_bg">
@@ -48,8 +48,8 @@
                 android:layout_marginTop="@dimen/item_monsters_place_btn_normal_margin"
                 android:background="@drawable/bg_gray_round"
                 android:padding="3dp"
-                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_name">
 
                 <ImageView
@@ -64,8 +64,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/item_medicines_normal_margin"
-                android:layout_marginRight="@dimen/item_medicines_normal_margin"
                 android:layout_marginTop="@dimen/item_double_layer_margin"
+                android:layout_marginRight="@dimen/item_medicines_normal_margin"
                 android:gravity="center|left"
                 android:textColor="@color/gray_plus"
                 android:textSize="12sp"
@@ -87,7 +87,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_name"
                 tools:text="限制次数" />
-
 
 
             <TextView
@@ -147,10 +146,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_btn_buy"
-                android:paddingBottom="4dp"
+                android:clickable="@{vm.isLock?false :true}"
+                android:onClick="@{()->handler.onItemBtnOnClick(vm)}"
                 android:paddingLeft="12dp"
-                android:paddingRight="12dp"
                 android:paddingTop="4dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="4dp"
                 android:text="购买"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -165,10 +166,39 @@
                 android:text="@{vm.price}"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_buy"
                 tools:text="需要金钱：10" />
         </android.support.constraint.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/black_trans_50"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="@{vm.isLock?View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/layout_content"
+            app:layout_constraintEnd_toEndOf="@+id/layout_content"
+            app:layout_constraintStart_toStartOf="@+id/layout_content"
+            app:layout_constraintTop_toTopOf="@+id/layout_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:rotation="30"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_bg_link" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:rotation="160"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_bg_link" />
+        </FrameLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -41,11 +41,12 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
         public final static Property IsSpecial = new Property(14, int.class, "isSpecial", false, "IS_SPECIAL");
         public final static Property BelongMonsterId = new Property(15, String.class, "belongMonsterId", false, "BELONG_MONSTER_ID");
         public final static Property Position = new Property(16, int.class, "position", false, "POSITION");
-        public final static Property NeedLevel = new Property(17, int.class, "needLevel", false, "NEED_LEVEL");
-        public final static Property NeedLiLiang = new Property(18, int.class, "needLiLiang", false, "NEED_LI_LIANG");
-        public final static Property NeedMinJie = new Property(19, int.class, "needMinJie", false, "NEED_MIN_JIE");
-        public final static Property NeedZhiHui = new Property(20, int.class, "needZhiHui", false, "NEED_ZHI_HUI");
-        public final static Property NeedQiangZhuang = new Property(21, int.class, "needQiangZhuang", false, "NEED_QIANG_ZHUANG");
+        public final static Property IsLock = new Property(17, int.class, "isLock", false, "IS_LOCK");
+        public final static Property NeedLevel = new Property(18, int.class, "needLevel", false, "NEED_LEVEL");
+        public final static Property NeedLiLiang = new Property(19, int.class, "needLiLiang", false, "NEED_LI_LIANG");
+        public final static Property NeedMinJie = new Property(20, int.class, "needMinJie", false, "NEED_MIN_JIE");
+        public final static Property NeedZhiHui = new Property(21, int.class, "needZhiHui", false, "NEED_ZHI_HUI");
+        public final static Property NeedQiangZhuang = new Property(22, int.class, "needQiangZhuang", false, "NEED_QIANG_ZHUANG");
     }
 
 
@@ -78,11 +79,12 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
                 "\"IS_SPECIAL\" INTEGER NOT NULL ," + // 14: isSpecial
                 "\"BELONG_MONSTER_ID\" TEXT," + // 15: belongMonsterId
                 "\"POSITION\" INTEGER NOT NULL ," + // 16: position
-                "\"NEED_LEVEL\" INTEGER NOT NULL ," + // 17: needLevel
-                "\"NEED_LI_LIANG\" INTEGER NOT NULL ," + // 18: needLiLiang
-                "\"NEED_MIN_JIE\" INTEGER NOT NULL ," + // 19: needMinJie
-                "\"NEED_ZHI_HUI\" INTEGER NOT NULL ," + // 20: needZhiHui
-                "\"NEED_QIANG_ZHUANG\" INTEGER NOT NULL );"); // 21: needQiangZhuang
+                "\"IS_LOCK\" INTEGER NOT NULL ," + // 17: isLock
+                "\"NEED_LEVEL\" INTEGER NOT NULL ," + // 18: needLevel
+                "\"NEED_LI_LIANG\" INTEGER NOT NULL ," + // 19: needLiLiang
+                "\"NEED_MIN_JIE\" INTEGER NOT NULL ," + // 20: needMinJie
+                "\"NEED_ZHI_HUI\" INTEGER NOT NULL ," + // 21: needZhiHui
+                "\"NEED_QIANG_ZHUANG\" INTEGER NOT NULL );"); // 22: needQiangZhuang
     }
 
     /** Drops the underlying database table. */
@@ -143,11 +145,12 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
             stmt.bindString(16, belongMonsterId);
         }
         stmt.bindLong(17, entity.getPosition());
-        stmt.bindLong(18, entity.getNeedLevel());
-        stmt.bindLong(19, entity.getNeedLiLiang());
-        stmt.bindLong(20, entity.getNeedMinJie());
-        stmt.bindLong(21, entity.getNeedZhiHui());
-        stmt.bindLong(22, entity.getNeedQiangZhuang());
+        stmt.bindLong(18, entity.getIsLock());
+        stmt.bindLong(19, entity.getNeedLevel());
+        stmt.bindLong(20, entity.getNeedLiLiang());
+        stmt.bindLong(21, entity.getNeedMinJie());
+        stmt.bindLong(22, entity.getNeedZhiHui());
+        stmt.bindLong(23, entity.getNeedQiangZhuang());
     }
 
     @Override
@@ -202,11 +205,12 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
             stmt.bindString(16, belongMonsterId);
         }
         stmt.bindLong(17, entity.getPosition());
-        stmt.bindLong(18, entity.getNeedLevel());
-        stmt.bindLong(19, entity.getNeedLiLiang());
-        stmt.bindLong(20, entity.getNeedMinJie());
-        stmt.bindLong(21, entity.getNeedZhiHui());
-        stmt.bindLong(22, entity.getNeedQiangZhuang());
+        stmt.bindLong(18, entity.getIsLock());
+        stmt.bindLong(19, entity.getNeedLevel());
+        stmt.bindLong(20, entity.getNeedLiLiang());
+        stmt.bindLong(21, entity.getNeedMinJie());
+        stmt.bindLong(22, entity.getNeedZhiHui());
+        stmt.bindLong(23, entity.getNeedQiangZhuang());
     }
 
     @Override
@@ -234,11 +238,12 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
             cursor.getInt(offset + 14), // isSpecial
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // belongMonsterId
             cursor.getInt(offset + 16), // position
-            cursor.getInt(offset + 17), // needLevel
-            cursor.getInt(offset + 18), // needLiLiang
-            cursor.getInt(offset + 19), // needMinJie
-            cursor.getInt(offset + 20), // needZhiHui
-            cursor.getInt(offset + 21) // needQiangZhuang
+            cursor.getInt(offset + 17), // isLock
+            cursor.getInt(offset + 18), // needLevel
+            cursor.getInt(offset + 19), // needLiLiang
+            cursor.getInt(offset + 20), // needMinJie
+            cursor.getInt(offset + 21), // needZhiHui
+            cursor.getInt(offset + 22) // needQiangZhuang
         );
         return entity;
     }
@@ -262,11 +267,12 @@ public class AccessoriesDao extends AbstractDao<Accessories, Long> {
         entity.setIsSpecial(cursor.getInt(offset + 14));
         entity.setBelongMonsterId(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
         entity.setPosition(cursor.getInt(offset + 16));
-        entity.setNeedLevel(cursor.getInt(offset + 17));
-        entity.setNeedLiLiang(cursor.getInt(offset + 18));
-        entity.setNeedMinJie(cursor.getInt(offset + 19));
-        entity.setNeedZhiHui(cursor.getInt(offset + 20));
-        entity.setNeedQiangZhuang(cursor.getInt(offset + 21));
+        entity.setIsLock(cursor.getInt(offset + 17));
+        entity.setNeedLevel(cursor.getInt(offset + 18));
+        entity.setNeedLiLiang(cursor.getInt(offset + 19));
+        entity.setNeedMinJie(cursor.getInt(offset + 20));
+        entity.setNeedZhiHui(cursor.getInt(offset + 21));
+        entity.setNeedQiangZhuang(cursor.getInt(offset + 22));
      }
     
     @Override

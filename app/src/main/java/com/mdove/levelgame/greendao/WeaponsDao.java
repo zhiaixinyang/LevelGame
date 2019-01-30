@@ -30,22 +30,23 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         public final static Property Attack = new Property(3, int.class, "attack", false, "ATTACK");
         public final static Property Armor = new Property(4, int.class, "armor", false, "ARMOR");
         public final static Property Price = new Property(5, long.class, "price", false, "PRICE");
-        public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
-        public final static Property IsCanStrengthen = new Property(7, int.class, "isCanStrengthen", false, "IS_CAN_STRENGTHEN");
-        public final static Property IsCanUpdate = new Property(8, int.class, "isCanUpdate", false, "IS_CAN_UPDATE");
-        public final static Property IsCanMixture = new Property(9, int.class, "isCanMixture", false, "IS_CAN_MIXTURE");
-        public final static Property IsSpecial = new Property(10, int.class, "isSpecial", false, "IS_SPECIAL");
-        public final static Property MixtureFormula = new Property(11, String.class, "mixtureFormula", false, "MIXTURE_FORMULA");
-        public final static Property UpdateFormula = new Property(12, String.class, "updateFormula", false, "UPDATE_FORMULA");
-        public final static Property StrengthenFormula = new Property(13, String.class, "strengthenFormula", false, "STRENGTHEN_FORMULA");
-        public final static Property BelongMonsterId = new Property(14, String.class, "belongMonsterId", false, "BELONG_MONSTER_ID");
-        public final static Property AttackSpeed = new Property(15, long.class, "attackSpeed", false, "ATTACK_SPEED");
-        public final static Property Position = new Property(16, int.class, "position", false, "POSITION");
-        public final static Property NeedLevel = new Property(17, int.class, "needLevel", false, "NEED_LEVEL");
-        public final static Property NeedLiLiang = new Property(18, int.class, "needLiLiang", false, "NEED_LI_LIANG");
-        public final static Property NeedMinJie = new Property(19, int.class, "needMinJie", false, "NEED_MIN_JIE");
-        public final static Property NeedZhiHui = new Property(20, int.class, "needZhiHui", false, "NEED_ZHI_HUI");
-        public final static Property NeedQiangZhuang = new Property(21, int.class, "needQiangZhuang", false, "NEED_QIANG_ZHUANG");
+        public final static Property IsLock = new Property(6, int.class, "isLock", false, "IS_LOCK");
+        public final static Property Type = new Property(7, String.class, "type", false, "TYPE");
+        public final static Property IsCanStrengthen = new Property(8, int.class, "isCanStrengthen", false, "IS_CAN_STRENGTHEN");
+        public final static Property IsCanUpdate = new Property(9, int.class, "isCanUpdate", false, "IS_CAN_UPDATE");
+        public final static Property IsCanMixture = new Property(10, int.class, "isCanMixture", false, "IS_CAN_MIXTURE");
+        public final static Property IsSpecial = new Property(11, int.class, "isSpecial", false, "IS_SPECIAL");
+        public final static Property MixtureFormula = new Property(12, String.class, "mixtureFormula", false, "MIXTURE_FORMULA");
+        public final static Property UpdateFormula = new Property(13, String.class, "updateFormula", false, "UPDATE_FORMULA");
+        public final static Property StrengthenFormula = new Property(14, String.class, "strengthenFormula", false, "STRENGTHEN_FORMULA");
+        public final static Property BelongMonsterId = new Property(15, String.class, "belongMonsterId", false, "BELONG_MONSTER_ID");
+        public final static Property AttackSpeed = new Property(16, long.class, "attackSpeed", false, "ATTACK_SPEED");
+        public final static Property Position = new Property(17, int.class, "position", false, "POSITION");
+        public final static Property NeedLevel = new Property(18, int.class, "needLevel", false, "NEED_LEVEL");
+        public final static Property NeedLiLiang = new Property(19, int.class, "needLiLiang", false, "NEED_LI_LIANG");
+        public final static Property NeedMinJie = new Property(20, int.class, "needMinJie", false, "NEED_MIN_JIE");
+        public final static Property NeedZhiHui = new Property(21, int.class, "needZhiHui", false, "NEED_ZHI_HUI");
+        public final static Property NeedQiangZhuang = new Property(22, int.class, "needQiangZhuang", false, "NEED_QIANG_ZHUANG");
     }
 
 
@@ -67,22 +68,23 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
                 "\"ATTACK\" INTEGER NOT NULL ," + // 3: attack
                 "\"ARMOR\" INTEGER NOT NULL ," + // 4: armor
                 "\"PRICE\" INTEGER NOT NULL ," + // 5: price
-                "\"TYPE\" TEXT," + // 6: type
-                "\"IS_CAN_STRENGTHEN\" INTEGER NOT NULL ," + // 7: isCanStrengthen
-                "\"IS_CAN_UPDATE\" INTEGER NOT NULL ," + // 8: isCanUpdate
-                "\"IS_CAN_MIXTURE\" INTEGER NOT NULL ," + // 9: isCanMixture
-                "\"IS_SPECIAL\" INTEGER NOT NULL ," + // 10: isSpecial
-                "\"MIXTURE_FORMULA\" TEXT," + // 11: mixtureFormula
-                "\"UPDATE_FORMULA\" TEXT," + // 12: updateFormula
-                "\"STRENGTHEN_FORMULA\" TEXT," + // 13: strengthenFormula
-                "\"BELONG_MONSTER_ID\" TEXT," + // 14: belongMonsterId
-                "\"ATTACK_SPEED\" INTEGER NOT NULL ," + // 15: attackSpeed
-                "\"POSITION\" INTEGER NOT NULL ," + // 16: position
-                "\"NEED_LEVEL\" INTEGER NOT NULL ," + // 17: needLevel
-                "\"NEED_LI_LIANG\" INTEGER NOT NULL ," + // 18: needLiLiang
-                "\"NEED_MIN_JIE\" INTEGER NOT NULL ," + // 19: needMinJie
-                "\"NEED_ZHI_HUI\" INTEGER NOT NULL ," + // 20: needZhiHui
-                "\"NEED_QIANG_ZHUANG\" INTEGER NOT NULL );"); // 21: needQiangZhuang
+                "\"IS_LOCK\" INTEGER NOT NULL ," + // 6: isLock
+                "\"TYPE\" TEXT," + // 7: type
+                "\"IS_CAN_STRENGTHEN\" INTEGER NOT NULL ," + // 8: isCanStrengthen
+                "\"IS_CAN_UPDATE\" INTEGER NOT NULL ," + // 9: isCanUpdate
+                "\"IS_CAN_MIXTURE\" INTEGER NOT NULL ," + // 10: isCanMixture
+                "\"IS_SPECIAL\" INTEGER NOT NULL ," + // 11: isSpecial
+                "\"MIXTURE_FORMULA\" TEXT," + // 12: mixtureFormula
+                "\"UPDATE_FORMULA\" TEXT," + // 13: updateFormula
+                "\"STRENGTHEN_FORMULA\" TEXT," + // 14: strengthenFormula
+                "\"BELONG_MONSTER_ID\" TEXT," + // 15: belongMonsterId
+                "\"ATTACK_SPEED\" INTEGER NOT NULL ," + // 16: attackSpeed
+                "\"POSITION\" INTEGER NOT NULL ," + // 17: position
+                "\"NEED_LEVEL\" INTEGER NOT NULL ," + // 18: needLevel
+                "\"NEED_LI_LIANG\" INTEGER NOT NULL ," + // 19: needLiLiang
+                "\"NEED_MIN_JIE\" INTEGER NOT NULL ," + // 20: needMinJie
+                "\"NEED_ZHI_HUI\" INTEGER NOT NULL ," + // 21: needZhiHui
+                "\"NEED_QIANG_ZHUANG\" INTEGER NOT NULL );"); // 22: needQiangZhuang
     }
 
     /** Drops the underlying database table. */
@@ -112,42 +114,43 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         stmt.bindLong(4, entity.getAttack());
         stmt.bindLong(5, entity.getArmor());
         stmt.bindLong(6, entity.getPrice());
+        stmt.bindLong(7, entity.getIsLock());
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(7, type);
+            stmt.bindString(8, type);
         }
-        stmt.bindLong(8, entity.getIsCanStrengthen());
-        stmt.bindLong(9, entity.getIsCanUpdate());
-        stmt.bindLong(10, entity.getIsCanMixture());
-        stmt.bindLong(11, entity.getIsSpecial());
+        stmt.bindLong(9, entity.getIsCanStrengthen());
+        stmt.bindLong(10, entity.getIsCanUpdate());
+        stmt.bindLong(11, entity.getIsCanMixture());
+        stmt.bindLong(12, entity.getIsSpecial());
  
         String mixtureFormula = entity.getMixtureFormula();
         if (mixtureFormula != null) {
-            stmt.bindString(12, mixtureFormula);
+            stmt.bindString(13, mixtureFormula);
         }
  
         String updateFormula = entity.getUpdateFormula();
         if (updateFormula != null) {
-            stmt.bindString(13, updateFormula);
+            stmt.bindString(14, updateFormula);
         }
  
         String strengthenFormula = entity.getStrengthenFormula();
         if (strengthenFormula != null) {
-            stmt.bindString(14, strengthenFormula);
+            stmt.bindString(15, strengthenFormula);
         }
  
         String belongMonsterId = entity.getBelongMonsterId();
         if (belongMonsterId != null) {
-            stmt.bindString(15, belongMonsterId);
+            stmt.bindString(16, belongMonsterId);
         }
-        stmt.bindLong(16, entity.getAttackSpeed());
-        stmt.bindLong(17, entity.getPosition());
-        stmt.bindLong(18, entity.getNeedLevel());
-        stmt.bindLong(19, entity.getNeedLiLiang());
-        stmt.bindLong(20, entity.getNeedMinJie());
-        stmt.bindLong(21, entity.getNeedZhiHui());
-        stmt.bindLong(22, entity.getNeedQiangZhuang());
+        stmt.bindLong(17, entity.getAttackSpeed());
+        stmt.bindLong(18, entity.getPosition());
+        stmt.bindLong(19, entity.getNeedLevel());
+        stmt.bindLong(20, entity.getNeedLiLiang());
+        stmt.bindLong(21, entity.getNeedMinJie());
+        stmt.bindLong(22, entity.getNeedZhiHui());
+        stmt.bindLong(23, entity.getNeedQiangZhuang());
     }
 
     @Override
@@ -171,42 +174,43 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         stmt.bindLong(4, entity.getAttack());
         stmt.bindLong(5, entity.getArmor());
         stmt.bindLong(6, entity.getPrice());
+        stmt.bindLong(7, entity.getIsLock());
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(7, type);
+            stmt.bindString(8, type);
         }
-        stmt.bindLong(8, entity.getIsCanStrengthen());
-        stmt.bindLong(9, entity.getIsCanUpdate());
-        stmt.bindLong(10, entity.getIsCanMixture());
-        stmt.bindLong(11, entity.getIsSpecial());
+        stmt.bindLong(9, entity.getIsCanStrengthen());
+        stmt.bindLong(10, entity.getIsCanUpdate());
+        stmt.bindLong(11, entity.getIsCanMixture());
+        stmt.bindLong(12, entity.getIsSpecial());
  
         String mixtureFormula = entity.getMixtureFormula();
         if (mixtureFormula != null) {
-            stmt.bindString(12, mixtureFormula);
+            stmt.bindString(13, mixtureFormula);
         }
  
         String updateFormula = entity.getUpdateFormula();
         if (updateFormula != null) {
-            stmt.bindString(13, updateFormula);
+            stmt.bindString(14, updateFormula);
         }
  
         String strengthenFormula = entity.getStrengthenFormula();
         if (strengthenFormula != null) {
-            stmt.bindString(14, strengthenFormula);
+            stmt.bindString(15, strengthenFormula);
         }
  
         String belongMonsterId = entity.getBelongMonsterId();
         if (belongMonsterId != null) {
-            stmt.bindString(15, belongMonsterId);
+            stmt.bindString(16, belongMonsterId);
         }
-        stmt.bindLong(16, entity.getAttackSpeed());
-        stmt.bindLong(17, entity.getPosition());
-        stmt.bindLong(18, entity.getNeedLevel());
-        stmt.bindLong(19, entity.getNeedLiLiang());
-        stmt.bindLong(20, entity.getNeedMinJie());
-        stmt.bindLong(21, entity.getNeedZhiHui());
-        stmt.bindLong(22, entity.getNeedQiangZhuang());
+        stmt.bindLong(17, entity.getAttackSpeed());
+        stmt.bindLong(18, entity.getPosition());
+        stmt.bindLong(19, entity.getNeedLevel());
+        stmt.bindLong(20, entity.getNeedLiLiang());
+        stmt.bindLong(21, entity.getNeedMinJie());
+        stmt.bindLong(22, entity.getNeedZhiHui());
+        stmt.bindLong(23, entity.getNeedQiangZhuang());
     }
 
     @Override
@@ -223,22 +227,23 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
             cursor.getInt(offset + 3), // attack
             cursor.getInt(offset + 4), // armor
             cursor.getLong(offset + 5), // price
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
-            cursor.getInt(offset + 7), // isCanStrengthen
-            cursor.getInt(offset + 8), // isCanUpdate
-            cursor.getInt(offset + 9), // isCanMixture
-            cursor.getInt(offset + 10), // isSpecial
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // mixtureFormula
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // updateFormula
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // strengthenFormula
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // belongMonsterId
-            cursor.getLong(offset + 15), // attackSpeed
-            cursor.getInt(offset + 16), // position
-            cursor.getInt(offset + 17), // needLevel
-            cursor.getInt(offset + 18), // needLiLiang
-            cursor.getInt(offset + 19), // needMinJie
-            cursor.getInt(offset + 20), // needZhiHui
-            cursor.getInt(offset + 21) // needQiangZhuang
+            cursor.getInt(offset + 6), // isLock
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // type
+            cursor.getInt(offset + 8), // isCanStrengthen
+            cursor.getInt(offset + 9), // isCanUpdate
+            cursor.getInt(offset + 10), // isCanMixture
+            cursor.getInt(offset + 11), // isSpecial
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // mixtureFormula
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // updateFormula
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // strengthenFormula
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // belongMonsterId
+            cursor.getLong(offset + 16), // attackSpeed
+            cursor.getInt(offset + 17), // position
+            cursor.getInt(offset + 18), // needLevel
+            cursor.getInt(offset + 19), // needLiLiang
+            cursor.getInt(offset + 20), // needMinJie
+            cursor.getInt(offset + 21), // needZhiHui
+            cursor.getInt(offset + 22) // needQiangZhuang
         );
         return entity;
     }
@@ -251,22 +256,23 @@ public class WeaponsDao extends AbstractDao<Weapons, Long> {
         entity.setAttack(cursor.getInt(offset + 3));
         entity.setArmor(cursor.getInt(offset + 4));
         entity.setPrice(cursor.getLong(offset + 5));
-        entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setIsCanStrengthen(cursor.getInt(offset + 7));
-        entity.setIsCanUpdate(cursor.getInt(offset + 8));
-        entity.setIsCanMixture(cursor.getInt(offset + 9));
-        entity.setIsSpecial(cursor.getInt(offset + 10));
-        entity.setMixtureFormula(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setUpdateFormula(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setStrengthenFormula(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setBelongMonsterId(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setAttackSpeed(cursor.getLong(offset + 15));
-        entity.setPosition(cursor.getInt(offset + 16));
-        entity.setNeedLevel(cursor.getInt(offset + 17));
-        entity.setNeedLiLiang(cursor.getInt(offset + 18));
-        entity.setNeedMinJie(cursor.getInt(offset + 19));
-        entity.setNeedZhiHui(cursor.getInt(offset + 20));
-        entity.setNeedQiangZhuang(cursor.getInt(offset + 21));
+        entity.setIsLock(cursor.getInt(offset + 6));
+        entity.setType(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setIsCanStrengthen(cursor.getInt(offset + 8));
+        entity.setIsCanUpdate(cursor.getInt(offset + 9));
+        entity.setIsCanMixture(cursor.getInt(offset + 10));
+        entity.setIsSpecial(cursor.getInt(offset + 11));
+        entity.setMixtureFormula(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setUpdateFormula(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setStrengthenFormula(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setBelongMonsterId(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setAttackSpeed(cursor.getLong(offset + 16));
+        entity.setPosition(cursor.getInt(offset + 17));
+        entity.setNeedLevel(cursor.getInt(offset + 18));
+        entity.setNeedLiLiang(cursor.getInt(offset + 19));
+        entity.setNeedMinJie(cursor.getInt(offset + 20));
+        entity.setNeedZhiHui(cursor.getInt(offset + 21));
+        entity.setNeedQiangZhuang(cursor.getInt(offset + 22));
      }
     
     @Override

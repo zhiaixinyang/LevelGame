@@ -43,6 +43,8 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
     public int isCanMixture;
     // 特殊：在铁匠铺展示
     public int isSpecial;
+    public int isLock;
+
     // 合成公式 json
     public String mixtureFormula;
     public String updateFormula;
@@ -57,13 +59,13 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
     public int needZhiHui;
     public int needQiangZhuang;
 
-    @Generated(hash = 499008905)
+    @Generated(hash = 687111596)
     public Armors(Long id, String name, String tips, int attack, int armor,
-                  long price, String type, int strengthen, int isCanStrengthen,
-                  int isCanUpdate, int isCanMixture, int isSpecial, String mixtureFormula,
-                  String updateFormula, String strengthenFormula, String belongMonsterId,
-                  int position, int needLevel, int needLiLiang, int needMinJie,
-                  int needZhiHui, int needQiangZhuang) {
+            long price, String type, int strengthen, int isCanStrengthen,
+            int isCanUpdate, int isCanMixture, int isSpecial, int isLock,
+            String mixtureFormula, String updateFormula, String strengthenFormula,
+            String belongMonsterId, int position, int needLevel, int needLiLiang,
+            int needMinJie, int needZhiHui, int needQiangZhuang) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -76,6 +78,7 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
         this.isCanUpdate = isCanUpdate;
         this.isCanMixture = isCanMixture;
         this.isSpecial = isSpecial;
+        this.isLock = isLock;
         this.mixtureFormula = mixtureFormula;
         this.updateFormula = updateFormula;
         this.strengthenFormula = strengthenFormula;
@@ -286,5 +289,13 @@ public class Armors extends BaseBlacksmithModel implements IAttrsModel {
 
     public void setNeedQiangZhuang(int needQiangZhuang) {
         this.needQiangZhuang = needQiangZhuang;
+    }
+
+    public int getIsLock() {
+        return this.isLock;
+    }
+
+    public void setIsLock(int isLock) {
+        this.isLock = isLock;
     }
 }

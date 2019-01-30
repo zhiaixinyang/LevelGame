@@ -23,6 +23,7 @@ public class MedicinesModelVM {
     public ObservableField<Integer> src = new ObservableField<>();
     public ObservableField<String> limitCount = new ObservableField<>();
     public ObservableField<Boolean> isLimitCount = new ObservableField<>();
+    public ObservableField<Boolean> isLock = new ObservableField<>();
     private int limitCountInt;
     private int curlimitCountInt;
 
@@ -30,6 +31,11 @@ public class MedicinesModelVM {
         id.set(medicines.id);
         tips.set(medicines.tips);
         name.set(medicines.name);
+        if (medicines.isLock == 1) {
+            isLock.set(false);
+        } else {
+            isLock.set(true);
+        }
         price.set(String.format(App.getAppContext().getString(R.string.medicines_msg_price), medicines.price));
         life.set(String.format(App.getAppContext().getString(R.string.medicines_msg_life), medicines.life));
         armor.set(String.format(App.getAppContext().getString(R.string.medicines_msg_armor), medicines.armor));

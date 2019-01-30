@@ -34,7 +34,8 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         public final static Property IsEquip = new Property(2, int.class, "isEquip", false, "IS_EQUIP");
         public final static Property StrengthenLevel = new Property(3, int.class, "strengthenLevel", false, "STRENGTHEN_LEVEL");
         public final static Property IsSelect = new Property(4, int.class, "isSelect", false, "IS_SELECT");
-        public final static Property RandomAttrId = new Property(5, Long.class, "randomAttrId", false, "RANDOM_ATTR_ID");
+        public final static Property Count = new Property(5, int.class, "count", false, "COUNT");
+        public final static Property RandomAttrId = new Property(6, Long.class, "randomAttrId", false, "RANDOM_ATTR_ID");
     }
 
     private DaoSession daoSession;
@@ -58,7 +59,8 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
                 "\"IS_EQUIP\" INTEGER NOT NULL ," + // 2: isEquip
                 "\"STRENGTHEN_LEVEL\" INTEGER NOT NULL ," + // 3: strengthenLevel
                 "\"IS_SELECT\" INTEGER NOT NULL ," + // 4: isSelect
-                "\"RANDOM_ATTR_ID\" INTEGER);"); // 5: randomAttrId
+                "\"COUNT\" INTEGER NOT NULL ," + // 5: count
+                "\"RANDOM_ATTR_ID\" INTEGER);"); // 6: randomAttrId
     }
 
     /** Drops the underlying database table. */
@@ -83,10 +85,11 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         stmt.bindLong(3, entity.getIsEquip());
         stmt.bindLong(4, entity.getStrengthenLevel());
         stmt.bindLong(5, entity.getIsSelect());
+        stmt.bindLong(6, entity.getCount());
  
         Long randomAttrId = entity.getRandomAttrId();
         if (randomAttrId != null) {
-            stmt.bindLong(6, randomAttrId);
+            stmt.bindLong(7, randomAttrId);
         }
     }
 
@@ -106,10 +109,11 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         stmt.bindLong(3, entity.getIsEquip());
         stmt.bindLong(4, entity.getStrengthenLevel());
         stmt.bindLong(5, entity.getIsSelect());
+        stmt.bindLong(6, entity.getCount());
  
         Long randomAttrId = entity.getRandomAttrId();
         if (randomAttrId != null) {
-            stmt.bindLong(6, randomAttrId);
+            stmt.bindLong(7, randomAttrId);
         }
     }
 
@@ -132,7 +136,8 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
             cursor.getInt(offset + 2), // isEquip
             cursor.getInt(offset + 3), // strengthenLevel
             cursor.getInt(offset + 4), // isSelect
-            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5) // randomAttrId
+            cursor.getInt(offset + 5), // count
+            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6) // randomAttrId
         );
         return entity;
     }
@@ -144,7 +149,8 @@ public class PackagesDao extends AbstractDao<Packages, Long> {
         entity.setIsEquip(cursor.getInt(offset + 2));
         entity.setStrengthenLevel(cursor.getInt(offset + 3));
         entity.setIsSelect(cursor.getInt(offset + 4));
-        entity.setRandomAttrId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
+        entity.setCount(cursor.getInt(offset + 5));
+        entity.setRandomAttrId(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
      }
     
     @Override

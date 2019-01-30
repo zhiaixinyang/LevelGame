@@ -55,6 +55,7 @@ public class MonsterAttackManager {
             }
 
             if (HeroAttributesManager.getInstance().isQuickAttack(monsters, HeroAttributesWrapper.getInstance())) {
+                HeroAttributesWrapper.getInstance().awardMonster(monsters);
                 // 掉落装备逻辑
                 String content = AttackMonsterException.ERROR_MSG_HERO_IS_QUICK_ATTACK;
                 List<String> dropGoods = HeroAttributesManager.getInstance().dropGoods(monsters.dropGoodsId);

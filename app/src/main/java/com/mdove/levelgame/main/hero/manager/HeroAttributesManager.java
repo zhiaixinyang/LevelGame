@@ -201,7 +201,8 @@ public class HeroAttributesManager {
                 heroAttributes.money += money;
             } else if (attack != null && attack instanceof Material) {
                 Material material = (Material) attack;
-                money = (int) (material.price / 2);
+                int count = material.count;
+                money = (int) (material.price / 2) * count;
                 heroAttributes.money += money;
             }
             DatabaseManager.getInstance().getPackagesDao().delete(pk);
@@ -606,12 +607,20 @@ public class HeroAttributesManager {
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
                     Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(model.type)).unique();
                     if (material != null) {
-                        Packages packages = new Packages();
-                        packages.isEquip = 1;
-                        packages.isSelect = 1;
-                        packages.randomAttrId = randomAttrId;
-                        packages.type = material.type;
-                        DatabaseManager.getInstance().getPackagesDao().insert(packages);
+
+                        Packages packages = DatabaseManager.getInstance().getPackagesDao().queryBuilder().where(PackagesDao.Properties.Type.eq(model.type)).unique();
+                        if (packages == null) {
+                            packages = new Packages();
+                            packages.isEquip = 1;
+                            packages.isSelect = 1;
+                            packages.randomAttrId = randomAttrId;
+                            packages.type = material.type;
+                            packages.count = 1;
+                            DatabaseManager.getInstance().getPackagesDao().insert(packages);
+                        } else {
+                            packages.count = packages.count + 1;
+                            DatabaseManager.getInstance().getPackagesDao().update(packages);
+                        }
                         name = material.name;
                     }
                     break;
@@ -681,7 +690,7 @@ public class HeroAttributesManager {
         heroAttributes.maxLife -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
         heroAttributes.curLife -= (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
 
-        if (randomAttr!=null) {
+        if (randomAttr != null) {
             heroAttributes.attack -= randomAttr.randomAttack;
             heroAttributes.armor -= randomAttr.randomArmor;
             heroAttributes.curLife -= randomAttr.randomLife;
@@ -701,7 +710,7 @@ public class HeroAttributesManager {
         heroAttributes.maxLife += (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
         heroAttributes.curLife += (1 + strengthen * 0.2) * (model.getAttrsModel().baseLife);
 
-        if (randomAttr!=null) {
+        if (randomAttr != null) {
             heroAttributes.attack += randomAttr.randomAttack;
             heroAttributes.armor += randomAttr.randomArmor;
             heroAttributes.curLife += randomAttr.randomLife;

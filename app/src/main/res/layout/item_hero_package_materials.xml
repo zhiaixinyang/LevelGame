@@ -19,9 +19,9 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:layout_marginLeft="@dimen/item_hero_equip_normal_margin"
         android:layout_marginRight="@dimen/item_hero_equip_normal_margin"
+        android:layout_marginBottom="@dimen/item_hero_equip_normal_margin"
         android:background="@drawable/bg_white_round">
 
         <android.support.constraint.ConstraintLayout
@@ -53,29 +53,31 @@
                         tools:src="@mipmap/a1" />
                 </FrameLayout>
             </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
                 android:paddingRight="4dp"
-                tools:text="99"
+                android:paddingBottom="4dp"
+                android:text="@{vm.count}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/item_hero_equip_text_size"
                 android:visibility="@{vm.isCountType?View.VISIBLE:View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                />
+                tools:text="99" />
         </android.support.constraint.ConstraintLayout>
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:htmlColorText="@{vm.name}"
-            android:layout_marginTop="4dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_iv"

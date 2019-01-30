@@ -208,7 +208,11 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
                     Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(pk.type)).unique();
                     if (material != null && pk.isEquip == 1) {
-                        packageModelVMS.add(1, new HeroPackageModelVM(pk.id, material.tips, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
+                        HeroPackageModelVM model = new HeroPackageModelVM(pk.id, material.tips, pk.strengthenLevel, material.name, 0, 0, 0, material.type);
+                        if (material.isCount == 0) {
+                            model.setCount(pk.count);
+                        }
+                        packageModelVMS.add(1, model);
                     }
                     break;
                 }

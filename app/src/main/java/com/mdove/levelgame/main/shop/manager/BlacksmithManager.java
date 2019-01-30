@@ -66,7 +66,7 @@ public class BlacksmithManager {
                 if (need != null && need.size() > 0) {
                     List<HasMaterial> hasMaterials = new ArrayList<>();
                     for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
+                        hasMaterials.add(hasMaterial(type.type, type.count));
                     }
                     boolean isSuc = true;
                     for (HasMaterial material : hasMaterials) {
@@ -104,7 +104,7 @@ public class BlacksmithManager {
                 if (need != null && need.size() > 0) {
                     List<HasMaterial> hasMaterials = new ArrayList<>();
                     for (NeedMaterial type : need) {
-                        hasMaterials.add(hasMaterial(type.type));
+                        hasMaterials.add(hasMaterial(type.type, type.count));
                     }
                     boolean isSuc = true;
                     for (HasMaterial attack : hasMaterials) {
@@ -168,6 +168,7 @@ public class BlacksmithManager {
         packages.isSelect = 1;
         packages.strengthenLevel = 0;
         packages.type = model.myType;
+        packages.count = 1;
         if (TextUtils.equals(model.myType, TO_COPPER_TYPE)) {
             packages.type = "E2";
         } else if (TextUtils.equals(model.myType, TO_STRENGTHEN_TYPE)) {
@@ -181,7 +182,7 @@ public class BlacksmithManager {
     private void deleteMaterial(List<HasMaterial> hasMaterials) {
         for (HasMaterial material : hasMaterials) {
             PackagesDao packagesDao = DatabaseManager.getInstance().getPackagesDao();
-            Packages packages = packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(material.id)).unique();
+            Packages packages = material.pk;
             if (packages != null) {
                 // 如果删除的装备是已经装备的，则先脱掉装备
                 if (packages.isEquip == 0) {
@@ -191,7 +192,12 @@ public class BlacksmithManager {
                                 packages.getRandomAttr());
                     }
                 }
-                packagesDao.delete(packages);
+                if (packages.count == material.needCount) {
+                    packagesDao.delete(packages);
+                } else if (packages.count > material.needCount) {
+                    packages.count = packages.count - material.needCount;
+                    packagesDao.update(packages);
+                }
             }
         }
     }
@@ -212,13 +218,19 @@ public class BlacksmithManager {
                 if (nextLevel <= needModels.size()) {
                     // 数组越界问题
                     StrengthenNeedModel needModel = needModels.get(nextLevel - 1);
-                    HasMaterial hasMaterial = hasMaterial(needModel.type);
+                    HasMaterial hasMaterial = hasMaterial(needModel.type, needModel.count);
                     if (!hasMaterial.isHas) {
                         resp.status = STRENGTHEN_STATUS_NO_MATERIAL;
                         return resp;
                     } else {
                         // 材料足够，先删强化石
-                        packagesDao.delete(packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(hasMaterial.id)).unique());
+                        Packages _pk = hasMaterial.pk;
+                        if (_pk.count > needModel.count) {
+                            _pk.count = _pk.count - needModel.count;
+                            packagesDao.update(_pk);
+                        } else if (_pk.count == needModel.count) {
+                            packagesDao.delete(_pk);
+                        }
                         float probability = needModel.probability * 100;
                         int random = new Random(System.currentTimeMillis()).nextInt(100);
                         // 强化成功
@@ -226,11 +238,11 @@ public class BlacksmithManager {
                             resp.status = STRENGTHEN_STATUS_SUC;
                             pk.strengthenLevel = nextLevel;
                             resp.level = pk.strengthenLevel;
-                            resp.strengthId = hasMaterial.id;
+                            resp.strengthId = hasMaterial.pk.id;
                             packagesDao.update(pk);
                             return resp;
                         } else {
-                            resp.strengthId = hasMaterial.id;
+                            resp.strengthId = hasMaterial.pk.id;
                             resp.status = STRENGTHEN_STATUS_FAIL;
                             return resp;
                         }
@@ -244,7 +256,7 @@ public class BlacksmithManager {
         return resp;
     }
 
-    public HasMaterial hasMaterial(String type) {
+    public HasMaterial hasMaterial(String type, int needCount) {
         HasMaterial material = new HasMaterial();
         List<Packages> packages = null;
         // 因为龙渊有俩个版本A15和A18
@@ -260,9 +272,10 @@ public class BlacksmithManager {
         if (packages != null && packages.size() > 0) {
             pk = packages.get(0);
         }
-        if (pk != null) {
+        if (pk != null && pk.count >= needCount) {
             material.isHas = true;
-            material.id = pk.id;
+            material.pk = pk;
+            material.needCount = needCount;
             pk.isSelect = 0;
             DatabaseManager.getInstance().getPackagesDao().update(pk);
         } else {
@@ -273,6 +286,7 @@ public class BlacksmithManager {
 
     private class NeedMaterial {
         public String type;
+        public int count;
     }
 
     public class BlacksmithResp {
@@ -283,7 +297,8 @@ public class BlacksmithManager {
 
     public class HasMaterial {
         public boolean isHas;
-        // 拥有Packages中的id
-        public Long id;
+        // 拥有Packages
+        public Packages pk;
+        public int needCount;
     }
 }

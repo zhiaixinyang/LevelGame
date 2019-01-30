@@ -584,6 +584,7 @@ public class HeroAttributesManager {
                         Packages packages = new Packages();
                         packages.isEquip = 1;
                         packages.isSelect = 1;
+                        packages.count = 1;
                         packages.randomAttrId = randomAttrId;
                         packages.type = weapons.type;
                         DatabaseManager.getInstance().getPackagesDao().insert(packages);
@@ -598,6 +599,7 @@ public class HeroAttributesManager {
                         packages.isEquip = 1;
                         packages.randomAttrId = randomAttrId;
                         packages.isSelect = 1;
+                        packages.count = 1;
                         packages.type = armors.type;
                         DatabaseManager.getInstance().getPackagesDao().insert(packages);
                         name = armors.name;

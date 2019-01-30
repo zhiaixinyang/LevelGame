@@ -132,6 +132,7 @@ public class HeroBuyManager {
                 Packages packages = new Packages();
                 packages.isEquip = 1;
                 packages.isSelect = 1;
+                packages.count = 1;
                 packages.type = realData.type;
                 packagesDao.insert(packages);
             } else {
@@ -203,6 +204,7 @@ public class HeroBuyManager {
                     Packages packages = new Packages();
                     packages.isEquip = 1;
                     packages.isSelect = 1;
+                    packages.count = 1;
                     packages.strengthenLevel = 0;
                     packages.type = baseBuy.type;
                     packagesDao.insert(packages);
@@ -242,6 +244,7 @@ public class HeroBuyManager {
                 Packages packages = new Packages();
                 packages.isEquip = 1;
                 packages.isSelect = 1;
+                packages.count = 1;
                 packages.strengthenLevel = 0;
                 packages.type = realData.type;
                 packagesDao.insert(packages);

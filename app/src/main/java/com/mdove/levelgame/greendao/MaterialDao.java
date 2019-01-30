@@ -31,6 +31,8 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         public final static Property Price = new Property(4, long.class, "price", false, "PRICE");
         public final static Property IsCanMixture = new Property(5, int.class, "isCanMixture", false, "IS_CAN_MIXTURE");
         public final static Property MixtureFormula = new Property(6, String.class, "mixtureFormula", false, "MIXTURE_FORMULA");
+        public final static Property Count = new Property(7, int.class, "count", false, "COUNT");
+        public final static Property IsCount = new Property(8, int.class, "isCount", false, "IS_COUNT");
     }
 
 
@@ -52,7 +54,9 @@ public class MaterialDao extends AbstractDao<Material, Long> {
                 "\"TIPS\" TEXT," + // 3: tips
                 "\"PRICE\" INTEGER NOT NULL ," + // 4: price
                 "\"IS_CAN_MIXTURE\" INTEGER NOT NULL ," + // 5: isCanMixture
-                "\"MIXTURE_FORMULA\" TEXT);"); // 6: mixtureFormula
+                "\"MIXTURE_FORMULA\" TEXT," + // 6: mixtureFormula
+                "\"COUNT\" INTEGER NOT NULL ," + // 7: count
+                "\"IS_COUNT\" INTEGER NOT NULL );"); // 8: isCount
     }
 
     /** Drops the underlying database table. */
@@ -91,6 +95,8 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         if (mixtureFormula != null) {
             stmt.bindString(7, mixtureFormula);
         }
+        stmt.bindLong(8, entity.getCount());
+        stmt.bindLong(9, entity.getIsCount());
     }
 
     @Override
@@ -123,6 +129,8 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         if (mixtureFormula != null) {
             stmt.bindString(7, mixtureFormula);
         }
+        stmt.bindLong(8, entity.getCount());
+        stmt.bindLong(9, entity.getIsCount());
     }
 
     @Override
@@ -139,7 +147,9 @@ public class MaterialDao extends AbstractDao<Material, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // tips
             cursor.getLong(offset + 4), // price
             cursor.getInt(offset + 5), // isCanMixture
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // mixtureFormula
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // mixtureFormula
+            cursor.getInt(offset + 7), // count
+            cursor.getInt(offset + 8) // isCount
         );
         return entity;
     }
@@ -153,6 +163,8 @@ public class MaterialDao extends AbstractDao<Material, Long> {
         entity.setPrice(cursor.getLong(offset + 4));
         entity.setIsCanMixture(cursor.getInt(offset + 5));
         entity.setMixtureFormula(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setCount(cursor.getInt(offset + 7));
+        entity.setIsCount(cursor.getInt(offset + 8));
      }
     
     @Override

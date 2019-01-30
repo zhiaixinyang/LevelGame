@@ -65,6 +65,7 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
 
         presenter = new MonstersPresenter();
         presenter.subscribe(this);
+        presenter.setPlaceId(monsterPlaceId);
 
         adapter = new MonstersAdapter(presenter);
 

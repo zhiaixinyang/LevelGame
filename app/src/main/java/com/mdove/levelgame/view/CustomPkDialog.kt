@@ -39,12 +39,12 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             var name = it.name
 
             mBinding.vm = CustomPkBaseViewModel(name, it.tips, packages.type)
-             it.baseAttack.takeIf {
+            it.baseAttack.takeIf {
                 it != 0
             }?.let { attack ->
                 var strengthenLevel = ""
                 if (packages.strengthenLevel > 0) {
-                    strengthenLevel += " + " + attack * (0.1 * packages.strengthenLevel)
+                    strengthenLevel += " + " + attack * (0.2 * packages.strengthenLevel) + attack
                 } else {
                     strengthenLevel = attack.toString()
                 }
@@ -55,7 +55,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             }?.let { arrmor ->
                 var strengthenLevel = ""
                 if (packages.strengthenLevel > 0) {
-                    strengthenLevel += " + " + arrmor * (0.1 * packages.strengthenLevel)
+                    strengthenLevel += " + " + arrmor * (0.2 * packages.strengthenLevel)
                 } else {
                     strengthenLevel = arrmor.toString()
                 }
@@ -66,7 +66,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             }?.let { life ->
                 var strengthenLevel = ""
                 if (packages.strengthenLevel > 0) {
-                    strengthenLevel += " + " + life * (0.1 * packages.strengthenLevel)
+                    strengthenLevel += " + " + life * (0.2 * packages.strengthenLevel)
                 } else {
                     strengthenLevel = life.toString()
                 }

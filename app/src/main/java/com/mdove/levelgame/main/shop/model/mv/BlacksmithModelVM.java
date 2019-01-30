@@ -22,6 +22,7 @@ public class BlacksmithModelVM {
     public ObservableField<String> life = new ObservableField<>();
     public ObservableField<String> btnName = new ObservableField<>();
     public ObservableField<Integer> src = new ObservableField<>();
+    public ObservableField<Boolean> isLock = new ObservableField<>();
 
     public BlacksmithModelVM(Weapons model) {
         id.set(model.id);
@@ -31,6 +32,11 @@ public class BlacksmithModelVM {
             name.set("[服务：换]" + model.name);
         } else {
             name.set(model.name);
+        }
+        if (model.isLock == 1) {
+            isLock.set(false);
+        } else {
+            isLock.set(true);
         }
 
         attack.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_attack), model.attack));
@@ -57,6 +63,11 @@ public class BlacksmithModelVM {
         } else {
             name.set(model.name);
         }
+        if (model.isLock == 1) {
+            isLock.set(false);
+        } else {
+            isLock.set(true);
+        }
         attack.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_attack), model.attack));
         life.set(String.format(App.getAppContext().getString(R.string.shop_attack_msg_life), 0));
         armor.set("");
@@ -80,6 +91,11 @@ public class BlacksmithModelVM {
             name.set("[服务：换]" + model.name);
         } else {
             name.set(model.name);
+        }
+        if (model.isLock == 1) {
+            isLock.set(false);
+        } else {
+            isLock.set(true);
         }
         attack.set(String.format(App.getAppContext().getString(R.string.shop_accessories_msg_attack), model.attack));
         armor.set(String.format(App.getAppContext().getString(R.string.shop_accessories_msg_armor), model.armor));

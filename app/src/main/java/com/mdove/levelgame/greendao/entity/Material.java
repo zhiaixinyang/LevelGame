@@ -26,9 +26,12 @@ public class Material extends BaseBlacksmithModel implements IAttrsModel {
     public int isCanMixture;
     // 合成公式 json
     public String mixtureFormula;
-    @Generated(hash = 97262922)
+    public int count;
+    public int isCount;
+
+    @Generated(hash = 2057318771)
     public Material(Long id, String type, String name, String tips, long price,
-            int isCanMixture, String mixtureFormula) {
+            int isCanMixture, String mixtureFormula, int count, int isCount) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -36,49 +39,66 @@ public class Material extends BaseBlacksmithModel implements IAttrsModel {
         this.price = price;
         this.isCanMixture = isCanMixture;
         this.mixtureFormula = mixtureFormula;
+        this.count = count;
+        this.isCount = isCount;
     }
+
     @Generated(hash = 1176792654)
     public Material() {
     }
+
     public Long getId() {
         return this.id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getType() {
         return this.type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
+
     public String getName() {
         return this.name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getTips() {
         return this.tips;
     }
+
     public void setTips(String tips) {
         this.tips = tips;
     }
+
     public long getPrice() {
         return this.price;
     }
+
     public void setPrice(long price) {
         this.price = price;
     }
+
     public int getIsCanMixture() {
         return this.isCanMixture;
     }
+
     public void setIsCanMixture(int isCanMixture) {
         this.isCanMixture = isCanMixture;
     }
+
     public String getMixtureFormula() {
         return this.mixtureFormula;
     }
+
     public void setMixtureFormula(String mixtureFormula) {
         this.mixtureFormula = mixtureFormula;
     }
@@ -97,5 +117,21 @@ public class Material extends BaseBlacksmithModel implements IAttrsModel {
     public BaseAttrsModel getAttrsModel() {
         return new BaseAttrsModel(name, tips);
 
+    }
+
+    public int getCount() {
+        return this.count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getIsCount() {
+        return this.isCount;
+    }
+
+    public void setIsCount(int isCount) {
+        this.isCount = isCount;
     }
 }

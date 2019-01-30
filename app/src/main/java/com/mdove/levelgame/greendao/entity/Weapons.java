@@ -26,6 +26,7 @@ public class Weapons extends BaseBlacksmithModel implements IAttrsModel {
     public int armor;
     // 价格
     public long price;
+    public int isLock;
     /**
      * 装备类型 标识什么样子的装备。比如：普通装备（369等），神装...
      * 首字母A：表示武器
@@ -55,19 +56,21 @@ public class Weapons extends BaseBlacksmithModel implements IAttrsModel {
     public int needZhiHui;
     public int needQiangZhuang;
 
-    @Generated(hash = 2139335636)
+
+    @Generated(hash = 889371871)
     public Weapons(Long id, String name, String tips, int attack, int armor,
-                   long price, String type, int isCanStrengthen, int isCanUpdate,
-                   int isCanMixture, int isSpecial, String mixtureFormula,
-                   String updateFormula, String strengthenFormula, String belongMonsterId,
-                   long attackSpeed, int position, int needLevel, int needLiLiang,
-                   int needMinJie, int needZhiHui, int needQiangZhuang) {
+            long price, int isLock, String type, int isCanStrengthen,
+            int isCanUpdate, int isCanMixture, int isSpecial, String mixtureFormula,
+            String updateFormula, String strengthenFormula, String belongMonsterId,
+            long attackSpeed, int position, int needLevel, int needLiLiang,
+            int needMinJie, int needZhiHui, int needQiangZhuang) {
         this.id = id;
         this.name = name;
         this.tips = tips;
         this.attack = attack;
         this.armor = armor;
         this.price = price;
+        this.isLock = isLock;
         this.type = type;
         this.isCanStrengthen = isCanStrengthen;
         this.isCanUpdate = isCanUpdate;
@@ -89,6 +92,7 @@ public class Weapons extends BaseBlacksmithModel implements IAttrsModel {
     @Generated(hash = 1666722499)
     public Weapons() {
     }
+    
 
     @Override
     public void constructorBlacksmithModel() {
@@ -284,5 +288,13 @@ public class Weapons extends BaseBlacksmithModel implements IAttrsModel {
 
     public void setNeedQiangZhuang(int needQiangZhuang) {
         this.needQiangZhuang = needQiangZhuang;
+    }
+
+    public int getIsLock() {
+        return this.isLock;
+    }
+
+    public void setIsLock(int isLock) {
+        this.isLock = isLock;
     }
 }

@@ -1,5 +1,7 @@
 package com.mdove.levelgame.main.monsters.model
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import com.mdove.levelgame.greendao.MonstersDao
 import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager
@@ -19,9 +21,8 @@ class MonstersRepository {
         DatabaseManager.getInstance().monstersDao
     }
 
-    fun loadData(placeId: Long): List<BaseMonsterModelVM> {
-        var data = mutableListOf<BaseMonsterModelVM>()
-        data.add(MenuMonsterModelVM())
+    fun loadData(placeId: Long): List<MonstersModelVM> {
+        var data = mutableListOf<MonstersModelVM>()
         GlobalScope.launch {
             val deferred = GlobalScope.async(MDoveApiPool) {
                 loadDataFromPlaceId(placeId)

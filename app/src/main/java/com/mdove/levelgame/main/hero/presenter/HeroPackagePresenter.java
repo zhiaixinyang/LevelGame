@@ -21,7 +21,6 @@ import com.mdove.levelgame.main.hero.model.BasePackageModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPackageModelVM;
 import com.mdove.levelgame.main.hero.model.HeroPkEmptyModelVM;
 import com.mdove.levelgame.main.hero.util.EquipUtils;
-import com.mdove.levelgame.main.hero.viewmodel.HeroPackageViewModel;
 import com.mdove.levelgame.main.shop.manager.BlacksmithManager;
 import com.mdove.levelgame.main.shop.model.StrengthenResp;
 import com.mdove.levelgame.utils.AllGoodsToDBIdUtils;
@@ -32,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -208,7 +206,11 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
                 case AllGoodsToDBIdUtils.DB_TYPE_IS_MATERIALS: {
                     Material material = DatabaseManager.getInstance().getMaterialDao().queryBuilder().where(MaterialDao.Properties.Type.eq(pk.type)).unique();
                     if (material != null && pk.isEquip == 1) {
-                        packageModelVMS.add(1, new HeroPackageModelVM(pk.id, material.tips, pk.strengthenLevel, material.name, 0, 0, 0, material.type));
+                        HeroPackageModelVM model = new HeroPackageModelVM(pk.id, material.tips, pk.strengthenLevel, material.name, 0, 0, 0, material.type);
+                        if (material.isCount == 0) {
+                            model.setCount(pk.count);
+                        }
+                        packageModelVMS.add(1, model);
                     }
                     break;
                 }

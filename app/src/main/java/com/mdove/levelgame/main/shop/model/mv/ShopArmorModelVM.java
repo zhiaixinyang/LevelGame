@@ -17,6 +17,7 @@ public class ShopArmorModelVM {
     public ObservableField<String> attack = new ObservableField<>();
     public ObservableField<String> armor = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();
+    public ObservableField<Boolean> isLock = new ObservableField<>();
     public ObservableField<Integer> src = new ObservableField<>();
 
     public ShopArmorModelVM(Armors model) {
@@ -27,6 +28,11 @@ public class ShopArmorModelVM {
             attack.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_attack), model.attack));
         }else{
             attack.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_attack), 0));
+        }
+        if (model.isLock == 1) {
+            isLock.set(false);
+        } else {
+            isLock.set(true);
         }
         armor.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_armor), model.armor));
         price.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_price), model.price));

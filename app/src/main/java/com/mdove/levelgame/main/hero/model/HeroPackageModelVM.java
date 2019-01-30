@@ -61,7 +61,7 @@ public class HeroPackageModelVM extends BasePackageModelVM {
 
     public void setCount(int count) {
         isCountType.set(true);
-        this.count.set("数量：" + count);
+        this.count.set("" + count);
     }
 
     public void reName(long strengthen) {

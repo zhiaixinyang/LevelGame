@@ -54,9 +54,7 @@ class TaskManager {
                         HeroManager.getInstance().heroAttributes.bodyPower -= task.consumePower
                         HeroManager.getInstance().heroAttributes.money -= task.consumeMoney
                         if (hasMaterial.hasMaterial != null) {
-                            DatabaseManager.getInstance().packagesDao.delete(
-                                    DatabaseManager.getInstance().packagesDao.queryBuilder()
-                                            .where(PackagesDao.Properties.Id.eq(hasMaterial.hasMaterial!!.id)).unique())
+                            DatabaseManager.getInstance().packagesDao.delete(hasMaterial.hasMaterial!!.pk)
                         }
                         HeroManager.getInstance().save()
                         DatabaseManager.getInstance().taskDao.update(task)
@@ -95,7 +93,7 @@ class TaskManager {
             val taskContentTypes = JsonUtil.decode<List<TaskContentModel>>(task.taskContentType, object : TypeToken<List<TaskContentModel>>() {
             }.type)
             taskContentTypes.any {
-                resp.hasMaterial = BlacksmithManager.getInstance().hasMaterial(it.type)
+                resp.hasMaterial = BlacksmithManager.getInstance().hasMaterial(it.type,it.count)
                 resp.hasMaterial!!.isHas
             }
         } else {
@@ -123,9 +121,7 @@ class TaskManager {
 
         var hasMaterial = hasMaterials(task)
         if (hasMaterial.has && hasMaterial.hasMaterial != null) {
-            DatabaseManager.getInstance().packagesDao.delete(
-                    DatabaseManager.getInstance().packagesDao.queryBuilder()
-                            .where(PackagesDao.Properties.Id.eq(hasMaterial.hasMaterial!!.id)).unique())
+            DatabaseManager.getInstance().packagesDao.delete(hasMaterial.hasMaterial!!.pk)
         }
 
         task.taskStatus = 0

@@ -5,11 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.SwitchCompat
+import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.BaseActivity
 import com.mdove.levelgame.base.RxTransformerHelper
+import com.mdove.levelgame.base.sliding.AbsSlideCloseActivity
 import com.mdove.levelgame.config.AppConfig
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils
 import com.mdove.levelgame.main.feedback.FeedBackActivity
@@ -22,6 +24,7 @@ import io.reactivex.ObservableOnSubscribe
  * Created by MDove on 2018/11/13.
  */
 class SettingActivity : BaseActivity() {
+
     lateinit var btnHelp: TextView
     lateinit var btnReStart: TextView
     lateinit var btnUpdateMes: TextView

@@ -24,6 +24,7 @@ import javax.inject.Inject
  * Created by MDove on 2018/12/23.
  */
 class ShopActivity : BaseActivity(), ShopContract.IMedicinesShopView, HasSupportFragmentInjector {
+
     @Inject
     lateinit var injector: DispatchingAndroidInjector<Fragment>
 

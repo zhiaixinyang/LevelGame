@@ -22,10 +22,10 @@ import com.mdove.levelgame.base.BaseActivity
  *
  * 继承BuzzAbsSlideCloseActivity的子类，必须配合透明主题：android:theme="@style/BuzzTransparentTheme"
  *
- * @author   Demon.zhang <zhanglei.demon@bytedance.com>
- * @since    2018/12/21 下午6:31.
+ * @author   MDove
+ * @since    2019/2/01
  */
-abstract class BuzzAbsSlideCloseActivity : AppCompatActivity(), SlidingPaneLayout.PanelSlideListener {
+abstract class AbsSlideCloseActivity : BaseActivity(), SlidingPaneLayout.PanelSlideListener {
 
     private lateinit var mSlidingPaneLayout: PagerEnabledSlidingPaneLayout
     private lateinit var mContentView: FrameLayout
@@ -39,8 +39,20 @@ abstract class BuzzAbsSlideCloseActivity : AppCompatActivity(), SlidingPaneLayou
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initSlidingPaneLayout()
+        if (enableSlideClose()) {
+            initSlidingPaneLayout()
+        }
 //        mImmersedStatusBarHelper?.setStatusBarColor(android.R.color.transparent)
+    }
+
+    fun setSlideContentView(layoutId: Int) {
+        setSlideContentView(layoutInflater.inflate(layoutId, null))
+    }
+
+    fun setSlideContentView(view: View) {
+        super.setContentView(mSlidingPaneLayout, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+        mContentView.removeAllViews()
+        mContentView.addView(view)
     }
 
     private fun initSlidingPaneLayout() {
@@ -81,24 +93,11 @@ abstract class BuzzAbsSlideCloseActivity : AppCompatActivity(), SlidingPaneLayou
         mContentView = contentView
     }
 
-    override fun setContentView(layoutResID: Int) {
-        setContentView(layoutInflater.inflate(layoutResID, null))
-    }
-
-    override fun setContentView(view: View?) {
-        setContentView(view, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
-    }
-
-    override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
-        super.setContentView(mSlidingPaneLayout, params)
-        mContentView.removeAllViews()
-        mContentView.addView(view)
-    }
-
-    override fun onPanelClosed(panel: View) {
-    }
-
     override fun onPanelSlide(panel: View, slideOffset: Float) {
+    }
+
+    open fun enableSlideClose(): Boolean {
+        return true
     }
 
     override fun onPanelOpened(panel: View) {

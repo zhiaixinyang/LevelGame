@@ -17,8 +17,13 @@ import com.mdove.levelgame.greendao.utils.InitDataFileUtils
 import com.mdove.levelgame.main.feedback.FeedBackActivity
 import com.mdove.levelgame.utils.ToastHelper
 import com.mdove.levelgame.view.MyDialog
+import com.ss.android.network.threadpool.FastMain
+import com.ss.android.network.threadpool.MDoveBackgroundPool
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by MDove on 2018/11/13.
@@ -28,6 +33,7 @@ class SettingActivity : BaseActivity() {
     lateinit var btnHelp: TextView
     lateinit var btnReStart: TextView
     lateinit var btnUpdateMes: TextView
+    lateinit var btnUpdateDB: TextView
     lateinit var btnFeedBack: TextView
     lateinit var switchBigMonster: SwitchCompat
     lateinit var layoutBigMonster: RelativeLayout
@@ -52,6 +58,7 @@ class SettingActivity : BaseActivity() {
         setContentView(R.layout.activity_setting)
 
         btnHelp = findViewById(R.id.btn_help)
+        btnUpdateDB = findViewById(R.id.btn_update_db)
         btnReStart = findViewById(R.id.btn_re_start)
         btnUpdateMes = findViewById(R.id.btn_update_mes)
         btnFeedBack = findViewById(R.id.btn_feed_back)
@@ -62,6 +69,15 @@ class SettingActivity : BaseActivity() {
             MyDialog.showMyDialog(context, getString(R.string.string_re_start_dialog_title), getString(R.string.string_re_start_dialog_content)
                     , "不，点错了", "确定", false) {
                 restartGame()
+            }
+        }
+        btnUpdateDB.setOnClickListener {
+            CoroutineScope(FastMain).launch {
+                showLoadingDialog(getString(R.string.string_update_db_loading))
+                withContext(MDoveBackgroundPool) {
+                    InitDataFileUtils.updateDB()
+                }
+                dismissLoadingDialog()
             }
         }
         btnHelp.setOnClickListener { MyDialog.showMyDialog(context, getString(R.string.string_setting_help_title), getString(R.string.string_setting_help_content), true) }

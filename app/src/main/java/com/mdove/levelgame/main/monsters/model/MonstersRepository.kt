@@ -1,7 +1,6 @@
 package com.mdove.levelgame.main.monsters.model
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import com.mdove.levelgame.greendao.MonstersDao
 import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager
@@ -21,8 +20,8 @@ class MonstersRepository {
         DatabaseManager.getInstance().monstersDao
     }
 
-    fun loadData(placeId: Long): List<MonstersModelVM> {
-        var data = mutableListOf<MonstersModelVM>()
+    fun loadData(placeId: Long): List<BaseMonsterModelVM> {
+        var data = mutableListOf<BaseMonsterModelVM>()
         GlobalScope.launch {
             val deferred = GlobalScope.async(MDoveApiPool) {
                 loadDataFromPlaceId(placeId)
@@ -32,8 +31,8 @@ class MonstersRepository {
         return data
     }
 
-    private fun loadDataFromPlaceId(placeId: Long): MutableList<MonstersModelVM> {
-        var data = mutableListOf<MonstersModelVM>()
+    private fun loadDataFromPlaceId(placeId: Long): List<BaseMonsterModelVM> {
+        var data = mutableListOf<BaseMonsterModelVM>()
         // 特殊怪物出现设置
         SpecialMonsterManager.getInstance().setShowSpecialMonster()
         val monsters = monstersDao.queryBuilder()
@@ -41,6 +40,7 @@ class MonstersRepository {
         if (monsters == null || monsters.size == 0) {
             return data
         }
+        data.add(MenuMonsterModelVM())
         monsters.filter {
             it.monsterPlaceId == placeId && it.isShow == 0
         }.forEach {

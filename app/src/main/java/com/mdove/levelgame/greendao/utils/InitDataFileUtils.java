@@ -98,6 +98,10 @@ public class InitDataFileUtils {
         HeroManager.getInstance().resetAttr();
         HeroAttributesManager.getInstance().resetPower();
 
+        updateDB();
+    }
+
+    public static void updateDB() {
         AllGoodsDao allGoodsDao = DatabaseManager.getInstance().getAllGoodsDao();
         allGoodsDao.deleteAll();
         WeaponsDao weaponsDao = DatabaseManager.getInstance().getWeaponsDao();
@@ -107,6 +111,7 @@ public class InitDataFileUtils {
         MonstersDao monstersDao = DatabaseManager.getInstance().getMonstersDao();
         monstersDao.deleteAll();
         MonstersPlaceDao monstersPlaceDao = DatabaseManager.getInstance().getMonstersPlaceDao();
+        monstersPlaceDao.deleteAll();
         MedicinesDao medicinesDao = DatabaseManager.getInstance().getMedicinesDao();
         medicinesDao.deleteAll();
         BigMonstersDao bigMonstersDao = DatabaseManager.getInstance().getBigMonstersDao();
@@ -130,7 +135,6 @@ public class InitDataFileUtils {
 
         if (!AppConfig.isHasLogin()) {
             bigMonstersDao.deleteAll();
-            monstersPlaceDao.deleteAll();
         }
         DropGoodsDao dropGoodsDao = DatabaseManager.getInstance().getDropGoodsDao();
         dropGoodsDao.deleteAll();
@@ -220,12 +224,12 @@ public class InitDataFileUtils {
         for (Adventure adventure : getInitAdventure()) {
             adventureDao.insert(adventure);
         }
+        for (MonstersPlace monstersPlace : getInitMonstersPlaceBase()) {
+            monstersPlaceDao.insert(monstersPlace);
+        }
         if (!AppConfig.isHasLogin()) {
             for (BigMonsters b : getInitBigMonsters()) {
                 bigMonstersDao.insert(b);
-            }
-            for (MonstersPlace monstersPlace : getInitMonstersPlaceBase()) {
-                monstersPlaceDao.insert(monstersPlace);
             }
         }
     }

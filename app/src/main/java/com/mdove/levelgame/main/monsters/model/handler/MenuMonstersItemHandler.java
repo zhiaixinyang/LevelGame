@@ -20,4 +20,7 @@ public class MenuMonstersItemHandler {
     public void onItemMyPackage() {
         monstersPresenter.onItemMyPackage();
     }
+    public void onItemMyAttr() {
+        monstersPresenter.onItemMyAttr();
+    }
 }

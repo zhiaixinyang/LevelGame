@@ -53,9 +53,10 @@
             android:layout_marginRight="12dp"
             android:layout_marginTop="12dp"
             android:layout_weight="1"
+            android:onClick="@{()->handler.onItemMyAttr()}"
             android:background="@drawable/bg_purple_round_8"
             android:gravity="center"
-            android:text="休息"
+            android:text="详细属性"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>

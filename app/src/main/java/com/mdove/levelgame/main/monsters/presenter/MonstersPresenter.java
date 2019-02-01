@@ -13,6 +13,7 @@ import com.mdove.levelgame.greendao.entity.HeroAttributes;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
+import com.mdove.levelgame.main.hero.HeroAttributesActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.hero.manager.HeroManager;
 import com.mdove.levelgame.main.hero.model.AttackResp;
@@ -138,6 +139,11 @@ public class MonstersPresenter implements MonstersConstract.IMonstersPresenter {
     @Override
     public void onItemMyPackage() {
         view.showMyPackage();
+    }
+
+    @Override
+    public void onItemMyAttr() {
+        HeroAttributesActivity.start(view.getContext());
     }
 
     @SuppressLint("CheckResult")

@@ -26,6 +26,7 @@ public interface MonstersConstract {
         void heroRest();
 
         void onItemMyPackage();
+        void onItemMyAttr();
 
         void onItemBtnClick(String type, Long id);
 

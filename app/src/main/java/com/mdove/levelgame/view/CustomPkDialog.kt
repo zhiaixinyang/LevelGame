@@ -44,7 +44,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             }?.let { attack ->
                 var strengthenLevel = ""
                 if (packages.strengthenLevel > 0) {
-                    strengthenLevel += " + " + attack * (0.2 * packages.strengthenLevel)
+                    strengthenLevel += " + " + attack * (0.2 * packages.strengthenLevel).toInt()
                 } else {
                     strengthenLevel = attack.toString()
                 }
@@ -55,7 +55,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             }?.let { arrmor ->
                 var strengthenLevel = ""
                 if (packages.strengthenLevel > 0) {
-                    strengthenLevel += " + " + arrmor * (0.2 * packages.strengthenLevel)
+                    strengthenLevel += " + " + arrmor * (0.2 * packages.strengthenLevel).toInt()
                 } else {
                     strengthenLevel = arrmor.toString()
                 }
@@ -66,7 +66,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             }?.let { life ->
                 var strengthenLevel = ""
                 if (packages.strengthenLevel > 0) {
-                    strengthenLevel += " + " + life * (0.2 * packages.strengthenLevel)
+                    strengthenLevel += " + " + life * (0.2 * packages.strengthenLevel).toInt()
                 } else {
                     strengthenLevel = life.toString()
                 }
@@ -77,7 +77,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             }?.let {
                 var strengthenLevel = ""
                 if (packages.strengthenLevel > 0) {
-                    strengthenLevel += " + " + it * (0.1 * packages.strengthenLevel)
+                    strengthenLevel += " + " + it * (0.1 * packages.strengthenLevel).toInt()
                 } else {
                     strengthenLevel = it.toString()
                 }

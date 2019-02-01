@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.kotlin.ActivityLauncher;
 import com.mdove.levelgame.base.kotlin.JobHandler;
-import com.mdove.levelgame.base.sliding.AbsSlideCloseActivity;
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.home.HomeActivity;
 import com.mdove.levelgame.view.MyDialog;
@@ -69,6 +68,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             super.setContentView(R.layout.activity_base);
 
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            mToolbar.setNavigationOnClickListener(v -> {
+                onToolbarBack();
+            });
             btnAttr = findViewById(R.id.btn_attributes);
             btnGoHome = findViewById(R.id.btn_go_home);
             mContentContainer = (FrameLayout) findViewById(R.id.content_frame);
@@ -95,6 +97,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 });
             }
         }
+    }
+
+    protected void onToolbarBack() {
+        finish();
     }
 
     private Drawable resizeImage(int resId, int w, int h) {

@@ -16,7 +16,7 @@ import io.reactivex.functions.Consumer
  */
 class BlacksmithAccessoriesPresenter : BlacksmithAccessoriesContract.IBlacksmithAccessoriesPresenter {
     override fun onItemBtnClick(type: String, id: Long?) {
-        BlacksmithManager.getInstance().goodsUpdate(type).subscribe(Consumer {
+        BlacksmithManager.instance.goodsUpdate(type).subscribe(Consumer {
             MyDialog.showMyDialog(view.context, it.title, it.content, true)
         })
     }

@@ -115,7 +115,7 @@
   {
     "id": 10,
     "name": "[服务：换]铜矿石",
-    "tips": "换取铜矿石的条件：铁矿石+铁矿石+铁矿石",
+    "tips": "换取铜矿石的条件：铁矿石3个",
     "type": "A10",
     "is_can_update": 1,
     "is_can_mixture": 0,
@@ -129,7 +129,7 @@
     "belong_monster_id": "1002,",
     "price": 0,
     "is_special": 0,
-    "mixture_formula": "[{\"type\":\"E1\"},{\"type\":\"E1\"},{\"type\":\"E1\"}]"
+    "mixture_formula": "[{\"type\":\"E1\",\"is_count\":0,\"count\":3}]"
   },
   {
     "id": 11,
@@ -148,7 +148,7 @@
     "belong_monster_id": "1002,",
     "price": 0,
     "is_special": 0,
-    "mixture_formula": "[{\"type\":\"E1\"},{\"type\":\"E1\"},{\"type\":\"E1\"},{\"type\":\"E1\"},{\"type\":\"E1\"}]"
+    "mixture_formula": "[{\"type\":\"E1\",\"is_count\":0,\"count\":5}]"
   },
   {
     "id": 6,
@@ -338,7 +338,7 @@
   {
     "id": 16,
     "name": "<font color=\"#43A047\">破魂斧</font>",
-    "tips": "升级公式：重斧 + 铁矿石 + 铁矿石",
+    "tips": "升级公式：重斧 + 铁矿石2个",
     "attack": 150,
     "armor": 0,
     "price": 2,
@@ -355,13 +355,13 @@
     "belong_monster_id": "1002,",
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1,\"is_count\":0,\"count\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9,\"is_count\":0,\"count\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8,\"is_count\":0,\"count\":1}]",
     "is_special": 0,
-    "update_formula": "[{\"type\":\"A4\",\"is_count\":0,\"count\":1},{\"type\":\"E1\",\"is_count\":0,\"count\":1},{\"type\":\"E1\",\"is_count\":0,\"count\":1}]",
+    "update_formula": "[{\"type\":\"A4\",\"is_count\":0,\"count\":1},{\"type\":\"E1\",\"is_count\":0,\"count\":2}]",
     "is_can_mixture": 1
   },
   {
     "id": 17,
     "name": "<font color=\"#43A047\">修罗斧</font>",
-    "tips": "升级公式：<font color=\"#43A047\">破魂斧</font> + 铁矿石 + 铁矿石 + 域外陨铁",
+    "tips": "升级公式：<font color=\"#43A047\">破魂斧</font> + 铁矿石2个 + 域外陨铁",
     "attack": 250,
     "armor": 0,
     "price": 2,
@@ -378,7 +378,7 @@
     "belong_monster_id": "1002,",
     "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1,\"is_count\":0,\"count\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9,\"is_count\":0,\"count\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8,\"is_count\":0,\"count\":1}]",
     "is_special": 0,
-    "update_formula": "[{\"type\":\"A16\",\"is_count\":0,\"count\":1},{\"type\":\"E1\",\"is_count\":0,\"count\":1},{\"type\":\"E5\",\"is_count\":0,\"count\":1},{\"type\":\"E1\",\"is_count\":0,\"count\":1}]",
+    "update_formula": "[{\"type\":\"A16\",\"is_count\":0,\"count\":1},{\"type\":\"E1\",\"is_count\":0,\"count\":2},{\"type\":\"E5\",\"is_count\":0,\"count\":1}]",
     "is_can_mixture": 1
   },
   {

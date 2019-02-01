@@ -11,7 +11,7 @@
     "position": 4,
     "type": "G1",
     "is_can_strengthen": 0,
-    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1,\"is_count\":0,\"count\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9,\"is_count\":0,\"count\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8,\"is_count\":0,\"count\":1}]",
     "is_can_update": 1,
     "need_level": 0,
     "need_li_liang": 0,
@@ -21,7 +21,7 @@
     "need_qiang_zhuang": 0,
     "is_special": 0,
     "is_can_mixture": 0,
-    "mixture_formula": "[{\"type\":\"G3\"},{\"type\":\"E7\"}]"
+    "mixture_formula": "[{\"type\":\"G3\",\"is_count\":0,\"count\":1},{\"type\":\"E7\",\"is_count\":0,\"count\":1}]"
   },
   {
     "id": 2,
@@ -33,7 +33,7 @@
     "price": 2,
     "type": "G2",
     "is_can_strengthen": 0,
-    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8}]",
+    "strengthen_formula": "[{\"level\":\"1\",\"type\":\"E3\",\"probability\":1,\"is_count\":0,\"count\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.9,\"is_count\":0,\"count\":1},{\"level\":\"1\",\"type\":\"E3\",\"probability\":0.8,\"is_count\":0,\"count\":1}]",
     "is_can_update": 1,
     "need_level": 0,
     "is_lock": 1,
@@ -42,7 +42,7 @@
     "need_zhi_hui": 0,
     "need_qiang_zhuang": 0,
     "is_special": 0,
-    "mixture_formula": "[{\"type\":\"E9\"}]",
+    "mixture_formula": "[{\"type\":\"E9\",\"is_count\":0,\"count\":1}]",
     "is_can_mixture": 0
   },
   {

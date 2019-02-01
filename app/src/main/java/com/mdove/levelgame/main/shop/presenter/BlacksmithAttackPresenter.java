@@ -53,10 +53,10 @@ public class BlacksmithAttackPresenter implements BlacksmithAttackContract.IBlac
 
     @Override
     public void onItemBtnClick(String type, Long id) {
-        BlacksmithManager.getInstance().goodsUpdate(type).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
+        BlacksmithManager.Companion.getInstance().goodsUpdate(type).subscribe(new Consumer<BlacksmithManager.BlacksmithResp>() {
             @Override
             public void accept(BlacksmithManager.BlacksmithResp blacksmithResp) throws Exception {
-                MyDialog.showMyDialog(view.getContext(), blacksmithResp.title, blacksmithResp.content, true);
+                MyDialog.showMyDialog(view.getContext(), blacksmithResp.getTitle(), blacksmithResp.getContent(), true);
             }
         });
     }

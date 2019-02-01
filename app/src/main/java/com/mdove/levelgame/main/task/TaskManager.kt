@@ -93,7 +93,7 @@ class TaskManager {
             val taskContentTypes = JsonUtil.decode<List<TaskContentModel>>(task.taskContentType, object : TypeToken<List<TaskContentModel>>() {
             }.type)
             taskContentTypes.any {
-                resp.hasMaterial = BlacksmithManager.getInstance().hasMaterial(it.type,it.count)
+                resp.hasMaterial = BlacksmithManager.instance.hasMaterial(it.type,it.count)
                 resp.hasMaterial!!.isHas
             }
         } else {

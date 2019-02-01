@@ -32,6 +32,8 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
         super.onViewCreated(view, savedInstanceState);
         rlv = view.findViewById(R.id.rlv);
         layoutEmpty = view.findViewById(R.id.layout_empty);
+        layoutEmpty.setVisibility(View.GONE);
+
         rlv.setLayoutManager(customLayoutManager());
 
         initData();
@@ -39,7 +41,6 @@ public abstract class BaseListFragment extends Fragment implements BaseView {
         adapter = createAdapter();
         rlv.setAdapter(adapter);
         adapter.setListener(isEmpty -> {
-            layoutEmpty.setVisibility(View.GONE);
 //            if (isEmpty) {
 //                layoutEmpty.setVisibility(View.VISIBLE);
 //            } else {

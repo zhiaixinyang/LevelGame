@@ -326,6 +326,8 @@
                         android:layout_marginLeft="@dimen/main_btn_normal_margin"
                         android:layout_marginRight="@dimen/main_btn_normal_margin"
                         android:layout_marginBottom="@dimen/main_btn_normal_margin"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
                         android:progress="@{vm.qiangZhuangProgress}" />
                 </LinearLayout>
             </android.support.constraint.ConstraintLayout>

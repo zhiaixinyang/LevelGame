@@ -607,22 +607,23 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
     @Override
     public void onClickStrengthen(HeroPackageModelVM vm) {
-        StrengthenResp resp = BlacksmithManager.getInstance().strengthen(vm.pkId.get(), vm.type.get());
-        switch (resp.status) {
+        StrengthenResp resp = BlacksmithManager.Companion.getInstance().strengthen(vm.pkId.get(), vm.type.get());
+        switch (resp.getStatus()) {
             case BlacksmithManager.STRENGTHEN_STATUS_SUC: {
                 MyDialog.showMyDialog(view.getContext(), view.getString(R.string.string_strengthen_title)
                         , view.getString(R.string.string_strengthen_suc), true);
                 int position = -1;
                 int strengthIdPosition = -1;
                 for (BasePackageModelVM vm1 : packageModelVMS) {
-                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get() == vm.pkId.get()) {
+                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get().equals(vm.pkId.get())) {
                         position = packageModelVMS.indexOf(vm1);
-                        ((HeroPackageModelVM) vm1).reName(resp.level);
+                        ((HeroPackageModelVM) vm1).reName(resp.getLevel());
                         break;
                     }
                 }
                 for (BasePackageModelVM vm1 : packageModelVMS) {
-                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get() == resp.strengthId) {
+                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get() == resp.getStrengthId()) {
+                        ((HeroPackageModelVM) vm1).setCount(((HeroPackageModelVM) vm1).baseCount - 1);
                         strengthIdPosition = packageModelVMS.indexOf(vm1);
                         break;
                     }
@@ -630,14 +631,18 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
 
                 if (position != -1 && strengthIdPosition != -1) {
                     view.notifyByPosition(position);
-                    view.deleteByPosition(strengthIdPosition);
+                    if (resp.isDelete()) {
+                        view.deleteByPosition(strengthIdPosition);
+                    } else {
+                        view.notifyByPosition(strengthIdPosition);
+                    }
                 }
                 break;
             }
             case BlacksmithManager.STRENGTHEN_STATUS_FAIL: {
                 int strengthIdPosition = -1;
                 for (BasePackageModelVM vm1 : packageModelVMS) {
-                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get() == resp.strengthId) {
+                    if (vm1 instanceof HeroPackageModelVM && ((HeroPackageModelVM) vm1).pkId.get() == resp.getStrengthId()) {
                         strengthIdPosition = packageModelVMS.indexOf(vm1);
                         break;
                     }

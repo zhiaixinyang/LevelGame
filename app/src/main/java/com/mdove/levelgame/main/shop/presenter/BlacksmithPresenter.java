@@ -62,6 +62,6 @@ public class BlacksmithPresenter implements BlacksmithContract.IBlacksmithPresen
 
     @Override
     public void onItemBtnClick(String type, Long id) {
-        BlacksmithManager.getInstance().goodsUpdate(type).subscribe(blacksmithResp -> MyDialog.showMyDialog(view.getContext(), blacksmithResp.title, blacksmithResp.content, true));
+        BlacksmithManager.Companion.getInstance().goodsUpdate(type).subscribe(blacksmithResp -> MyDialog.showMyDialog(view.getContext(), blacksmithResp.getTitle(), blacksmithResp.getContent(), true));
     }
 }

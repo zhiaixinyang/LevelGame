@@ -44,11 +44,11 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             }?.let { attack ->
                 var strengthenLevel = ""
                 if (packages.strengthenLevel > 0) {
-                    strengthenLevel += " + " + attack * (0.2 * packages.strengthenLevel) + attack
+                    strengthenLevel += " + " + attack * (0.2 * packages.strengthenLevel)
                 } else {
                     strengthenLevel = attack.toString()
                 }
-                allAttrInfos.add("增加攻击：$strengthenLevel")
+                allAttrInfos.add("增加攻击：$attack$strengthenLevel")
             }
             it.baseArmor.takeIf {
                 it != 0
@@ -59,7 +59,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 } else {
                     strengthenLevel = arrmor.toString()
                 }
-                allAttrInfos.add("增加防御：$strengthenLevel")
+                allAttrInfos.add("增加防御：$arrmor$strengthenLevel")
             }
             it.baseLife.takeIf {
                 it != 0
@@ -70,7 +70,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 } else {
                     strengthenLevel = life.toString()
                 }
-                allAttrInfos.add("增加血上限：$strengthenLevel")
+                allAttrInfos.add("增加血上限：$life$strengthenLevel")
             }
             it.baseAttackSpeed.takeIf {
                 it > 0
@@ -81,7 +81,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 } else {
                     strengthenLevel = it.toString()
                 }
-                allAttrInfos.add("降低攻击间隔：$strengthenLevel")
+                allAttrInfos.add("降低攻击间隔：$it$strengthenLevel")
             }
 
             it.baseNeedLevel.takeIf {

@@ -1,5 +1,7 @@
 package com.mdove.levelgame.main.hero.manager;
 
+import android.text.TextUtils;
+
 import com.mdove.levelgame.greendao.ArmorsDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.PackagesDao;
@@ -151,6 +153,7 @@ public class HeroBuyManager {
         final BaseBuy baseBuy = new BaseBuy();
 
         Object oj = AllGoodsToDBIdUtils.getInstance().getBlacksmithModelFromType(type);
+        String materialType = null;
         if (oj != null) {
             // 构建BaseBuy
             if (oj instanceof Weapons) {
@@ -175,6 +178,7 @@ public class HeroBuyManager {
                 }
             } else if (oj instanceof Material) {
                 Material model = (Material) oj;
+                materialType = model.type;
                 baseBuy.name = model.name;
                 baseBuy.tips = model.tips;
                 baseBuy.type = model.type;
@@ -201,13 +205,22 @@ public class HeroBuyManager {
 
                     heroAttributes.money -= baseBuy.price;
 
-                    Packages packages = new Packages();
-                    packages.isEquip = 1;
-                    packages.isSelect = 1;
-                    packages.count = 1;
-                    packages.strengthenLevel = 0;
-                    packages.type = baseBuy.type;
-                    packagesDao.insert(packages);
+                    Packages packages = null;
+                    if (!TextUtils.isEmpty(materialType)) {
+                        packages = packagesDao.queryBuilder().where(PackagesDao.Properties.Type.eq(materialType)).unique();
+                    }
+                    if (packages == null) {
+                        packages = new Packages();
+                        packages.isEquip = 1;
+                        packages.isSelect = 1;
+                        packages.count = 1;
+                        packages.strengthenLevel = 0;
+                        packages.type = baseBuy.type;
+                        packagesDao.insert(packages);
+                    } else {
+                        packages.count = packages.count + 1;
+                        packagesDao.update(packages);
+                    }
                 } else {
                     baseBuy.buyStatus = BUY_BASE_STATUS_FAIL;
                 }

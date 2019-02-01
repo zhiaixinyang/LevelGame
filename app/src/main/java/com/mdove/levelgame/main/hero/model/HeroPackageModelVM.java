@@ -26,6 +26,7 @@ public class HeroPackageModelVM extends BasePackageModelVM {
     public ObservableField<Boolean> isMaterials = new ObservableField<>();
     public ObservableField<Boolean> isCountType = new ObservableField<>();
     public ObservableField<String> count = new ObservableField<>();
+    public int baseCount;
 
     public HeroPackageModelVM(Long id, String tips, long strengthen, String name, int attack, int armor, int life, String type) {
         pkId.set(id);
@@ -61,6 +62,7 @@ public class HeroPackageModelVM extends BasePackageModelVM {
 
     public void setCount(int count) {
         isCountType.set(true);
+        baseCount = count;
         this.count.set("" + count);
     }
 

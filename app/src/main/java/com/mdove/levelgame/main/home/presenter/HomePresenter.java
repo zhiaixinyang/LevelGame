@@ -25,6 +25,8 @@ import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.vm.BaseMainMenuVM;
 import com.mdove.levelgame.main.home.model.vm.MainMenuModelVM;
 import com.mdove.levelgame.main.home.model.vm.TopMainMenuModelVM;
+import com.mdove.levelgame.main.lilian.LiLianLevelActivity;
+import com.mdove.levelgame.main.lilian.PracticePlaceActivity;
 import com.mdove.levelgame.main.monsters.MonstersActivity;
 import com.mdove.levelgame.main.shop.BlacksmithActivity;
 import com.mdove.levelgame.main.shop.ShopActivity;
@@ -53,6 +55,9 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     private static final int INTENT_TO_HERO_PACKAGE = 5;
     private static final int INTENT_TO_HOME_SKILL = 6;
     private static final int INTENT_TO_HOME_TASK = 7;
+    private static final int INTENT_TO_HOME_SHENG_WANG = 8;
+    private static final int INTENT_TO_HOME_MI_JING = 9;
+    private static final int INTENT_TO_HOME_LI_LIAN = 10;
     private HomeContract.IHomeView view;
 
     @Override
@@ -83,6 +88,18 @@ public class HomePresenter implements HomeContract.IHomePresenter {
             }
             case INTENT_TO_HOME_TASK: {
                 TaskActivity.Companion.start(view.getContext());
+                break;
+            }
+            case INTENT_TO_HOME_SHENG_WANG: {
+                TaskActivity.Companion.start(view.getContext());
+                break;
+            }
+            case INTENT_TO_HOME_MI_JING: {
+                PracticePlaceActivity.Companion.start(view.getContext());
+                break;
+            }
+            case INTENT_TO_HOME_LI_LIAN: {
+                LiLianLevelActivity.Companion.start(view.getContext());
                 break;
             }
             default:

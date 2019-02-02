@@ -31,7 +31,6 @@ public class ViewPagerLayoutManager  extends LinearLayoutManager {
 
     }
 
-
     @Override
     public void onAttachedToWindow(RecyclerView view) {
         super.onAttachedToWindow(view);

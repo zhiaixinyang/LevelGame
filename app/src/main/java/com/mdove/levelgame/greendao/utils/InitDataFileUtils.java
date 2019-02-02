@@ -15,12 +15,14 @@ import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.FbMonstersDao;
 import com.mdove.levelgame.greendao.FbPlaceDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
+import com.mdove.levelgame.greendao.LiLianLevelDao;
 import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
 import com.mdove.levelgame.greendao.PackagesDao;
+import com.mdove.levelgame.greendao.PracticePlaceDao;
 import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.TaskDao;
 import com.mdove.levelgame.greendao.WeaponsDao;
@@ -33,11 +35,13 @@ import com.mdove.levelgame.greendao.entity.DropGoods;
 import com.mdove.levelgame.greendao.entity.FbMonsters;
 import com.mdove.levelgame.greendao.entity.FbPlace;
 import com.mdove.levelgame.greendao.entity.HeroAttributes;
+import com.mdove.levelgame.greendao.entity.LiLianLevel;
 import com.mdove.levelgame.greendao.entity.MainMenu;
 import com.mdove.levelgame.greendao.entity.Material;
 import com.mdove.levelgame.greendao.entity.Medicines;
 import com.mdove.levelgame.greendao.entity.Monsters;
 import com.mdove.levelgame.greendao.entity.MonstersPlace;
+import com.mdove.levelgame.greendao.entity.PracticePlace;
 import com.mdove.levelgame.greendao.entity.Skill;
 import com.mdove.levelgame.greendao.entity.Task;
 import com.mdove.levelgame.greendao.entity.Weapons;
@@ -76,6 +80,8 @@ public class InitDataFileUtils {
         heroAttributes.attackSpeed = 1500;
         heroAttributes.skillCount = 1;
         heroAttributes.days = 1;
+        heroAttributes.shengWang = 0;
+        heroAttributes.liLian = 0;
         heroAttributes.liLiang = 1;
         heroAttributes.liLiangExp = 0;
         heroAttributes.liLiangBaseExp = 100;
@@ -133,6 +139,12 @@ public class InitDataFileUtils {
         CityDao cityDao = DatabaseManager.getInstance().getCityDao();
         cityDao.deleteAll();
 
+        LiLianLevelDao liLianLevelDao = DatabaseManager.getInstance().getLiLianLevelDao();
+        liLianLevelDao.deleteAll();
+        for (LiLianLevel liLianLevel : getInitLiLianLevel()) {
+            liLianLevelDao.insert(liLianLevel);
+        }
+
         if (!AppConfig.isHasLogin()) {
             bigMonstersDao.deleteAll();
         }
@@ -142,6 +154,12 @@ public class InitDataFileUtils {
         materialDao.deleteAll();
         PackagesDao packagesDao = DatabaseManager.getInstance().getPackagesDao();
         packagesDao.deleteAll();
+
+        PracticePlaceDao practicePlaceDao = DatabaseManager.getInstance().getPracticePlaceDao();
+        practicePlaceDao.deleteAll();
+        for (PracticePlace practicePlace : getInitPracticePlace()) {
+            practicePlaceDao.insert(practicePlace);
+        }
 
         List<DropGoods> dropGoods = getInitDropGoods();
         for (DropGoods dropGood : dropGoods) {
@@ -304,6 +322,16 @@ public class InitDataFileUtils {
         return null;
     }
 
+    public static List<PracticePlace> getInitPracticePlace() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_PRACTICE_PLACE);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<PracticePlace>>() {
+            }.getType());
+        }
+        return null;
+    }
+
     public static List<FbMonsters> getInitFbMonsters() {
         String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
                 ConstAssetsFileName.ASSETS_FB_MONSTER);
@@ -329,6 +357,16 @@ public class InitDataFileUtils {
                 ConstAssetsFileName.ASSETS_ACCESSORIES);
         if (json != null) {
             return JsonUtil.decode(json, new TypeToken<List<Accessories>>() {
+            }.getType());
+        }
+        return null;
+    }
+
+    public static List<LiLianLevel> getInitLiLianLevel() {
+        String json = FileUtil.loadJsonFromAssets(App.getAppContext(),
+                ConstAssetsFileName.ASSETS_LILIAN_LEVEL);
+        if (json != null) {
+            return JsonUtil.decode(json, new TypeToken<List<LiLianLevel>>() {
             }.getType());
         }
         return null;

@@ -14,12 +14,14 @@ import com.mdove.levelgame.greendao.DropGoodsDao;
 import com.mdove.levelgame.greendao.FbMonstersDao;
 import com.mdove.levelgame.greendao.FbPlaceDao;
 import com.mdove.levelgame.greendao.HeroAttributesDao;
+import com.mdove.levelgame.greendao.LiLianLevelDao;
 import com.mdove.levelgame.greendao.MainMenuDao;
 import com.mdove.levelgame.greendao.MaterialDao;
 import com.mdove.levelgame.greendao.MedicinesDao;
 import com.mdove.levelgame.greendao.MonstersDao;
 import com.mdove.levelgame.greendao.MonstersPlaceDao;
 import com.mdove.levelgame.greendao.PackagesDao;
+import com.mdove.levelgame.greendao.PracticePlaceDao;
 import com.mdove.levelgame.greendao.RandomAttrDao;
 import com.mdove.levelgame.greendao.SkillDao;
 import com.mdove.levelgame.greendao.TaskDao;
@@ -61,6 +63,8 @@ public class DatabaseManager {
     private FbMonstersDao mFbMonstersDao;
     private CityDao mCityDao;
     private RandomAttrDao mRandomAttrDao;
+    private LiLianLevelDao mLiLianLevelDao;
+    private PracticePlaceDao mPracticePlaceDao;
 
     private static final class Holder {
         private static final DatabaseManager INSTANCE = new DatabaseManager();
@@ -108,10 +112,20 @@ public class DatabaseManager {
         mFbMonstersDao = mDaoSession.getFbMonstersDao();
         mCityDao = mDaoSession.getCityDao();
         mRandomAttrDao = mDaoSession.getRandomAttrDao();
+        mLiLianLevelDao = mDaoSession.getLiLianLevelDao();
+        mPracticePlaceDao = mDaoSession.getPracticePlaceDao();
     }
 
     public MaterialDao getMaterialDao() {
         return materialDao;
+    }
+
+    public LiLianLevelDao getLiLianLevelDao() {
+        return mLiLianLevelDao;
+    }
+
+    public void setLiLianLevelDao(LiLianLevelDao liLianLevelDao) {
+        mLiLianLevelDao = liLianLevelDao;
     }
 
     /**
@@ -197,6 +211,15 @@ public class DatabaseManager {
 
     public RandomAttrDao getRandomAttrDao() {
         return mRandomAttrDao;
+    }
+
+
+    public PracticePlaceDao getPracticePlaceDao() {
+        return mPracticePlaceDao;
+    }
+
+    public void setPracticePlaceDao(PracticePlaceDao practicePlaceDao) {
+        mPracticePlaceDao = practicePlaceDao;
     }
 
     /**

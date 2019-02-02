@@ -14,6 +14,7 @@ import com.mdove.levelgame.greendao.utils.SrcIconMap;
 public class MedicinesModelVM {
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<String> tips = new ObservableField<>();
+    public ObservableField<String> type = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
     public ObservableField<String> life = new ObservableField<>();
     public ObservableField<String> attack = new ObservableField<>();
@@ -31,6 +32,7 @@ public class MedicinesModelVM {
         id.set(medicines.id);
         tips.set(medicines.tips);
         name.set(medicines.name);
+        type.set(medicines.type);
         if (medicines.isLock == 1) {
             isLock.set(false);
         } else {

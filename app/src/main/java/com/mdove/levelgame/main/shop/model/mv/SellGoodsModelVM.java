@@ -17,7 +17,7 @@ public class SellGoodsModelVM {
     public ObservableField<String> btnText = new ObservableField<>();
     public ObservableField<Integer> src = new ObservableField<>();
     public ObservableField<Long> realPrice = new ObservableField<>();
-    // 0表示是可购买的，1表示可合成，2表示可升级
+    // 0表示是可购买的，1表示可合成，2表示可升级，3表示学习，4表示买药
     public int status;
 
     public SellGoodsModelVM(long price, String name, String tips, String type, int status) {
@@ -26,7 +26,7 @@ public class SellGoodsModelVM {
         this.type.set(type);
         this.status = status;
         src.set(SrcIconMap.getInstance().getSrc(type));
-        if (status == 0) {
+        if (status == 0 || status == 4) {
             this.price.set(String.format(App.getAppContext().getString(R.string.shop_armor_msg_price), price));
             btnText.set("购买");
         } else if (status == 1) {
@@ -35,7 +35,7 @@ public class SellGoodsModelVM {
         } else if (status == 2) {
             this.price.set("");
             btnText.set("升级");
-        }else if (status == 3) {
+        } else if (status == 3) {
             this.price.set("");
             btnText.set("学习");
         }

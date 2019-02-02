@@ -79,7 +79,7 @@ public abstract class BaseListActivity<T> extends AppCompatActivity implements B
                 }
             });
         }
-        mRlv.setLayoutManager(new LinearLayoutManager(this));
+        mRlv.setLayoutManager(customLayoutManager());
 
         initData(getIntent());
 
@@ -98,6 +98,10 @@ public abstract class BaseListActivity<T> extends AppCompatActivity implements B
         if (enableAndroidInject()) {
             AndroidInjection.inject(this);
         }
+    }
+
+    protected RecyclerView.LayoutManager customLayoutManager() {
+        return new LinearLayoutManager(this);
     }
 
     public abstract BaseListAdapter<T> createAdapter();

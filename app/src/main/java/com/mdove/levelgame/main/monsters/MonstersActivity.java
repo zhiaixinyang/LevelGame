@@ -13,9 +13,7 @@ import android.widget.TextView;
 
 import com.mdove.levelgame.R;
 import com.mdove.levelgame.base.BaseActivity;
-import com.mdove.levelgame.base.BaseNormalDialog;
 import com.mdove.levelgame.main.hero.fragment.HeroPackageDialogFragment;
-import com.mdove.levelgame.main.hero.manager.HeroAttributesManager;
 import com.mdove.levelgame.main.monsters.adapter.MonstersAdapter;
 import com.mdove.levelgame.main.monsters.manager.AdventureManager;
 import com.mdove.levelgame.main.monsters.model.MonstersViewModel;
@@ -82,9 +80,6 @@ public class MonstersActivity extends BaseActivity implements MonstersConstract.
         mViewModel = ViewModelProviders.of(this).get(MonstersViewModel.class);
         mViewModel.loadMonsters(monsterPlaceId);
         mViewModel.getMonstersData().observe(this, monstersModelVMS -> adapter.setData(monstersModelVMS));
-
-//        presenter.initData(monsterPlaceId);
-
     }
 
     @Override

@@ -38,9 +38,9 @@ class ShopMedicinesPresenter : ShopMedicinesContract.IShopMedicinesPresenter {
         mView.dismissLoadingDialog()
     }
 
-    override fun onItemBtnClick(id: Long) {
+    override fun onItemBtnClick(type: String) {
         Observable.create(ObservableOnSubscribe<BuyMedicinesResp> { e ->
-            val resp = HeroBuyManager.getInstance().buyMedicines(id)
+            val resp = HeroBuyManager.getInstance().buyMedicines(type)
             e.onNext(resp)
         }).subscribe({ buyMedicinesResp ->
             when (buyMedicinesResp.buyStatus) {
@@ -63,7 +63,7 @@ class ShopMedicinesPresenter : ShopMedicinesContract.IShopMedicinesPresenter {
                         String.format(mView.context.getString(R.string.string_buy_medicines_suc),
                                 buyMedicinesResp.life, buyMedicinesResp.price, buyMedicinesResp.name)
                     }
-                    notifyUI(id)
+                    notifyUI(type)
                     MyDialog.showMyDialog(mView.context, mView.context.getString(R.string.string_buy_title_suc),
                             content, true)
                 }
@@ -73,10 +73,10 @@ class ShopMedicinesPresenter : ShopMedicinesContract.IShopMedicinesPresenter {
         }, {})
     }
 
-    private fun notifyUI(id: Long) {
+    private fun notifyUI(type: String) {
         var position = -1
         for (vm in data) {
-            if (vm.id.get() == id) {
+            if (vm.type.get() == type) {
                 vm.resetLimitCount()
                 position = data.indexOf(vm)
                 break

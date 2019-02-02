@@ -198,6 +198,16 @@
     "is_count": 0,
     "is_can_mixture": 1,
     "tips": "击败<font color=\"#D32F2F\">神兽·朱雀</font>所掉落。<br/>可用于合成神器：<font color=\"#7B1FA2\">凤凰羽衣</font>。<br/>合成公式：凤凰羽 + 魔王头骨 + 金砂",
-    "type": "E19"
+    "type": "E20"
+  },
+  {
+    "id": 21,
+    "name": "妖蛇鳞",
+    "price": 2,
+    "count": 1,
+    "is_count": 0,
+    "is_can_mixture": 1,
+    "tips": "击败[<font color=\"#E53935\">BOSS</font>]-妖蛇王所掉落。<br/>可用于在龙地洞进行修炼。",
+    "type": "E21"
   }
 ]

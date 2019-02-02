@@ -54,5 +54,29 @@
     "btn_text": "进入",
     "type": "main7",
     "click_id": 7
+  },
+  {
+    "id": 8,
+    "name": "名声远扬",
+    "tips": "通过声望，提升自己的名气值。以此解锁更多内容~",
+    "btn_text": "进入",
+    "type": "main8",
+    "click_id": 8
+  },
+  {
+    "id": 9,
+    "name": "秘境之地",
+    "tips": "传说中的秘境，此处可以快速获得 历练值~",
+    "btn_text": "进入",
+    "type": "main9",
+    "click_id": 9
+  },
+  {
+    "id": 10,
+    "name": "历练晋升",
+    "tips": "能力晋升，可以解锁更多的场景~",
+    "btn_text": "进入",
+    "type": "main10",
+    "click_id": 10
   }
 ]

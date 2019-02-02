@@ -15,6 +15,6 @@ public class MedicinesItemHandler {
     }
 
     public void onItemBtnOnClick(MedicinesModelVM vm) {
-        medicinesShopPresenter.onItemBtnClick(vm.id.get());
+        medicinesShopPresenter.onItemBtnClick(vm.type.get());
     }
 }

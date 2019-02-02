@@ -71,6 +71,10 @@
     "id": 18,
     "types": "[{\"type\":\"E19\",\"probability\":0.6}]"
   },
+  {
+    "id": 19,
+    "types": "[{\"type\":\"E21\",\"probability\":1}]"
+  },
   // 魔王掉落
   {
     "id": 100,

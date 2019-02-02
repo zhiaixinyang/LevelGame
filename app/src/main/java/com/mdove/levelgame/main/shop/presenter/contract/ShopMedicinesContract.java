@@ -14,7 +14,7 @@ public interface ShopMedicinesContract {
     interface IShopMedicinesPresenter extends BasePresenter<IShopMedicinesView> {
         void initData();
 
-        void onItemBtnClick(Long id);
+        void onItemBtnClick(String type);
     }
 
     interface IShopMedicinesView extends BaseView {

@@ -43,6 +43,7 @@
     <string name="hero_msg_has_life">生命：%1$d/%2$d</string>
     <string name="monsters_msg_has_count">还剩次数：%1$d / %2$d</string>
     <string name="string_buy_msg_has_count">可购买次数：%1$d / %2$d</string>
+    <string name="string_practice_has_count">可修炼次数：%1$d / %2$d</string>
     <string name="monsters_msg_use_power">消耗体力：%1$d</string>
     <string name="monsters_msg_armor">护甲：%1$d</string>
     <string name="monsters_msg_exp">经验：%1$d</string>

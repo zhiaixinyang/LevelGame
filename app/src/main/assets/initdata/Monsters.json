@@ -3,11 +3,12 @@
     "id": 1,
     "name": "小喽啰",
     "tips": "别打我，我就是混口饭吃...",
-    "attack": 10,
+    "attack": 15,
     "armor": 5,
     "money": 10,
     "life": 50,
     "type": "C1",
+    "is_lock": 1,
     "is_businessman": 1,
     "monster_place_id": 1,
     "drop_goods_id": 1,
@@ -38,11 +39,12 @@
     "id": 2,
     "name": "强盗",
     "tips": "一帮刀口舔血的家伙。",
-    "attack": 20,
-    "armor": 10,
-    "life": 100,
-    "money": 30,
+    "attack": 35,
+    "armor": 20,
+    "life": 125,
+    "money": 40,
     "type": "C2",
+    "is_lock": 1,
     "is_show": 0,
     "exp_li_liang": [
       1,
@@ -67,7 +69,7 @@
     "monster_place_id": 1,
     "drop_goods_id": 2,
     "consume_power": 10,
-    "exp": 30
+    "exp": 50
   },
   {
     "id": 3,
@@ -77,6 +79,7 @@
     "armor": 10,
     "life": 60,
     "money": 150,
+    "is_lock": 1,
     "type": "C3",
     "is_show": 0,
     "exp_li_liang": [
@@ -109,10 +112,11 @@
     "id": 4,
     "name": "嗜血强盗",
     "tips": "嗜杀成性的强盗。<br/><font color=\"#D32F2F\">有较高几率掉落：长刀</font>",
-    "attack": 100,
+    "attack": 75,
     "armor": 35,
     "money": 50,
-    "life": 100,
+    "is_lock": 1,
+    "life": 300,
     "is_show": 0,
     "type": "C4",
     "exp_li_liang": [
@@ -139,15 +143,16 @@
     "monster_place_id": 1,
     "drop_goods_id": 4,
     "consume_power": 25,
-    "exp": 30
+    "exp": 100
   },
   {
     "id": 5,
-    "name": "[BOSS]-山贼头目",
-    "tips": "BOSS级别怪物，请小心应对！！！<br/>有几率掉落战神系列装备。",
-    "attack": 300,
+    "name": "[<font color=\"#E53935\">BOSS</font>]-山贼头目",
+    "tips": "<font color=\"#E53935\">BOSS</font>级别怪物，请小心应对！！！<br/>有几率掉落战神系列装备。",
+    "attack": 150,
     "life": 2000,
     "armor": 150,
+    "is_lock": 0,
     "money": 100,
     "type": "C5",
     "is_show": 0,
@@ -185,6 +190,7 @@
     "life": 30,
     "money": 0,
     "type": "C6",
+    "is_lock": 1,
     "is_show": 0,
     "exp_li_liang": [
       5,
@@ -219,6 +225,7 @@
     "attack": 500,
     "armor": 350,
     "life": 1000,
+    "is_lock": 1,
     "money": 50,
     "type": "C7",
     "exp_li_liang": [
@@ -255,6 +262,7 @@
     "attack": 10,
     "armor": 0,
     "life": 100,
+    "is_lock": 1,
     "money": 0,
     "type": "C8",
     "exp_li_liang": [
@@ -289,6 +297,7 @@
     "attack": 50,
     "armor": 0,
     "life": 200,
+    "is_lock": 1,
     "money": 0,
     "type": "C9",
     "exp_li_liang": [
@@ -316,7 +325,7 @@
     "monster_place_id": 4,
     "drop_goods_id": 13,
     "consume_power": 15,
-    "exp": 100
+    "exp": 300
   },
   {
     "id": 10,
@@ -325,6 +334,7 @@
     "attack": 200,
     "armor": 50,
     "life": 500,
+    "is_lock": 1,
     "attack_speed": 1500,
     "money": 0,
     "type": "C10",
@@ -359,6 +369,7 @@
     "attack": 150,
     "armor": 50,
     "life": 300,
+    "is_lock": 1,
     "money": 0,
     "is_show": 0,
     "attack_speed": 1500,
@@ -394,6 +405,7 @@
     "tips": "游走在怪物堆的商人，你可能需要他手中的一些道具，甚至需要他提供的服务~",
     "attack": 99999,
     "armor": 99999,
+    "is_lock": 1,
     "life": 99999,
     "money": 0,
     "type": "C12",
@@ -432,6 +444,7 @@
     "life": 99999,
     "money": 0,
     "type": "C13",
+    "is_lock": 1,
     "is_show": 1,
     "exp_li_liang": [
       5,
@@ -466,6 +479,7 @@
     "armor": 1200,
     "life": 5000,
     "money": 100,
+    "is_lock": 1,
     "type": "C14",
     "exp_li_liang": [
       5,
@@ -501,6 +515,7 @@
     "attack": 300,
     "armor": 800,
     "life": 3000,
+    "is_lock": 1,
     "money": 50,
     "type": "C15",
     "exp_li_liang": [
@@ -540,6 +555,7 @@
     "attack_speed": 1500,
     "money": 0,
     "type": "C16",
+    "is_lock": 1,
     "is_limit_count": 1,
     "limit_count": 0,
     "cur_count": 0,
@@ -574,6 +590,7 @@
     "attack": 1200,
     "armor": 500,
     "life": 10000,
+    "is_lock": 0,
     "money": 0,
     "type": "C17",
     "is_limit_count": 0,
@@ -646,6 +663,7 @@
       5,
       10
     ],
+    "is_lock": 0,
     "money": 0,
     "type": "C19",
     "is_limit_count": 0,
@@ -667,6 +685,7 @@
     "armor": 0,
     "life": 666,
     "money": 0,
+    "is_lock": 1,
     "type": "C20",
     "exp_li_liang": [
       5,
@@ -703,6 +722,7 @@
     "armor": 0,
     "life": 666,
     "money": 0,
+    "is_lock": 1,
     "exp_li_liang": [
       5,
       10
@@ -737,6 +757,7 @@
     "tips": "<font color=\"#7B1FA2\">[奇遇怪物]</font><br>携带大量金钱，还不需要体力，干就完了！",
     "attack": 0,
     "armor": 0,
+    "is_lock": 1,
     "life": 666,
     "exp_li_liang": [
       5,
@@ -773,6 +794,7 @@
     "tips": "传说中的四大神兽之一。<br/>击败有几率获得：青龙爪；可用于合成神器：<font color=\"#D32F2F\">真·东皇钟</font>。",
     "attack": 3500,
     "armor": 2000,
+    "is_lock": 0,
     "life": 12000,
     "exp_li_liang": [
       5,
@@ -811,6 +833,7 @@
     "armor": 500,
     "life": 1000,
     "money": 100,
+    "is_lock": 0,
     "type": "C24",
     "exp_li_liang": [
       5,
@@ -845,6 +868,7 @@
     "tips": "传说中的四大神兽之一。<br/>击败有几率获得：白虎牙；可用于合成神器：<font color=\"#7B1FA2\">白虎之力</font>。",
     "attack": 300,
     "armor": 500,
+    "is_lock": 1,
     "life": 1000,
     "exp_li_liang": [
       5,
@@ -915,16 +939,17 @@
     "id": 27,
     "name": "猪妖",
     "tips": "卧槽？猪成精了...",
-    "attack": 50,
-    "armor": 30,
-    "life": 100,
+    "attack": 120,
+    "armor": 20,
+    "life": 200,
+    "is_lock": 1,
     "money": 0,
     "is_show": 0,
     "attack_speed": 1500,
-    "type": "C11",
+    "type": "C27",
     "exp_li_liang": [
-      1,
-      20
+      10,
+      35
     ],
     "exp_min_jie": [
       1,
@@ -945,26 +970,27 @@
     "drop_goods_id": 8,
     "is_businessman": 1,
     "consume_power": 15,
-    "exp": 0
+    "exp": 50
   },
   {
     "id": 28,
     "name": "牛妖",
     "tips": "卧槽？牛成精了...",
-    "attack": 80,
+    "attack": 150,
     "armor": 30,
-    "life": 150,
+    "life": 300,
     "money": 0,
     "is_show": 0,
+    "is_lock": 1,
     "attack_speed": 1500,
-    "type": "C11",
+    "type": "C28",
     "exp_li_liang": [
       1,
       20
     ],
     "exp_min_jie": [
-      1,
-      5
+      15,
+      45
     ],
     "exp_zhi_hui": [
       1,
@@ -981,7 +1007,7 @@
     "drop_goods_id": 8,
     "is_businessman": 1,
     "consume_power": 15,
-    "exp": 0
+    "exp": 100
   },
   {
     "id": 29,
@@ -989,9 +1015,10 @@
     "tips": "帮你迅速提高力量经验值。",
     "attack": 0,
     "armor": 0,
+    "is_lock": 0,
     "life": 100,
     "money": 0,
-    "type": "C8",
+    "type": "C29",
     "exp_li_liang": [
       50,
       100
@@ -1026,8 +1053,9 @@
     "attack": 0,
     "armor": 0,
     "life": 100,
+    "is_lock": 0,
     "money": 0,
-    "type": "C8",
+    "type": "C30",
     "exp_li_liang": [
       1,
       3
@@ -1062,8 +1090,9 @@
     "attack": 0,
     "armor": 0,
     "life": 100,
+    "is_lock": 0,
     "money": 0,
-    "type": "C8",
+    "type": "C31",
     "exp_li_liang": [
       1,
       3
@@ -1098,8 +1127,9 @@
     "attack": 0,
     "armor": 0,
     "life": 100,
+    "is_lock": 0,
     "money": 0,
-    "type": "C8",
+    "type": "C32",
     "exp_li_liang": [
       1,
       3
@@ -1125,6 +1155,78 @@
     "monster_place_id": 4,
     "drop_goods_id": 0,
     "consume_power": 15,
+    "exp": 0
+  },
+  {
+    "id": 33,
+    "name": "江湖游医",
+    "tips": "云游四海的江湖医生~",
+    "attack": 99999,
+    "armor": 99999,
+    "life": 99999,
+    "money": 0,
+    "is_lock": 1,
+    "type": "C33",
+    "exp_li_liang": [
+      5,
+      10
+    ],
+    "exp_min_jie": [
+      5,
+      10
+    ],
+    "exp_zhi_hui": [
+      5,
+      10
+    ],
+    "exp_qiang_zhuang": [
+      5,
+      10
+    ],
+    "is_show": 0,
+    "is_limit_count": 1,
+    "monster_place_id": 0,
+    "drop_goods_id": 0,
+    "is_businessman": 0,
+    "attack_speed": 1500,
+    "consume_power": 0,
+    "sell_goods_json": "[{\"type\":\"D1\",\"price\":30},{\"type\":\"D2\",\"price\":40}]",
+    "exp": 0
+  },
+  {
+    "id": 34,
+    "name": "[<font color=\"#E53935\">BOSS</font>]-妖蛇王",
+    "tips": "<font color=\"#E53935\">BOSS</font>级别怪物，请小心应对！！！<br/>有几率掉落：妖蛇鳞。",
+    "attack": 350,
+    "life": 3000,
+    "armor": 100,
+    "money": 0,
+    "type": "C34",
+    "is_lock": 0,
+    "is_show": 0,
+    "exp_li_liang": [
+      100,
+      100
+    ],
+    "exp_min_jie": [
+      100,
+      100
+    ],
+    "exp_zhi_hui": [
+      100,
+      100
+    ],
+    "exp_qiang_zhuang": [
+      100,
+      100
+    ],
+    "is_businessman": 1,
+    "monster_place_id": 2,
+    "attack_speed": 1500,
+    "is_limit_count": 0,
+    "limit_count": 1,
+    "drop_goods_id": 19,
+    "consume_power": 0,
     "exp": 0
   }
   //,

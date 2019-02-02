@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "战士1",
+    "tips": "战士1。",
+    "is_get":1,
+    "btn_name": "晋升",
+    "type": "L1",
+    "unlock_type": "[{\"type\":\"C29\"},{\"type\":\"C30\"},{\"type\":\"C31\"},{\"type\":\"C32\"}{\"type\":\"C5\"}]",
+    "need_lilian": 100
+  },
+  {
+    "id": 2,
+    "name": "战士2",
+    "tips": "战士2。",
+    "is_get":1,
+    "btn_name": "晋升",
+    "type": "L2",
+    "unlock_type": "[{\"type\":\"C29\"},{\"type\":\"C30\"},{\"type\":\"C31\"},{\"type\":\"C32\"}{\"type\":\"C5\"}]",
+    "need_lilian": 200
+  },
+  {
+    "id": 3,
+    "name": "战士3",
+    "is_get":1,
+    "tips": "战士3。",
+    "type": "L3",
+    "btn_name": "晋升",
+    "unlock_type": "[{\"type\":\"C29\"},{\"type\":\"C30\"},{\"type\":\"C31\"},{\"type\":\"C32\"}{\"type\":\"C5\"}]",
+    "need_lilian": 300
+  }
+]

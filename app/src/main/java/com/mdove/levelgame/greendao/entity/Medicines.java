@@ -1,5 +1,9 @@
 package com.mdove.levelgame.greendao.entity;
 
+import com.mdove.levelgame.model.BaseAttrsModel;
+import com.mdove.levelgame.model.BaseBlacksmithModel;
+import com.mdove.levelgame.model.IAttrsModel;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -11,7 +15,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 
 @Entity
-public class Medicines {
+public class Medicines extends BaseBlacksmithModel implements IAttrsModel {
     @Id(autoincrement = true)
     public Long id;
     // 药品名
@@ -36,8 +40,8 @@ public class Medicines {
 
     @Generated(hash = 672333653)
     public Medicines(Long id, String name, String tips, int life, int lifeUp,
-            int price, String type, long attack, long armor, int limitCount,
-            int isLimitCount, int isLock, int curCount) {
+                     int price, String type, long attack, long armor, int limitCount,
+                     int isLimitCount, int isLock, int curCount) {
         this.id = id;
         this.name = name;
         this.tips = tips;
@@ -55,6 +59,19 @@ public class Medicines {
 
     @Generated(hash = 1436234687)
     public Medicines() {
+    }
+
+    @Override
+    public void constructorBlacksmithModel() {
+        myName = name;
+        myType = type;
+    }
+
+    @Override
+    public BaseAttrsModel getAttrsModel() {
+        BaseAttrsModel model = new BaseAttrsModel(name, type);
+        model.baseLife = lifeUp;
+        return model;
     }
 
 

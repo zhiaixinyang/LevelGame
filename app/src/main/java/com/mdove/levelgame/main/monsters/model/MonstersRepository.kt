@@ -1,16 +1,18 @@
 package com.mdove.levelgame.main.monsters.model
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import com.mdove.levelgame.greendao.MonstersDao
 import com.mdove.levelgame.greendao.utils.DatabaseManager
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager
 import com.mdove.levelgame.main.monsters.model.vm.BaseMonsterModelVM
 import com.mdove.levelgame.main.monsters.model.vm.MenuMonsterModelVM
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM
-import com.ss.android.network.threadpool.MDoveApiPool
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import com.ss.android.network.threadpool.FastMain
+import com.ss.android.network.threadpool.MDoveBackgroundPool
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Created by MDove on 2018/12/24.
@@ -20,32 +22,27 @@ class MonstersRepository {
         DatabaseManager.getInstance().monstersDao
     }
 
-    fun loadData(placeId: Long): List<BaseMonsterModelVM> {
-        var data = mutableListOf<BaseMonsterModelVM>()
-        GlobalScope.launch {
-            val deferred = GlobalScope.async(MDoveApiPool) {
-                loadDataFromPlaceId(placeId)
+    fun loadData(placeId: Long): LiveData<List<BaseMonsterModelVM>> {
+        var dataLiveData = MutableLiveData<List<BaseMonsterModelVM>>()
+        CoroutineScope(FastMain).launch {
+            val baseData = withContext(MDoveBackgroundPool) {
+                var data = mutableListOf<BaseMonsterModelVM>()
+                // 特殊怪物出现设置
+                SpecialMonsterManager.getInstance().setShowSpecialMonster()
+                val qb = monstersDao.queryBuilder()
+                val monsters = qb.whereOr(qb.and(MonstersDao.Properties.MonsterPlaceId.eq(placeId), MonstersDao.Properties.IsShow.eq(0)),
+                        MonstersDao.Properties.MonsterPlaceId.eq(0)).list()
+                data.add(MenuMonsterModelVM())
+                monsters.forEach {
+                    data.add(MonstersModelVM(it))
+                }
+                val lastPos = data.size - 1
+                data.add(0, data[lastPos])
+                data.removeAt(lastPos+1)
+                data
             }
-            data.addAll(deferred.await())
+            dataLiveData.postValue(baseData)
         }
-        return data
-    }
-
-    private fun loadDataFromPlaceId(placeId: Long): List<BaseMonsterModelVM> {
-        var data = mutableListOf<BaseMonsterModelVM>()
-        // 特殊怪物出现设置
-        SpecialMonsterManager.getInstance().setShowSpecialMonster()
-        val monsters = monstersDao.queryBuilder()
-                .where(MonstersDao.Properties.MonsterPlaceId.eq(placeId), MonstersDao.Properties.IsShow.eq(0)).list()
-        if (monsters == null || monsters.size == 0) {
-            return data
-        }
-        data.add(MenuMonsterModelVM())
-        monsters.filter {
-            it.monsterPlaceId == placeId && it.isShow == 0
-        }.forEach {
-            data.add(MonstersModelVM(it))
-        }
-        return data
+        return dataLiveData
     }
 }

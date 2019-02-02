@@ -87,20 +87,12 @@ public class BaseNormalDialog extends AppCompatDialog {
             binding.btnCancel.setVisibility(View.GONE);
         }
 
-        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
+        binding.btnCancel.setOnClickListener(v -> dismiss());
+        binding.btnSubmit.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onClick();
             }
-        });
-        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.onClick();
-                }
-                dismiss();
-            }
+            dismiss();
         });
     }
 

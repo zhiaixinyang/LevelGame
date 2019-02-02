@@ -62,12 +62,12 @@ public class HeroBuyManager {
         return SingletonHolder.INSTANCE;
     }
 
-    public BuyMedicinesResp buyMedicines(long id) {
+    public BuyMedicinesResp buyMedicines(String type) {
         HeroAttributes heroAttributes = HeroManager.getInstance().getHeroAttributes();
         BuyMedicinesResp resp = new BuyMedicinesResp();
         resp.buyStatus = BUY_MEDICINES_STATUS_ERROR;
         Medicines medicine = DatabaseManager.getInstance().getMedicinesDao().queryBuilder()
-                .where(MedicinesDao.Properties.Id.eq(id)).unique();
+                .where(MedicinesDao.Properties.Type.eq(type)).unique();
         if (medicine != null) {
             // 没钱
             if (heroAttributes.money - medicine.price < 0) {

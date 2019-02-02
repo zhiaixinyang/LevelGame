@@ -41,22 +41,24 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         public final static Property Days = new Property(14, int.class, "days", false, "DAYS");
         public final static Property AttackSpeed = new Property(15, long.class, "attackSpeed", false, "ATTACK_SPEED");
         public final static Property SkillCount = new Property(16, int.class, "skillCount", false, "SKILL_COUNT");
-        public final static Property LiLiang = new Property(17, int.class, "liLiang", false, "LI_LIANG");
-        public final static Property LiLiangExp = new Property(18, long.class, "liLiangExp", false, "LI_LIANG_EXP");
-        public final static Property LiLiangBaseExp = new Property(19, long.class, "liLiangBaseExp", false, "LI_LIANG_BASE_EXP");
-        public final static Property LiLiangExpMultiple = new Property(20, int.class, "liLiangExpMultiple", false, "LI_LIANG_EXP_MULTIPLE");
-        public final static Property MinJie = new Property(21, int.class, "minJie", false, "MIN_JIE");
-        public final static Property MinJieExp = new Property(22, long.class, "minJieExp", false, "MIN_JIE_EXP");
-        public final static Property MinJieBaseExp = new Property(23, long.class, "minJieBaseExp", false, "MIN_JIE_BASE_EXP");
-        public final static Property MinJieExpMultiple = new Property(24, int.class, "minJieExpMultiple", false, "MIN_JIE_EXP_MULTIPLE");
-        public final static Property ZhiHui = new Property(25, int.class, "zhiHui", false, "ZHI_HUI");
-        public final static Property ZhiHuiExp = new Property(26, long.class, "zhiHuiExp", false, "ZHI_HUI_EXP");
-        public final static Property ZhiHuiBaseExp = new Property(27, long.class, "zhiHuiBaseExp", false, "ZHI_HUI_BASE_EXP");
-        public final static Property ZhiHuiExpMultiple = new Property(28, int.class, "zhiHuiExpMultiple", false, "ZHI_HUI_EXP_MULTIPLE");
-        public final static Property QiangZhuang = new Property(29, int.class, "qiangZhuang", false, "QIANG_ZHUANG");
-        public final static Property QiangZhuangExp = new Property(30, long.class, "qiangZhuangExp", false, "QIANG_ZHUANG_EXP");
-        public final static Property QiangZhuangBaseExp = new Property(31, long.class, "qiangZhuangBaseExp", false, "QIANG_ZHUANG_BASE_EXP");
-        public final static Property QiangZhuangExpMultiple = new Property(32, int.class, "qiangZhuangExpMultiple", false, "QIANG_ZHUANG_EXP_MULTIPLE");
+        public final static Property ShengWang = new Property(17, int.class, "shengWang", false, "SHENG_WANG");
+        public final static Property LiLian = new Property(18, int.class, "liLian", false, "LI_LIAN");
+        public final static Property LiLiang = new Property(19, int.class, "liLiang", false, "LI_LIANG");
+        public final static Property LiLiangExp = new Property(20, long.class, "liLiangExp", false, "LI_LIANG_EXP");
+        public final static Property LiLiangBaseExp = new Property(21, long.class, "liLiangBaseExp", false, "LI_LIANG_BASE_EXP");
+        public final static Property LiLiangExpMultiple = new Property(22, int.class, "liLiangExpMultiple", false, "LI_LIANG_EXP_MULTIPLE");
+        public final static Property MinJie = new Property(23, int.class, "minJie", false, "MIN_JIE");
+        public final static Property MinJieExp = new Property(24, long.class, "minJieExp", false, "MIN_JIE_EXP");
+        public final static Property MinJieBaseExp = new Property(25, long.class, "minJieBaseExp", false, "MIN_JIE_BASE_EXP");
+        public final static Property MinJieExpMultiple = new Property(26, int.class, "minJieExpMultiple", false, "MIN_JIE_EXP_MULTIPLE");
+        public final static Property ZhiHui = new Property(27, int.class, "zhiHui", false, "ZHI_HUI");
+        public final static Property ZhiHuiExp = new Property(28, long.class, "zhiHuiExp", false, "ZHI_HUI_EXP");
+        public final static Property ZhiHuiBaseExp = new Property(29, long.class, "zhiHuiBaseExp", false, "ZHI_HUI_BASE_EXP");
+        public final static Property ZhiHuiExpMultiple = new Property(30, int.class, "zhiHuiExpMultiple", false, "ZHI_HUI_EXP_MULTIPLE");
+        public final static Property QiangZhuang = new Property(31, int.class, "qiangZhuang", false, "QIANG_ZHUANG");
+        public final static Property QiangZhuangExp = new Property(32, long.class, "qiangZhuangExp", false, "QIANG_ZHUANG_EXP");
+        public final static Property QiangZhuangBaseExp = new Property(33, long.class, "qiangZhuangBaseExp", false, "QIANG_ZHUANG_BASE_EXP");
+        public final static Property QiangZhuangExpMultiple = new Property(34, int.class, "qiangZhuangExpMultiple", false, "QIANG_ZHUANG_EXP_MULTIPLE");
     }
 
 
@@ -89,22 +91,24 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
                 "\"DAYS\" INTEGER NOT NULL ," + // 14: days
                 "\"ATTACK_SPEED\" INTEGER NOT NULL ," + // 15: attackSpeed
                 "\"SKILL_COUNT\" INTEGER NOT NULL ," + // 16: skillCount
-                "\"LI_LIANG\" INTEGER NOT NULL ," + // 17: liLiang
-                "\"LI_LIANG_EXP\" INTEGER NOT NULL ," + // 18: liLiangExp
-                "\"LI_LIANG_BASE_EXP\" INTEGER NOT NULL ," + // 19: liLiangBaseExp
-                "\"LI_LIANG_EXP_MULTIPLE\" INTEGER NOT NULL ," + // 20: liLiangExpMultiple
-                "\"MIN_JIE\" INTEGER NOT NULL ," + // 21: minJie
-                "\"MIN_JIE_EXP\" INTEGER NOT NULL ," + // 22: minJieExp
-                "\"MIN_JIE_BASE_EXP\" INTEGER NOT NULL ," + // 23: minJieBaseExp
-                "\"MIN_JIE_EXP_MULTIPLE\" INTEGER NOT NULL ," + // 24: minJieExpMultiple
-                "\"ZHI_HUI\" INTEGER NOT NULL ," + // 25: zhiHui
-                "\"ZHI_HUI_EXP\" INTEGER NOT NULL ," + // 26: zhiHuiExp
-                "\"ZHI_HUI_BASE_EXP\" INTEGER NOT NULL ," + // 27: zhiHuiBaseExp
-                "\"ZHI_HUI_EXP_MULTIPLE\" INTEGER NOT NULL ," + // 28: zhiHuiExpMultiple
-                "\"QIANG_ZHUANG\" INTEGER NOT NULL ," + // 29: qiangZhuang
-                "\"QIANG_ZHUANG_EXP\" INTEGER NOT NULL ," + // 30: qiangZhuangExp
-                "\"QIANG_ZHUANG_BASE_EXP\" INTEGER NOT NULL ," + // 31: qiangZhuangBaseExp
-                "\"QIANG_ZHUANG_EXP_MULTIPLE\" INTEGER NOT NULL );"); // 32: qiangZhuangExpMultiple
+                "\"SHENG_WANG\" INTEGER NOT NULL ," + // 17: shengWang
+                "\"LI_LIAN\" INTEGER NOT NULL ," + // 18: liLian
+                "\"LI_LIANG\" INTEGER NOT NULL ," + // 19: liLiang
+                "\"LI_LIANG_EXP\" INTEGER NOT NULL ," + // 20: liLiangExp
+                "\"LI_LIANG_BASE_EXP\" INTEGER NOT NULL ," + // 21: liLiangBaseExp
+                "\"LI_LIANG_EXP_MULTIPLE\" INTEGER NOT NULL ," + // 22: liLiangExpMultiple
+                "\"MIN_JIE\" INTEGER NOT NULL ," + // 23: minJie
+                "\"MIN_JIE_EXP\" INTEGER NOT NULL ," + // 24: minJieExp
+                "\"MIN_JIE_BASE_EXP\" INTEGER NOT NULL ," + // 25: minJieBaseExp
+                "\"MIN_JIE_EXP_MULTIPLE\" INTEGER NOT NULL ," + // 26: minJieExpMultiple
+                "\"ZHI_HUI\" INTEGER NOT NULL ," + // 27: zhiHui
+                "\"ZHI_HUI_EXP\" INTEGER NOT NULL ," + // 28: zhiHuiExp
+                "\"ZHI_HUI_BASE_EXP\" INTEGER NOT NULL ," + // 29: zhiHuiBaseExp
+                "\"ZHI_HUI_EXP_MULTIPLE\" INTEGER NOT NULL ," + // 30: zhiHuiExpMultiple
+                "\"QIANG_ZHUANG\" INTEGER NOT NULL ," + // 31: qiangZhuang
+                "\"QIANG_ZHUANG_EXP\" INTEGER NOT NULL ," + // 32: qiangZhuangExp
+                "\"QIANG_ZHUANG_BASE_EXP\" INTEGER NOT NULL ," + // 33: qiangZhuangBaseExp
+                "\"QIANG_ZHUANG_EXP_MULTIPLE\" INTEGER NOT NULL );"); // 34: qiangZhuangExpMultiple
     }
 
     /** Drops the underlying database table. */
@@ -137,22 +141,24 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         stmt.bindLong(15, entity.getDays());
         stmt.bindLong(16, entity.getAttackSpeed());
         stmt.bindLong(17, entity.getSkillCount());
-        stmt.bindLong(18, entity.getLiLiang());
-        stmt.bindLong(19, entity.getLiLiangExp());
-        stmt.bindLong(20, entity.getLiLiangBaseExp());
-        stmt.bindLong(21, entity.getLiLiangExpMultiple());
-        stmt.bindLong(22, entity.getMinJie());
-        stmt.bindLong(23, entity.getMinJieExp());
-        stmt.bindLong(24, entity.getMinJieBaseExp());
-        stmt.bindLong(25, entity.getMinJieExpMultiple());
-        stmt.bindLong(26, entity.getZhiHui());
-        stmt.bindLong(27, entity.getZhiHuiExp());
-        stmt.bindLong(28, entity.getZhiHuiBaseExp());
-        stmt.bindLong(29, entity.getZhiHuiExpMultiple());
-        stmt.bindLong(30, entity.getQiangZhuang());
-        stmt.bindLong(31, entity.getQiangZhuangExp());
-        stmt.bindLong(32, entity.getQiangZhuangBaseExp());
-        stmt.bindLong(33, entity.getQiangZhuangExpMultiple());
+        stmt.bindLong(18, entity.getShengWang());
+        stmt.bindLong(19, entity.getLiLian());
+        stmt.bindLong(20, entity.getLiLiang());
+        stmt.bindLong(21, entity.getLiLiangExp());
+        stmt.bindLong(22, entity.getLiLiangBaseExp());
+        stmt.bindLong(23, entity.getLiLiangExpMultiple());
+        stmt.bindLong(24, entity.getMinJie());
+        stmt.bindLong(25, entity.getMinJieExp());
+        stmt.bindLong(26, entity.getMinJieBaseExp());
+        stmt.bindLong(27, entity.getMinJieExpMultiple());
+        stmt.bindLong(28, entity.getZhiHui());
+        stmt.bindLong(29, entity.getZhiHuiExp());
+        stmt.bindLong(30, entity.getZhiHuiBaseExp());
+        stmt.bindLong(31, entity.getZhiHuiExpMultiple());
+        stmt.bindLong(32, entity.getQiangZhuang());
+        stmt.bindLong(33, entity.getQiangZhuangExp());
+        stmt.bindLong(34, entity.getQiangZhuangBaseExp());
+        stmt.bindLong(35, entity.getQiangZhuangExpMultiple());
     }
 
     @Override
@@ -179,22 +185,24 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         stmt.bindLong(15, entity.getDays());
         stmt.bindLong(16, entity.getAttackSpeed());
         stmt.bindLong(17, entity.getSkillCount());
-        stmt.bindLong(18, entity.getLiLiang());
-        stmt.bindLong(19, entity.getLiLiangExp());
-        stmt.bindLong(20, entity.getLiLiangBaseExp());
-        stmt.bindLong(21, entity.getLiLiangExpMultiple());
-        stmt.bindLong(22, entity.getMinJie());
-        stmt.bindLong(23, entity.getMinJieExp());
-        stmt.bindLong(24, entity.getMinJieBaseExp());
-        stmt.bindLong(25, entity.getMinJieExpMultiple());
-        stmt.bindLong(26, entity.getZhiHui());
-        stmt.bindLong(27, entity.getZhiHuiExp());
-        stmt.bindLong(28, entity.getZhiHuiBaseExp());
-        stmt.bindLong(29, entity.getZhiHuiExpMultiple());
-        stmt.bindLong(30, entity.getQiangZhuang());
-        stmt.bindLong(31, entity.getQiangZhuangExp());
-        stmt.bindLong(32, entity.getQiangZhuangBaseExp());
-        stmt.bindLong(33, entity.getQiangZhuangExpMultiple());
+        stmt.bindLong(18, entity.getShengWang());
+        stmt.bindLong(19, entity.getLiLian());
+        stmt.bindLong(20, entity.getLiLiang());
+        stmt.bindLong(21, entity.getLiLiangExp());
+        stmt.bindLong(22, entity.getLiLiangBaseExp());
+        stmt.bindLong(23, entity.getLiLiangExpMultiple());
+        stmt.bindLong(24, entity.getMinJie());
+        stmt.bindLong(25, entity.getMinJieExp());
+        stmt.bindLong(26, entity.getMinJieBaseExp());
+        stmt.bindLong(27, entity.getMinJieExpMultiple());
+        stmt.bindLong(28, entity.getZhiHui());
+        stmt.bindLong(29, entity.getZhiHuiExp());
+        stmt.bindLong(30, entity.getZhiHuiBaseExp());
+        stmt.bindLong(31, entity.getZhiHuiExpMultiple());
+        stmt.bindLong(32, entity.getQiangZhuang());
+        stmt.bindLong(33, entity.getQiangZhuangExp());
+        stmt.bindLong(34, entity.getQiangZhuangBaseExp());
+        stmt.bindLong(35, entity.getQiangZhuangExpMultiple());
     }
 
     @Override
@@ -222,22 +230,24 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
             cursor.getInt(offset + 14), // days
             cursor.getLong(offset + 15), // attackSpeed
             cursor.getInt(offset + 16), // skillCount
-            cursor.getInt(offset + 17), // liLiang
-            cursor.getLong(offset + 18), // liLiangExp
-            cursor.getLong(offset + 19), // liLiangBaseExp
-            cursor.getInt(offset + 20), // liLiangExpMultiple
-            cursor.getInt(offset + 21), // minJie
-            cursor.getLong(offset + 22), // minJieExp
-            cursor.getLong(offset + 23), // minJieBaseExp
-            cursor.getInt(offset + 24), // minJieExpMultiple
-            cursor.getInt(offset + 25), // zhiHui
-            cursor.getLong(offset + 26), // zhiHuiExp
-            cursor.getLong(offset + 27), // zhiHuiBaseExp
-            cursor.getInt(offset + 28), // zhiHuiExpMultiple
-            cursor.getInt(offset + 29), // qiangZhuang
-            cursor.getLong(offset + 30), // qiangZhuangExp
-            cursor.getLong(offset + 31), // qiangZhuangBaseExp
-            cursor.getInt(offset + 32) // qiangZhuangExpMultiple
+            cursor.getInt(offset + 17), // shengWang
+            cursor.getInt(offset + 18), // liLian
+            cursor.getInt(offset + 19), // liLiang
+            cursor.getLong(offset + 20), // liLiangExp
+            cursor.getLong(offset + 21), // liLiangBaseExp
+            cursor.getInt(offset + 22), // liLiangExpMultiple
+            cursor.getInt(offset + 23), // minJie
+            cursor.getLong(offset + 24), // minJieExp
+            cursor.getLong(offset + 25), // minJieBaseExp
+            cursor.getInt(offset + 26), // minJieExpMultiple
+            cursor.getInt(offset + 27), // zhiHui
+            cursor.getLong(offset + 28), // zhiHuiExp
+            cursor.getLong(offset + 29), // zhiHuiBaseExp
+            cursor.getInt(offset + 30), // zhiHuiExpMultiple
+            cursor.getInt(offset + 31), // qiangZhuang
+            cursor.getLong(offset + 32), // qiangZhuangExp
+            cursor.getLong(offset + 33), // qiangZhuangBaseExp
+            cursor.getInt(offset + 34) // qiangZhuangExpMultiple
         );
         return entity;
     }
@@ -261,22 +271,24 @@ public class HeroAttributesDao extends AbstractDao<HeroAttributes, Long> {
         entity.setDays(cursor.getInt(offset + 14));
         entity.setAttackSpeed(cursor.getLong(offset + 15));
         entity.setSkillCount(cursor.getInt(offset + 16));
-        entity.setLiLiang(cursor.getInt(offset + 17));
-        entity.setLiLiangExp(cursor.getLong(offset + 18));
-        entity.setLiLiangBaseExp(cursor.getLong(offset + 19));
-        entity.setLiLiangExpMultiple(cursor.getInt(offset + 20));
-        entity.setMinJie(cursor.getInt(offset + 21));
-        entity.setMinJieExp(cursor.getLong(offset + 22));
-        entity.setMinJieBaseExp(cursor.getLong(offset + 23));
-        entity.setMinJieExpMultiple(cursor.getInt(offset + 24));
-        entity.setZhiHui(cursor.getInt(offset + 25));
-        entity.setZhiHuiExp(cursor.getLong(offset + 26));
-        entity.setZhiHuiBaseExp(cursor.getLong(offset + 27));
-        entity.setZhiHuiExpMultiple(cursor.getInt(offset + 28));
-        entity.setQiangZhuang(cursor.getInt(offset + 29));
-        entity.setQiangZhuangExp(cursor.getLong(offset + 30));
-        entity.setQiangZhuangBaseExp(cursor.getLong(offset + 31));
-        entity.setQiangZhuangExpMultiple(cursor.getInt(offset + 32));
+        entity.setShengWang(cursor.getInt(offset + 17));
+        entity.setLiLian(cursor.getInt(offset + 18));
+        entity.setLiLiang(cursor.getInt(offset + 19));
+        entity.setLiLiangExp(cursor.getLong(offset + 20));
+        entity.setLiLiangBaseExp(cursor.getLong(offset + 21));
+        entity.setLiLiangExpMultiple(cursor.getInt(offset + 22));
+        entity.setMinJie(cursor.getInt(offset + 23));
+        entity.setMinJieExp(cursor.getLong(offset + 24));
+        entity.setMinJieBaseExp(cursor.getLong(offset + 25));
+        entity.setMinJieExpMultiple(cursor.getInt(offset + 26));
+        entity.setZhiHui(cursor.getInt(offset + 27));
+        entity.setZhiHuiExp(cursor.getLong(offset + 28));
+        entity.setZhiHuiBaseExp(cursor.getLong(offset + 29));
+        entity.setZhiHuiExpMultiple(cursor.getInt(offset + 30));
+        entity.setQiangZhuang(cursor.getInt(offset + 31));
+        entity.setQiangZhuangExp(cursor.getLong(offset + 32));
+        entity.setQiangZhuangBaseExp(cursor.getLong(offset + 33));
+        entity.setQiangZhuangExpMultiple(cursor.getInt(offset + 34));
      }
     
     @Override

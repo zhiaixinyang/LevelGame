@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "<font color=\"#43A047\">任务：击杀小喽啰</font>",
-    "tips": "击杀3个小喽啰。<br/>完成任务：增加金钱30、经验50；增加攻击力10、防御力5、最大生命15。",
+    "tips": "击杀3个小喽啰。<br/>完成任务：增加金钱30、经验50；增加声望10。",
     // status 0代表击杀（可拓展）count（代表status对应要完成的数目）
     "task_content_type": "[{\"status\":\"0\",\"type\":\"C1\",\"count\":3}]",
     "attack_count": 0,
@@ -13,14 +13,15 @@
     "consume_formula": "",
     "award_money": 30,
     "award_exy": 50,
-    "award_attack": 10,
-    "award_armor": 5,
-    "award_max_life": 15
+    "award_attack": 0,
+    "award_armor": 0,
+    "sheng_wang": 10,
+    "award_max_life": 0
   },
   {
     "id": 2,
     "name": "<font color=\"#43A047\">任务：击杀山贼头目</font>",
-    "tips": "击杀1个[BOSS]-山贼头目<br/>完成任务：增加金钱100、经验100；增加攻击力15、防御力15、最大生命30。",
+    "tips": "击杀1个[BOSS]-山贼头目<br/>完成任务：增加金钱100、经验100；增加100声望。",
     "award_money": 100,
     "award_exy": 100,
     "task_content_type": "[{\"status\":\"0\",\"type\":\"C5\",\"count\":1}]",
@@ -30,14 +31,15 @@
     "consume_formula": "",
     "type": "H2",
     "task_status": 0,
-    "award_attack": 15,
-    "award_armor": 15,
-    "award_max_life": 30
+    "award_attack": 0,
+    "award_armor": 0,
+    "sheng_wang": 100,
+    "award_max_life": 0
   },
   {
     "id": 3,
     "name": "<font color=\"#43A047\">任务：上交战神令</font>",
-    "tips": "上交一个战神令（材料）。<br/>完成任务：增加攻击力30。",
+    "tips": "上交一个战神令（材料）。<br/>完成任务：增加声望300。",
     "award_money": 0,
     "award_exy": 0,
     "task_content_type": "[{\"status\":\"0\",\"type\":\"E4\",\"count\":1}]",
@@ -45,9 +47,10 @@
     "consume_power": 0,
     "consume_money": 150,
     "consume_formula": "",
+    "sheng_wang": 300,
     "type": "H3",
     "task_status": 0,
-    "award_attack": 30,
+    "award_attack": 0,
     "award_armor": 0,
     "award_max_life": 0
   }

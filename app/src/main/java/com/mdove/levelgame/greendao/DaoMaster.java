@@ -41,6 +41,8 @@ public class DaoMaster extends AbstractDaoMaster {
         AccessoriesDao.createTable(db, ifNotExists);
         MonstersDao.createTable(db, ifNotExists);
         AllGoodsDao.createTable(db, ifNotExists);
+        LiLianLevelDao.createTable(db, ifNotExists);
+        PracticePlaceDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -65,6 +67,8 @@ public class DaoMaster extends AbstractDaoMaster {
         AccessoriesDao.dropTable(db, ifExists);
         MonstersDao.dropTable(db, ifExists);
         AllGoodsDao.dropTable(db, ifExists);
+        LiLianLevelDao.dropTable(db, ifExists);
+        PracticePlaceDao.dropTable(db, ifExists);
     }
 
     /**
@@ -103,6 +107,8 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(AccessoriesDao.class);
         registerDaoClass(MonstersDao.class);
         registerDaoClass(AllGoodsDao.class);
+        registerDaoClass(LiLianLevelDao.class);
+        registerDaoClass(PracticePlaceDao.class);
     }
 
     public DaoSession newSession() {

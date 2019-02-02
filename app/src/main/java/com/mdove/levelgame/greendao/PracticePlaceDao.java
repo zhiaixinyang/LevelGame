@@ -34,6 +34,7 @@ public class PracticePlaceDao extends AbstractDao<PracticePlace, Long> {
         public final static Property ConsumeMoney = new Property(7, int.class, "consumeMoney", false, "CONSUME_MONEY");
         public final static Property ConsumePower = new Property(8, int.class, "consumePower", false, "CONSUME_POWER");
         public final static Property ConsumeGoods = new Property(9, String.class, "consumeGoods", false, "CONSUME_GOODS");
+        public final static Property LiLian = new Property(10, int.class, "liLian", false, "LI_LIAN");
     }
 
 
@@ -58,7 +59,8 @@ public class PracticePlaceDao extends AbstractDao<PracticePlace, Long> {
                 "\"CUR_COUNT\" INTEGER NOT NULL ," + // 6: curCount
                 "\"CONSUME_MONEY\" INTEGER NOT NULL ," + // 7: consumeMoney
                 "\"CONSUME_POWER\" INTEGER NOT NULL ," + // 8: consumePower
-                "\"CONSUME_GOODS\" TEXT);"); // 9: consumeGoods
+                "\"CONSUME_GOODS\" TEXT," + // 9: consumeGoods
+                "\"LI_LIAN\" INTEGER NOT NULL );"); // 10: liLian
     }
 
     /** Drops the underlying database table. */
@@ -100,6 +102,7 @@ public class PracticePlaceDao extends AbstractDao<PracticePlace, Long> {
         if (consumeGoods != null) {
             stmt.bindString(10, consumeGoods);
         }
+        stmt.bindLong(11, entity.getLiLian());
     }
 
     @Override
@@ -135,6 +138,7 @@ public class PracticePlaceDao extends AbstractDao<PracticePlace, Long> {
         if (consumeGoods != null) {
             stmt.bindString(10, consumeGoods);
         }
+        stmt.bindLong(11, entity.getLiLian());
     }
 
     @Override
@@ -154,7 +158,8 @@ public class PracticePlaceDao extends AbstractDao<PracticePlace, Long> {
             cursor.getInt(offset + 6), // curCount
             cursor.getInt(offset + 7), // consumeMoney
             cursor.getInt(offset + 8), // consumePower
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // consumeGoods
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // consumeGoods
+            cursor.getInt(offset + 10) // liLian
         );
         return entity;
     }
@@ -171,6 +176,7 @@ public class PracticePlaceDao extends AbstractDao<PracticePlace, Long> {
         entity.setConsumeMoney(cursor.getInt(offset + 7));
         entity.setConsumePower(cursor.getInt(offset + 8));
         entity.setConsumeGoods(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setLiLian(cursor.getInt(offset + 10));
      }
     
     @Override

@@ -10,6 +10,8 @@ import com.mdove.levelgame.base.adapter.BaseListAdapter
 import com.mdove.levelgame.main.lilian.adapter.PracticePlaceAdapter
 import com.mdove.levelgame.main.lilian.bean.PracticePlaceVM
 import com.mdove.levelgame.main.lilian.viewmodel.PracticePlaceViewModel
+import com.mdove.levelgame.utils.ToastHelper
+import com.mdove.levelgame.view.MyDialog
 
 /**
  * Created by MDove on 2019/2/2.
@@ -29,7 +31,7 @@ class PracticePlaceActivity : BaseListActivity<PracticePlaceVM>() {
 
     override fun createAdapter(): BaseListAdapter<PracticePlaceVM> {
         return PracticePlaceAdapter { vm ->
-
+            viewModel.clickPlace.value=vm
         }
     }
 
@@ -40,6 +42,11 @@ class PracticePlaceActivity : BaseListActivity<PracticePlaceVM>() {
     override fun initData(intent: Intent?) {
         title = "秘境之地"
         viewModel = ViewModelProviders.of(this).get(PracticePlaceViewModel::class.java)
+        viewModel.errorToast.observe(this, Observer {
+            it?.let {
+                MyDialog.showMyDialog(this,"修炼失败",it,true)
+            }
+        })
         viewModel.dataLiveData.observe(this, Observer { data ->
             data?.let {
                 (adapter as? PracticePlaceAdapter)?.let { adapter ->

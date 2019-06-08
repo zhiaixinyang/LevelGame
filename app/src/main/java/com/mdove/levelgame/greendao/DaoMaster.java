@@ -22,9 +22,11 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         SkillDao.createTable(db, ifNotExists);
+        PracticePlaceDao.createTable(db, ifNotExists);
         ArmorsDao.createTable(db, ifNotExists);
         MaterialDao.createTable(db, ifNotExists);
         MainMenuDao.createTable(db, ifNotExists);
+        LiLianLevelDao.createTable(db, ifNotExists);
         AdventureDao.createTable(db, ifNotExists);
         PackagesDao.createTable(db, ifNotExists);
         FbPlaceDao.createTable(db, ifNotExists);
@@ -41,16 +43,16 @@ public class DaoMaster extends AbstractDaoMaster {
         AccessoriesDao.createTable(db, ifNotExists);
         MonstersDao.createTable(db, ifNotExists);
         AllGoodsDao.createTable(db, ifNotExists);
-        LiLianLevelDao.createTable(db, ifNotExists);
-        PracticePlaceDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         SkillDao.dropTable(db, ifExists);
+        PracticePlaceDao.dropTable(db, ifExists);
         ArmorsDao.dropTable(db, ifExists);
         MaterialDao.dropTable(db, ifExists);
         MainMenuDao.dropTable(db, ifExists);
+        LiLianLevelDao.dropTable(db, ifExists);
         AdventureDao.dropTable(db, ifExists);
         PackagesDao.dropTable(db, ifExists);
         FbPlaceDao.dropTable(db, ifExists);
@@ -67,8 +69,6 @@ public class DaoMaster extends AbstractDaoMaster {
         AccessoriesDao.dropTable(db, ifExists);
         MonstersDao.dropTable(db, ifExists);
         AllGoodsDao.dropTable(db, ifExists);
-        LiLianLevelDao.dropTable(db, ifExists);
-        PracticePlaceDao.dropTable(db, ifExists);
     }
 
     /**
@@ -88,9 +88,11 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(SkillDao.class);
+        registerDaoClass(PracticePlaceDao.class);
         registerDaoClass(ArmorsDao.class);
         registerDaoClass(MaterialDao.class);
         registerDaoClass(MainMenuDao.class);
+        registerDaoClass(LiLianLevelDao.class);
         registerDaoClass(AdventureDao.class);
         registerDaoClass(PackagesDao.class);
         registerDaoClass(FbPlaceDao.class);
@@ -107,8 +109,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(AccessoriesDao.class);
         registerDaoClass(MonstersDao.class);
         registerDaoClass(AllGoodsDao.class);
-        registerDaoClass(LiLianLevelDao.class);
-        registerDaoClass(PracticePlaceDao.class);
     }
 
     public DaoSession newSession() {

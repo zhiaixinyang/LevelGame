@@ -23,10 +23,10 @@ class MonstersRepository {
     }
 
     fun loadData(placeId: Long): LiveData<List<BaseMonsterModelVM>> {
-        var dataLiveData = MutableLiveData<List<BaseMonsterModelVM>>()
+        val dataLiveData = MutableLiveData<List<BaseMonsterModelVM>>()
         CoroutineScope(FastMain).launch {
             val baseData = withContext(MDoveBackgroundPool) {
-                var data = mutableListOf<BaseMonsterModelVM>()
+                val data = mutableListOf<BaseMonsterModelVM>()
                 // 特殊怪物出现设置
                 SpecialMonsterManager.getInstance().setShowSpecialMonster()
                 val qb = monstersDao.queryBuilder()

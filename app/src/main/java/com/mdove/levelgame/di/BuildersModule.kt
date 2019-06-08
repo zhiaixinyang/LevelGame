@@ -3,8 +3,6 @@ package com.mdove.levelgame.di
 import com.mdove.levelgame.main.shop.ShopActivity
 import com.mdove.levelgame.main.shop.di.ShopMedicainesModule
 import com.mdove.levelgame.main.shop.fragment.ShopMedicinesFragment
-import com.mdove.levelgame.main.task.TaskActivity
-import com.mdove.levelgame.main.task.di.TaskModule
 import com.ss.android.buzz.dependencies.ActivityScope
 import com.ss.android.buzz.dependencies.FragmentScope
 import dagger.Module
@@ -17,9 +15,9 @@ import dagger.android.ContributesAndroidInjector
  */
 @Module
 abstract class BuildersModule {
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [TaskModule::class])
-    abstract fun taskActivityInjector(): TaskActivity
+//    @ActivityScope
+//    @ContributesAndroidInjector(modules = [TaskModule::class])
+//    abstract fun taskActivityInjector(): TaskActivity
 
     @ActivityScope
     @ContributesAndroidInjector()

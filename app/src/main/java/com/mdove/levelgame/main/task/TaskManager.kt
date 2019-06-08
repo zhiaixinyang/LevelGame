@@ -37,8 +37,8 @@ class TaskManager {
     }
 
     fun startTask(id: Long): Observable<TaskResp> {
-        var resp = TaskResp()
-        var task = DatabaseManager.getInstance().taskDao.queryBuilder()
+        val resp = TaskResp()
+        val task = DatabaseManager.getInstance().taskDao.queryBuilder()
                 .where(TaskDao.Properties.Id.eq(id)).unique()
         resp.status = STATUS_CODE_HAS_START
         task?.let {

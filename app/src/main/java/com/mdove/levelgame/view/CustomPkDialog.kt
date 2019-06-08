@@ -26,7 +26,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
     private var packages: Packages = DatabaseManager.getInstance().packagesDao.queryBuilder().where(PackagesDao.Properties.Id.eq(pkId)).unique()
 
     init {
-        setContentView(mBinding.getRoot())
+        setContentView(mBinding.root)
         val paramsWindow = window!!.attributes
         paramsWindow.width = getWindowWidth()
         setCancelable(true)
@@ -34,9 +34,9 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val allAttrInfos = mutableListOf<String>()
+        val allAttrInfo = mutableListOf<String>()
         AllGoodsToDBIdUtils.getInstance().getAttrsModelFromType(packages.type)?.attrsModel?.let {
-            var name = it.name
+            val name = it.name
 
             mBinding.vm = CustomPkBaseViewModel(name, it.tips, packages.type)
             it.baseAttack.takeIf {
@@ -46,9 +46,9 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 if (packages.strengthenLevel > 0) {
                     strengthenLevel += " + " + attack * (0.2 * packages.strengthenLevel).toInt()
                 } else {
-                    strengthenLevel = attack.toString()
+                    strengthenLevel = ""
                 }
-                allAttrInfos.add("增加攻击：$attack$strengthenLevel")
+                allAttrInfo.add("增加攻击：$attack$strengthenLevel")
             }
             it.baseArmor.takeIf {
                 it != 0
@@ -57,9 +57,9 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 if (packages.strengthenLevel > 0) {
                     strengthenLevel += " + " + arrmor * (0.2 * packages.strengthenLevel).toInt()
                 } else {
-                    strengthenLevel = arrmor.toString()
+                    strengthenLevel = ""
                 }
-                allAttrInfos.add("增加防御：$arrmor$strengthenLevel")
+                allAttrInfo.add("增加防御：$arrmor$strengthenLevel")
             }
             it.baseLife.takeIf {
                 it != 0
@@ -68,9 +68,9 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 if (packages.strengthenLevel > 0) {
                     strengthenLevel += " + " + life * (0.2 * packages.strengthenLevel).toInt()
                 } else {
-                    strengthenLevel = life.toString()
+                    strengthenLevel = ""
                 }
-                allAttrInfos.add("增加血上限：$life$strengthenLevel")
+                allAttrInfo.add("增加血上限：$life$strengthenLevel")
             }
             it.baseAttackSpeed.takeIf {
                 it > 0
@@ -79,9 +79,9 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 if (packages.strengthenLevel > 0) {
                     strengthenLevel += " + " + it * (0.1 * packages.strengthenLevel).toInt()
                 } else {
-                    strengthenLevel = it.toString()
+                    strengthenLevel = ""
                 }
-                allAttrInfos.add("降低攻击间隔：$it$strengthenLevel")
+                allAttrInfo.add("降低攻击间隔：$it$strengthenLevel")
             }
 
             it.baseNeedLevel.takeIf {
@@ -92,7 +92,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 } else {
                     "<font color=\"#F44336\">需要等级：$it</font>"
                 }
-                allAttrInfos.add(string)
+                allAttrInfo.add(string)
             }
             it.baseNeedLiLiang.takeIf {
                 it > 0
@@ -102,7 +102,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 } else {
                     "<font color=\"#F44336\">需要力量：$it</font>"
                 }
-                allAttrInfos.add(string)
+                allAttrInfo.add(string)
             }
             it.baseNeedMinJie.takeIf {
                 it > 0
@@ -112,7 +112,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 } else {
                     "<font color=\"#F44336\">需要敏捷：$it</font>"
                 }
-                allAttrInfos.add(string)
+                allAttrInfo.add(string)
             }
             it.baseNeedZhiHui.takeIf {
                 it > 0
@@ -122,7 +122,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 } else {
                     "<font color=\"#F44336\">需要智慧：$it</font>"
                 }
-                allAttrInfos.add(string)
+                allAttrInfo.add(string)
             }
             it.baseNeedQiangZhuang.takeIf {
                 it > 0
@@ -132,7 +132,7 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
                 } else {
                     "<font color=\"#F44336\">需要强壮：$it</font>"
                 }
-                allAttrInfos.add(string)
+                allAttrInfo.add(string)
             }
         }
 
@@ -140,44 +140,44 @@ class CustomPkDialog(context: Context, val pkId: Long) : AppCompatDialog(context
             it.randomAttack.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加攻击：$it</font>")
+                allAttrInfo.add("<font color=\"#3D5AFE\">额外增加攻击：$it</font>")
             }
             it.randomArmor.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加防御：$it</font>")
+                allAttrInfo.add("<font color=\"#3D5AFE\">额外增加防御：$it</font>")
             }
             it.randomLife.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加生命上限：$it</font>")
+                allAttrInfo.add("<font color=\"#3D5AFE\">额外增加生命上限：$it</font>")
             }
             it.randomLiLiang.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加力量：$it</font>")
+                allAttrInfo.add("<font color=\"#3D5AFE\">额外增加力量：$it</font>")
             }
             it.randomMinJie.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加敏捷：$it</font>")
+                allAttrInfo.add("<font color=\"#3D5AFE\">额外增加敏捷：$it</font>")
             }
             it.randomZhiHui.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加智慧：$it</font>")
+                allAttrInfo.add("<font color=\"#3D5AFE\">额外增加智慧：$it</font>")
             }
             it.randomQiangZhuang.takeIf {
                 it > 0
             }?.let {
-                allAttrInfos.add("<font color=\"#3D5AFE\">额外增加强壮：$it</font>")
+                allAttrInfo.add("<font color=\"#3D5AFE\">额外增加强壮：$it</font>")
             }
         }
 
         mBinding.rlv.layoutManager = LinearLayoutManager(context)
         val adapter = CustomInfoAdapter()
         mBinding.rlv.adapter = adapter
-        adapter.data = allAttrInfos
+        adapter.data = allAttrInfo
     }
 
     private fun getWindowWidth(): Int {

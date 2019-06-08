@@ -98,7 +98,7 @@ public class HeroPackageFragment extends BaseListFragment implements HeroPackage
             }
             activity.notifyEquipUpdateUI(position);
         } else {
-            mViewModel.getEquipPkPosition().postValue(position);
+            mViewModel.getEquipPkPosition().setValue(position);
         }
     }
 

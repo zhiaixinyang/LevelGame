@@ -13,7 +13,7 @@ import java.util.List;
  * Created by MDove on 2018/10/21.
  */
 
-public interface MonstersConstract {
+public interface MonstersContract {
     interface IMonstersPresenter extends BasePresenter<IMonstersView> {
         void initData(long monstersPlaceId);
 

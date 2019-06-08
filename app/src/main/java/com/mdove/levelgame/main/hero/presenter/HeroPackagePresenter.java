@@ -79,10 +79,6 @@ public class HeroPackagePresenter implements HeroPackageContract.IHeroPackagePre
         }).compose(RxTransformerHelper.schedulerTransf())
                 .subscribe(integer -> {
                     view.dismissLoadingDialog();
-                    int addEmptyCount = 10 - packageModelVMS.size();
-                    for (int i = 0; i < addEmptyCount; i++) {
-                        packageModelVMS.add(new HeroPkEmptyModelVM());
-                    }
                     view.showPackage(packageModelVMS);
                 }, throwable -> {
                     view.dismissLoadingDialog();

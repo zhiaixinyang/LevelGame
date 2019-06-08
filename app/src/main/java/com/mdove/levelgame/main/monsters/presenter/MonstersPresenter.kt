@@ -1,63 +1,44 @@
 package com.mdove.levelgame.main.monsters.presenter
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
-import android.text.TextUtils
 
-import com.mdove.levelgame.App
 import com.mdove.levelgame.R
-import com.mdove.levelgame.base.BaseNormalDialog
 import com.mdove.levelgame.config.AppConfig
 import com.mdove.levelgame.greendao.MonstersDao
-import com.mdove.levelgame.greendao.entity.HeroAttributes
-import com.mdove.levelgame.greendao.entity.Monsters
 import com.mdove.levelgame.greendao.utils.DatabaseManager
-import com.mdove.levelgame.greendao.utils.InitDataFileUtils
 import com.mdove.levelgame.main.hero.HeroAttributesActivity
 import com.mdove.levelgame.main.hero.manager.HeroAttributesManager
 import com.mdove.levelgame.main.hero.manager.HeroManager
-import com.mdove.levelgame.main.hero.model.AttackResp
 import com.mdove.levelgame.main.home.HomeActivity
-import com.mdove.levelgame.main.home.MainActivity
-import com.mdove.levelgame.main.home.model.vm.TopMainMenuModelVM
 import com.mdove.levelgame.main.monsters.manager.MonsterAttackManager
 import com.mdove.levelgame.main.monsters.manager.SpecialMonsterManager
 import com.mdove.levelgame.main.monsters.manager.exception.AttackMonsterException
-import com.mdove.levelgame.main.monsters.model.MonstersModel
 import com.mdove.levelgame.main.monsters.model.vm.BaseMonsterModelVM
-import com.mdove.levelgame.main.monsters.model.vm.FightMonstersVM
 import com.mdove.levelgame.main.monsters.model.vm.MenuMonsterModelVM
 import com.mdove.levelgame.main.monsters.model.vm.MonstersModelVM
 import com.mdove.levelgame.main.shop.BusinessmanActivity
-import com.mdove.levelgame.utils.ToastHelper
 import com.mdove.levelgame.view.CustomMonsterDialog
 import com.mdove.levelgame.view.FightingDialog
 import com.mdove.levelgame.view.MyDialog
 
-import org.greenrobot.greendao.query.QueryBuilder
-
 import java.math.BigDecimal
-import java.util.ArrayList
 import java.util.concurrent.TimeUnit
 
 import io.reactivex.Observable
-import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
-import io.reactivex.functions.Function
 
 /**
  * Created by MDove on 2018/10/21.
  */
 
-class MonstersPresenter : MonstersConstract.IMonstersPresenter {
-    private lateinit var view: MonstersConstract.IMonstersView
+class MonstersPresenter : MonstersContract.IMonstersPresenter {
+    private lateinit var view: MonstersContract.IMonstersView
     private var realData: MutableList<BaseMonsterModelVM> = mutableListOf()
     private var monstersPlaceId: Long = 0
 
-    override fun subscribe(view: MonstersConstract.IMonstersView) {
+    override fun subscribe(view: MonstersContract.IMonstersView) {
         this.view = view
     }
 
@@ -77,9 +58,9 @@ class MonstersPresenter : MonstersConstract.IMonstersPresenter {
                 MonstersDao.Properties.MonsterPlaceId.eq(0)).list()
         realData = mutableListOf()
         realData.add(MenuMonsterModelVM())
-        monsters?.forEach { monster ->
-            realData.add(MonstersModelVM(monster))
-        }
+        realData.addAll(monsters?.map { monster ->
+            MonstersModelVM(monster)
+        }?: mutableListOf())
         view.showData(realData)
     }
 
@@ -160,14 +141,12 @@ class MonstersPresenter : MonstersConstract.IMonstersPresenter {
                                     MyDialog.showMyDialog(view.context, e.errorTitle, e.errorMsg, true)
                                     updateUI()
                                 }
-                                else -> {
-                                }
+                                else -> { }
                             }
                         }
                     }
 
                     override fun onComplete() {
-
                     }
                 })
     }

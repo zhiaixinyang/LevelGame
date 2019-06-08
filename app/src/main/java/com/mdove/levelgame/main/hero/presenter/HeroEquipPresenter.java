@@ -83,6 +83,12 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
 
     @Override
     public void notifyEquipUpdateUI(int position) {
+        if (equipData == null) {
+            return;
+        }
+        if (equipData.size() < 4) {
+            initEquipData();
+        }
         // 根据position重新加载数据，刷UI
         switch (position) {
             case 1: {
@@ -291,6 +297,9 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
         if (equipData == null) {
             return;
         }
+        if (equipData.size() < 4) {
+            initEquipData();
+        }
         for (HeroEquipModelVM modelVM : equipData) {
             if (!TextUtils.isEmpty(modelVM.type.get()) && modelVM.type.get().equals(type)) {
                 position = equipData.indexOf(modelVM);
@@ -313,7 +322,6 @@ public class HeroEquipPresenter implements HeroEquipContract.IHeroEquipPresenter
                 break;
         }
         view.notifyByPosition(position);
-
     }
 
     // 临时封装了脱掉装备的Id和穿装备的Id

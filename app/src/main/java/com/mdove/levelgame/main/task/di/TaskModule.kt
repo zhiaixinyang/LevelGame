@@ -9,12 +9,12 @@ import dagger.Provides
 /**
  * Created by MDove on 2018/12/23.
  */
-@Module
-class TaskModule {
-
-    @ActivityScope
-    @Provides
-    fun providesPresenter():TaskPresenter{
-        return TaskPresenter()
-    }
-}
+//@Module
+//class TaskModule {
+//
+//    @ActivityScope
+//    @Provides
+//    fun providesPresenter():TaskPresenter{
+//        return TaskPresenter()
+//    }
+//}

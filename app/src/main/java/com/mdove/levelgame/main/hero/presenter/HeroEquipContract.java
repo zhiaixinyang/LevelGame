@@ -28,6 +28,5 @@ public interface HeroEquipContract {
         void notifyByPosition(int position);
         void deleteByPosition(int position);
         void notifyPackageAddUI(long pkId);
-
     }
 }

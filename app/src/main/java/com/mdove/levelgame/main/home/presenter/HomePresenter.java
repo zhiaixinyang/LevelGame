@@ -118,7 +118,7 @@ public class HomePresenter implements HomeContract.IHomePresenter {
     @Override
     public void initMenu(CityReps cityReps) {
         if (cityReps.isMonsterPlace()) {
-            MonstersActivity.start(view.getContext(), cityReps.getPlaceId(), cityReps.getPlaceTitle());
+            MonstersActivity.Companion.start(view.getContext(), cityReps.getPlaceId(), cityReps.getPlaceTitle());
             return;
         }
         if (preCityResp != null && preCityResp.getPlaceId() == cityReps.getPlaceId()) {

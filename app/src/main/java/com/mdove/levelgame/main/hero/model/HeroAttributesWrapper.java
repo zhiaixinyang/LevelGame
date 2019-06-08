@@ -129,7 +129,7 @@ public class HeroAttributesWrapper {
 
     public void awardMonster(Monsters monsters) {
         if (monsters.isLimitCount == 0) {
-            monsters.curCount--;
+            monsters.curCount -= 1;
             DatabaseManager.getInstance().getMonstersDao().update(monsters);
         }
         TaskManager.Companion.getInstance().computeTask(monsters.type);

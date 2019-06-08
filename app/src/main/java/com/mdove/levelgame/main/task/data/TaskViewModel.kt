@@ -8,14 +8,14 @@ import com.mdove.levelgame.greendao.utils.DatabaseManager
  * Created by MDove on 2018/12/16.
  */
 
-class TaskViewModel :ViewModel(){
-    val taskData:MutableLiveData<MutableList<TaskModelVM>> by lazy {
+class TaskViewModel : ViewModel() {
+    val taskData: MutableLiveData<MutableList<TaskModelVM>> by lazy {
         MutableLiveData<MutableList<TaskModelVM>>()
     }
 
-    fun initData(){
-        taskData.value= mutableListOf()
-        var data = DatabaseManager.getInstance().taskDao.queryBuilder().list()
+    fun initData() {
+        taskData.value = mutableListOf()
+        val data = DatabaseManager.getInstance().taskDao.queryBuilder().list()
         for (it in data) {
             taskData.value?.add(TaskModelVM(it))
         }

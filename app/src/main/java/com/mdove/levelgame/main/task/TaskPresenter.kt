@@ -15,15 +15,12 @@ import kotlinx.coroutines.launch
  * @author MDove on 2018/11/5
  *
  */
-class TaskPresenter : TaskContract.ITaskPresenter {
+class TaskPresenter(val taskViewModel: TaskViewModel) : TaskContract.ITaskPresenter {
     lateinit var view: TaskContract.ITaskView
     lateinit var data: ArrayList<TaskModelVM>
-    lateinit var taskViewModel: TaskViewModel
 
     override fun subscribe(view: TaskContract.ITaskView?) {
         this.view = view!!
-        taskViewModel = ViewModelProviders.of(view.context as AppCompatActivity)
-                .get(TaskViewModel::class.java)
     }
 
     @SuppressLint("CheckResult")

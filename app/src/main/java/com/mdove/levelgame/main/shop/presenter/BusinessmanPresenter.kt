@@ -25,6 +25,7 @@ import java.util.*
 class BusinessmanPresenter : BusinessmanContract.IBusinessmanPresenter {
     private lateinit var view: BusinessmanContract.IBusinessmanView
     private var data: MutableList<SellGoodsModelVM> = mutableListOf()
+
     override fun initData(monstersId: Long?) {
         if (monstersId == (-1).toLong()) {
             return

@@ -10,7 +10,6 @@ import com.mdove.levelgame.base.adapter.BaseListAdapter
 import com.mdove.levelgame.main.lilian.adapter.PracticePlaceAdapter
 import com.mdove.levelgame.main.lilian.bean.PracticePlaceVM
 import com.mdove.levelgame.main.lilian.viewmodel.PracticePlaceViewModel
-import com.mdove.levelgame.utils.ToastHelper
 import com.mdove.levelgame.view.MyDialog
 
 /**

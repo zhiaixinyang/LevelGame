@@ -18,8 +18,9 @@ import javax.inject.Inject
  * Dagger文档：https://google.github.io/dagger/users-guide
  */
 class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
-    @Inject
+
     lateinit var presenter: TaskPresenter
+
     @Inject
     lateinit var adapter: TaskAdapter
 
@@ -53,16 +54,12 @@ class TaskActivity : BaseListActivity<TaskModelVM>(), TaskContract.ITaskView {
     }
 
     override fun initData(intent: Intent?) {
-        presenter.subscribe(this)
         viewModel = ViewModelProviders.of(this).get(TaskViewModel::class.java)
-
-        val tasksObserver = Observer<MutableList<TaskModelVM>> { data ->
-            adapter.let {
-                it.data = data
-            }
-        }
-
-        viewModel.taskData.observe(this, tasksObserver)
+        presenter = TaskPresenter(viewModel)
+        presenter.subscribe(this)
+        viewModel.taskData.observe(this, Observer<MutableList<TaskModelVM>> { data ->
+            adapter.data = data
+        })
     }
 
     override fun getContext(): Context {

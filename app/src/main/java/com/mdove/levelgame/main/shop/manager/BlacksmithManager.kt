@@ -52,85 +52,80 @@ class BlacksmithManager {
 
     fun goodsUpdate(type: String): Observable<BlacksmithResp> {
         return updateAndMixture(AllGoodsToDBIdUtils.getInstance().getBlacksmithModelFromType(type))
-
     }
 
     private fun updateAndMixture(weapon: BaseBlacksmithModel?): Observable<BlacksmithResp> {
         val blacksmithResp = BlacksmithResp()
         if (weapon != null) {
             // 可升级
-            if (weapon.canUpdate == 0) {
-                // 判断材料是否完全
-                val formula = weapon.updateFormulas
-                val needs = JsonUtil.decode<List<NeedMaterial>>(formula, object : TypeToken<List<NeedMaterial>>() {
-
-                }.type)
-                needs?.let {
-                    val hasMaterials = ArrayList<HasMaterial>()
-                    for (type in needs) {
-                        hasMaterials.add(hasMaterial(type.type, type.count))
-                    }
-                    var isSuc = hasMaterials.any { material ->
-                        !material.isHas
-                    }
-                    // 升级成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials)
-                        // 生成新装备
-                        newPk(weapon)
-                        blacksmithResp.isSuc = true
-                        blacksmithResp.title = App.getAppContext().getString(R.string.string_blacksmith_update_suc)
-                        blacksmithResp.content = weapon.myName + "升级成功。"
-                    } else {
-                        resetPkSelectStatus()
+            when {
+                weapon.canUpdate == 0 -> {
+                    // 判断材料是否完全
+                    val formula = weapon.updateFormulas
+                    val needs = JsonUtil.decode<List<NeedMaterial>>(formula, object : TypeToken<List<NeedMaterial>>() {}.type)
+                    needs?.let {
+                        val hasMaterials = needs.map { hasMaterial(it.type, it.count) }
+                        val isSuc = hasMaterials.all  { material ->
+                            material.isHas
+                        }
+                        // 升级成功
+                        if (isSuc) {
+                            // 删除低级材料（装备+石头，直接从Pk中）
+                            deleteMaterial(hasMaterials)
+                            // 生成新装备
+                            newPk(weapon)
+                            blacksmithResp.isSuc = true
+                            blacksmithResp.title = App.getAppContext().getString(R.string.string_blacksmith_update_suc)
+                            blacksmithResp.content = weapon.myName + "升级成功。"
+                        } else {
+                            resetPkSelectStatus()
+                            blacksmithResp.isSuc = false
+                            blacksmithResp.title = "升级失败"
+                            blacksmithResp.content = "缺少材料：请确认所需材料都持有。"
+                        }
+                    } ?: run {
                         blacksmithResp.isSuc = false
-                        blacksmithResp.title = "升级失败"
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。"
+                        blacksmithResp.title = "未知错误"
+                        blacksmithResp.content = "获取升级材料异常：null。"
                     }
-                } ?: run {
+                }
+                weapon.canMixture == 0 -> {
+                    // 可合成
+                    // 判断材料是否完全
+                    val formula = weapon.mixtureFormulas
+                    val needs = JsonUtil.decode<List<NeedMaterial>>(formula, object : TypeToken<List<NeedMaterial>>() {}.type)
+                    needs?.let {
+                        val hasMaterials = needs.map { hasMaterial(it.type, it.count) }
+                        var isSuc = hasMaterials.all { material ->
+                            material.isHas
+                        }
+                        // 合成成功
+                        if (isSuc) {
+                            // 删除低级材料（装备+石头，直接从Pk中）
+                            deleteMaterial(hasMaterials)
+                            // 生成新装备
+                            newPk(weapon)
+                            blacksmithResp.isSuc = true
+                            blacksmithResp.title = "合成成功"
+                            blacksmithResp.content = weapon.myName + "合成成功。"
+                        } else {
+                            // 重置pk中材料的选择状态
+                            resetPkSelectStatus()
+                            blacksmithResp.isSuc = false
+                            blacksmithResp.title = "合成失败"
+                            blacksmithResp.content = "缺少材料：请确认所需材料都持有。"
+                        }
+                    } ?: run {
+                        blacksmithResp.isSuc = false
+                        blacksmithResp.title = "未知错误"
+                        blacksmithResp.content = "获取升级材料异常：null。"
+                    }
+                }
+                else -> {
                     blacksmithResp.isSuc = false
                     blacksmithResp.title = "未知错误"
-                    blacksmithResp.content = "获取升级材料异常：null。"
+                    blacksmithResp.content = "未找到对应升级的装备..."
                 }
-            } else if (weapon.canMixture == 0) {
-                // 可合成
-                // 判断材料是否完全
-                val formula = weapon.mixtureFormulas
-                val needs = JsonUtil.decode<List<NeedMaterial>>(formula, object : TypeToken<List<NeedMaterial>>() {}.type)
-                needs?.let {
-                    val hasMaterials = ArrayList<HasMaterial>()
-                    for (type in needs) {
-                        hasMaterials.add(hasMaterial(type.type, type.count))
-                    }
-                    var isSuc = hasMaterials.any { material ->
-                        !material.isHas
-                    }
-                    // 合成成功
-                    if (isSuc) {
-                        // 删除低级材料（装备+石头，直接从Pk中）
-                        deleteMaterial(hasMaterials)
-                        // 生成新装备
-                        newPk(weapon)
-                        blacksmithResp.isSuc = true
-                        blacksmithResp.title = "合成成功"
-                        blacksmithResp.content = weapon.myName + "合成成功。"
-                    } else {
-                        // 重置pk中材料的选择状态
-                        resetPkSelectStatus()
-                        blacksmithResp.isSuc = false
-                        blacksmithResp.title = "合成失败"
-                        blacksmithResp.content = "缺少材料：请确认所需材料都持有。"
-                    }
-                } ?: run {
-                    blacksmithResp.isSuc = false
-                    blacksmithResp.title = "未知错误"
-                    blacksmithResp.content = "获取升级材料异常：null。"
-                }
-            } else {
-                blacksmithResp.isSuc = false
-                blacksmithResp.title = "未知错误"
-                blacksmithResp.content = "未找到对应升级的装备..."
             }
         } else {
             blacksmithResp.isSuc = false

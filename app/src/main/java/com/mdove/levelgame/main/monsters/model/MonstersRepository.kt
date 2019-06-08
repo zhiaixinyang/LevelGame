@@ -36,9 +36,6 @@ class MonstersRepository {
                 monsters.forEach {
                     data.add(MonstersModelVM(it))
                 }
-                val lastPos = data.size - 1
-                data.add(0, data[lastPos])
-                data.removeAt(lastPos+1)
                 data
             }
             dataLiveData.postValue(baseData)

@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * Created by MDove on 2018/10/21.
  */
 
-public class MonstersModelVM extends BaseMonsterModelVM{
+public class MonstersModelVM extends BaseMonsterModelVM {
     public ObservableField<Long> id = new ObservableField<>();
     public ObservableField<String> exp = new ObservableField<>();
     public ObservableField<Long> monsterPlaceId = new ObservableField<>();
@@ -37,12 +37,14 @@ public class MonstersModelVM extends BaseMonsterModelVM{
     public ObservableField<String> limitCount = new ObservableField<>();
     public ObservableField<Boolean> isLimitCount = new ObservableField<>();
     private int limitCountInt;
+    private int curCount;
 
     public MonstersModelVM(Monsters model) {
         id.set(model.id);
         exp.set(String.format(App.getAppContext().getString(R.string.monsters_msg_exp), model.exp));
         monsterPlaceId.set(model.monsterPlaceId);
         limitCountInt = model.limitCount;
+        curCount = model.curCount;
         name.set(model.name);
         tips.set(model.tips);
         power.set(String.format(App.getAppContext().getString(R.string.monsters_msg_use_power), model.consumePower));
@@ -89,5 +91,9 @@ public class MonstersModelVM extends BaseMonsterModelVM{
         if (isLimitCount.get()) {
             limitCount.set(String.format(App.getAppContext().getString(R.string.monsters_msg_has_count), curCount, limitCountInt));
         }
+    }
+
+    public int getCurCount() {
+        return curCount;
     }
 }

@@ -21,54 +21,54 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        SkillDao.createTable(db, ifNotExists);
-        PracticePlaceDao.createTable(db, ifNotExists);
-        ArmorsDao.createTable(db, ifNotExists);
-        MaterialDao.createTable(db, ifNotExists);
-        MainMenuDao.createTable(db, ifNotExists);
-        LiLianLevelDao.createTable(db, ifNotExists);
+        AllGoodsDao.createTable(db, ifNotExists);
+        AccessoriesDao.createTable(db, ifNotExists);
         AdventureDao.createTable(db, ifNotExists);
-        PackagesDao.createTable(db, ifNotExists);
-        FbPlaceDao.createTable(db, ifNotExists);
-        RandomAttrDao.createTable(db, ifNotExists);
+        ArmorsDao.createTable(db, ifNotExists);
+        BigMonstersDao.createTable(db, ifNotExists);
+        CityDao.createTable(db, ifNotExists);
         DropGoodsDao.createTable(db, ifNotExists);
         FbMonstersDao.createTable(db, ifNotExists);
+        FbPlaceDao.createTable(db, ifNotExists);
         HeroAttributesDao.createTable(db, ifNotExists);
-        CityDao.createTable(db, ifNotExists);
-        TaskDao.createTable(db, ifNotExists);
+        LiLianLevelDao.createTable(db, ifNotExists);
+        MainMenuDao.createTable(db, ifNotExists);
+        MaterialDao.createTable(db, ifNotExists);
         MedicinesDao.createTable(db, ifNotExists);
-        BigMonstersDao.createTable(db, ifNotExists);
-        WeaponsDao.createTable(db, ifNotExists);
-        MonstersPlaceDao.createTable(db, ifNotExists);
-        AccessoriesDao.createTable(db, ifNotExists);
         MonstersDao.createTable(db, ifNotExists);
-        AllGoodsDao.createTable(db, ifNotExists);
+        MonstersPlaceDao.createTable(db, ifNotExists);
+        PackagesDao.createTable(db, ifNotExists);
+        PracticePlaceDao.createTable(db, ifNotExists);
+        RandomAttrDao.createTable(db, ifNotExists);
+        SkillDao.createTable(db, ifNotExists);
+        TaskDao.createTable(db, ifNotExists);
+        WeaponsDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        SkillDao.dropTable(db, ifExists);
-        PracticePlaceDao.dropTable(db, ifExists);
-        ArmorsDao.dropTable(db, ifExists);
-        MaterialDao.dropTable(db, ifExists);
-        MainMenuDao.dropTable(db, ifExists);
-        LiLianLevelDao.dropTable(db, ifExists);
+        AllGoodsDao.dropTable(db, ifExists);
+        AccessoriesDao.dropTable(db, ifExists);
         AdventureDao.dropTable(db, ifExists);
-        PackagesDao.dropTable(db, ifExists);
-        FbPlaceDao.dropTable(db, ifExists);
-        RandomAttrDao.dropTable(db, ifExists);
+        ArmorsDao.dropTable(db, ifExists);
+        BigMonstersDao.dropTable(db, ifExists);
+        CityDao.dropTable(db, ifExists);
         DropGoodsDao.dropTable(db, ifExists);
         FbMonstersDao.dropTable(db, ifExists);
+        FbPlaceDao.dropTable(db, ifExists);
         HeroAttributesDao.dropTable(db, ifExists);
-        CityDao.dropTable(db, ifExists);
-        TaskDao.dropTable(db, ifExists);
+        LiLianLevelDao.dropTable(db, ifExists);
+        MainMenuDao.dropTable(db, ifExists);
+        MaterialDao.dropTable(db, ifExists);
         MedicinesDao.dropTable(db, ifExists);
-        BigMonstersDao.dropTable(db, ifExists);
-        WeaponsDao.dropTable(db, ifExists);
-        MonstersPlaceDao.dropTable(db, ifExists);
-        AccessoriesDao.dropTable(db, ifExists);
         MonstersDao.dropTable(db, ifExists);
-        AllGoodsDao.dropTable(db, ifExists);
+        MonstersPlaceDao.dropTable(db, ifExists);
+        PackagesDao.dropTable(db, ifExists);
+        PracticePlaceDao.dropTable(db, ifExists);
+        RandomAttrDao.dropTable(db, ifExists);
+        SkillDao.dropTable(db, ifExists);
+        TaskDao.dropTable(db, ifExists);
+        WeaponsDao.dropTable(db, ifExists);
     }
 
     /**
@@ -87,28 +87,28 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(SkillDao.class);
-        registerDaoClass(PracticePlaceDao.class);
-        registerDaoClass(ArmorsDao.class);
-        registerDaoClass(MaterialDao.class);
-        registerDaoClass(MainMenuDao.class);
-        registerDaoClass(LiLianLevelDao.class);
+        registerDaoClass(AllGoodsDao.class);
+        registerDaoClass(AccessoriesDao.class);
         registerDaoClass(AdventureDao.class);
-        registerDaoClass(PackagesDao.class);
-        registerDaoClass(FbPlaceDao.class);
-        registerDaoClass(RandomAttrDao.class);
+        registerDaoClass(ArmorsDao.class);
+        registerDaoClass(BigMonstersDao.class);
+        registerDaoClass(CityDao.class);
         registerDaoClass(DropGoodsDao.class);
         registerDaoClass(FbMonstersDao.class);
+        registerDaoClass(FbPlaceDao.class);
         registerDaoClass(HeroAttributesDao.class);
-        registerDaoClass(CityDao.class);
-        registerDaoClass(TaskDao.class);
+        registerDaoClass(LiLianLevelDao.class);
+        registerDaoClass(MainMenuDao.class);
+        registerDaoClass(MaterialDao.class);
         registerDaoClass(MedicinesDao.class);
-        registerDaoClass(BigMonstersDao.class);
-        registerDaoClass(WeaponsDao.class);
-        registerDaoClass(MonstersPlaceDao.class);
-        registerDaoClass(AccessoriesDao.class);
         registerDaoClass(MonstersDao.class);
-        registerDaoClass(AllGoodsDao.class);
+        registerDaoClass(MonstersPlaceDao.class);
+        registerDaoClass(PackagesDao.class);
+        registerDaoClass(PracticePlaceDao.class);
+        registerDaoClass(RandomAttrDao.class);
+        registerDaoClass(SkillDao.class);
+        registerDaoClass(TaskDao.class);
+        registerDaoClass(WeaponsDao.class);
     }
 
     public DaoSession newSession() {

@@ -43,7 +43,7 @@ public class MainPresenter implements MainContract.IMainPresenter {
 
     @Override
     public void onClickMonstersPlace() {
-        MonstersPlaceActivity.start(mView.getContext());
+        MonstersPlaceActivity.Companion.start(mView.getContext());
     }
 
     @Override

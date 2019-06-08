@@ -1,8 +1,10 @@
 package com.mdove.levelgame.base.adapter;
 
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 
 import com.mdove.levelgame.base.BaseActivity;
+import com.mdove.levelgame.base.recyclerview.diff.SimpleDiffCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +13,9 @@ import java.util.List;
  * @author zhaojing on 2018/10/22
  */
 public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    protected List<T> data =new ArrayList<>();
+    protected List<T> data = new ArrayList<>();
     private OnDataEmptyListener mListener;
+
     private RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onChanged() {
@@ -27,6 +30,18 @@ public abstract class BaseListAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             }
         }
     };
+
+    protected SimpleDiffCallback<T> createDiffUtils() {
+        return null;
+    }
+
+    public void updateDataByDiffUtil(List<T> data){
+        if(createDiffUtils()!=null){
+            this.data = data;
+            createDiffUtils().update(data);
+            DiffUtil.calculateDiff(createDiffUtils(), false).dispatchUpdatesTo(this);
+        }
+    }
 
     public BaseListAdapter() {
         registerAdapterDataObserver(observer);

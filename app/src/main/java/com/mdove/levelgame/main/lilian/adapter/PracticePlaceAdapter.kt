@@ -5,9 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.mdove.levelgame.R
 import com.mdove.levelgame.base.adapter.BaseListAdapter
-import com.mdove.levelgame.databinding.ItemLilianLevelBinding
 import com.mdove.levelgame.databinding.ItemPracticePlaceBinding
-import com.mdove.levelgame.main.lilian.bean.LiLianLevelVM
 import com.mdove.levelgame.main.lilian.bean.PracticePlaceVM
 import com.mdove.levelgame.utils.InflateUtils
 

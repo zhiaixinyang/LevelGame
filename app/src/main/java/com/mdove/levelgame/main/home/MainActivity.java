@@ -1,6 +1,7 @@
 package com.mdove.levelgame.main.home;
 
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -15,6 +16,10 @@ import com.mdove.levelgame.main.home.model.BigMonstersModelVM;
 import com.mdove.levelgame.main.home.model.MainActionHandler;
 import com.mdove.levelgame.main.home.presenter.MainContract;
 import com.mdove.levelgame.main.home.presenter.MainPresenter;
+import com.mdove.levelgame.test.EvilInstrumentation;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class MainActivity extends BaseActivity implements MainContract.IMainView {
     private ActivityMainBinding binding;
@@ -66,5 +71,4 @@ public class MainActivity extends BaseActivity implements MainContract.IMainView
     public void showBigMonsterInvade(String days) {
         binding.tvInvade.setText(Html.fromHtml(days));
     }
-
 }

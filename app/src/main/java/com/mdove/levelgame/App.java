@@ -24,9 +24,11 @@ import com.mdove.levelgame.greendao.WeaponsDao;
 import com.mdove.levelgame.greendao.entity.Packages;
 import com.mdove.levelgame.greendao.utils.DatabaseManager;
 import com.mdove.levelgame.greendao.utils.InitDataFileUtils;
+import com.mdove.levelgame.main.home.MainActivity;
 import com.mdove.levelgame.net.ApiServer;
 import com.mdove.levelgame.net.RetrofitUtil;
 import com.mdove.levelgame.net.UrlConstants;
+import com.mdove.levelgame.test.HookUtils;
 
 import java.util.List;
 
@@ -45,6 +47,13 @@ public class App extends DaggerApplication {
     public void onCreate() {
         super.onCreate();
         mAppContext = this;
+
+        try {
+            HookUtils.attachContext();
+            HookUtils.hookClipboard();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         DatabaseManager.getInstance().init(mAppContext, HeroAttributesDao.class, ArmorsDao.class,
                 DropGoodsDao.class, MedicinesDao.class, MonstersDao.class, MonstersPlaceDao.class,
